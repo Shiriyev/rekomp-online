@@ -1,7 +1,10 @@
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, type ReactNode } from 'react';
+import { useColorScheme } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
 
+import { darkTheme, lightTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 
 import { db } from './client';
@@ -33,6 +36,7 @@ export function DatabaseProvider({ children }: { children: ReactNode }) {
   const seed = migration.success ? ensureSeeded() : undefined;
   const error = migration.error ?? (seed && !seed.ok ? seed.error : undefined);
   const ready = seed?.ok === true;
+  const isDark = useColorScheme() === 'dark';
 
   useEffect(() => {
     if (error && __DEV__) console.error('Database initialisation failed', error);
@@ -41,11 +45,13 @@ export function DatabaseProvider({ children }: { children: ReactNode }) {
 
   if (error) {
     return (
-      <EmptyState
-        icon="database-alert-outline"
-        title="Не удалось открыть данные"
-        description="Перезапустите приложение. Если ошибка повторится — восстановите данные из бэкапа."
-      />
+      <PaperProvider theme={isDark ? darkTheme : lightTheme}>
+        <EmptyState
+          icon="database-alert-outline"
+          title="Не удалось открыть данные"
+          description="Перезапустите приложение. Если ошибка повторится — восстановите данные из бэкапа."
+        />
+      </PaperProvider>
     );
   }
   return ready ? <>{children}</> : null;

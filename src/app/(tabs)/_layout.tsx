@@ -7,7 +7,7 @@ import { useAppTheme } from '@/theme';
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
 const TABS: { name: string; title: string; icon: IconName }[] = [
-  { name: 'today', title: 'Сегодня', icon: 'silverware-fork-knife' },
+  { name: 'index', title: 'Сегодня', icon: 'silverware-fork-knife' },
   { name: 'pantry', title: 'Продукты', icon: 'fridge-outline' },
   { name: 'history', title: 'История', icon: 'chart-timeline-variant' },
   { name: 'profile', title: 'Профиль', icon: 'account-circle-outline' },

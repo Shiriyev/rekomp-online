@@ -45,3 +45,14 @@ export type RecipeLine = {
 };
 
 export type Macros = { kcal: number; protein: number };
+
+export const SEXES = ['male', 'female'] as const;
+export type Sex = (typeof SEXES)[number];
+
+export const ACTIVITY_LEVELS = ['sedentary', 'light', 'moderate', 'active', 'very_active'] as const;
+export type ActivityLevel = (typeof ACTIVITY_LEVELS)[number];
+
+/** Weekly weight change in kg; negative = losing. */
+export const GOAL_RATES = [0, -0.25, -0.5, -0.75] as const;
+export type GoalRate = (typeof GOAL_RATES)[number];
+export const DEFAULT_GOAL_RATE: GoalRate = -0.5;

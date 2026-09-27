@@ -10,7 +10,15 @@ import {
   text,
 } from 'drizzle-orm/sqlite-core';
 
-import { INGREDIENT_CATEGORIES, MEAL_LOG_SOURCES, MEAL_TYPES, UNITS } from '../domain/types';
+import {
+  ACTIVITY_LEVELS,
+  INGREDIENT_CATEGORIES,
+  MEAL_LOG_SOURCES,
+  MEAL_TYPES,
+  SEXES,
+  UNITS,
+  type GoalRate,
+} from '../domain/types';
 
 /** Per-ingredient amounts moved by a cook session, used for Undo. Positive = consumed. */
 export type PantryDelta = { ingredientId: string; amount: number; unit: (typeof UNITS)[number] }[];
@@ -175,9 +183,6 @@ export const mealLogs = sqliteTable(
   ],
 );
 
-export const SEXES = ['male', 'female'] as const;
-export const ACTIVITY_LEVELS = ['sedentary', 'light', 'moderate', 'active', 'very_active'] as const;
-
 export const profile = sqliteTable(
   'profile',
   {
@@ -188,7 +193,7 @@ export const profile = sqliteTable(
     heightCm: real('height_cm').notNull(),
     weightKg: real('weight_kg').notNull(),
     activityLevel: text('activity_level', { enum: ACTIVITY_LEVELS }).notNull(),
-    goalRateKgPerWeek: real('goal_rate_kg_per_week').notNull(),
+    goalRateKgPerWeek: real('goal_rate_kg_per_week').$type<GoalRate>().notNull(),
     kcalTarget: integer('kcal_target').notNull(),
     proteinTargetG: integer('protein_target_g').notNull(),
     proteinMinG: integer('protein_min_g').notNull(),

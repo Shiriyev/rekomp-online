@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { MEAL_TYPES } from './types';
+import { ACTIVITY_LEVELS, GOAL_RATES, MEAL_TYPES, SEXES } from './types';
 
 /** Manual food entry ("купил сникерс"). */
 export const manualLogInputSchema = z.object({
@@ -19,3 +19,48 @@ export const ingredientNutritionSchema = z.object({
 export type IngredientNutritionInput = z.infer<typeof ingredientNutritionSchema>;
 
 export const pantryQuantitySchema = z.number().finite().min(0).max(1_000_000);
+
+/** Parses user-typed decimals, accepting a comma separator ("82,5"). Returns NaN when invalid. */
+export function parseDecimal(input: string): number {
+  const normalized = input.trim().replace(',', '.');
+  return /^\d+(\.\d+)?$/.test(normalized) ? Number(normalized) : Number.NaN;
+}
+
+export const PROFILE_LIMITS = {
+  age: { min: 16, max: 100 },
+  heightCm: { min: 120, max: 230 },
+  weightKg: { min: 35, max: 300 },
+  kcalTarget: { min: 1000, max: 5000 },
+  proteinG: { min: 30, max: 400 },
+} as const;
+
+export const profileSchema = z
+  .object({
+    sex: z.enum(SEXES),
+    age: z.number().int().min(PROFILE_LIMITS.age.min).max(PROFILE_LIMITS.age.max),
+    heightCm: z.number().min(PROFILE_LIMITS.heightCm.min).max(PROFILE_LIMITS.heightCm.max),
+    weightKg: z.number().min(PROFILE_LIMITS.weightKg.min).max(PROFILE_LIMITS.weightKg.max),
+    activityLevel: z.enum(ACTIVITY_LEVELS),
+    goalRateKgPerWeek: z.literal(GOAL_RATES),
+    kcalTarget: z
+      .number()
+      .int()
+      .min(PROFILE_LIMITS.kcalTarget.min)
+      .max(PROFILE_LIMITS.kcalTarget.max),
+    proteinTargetG: z
+      .number()
+      .int()
+      .min(PROFILE_LIMITS.proteinG.min)
+      .max(PROFILE_LIMITS.proteinG.max),
+    proteinMinG: z.number().int().min(PROFILE_LIMITS.proteinG.min).max(PROFILE_LIMITS.proteinG.max),
+    targetOverridden: z.boolean(),
+  })
+  .refine((p) => p.proteinMinG <= p.proteinTargetG, {
+    path: ['proteinMinG'],
+    message: 'Минимум не может быть больше цели',
+  });
+export type ProfileInput = z.infer<typeof profileSchema>;
+
+export const THEME_PREFERENCES = ['system', 'light', 'dark'] as const;
+export type ThemePreference = (typeof THEME_PREFERENCES)[number];
+export const themePreferenceSchema = z.enum(THEME_PREFERENCES);

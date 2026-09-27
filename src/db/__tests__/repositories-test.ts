@@ -4,7 +4,8 @@
 import { ZodError } from 'zod';
 
 import { createRepositories, type Repositories } from '../repositories';
-import { pantryItems } from '../schema';
+import type { ProfileInput } from '../../domain/schemas';
+import { pantryItems, weightLogs } from '../schema';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
@@ -182,22 +183,55 @@ describe('logRepo', () => {
 });
 
 describe('profileRepo', () => {
+  const base: ProfileInput = {
+    sex: 'male',
+    age: 30,
+    heightCm: 180,
+    weightKg: 85,
+    activityLevel: 'moderate',
+    goalRateKgPerWeek: -0.5,
+    kcalTarget: 2150,
+    proteinTargetG: 140,
+    proteinMinG: 120,
+    targetOverridden: true,
+  };
+  const day1 = Date.UTC(2026, 8, 27, 10);
+  const day2 = Date.UTC(2026, 8, 28, 10);
+
   it('upserts the single profile row', () => {
     expect(repos.profile.get()).toBeUndefined();
-    const base = {
-      sex: 'male' as const,
-      age: 30,
-      heightCm: 180,
-      weightKg: 85,
-      activityLevel: 'moderate' as const,
-      goalRateKgPerWeek: -0.5,
-      kcalTarget: 2150,
-      proteinTargetG: 140,
-      proteinMinG: 120,
-      targetOverridden: true,
-    };
-    repos.profile.save(base, 1);
-    repos.profile.save({ ...base, weightKg: 84 }, 2);
-    expect(repos.profile.get()).toMatchObject({ id: 1, weightKg: 84, updatedAt: 2 });
+    repos.profile.save(base, day1);
+    repos.profile.save({ ...base, weightKg: 84 }, day2);
+    expect(repos.profile.get()).toMatchObject({ id: 1, weightKg: 84, updatedAt: day2 });
+  });
+
+  it('records one weight entry per local day, last value wins', () => {
+    repos.profile.save(base, day1);
+    repos.profile.save({ ...base, weightKg: 84.6 }, day1 + 1000);
+    repos.profile.save({ ...base, weightKg: 84.2 }, day2);
+    expect(db.select().from(weightLogs).orderBy(weightLogs.localDate).all()).toEqual([
+      { localDate: '2026-09-27', weightKg: 84.6 },
+      { localDate: '2026-09-28', weightKg: 84.2 },
+    ]);
+  });
+
+  it('validates before writing anything', () => {
+    expect(() => repos.profile.save({ ...base, proteinMinG: 150 })).toThrow(ZodError);
+    expect(() => repos.profile.save({ ...base, age: 12 })).toThrow(ZodError);
+    expect(repos.profile.get()).toBeUndefined();
+    expect(db.select().from(weightLogs).all()).toEqual([]);
+  });
+});
+
+describe('settingsRepo', () => {
+  it('defaults to the system theme and persists a choice', () => {
+    expect(repos.settings.getTheme()).toBe('system');
+    repos.settings.setTheme('dark');
+    expect(repos.settings.getTheme()).toBe('dark');
+  });
+
+  it('rejects unknown themes', () => {
+    // @ts-expect-error: invalid on purpose
+    expect(() => repos.settings.setTheme('neon')).toThrow(ZodError);
   });
 });

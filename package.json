@@ -5,6 +5,7 @@
   "dependencies": {
     "@expo/ui": "~57.0.20",
     "@expo/vector-icons": "^15.0.2",
+    "@hookform/resolvers": "^5.9.1",
     "date-fns": "^4.4.0",
     "drizzle-orm": "^0.45.3",
     "expo": "~57.0.25",
@@ -26,6 +27,7 @@
     "expo-web-browser": "~57.0.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-hook-form": "^7.89.0",
     "react-native": "0.86.3",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-paper": "^5.15.3",

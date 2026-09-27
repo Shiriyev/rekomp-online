@@ -4,6 +4,7 @@ import { createLogRepo } from './logRepo';
 import { createPantryRepo } from './pantryRepo';
 import { createProfileRepo } from './profileRepo';
 import { createRecipesRepo } from './recipesRepo';
+import { createSettingsRepo } from './settingsRepo';
 
 export function createRepositories(db: AppDb) {
   return {
@@ -12,6 +13,7 @@ export function createRepositories(db: AppDb) {
     pantry: createPantryRepo(db),
     logs: createLogRepo(db),
     profile: createProfileRepo(db),
+    settings: createSettingsRepo(db),
   };
 }
 
