@@ -2,3 +2,7 @@
 jest.mock('expo-crypto', () => ({
   randomUUID: () => jest.requireActual<typeof import('node:crypto')>('node:crypto').randomUUID(),
 }));
+
+// Reanimated/worklets need native runtimes; use the mocks they ship for tests.
+jest.mock('react-native-worklets', () => jest.requireActual('react-native-worklets/src/mock'));
+jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));

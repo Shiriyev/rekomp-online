@@ -1,6 +1,6 @@
 import { Controller, type Control, type FieldPath, type FieldValues } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { HelperText, TextInput } from 'react-native-paper';
+import { HelperText, TextInput, type TextInputProps } from 'react-native-paper';
 
 type Props<T extends FieldValues, TOut extends FieldValues> = {
   /** Control of a form whose resolver may transform values (input T, output TOut). */
@@ -9,6 +9,8 @@ type Props<T extends FieldValues, TOut extends FieldValues> = {
   label: string;
   suffix?: string;
   integer?: boolean;
+  /** Custom native input, e.g. BottomSheetTextInput inside a bottom sheet. */
+  render?: TextInputProps['render'];
 };
 
 /** Numeric text input bound to react-hook-form; parsing/validation is done by the zod schema. */
@@ -18,6 +20,7 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
   label,
   suffix,
   integer,
+  render,
 }: Props<T, TOut>) {
   return (
     <Controller
@@ -35,6 +38,7 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
             keyboardType={integer ? 'number-pad' : 'decimal-pad'}
             right={suffix ? <TextInput.Affix text={suffix} /> : undefined}
             error={!!error}
+            render={render}
           />
           {error ? (
             <HelperText type="error" padding="none">

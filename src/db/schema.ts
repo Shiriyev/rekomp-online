@@ -176,6 +176,8 @@ export const mealLogs = sqliteTable(
     cookSessionId: text('cook_session_id').references(() => cookSessions.id, {
       onDelete: 'set null',
     }),
+    /** Set when a prepared portion was eaten, so Undo can put it back. */
+    portionId: text('portion_id').references(() => preparedPortions.id, { onDelete: 'set null' }),
   },
   (t) => [
     index('meal_logs_local_date_idx').on(t.localDate),

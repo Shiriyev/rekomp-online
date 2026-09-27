@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -37,19 +38,26 @@ function AppShell() {
   return (
     <PaperProvider theme={isDark ? darkTheme : lightTheme}>
       <ThemeProvider value={isDark ? navDarkTheme : navLightTheme}>
-        <StatusBar style={isDark ? 'light' : 'dark'} />
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Protected guard={hasProfile}>
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen
-              name="edit-profile"
-              options={{ headerShown: true, title: 'Данные и цели' }}
-            />
-          </Stack.Protected>
-          <Stack.Protected guard={!hasProfile}>
-            <Stack.Screen name="onboarding/index" />
-          </Stack.Protected>
-        </Stack>
+        <BottomSheetModalProvider>
+          <StatusBar style={isDark ? 'light' : 'dark'} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Protected guard={hasProfile}>
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen
+                name="edit-profile"
+                options={{ headerShown: true, title: 'Данные и цели' }}
+              />
+              <Stack.Screen
+                name="recipes/[mealType]"
+                options={{ headerShown: true, title: 'Блюда' }}
+              />
+              <Stack.Screen name="recipe/[id]" options={{ headerShown: true, title: 'Блюдо' }} />
+            </Stack.Protected>
+            <Stack.Protected guard={!hasProfile}>
+              <Stack.Screen name="onboarding/index" />
+            </Stack.Protected>
+          </Stack>
+        </BottomSheetModalProvider>
       </ThemeProvider>
     </PaperProvider>
   );

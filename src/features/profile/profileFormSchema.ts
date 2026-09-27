@@ -1,21 +1,10 @@
 import { z } from 'zod';
 
 import { buildProfile } from '@/domain/profile';
-import { parseDecimal, PROFILE_LIMITS } from '@/domain/schemas';
+import { PROFILE_LIMITS } from '@/domain/schemas';
+import { numberText } from '@/features/forms/numberText';
 import { ACTIVITY_LEVELS, GOAL_RATES, SEXES, type GoalRate } from '@/domain/types';
 import type { Profile } from '@/db/schema';
-
-const numberText = (limits: { min: number; max: number }, int = false) => {
-  const base = z.number({ error: 'Введите число' });
-  return z
-    .string()
-    .transform(parseDecimal)
-    .pipe(
-      (int ? base.int('Нужно целое число') : base)
-        .min(limits.min, `Не меньше ${limits.min}`)
-        .max(limits.max, `Не больше ${limits.max}`),
-    );
-};
 
 const GOAL_KEYS = GOAL_RATES.map(String) as [string, ...string[]];
 
