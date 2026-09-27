@@ -5,6 +5,7 @@ import {
   formatGrams,
   formatInt,
   formatKcal,
+  pluralRu,
 } from '../format';
 
 // ru-RU groups thousands with a no-break space.
@@ -31,5 +32,22 @@ describe('format', () => {
 
   it('formats day and month', () => {
     expect(formatDayMonth('2026-10-02')).toBe('02.10');
+  });
+});
+
+describe('pluralRu', () => {
+  const forms = ['порция', 'порции', 'порций'] as const;
+  it.each([
+    [1, 'порция'],
+    [2, 'порции'],
+    [4, 'порции'],
+    [5, 'порций'],
+    [11, 'порций'],
+    [12, 'порций'],
+    [21, 'порция'],
+    [22, 'порции'],
+    [0, 'порций'],
+  ])('%i → %s', (n, form) => {
+    expect(pluralRu(n, forms)).toBe(form);
   });
 });

@@ -1,4 +1,4 @@
-import { asc, desc, eq, gt } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, isNotNull, isNull } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useMemo } from 'react';
 
@@ -13,6 +13,7 @@ import type { AvailablePortion } from './repositories/portionsRepo';
 import { THEME_KEY } from './repositories/settingsRepo';
 import {
   appMeta,
+  cookSessions,
   ingredients,
   lidlProducts,
   mealLogs,
@@ -171,4 +172,55 @@ export function useActiveSales(today: string): Map<string, LidlProduct> {
     () => new Map(data.filter((p) => isSaleActive(p, today)).map((p) => [p.ingredientId, p])),
     [data, today],
   );
+}
+
+export type ActiveCook = { id: string; recipeId: string; recipeName: string } | undefined;
+
+/** Unfinished cooking session to offer «Продолжить готовку». */
+export function useActiveCook(): ActiveCook {
+  const { data } = useLiveQuery(
+    db
+      .select({ id: cookSessions.id, recipeId: cookSessions.recipeId, recipeName: recipes.name })
+      .from(cookSessions)
+      .innerJoin(recipes, eq(recipes.id, cookSessions.recipeId))
+      .where(and(isNull(cookSessions.finishedAt), isNull(cookSessions.abandonedAt)))
+      .orderBy(desc(cookSessions.startedAt))
+      .limit(1),
+  );
+  return data[0];
+}
+
+/** Whether a recipe has never been cooked to the end (for the first-cook badge). */
+export function useIsFirstCook(recipeId: string): boolean {
+  const { data } = useLiveQuery(
+    db
+      .select({ id: cookSessions.id })
+      .from(cookSessions)
+      .where(
+        and(
+          eq(cookSessions.recipeId, recipeId),
+          isNotNull(cookSessions.finishedAt),
+          isNull(cookSessions.undoneAt),
+        ),
+      )
+      .limit(1),
+    [recipeId],
+  );
+  return data.length === 0;
+}
+
+/** Protein per local day since `fromDate` (inclusive), for the streak. */
+export function useDailyProtein(fromDate: string): Map<string, number> {
+  const { data } = useLiveQuery(
+    db
+      .select({ localDate: mealLogs.localDate, protein: mealLogs.protein })
+      .from(mealLogs)
+      .where(gte(mealLogs.localDate, fromDate)),
+    [fromDate],
+  );
+  return useMemo(() => {
+    const map = new Map<string, number>();
+    for (const row of data) map.set(row.localDate, (map.get(row.localDate) ?? 0) + row.protein);
+    return map;
+  }, [data]);
 }

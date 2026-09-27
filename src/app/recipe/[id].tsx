@@ -24,6 +24,7 @@ import { StatusBadge } from '@/features/recipes/StatusBadge';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { formatAmount, formatInt, formatKcal } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
+import { showUndo } from '@/features/undo/undoStore';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -70,7 +71,17 @@ export default function RecipeScreen() {
 
   const startCooking = () => {
     setConfirmOpen(false);
-    router.push({ pathname: '/cook/[id]', params: { id: recipe.id, servings: String(servings) } });
+    router.push({
+      pathname: '/cook/[id]',
+      params: { id: recipe.id, servings: String(servings), choices: JSON.stringify(check.choices) },
+    });
+  };
+
+  const justAte = () => {
+    // One portion eaten without the cooking mode; products for that portion are deducted.
+    const result = repositories.cook.quickEat(recipe.id, 1, check.choices, recipe.mealType);
+    showUndo(`Записано: ${recipe.name}`, () => repositories.cook.undo(result.sessionId));
+    router.back();
   };
 
   const addMissing = () => {
@@ -207,6 +218,13 @@ export default function RecipeScreen() {
             onPress={() => (check.status === 'ok' ? startCooking() : setConfirmOpen(true))}
             contentStyle={styles.button}>
             Начать готовить
+          </Button>
+          <Button
+            mode="text"
+            icon="silverware-fork-knife"
+            onPress={justAte}
+            contentStyle={styles.button}>
+            Просто съел(а)
           </Button>
         </View>
       </ScrollView>

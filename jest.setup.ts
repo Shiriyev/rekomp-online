@@ -5,4 +5,8 @@ jest.mock('expo-crypto', () => ({
 
 // Reanimated/worklets need native runtimes; use the mocks they ship for tests.
 jest.mock('react-native-worklets', () => jest.requireActual('react-native-worklets/src/mock'));
-jest.mock('react-native-reanimated', () => jest.requireActual('react-native-reanimated/mock'));
+jest.mock('react-native-reanimated', () => ({
+  ...jest.requireActual<object>('react-native-reanimated/mock'),
+  // Not included in the shipped mock.
+  useReducedMotion: () => false,
+}));

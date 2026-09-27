@@ -1,4 +1,5 @@
 import type { AppDb } from '../types';
+import { createCookRepo } from './cookRepo';
 import { createIngredientsRepo } from './ingredientsRepo';
 import { createLogRepo } from './logRepo';
 import { createPantryRepo } from './pantryRepo';
@@ -14,6 +15,7 @@ export function createRepositories(db: AppDb) {
     recipes: createRecipesRepo(db),
     pantry: createPantryRepo(db),
     logs: createLogRepo(db),
+    cook: createCookRepo(db),
     portions: createPortionsRepo(db),
     profile: createProfileRepo(db),
     settings: createSettingsRepo(db),

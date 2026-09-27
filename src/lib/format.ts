@@ -25,3 +25,13 @@ export function formatAmount(amount: number, unit: keyof typeof UNIT_LABELS): st
 /** "02.10" for a YYYY-MM-DD date. */
 export const formatDayMonth = (localDate: string): string =>
   `${localDate.slice(8, 10)}.${localDate.slice(5, 7)}`;
+
+/** Russian plural form: pluralRu(3, ['порция', 'порции', 'порций']) → 'порции'. */
+export function pluralRu(n: number, forms: readonly [string, string, string]): string {
+  const abs = Math.abs(Math.trunc(n));
+  const mod10 = abs % 10;
+  const mod100 = abs % 100;
+  if (mod10 === 1 && mod100 !== 11) return forms[0];
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return forms[1];
+  return forms[2];
+}

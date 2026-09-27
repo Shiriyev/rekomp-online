@@ -21,6 +21,19 @@ import {
   type GoalRate,
 } from '../domain/types';
 
+/** Timer of one step; wall-clock based so it survives the app being killed. */
+export type CookTimer = {
+  stepOrder: number;
+  durationSec: number;
+  /** Epoch ms when the current run started; null while paused/idle. */
+  startedAt: number | null;
+  /** Seconds already elapsed in earlier runs (before pauses). */
+  elapsedSec: number;
+  notificationId: string | null;
+};
+
+export type CookProgress = { stepIndex: number; checked: string[]; timers: CookTimer[] };
+
 /** Per-ingredient amounts moved by a cook session, used for Undo. Positive = consumed. */
 export type PantryDelta = { ingredientId: string; amount: number; unit: (typeof UNITS)[number] }[];
 
@@ -137,6 +150,14 @@ export const cookSessions = sqliteTable('cook_sessions', {
   startedAt: integer('started_at').notNull(),
   finishedAt: integer('finished_at'),
   undoneAt: integer('undone_at'),
+  abandonedAt: integer('abandoned_at'),
+  /** Chosen alternatives for this cook, e.g. { yogurt: 'greek_yogurt' }. */
+  choices: text('choices', { mode: 'json' })
+    .$type<Record<string, string>>()
+    .notNull()
+    .default(sql`'{}'`),
+  /** UI progress (step, checked items, timers) so an interrupted session can resume. */
+  progress: text('progress', { mode: 'json' }).$type<CookProgress>(),
   pantryDelta: text('pantry_delta', { mode: 'json' }).$type<PantryDelta>(),
   shortfall: text('shortfall', { mode: 'json' }).$type<PantryDelta>(),
 });

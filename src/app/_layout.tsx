@@ -9,8 +9,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { DatabaseProvider } from '@/db/DatabaseProvider';
 import { useProfile, useThemePreference } from '@/db/hooks';
+import { useCookStore } from '@/features/cooking/cookStore';
+import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
+import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
+
+// Timer notifications stay quiet while the cooking screen shows its own alert.
+configureNotificationHandler(() => useCookStore.getState().screenOpen);
 
 export default function RootLayout() {
   return (
@@ -52,12 +58,16 @@ function AppShell() {
                 options={{ headerShown: true, title: 'Блюда' }}
               />
               <Stack.Screen name="recipe/[id]" options={{ headerShown: true, title: 'Блюдо' }} />
-              <Stack.Screen name="cook/[id]" options={{ headerShown: true, title: 'Готовка' }} />
+              <Stack.Screen
+                name="cook/[id]"
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
             </Stack.Protected>
             <Stack.Protected guard={!hasProfile}>
               <Stack.Screen name="onboarding/index" />
             </Stack.Protected>
           </Stack>
+          <UndoSnackbarHost />
         </BottomSheetModalProvider>
       </ThemeProvider>
     </PaperProvider>
