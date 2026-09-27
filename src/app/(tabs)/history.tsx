@@ -16,6 +16,7 @@ import { formatDayLabel, formatInt, formatTime } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
+import { SkeletonList } from '@/ui/Skeleton';
 
 export default function HistoryScreen() {
   const theme = useAppTheme();
@@ -39,7 +40,7 @@ export default function HistoryScreen() {
     [byDate, days, today],
   );
 
-  if (!profile) return null;
+  if (!profile) return <SkeletonList rows={3} thumb={0} />;
 
   const askDelete = (log: MealLog) => setDeletePlan(planDelete(log));
   const toggle = (date: string) =>

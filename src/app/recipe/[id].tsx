@@ -28,6 +28,7 @@ import { showUndo } from '@/features/undo/undoStore';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
+import { SkeletonDetail } from '@/ui/Skeleton';
 
 const SERVING_OPTIONS = [1, 2, 3, 4] as const;
 
@@ -63,7 +64,7 @@ export default function RecipeScreen() {
   if (isLoaded && !recipe) {
     return <EmptyState icon="alert-circle-outline" title="Блюдо не найдено" />;
   }
-  if (!recipe || !computed) return null;
+  if (!recipe || !computed) return <SkeletonDetail />;
 
   const { check, macros, staples } = computed;
   const perServing = macros.perServing;

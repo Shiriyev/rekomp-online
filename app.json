@@ -45,7 +45,8 @@
         {
           "hidden": true
         }
-      ]
+      ],
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true,

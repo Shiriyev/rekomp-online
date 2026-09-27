@@ -6,6 +6,7 @@ export const radius = { sm: 8, md: 12, lg: 20, pill: 999 } as const;
 export const palette = {
   kcal: { light: '#2E7D32', dark: '#81C784' },
   protein: { light: '#E65100', dark: '#FFB74D' },
-  warning: { light: '#B26A00', dark: '#FFCC80' },
+  // #8F5500 keeps ≥ 4.5:1 (WCAG AA) on the light background and orange containers.
+  warning: { light: '#8F5500', dark: '#FFCC80' },
   success: { light: '#1B5E20', dark: '#A5D6A7' },
 } as const;

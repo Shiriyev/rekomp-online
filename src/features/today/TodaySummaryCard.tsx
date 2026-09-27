@@ -27,8 +27,18 @@ export function TodaySummaryCard({ summary, targets }: Props) {
               color={kcalColor}
               trackColor={track}
               accessibilityLabel={`Калории: ${formatInt(total.kcal)} из ${formatInt(targets.kcalTarget)}`}>
-              <Text variant="headlineSmall">{formatInt(total.kcal)}</Text>
-              <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              <Text
+                variant="headlineSmall"
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                style={styles.ringText}>
+                {formatInt(total.kcal)}
+              </Text>
+              <Text
+                variant="bodySmall"
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                style={[styles.ringText, { color: theme.colors.onSurfaceVariant }]}>
                 из {formatInt(targets.kcalTarget)} ккал
               </Text>
             </MacroRing>
@@ -45,8 +55,18 @@ export function TodaySummaryCard({ summary, targets }: Props) {
               color={theme.colors.protein}
               trackColor={track}
               accessibilityLabel={`Белок: ${formatInt(total.protein)} из ${formatInt(targets.proteinTargetG)} грамм`}>
-              <Text variant="headlineSmall">{formatInt(total.protein)}</Text>
-              <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              <Text
+                variant="headlineSmall"
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                style={styles.ringText}>
+                {formatInt(total.protein)}
+              </Text>
+              <Text
+                variant="bodySmall"
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                style={[styles.ringText, { color: theme.colors.onSurfaceVariant }]}>
                 из {formatInt(targets.proteinTargetG)} г белка
               </Text>
             </MacroRing>
@@ -81,4 +101,6 @@ const styles = StyleSheet.create({
   ringColumn: { alignItems: 'center', gap: spacing.sm },
   meals: { flexDirection: 'row', justifyContent: 'space-between' },
   meal: { alignItems: 'center', flex: 1 },
+  // Keeps ring labels inside the circle at large system font sizes.
+  ringText: { maxWidth: 104, textAlign: 'center' },
 });

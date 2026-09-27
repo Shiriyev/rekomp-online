@@ -1,6 +1,7 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useMemo, useRef } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { Avatar, Card, Chip, FAB, Text } from 'react-native-paper';
 
@@ -27,6 +28,7 @@ import { TodaySummaryCard } from '@/features/today/TodaySummaryCard';
 import { showUndo } from '@/features/undo/undoStore';
 import { useClock } from '@/lib/useClock';
 import { spacing } from '@/theme';
+import { SkeletonBlock } from '@/ui/Skeleton';
 
 const STREAK_WINDOW_DAYS = 60;
 
@@ -54,7 +56,15 @@ export default function TodayScreen() {
     [catalog],
   );
 
-  if (!profile) return null;
+  if (!profile || !catalog.isLoaded) {
+    return (
+      <View style={styles.content} accessibilityLabel="Загрузка">
+        <SkeletonBlock height={260} rounded={16} />
+        <SkeletonBlock height={24} width="50%" />
+        <SkeletonBlock height={180} rounded={16} />
+      </View>
+    );
+  }
   const nudge = proteinNudge(now, summary.total.protein, profile.proteinMinG);
   const mealNow = suggestMealType(now);
   const streak = proteinStreak(dailyProtein, profile.proteinMinG, today);
@@ -86,7 +96,9 @@ export default function TodayScreen() {
             />
           </Card>
         ) : null}
-        <TodaySummaryCard summary={summary} targets={profile} />
+        <Animated.View entering={FadeIn.duration(250)}>
+          <TodaySummaryCard summary={summary} targets={profile} />
+        </Animated.View>
         {streak >= 2 ? (
           <Chip
             icon="fire"

@@ -18,6 +18,7 @@ import { RecipeListItem } from '@/features/recipes/RecipeListItem';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { spacing } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
+import { SkeletonList } from '@/ui/Skeleton';
 
 const SORT_LABELS: Record<RecipeSort, string> = {
   protein: 'Больше белка',
@@ -60,6 +61,14 @@ export default function RecipesScreen() {
   }, [meal, catalog, linesByRecipe, ingredients, pantry, onlyCookable, sort]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title="Такой категории нет" />;
+  if (!catalog.isLoaded || ingredients.size === 0) {
+    return (
+      <>
+        <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />
+        <SkeletonList />
+      </>
+    );
+  }
 
   return (
     <>

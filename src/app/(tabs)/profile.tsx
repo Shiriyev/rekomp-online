@@ -9,6 +9,7 @@ import type { Profile } from '@/db/schema';
 import { THEME_PREFERENCES, type ThemePreference } from '@/domain/schemas';
 import { ACTIVITY_TITLES, goalRateLabel, SEX_LABELS } from '@/features/profile/labels';
 import { WeightDialog } from '@/features/profile/WeightDialog';
+import { DataSection } from '@/features/backup/DataSection';
 import { formatDecimal, formatInt, formatKcal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
@@ -82,6 +83,8 @@ export default function ProfileScreen() {
           buttons={THEME_PREFERENCES.map((t) => ({ value: t, label: THEME_LABELS[t] }))}
         />
       </View>
+
+      <DataSection />
 
       {weightOpen ? (
         <WeightDialog
