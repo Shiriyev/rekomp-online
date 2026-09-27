@@ -49,6 +49,12 @@ export type FinishResult = {
 
 export type ActiveSession = CookSession & { recipeName: string };
 
+export type UndoPreview =
+  | { canUndo: true; products: PantryDeltaItem[]; portionsToRemove: number }
+  | { canUndo: false; reason: 'portions_eaten' | 'not_finished' | 'already_undone' | 'not_found' };
+
+type PantryDeltaItem = { ingredientId: string; amount: number; unit: 'g' | 'ml' | 'pcs' };
+
 const validateServings = (servings: number) => {
   if (!Number.isInteger(servings) || servings < 1 || servings > MAX_SERVINGS) {
     throw new RangeError(`servings must be an integer 1–${MAX_SERVINGS}, got ${servings}`);
@@ -281,6 +287,32 @@ export function createCookRepo(db: AppDb) {
         const session = startIn(tx, recipeId, servings, choices, now);
         return finishIn(tx, session.id, { eatNow: true, mealType }, now);
       });
+    },
+
+    /** What undo would do, for the confirmation dialog. */
+    undoPreview(sessionId: string): UndoPreview {
+      const session = getSession(db, sessionId);
+      if (!session) return { canUndo: false, reason: 'not_found' };
+      if (session.undoneAt !== null) return { canUndo: false, reason: 'already_undone' };
+      if (session.finishedAt === null) return { canUndo: false, reason: 'not_finished' };
+      const portion = db
+        .select()
+        .from(preparedPortions)
+        .where(eq(preparedPortions.cookSessionId, sessionId))
+        .get();
+      if (portion) {
+        const eaten = db
+          .select({ n: count() })
+          .from(mealLogs)
+          .where(eq(mealLogs.portionId, portion.id))
+          .get();
+        if ((eaten?.n ?? 0) > 0) return { canUndo: false, reason: 'portions_eaten' };
+      }
+      return {
+        canUndo: true,
+        products: session.pantryDelta ?? [],
+        portionsToRemove: portion?.portionsLeft ?? 0,
+      };
     },
 
     /**

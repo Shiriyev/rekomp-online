@@ -1,5 +1,7 @@
 import {
   formatAmount,
+  formatDayLabel,
+  formatTime,
   formatDayMonth,
   formatDecimal,
   formatGrams,
@@ -49,5 +51,17 @@ describe('pluralRu', () => {
     [0, 'порций'],
   ])('%i → %s', (n, form) => {
     expect(pluralRu(n, forms)).toBe(form);
+  });
+});
+
+describe('formatDayLabel / formatTime', () => {
+  it('names today and yesterday, otherwise weekday and date', () => {
+    expect(formatDayLabel('2026-09-27', '2026-09-27', '2026-09-26')).toBe('Сегодня');
+    expect(formatDayLabel('2026-09-26', '2026-09-27', '2026-09-26')).toBe('Вчера');
+    expect(formatDayLabel('2026-09-21', '2026-09-27', '2026-09-26')).toMatch(/пн.*21 сентября/);
+  });
+
+  it('formats local time', () => {
+    expect(formatTime(Date.UTC(2026, 8, 27, 15, 12))).toBe('17:12');
   });
 });

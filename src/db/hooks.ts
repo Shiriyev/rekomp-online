@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, gte, isNotNull, isNull } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, isNotNull, isNull, sql } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useMemo } from 'react';
 
@@ -24,6 +24,7 @@ import {
   recipes,
   recipeSteps,
   shoppingItems,
+  weightLogs,
   type Ingredient,
   type LidlProduct,
   type MealLog,
@@ -243,4 +244,31 @@ export function useShoppingItems(): ShoppingItem[] {
 
 export function useLidlProducts(): LidlProduct[] {
   return useLiveQuery(db.select().from(lidlProducts).orderBy(asc(lidlProducts.title))).data;
+}
+
+export type DayAggregate = { localDate: string; kcal: number; protein: number; entries: number };
+
+/** Totals per local day, newest first. */
+export function useDayAggregates(): DayAggregate[] {
+  return useLiveQuery(
+    db
+      .select({
+        localDate: mealLogs.localDate,
+        kcal: sql<number>`sum(${mealLogs.kcal})`,
+        protein: sql<number>`sum(${mealLogs.protein})`,
+        entries: sql<number>`count(*)`,
+      })
+      .from(mealLogs)
+      .groupBy(mealLogs.localDate)
+      .orderBy(desc(mealLogs.localDate)),
+  ).data;
+}
+
+export function useWeightLogs(): { localDate: string; weightKg: number }[] {
+  return useLiveQuery(db.select().from(weightLogs).orderBy(asc(weightLogs.localDate))).data;
+}
+
+export function useLatestLog(): MealLog | undefined {
+  return useLiveQuery(db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1))
+    .data[0];
 }

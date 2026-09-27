@@ -35,3 +35,22 @@ export function pluralRu(n: number, forms: readonly [string, string, string]): s
   if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return forms[1];
   return forms[2];
 }
+
+const weekdayDay = new Intl.DateTimeFormat('ru-RU', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'long',
+});
+
+/** «Сегодня», «Вчера», otherwise «пн, 21 сентября». */
+export function formatDayLabel(localDate: string, today: string, yesterday: string): string {
+  if (localDate === today) return 'Сегодня';
+  if (localDate === yesterday) return 'Вчера';
+  const [y, m, d] = localDate.split('-').map(Number) as [number, number, number];
+  return weekdayDay.format(new Date(y, m - 1, d));
+}
+
+const hourMinute = new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+/** «17:12» in the device time zone. */
+export const formatTime = (timestampMs: number): string => hourMinute.format(new Date(timestampMs));

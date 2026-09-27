@@ -1,7 +1,12 @@
-import { asc, desc, eq, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, sql } from 'drizzle-orm';
 
 import { toLocalDate } from '../../domain/dates';
-import { manualLogInputSchema, type ManualLogInput } from '../../domain/schemas';
+import {
+  manualLogInputSchema,
+  mealLogEditSchema,
+  type ManualLogInput,
+  type MealLogEditInput,
+} from '../../domain/schemas';
 import type { Macros } from '../../domain/types';
 import { newId } from '../../lib/id';
 import { mealLogs, preparedPortions, type MealLog } from '../schema';
@@ -51,6 +56,38 @@ export function createLogRepo(db: AppDb) {
 
     remove(id: string): void {
       db.delete(mealLogs).where(eq(mealLogs.id, id)).run();
+    },
+
+    get(id: string): MealLog | undefined {
+      return db.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
+    },
+
+    /** The most recent entry, for «Отменить последнее» in the history. */
+    latest(): MealLog | undefined {
+      return db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1).get();
+    },
+
+    /** Corrects an entry; the name of recipe/portion entries stays tied to the dish. */
+    update(id: string, input: MealLogEditInput): MealLog {
+      const values = mealLogEditSchema.parse(input);
+      const current = db.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
+      if (!current) throw new Error(`Meal log not found: ${id}`);
+      return db
+        .update(mealLogs)
+        .set({ ...values, name: current.source === 'manual' ? values.name : current.name })
+        .where(eq(mealLogs.id, id))
+        .returning()
+        .get();
+    },
+
+    /**
+     * Deletes only the log line of a cooked dish; pantry and fridge portions stay as they are.
+     * Use cook.undo to also return products.
+     */
+    removeCookedEntryOnly(id: string): void {
+      db.delete(mealLogs)
+        .where(and(eq(mealLogs.id, id), eq(mealLogs.source, 'recipe')))
+        .run();
     },
 
     /** Latest manual entries, newest first, for quick presets. */

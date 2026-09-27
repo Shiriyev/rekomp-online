@@ -125,3 +125,11 @@ export const shoppingItemInputSchema = z
     message: 'Количество и единица указываются вместе',
   });
 export type ShoppingItemInput = z.infer<typeof shoppingItemInputSchema>;
+
+export const mealLogEditSchema = z.object({
+  name: z.string().trim().min(1, 'Введите название').max(80, 'Не длиннее 80 символов'),
+  kcal: z.number().int('Целое число').min(0).max(5000),
+  protein: z.number().min(0).max(500),
+  mealType: z.enum(MEAL_TYPES),
+});
+export type MealLogEditInput = z.infer<typeof mealLogEditSchema>;
