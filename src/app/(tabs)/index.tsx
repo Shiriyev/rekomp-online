@@ -17,6 +17,7 @@ import {
 } from '@/db/hooks';
 import type { AvailablePortion } from '@/db/repositories/portionsRepo';
 import type { ManualLogInput } from '@/domain/schemas';
+import type { MealType } from '@/domain/types';
 import { proteinStreak } from '@/domain/cooking';
 import { toLocalDate } from '@/domain/dates';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
@@ -46,6 +47,13 @@ export default function TodayScreen() {
 
   const summary = useMemo(() => summarizeDay(logs), [logs]);
   const kcalRanges = useMemo(() => kcalRangeByMeal(catalog.recipes, catalog.macros), [catalog]);
+  // First recipe of each meal (catalog order) gives the tile its photo.
+  const coverImages = useMemo(() => {
+    const covers: Partial<Record<MealType, string>> = {};
+    for (const r of catalog.recipes)
+      if (r.imageKey && !covers[r.mealType]) covers[r.mealType] = r.imageKey;
+    return covers;
+  }, [catalog]);
   const snackSuggestions = useMemo(
     () =>
       catalog.recipes
@@ -112,7 +120,7 @@ export default function TodayScreen() {
         <Text variant="titleMedium" accessibilityRole="header">
           Что приготовить
         </Text>
-        <MealCategoryGrid kcalRanges={kcalRanges} />
+        <MealCategoryGrid kcalRanges={kcalRanges} coverImages={coverImages} />
       </ScrollView>
 
       <FAB

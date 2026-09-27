@@ -79,6 +79,9 @@ export function DataSection() {
         onPress={() => setDialog({ kind: 'reset1' })}>
         Сбросить все данные
       </Button>
+      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+        Фото блюд и продуктов — авторы Pexels (pexels.com), список в ATTRIBUTION.md.
+      </Text>
 
       <Portal>
         <Dialog visible={dialog?.kind === 'import'} onDismiss={() => setDialog(null)}>
