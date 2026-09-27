@@ -8,6 +8,7 @@ import {
   real,
   sqliteTable,
   text,
+  uniqueIndex,
 } from 'drizzle-orm/sqlite-core';
 
 import {
@@ -210,6 +211,27 @@ export const weightLogs = sqliteTable('weight_logs', {
   weightKg: real('weight_kg').notNull(),
 });
 
+/** Shopping list. At most one open (unchecked) item per ingredient. */
+export const shoppingItems = sqliteTable(
+  'shopping_items',
+  {
+    id: text('id').primaryKey(),
+    ingredientId: text('ingredient_id').references(() => ingredients.id, { onDelete: 'set null' }),
+    /** Free-text title for manual items; ingredient name is used otherwise. */
+    title: text('title').notNull(),
+    quantity: real('quantity'),
+    unit: text('unit', { enum: UNITS }),
+    checked: integer('checked', { mode: 'boolean' }).notNull().default(false),
+    createdAt: integer('created_at').notNull(),
+    checkedAt: integer('checked_at'),
+  },
+  (t) => [
+    uniqueIndex('shopping_items_open_ingredient_uq')
+      .on(t.ingredientId)
+      .where(sql`${t.checked} = 0 AND ${t.ingredientId} IS NOT NULL`),
+  ],
+);
+
 /** Small key/value store for app metadata such as the applied seed version. */
 export const appMeta = sqliteTable('app_meta', {
   key: text('key').primaryKey(),
@@ -229,4 +251,5 @@ export type PreparedPortion = typeof preparedPortions.$inferSelect;
 export type MealLog = typeof mealLogs.$inferSelect;
 export type NewMealLog = typeof mealLogs.$inferInsert;
 export type Profile = typeof profile.$inferSelect;
+export type ShoppingItem = typeof shoppingItems.$inferSelect;
 export type NewProfile = typeof profile.$inferInsert;

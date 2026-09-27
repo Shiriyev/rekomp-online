@@ -2,6 +2,8 @@ import { asc, desc, eq, gt } from 'drizzle-orm';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useMemo } from 'react';
 
+import { isSaleActive } from '@/domain/lidl';
+import type { PantryStock } from '@/domain/pantry';
 import { themePreferenceSchema, type ThemePreference } from '@/domain/schemas';
 import { catalogMacros, recentPresets, type Preset } from '@/domain/today';
 import type { Macros } from '@/domain/types';
@@ -12,14 +14,21 @@ import { THEME_KEY } from './repositories/settingsRepo';
 import {
   appMeta,
   ingredients,
+  lidlProducts,
   mealLogs,
+  pantryItems,
   preparedPortions,
   profile,
   recipeIngredients,
   recipes,
+  recipeSteps,
+  type Ingredient,
+  type LidlProduct,
   type MealLog,
   type Profile,
   type Recipe,
+  type RecipeIngredient,
+  type RecipeStep,
 } from './schema';
 
 /** Reactive profile row. `isLoaded` is false until the first query resolves. */
@@ -88,4 +97,78 @@ export function useRecipeCatalog(): RecipeCatalog {
       isLoaded,
     };
   }, [recipeRows, lineRows, ingredientRows]);
+}
+
+/** Pantry as a stock map for domain checks. */
+export function usePantryStock(): PantryStock {
+  const { data } = useLiveQuery(db.select().from(pantryItems));
+  return useMemo(
+    () => new Map(data.map((p) => [p.ingredientId, { quantity: p.quantity, unit: p.unit }])),
+    [data],
+  );
+}
+
+export function useIngredientsMap(): Map<string, Ingredient> {
+  const { data } = useLiveQuery(db.select().from(ingredients));
+  return useMemo(() => new Map(data.map((i) => [i.id, i])), [data]);
+}
+
+/** Recipe lines grouped by recipe id. */
+export function useRecipeLinesByRecipe(): Map<string, RecipeIngredient[]> {
+  const { data } = useLiveQuery(
+    db.select().from(recipeIngredients).orderBy(asc(recipeIngredients.sortOrder)),
+  );
+  return useMemo(() => {
+    const map = new Map<string, RecipeIngredient[]>();
+    for (const line of data) {
+      const bucket = map.get(line.recipeId);
+      if (bucket) bucket.push(line);
+      else map.set(line.recipeId, [line]);
+    }
+    return map;
+  }, [data]);
+}
+
+export type RecipeDetailData = {
+  recipe: Recipe | undefined;
+  lines: RecipeIngredient[];
+  steps: RecipeStep[];
+  isLoaded: boolean;
+};
+
+export function useRecipeDetail(id: string): RecipeDetailData {
+  const recipe = useLiveQuery(db.select().from(recipes).where(eq(recipes.id, id)), [id]);
+  const lines = useLiveQuery(
+    db
+      .select()
+      .from(recipeIngredients)
+      .where(eq(recipeIngredients.recipeId, id))
+      .orderBy(asc(recipeIngredients.sortOrder)),
+    [id],
+  );
+  const steps = useLiveQuery(
+    db
+      .select()
+      .from(recipeSteps)
+      .where(eq(recipeSteps.recipeId, id))
+      .orderBy(asc(recipeSteps.order)),
+    [id],
+  );
+  return {
+    recipe: recipe.data[0],
+    lines: lines.data,
+    steps: steps.data,
+    isLoaded: [recipe, lines, steps].every((q) => q.updatedAt !== undefined),
+  };
+}
+
+/** Lidl products currently on sale, keyed by ingredient id (expired sales drop out automatically). */
+export function useActiveSales(today: string): Map<string, LidlProduct> {
+  const { data } = useLiveQuery(
+    db.select().from(lidlProducts).where(eq(lidlProducts.onSale, true)),
+  );
+  return useMemo(
+    () => new Map(data.filter((p) => isSaleActive(p, today)).map((p) => [p.ingredientId, p])),
+    [data, today],
+  );
 }

@@ -6,6 +6,7 @@ import { createPortionsRepo } from './portionsRepo';
 import { createProfileRepo } from './profileRepo';
 import { createRecipesRepo } from './recipesRepo';
 import { createSettingsRepo } from './settingsRepo';
+import { createShoppingRepo } from './shoppingRepo';
 
 export function createRepositories(db: AppDb) {
   return {
@@ -16,6 +17,7 @@ export function createRepositories(db: AppDb) {
     portions: createPortionsRepo(db),
     profile: createProfileRepo(db),
     settings: createSettingsRepo(db),
+    shopping: createShoppingRepo(db),
   };
 }
 

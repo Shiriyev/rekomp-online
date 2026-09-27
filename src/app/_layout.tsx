@@ -52,6 +52,7 @@ function AppShell() {
                 options={{ headerShown: true, title: 'Блюда' }}
               />
               <Stack.Screen name="recipe/[id]" options={{ headerShown: true, title: 'Блюдо' }} />
+              <Stack.Screen name="cook/[id]" options={{ headerShown: true, title: 'Готовка' }} />
             </Stack.Protected>
             <Stack.Protected guard={!hasProfile}>
               <Stack.Screen name="onboarding/index" />

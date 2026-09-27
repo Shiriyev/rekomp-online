@@ -15,6 +15,13 @@
       "when": 1790518935128,
       "tag": "0001_meal_log_portion",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790519859876,
+      "tag": "0002_shopping_items",
+      "breakpoints": true
     }
   ]
 }
