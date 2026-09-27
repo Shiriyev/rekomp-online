@@ -10,7 +10,7 @@ import type { Macros } from '@/domain/types';
 
 import { db } from './client';
 import type { AvailablePortion } from './repositories/portionsRepo';
-import { THEME_KEY } from './repositories/settingsRepo';
+import { COOK_VIEW_KEY, COOK_VIEWS, THEME_KEY, type CookView } from './repositories/settingsRepo';
 import {
   appMeta,
   cookSessions,
@@ -271,4 +271,10 @@ export function useWeightLogs(): { localDate: string; weightKg: number }[] {
 export function useLatestLog(): MealLog | undefined {
   return useLiveQuery(db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1))
     .data[0];
+}
+
+export function useCookView(): CookView {
+  const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, COOK_VIEW_KEY)));
+  const value = data[0]?.value;
+  return COOK_VIEWS.find((v) => v === value) ?? 'steps';
 }

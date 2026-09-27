@@ -42,3 +42,28 @@ export function purchaseAmount(
   }
   return wantedInUnit ?? (ingredient.unit === 'pcs' ? 1 : 0);
 }
+
+/** +/- step for a shopping item: one Lidl package when known, else 50 g / 1 шт. */
+export function shoppingStep(ingredient: Convertible, product: Packaged | undefined): number {
+  if (product) {
+    const pack = convertAmount(
+      product.packageSize,
+      product.packageUnit,
+      ingredient.unit,
+      ingredient,
+    );
+    if (pack > 0) return pack;
+  }
+  return ingredient.unit === 'pcs' ? 1 : 50;
+}
+
+/**
+ * Next amount for a +/- tap: snaps to whole steps (packages), so an odd 900 g with a
+ * 2 kg pack goes to 2 kg on «+» instead of 2.9 kg. Never goes below one step.
+ */
+export function stepQuantity(current: number, step: number, direction: 1 | -1): number {
+  const eps = 1e-9;
+  if (direction === 1) return (Math.floor(current / step + eps) + 1) * step;
+  const down = (Math.ceil(current / step - eps) - 1) * step;
+  return Math.max(step, down);
+}

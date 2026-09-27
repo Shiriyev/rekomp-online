@@ -5,7 +5,7 @@ import { ZodError } from 'zod';
 
 import { createRepositories, type Repositories } from '../repositories';
 import type { ProfileInput } from '../../domain/schemas';
-import { pantryItems, weightLogs } from '../schema';
+import { appMeta, pantryItems, weightLogs } from '../schema';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
@@ -228,6 +228,13 @@ describe('settingsRepo', () => {
     expect(repos.settings.getTheme()).toBe('system');
     repos.settings.setTheme('dark');
     expect(repos.settings.getTheme()).toBe('dark');
+  });
+
+  it('stores the cooking view and rejects unknown ones', () => {
+    repos.settings.setCookView('overview');
+    expect(db.select().from(appMeta).all()).toContainEqual({ key: 'cook_view', value: 'overview' });
+    // @ts-expect-error: invalid on purpose
+    expect(() => repos.settings.setCookView('grid')).toThrow(RangeError);
   });
 
   it('rejects unknown themes', () => {

@@ -12,16 +12,18 @@ import {
   IconButton,
   Portal,
   ProgressBar,
+  SegmentedButtons,
   Text,
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { repositories } from '@/db';
-import { useIngredientsMap, useIsFirstCook, useRecipeDetail } from '@/db/hooks';
+import { useCookView, useIngredientsMap, useIsFirstCook, useRecipeDetail } from '@/db/hooks';
 import { formatTimer, isDone, remainingSec, stepIngredients } from '@/domain/cooking';
 import { recipeMacros, roundKcal, roundProtein } from '@/domain/nutrition';
 import { activeTimers, useCookStore } from '@/features/cooking/cookStore';
 import { FinishView } from '@/features/cooking/FinishView';
+import { RecipeOverview } from '@/features/cooking/RecipeOverview';
 import { TimerCard } from '@/features/cooking/TimerCard';
 import { showUndo } from '@/features/undo/undoStore';
 import { formatAmount, formatInt } from '@/lib/format';
@@ -62,6 +64,7 @@ export default function CookScreen() {
   const conflict = useCookStore((s) => s.conflict);
   const store = useCookStore.getState;
   const [exitOpen, setExitOpen] = useState(false);
+  const view = useCookView();
 
   // Open or resume the session once the recipe is known.
   const defaultServings = recipe?.defaultServings;
@@ -189,6 +192,20 @@ export default function CookScreen() {
         color={theme.colors.primary}
         style={styles.progress}
       />
+      {finished ? null : (
+        <SegmentedButtons
+          value={view}
+          onValueChange={(v) =>
+            repositories.settings.setCookView(v === 'overview' ? 'overview' : 'steps')
+          }
+          density="small"
+          style={styles.viewSwitch}
+          buttons={[
+            { value: 'steps', label: 'По шагам', icon: 'format-list-numbered' },
+            { value: 'overview', label: 'Весь рецепт', icon: 'text-long' },
+          ]}
+        />
+      )}
 
       {otherTimers.length > 0 ? (
         <View style={styles.otherTimers}>
@@ -196,7 +213,11 @@ export default function CookScreen() {
             <Chip
               key={t.stepOrder}
               icon={isDone(t, now) ? 'bell-ring' : 'timer-outline'}
-              onPress={() => go(steps.findIndex((s) => s.order === t.stepOrder))}
+              onPress={() => {
+                // Timers live on their steps: jump there in the step-by-step view.
+                repositories.settings.setCookView('steps');
+                go(steps.findIndex((s) => s.order === t.stepOrder));
+              }}
               accessibilityLabel={`Таймер шага ${t.stepOrder}`}>
               Шаг {t.stepOrder}: {isDone(t, now) ? 'готово' : formatTimer(remainingSec(t, now))}
             </Chip>
@@ -214,6 +235,15 @@ export default function CookScreen() {
           onEatNow={() => complete(true)}
           onStoreAll={() => complete(false)}
           onBack={() => go(steps.length - 1)}
+        />
+      ) : view === 'overview' ? (
+        <RecipeOverview
+          steps={steps}
+          lines={lines}
+          ingredients={ingredients}
+          servings={servings}
+          choices={choices}
+          onFinish={() => go(steps.length)}
         />
       ) : (
         <>
@@ -339,6 +369,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   header: { flexDirection: 'row', alignItems: 'center', paddingRight: spacing.lg },
   progress: { height: 6, marginHorizontal: spacing.lg, borderRadius: 3 },
+  viewSwitch: { marginHorizontal: spacing.lg, marginTop: spacing.md },
   otherTimers: {
     flexDirection: 'row',
     flexWrap: 'wrap',

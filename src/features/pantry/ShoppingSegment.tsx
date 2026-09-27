@@ -1,42 +1,41 @@
-import { useMemo, useState } from 'react';
+import type { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { useMemo, useRef } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Checkbox, Chip, IconButton, Text, TextInput } from 'react-native-paper';
+import { Button, Checkbox, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { useIngredientsMap, useShoppingItems } from '@/db/hooks';
-import type { ShoppingItem } from '@/db/schema';
-import { searchIngredients } from '@/domain/search';
+import { useIngredientsMap, useLidlProducts, usePantryItems, useShoppingItems } from '@/db/hooks';
+import type { LidlProduct, ShoppingItem } from '@/db/schema';
+import { shoppingStep, stepQuantity } from '@/domain/stock';
 import { showUndo } from '@/features/undo/undoStore';
 import { formatAmount } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
+import { QuantityStepper } from '@/ui/QuantityStepper';
 import { SwipeToDelete } from '@/ui/SwipeToDelete';
+
+import { ProductPickerSheet } from './ProductPickerSheet';
 
 export function ShoppingSegment() {
   const theme = useAppTheme();
   const items = useShoppingItems();
   const ingredients = useIngredientsMap();
-  const [text, setText] = useState('');
+  const pantry = usePantryItems();
+  const lidl = useLidlProducts();
+  const pickerRef = useRef<BottomSheetModal>(null);
+
+  // Smallest Lidl package per ingredient: default amount and +/- step.
+  const packageOf = useMemo(() => {
+    const map = new Map<string, LidlProduct>();
+    for (const p of lidl) {
+      const current = map.get(p.ingredientId);
+      if (!current || p.packageSize < current.packageSize) map.set(p.ingredientId, p);
+    }
+    return map;
+  }, [lidl]);
 
   const open = items.filter((i) => !i.checked);
   const bought = items.filter((i) => i.checked);
-  const suggestions = useMemo(
-    () =>
-      text.trim().length < 2
-        ? []
-        : searchIngredients(
-            [...ingredients.values()].filter((i) => !i.isStaple),
-            text,
-          ).slice(0, 4),
-    [ingredients, text],
-  );
-
-  const addFree = () => {
-    const title = text.trim();
-    if (!title) return;
-    repositories.shopping.add({ title, ingredientId: null, quantity: null, unit: null });
-    setText('');
-  };
 
   const toggle = (item: ShoppingItem) => {
     repositories.shopping.setChecked(item.id, !item.checked);
@@ -53,105 +52,129 @@ export function ShoppingSegment() {
   };
 
   const row = (item: ShoppingItem) => {
+    const ingredient = item.ingredientId ? ingredients.get(item.ingredientId) : undefined;
+    const canEdit = !item.checked && ingredient && item.quantity !== null && item.unit !== null;
+    const step = ingredient ? shoppingStep(ingredient, packageOf.get(ingredient.id)) : 1;
     const amount =
       item.quantity !== null && item.unit !== null ? formatAmount(item.quantity, item.unit) : '';
+
     return (
       <SwipeToDelete key={item.id} onDelete={() => repositories.shopping.remove(item.id)}>
-        <View style={{ backgroundColor: theme.colors.background }}>
-          <Checkbox.Item
-            label={amount ? `${item.title} — ${amount}` : item.title}
-            status={item.checked ? 'checked' : 'unchecked'}
-            onPress={() => toggle(item)}
-            position="leading"
-            labelStyle={[
-              styles.label,
-              item.checked && {
-                textDecorationLine: 'line-through',
-                color: theme.colors.onSurfaceVariant,
-              },
-            ]}
-            style={styles.item}
-          />
+        <View style={[styles.row, { backgroundColor: theme.colors.background }]}>
+          <View style={styles.flex}>
+            <Checkbox.Item
+              label={canEdit || !amount ? item.title : `${item.title} — ${amount}`}
+              status={item.checked ? 'checked' : 'unchecked'}
+              onPress={() => toggle(item)}
+              position="leading"
+              labelStyle={[
+                styles.label,
+                item.checked && {
+                  textDecorationLine: 'line-through',
+                  color: theme.colors.onSurfaceVariant,
+                },
+              ]}
+              style={styles.item}
+            />
+          </View>
+          {canEdit ? (
+            <QuantityStepper
+              label={item.title}
+              valueText={amount}
+              decrementDisabled={(item.quantity ?? 0) <= step}
+              onDecrement={() =>
+                repositories.shopping.setQuantity(
+                  item.id,
+                  stepQuantity(item.quantity ?? step, step, -1),
+                )
+              }
+              onIncrement={() =>
+                repositories.shopping.setQuantity(
+                  item.id,
+                  stepQuantity(item.quantity ?? 0, step, 1),
+                )
+              }
+            />
+          ) : null}
         </View>
       </SwipeToDelete>
     );
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.list} keyboardShouldPersistTaps="handled">
-      <View style={styles.addRow}>
-        <TextInput
-          mode="outlined"
-          label="Добавить в список"
-          accessibilityLabel="Добавить в список"
-          value={text}
-          onChangeText={setText}
-          onSubmitEditing={addFree}
-          returnKeyType="done"
-          style={styles.flex}
-          dense
-        />
-        <IconButton
+    <View style={styles.flex}>
+      <ScrollView contentContainerStyle={styles.list}>
+        <Button
+          mode="contained-tonal"
           icon="plus"
-          mode="contained"
-          onPress={addFree}
-          disabled={!text.trim()}
-          accessibilityLabel="Добавить"
-        />
-      </View>
-      {suggestions.length > 0 ? (
-        <View style={styles.chips}>
-          {suggestions.map((s) => (
-            <Chip
-              key={s.id}
-              icon="plus"
-              onPress={() => {
-                repositories.shopping.add({
-                  title: s.name,
-                  ingredientId: s.id,
-                  quantity: null,
-                  unit: null,
-                });
-                setText('');
-              }}>
-              {s.name}
-            </Chip>
-          ))}
-        </View>
-      ) : null}
+          onPress={() => pickerRef.current?.present()}
+          style={styles.add}>
+          Добавить продукт
+        </Button>
 
-      {items.length === 0 ? (
-        <EmptyState
-          icon="cart-outline"
-          title="Список покупок пуст"
-          description="Добавляй вручную или кнопкой «Добавить недостающее» в карточке блюда."
-        />
-      ) : null}
+        {items.length === 0 ? (
+          <EmptyState
+            icon="cart-outline"
+            title="Список покупок пуст"
+            description="Добавь продукт из каталога или кнопкой «Добавить недостающее» в карточке блюда."
+          />
+        ) : null}
 
-      {open.map(row)}
+        {open.map(row)}
 
-      {bought.length > 0 ? (
-        <>
-          <View style={styles.boughtHeader}>
-            <Text variant="titleSmall" style={{ color: theme.colors.onSurfaceVariant }}>
-              Куплено · добавлено домой
-            </Text>
-            <Button compact onPress={() => repositories.shopping.clearChecked()}>
-              Очистить
-            </Button>
-          </View>
-          {bought.map(row)}
-        </>
-      ) : null}
-    </ScrollView>
+        {bought.length > 0 ? (
+          <>
+            <View style={styles.boughtHeader}>
+              <Text variant="titleSmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                Куплено · добавлено домой
+              </Text>
+              <Button compact onPress={() => repositories.shopping.clearChecked()}>
+                Очистить
+              </Button>
+            </View>
+            {bought.map(row)}
+          </>
+        ) : null}
+      </ScrollView>
+
+      <ProductPickerSheet
+        sheetRef={pickerRef}
+        ingredients={[...ingredients.values()]}
+        title="Добавить в список покупок"
+        amountHint="Сколько купить — при «купил» столько и добавится домой"
+        submitLabel="В список"
+        describe={(i) => {
+          const have = pantry.find((p) => p.ingredientId === i.id);
+          const listed = open.some((o) => o.ingredientId === i.id);
+          return (
+            [
+              have ? `дома: ${formatAmount(have.quantity, i.unit)}` : null,
+              listed ? 'уже в списке' : null,
+            ]
+              .filter(Boolean)
+              .join(' · ') || null
+          );
+        }}
+        defaultAmount={(i) => shoppingStep(i, packageOf.get(i.id))}
+        onSubmit={(ingredient, amount) => {
+          repositories.shopping.add({
+            title: ingredient.name,
+            ingredientId: ingredient.id,
+            quantity: amount,
+            unit: ingredient.unit,
+          });
+          showUndo(`В списке: ${ingredient.name} ${formatAmount(amount, ingredient.unit)}`);
+        }}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   list: { padding: spacing.lg, gap: spacing.xs, paddingBottom: spacing.xxl },
-  addRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm, paddingVertical: spacing.sm },
+  add: { alignSelf: 'flex-start', marginBottom: spacing.sm },
+  row: { flexDirection: 'row', alignItems: 'center' },
   item: { paddingHorizontal: 0, minHeight: 48 },
   label: { textAlign: 'left' },
   boughtHeader: {

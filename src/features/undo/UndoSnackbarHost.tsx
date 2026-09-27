@@ -35,4 +35,4 @@ export function UndoSnackbarHost() {
 }
 
 // Clears the tab bar plus the Today FAB.
-const styles = StyleSheet.create({ wrapper: { bottom: 140 } });
+const styles = StyleSheet.create({ wrapper: { bottom: 160 } });

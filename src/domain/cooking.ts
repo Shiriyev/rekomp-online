@@ -148,3 +148,42 @@ export function stepIngredients(
     return [{ ingredientId: id, amount, unit: ingredient.unit }];
   });
 }
+
+// ---------- One-page overview («Весь рецепт») ----------
+
+type OverviewStep = { order: number; text: string; timerSec: number | null };
+
+export type OverviewEntry = OverviewStep & {
+  /** «Сначала 6 мин», «Затем», «В конце 25 мин». */
+  lead: string;
+  /** Minute on the timeline when this step starts, counting timers only. */
+  startsAtMin: number;
+};
+
+/** «6 мин», «1,5 мин», «30 сек». */
+export function durationLabel(seconds: number): string {
+  if (seconds < 60) return `${Math.round(seconds)} сек`;
+  const minutes = Math.round((seconds / 60) * 10) / 10;
+  return `${String(minutes).replace('.', ',')} мин`;
+}
+
+/**
+ * The recipe as one readable sequence: «Сначала 6 мин: …, затем 3 мин: …, в конце …».
+ * Timings add up only the timers (parallel steps make this an upper estimate).
+ */
+export function recipeOverview(steps: readonly OverviewStep[]): {
+  entries: OverviewEntry[];
+  timedTotalMin: number;
+} {
+  const sorted = [...steps].sort((a, b) => a.order - b.order);
+  let elapsedSec = 0;
+  const entries = sorted.map((step, i) => {
+    const word =
+      i === 0 ? 'Сначала' : i === sorted.length - 1 && sorted.length > 1 ? 'В конце' : 'Затем';
+    const lead = step.timerSec ? `${word} ${durationLabel(step.timerSec)}` : word;
+    const entry = { ...step, lead, startsAtMin: Math.round(elapsedSec / 60) };
+    elapsedSec += step.timerSec ?? 0;
+    return entry;
+  });
+  return { entries, timedTotalMin: Math.round(elapsedSec / 60) };
+}

@@ -6,18 +6,16 @@ import { SegmentedButtons } from 'react-native-paper';
 import { repositories } from '@/db';
 import { toLocalDate } from '@/domain/dates';
 import { HomeSegment } from '@/features/pantry/HomeSegment';
-import { LidlSegment } from '@/features/pantry/LidlSegment';
 import { PortionsSegment } from '@/features/pantry/PortionsSegment';
 import { ShoppingSegment } from '@/features/pantry/ShoppingSegment';
 import { spacing } from '@/theme';
 
-type Segment = 'home' | 'portions' | 'shopping' | 'lidl';
+type Segment = 'home' | 'portions' | 'shopping';
 
 const SEGMENTS: { value: Segment; label: string }[] = [
   { value: 'home', label: 'Дома' },
   { value: 'portions', label: 'Порции' },
   { value: 'shopping', label: 'Покупки' },
-  { value: 'lidl', label: 'Lidl' },
 ];
 
 export default function PantryScreen() {
@@ -43,7 +41,6 @@ export default function PantryScreen() {
         {segment === 'home' ? <HomeSegment /> : null}
         {segment === 'portions' ? <PortionsSegment /> : null}
         {segment === 'shopping' ? <ShoppingSegment /> : null}
-        {segment === 'lidl' ? <LidlSegment /> : null}
       </View>
     </View>
   );

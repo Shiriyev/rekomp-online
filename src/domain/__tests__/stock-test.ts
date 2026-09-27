@@ -1,7 +1,13 @@
 import { addDays, daysBetween, parseDayMonth } from '../dates';
 import { customIngredientSchema, lidlProductSchema, shoppingItemInputSchema } from '../schemas';
 import { normalizeForSearch, searchIngredients } from '../search';
-import { defaultLowStockThreshold, isLowStock, purchaseAmount } from '../stock';
+import {
+  defaultLowStockThreshold,
+  isLowStock,
+  purchaseAmount,
+  shoppingStep,
+  stepQuantity,
+} from '../stock';
 
 describe('low stock', () => {
   it('uses per-unit defaults', () => {
@@ -57,6 +63,38 @@ describe('purchaseAmount', () => {
     expect(
       purchaseAmount({ quantity: 150, unit: 'g' }, tvorog, { packageSize: 0, packageUnit: 'g' }),
     ).toBe(150);
+  });
+});
+
+describe('shoppingStep', () => {
+  const egg = { id: 'egg', unit: 'pcs' as const, gramsPerPiece: 55 };
+  const tvorog = { id: 'tvorog', unit: 'g' as const, gramsPerPiece: null };
+
+  it('steps by one package when the product is in the Lidl catalog', () => {
+    expect(shoppingStep(tvorog, { packageSize: 250, packageUnit: 'g' })).toBe(250);
+    expect(shoppingStep(egg, { packageSize: 10, packageUnit: 'pcs' })).toBe(10);
+  });
+
+  it('falls back to 50 g / 1 шт', () => {
+    expect(shoppingStep(tvorog, undefined)).toBe(50);
+    expect(shoppingStep(egg, undefined)).toBe(1);
+    expect(shoppingStep(tvorog, { packageSize: 0, packageUnit: 'g' })).toBe(50);
+  });
+});
+
+describe('stepQuantity', () => {
+  it.each([
+    [500, 250, 1, 750],
+    [500, 250, -1, 250],
+    [250, 250, -1, 250],
+    [900, 2000, 1, 2000],
+    [900, 2000, -1, 2000],
+    [2900, 2000, -1, 2000],
+    [15, 1000, 1, 1000],
+    [3, 1, 1, 4],
+    [3, 1, -1, 2],
+  ] as const)('%p step %p dir %p → %p', (current, step, dir, expected) => {
+    expect(stepQuantity(current, step, dir)).toBe(expected);
   });
 });
 

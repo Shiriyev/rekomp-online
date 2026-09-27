@@ -3,7 +3,7 @@ import { and, asc, eq, inArray, ne } from 'drizzle-orm';
 import type { Shortage } from '../../domain/pantry';
 import { shoppingItemInputSchema, type ShoppingItemInput } from '../../domain/schemas';
 import { purchaseAmount } from '../../domain/stock';
-import { normalizeQuantity } from '../../domain/units';
+import { convertAmount, normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
 import {
   ingredients,
@@ -31,6 +31,14 @@ export function createShoppingRepo(db: AppDb) {
       )
       .get();
 
+  const smallestPackage = (tx: AppDb, ingredientId: string) =>
+    tx
+      .select()
+      .from(lidlProducts)
+      .where(eq(lidlProducts.ingredientId, ingredientId))
+      .orderBy(asc(lidlProducts.packageSize))
+      .get();
+
   const changePantry = (tx: AppDb, ingredientId: string, delta: number, now: number) => {
     const ingredient = tx.select().from(ingredients).where(eq(ingredients.id, ingredientId)).get();
     if (!ingredient) return;
@@ -55,9 +63,9 @@ export function createShoppingRepo(db: AppDb) {
     addMissing(shortages: readonly Shortage[], now: number = Date.now()): number {
       if (shortages.length === 0) return 0;
       return db.transaction((tx) => {
-        const names = new Map(
+        const byId = new Map(
           tx
-            .select({ id: ingredients.id, name: ingredients.name })
+            .select()
             .from(ingredients)
             .where(
               inArray(
@@ -66,14 +74,28 @@ export function createShoppingRepo(db: AppDb) {
               ),
             )
             .all()
-            .map((r) => [r.id, r.name]),
+            .map((r) => [r.id, r]),
         );
 
         let changed = 0;
         for (const s of shortages) {
-          const name = names.get(s.ingredientId);
-          if (!name) throw new Error(`Ingredient not found: ${s.ingredientId}`);
-          const quantity = toBuy(s.amount);
+          const ingredient = byId.get(s.ingredientId);
+          if (!ingredient) throw new Error(`Ingredient not found: ${s.ingredientId}`);
+          const name = ingredient.name;
+          // The list shows what to actually buy: whole Lidl packages when the catalog knows them.
+          const product = smallestPackage(tx, ingredient.id);
+          const inIngredientUnit = convertAmount(s.amount, s.unit, ingredient.unit, ingredient);
+          const quantity = product
+            ? normalizeQuantity(
+                purchaseAmount(
+                  { quantity: inIngredientUnit, unit: ingredient.unit },
+                  ingredient,
+                  product,
+                ),
+                ingredient.unit,
+              )
+            : toBuy(inIngredientUnit);
+          const unit = ingredient.unit;
           const open = openFor(tx, s.ingredientId);
           if (!open) {
             tx.insert(shoppingItems)
@@ -82,14 +104,14 @@ export function createShoppingRepo(db: AppDb) {
                 ingredientId: s.ingredientId,
                 title: name,
                 quantity,
-                unit: s.unit,
+                unit,
                 createdAt: now,
               })
               .run();
             changed++;
-          } else if ((open.quantity ?? 0) < quantity || open.unit !== s.unit) {
+          } else if ((open.quantity ?? 0) < quantity || open.unit !== unit) {
             tx.update(shoppingItems)
-              .set({ quantity, unit: s.unit })
+              .set({ quantity, unit })
               .where(eq(shoppingItems.id, open.id))
               .run();
             changed++;
@@ -156,13 +178,15 @@ export function createShoppingRepo(db: AppDb) {
               .where(eq(ingredients.id, item.ingredientId))
               .get();
             if (ingredient) {
-              const product = tx
-                .select()
-                .from(lidlProducts)
-                .where(eq(lidlProducts.ingredientId, ingredient.id))
-                .orderBy(asc(lidlProducts.packageSize))
-                .get();
-              added = purchaseAmount(item, ingredient, product);
+              // Exactly what the list says; without an amount, one package (or 1 шт).
+              added =
+                item.quantity !== null && item.unit !== null
+                  ? convertAmount(item.quantity, item.unit, ingredient.unit, ingredient)
+                  : purchaseAmount(
+                      { quantity: null, unit: null },
+                      ingredient,
+                      smallestPackage(tx, ingredient.id),
+                    );
               if (added > 0) changePantry(tx, ingredient.id, added, now);
             }
           }
@@ -186,6 +210,17 @@ export function createShoppingRepo(db: AppDb) {
             .run();
         }
       });
+    },
+
+    /** Changes how much to buy of an open item (in its unit); must stay positive. */
+    setQuantity(id: string, quantity: number): void {
+      if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 100_000) {
+        throw new RangeError(`quantity must be positive, got ${quantity}`);
+      }
+      const item = db.select().from(shoppingItems).where(eq(shoppingItems.id, id)).get();
+      if (!item || item.checked) return;
+      const value = item.unit ? normalizeQuantity(quantity, item.unit) : quantity;
+      db.update(shoppingItems).set({ quantity: value }).where(eq(shoppingItems.id, id)).run();
     },
 
     remove(id: string): void {

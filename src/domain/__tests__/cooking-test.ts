@@ -12,6 +12,8 @@ import {
   resetTimer,
   startTimer,
   stepIngredients,
+  durationLabel,
+  recipeOverview,
 } from '../cooking';
 import type { PantryStock } from '../pantry';
 import type { NutritionIngredient, RecipeLine, Unit } from '../types';
@@ -229,5 +231,39 @@ describe('stepIngredients', () => {
 
   it('drops refs that are not recipe lines', () => {
     expect(stepIngredients(['ghost'], LINES, INGREDIENTS, 1, {})).toEqual([]);
+  });
+});
+
+describe('recipeOverview', () => {
+  it('phrases steps as a sequence and adds up timer minutes', () => {
+    const o = recipeOverview([
+      { order: 2, text: 'Обжарить курицу.', timerSec: 360 },
+      { order: 1, text: 'Нарезать курицу.', timerSec: null },
+      { order: 3, text: 'Добавить овощи.', timerSec: 180 },
+      { order: 4, text: 'Тушить под крышкой.', timerSec: 1200 },
+    ]);
+    expect(o.entries.map((e) => [e.order, e.lead, e.startsAtMin])).toEqual([
+      [1, 'Сначала', 0],
+      [2, 'Затем 6 мин', 0],
+      [3, 'Затем 3 мин', 6],
+      [4, 'В конце 20 мин', 9],
+    ]);
+    expect(o.timedTotalMin).toBe(29);
+  });
+
+  it('handles a single step and no steps', () => {
+    expect(recipeOverview([{ order: 1, text: 'Подать.', timerSec: null }]).entries[0]?.lead).toBe(
+      'Сначала',
+    );
+    expect(recipeOverview([])).toEqual({ entries: [], timedTotalMin: 0 });
+  });
+
+  it.each([
+    [30, '30 сек'],
+    [60, '1 мин'],
+    [90, '1,5 мин'],
+    [540, '9 мин'],
+  ])('durationLabel(%p) = %p', (s, label) => {
+    expect(durationLabel(s)).toBe(label);
   });
 });

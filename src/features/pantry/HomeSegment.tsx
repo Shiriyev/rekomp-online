@@ -20,7 +20,7 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { QuantityStepper } from '@/ui/QuantityStepper';
 import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
-import { AddProductSheet } from './AddProductSheet';
+import { ProductPickerSheet } from './ProductPickerSheet';
 import { PantryItemSheet, type PantryItemSheetHandle } from './PantryItemSheet';
 
 type Row =
@@ -134,13 +134,21 @@ export function HomeSegment() {
         accessibilityLabel="Добавить продукт"
       />
 
-      <AddProductSheet
+      <ProductPickerSheet
         sheetRef={addRef}
         ingredients={[...ingredients.values()]}
-        inPantry={new Set(items.map((i) => i.ingredientId))}
-        onAdded={(ingredient, amount) =>
-          showUndo(`Дома: +${formatAmount(amount, ingredient.unit)} ${ingredient.name}`)
-        }
+        title="Добавить домой"
+        amountHint="Сколько добавить (к тому, что уже есть)"
+        submitLabel="Добавить"
+        describe={(i) => {
+          const have = items.find((p) => p.ingredientId === i.id);
+          return have ? `дома: ${formatAmount(have.quantity, i.unit)}` : null;
+        }}
+        defaultAmount={(i) => quantityStep(i.unit)}
+        onSubmit={(ingredient, amount) => {
+          repositories.pantry.adjust(ingredient.id, amount);
+          showUndo(`Дома: +${formatAmount(amount, ingredient.unit)} ${ingredient.name}`);
+        }}
       />
       <PantryItemSheet ref={editRef} onRemove={remove} />
     </View>

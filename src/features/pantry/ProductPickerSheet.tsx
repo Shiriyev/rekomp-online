@@ -10,10 +10,9 @@ import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
 import { searchIngredients } from '@/domain/search';
 import { INGREDIENT_CATEGORIES, UNITS, type Unit } from '@/domain/types';
-import { quantityStep } from '@/domain/units';
 import { numberText, optionalNumberText } from '@/features/forms/numberText';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
-import { formatAmount } from '@/lib/format';
+import { formatAmount, formatDecimal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
@@ -22,8 +21,14 @@ import { sheetInput } from '@/ui/sheetInput';
 type Props = {
   sheetRef: RefObject<BottomSheetModal | null>;
   ingredients: Ingredient[];
-  inPantry: ReadonlySet<string>;
-  onAdded: (ingredient: Ingredient, amount: number) => void;
+  title: string;
+  /** Shown above the amount field, e.g. «к тому, что уже есть». */
+  amountHint: string;
+  submitLabel: string;
+  /** Extra line in the search results (e.g. «дома: 350 г», «уже в списке»). */
+  describe?: (ingredient: Ingredient) => string | null;
+  defaultAmount: (ingredient: Ingredient) => number;
+  onSubmit: (ingredient: Ingredient, amount: number) => void;
 };
 
 const UNIT_LABELS: Record<Unit, string> = { g: 'г', ml: 'мл', pcs: 'шт' };
@@ -43,7 +48,20 @@ const customSchema = z.object({
 
 type Step = { kind: 'search' } | { kind: 'amount'; ingredient: Ingredient } | { kind: 'custom' };
 
-export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Props) {
+/**
+ * Pick a catalog product and an amount. Unknown products are created first
+ * (custom ingredient), so everything stays linked to the catalog.
+ */
+export function ProductPickerSheet({
+  sheetRef,
+  ingredients,
+  title,
+  amountHint,
+  submitLabel,
+  describe,
+  defaultAmount,
+  onSubmit,
+}: Props) {
   const theme = useAppTheme();
   const [step, setStep] = useState<Step>({ kind: 'search' });
   const [query, setQuery] = useState('');
@@ -72,13 +90,12 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
   };
 
   const pick = (ingredient: Ingredient) => {
-    amountForm.reset({ amount: String(quantityStep(ingredient.unit)) });
+    amountForm.reset({ amount: formatDecimal(defaultAmount(ingredient)) });
     setStep({ kind: 'amount', ingredient });
   };
 
   const add = (ingredient: Ingredient, amount: number) => {
-    repositories.pantry.adjust(ingredient.id, amount);
-    onAdded(ingredient, amount);
+    onSubmit(ingredient, amount);
     sheetRef.current?.dismiss();
   };
 
@@ -100,7 +117,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
       {step.kind === 'search' ? (
         <>
           <Text variant="titleLarge" accessibilityRole="header">
-            Добавить продукт
+            {title}
           </Text>
           <TextInput
             mode="outlined"
@@ -117,9 +134,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
               <List.Item
                 key={i.id}
                 title={i.name}
-                description={[i.nameHu, inPantry.has(i.id) ? 'уже дома' : null]
-                  .filter(Boolean)
-                  .join(' · ')}
+                description={[i.nameHu, describe?.(i)].filter(Boolean).join(' · ')}
                 left={(props) => <List.Icon {...props} icon={CATEGORY_ICONS[i.category]} />}
                 onPress={() => pick(i)}
                 style={styles.item}
@@ -138,7 +153,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
             {step.ingredient.name}
           </Text>
           <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-            Сколько добавить домой (к тому, что уже есть)
+            {amountHint}
           </Text>
           <NumberField
             control={amountForm.control}
@@ -155,7 +170,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
               onPress={() =>
                 amountForm.handleSubmit(({ amount }) => add(step.ingredient, amount))()
               }>
-              Добавить
+              {submitLabel}
             </Button>
           </View>
         </>
@@ -247,7 +262,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
           <NumberField
             control={customForm.control}
             name="amount"
-            label="Сколько есть дома"
+            label="Количество"
             suffix={UNIT_LABELS[customUnit ?? 'g']}
             render={sheetInput}
           />
@@ -266,7 +281,7 @@ export function AddProductSheet({ sheetRef, ingredients, inPantry, onAdded }: Pr
                   add(created, amount);
                 })()
               }>
-              Создать и добавить
+              Создать: {submitLabel.toLocaleLowerCase('ru-RU')}
             </Button>
           </View>
         </>

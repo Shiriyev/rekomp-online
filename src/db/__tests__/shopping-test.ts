@@ -25,16 +25,33 @@ const open = () =>
     .sort();
 
 describe('shoppingRepo.addMissing', () => {
-  it('adds shortages with ingredient names, rounding amounts up', () => {
+  it('rounds shortages up to whole Lidl packages (the amount to actually buy)', () => {
     const n = repos.shopping.addMissing([
-      { ingredientId: 'tvorog', amount: 49.2, unit: 'g' },
-      { ingredientId: 'egg', amount: 1.5, unit: 'pcs' },
+      { ingredientId: 'tvorog', amount: 49.2, unit: 'g' }, // pack 250 g
+      { ingredientId: 'egg', amount: 1.5, unit: 'pcs' }, // pack of 10
     ]);
     expect(n).toBe(2);
     expect(open()).toEqual([
-      ['egg', 'Яйцо', 2, 'pcs'],
-      ['tvorog', 'Творог', 50, 'g'],
+      ['egg', 'Яйцо', 10, 'pcs'],
+      ['tvorog', 'Творог', 250, 'g'],
     ]);
+  });
+
+  it('rounds up to whole units without a Lidl package', () => {
+    repos.shopping.addMissing([
+      { ingredientId: 'apple', amount: 1.5, unit: 'pcs' },
+      { ingredientId: 'cucumber', amount: 99.2, unit: 'g' },
+    ]);
+    expect(open()).toEqual([
+      ['apple', 'Яблоко', 2, 'pcs'],
+      ['cucumber', 'Огурец', 100, 'g'],
+    ]);
+  });
+
+  it('stores the amount in the ingredient unit even if the shortage uses another', () => {
+    // 150 g of onion = 1.5 шт → 1 kg Lidl pack (10 шт at 100 g each).
+    repos.shopping.addMissing([{ ingredientId: 'onion', amount: 150, unit: 'g' }]);
+    expect(open()).toEqual([['onion', 'Лук', 10, 'pcs']]);
   });
 
   it('is idempotent and keeps the larger amount', () => {
@@ -43,7 +60,26 @@ describe('shoppingRepo.addMissing', () => {
     expect(repos.shopping.addMissing([shortage])).toBe(0);
     expect(repos.shopping.addMissing([{ ...shortage, amount: 60 }])).toBe(0);
     expect(repos.shopping.addMissing([{ ...shortage, amount: 300 }])).toBe(1);
-    expect(open()).toEqual([['tvorog', 'Творог', 300, 'g']]);
+    expect(open()).toEqual([['tvorog', 'Творог', 500, 'g']]);
+  });
+
+  it('lets the amount of an open item be changed, but not below zero or when bought', () => {
+    repos.shopping.addMissing([{ ingredientId: 'tvorog', amount: 100, unit: 'g' }]);
+    const id = repos.shopping.listOpen()[0]!.id;
+    repos.shopping.setQuantity(id, 750);
+    expect(open()).toEqual([['tvorog', 'Творог', 750, 'g']]);
+    expect(() => repos.shopping.setQuantity(id, 0)).toThrow(RangeError);
+    repos.shopping.setChecked(id, true);
+    repos.shopping.setQuantity(id, 100);
+    expect(repos.shopping.list()[0]?.quantity).toBe(750);
+  });
+
+  it('«купил» adds exactly the listed amount to the pantry', () => {
+    repos.shopping.addMissing([{ ingredientId: 'tvorog', amount: 100, unit: 'g' }]);
+    const id = repos.shopping.listOpen()[0]!.id;
+    repos.shopping.setQuantity(id, 300);
+    repos.shopping.setChecked(id, true);
+    expect(repos.pantry.get('tvorog')?.quantity).toBe(300);
   });
 
   it('starts a new open item once the old one is checked off', () => {
