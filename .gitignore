@@ -41,3 +41,8 @@ example
 # generated native folders
 /ios
 /android
+
+# test output
+coverage/
+# local secrets
+.env
