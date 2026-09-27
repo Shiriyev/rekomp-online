@@ -14,3 +14,14 @@ export const numberText = (limits: { min: number; max: number }, int = false) =>
         .max(limits.max, `Не больше ${limits.max}`),
     );
 };
+
+/** Like numberText, but an empty field means null. */
+export const optionalNumberText = (limits: { min: number; max: number }, int = false) =>
+  z.union([
+    z
+      .string()
+      .trim()
+      .length(0)
+      .transform(() => null),
+    numberText(limits, int),
+  ]);

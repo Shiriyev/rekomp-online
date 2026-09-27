@@ -1,6 +1,13 @@
 import { z } from 'zod';
 
-import { ACTIVITY_LEVELS, GOAL_RATES, MEAL_TYPES, SEXES } from './types';
+import {
+  ACTIVITY_LEVELS,
+  GOAL_RATES,
+  INGREDIENT_CATEGORIES,
+  MEAL_TYPES,
+  SEXES,
+  UNITS,
+} from './types';
 
 /** Manual food entry ("купил сникерс"). */
 export const manualLogInputSchema = z.object({
@@ -64,3 +71,57 @@ export type ProfileInput = z.infer<typeof profileSchema>;
 export const THEME_PREFERENCES = ['system', 'light', 'dark'] as const;
 export type ThemePreference = (typeof THEME_PREFERENCES)[number];
 export const themePreferenceSchema = z.enum(THEME_PREFERENCES);
+
+export const customIngredientSchema = z
+  .object({
+    name: z.string().trim().min(1, 'Введите название').max(60, 'Не длиннее 60 символов'),
+    category: z.enum(INGREDIENT_CATEGORIES),
+    unit: z.enum(UNITS),
+    gramsPerPiece: z.number().positive().max(5000).nullable(),
+    kcalPer100g: z.number().min(0).max(900),
+    proteinPer100g: z.number().min(0).max(100),
+  })
+  .refine((v) => v.unit !== 'pcs' || v.gramsPerPiece !== null, {
+    path: ['gramsPerPiece'],
+    message: 'Укажите вес одной штуки',
+  });
+export type CustomIngredientInput = z.infer<typeof customIngredientSchema>;
+
+export const ingredientSettingsSchema = ingredientNutritionSchema.extend({
+  lowStockThreshold: z.number().min(0).max(100_000).nullable(),
+});
+export type IngredientSettingsInput = z.infer<typeof ingredientSettingsSchema>;
+
+const localDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Дата в формате ГГГГ-ММ-ДД');
+
+export const lidlProductSchema = z
+  .object({
+    ingredientId: z.string().min(1, 'Выберите продукт'),
+    title: z.string().trim().min(1, 'Введите название').max(80),
+    packageSize: z.number().positive('Больше нуля').max(100_000),
+    packageUnit: z.enum(UNITS),
+    priceHuf: z.number().int().min(0).max(1_000_000).nullable(),
+    onSale: z.boolean(),
+    saleUntil: localDateSchema.nullable(),
+    barcode: z
+      .string()
+      .trim()
+      .regex(/^\d{8,14}$/, '8–14 цифр')
+      .nullable(),
+    notes: z.string().trim().max(200).nullable(),
+  })
+  .transform((v) => (v.onSale ? v : { ...v, saleUntil: null }));
+export type LidlProductInput = z.input<typeof lidlProductSchema>;
+
+export const shoppingItemInputSchema = z
+  .object({
+    title: z.string().trim().min(1, 'Введите название').max(80),
+    ingredientId: z.string().min(1).nullable(),
+    quantity: z.number().positive().max(100_000).nullable(),
+    unit: z.enum(UNITS).nullable(),
+  })
+  .refine((v) => (v.quantity === null) === (v.unit === null), {
+    path: ['quantity'],
+    message: 'Количество и единица указываются вместе',
+  });
+export type ShoppingItemInput = z.infer<typeof shoppingItemInputSchema>;

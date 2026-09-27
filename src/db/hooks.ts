@@ -23,13 +23,16 @@ import {
   recipeIngredients,
   recipes,
   recipeSteps,
+  shoppingItems,
   type Ingredient,
   type LidlProduct,
   type MealLog,
+  type PantryItem,
   type Profile,
   type Recipe,
   type RecipeIngredient,
   type RecipeStep,
+  type ShoppingItem,
 } from './schema';
 
 /** Reactive profile row. `isLoaded` is false until the first query resolves. */
@@ -223,4 +226,21 @@ export function useDailyProtein(fromDate: string): Map<string, number> {
     for (const row of data) map.set(row.localDate, (map.get(row.localDate) ?? 0) + row.protein);
     return map;
   }, [data]);
+}
+
+export function usePantryItems(): PantryItem[] {
+  return useLiveQuery(db.select().from(pantryItems)).data;
+}
+
+export function useShoppingItems(): ShoppingItem[] {
+  return useLiveQuery(
+    db
+      .select()
+      .from(shoppingItems)
+      .orderBy(asc(shoppingItems.checked), asc(shoppingItems.createdAt)),
+  ).data;
+}
+
+export function useLidlProducts(): LidlProduct[] {
+  return useLiveQuery(db.select().from(lidlProducts).orderBy(asc(lidlProducts.title))).data;
 }

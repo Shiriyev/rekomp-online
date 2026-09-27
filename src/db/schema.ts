@@ -49,6 +49,8 @@ export const ingredients = sqliteTable('ingredients', {
   isStaple: integer('is_staple', { mode: 'boolean' }).notNull().default(false),
   imageKey: text('image_key'),
   isCustom: integer('is_custom', { mode: 'boolean' }).notNull().default(false),
+  /** «Заканчивается» below this amount (ingredient unit); null = default by unit. */
+  lowStockThreshold: real('low_stock_threshold'),
 });
 
 export const lidlProducts = sqliteTable(
@@ -243,6 +245,8 @@ export const shoppingItems = sqliteTable(
     quantity: real('quantity'),
     unit: text('unit', { enum: UNITS }),
     checked: integer('checked', { mode: 'boolean' }).notNull().default(false),
+    /** What «купил» added to the pantry (ingredient unit), so un-checking can take it back. */
+    addedQuantity: real('added_quantity'),
     createdAt: integer('created_at').notNull(),
     checkedAt: integer('checked_at'),
   },
@@ -262,6 +266,7 @@ export const appMeta = sqliteTable('app_meta', {
 export type Ingredient = typeof ingredients.$inferSelect;
 export type NewIngredient = typeof ingredients.$inferInsert;
 export type LidlProduct = typeof lidlProducts.$inferSelect;
+export type NewLidlProduct = typeof lidlProducts.$inferInsert;
 export type Recipe = typeof recipes.$inferSelect;
 export type NewRecipe = typeof recipes.$inferInsert;
 export type RecipeIngredient = typeof recipeIngredients.$inferSelect;

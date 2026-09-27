@@ -17,6 +17,17 @@ export type AvailablePortion = PreparedPortion & { recipeName: string };
 
 export function createPortionsRepo(db: AppDb) {
   return {
+    /** Corrects the count (e.g. a portion was given away); 0 removes it from the fridge list. */
+    setPortionsLeft(portionId: string, portionsLeft: number): void {
+      if (!Number.isInteger(portionsLeft) || portionsLeft < 0 || portionsLeft > 20) {
+        throw new RangeError(`portionsLeft must be an integer 0–20, got ${portionsLeft}`);
+      }
+      db.update(preparedPortions)
+        .set({ portionsLeft })
+        .where(eq(preparedPortions.id, portionId))
+        .run();
+    },
+
     /** Containers in the fridge that still have portions, oldest first (eat those first). */
     listAvailable(): AvailablePortion[] {
       return db

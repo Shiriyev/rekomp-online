@@ -23,6 +23,7 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   isStaple: false,
   imageKey: null,
   isCustom: false,
+  lowStockThreshold: null,
   ...over,
 });
 
