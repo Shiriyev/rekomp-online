@@ -366,7 +366,7 @@ export const SEED_RECIPES: SeedRecipe[] = [
       { id: 'tomatoes_canned', amount: 200 },
       { id: 'onion', amount: 0.5 },
       { id: 'bell_pepper', amount: 0.5 },
-      { id: 'bread_wholegrain', amount: 2 },
+      { id: 'bread_wholegrain', amount: 1 },
       { id: 'oil', amount: 5, note: '1 ч.л.' },
     ],
     steps: [

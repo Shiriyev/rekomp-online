@@ -5,8 +5,11 @@ import type { AppDb } from '../types';
 import { SEED_INGREDIENTS } from './ingredients';
 import { SEED_RECIPES, type SeedRecipe } from './recipes';
 
-/** Bump when seed content changes; recipes are re-synced, user-edited ingredients are kept. */
-export const SEED_VERSION = 1;
+/**
+ * Bump when seed content changes; recipes are re-synced, user-edited ingredients are kept.
+ * v2: U4 shakshuka uses 1 slice of bread (was 2) to match the reference ~470 kcal.
+ */
+export const SEED_VERSION = 2;
 const SEED_VERSION_KEY = 'seed_version';
 
 const LUNCH_DEFAULTS = { defaultServings: 3, isBatch: true } as const;

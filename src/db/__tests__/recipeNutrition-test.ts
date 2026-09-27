@@ -35,10 +35,7 @@ const TOLERANCE = 0.15;
  * Deviations above tolerance, reported instead of silently adjusted (PLAN phase 1).
  * Each entry is asserted to still exceed tolerance so it is removed once resolved.
  */
-const KNOWN_DEVIATIONS: Partial<Record<string, 'kcal' | 'protein'>> = {
-  // 3 eggs + 2 bread + 5 g oil + 200 g tomatoes + ½ onion + ½ pepper = ~541 kcal vs 470.
-  U4: 'kcal',
-};
+const KNOWN_DEVIATIONS: Partial<Record<string, 'kcal' | 'protein'>> = {};
 
 const { db, close } = createTestDb();
 runSeed(db);
@@ -67,16 +64,15 @@ describe('recipe nutrition vs spreadsheet', () => {
     if (known !== 'protein') expect(Math.abs(proteinDev)).toBeLessThanOrEqual(TOLERANCE);
   });
 
-  it.each(Object.entries(KNOWN_DEVIATIONS))(
-    'known deviation %s (%s) is still present',
-    (id, field) => {
+  it('known deviations are still present (remove them once resolved)', () => {
+    for (const [id, field] of Object.entries(KNOWN_DEVIATIONS)) {
       const c = computed.find((x) => x.id === id)!;
       const ref = SPREADSHEET[id]!;
       const dev =
         field === 'kcal' ? deviation(c.kcal, ref.kcal) : deviation(c.protein, ref.protein);
       expect(Math.abs(dev)).toBeGreaterThan(TOLERANCE);
-    },
-  );
+    }
+  });
 
   it('prints the comparison table for the phase report', () => {
     const table = computed.map((c) => {
