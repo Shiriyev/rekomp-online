@@ -35,7 +35,13 @@
           "imageWidth": 76
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-navigation-bar",
+        {
+          "hidden": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

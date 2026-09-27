@@ -1,3 +1,4 @@
+import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
@@ -18,6 +19,8 @@ export default function RootLayout() {
         <PaperProvider theme={isDark ? darkTheme : lightTheme}>
           <ThemeProvider value={isDark ? navDarkTheme : navLightTheme}>
             <StatusBar style={isDark ? 'light' : 'dark'} />
+            {/* Immersive: system buttons stay hidden; swipe up from the edge shows them temporarily. */}
+            <NavigationBar hidden />
             <DatabaseProvider>
               <Stack screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="(tabs)" />
