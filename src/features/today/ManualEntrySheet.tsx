@@ -2,7 +2,7 @@ import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef, useState, type RefObject } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Chip, HelperText, SegmentedButtons, Text, TextInput } from 'react-native-paper';
 
 import { useIngredientsMap } from '@/db/hooks';
@@ -90,6 +90,7 @@ export function ManualEntrySheet({ sheetRef, defaultMealType, presets, onSubmit 
       (input) => {
         try {
           onSubmit({ ...input, id: entryId.current, deductions }, photo);
+          Keyboard.dismiss();
           sheetRef.current?.dismiss();
         } finally {
           submitting.current = false;

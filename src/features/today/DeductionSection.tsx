@@ -46,6 +46,9 @@ export function DeductionSection({ value, onChange, onCalculate }: Props) {
   // Selection survives a new search query: ticked products always stay on top.
   const results = useMemo(() => {
     const chosen = new Set(value.map((v) => v.ingredientId));
+    // Once something is ticked, the full list would push «Добавить» off screen:
+    // further products are found through the search.
+    if (chosen.size > 0 && query.trim() === '') return [];
     return searchIngredients(atHome, query)
       .filter((i) => !chosen.has(i.id))
       .slice(0, MAX_RESULTS);
@@ -91,7 +94,7 @@ export function DeductionSection({ value, onChange, onCalculate }: Props) {
           <TextInput
             mode="outlined"
             dense
-            label="Найти дома"
+            label={value.length > 0 ? 'Добавить ещё продукт' : 'Найти дома'}
             accessibilityLabel="Найти продукт дома"
             value={query}
             onChangeText={setQuery}

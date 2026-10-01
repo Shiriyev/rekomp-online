@@ -2,7 +2,7 @@ import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useImperativeHandle, useRef, useState, type Ref } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
-import { StyleSheet, View } from 'react-native';
+import { Keyboard, StyleSheet, View } from 'react-native';
 import {
   Button,
   HelperText,
@@ -98,6 +98,7 @@ export function EditEntrySheet({ ref, onDelete }: Props) {
         return;
       }
       repositories.logs.update(log.id, { ...v, timestamp });
+      Keyboard.dismiss();
       sheetRef.current?.dismiss();
     })();
 

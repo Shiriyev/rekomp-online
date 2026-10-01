@@ -177,7 +177,7 @@ export default function RecipeScreen() {
                 accessibilityLabel={
                   kcalChanged
                     ? `${formatInt(perServing.kcal)} ккал, в рецепте ${formatInt(baseMacros.perServing.kcal)}`
-                    : undefined
+                    : formatKcal(perServing.kcal)
                 }>
                 {kcalChanged
                   ? `${formatInt(baseMacros.perServing.kcal)} → ${formatKcal(perServing.kcal)}`
