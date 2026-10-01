@@ -123,15 +123,16 @@ export function IngredientRow({
       {editor ? (
         <View style={styles.editor}>
           <View style={styles.caption}>
-            <Text
-              variant="bodySmall"
-              style={{ color: changed ? theme.colors.primary : theme.colors.onSurfaceVariant }}>
-              {servings > 1
-                ? t('recipes.card.totalAmount', {
-                    amount: formatAmount(editor.value * servings, unit),
-                  })
-                : t('recipes.card.perServingAmount')}
-            </Text>
+            {/* Per serving is the default; only the pot total adds information. */}
+            {servings > 1 ? (
+              <Text
+                variant="bodySmall"
+                style={{ color: changed ? theme.colors.primary : theme.colors.onSurfaceVariant }}>
+                {t('recipes.card.totalAmount', {
+                  amount: formatAmount(editor.value * servings, unit),
+                })}
+              </Text>
+            ) : null}
             {changed ? (
               <Pressable
                 onPress={() => editor.onChange(editor.base)}

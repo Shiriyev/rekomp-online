@@ -42,6 +42,7 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
             right={suffix ? <TextInput.Affix text={suffix} /> : undefined}
             error={!!error}
             render={render}
+            outlineStyle={styles.outline}
           />
           {error ? (
             <HelperText type="error" padding="none">
@@ -54,4 +55,4 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
   );
 }
 
-const styles = StyleSheet.create({ container: { flex: 1 } });
+const styles = StyleSheet.create({ container: { flex: 1 }, outline: { borderRadius: 12 } });

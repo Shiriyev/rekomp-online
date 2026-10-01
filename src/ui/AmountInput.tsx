@@ -159,8 +159,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'center',
-    minWidth: 76,
-    gap: 2,
+    minWidth: 84,
+    gap: 4,
   },
   input: {
     fontSize: 17,

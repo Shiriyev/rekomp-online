@@ -199,12 +199,16 @@ export default function RecipeScreen() {
                 </Text>
               ) : null}
             </View>
-            <Text variant="titleMedium" style={{ color: onColor }}>
-              {t('common.proteinValue', { value: formatInt(perServing.protein) })}
+            <View style={styles.kcalRow}>
+              <Text variant="titleMedium" style={{ color: onColor }}>
+                {t('common.proteinValue', { value: formatInt(perServing.protein) })}
+              </Text>
               {proteinChanged ? (
-                <Text style={styles.was}> {formatInt(baseMacros.perServing.protein)}</Text>
+                <Text variant="bodyMedium" style={[styles.was, { color: onColor }]}>
+                  {formatInt(baseMacros.perServing.protein)} {t('common.grams')}
+                </Text>
               ) : null}
-            </Text>
+            </View>
           </View>
           <View style={styles.macrosRight}>
             <Text variant="bodySmall" style={{ color: onColor }}>

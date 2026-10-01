@@ -47,7 +47,9 @@ export function TodaySummaryCard({ summary, targets }: Props) {
                 {t('today.summary.kcalOf', { target: formatInt(targets.kcalTarget) })}
               </Text>
             </MacroRing>
-            <Text variant="bodyMedium" style={{ color: over ? theme.colors.error : undefined }}>
+            <Text
+              variant="bodyMedium"
+              style={{ color: over ? theme.colors.error : theme.colors.onSurface }}>
               {over
                 ? t('today.summary.kcalOver', { kcal: formatInt(-left.kcal) })
                 : t('today.summary.kcalLeft', { kcal: formatInt(left.kcal) })}
