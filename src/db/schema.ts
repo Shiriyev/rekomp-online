@@ -164,7 +164,32 @@ export const cookSessions = sqliteTable('cook_sessions', {
   progress: text('progress', { mode: 'json' }).$type<CookProgress>(),
   pantryDelta: text('pantry_delta', { mode: 'json' }).$type<PantryDelta>(),
   shortfall: text('shortfall', { mode: 'json' }).$type<PantryDelta>(),
+  /** Snapshot at start of the per-serving amounts actually cooked (edited on the card). */
+  amountOverrides: text('amount_overrides', { mode: 'json' })
+    .$type<Record<string, number>>()
+    .notNull()
+    .default(sql`'{}'`),
+  /** What the cook really used for all servings (ingredient unit), for the history. */
+  usedAmounts: text('used_amounts', { mode: 'json' }).$type<PantryDelta>(),
 });
+
+/** «Моя версия рецепта»: own default amounts; the seeded lines stay as the original. */
+export const recipeCustomAmounts = sqliteTable(
+  'recipe_custom_amounts',
+  {
+    recipeId: text('recipe_id')
+      .notNull()
+      .references(() => recipes.id, { onDelete: 'cascade' }),
+    ingredientId: text('ingredient_id')
+      .notNull()
+      .references(() => ingredients.id, { onDelete: 'cascade' }),
+    amountPerServing: real('amount_per_serving').notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.recipeId, t.ingredientId] }),
+    check('recipe_custom_amount_non_negative', sql`${t.amountPerServing} >= 0`),
+  ],
+);
 
 export const preparedPortions = sqliteTable(
   'prepared_portions',
@@ -282,6 +307,7 @@ export type Recipe = typeof recipes.$inferSelect;
 export type NewRecipe = typeof recipes.$inferInsert;
 export type RecipeIngredient = typeof recipeIngredients.$inferSelect;
 export type RecipeStep = typeof recipeSteps.$inferSelect;
+export type RecipeCustomAmount = typeof recipeCustomAmounts.$inferSelect;
 export type PantryItem = typeof pantryItems.$inferSelect;
 export type CookSession = typeof cookSessions.$inferSelect;
 export type PreparedPortion = typeof preparedPortions.$inferSelect;

@@ -10,11 +10,14 @@ import {
   useRecipeCatalog,
   useRecipeLinesByRecipe,
 } from '@/db/hooks';
+import { recipeMacros } from '@/domain/nutrition';
 import { canCook } from '@/domain/pantry';
+import { applyAmounts } from '@/domain/recipeDraft';
 import { RECIPE_SORTS, sortRecipes, type RecipeSort } from '@/domain/recipes';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { MEAL_LABELS } from '@/features/meals';
 import { RecipeListItem } from '@/features/recipes/RecipeListItem';
+import { useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { spacing } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -38,6 +41,7 @@ export default function RecipesScreen() {
   const ingredients = useIngredientsMap();
   const pantry = usePantryStock();
   const kcalLeft = useKcalLeftToday();
+  const drafts = useRecipeDraftStore((s) => s.drafts);
   const [onlyCookable, setOnlyCookable] = useState(false);
   const [sort, setSort] = useState<RecipeSort>('protein');
 
@@ -45,20 +49,23 @@ export default function RecipesScreen() {
     if (!meal || !catalog.isLoaded || ingredients.size === 0) return [];
     const rows = catalog.recipes
       .filter((r) => r.mealType === meal)
-      .map((recipe) => ({
-        recipe,
-        macros: catalog.macros.get(recipe.id) ?? { kcal: 0, protein: 0 },
-        check: canCook(
-          linesByRecipe.get(recipe.id) ?? [],
-          ingredients,
-          pantry,
-          recipe.defaultServings,
-        ),
-        totalMinutes: recipe.totalMinutes,
-        sortOrder: recipe.sortOrder,
-      }));
+      .map((recipe) => {
+        // Amounts edited on a recipe card (draft) count here too.
+        const draft = drafts[recipe.id];
+        const lines = linesByRecipe.get(recipe.id) ?? [];
+        const drafted = draft ? applyAmounts(lines, draft) : lines;
+        return {
+          recipe,
+          macros: draft
+            ? recipeMacros(drafted, ingredients).perServing
+            : (catalog.macros.get(recipe.id) ?? { kcal: 0, protein: 0 }),
+          check: canCook(drafted, ingredients, pantry, recipe.defaultServings),
+          totalMinutes: recipe.totalMinutes,
+          sortOrder: recipe.sortOrder,
+        };
+      });
     return sortRecipes(onlyCookable ? rows.filter((r) => r.check.status === 'ok') : rows, sort);
-  }, [meal, catalog, linesByRecipe, ingredients, pantry, onlyCookable, sort]);
+  }, [meal, catalog, linesByRecipe, drafts, ingredients, pantry, onlyCookable, sort]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title="Такой категории нет" />;
   if (!catalog.isLoaded || ingredients.size === 0) {

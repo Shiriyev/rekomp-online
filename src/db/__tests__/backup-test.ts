@@ -49,6 +49,7 @@ function populate() {
     NOW,
   );
   repos.settings.setTheme('dark');
+  repos.recipes.saveCustomAmounts('Z1', { tvorog: 200 });
   repos.ingredients.updateSettings('tvorog', {
     kcalPer100g: 98,
     proteinPer100g: 18,

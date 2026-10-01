@@ -113,7 +113,8 @@ export function canCook<L extends RecipeLine>(
   const checks: LineCheck<L>[] = [];
   for (const line of resolveLines(lines, choices)) {
     const { ingredient, required, available } = requirement(line, ingredients, pantry, servings);
-    if (ingredient.isStaple) continue;
+    // Staples are not tracked; a line set to 0 on the card is not needed for this cook.
+    if (ingredient.isStaple || required <= EPSILON) continue;
     const status: LineAvailability =
       available >= required - EPSILON ? 'ok' : available > EPSILON ? 'low' : 'missing';
     const alternatives =

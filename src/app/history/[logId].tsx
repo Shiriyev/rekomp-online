@@ -184,6 +184,26 @@ export default function EntryDetailScreen() {
           </View>
         ) : null}
 
+        {session?.usedAmounts && session.usedAmounts.length > 0 ? (
+          <View style={styles.section}>
+            <Text variant="titleMedium" accessibilityRole="header">
+              Использовано
+              {session.servings > 1 ? ` на ${session.servings} порц.` : ''}
+            </Text>
+            {session.usedAmounts.map((u, i) => (
+              <View key={u.ingredientId}>
+                {i > 0 ? <Divider /> : null}
+                <View style={styles.line}>
+                  <Text variant="bodyLarge" style={styles.flex}>
+                    {ingredients.get(u.ingredientId)?.name ?? u.ingredientId}
+                  </Text>
+                  <Text variant="bodyLarge">{formatAmount(u.amount, u.unit)}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        ) : null}
+
         <View style={styles.section}>
           <PhotoField
             value={log.photoUri}

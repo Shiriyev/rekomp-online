@@ -1,7 +1,9 @@
 import { asc, eq, inArray } from 'drizzle-orm';
 
+import { sanitizeAmounts } from '../../domain/recipeDraft';
 import type { MealType } from '../../domain/types';
 import {
+  recipeCustomAmounts,
   recipeIngredients,
   recipes,
   recipeSteps,
@@ -66,6 +68,38 @@ export function createRecipesRepo(db: AppDb) {
     getDetail(id: string): RecipeDetail | undefined {
       const recipe = db.select().from(recipes).where(eq(recipes.id, id)).get();
       return recipe ? withDetails([recipe])[0] : undefined;
+    },
+
+    /**
+     * «Сохранить как мою версию»: per-serving amounts that become this recipe's defaults.
+     * Values equal to the original are not stored; the original lines are never changed.
+     */
+    saveCustomAmounts(recipeId: string, amounts: Readonly<Record<string, number>>): number {
+      return db.transaction((tx) => {
+        const lines = tx
+          .select()
+          .from(recipeIngredients)
+          .where(eq(recipeIngredients.recipeId, recipeId))
+          .all();
+        if (lines.length === 0) throw new Error(`Recipe not found: ${recipeId}`);
+        const clean = sanitizeAmounts(amounts, lines);
+        const base = new Map(lines.map((l) => [l.ingredientId, l.amountPerServing]));
+        const rows = Object.entries(clean)
+          .filter(([id, amount]) => Math.abs(amount - (base.get(id) ?? amount)) > 1e-9)
+          .map(([ingredientId, amountPerServing]) => ({
+            recipeId,
+            ingredientId,
+            amountPerServing,
+          }));
+        tx.delete(recipeCustomAmounts).where(eq(recipeCustomAmounts.recipeId, recipeId)).run();
+        if (rows.length > 0) tx.insert(recipeCustomAmounts).values(rows).run();
+        return rows.length;
+      });
+    },
+
+    /** Back to the original recipe amounts. */
+    resetCustomAmounts(recipeId: string): void {
+      db.delete(recipeCustomAmounts).where(eq(recipeCustomAmounts.recipeId, recipeId)).run();
     },
 
     /** Every recipe with its lines and steps, in 3 queries. */

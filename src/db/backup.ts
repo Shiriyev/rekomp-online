@@ -15,6 +15,7 @@ const TABLES = {
   recipes: schema.recipes,
   recipe_ingredients: schema.recipeIngredients,
   recipe_steps: schema.recipeSteps,
+  recipe_custom_amounts: schema.recipeCustomAmounts,
   lidl_products: schema.lidlProducts,
   pantry_items: schema.pantryItems,
   cook_sessions: schema.cookSessions,

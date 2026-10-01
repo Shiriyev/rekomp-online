@@ -21,10 +21,12 @@ import { repositories } from '@/db';
 import { useCookView, useIngredientsMap, useIsFirstCook, useRecipeDetail } from '@/db/hooks';
 import { formatTimer, isDone, remainingSec, stepIngredients } from '@/domain/cooking';
 import { recipeMacros, roundKcal, roundProtein } from '@/domain/nutrition';
+import { applyAmounts } from '@/domain/recipeDraft';
 import { activeTimers, useCookStore } from '@/features/cooking/cookStore';
 import { FinishView } from '@/features/cooking/FinishView';
 import { RecipeOverview } from '@/features/cooking/RecipeOverview';
 import { TimerCard } from '@/features/cooking/TimerCard';
+import { clearRecipeDraft, useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
 import { showUndo } from '@/features/undo/undoStore';
 import { formatAmount, formatInt } from '@/lib/format';
 import { useNow } from '@/lib/useNow';
@@ -54,8 +56,13 @@ const parseServings = (raw: string | undefined, fallback: number) => {
 export default function CookScreen() {
   useKeepAwake();
   const theme = useAppTheme();
-  const params = useLocalSearchParams<{ id: string; servings?: string; choices?: string }>();
-  const { recipe, lines, steps, isLoaded } = useRecipeDetail(params.id);
+  const params = useLocalSearchParams<{
+    id: string;
+    servings?: string;
+    choices?: string;
+    fromCard?: string;
+  }>();
+  const { recipe, lines: recipeLines, steps, isLoaded } = useRecipeDetail(params.id);
   const ingredients = useIngredientsMap();
   const firstTime = useIsFirstCook(params.id);
 
@@ -70,12 +77,15 @@ export default function CookScreen() {
   const defaultServings = recipe?.defaultServings;
   useEffect(() => {
     if (defaultServings === undefined) return;
+    const draft =
+      params.fromCard === '1' ? (useRecipeDraftStore.getState().drafts[params.id] ?? {}) : null;
     store().open(
       params.id,
       parseServings(params.servings, defaultServings),
       parseChoices(params.choices),
+      draft,
     );
-  }, [params.id, params.servings, params.choices, defaultServings, store]);
+  }, [params.id, params.servings, params.choices, params.fromCard, defaultServings, store]);
 
   useEffect(() => {
     store().setScreenOpen(true);
@@ -112,6 +122,11 @@ export default function CookScreen() {
 
   const servings = session?.servings ?? recipe?.defaultServings ?? 1;
   const choices = useMemo(() => session?.choices ?? {}, [session?.choices]);
+  // The cooked amounts (edited on the card) drive steps, macros and the deduction.
+  const lines = useMemo(
+    () => applyAmounts(recipeLines, session?.amounts ?? {}),
+    [recipeLines, session?.amounts],
+  );
   const perPortion = useMemo(() => {
     if (ingredients.size === 0 || lines.length === 0) return { kcal: 0, protein: 0 };
     const m = recipeMacros(lines, ingredients, { choices }).perServing;
@@ -148,6 +163,7 @@ export default function CookScreen() {
     // A cooked dish counts toward its own meal (breakfast recipe → breakfast).
     const result = store().finish({ eatNow, mealType: recipe.mealType });
     if (!result) return;
+    clearRecipeDraft(recipe.id);
     showUndo(
       eatNow
         ? `Записано: +${formatInt(result.perPortion.kcal)} ккал, +${formatInt(result.perPortion.protein)} г белка`

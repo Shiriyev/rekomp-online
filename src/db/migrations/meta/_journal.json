@@ -64,6 +64,13 @@
       "when": 1790862123067,
       "tag": "0008_ingredient_last_added",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1790878256011,
+      "tag": "0009_recipe_amounts",
+      "breakpoints": true
     }
   ]
 }

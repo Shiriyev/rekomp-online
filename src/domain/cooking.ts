@@ -142,6 +142,8 @@ export function stepIngredients(
     const line = used.get(id);
     const ingredient = ingredients.get(id);
     if (!line || !ingredient) return [];
+    // Removed on the recipe card (amount 0): not part of this cook.
+    if (!ingredient.isStaple && line.amountPerServing <= 0) return [];
     const amount = ingredient.isStaple
       ? null
       : convertAmount(line.amountPerServing * servings, line.unit, ingredient.unit, ingredient);

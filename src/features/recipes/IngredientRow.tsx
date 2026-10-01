@@ -1,4 +1,5 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import type { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Chip, Text } from 'react-native-paper';
 
@@ -18,6 +19,10 @@ type Props = {
   /** Notes such as «1 ч.л.» are per serving. */
   servings: number;
   onChooseAlternative: (ingredientId: string) => void;
+  /** Amount differs from the recipe (edited on the card). */
+  changed?: boolean;
+  /** Extra controls under the row (amount stepper). */
+  footer?: ReactNode;
 };
 
 const STATUS = {
@@ -33,6 +38,8 @@ export function IngredientRow({
   sale,
   servings,
   onChooseAlternative,
+  changed = false,
+  footer,
 }: Props) {
   const theme = useAppTheme();
   const color =
@@ -49,56 +56,63 @@ export function IngredientRow({
       : status.label;
 
   return (
-    <View
-      style={styles.row}
-      accessible
-      accessibilityLabel={`${ingredient.name}, ${amount}, ${detail}`}>
-      <ImageWithFallback
-        source={ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined}
-        fallbackIcon={CATEGORY_ICONS[ingredient.category]}
-        style={styles.image}
-        iconSize={24}
-      />
-      <View style={styles.body}>
-        <Text variant="bodyLarge">{ingredient.name}</Text>
-        {check.line.note ? (
-          <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-            {servings > 1 ? `${check.line.note} на порцию` : check.line.note}
+    <View>
+      <View
+        style={styles.row}
+        accessible
+        accessibilityLabel={`${ingredient.name}, ${amount}, ${detail}${changed ? ', изменено' : ''}`}>
+        <ImageWithFallback
+          source={ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined}
+          fallbackIcon={CATEGORY_ICONS[ingredient.category]}
+          style={styles.image}
+          iconSize={24}
+        />
+        <View style={styles.body}>
+          <Text variant="bodyLarge">{ingredient.name}</Text>
+          {check.line.note ? (
+            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              {servings > 1 ? `${check.line.note} на порцию` : check.line.note}
+            </Text>
+          ) : null}
+          {sale ? (
+            <Text variant="bodySmall" style={{ color: theme.colors.secondary }}>
+              Скидка в Lidl{sale.saleUntil ? ` до ${formatDayMonth(sale.saleUntil)}` : ''}
+            </Text>
+          ) : null}
+          {alternatives.length > 0 ? (
+            <View style={styles.alts}>
+              {alternatives.map((alt) => (
+                <Chip
+                  key={alt.id}
+                  compact
+                  icon="swap-horizontal"
+                  onPress={() => onChooseAlternative(alt.id)}>
+                  или {alt.name}
+                </Chip>
+              ))}
+            </View>
+          ) : null}
+        </View>
+        <View style={styles.right}>
+          <Text
+            variant="titleSmall"
+            style={changed ? { color: theme.colors.primary, fontWeight: '700' } : undefined}>
+            {amount}
           </Text>
-        ) : null}
-        {sale ? (
-          <Text variant="bodySmall" style={{ color: theme.colors.secondary }}>
-            Скидка в Lidl{sale.saleUntil ? ` до ${formatDayMonth(sale.saleUntil)}` : ''}
-          </Text>
-        ) : null}
-        {alternatives.length > 0 ? (
-          <View style={styles.alts}>
-            {alternatives.map((alt) => (
-              <Chip
-                key={alt.id}
-                compact
-                icon="swap-horizontal"
-                onPress={() => onChooseAlternative(alt.id)}>
-                или {alt.name}
-              </Chip>
-            ))}
+          <View style={styles.status}>
+            <MaterialCommunityIcons
+              name={status.icon}
+              size={16}
+              color={color}
+              importantForAccessibility="no"
+            />
+            <Text variant="bodySmall" style={{ color }}>
+              {detail}
+            </Text>
           </View>
-        ) : null}
-      </View>
-      <View style={styles.right}>
-        <Text variant="titleSmall">{amount}</Text>
-        <View style={styles.status}>
-          <MaterialCommunityIcons
-            name={status.icon}
-            size={16}
-            color={color}
-            importantForAccessibility="no"
-          />
-          <Text variant="bodySmall" style={{ color }}>
-            {detail}
-          </Text>
         </View>
       </View>
+      {footer}
     </View>
   );
 }

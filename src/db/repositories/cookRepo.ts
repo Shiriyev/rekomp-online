@@ -3,6 +3,12 @@ import { and, asc, count, desc, eq, isNotNull, isNull, ne } from 'drizzle-orm';
 import { afterTaking, planConsumption } from '../../domain/cooking';
 import { recipeMacros, roundKcal, roundProtein } from '../../domain/nutrition';
 import type { PantryStock } from '../../domain/pantry';
+import {
+  amountSnapshot,
+  applyAmounts,
+  sanitizeAmounts,
+  usedAmounts,
+} from '../../domain/recipeDraft';
 import type { Macros, MealType } from '../../domain/types';
 import { normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
@@ -14,6 +20,7 @@ import {
   mealLogs,
   pantryItems,
   preparedPortions,
+  recipeCustomAmounts,
   recipeIngredients,
   recipes,
   type CookProgress,
@@ -67,9 +74,34 @@ const validateServings = (servings: number) => {
   }
 };
 
+/** Recipe lines with «моя версия» amounts applied (the card's starting point). */
+export function effectiveLines(tx: AppDb, recipeId: string) {
+  const lines = tx
+    .select()
+    .from(recipeIngredients)
+    .where(eq(recipeIngredients.recipeId, recipeId))
+    .orderBy(asc(recipeIngredients.sortOrder))
+    .all();
+  const custom = tx
+    .select()
+    .from(recipeCustomAmounts)
+    .where(eq(recipeCustomAmounts.recipeId, recipeId))
+    .all();
+  return applyAmounts(
+    lines,
+    Object.fromEntries(custom.map((c) => [c.ingredientId, c.amountPerServing])),
+  );
+}
+
 export function createCookRepo(db: AppDb) {
   const getSession = (tx: AppDb, id: string) =>
     tx.select().from(cookSessions).where(eq(cookSessions.id, id)).get();
+
+  /** Full per-serving snapshot: recipe (with «моя версия») plus the card's draft. */
+  const snapshotFor = (tx: AppDb, recipeId: string, amounts: Readonly<Record<string, unknown>>) => {
+    const lines = effectiveLines(tx, recipeId);
+    return amountSnapshot(applyAmounts(lines, sanitizeAmounts(amounts, lines)));
+  };
 
   const resultOf = (
     tx: AppDb,
@@ -107,6 +139,7 @@ export function createCookRepo(db: AppDb) {
     servings: number,
     choices: Record<string, string>,
     now: number,
+    amounts: Readonly<Record<string, number>>,
   ): CookSession => {
     validateServings(servings);
     const recipe = tx
@@ -122,7 +155,14 @@ export function createCookRepo(db: AppDb) {
       .run();
     return tx
       .insert(cookSessions)
-      .values({ id: newId(), recipeId, servings, choices, startedAt: now })
+      .values({
+        id: newId(),
+        recipeId,
+        servings,
+        choices,
+        startedAt: now,
+        amountOverrides: snapshotFor(tx, recipeId, amounts),
+      })
       .returning()
       .get();
   };
@@ -142,12 +182,8 @@ export function createCookRepo(db: AppDb) {
 
     const recipe = tx.select().from(recipes).where(eq(recipes.id, session.recipeId)).get();
     if (!recipe) throw new CookSessionError(`Recipe not found: ${session.recipeId}`);
-    const lines = tx
-      .select()
-      .from(recipeIngredients)
-      .where(eq(recipeIngredients.recipeId, recipe.id))
-      .orderBy(asc(recipeIngredients.sortOrder))
-      .all();
+    // The amounts captured when cooking started (edited on the card), not today's recipe.
+    const lines = applyAmounts(effectiveLines(tx, recipe.id), session.amountOverrides);
     const ingredientMap = new Map(
       tx
         .select()
@@ -224,7 +260,12 @@ export function createCookRepo(db: AppDb) {
 
     const finished = tx
       .update(cookSessions)
-      .set({ finishedAt: now, pantryDelta: take, shortfall })
+      .set({
+        finishedAt: now,
+        pantryDelta: take,
+        shortfall,
+        usedAmounts: usedAmounts(lines, ingredientMap, session.servings, session.choices),
+      })
       .where(eq(cookSessions.id, session.id))
       .returning()
       .get();
@@ -238,8 +279,24 @@ export function createCookRepo(db: AppDb) {
       servings: number,
       choices: Record<string, string> = {},
       now: number = Date.now(),
+      /** Per-serving amounts edited on the card (draft); missing ids keep the recipe's. */
+      amounts: Readonly<Record<string, number>> = {},
     ) {
-      return db.transaction((tx) => startIn(tx, recipeId, servings, choices, now));
+      return db.transaction((tx) => startIn(tx, recipeId, servings, choices, now, amounts));
+    },
+
+    /** The card's draft changed while this recipe was already being cooked. */
+    setAmounts(id: string, amounts: Readonly<Record<string, number>>): CookSession | undefined {
+      return db.transaction((tx) => {
+        const session = getSession(tx, id);
+        if (!session || session.finishedAt !== null || session.abandonedAt !== null) return session;
+        return tx
+          .update(cookSessions)
+          .set({ amountOverrides: snapshotFor(tx, session.recipeId, amounts) })
+          .where(eq(cookSessions.id, id))
+          .returning()
+          .get();
+      });
     },
 
     /** The unfinished session to resume, if any. */
@@ -288,9 +345,10 @@ export function createCookRepo(db: AppDb) {
       choices: Record<string, string>,
       mealType: MealType,
       now: number = Date.now(),
+      amounts: Readonly<Record<string, number>> = {},
     ): FinishResult {
       return db.transaction((tx) => {
-        const session = startIn(tx, recipeId, servings, choices, now);
+        const session = startIn(tx, recipeId, servings, choices, now, amounts);
         return finishIn(tx, session.id, { eatNow: true, mealType }, now);
       });
     },

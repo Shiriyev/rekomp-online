@@ -6,6 +6,7 @@ import { isSaleActive } from '@/domain/lidl';
 import type { PantryStock } from '@/domain/pantry';
 import { themePreferenceSchema, type ThemePreference } from '@/domain/schemas';
 import { catalogMacros, recentPresets, type Preset } from '@/domain/today';
+import { applyAmounts } from '@/domain/recipeDraft';
 import type { Macros } from '@/domain/types';
 
 import { db } from './client';
@@ -20,6 +21,7 @@ import {
   pantryItems,
   preparedPortions,
   profile,
+  recipeCustomAmounts,
   recipeIngredients,
   recipes,
   recipeSteps,
@@ -86,6 +88,18 @@ export function useRecentPresets(): Preset[] {
   return useMemo(() => recentPresets(data), [data]);
 }
 
+/** «Моя версия» amounts per recipe: recipeId → { ingredientId: amountPerServing }. */
+export function useCustomAmounts(): Map<string, Record<string, number>> {
+  const { data } = useLiveQuery(db.select().from(recipeCustomAmounts));
+  return useMemo(() => {
+    const map = new Map<string, Record<string, number>>();
+    for (const row of data) {
+      map.set(row.recipeId, { ...map.get(row.recipeId), [row.ingredientId]: row.amountPerServing });
+    }
+    return map;
+  }, [data]);
+}
+
 export type RecipeCatalog = { recipes: Recipe[]; macros: Map<string, Macros>; isLoaded: boolean };
 
 /** Recipes with per-serving macros computed from ingredients; reacts to ingredient edits. */
@@ -93,16 +107,21 @@ export function useRecipeCatalog(): RecipeCatalog {
   const recipeRows = useLiveQuery(db.select().from(recipes).orderBy(asc(recipes.sortOrder)));
   const lineRows = useLiveQuery(db.select().from(recipeIngredients));
   const ingredientRows = useLiveQuery(db.select().from(ingredients));
+  const custom = useCustomAmounts();
 
   return useMemo(() => {
     const isLoaded = [recipeRows, lineRows, ingredientRows].every((q) => q.updatedAt !== undefined);
     const ingredientMap = new Map(ingredientRows.data.map((i) => [i.id, i]));
+    const lines = lineRows.data.map((l) => {
+      const amount = custom.get(l.recipeId)?.[l.ingredientId];
+      return amount === undefined ? l : { ...l, amountPerServing: amount };
+    });
     return {
       recipes: recipeRows.data,
-      macros: isLoaded ? catalogMacros(recipeRows.data, lineRows.data, ingredientMap) : new Map(),
+      macros: isLoaded ? catalogMacros(recipeRows.data, lines, ingredientMap) : new Map(),
       isLoaded,
     };
-  }, [recipeRows, lineRows, ingredientRows]);
+  }, [recipeRows, lineRows, ingredientRows, custom]);
 }
 
 /** Pantry as a stock map for domain checks. */
@@ -119,25 +138,32 @@ export function useIngredientsMap(): Map<string, Ingredient> {
   return useMemo(() => new Map(data.map((i) => [i.id, i])), [data]);
 }
 
-/** Recipe lines grouped by recipe id. */
+/** Recipe lines grouped by recipe id («моя версия» applied). */
 export function useRecipeLinesByRecipe(): Map<string, RecipeIngredient[]> {
   const { data } = useLiveQuery(
     db.select().from(recipeIngredients).orderBy(asc(recipeIngredients.sortOrder)),
   );
+  const custom = useCustomAmounts();
   return useMemo(() => {
     const map = new Map<string, RecipeIngredient[]>();
-    for (const line of data) {
+    for (const raw of data) {
+      const amount = custom.get(raw.recipeId)?.[raw.ingredientId];
+      const line = amount === undefined ? raw : { ...raw, amountPerServing: amount };
       const bucket = map.get(line.recipeId);
       if (bucket) bucket.push(line);
       else map.set(line.recipeId, [line]);
     }
     return map;
-  }, [data]);
+  }, [data, custom]);
 }
 
 export type RecipeDetailData = {
   recipe: Recipe | undefined;
+  /** With «моя версия» applied: the card's starting point. */
   lines: RecipeIngredient[];
+  /** As seeded (the original recipe). */
+  originalLines: RecipeIngredient[];
+  hasCustom: boolean;
   steps: RecipeStep[];
   isLoaded: boolean;
 };
@@ -160,11 +186,25 @@ export function useRecipeDetail(id: string): RecipeDetailData {
       .orderBy(asc(recipeSteps.order)),
     [id],
   );
+  const custom = useLiveQuery(
+    db.select().from(recipeCustomAmounts).where(eq(recipeCustomAmounts.recipeId, id)),
+    [id],
+  );
+  const effective = useMemo(
+    () =>
+      applyAmounts(
+        lines.data,
+        Object.fromEntries(custom.data.map((c) => [c.ingredientId, c.amountPerServing])),
+      ),
+    [lines.data, custom.data],
+  );
   return {
     recipe: recipe.data[0],
-    lines: lines.data,
+    lines: effective,
+    originalLines: lines.data,
+    hasCustom: custom.data.length > 0,
     steps: steps.data,
-    isLoaded: [recipe, lines, steps].every((q) => q.updatedAt !== undefined),
+    isLoaded: [recipe, lines, steps, custom].every((q) => q.updatedAt !== undefined),
   };
 }
 
