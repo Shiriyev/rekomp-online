@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
 import type { MealType } from '@/domain/types';
-import { RECIPE_IMAGES } from '@/features/images';
 import { MEAL_ICONS, MEAL_LABELS, MEAL_ORDER } from '@/features/meals';
 import { t } from '@/i18n';
 import { formatInt } from '@/lib/format';
@@ -13,7 +12,8 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 type Props = {
   kcalRanges: Partial<Record<MealType, { min: number; max: number }>>;
   /** Photo per tile: image key of a representative recipe. */
-  coverImages: Partial<Record<MealType, string>>;
+  /** Tile photo per meal (bundled asset or the user's own photo). */
+  coverImages: Partial<Record<MealType, number | { uri: string }>>;
 };
 
 const rangeLabel = (r?: { min: number; max: number }) => {
@@ -41,7 +41,7 @@ export function MealCategoryGrid({ kcalRanges, coverImages }: Props) {
           }
           accessibilityLabel={`${MEAL_LABELS[meal]}, ${rangeLabel(kcalRanges[meal])}`}>
           <ImageWithFallback
-            source={coverImages[meal] ? RECIPE_IMAGES[coverImages[meal]] : undefined}
+            source={coverImages[meal]}
             fallbackIcon={MEAL_ICONS[meal]}
             style={styles.image}
           />

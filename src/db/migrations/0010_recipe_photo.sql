@@ -1,0 +1,1 @@
+ALTER TABLE `recipes` ADD `photo_uri` text;

@@ -13,7 +13,7 @@ import type { Macros } from '../../domain/types';
 import { newId } from '../../lib/id';
 import { logicalDateAt } from '../logicalDay';
 import { returnToPantry, stockOf, takeFromPantry } from '../pantryMoves';
-import { ingredients, mealLogs, preparedPortions, type MealLog } from '../schema';
+import { ingredients, mealLogs, preparedPortions, recipes, type MealLog } from '../schema';
 import type { AppDb } from '../types';
 
 export function createLogRepo(db: AppDb) {
@@ -79,22 +79,35 @@ export function createLogRepo(db: AppDb) {
       });
     },
 
-    /** Every stored photo reference, for the orphan-file sweep. */
+    /** Every stored photo reference (entries and dishes), for the orphan-file sweep. */
     photoUris(): string[] {
-      return db
+      const fromLogs = db
         .selectDistinct({ uri: mealLogs.photoUri })
         .from(mealLogs)
         .where(isNotNull(mealLogs.photoUri))
-        .all()
-        .flatMap((r) => (r.uri ? [r.uri] : []));
+        .all();
+      const fromRecipes = db
+        .selectDistinct({ uri: recipes.photoUri })
+        .from(recipes)
+        .where(isNotNull(recipes.photoUri))
+        .all();
+      return [...new Set([...fromLogs, ...fromRecipes].flatMap((r) => (r.uri ? [r.uri] : [])))];
     },
 
+    /** Whether an entry or a dish still uses this photo file. */
     isPhotoReferenced(photoUri: string): boolean {
+      const inLogs = db
+        .select({ id: mealLogs.id })
+        .from(mealLogs)
+        .where(eq(mealLogs.photoUri, photoUri))
+        .limit(1)
+        .get();
+      if (inLogs) return true;
       return (
         db
-          .select({ id: mealLogs.id })
-          .from(mealLogs)
-          .where(eq(mealLogs.photoUri, photoUri))
+          .select({ id: recipes.id })
+          .from(recipes)
+          .where(eq(recipes.photoUri, photoUri))
           .limit(1)
           .get() !== undefined
       );

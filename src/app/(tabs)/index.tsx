@@ -18,6 +18,7 @@ import type { MealType } from '@/domain/types';
 import { proteinStreak } from '@/domain/cooking';
 import { addDays } from '@/domain/dates';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
+import { recipeImage } from '@/features/recipes/recipeImage';
 import { MealCategoryGrid } from '@/features/today/MealCategoryGrid';
 import { PortionsStrip } from '@/features/today/PortionsStrip';
 import { ProteinNudgeCard } from '@/features/today/ProteinNudgeCard';
@@ -47,9 +48,12 @@ export default function TodayScreen() {
   const kcalRanges = useMemo(() => kcalRangeByMeal(catalog.recipes, catalog.macros), [catalog]);
   // First recipe of each meal (catalog order) gives the tile its photo.
   const coverImages = useMemo(() => {
-    const covers: Partial<Record<MealType, string>> = {};
+    const covers: Partial<Record<MealType, number | { uri: string }>> = {};
     for (const r of catalog.recipes)
-      if (r.imageKey && !covers[r.mealType]) covers[r.mealType] = r.imageKey;
+      if (!covers[r.mealType]) {
+        const image = recipeImage(r);
+        if (image !== undefined) covers[r.mealType] = image;
+      }
     return covers;
   }, [catalog]);
   const snackSuggestions = useMemo(

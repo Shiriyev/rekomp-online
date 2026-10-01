@@ -5,6 +5,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   Button,
   Chip,
+  IconButton,
   Dialog,
   Divider,
   Portal,
@@ -18,7 +19,12 @@ import { useActiveSales, useIngredientsMap, usePantryStock, useRecipeDetail } fr
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
-import { RECIPE_IMAGES } from '@/features/images';
+import {
+  persistPhoto,
+  pickPhoto,
+  releasePhoto,
+  type PhotoSource,
+} from '@/features/photos/mealPhotos';
 import { MEAL_ICONS, MEAL_LABELS } from '@/features/meals';
 import { IngredientRow } from '@/features/recipes/IngredientRow';
 import {
@@ -26,6 +32,7 @@ import {
   useRecipeDraft,
   useRecipeDraftStore,
 } from '@/features/recipes/recipeDraftStore';
+import { recipeImage } from '@/features/recipes/recipeImage';
 import { StatusBadge } from '@/features/recipes/StatusBadge';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { showUndo } from '@/features/undo/undoStore';
@@ -133,6 +140,25 @@ export default function RecipeScreen() {
     setMessage(t('recipes.card.savedMine'));
   };
 
+  const changeDishPhoto = async (source: PhotoSource | 'original') => {
+    let uri: string | null = null;
+    if (source !== 'original') {
+      const outcome = await pickPhoto(source);
+      if (outcome.kind === 'denied') setMessage(t('recipes.card.photoDenied'));
+      if (outcome.kind !== 'picked') return;
+      uri = persistPhoto(outcome.uri);
+    }
+    const old = repositories.recipes.setPhoto(recipe.id, uri);
+    showUndo(
+      t(uri ? 'recipes.card.photoUpdated' : 'recipes.card.photoRestored'),
+      () => {
+        repositories.recipes.setPhoto(recipe.id, old);
+        releasePhoto(uri);
+      },
+      () => releasePhoto(old),
+    );
+  };
+
   const addMissing = () => {
     const n = repositories.shopping.addMissing(check.missing);
     setMessage(
@@ -146,13 +172,43 @@ export default function RecipeScreen() {
     <>
       <Stack.Screen options={{ title: MEAL_LABELS[recipe.mealType] }} />
       <ScrollView contentContainerStyle={styles.content}>
-        <ImageWithFallback
-          source={recipe.imageKey ? RECIPE_IMAGES[recipe.imageKey] : undefined}
-          fallbackIcon={MEAL_ICONS[recipe.mealType]}
-          style={styles.hero}
-          iconSize={72}
-          accessibilityLabel={recipeName}
-        />
+        <View>
+          <ImageWithFallback
+            source={recipeImage(recipe)}
+            fallbackIcon={MEAL_ICONS[recipe.mealType]}
+            style={styles.hero}
+            iconSize={72}
+            accessibilityLabel={recipeName}
+          />
+          <View style={styles.heroActions}>
+            <IconButton
+              icon="camera-outline"
+              mode="contained"
+              containerColor="rgba(0,0,0,0.55)"
+              iconColor="#FFFFFF"
+              onPress={() => void changeDishPhoto('camera')}
+              accessibilityLabel={t('recipes.card.photoCamera')}
+            />
+            <IconButton
+              icon="image-outline"
+              mode="contained"
+              containerColor="rgba(0,0,0,0.55)"
+              iconColor="#FFFFFF"
+              onPress={() => void changeDishPhoto('library')}
+              accessibilityLabel={t('recipes.card.photoGallery')}
+            />
+            {recipe.photoUri ? (
+              <IconButton
+                icon="restore"
+                mode="contained"
+                containerColor="rgba(0,0,0,0.55)"
+                iconColor="#FFFFFF"
+                onPress={() => void changeDishPhoto('original')}
+                accessibilityLabel={t('recipes.card.photoOriginal')}
+              />
+            ) : null}
+          </View>
+        </View>
 
         <View style={styles.section}>
           <Text variant="headlineSmall" accessibilityRole="header">
@@ -447,6 +503,12 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   content: { paddingBottom: spacing.xxl, gap: spacing.lg },
   hero: { width: '100%', height: 240 },
+  heroActions: {
+    position: 'absolute',
+    right: spacing.sm,
+    bottom: spacing.sm,
+    flexDirection: 'row',
+  },
   section: { paddingHorizontal: spacing.lg, gap: spacing.sm },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   macros: {

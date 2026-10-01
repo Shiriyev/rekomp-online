@@ -6,7 +6,8 @@ import { StyleSheet, View, type ImageStyle, type StyleProp } from 'react-native'
 import { useAppTheme } from '@/theme';
 
 type Props = {
-  source: number | undefined;
+  /** Bundled asset (require) or a file photo; undefined shows the placeholder. */
+  source: number | { uri: string } | undefined;
   fallbackIcon: ComponentProps<typeof MaterialCommunityIcons>['name'];
   /** Box styles (size, radius); applied to the photo or the placeholder. */
   style?: StyleProp<ImageStyle>;

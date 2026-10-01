@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -8,12 +7,11 @@ import { repositories } from '@/db';
 import { useIngredientsMap, useMealLogDetail } from '@/db/hooks';
 import type { PantryDelta } from '@/db/schema';
 import { addDays } from '@/domain/dates';
-import { entryPhoto } from '@/domain/entryDetail';
 import { DeleteEntryDialog } from '@/features/history/DeleteEntryDialog';
 import { planDelete, type DeletePlan } from '@/features/history/deleteEntry';
 import { EditEntrySheet, type EditEntrySheetHandle } from '@/features/history/EditEntrySheet';
-import { RECIPE_IMAGES } from '@/features/images';
 import { MEAL_ICONS, MEAL_LABELS } from '@/features/meals';
+import { recipeImage } from '@/features/recipes/recipeImage';
 import { persistPhoto, releasePhoto } from '@/features/photos/mealPhotos';
 import { PhotoField } from '@/features/photos/PhotoField';
 import { PhotoViewer } from '@/features/photos/PhotoViewer';
@@ -63,13 +61,9 @@ export default function EntryDetailScreen() {
     return ingredient ? content.ingredientName(ingredient) : id;
   };
 
-  const photo = entryPhoto(log, recipe?.imageKey, (key) => key in RECIPE_IMAGES);
-  const viewerSource =
-    photo.kind === 'own'
-      ? { uri: photo.uri }
-      : photo.kind === 'recipe'
-        ? (RECIPE_IMAGES[photo.imageKey] ?? null)
-        : null;
+  // Own photo of the entry, else the dish picture (the user's dish photo or the bundled one).
+  const heroSource = log.photoUri ? { uri: log.photoUri } : recipeImage(recipe);
+  const viewerSource = heroSource ?? null;
 
   // Products taken with this entry: a manual deduction or the (not undone) cook.
   const deducted: PantryDelta =
@@ -80,27 +74,29 @@ export default function EntryDetailScreen() {
         : [];
 
   const changePhoto = (picked: string | null) => {
-    if (picked === null) {
-      const old = repositories.logs.setPhoto(log.id, null);
-      showUndo(
-        t('history.detail.photoRemoved'),
-        () => repositories.logs.setPhoto(log.id, old),
-        () => releasePhoto(old),
-      );
-      return;
-    }
-    const uri = persistPhoto(picked);
-    const old = repositories.logs.setPhoto(log.id, uri);
-    if (old) {
-      showUndo(
-        t('history.detail.photoReplaced'),
-        () => {
-          repositories.logs.setPhoto(log.id, old);
-          releasePhoto(uri);
-        },
-        () => releasePhoto(old),
-      );
-    }
+    const uri = picked === null ? null : persistPhoto(picked);
+    const oldEntry = repositories.logs.setPhoto(log.id, uri);
+    // A new photo of a dish becomes the dish's photo everywhere (recipe card, lists, tiles).
+    // Removing it from the entry leaves the dish photo alone; the recipe card can reset that.
+    const recipeId = log.recipeId && recipe ? log.recipeId : null;
+    const oldDish = uri && recipeId ? repositories.recipes.setPhoto(recipeId, uri) : undefined;
+    if (uri === null && oldEntry === null) return;
+    showUndo(
+      uri === null
+        ? t('history.detail.photoRemoved')
+        : oldDish !== undefined
+          ? t('history.detail.photoForDish')
+          : t('history.detail.photoReplaced'),
+      () => {
+        repositories.logs.setPhoto(log.id, oldEntry);
+        if (recipeId && oldDish !== undefined) repositories.recipes.setPhoto(recipeId, oldDish);
+        releasePhoto(uri);
+      },
+      () => {
+        releasePhoto(oldEntry);
+        if (oldDish) releasePhoto(oldDish);
+      },
+    );
   };
 
   return (
@@ -112,16 +108,12 @@ export default function EntryDetailScreen() {
           disabled={!viewerSource}
           accessibilityRole="imagebutton"
           accessibilityLabel={viewerSource ? t('history.detail.photoA11y', { name }) : name}>
-          {photo.kind === 'own' ? (
-            <Image source={{ uri: photo.uri }} style={styles.hero} contentFit="cover" />
-          ) : (
-            <ImageWithFallback
-              source={photo.kind === 'recipe' ? RECIPE_IMAGES[photo.imageKey] : undefined}
-              fallbackIcon={MEAL_ICONS[log.mealType]}
-              style={styles.hero}
-              iconSize={72}
-            />
-          )}
+          <ImageWithFallback
+            source={heroSource}
+            fallbackIcon={MEAL_ICONS[log.mealType]}
+            style={styles.hero}
+            iconSize={72}
+          />
         </Pressable>
 
         <View style={styles.section}>

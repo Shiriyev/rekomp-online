@@ -5,7 +5,9 @@
  */
 import { ZodError } from 'zod';
 
+import { backfillRecipePhotos } from '../logicalDay';
 import { createRepositories, type Repositories } from '../repositories';
+import { appMeta } from '../schema';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
@@ -96,5 +98,45 @@ describe('photo cleanup bookkeeping', () => {
     expect(repos.settings.getPhotoCleanupAt()).toBeNull();
     repos.settings.setPhotoCleanupAt(NOW);
     expect(repos.settings.getPhotoCleanupAt()).toBe(NOW);
+  });
+});
+
+describe('dish photo', () => {
+  const DISH = 'file:///data/user/0/com.tmstart.rekomp/files/meal-photos/dish.jpg';
+
+  it('sets and clears the recipe photo, returning the previous one', () => {
+    expect(repos.recipes.setPhoto('Z1', DISH)).toBeNull();
+    expect(repos.recipes.getDetail('Z1')?.recipe.photoUri).toBe(DISH);
+    expect(repos.recipes.setPhoto('Z1', null)).toBe(DISH);
+    expect(() => repos.recipes.setPhoto('ZZ', DISH)).toThrow('Recipe not found');
+  });
+
+  it('keeps the file referenced so the sweep and releases never delete it', () => {
+    repos.recipes.setPhoto('Z1', DISH);
+    expect(repos.logs.isPhotoReferenced(DISH)).toBe(true);
+    expect(repos.logs.photoUris()).toContain(DISH);
+  });
+
+  it('survives a seed re-sync', () => {
+    repos.recipes.setPhoto('Z1', DISH);
+    db.delete(appMeta).run();
+    runSeed(db);
+    expect(repos.recipes.getDetail('Z1')?.recipe.photoUri).toBe(DISH);
+  });
+});
+
+describe('backfillRecipePhotos', () => {
+  it('gives a dish the newest photo of its entries, once', () => {
+    const a = repos.cook.quickEat('P4', 1, {}, 'snack', NOW);
+    const b = repos.cook.quickEat('P4', 1, {}, 'snack', NOW + 1000);
+    repos.logs.setPhoto(a.logId!, 'file:///x/old.jpg');
+    repos.logs.setPhoto(b.logId!, 'file:///x/new.jpg');
+    repos.recipes.setPhoto('Z1', 'file:///x/mine.jpg');
+
+    expect(backfillRecipePhotos(db)).toBe(1);
+    expect(repos.recipes.getDetail('P4')?.recipe.photoUri).toBe('file:///x/new.jpg');
+    // A dish with its own photo keeps it; the step does not run twice.
+    expect(repos.recipes.getDetail('Z1')?.recipe.photoUri).toBe('file:///x/mine.jpg');
+    expect(backfillRecipePhotos(db)).toBeNull();
   });
 });

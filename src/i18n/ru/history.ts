@@ -34,6 +34,7 @@ export const history = {
     },
     photoA11y: 'Фото: {{name}}. Открыть на весь экран',
     photoRemoved: 'Фото удалено',
+    photoForDish: 'Фото сохранено — теперь это фото блюда',
     photoReplaced: 'Фото заменено',
     servings: 'Порций: {{value}}',
     cooked: 'приготовлено {{count}}',

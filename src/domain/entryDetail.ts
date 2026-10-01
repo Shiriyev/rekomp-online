@@ -1,21 +1,6 @@
 import { addDays } from './dates';
 import { deviceTimeZone, getLogicalDate } from './day';
 
-export type EntryPhoto =
-  { kind: 'own'; uri: string } | { kind: 'recipe'; imageKey: string } | { kind: 'none' };
-
-/** Own photo wins over the recipe picture; otherwise a placeholder. */
-export function entryPhoto(
-  log: { photoUri: string | null },
-  recipeImageKey: string | null | undefined,
-  hasImage: (key: string) => boolean,
-): EntryPhoto {
-  if (log.photoUri) return { kind: 'own', uri: log.photoUri };
-  if (recipeImageKey && hasImage(recipeImageKey))
-    return { kind: 'recipe', imageKey: recipeImageKey };
-  return { kind: 'none' };
-}
-
 /** «7:05», «07:05», «7.05» → { hour, minute }; null when not a valid time. */
 export function parseTimeOfDay(input: string): { hour: number; minute: number } | null {
   const m = /^(\d{1,2})[:.](\d{2})$/.exec(input.trim());

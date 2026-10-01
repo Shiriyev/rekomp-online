@@ -84,6 +84,8 @@ export const recipes = sqliteTable('recipes', {
   prepNightBefore: integer('prep_night_before', { mode: 'boolean' }).notNull().default(false),
   totalMinutes: integer('total_minutes').notNull(),
   imageKey: text('image_key'),
+  /** The user's own photo of the dish (documents/meal-photos); replaces the bundled one. */
+  photoUri: text('photo_uri'),
   tags: text('tags', { mode: 'json' })
     .$type<string[]>()
     .notNull()

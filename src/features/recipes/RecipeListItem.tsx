@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
-import { RECIPE_IMAGES } from '@/features/images';
 import type { Recipe } from '@/db/schema';
 import type { CookCheck } from '@/domain/pantry';
 import type { Macros } from '@/domain/types';
@@ -13,6 +12,7 @@ import { formatInt, formatKcal } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
+import { recipeImage } from './recipeImage';
 import { StatusBadge } from './StatusBadge';
 
 type Props = { recipe: Recipe; macros: Macros; check: CookCheck; kcalLeftToday: number };
@@ -36,7 +36,7 @@ export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) 
       })}>
       <View style={styles.row}>
         <ImageWithFallback
-          source={recipe.imageKey ? RECIPE_IMAGES[recipe.imageKey] : undefined}
+          source={recipeImage(recipe)}
           fallbackIcon={MEAL_ICONS[recipe.mealType]}
           style={styles.image}
           iconSize={32}

@@ -11,6 +11,7 @@ import m0006 from './0006_meal_photo.sql';
 import m0007 from './0007_meal_log_pantry_delta.sql';
 import m0008 from './0008_ingredient_last_added.sql';
 import m0009 from './0009_recipe_amounts.sql';
+import m0010 from './0010_recipe_photo.sql';
 
 export default {
   journal,
@@ -25,5 +26,6 @@ export default {
     m0007,
     m0008,
     m0009,
+    m0010,
   },
 };

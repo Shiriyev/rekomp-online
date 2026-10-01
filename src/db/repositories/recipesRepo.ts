@@ -1,6 +1,7 @@
 import { asc, eq, inArray } from 'drizzle-orm';
 
 import { sanitizeAmounts } from '../../domain/recipeDraft';
+import { photoUriSchema } from '../../domain/schemas';
 import type { MealType } from '../../domain/types';
 import {
   recipeCustomAmounts,
@@ -94,6 +95,17 @@ export function createRecipesRepo(db: AppDb) {
         tx.delete(recipeCustomAmounts).where(eq(recipeCustomAmounts.recipeId, recipeId)).run();
         if (rows.length > 0) tx.insert(recipeCustomAmounts).values(rows).run();
         return rows.length;
+      });
+    },
+
+    /** Sets or clears the dish's own photo; returns the previous one (to delete its file). */
+    setPhoto(recipeId: string, photoUri: string | null): string | null {
+      const uri = photoUriSchema.parse(photoUri);
+      return db.transaction((tx) => {
+        const current = tx.select().from(recipes).where(eq(recipes.id, recipeId)).get();
+        if (!current) throw new Error(`Recipe not found: ${recipeId}`);
+        tx.update(recipes).set({ photoUri: uri }).where(eq(recipes.id, recipeId)).run();
+        return current.photoUri;
       });
     },
 

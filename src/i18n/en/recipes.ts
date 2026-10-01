@@ -18,6 +18,12 @@ export const recipes: Messages<typeof ru> = {
     missing: '{{count}} missing',
   },
   card: {
+    photoCamera: 'Take a photo of the dish',
+    photoGallery: 'Dish photo from the gallery',
+    photoOriginal: 'Restore the original photo',
+    photoUpdated: 'Dish photo updated',
+    photoRestored: 'Original photo restored',
+    photoDenied: 'No access to the camera or gallery — allow it in settings.',
     notFound: 'Dish not found',
     minutes: '{{minutes}} min',
     nightBefore: 'Night before',

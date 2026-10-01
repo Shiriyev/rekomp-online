@@ -1,25 +1,10 @@
 import {
-  entryPhoto,
   isAllowedEntryTime,
   joinDateTime,
   parseTimeOfDay,
   shiftDate,
   splitTimestamp,
 } from '../entryDetail';
-
-describe('entryPhoto', () => {
-  const has = (key: string) => key === 'z1';
-
-  it('prefers the own photo, then the recipe picture, then a placeholder', () => {
-    expect(entryPhoto({ photoUri: 'file:///a.jpg' }, 'z1', has)).toEqual({
-      kind: 'own',
-      uri: 'file:///a.jpg',
-    });
-    expect(entryPhoto({ photoUri: null }, 'z1', has)).toEqual({ kind: 'recipe', imageKey: 'z1' });
-    expect(entryPhoto({ photoUri: null }, 'zz', has)).toEqual({ kind: 'none' });
-    expect(entryPhoto({ photoUri: null }, null, has)).toEqual({ kind: 'none' });
-  });
-});
 
 describe('parseTimeOfDay', () => {
   it('accepts common spellings', () => {

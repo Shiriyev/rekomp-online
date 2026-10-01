@@ -36,6 +36,7 @@ export const history: Messages<typeof ru> = {
     },
     photoA11y: 'Photo: {{name}}. Open full screen',
     photoRemoved: 'Photo removed',
+    photoForDish: 'Photo saved — it is now the photo of this dish',
     photoReplaced: 'Photo replaced',
     servings: 'Servings: {{value}}',
     cooked: '{{count}} cooked',

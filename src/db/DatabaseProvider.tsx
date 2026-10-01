@@ -9,7 +9,7 @@ import { darkTheme, lightTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 
 import { db } from './client';
-import { runDataMigrations } from './logicalDay';
+import { backfillRecipePhotos, runDataMigrations } from './logicalDay';
 import migrations from './migrations/migrations';
 import { runSeed } from './seed/runSeed';
 
@@ -25,6 +25,7 @@ function ensureSeeded() {
     try {
       runSeed(db);
       runDataMigrations(db);
+      backfillRecipePhotos(db);
       seedOutcome = { ok: true };
     } catch (error) {
       seedOutcome = { ok: false, error };

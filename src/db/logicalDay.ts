@@ -1,7 +1,7 @@
-import { eq } from 'drizzle-orm';
+import { and, desc, eq, isNotNull, isNull } from 'drizzle-orm';
 
 import { DEFAULT_DAY_START_HOUR, deviceTimeZone, getLogicalDate } from '../domain/day';
-import { appMeta, mealLogs, profile } from './schema';
+import { appMeta, mealLogs, profile, recipes } from './schema';
 import type { AppDb } from './types';
 
 /** The user's day start hour (default before onboarding). */
@@ -58,5 +58,40 @@ export function runDataMigrations(db: AppDb): number | null {
     const moved = recomputeLocalDates(tx, dayStartHourOf(tx));
     tx.insert(appMeta).values({ key: LOGICAL_DAY_MIGRATION_KEY, value: '1' }).run();
     return moved;
+  });
+}
+
+/** app_meta marker: dish photos were filled from photos already added to diary entries. */
+export const RECIPE_PHOTO_BACKFILL_KEY = 'recipe_photo_backfill';
+
+/**
+ * One-time: a dish without its own photo takes the newest photo the user added to one of its
+ * diary entries (before v1.1 such photos stayed on the entry). Returns how many dishes got one,
+ * or null when already applied.
+ */
+export function backfillRecipePhotos(db: AppDb): number | null {
+  return db.transaction((tx) => {
+    const done = tx.select().from(appMeta).where(eq(appMeta.key, RECIPE_PHOTO_BACKFILL_KEY)).get();
+    if (done) return null;
+    let filled = 0;
+    const withoutPhoto = tx
+      .select({ id: recipes.id })
+      .from(recipes)
+      .where(isNull(recipes.photoUri))
+      .all();
+    for (const { id } of withoutPhoto) {
+      const latest = tx
+        .select({ uri: mealLogs.photoUri })
+        .from(mealLogs)
+        .where(and(eq(mealLogs.recipeId, id), isNotNull(mealLogs.photoUri)))
+        .orderBy(desc(mealLogs.timestamp))
+        .limit(1)
+        .get();
+      if (!latest?.uri) continue;
+      tx.update(recipes).set({ photoUri: latest.uri }).where(eq(recipes.id, id)).run();
+      filled++;
+    }
+    tx.insert(appMeta).values({ key: RECIPE_PHOTO_BACKFILL_KEY, value: '1' }).run();
+    return filled;
   });
 }

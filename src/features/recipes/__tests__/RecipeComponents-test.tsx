@@ -112,6 +112,7 @@ describe('RecipeListItem', () => {
     prepNightBefore: false,
     totalMinutes: 2,
     imageKey: null,
+    photoUri: null,
     tags: [],
     sortOrder: 0,
   };

@@ -16,6 +16,12 @@ export const recipes = {
     missing: 'Не хватает {{count}}',
   },
   card: {
+    photoCamera: 'Сфотографировать блюдо',
+    photoGallery: 'Фото блюда из галереи',
+    photoOriginal: 'Вернуть исходное фото',
+    photoUpdated: 'Фото блюда обновлено',
+    photoRestored: 'Вернули исходное фото',
+    photoDenied: 'Нет доступа к камере или галерее — разреши в настройках.',
     notFound: 'Блюдо не найдено',
     minutes: '{{minutes}} мин',
     nightBefore: 'С вечера',
