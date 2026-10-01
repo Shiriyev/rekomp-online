@@ -9,9 +9,11 @@ import { z } from 'zod';
 import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
 import { searchIngredients } from '@/domain/search';
-import { INGREDIENT_CATEGORIES, UNITS, type Unit } from '@/domain/types';
+import { INGREDIENT_CATEGORIES, UNITS } from '@/domain/types';
 import { numberText, optionalNumberText } from '@/features/forms/numberText';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
+import { currentLocale, useT, useTranslateMessage, useUnitLabel } from '@/i18n';
+import { content as contentNames, useContent } from '@/i18n/content';
 import { formatAmount, formatDecimal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
@@ -31,13 +33,12 @@ type Props = {
   onSubmit: (ingredient: Ingredient, amount: number) => void;
 };
 
-const UNIT_LABELS: Record<Unit, string> = { g: 'г', ml: 'мл', pcs: 'шт' };
 const MAX_RESULTS = 30;
 
 const amountSchema = z.object({ amount: numberText({ min: 0.5, max: 100_000 }) });
 
 const customSchema = z.object({
-  name: z.string().trim().min(1, 'Введите название').max(60),
+  name: z.string().trim().min(1, 'validation.required').max(60, 'validation.maxLength|60'),
   category: z.enum(INGREDIENT_CATEGORIES),
   unit: z.enum(UNITS),
   gramsPerPiece: optionalNumberText({ min: 1, max: 5000 }),
@@ -63,16 +64,22 @@ export function ProductPickerSheet({
   onSubmit,
 }: Props) {
   const theme = useAppTheme();
+  const t = useT();
+  const translate = useTranslateMessage();
+  const content = useContent();
+  const unitLabel = useUnitLabel();
   const [step, setStep] = useState<Step>({ kind: 'search' });
   const [query, setQuery] = useState('');
 
   const results = useMemo(
     () =>
       searchIngredients(
-        ingredients.filter((i) => !i.isStaple),
+        ingredients
+          .filter((i) => !i.isStaple)
+          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
         query,
       ).slice(0, MAX_RESULTS),
-    [ingredients, query],
+    [ingredients, query, content],
   );
 
   const amountForm = useForm<z.input<typeof amountSchema>, unknown, z.output<typeof amountSchema>>({
@@ -121,8 +128,8 @@ export function ProductPickerSheet({
           </Text>
           <TextInput
             mode="outlined"
-            label="Поиск: творог, túró…"
-            accessibilityLabel="Поиск продукта"
+            label={t('pantry.picker.search')}
+            accessibilityLabel={t('pantry.picker.searchLabel')}
             value={query}
             onChangeText={setQuery}
             left={<TextInput.Icon icon="magnify" />}
@@ -133,7 +140,7 @@ export function ProductPickerSheet({
             {results.map((i) => (
               <List.Item
                 key={i.id}
-                title={i.name}
+                title={content.ingredientName(i)}
                 description={[i.nameHu, describe?.(i)].filter(Boolean).join(' · ')}
                 left={(props) => <List.Icon {...props} icon={CATEGORY_ICONS[i.category]} />}
                 onPress={() => pick(i)}
@@ -142,7 +149,9 @@ export function ProductPickerSheet({
             ))}
           </View>
           <Button mode="outlined" icon="plus" onPress={startCustom}>
-            {query.trim() ? `Новый продукт «${query.trim()}»` : 'Новый продукт'}
+            {query.trim()
+              ? t('pantry.picker.newProductNamed', { name: query.trim() })
+              : t('pantry.picker.newProduct')}
           </Button>
         </>
       ) : null}
@@ -150,7 +159,7 @@ export function ProductPickerSheet({
       {step.kind === 'amount' ? (
         <>
           <Text variant="titleLarge" accessibilityRole="header">
-            {step.ingredient.name}
+            {content.ingredientName(step.ingredient)}
           </Text>
           <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
             {amountHint}
@@ -158,12 +167,12 @@ export function ProductPickerSheet({
           <NumberField
             control={amountForm.control}
             name="amount"
-            label="Количество"
-            suffix={UNIT_LABELS[step.ingredient.unit]}
+            label={t('pantry.picker.amount')}
+            suffix={unitLabel(step.ingredient.unit)}
             render={sheetInput}
           />
           <View style={styles.row}>
-            <Button onPress={() => setStep({ kind: 'search' })}>Назад</Button>
+            <Button onPress={() => setStep({ kind: 'search' })}>{t('common.actions.back')}</Button>
             <Button
               mode="contained"
               style={styles.flex}
@@ -179,7 +188,7 @@ export function ProductPickerSheet({
       {step.kind === 'custom' ? (
         <>
           <Text variant="titleLarge" accessibilityRole="header">
-            Новый продукт
+            {t('pantry.picker.newProduct')}
           </Text>
           <Controller
             control={customForm.control}
@@ -188,8 +197,8 @@ export function ProductPickerSheet({
               <View>
                 <TextInput
                   mode="outlined"
-                  label="Название"
-                  accessibilityLabel="Название"
+                  label={t('bulkAdd.newProductForm.name')}
+                  accessibilityLabel={t('bulkAdd.newProductForm.name')}
                   value={field.value}
                   onChangeText={field.onChange}
                   error={!!fieldState.error}
@@ -197,7 +206,7 @@ export function ProductPickerSheet({
                 />
                 {fieldState.error ? (
                   <HelperText type="error" padding="none">
-                    {fieldState.error.message}
+                    {translate(fieldState.error.message)}
                   </HelperText>
                 ) : null}
               </View>
@@ -229,9 +238,9 @@ export function ProductPickerSheet({
                 value={field.value}
                 onValueChange={field.onChange}
                 buttons={[
-                  { value: 'g', label: 'Граммы' },
-                  { value: 'ml', label: 'Мл' },
-                  { value: 'pcs', label: 'Штуки' },
+                  { value: 'g', label: t('bulkAdd.newProductForm.grams') },
+                  { value: 'ml', label: t('bulkAdd.newProductForm.ml') },
+                  { value: 'pcs', label: t('bulkAdd.newProductForm.pieces') },
                 ]}
               />
             )}
@@ -240,8 +249,8 @@ export function ProductPickerSheet({
             <NumberField
               control={customForm.control}
               name="gramsPerPiece"
-              label="Вес 1 шт"
-              suffix="г"
+              label={t('bulkAdd.newProductForm.pieceWeight')}
+              suffix={unitLabel('g')}
               render={sheetInput}
             />
           ) : null}
@@ -249,39 +258,41 @@ export function ProductPickerSheet({
             <NumberField
               control={customForm.control}
               name="kcalPer100g"
-              label="Ккал / 100 г"
+              label={t('bulkAdd.newProductForm.kcal')}
               render={sheetInput}
             />
             <NumberField
               control={customForm.control}
               name="proteinPer100g"
-              label="Белок / 100 г"
+              label={t('bulkAdd.newProductForm.protein')}
               render={sheetInput}
             />
           </View>
           <NumberField
             control={customForm.control}
             name="amount"
-            label="Количество"
-            suffix={UNIT_LABELS[customUnit ?? 'g']}
+            label={t('pantry.picker.amount')}
+            suffix={unitLabel(customUnit ?? 'g')}
             render={sheetInput}
           />
           <View style={styles.row}>
-            <Button onPress={() => setStep({ kind: 'search' })}>Назад</Button>
+            <Button onPress={() => setStep({ kind: 'search' })}>{t('common.actions.back')}</Button>
             <Button
               mode="contained"
               style={styles.flex}
               onPress={() =>
                 customForm.handleSubmit(({ amount, ...values }) => {
                   if (values.unit === 'pcs' && values.gramsPerPiece === null) {
-                    customForm.setError('gramsPerPiece', { message: 'Укажите вес одной штуки' });
+                    customForm.setError('gramsPerPiece', { message: 'validation.pieceWeight' });
                     return;
                   }
                   const created = repositories.ingredients.createCustom(values);
                   add(created, amount);
                 })()
               }>
-              Создать: {submitLabel.toLocaleLowerCase('ru-RU')}
+              {t('pantry.picker.create', {
+                action: submitLabel.toLocaleLowerCase(currentLocale()),
+              })}
             </Button>
           </View>
         </>
@@ -292,7 +303,7 @@ export function ProductPickerSheet({
 
 /** «Творог 350 г» style label used across the tab. */
 export const stockLabel = (i: Ingredient, quantity: number) =>
-  `${i.name} ${formatAmount(quantity, i.unit)}`;
+  `${contentNames.ingredientName(i)} ${formatAmount(quantity, i.unit)}`;
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },

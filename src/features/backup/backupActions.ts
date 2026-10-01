@@ -13,6 +13,7 @@ import {
   type Backup,
 } from '@/db/backup';
 import { useCookStore } from '@/features/cooking/cookStore';
+import { t } from '@/i18n';
 
 /** Writes the backup to the cache and opens the system share sheet (Drive, Telegram, files…). */
 export async function exportAndShare(): Promise<void> {
@@ -20,11 +21,11 @@ export async function exportAndShare(): Promise<void> {
   const file = new File(Paths.cache, backupFileName());
   file.create({ overwrite: true });
   file.write(JSON.stringify(backup));
-  if (!(await Sharing.isAvailableAsync()))
-    throw new Error('Отправка файлов недоступна на этом устройстве');
+  // Message keys are rendered with translateMessage where the error is shown.
+  if (!(await Sharing.isAvailableAsync())) throw new Error('errors.backup.shareUnavailable');
   await Sharing.shareAsync(file.uri, {
     mimeType: 'application/json',
-    dialogTitle: 'Бэкап «Рекомп»',
+    dialogTitle: t('backup.shareTitle'),
   });
 }
 
@@ -44,7 +45,7 @@ export async function pickBackup(): Promise<PickedBackup | null> {
   try {
     raw = JSON.parse(await new File(asset.uri).text());
   } catch {
-    throw new BackupFormatError('Файл не читается как JSON');
+    throw new BackupFormatError('errors.backup.notJson');
   }
   const backup = parseBackup(raw);
   return { backup, entries: backup.tables.meal_logs.length };

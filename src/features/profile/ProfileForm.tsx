@@ -14,10 +14,10 @@ import { isBelowFloor } from '@/domain/calculator';
 import { parseDecimal, PROFILE_LIMITS, type ProfileInput } from '@/domain/schemas';
 import { SEXES, type GoalRate } from '@/domain/types';
 import { spacing, useAppTheme } from '@/theme';
-import { useTranslateMessage } from '@/i18n';
+import { useT, useTranslateMessage } from '@/i18n';
 import { NumberField } from '@/ui/NumberField';
 
-import { ACTIVITY_OPTIONS, GOAL_OPTIONS, SEX_LABELS } from './labels';
+import { activityOptions, goalOptions, sexLabel } from './labels';
 import { profileFormSchema, type ProfileFormValues } from './profileFormSchema';
 import { TargetsPreview } from './TargetsPreview';
 
@@ -32,7 +32,10 @@ const inRange = (n: number, { min, max }: { min: number; max: number }) => n >= 
 
 export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const translate = useTranslateMessage();
+  const activities = activityOptions();
+  const goals = goalOptions();
   const { control, handleSubmit, formState } = useForm<ProfileFormValues, unknown, ProfileInput>({
     defaultValues,
     resolver: zodResolver(profileFormSchema),
@@ -61,7 +64,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         {header}
 
-        <Section title="О тебе">
+        <Section title={t('profile.form.about')}>
           <Controller
             control={control}
             name="sex"
@@ -70,7 +73,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
                 <SegmentedButtons
                   value={field.value}
                   onValueChange={field.onChange}
-                  buttons={SEXES.map((s) => ({ value: s, label: SEX_LABELS[s] }))}
+                  buttons={SEXES.map((s) => ({ value: s, label: sexLabel(s) }))}
                 />
                 {fieldState.error ? (
                   <HelperText type="error" padding="none">
@@ -81,19 +84,35 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
             )}
           />
           <View style={styles.row}>
-            <NumberField control={control} name="age" label="Возраст" suffix="лет" integer />
-            <NumberField control={control} name="heightCm" label="Рост" suffix="см" />
-            <NumberField control={control} name="weightKg" label="Вес" suffix="кг" />
+            <NumberField
+              control={control}
+              name="age"
+              label={t('profile.form.age')}
+              suffix={t('profile.form.ageSuffix')}
+              integer
+            />
+            <NumberField
+              control={control}
+              name="heightCm"
+              label={t('profile.form.height')}
+              suffix={t('profile.form.heightSuffix')}
+            />
+            <NumberField
+              control={control}
+              name="weightKg"
+              label={t('profile.form.weight')}
+              suffix={t('profile.form.weightSuffix')}
+            />
           </View>
         </Section>
 
-        <Section title="Активность">
+        <Section title={t('profile.form.activity')}>
           <Controller
             control={control}
             name="activityLevel"
             render={({ field, fieldState }) => (
               <RadioButton.Group value={field.value ?? ''} onValueChange={field.onChange}>
-                {ACTIVITY_OPTIONS.map((o) => (
+                {activities.map((o) => (
                   <TouchableRipple
                     key={o.value}
                     onPress={() => field.onChange(o.value)}
@@ -127,7 +146,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
           />
         </Section>
 
-        <Section title="Темп, кг в неделю">
+        <Section title={t('profile.form.rate')}>
           <Controller
             control={control}
             name="goalRate"
@@ -136,21 +155,24 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
                 <SegmentedButtons
                   value={field.value}
                   onValueChange={field.onChange}
-                  buttons={GOAL_OPTIONS.map((o) => ({
+                  buttons={goals.map((o) => ({
                     value: String(o.value),
                     label: o.label,
-                    accessibilityLabel: `${o.label} кг в неделю, ${o.description}`,
+                    accessibilityLabel: t('profile.form.rateA11y', {
+                      rate: o.label,
+                      description: o.description,
+                    }),
                   }))}
                 />
                 <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                  {GOAL_OPTIONS.find((o) => String(o.value) === field.value)?.description}
+                  {goals.find((o) => String(o.value) === field.value)?.description}
                 </Text>
               </>
             )}
           />
         </Section>
 
-        <Section title="Цели">
+        <Section title={t('profile.form.targets')}>
           <Controller
             control={control}
             name="mode"
@@ -159,8 +181,8 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
                 value={field.value}
                 onValueChange={field.onChange}
                 buttons={[
-                  { value: 'calculate', label: 'Рассчитать' },
-                  { value: 'manual', label: 'Свои значения' },
+                  { value: 'calculate', label: t('profile.form.calculate') },
+                  { value: 'manual', label: t('profile.form.manual') },
                 ]}
               />
             )}
@@ -170,30 +192,29 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
               <NumberField
                 control={control}
                 name="kcalTarget"
-                label="Калории"
-                suffix="ккал"
+                label={t('profile.form.kcal')}
+                suffix={t('common.kcal')}
                 integer
               />
               <View style={styles.row}>
                 <NumberField
                   control={control}
                   name="proteinTargetG"
-                  label="Белок, цель"
-                  suffix="г"
+                  label={t('profile.form.proteinTarget')}
+                  suffix={t('common.grams')}
                   integer
                 />
                 <NumberField
                   control={control}
                   name="proteinMinG"
-                  label="Белок, минимум"
-                  suffix="г"
+                  label={t('profile.form.proteinMin')}
+                  suffix={t('common.grams')}
                   integer
                 />
               </View>
               {validBody && Number.isFinite(manualKcal) && isBelowFloor(manualKcal, validBody) ? (
                 <Text variant="bodyMedium" style={{ color: theme.colors.warning }}>
-                  Это ниже безопасного минимума для твоих данных. Так можно, но долго держать такую
-                  цель не стоит.
+                  {t('profile.form.belowFloor')}
                 </Text>
               ) : null}
             </>
@@ -205,7 +226,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
             />
           ) : (
             <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-              Заполни данные и активность — здесь появится расчёт.
+              {t('profile.form.fillFirst')}
             </Text>
           )}
         </Section>

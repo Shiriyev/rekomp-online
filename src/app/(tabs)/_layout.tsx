@@ -3,19 +3,21 @@ import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { ComponentProps } from 'react';
 
+import { useT } from '@/i18n';
 import { useAppTheme } from '@/theme';
 
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
-const TABS: { name: string; title: string; icon: IconName }[] = [
-  { name: 'index', title: 'Сегодня', icon: 'silverware-fork-knife' },
-  { name: 'pantry', title: 'Продукты', icon: 'fridge-outline' },
-  { name: 'history', title: 'История', icon: 'chart-timeline-variant' },
-  { name: 'profile', title: 'Профиль', icon: 'account-circle-outline' },
+const TABS: { name: string; key: 'today' | 'pantry' | 'history' | 'profile'; icon: IconName }[] = [
+  { name: 'index', key: 'today', icon: 'silverware-fork-knife' },
+  { name: 'pantry', key: 'pantry', icon: 'fridge-outline' },
+  { name: 'history', key: 'history', icon: 'chart-timeline-variant' },
+  { name: 'profile', key: 'profile', icon: 'account-circle-outline' },
 ];
 
 export default function TabsLayout() {
   const theme = useAppTheme();
+  const t = useT();
   const insets = useSafeAreaInsets();
   // With the system navigation bar hidden the inset is 0, so the bar would sit on the very edge
   // of the screen (gesture area); keep a comfortable margin either way.
@@ -41,8 +43,8 @@ export default function TabsLayout() {
           key={tab.name}
           name={tab.name}
           options={{
-            title: tab.title,
-            tabBarAccessibilityLabel: tab.title,
+            title: t(`nav.tabs.${tab.key}`),
+            tabBarAccessibilityLabel: t(`nav.tabs.${tab.key}`),
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name={tab.icon} color={color} size={size} />
             ),

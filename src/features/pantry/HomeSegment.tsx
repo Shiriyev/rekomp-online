@@ -13,6 +13,8 @@ import { quantityStep } from '@/domain/units';
 import { INGREDIENT_IMAGES } from '@/features/images';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { showUndo } from '@/features/undo/undoStore';
+import { currentLocale, useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -29,6 +31,8 @@ type Row =
 
 export function HomeSegment() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const items = usePantryItems();
   const ingredients = useIngredientsMap();
   const editRef = useRef<PantryItemSheetHandle>(null);
@@ -41,14 +45,18 @@ export function HomeSegment() {
     return INGREDIENT_CATEGORIES.flatMap((category) => {
       const inCategory = joined
         .filter((j) => j.ingredient.category === category)
-        .sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name, 'ru'));
+        .sort((a, b) =>
+          content
+            .ingredientName(a.ingredient)
+            .localeCompare(content.ingredientName(b.ingredient), currentLocale()),
+        );
       if (inCategory.length === 0) return [];
       return [
         { type: 'header' as const, key: `h:${category}`, title: CATEGORY_LABELS[category] },
         ...inCategory.map((j) => ({ type: 'item' as const, key: j.ingredient.id, ...j })),
       ];
     });
-  }, [items, ingredients]);
+  }, [items, ingredients, content]);
 
   const openBulkAdd = () => {
     useBulkAddStore.getState().start('home');
@@ -57,7 +65,7 @@ export function HomeSegment() {
 
   const remove = (ingredient: Ingredient, quantity: number) => {
     repositories.pantry.remove(ingredient.id);
-    showUndo(`Убрано: ${ingredient.name}`, () =>
+    showUndo(t('pantry.home.removed', { name: content.ingredientName(ingredient) }), () =>
       repositories.pantry.setQuantity(ingredient.id, quantity),
     );
   };
@@ -67,9 +75,9 @@ export function HomeSegment() {
       {rows.length === 0 ? (
         <EmptyState
           icon="fridge-outline"
-          title="Дома пока пусто"
-          description="Добавь продукты — и блюда покажут, что можно приготовить."
-          actionLabel="Добавить продукт"
+          title={t('pantry.home.emptyTitle')}
+          description={t('pantry.home.emptyDescription')}
+          actionLabel={t('pantry.home.emptyAction')}
           onAction={openBulkAdd}
         />
       ) : (
@@ -97,7 +105,7 @@ export function HomeSegment() {
                 <TouchableRipple
                   onPress={() => editRef.current?.open(ingredient, quantity)}
                   style={{ backgroundColor: theme.colors.background }}
-                  accessibilityHint="Изменить количество и КБЖУ">
+                  accessibilityHint={t('pantry.home.editHint')}>
                   <View style={styles.row}>
                     <ImageWithFallback
                       source={
@@ -108,15 +116,15 @@ export function HomeSegment() {
                       iconSize={22}
                     />
                     <View style={styles.flex}>
-                      <Text variant="bodyLarge">{ingredient.name}</Text>
+                      <Text variant="bodyLarge">{content.ingredientName(ingredient)}</Text>
                       {low ? (
                         <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
-                          {quantity === 0 ? 'закончилось' : 'заканчивается'}
+                          {quantity === 0 ? t('pantry.home.outOfStock') : t('pantry.home.lowStock')}
                         </Text>
                       ) : null}
                     </View>
                     <QuantityStepper
-                      label={ingredient.name}
+                      label={content.ingredientName(ingredient)}
                       valueText={formatAmount(quantity, ingredient.unit)}
                       decrementDisabled={quantity <= 0}
                       onDecrement={() => repositories.pantry.adjust(ingredient.id, -step)}
@@ -132,10 +140,10 @@ export function HomeSegment() {
 
       <FAB
         icon="plus"
-        label="Продукт"
+        label={t('pantry.home.fab')}
         style={styles.fab}
         onPress={openBulkAdd}
-        accessibilityLabel="Добавить продукты"
+        accessibilityLabel={t('pantry.home.fabLabel')}
       />
       <PantryItemSheet ref={editRef} onRemove={remove} />
     </View>

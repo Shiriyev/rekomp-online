@@ -4,6 +4,7 @@ import { BarChart, LineChart } from 'react-native-gifted-charts';
 import { Card, SegmentedButtons, Text } from 'react-native-paper';
 
 import { averageOfLogged, type DayPoint } from '@/domain/history';
+import { useT } from '@/i18n';
 import { formatDayMonth, formatDecimal, formatInt } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
@@ -19,6 +20,7 @@ type Metric = 'kcal' | 'protein';
 
 export function HistoryCharts({ week, month, today, targets, weights }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const { width } = useWindowDimensions();
   const [range, setRange] = useState<'7' | '30'>('7');
   const [metric, setMetric] = useState<Metric>('kcal');
@@ -58,8 +60,8 @@ export function HistoryCharts({ week, month, today, targets, weights }: Props) {
             density="small"
             style={styles.flex}
             buttons={[
-              { value: 'kcal', label: 'Ккал' },
-              { value: 'protein', label: 'Белок' },
+              { value: 'kcal', label: t('history.charts.kcal') },
+              { value: 'protein', label: t('history.charts.protein') },
             ]}
           />
           <SegmentedButtons
@@ -68,13 +70,15 @@ export function HistoryCharts({ week, month, today, targets, weights }: Props) {
             density="small"
             style={styles.flex}
             buttons={[
-              { value: '7', label: '7 дн.' },
-              { value: '30', label: '30 дн.' },
+              { value: '7', label: t('history.charts.range7') },
+              { value: '30', label: t('history.charts.range30') },
             ]}
           />
         </View>
 
-        <View accessible accessibilityLabel={`График за ${range} дней, цель ${formatInt(target)}`}>
+        <View
+          accessible
+          accessibilityLabel={t('history.charts.a11y', { days: range, target: formatInt(target) })}>
           <BarChart
             data={data}
             width={chartWidth}
@@ -106,17 +110,22 @@ export function HistoryCharts({ week, month, today, targets, weights }: Props) {
 
         <Text variant="bodyMedium">
           {avg
-            ? `Среднее за неделю (${avg.days} дн.): ${formatInt(avg.kcal)} ккал, ${formatInt(avg.protein)} г белка`
-            : 'Среднее появится после первого полного дня.'}
+            ? t('history.charts.average', {
+                days: avg.days,
+                kcal: formatInt(avg.kcal),
+                protein: formatInt(avg.protein),
+              })
+            : t('history.charts.averageEmpty')}
         </Text>
         <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-          Пунктир — цель ({formatInt(target)} {metric === 'kcal' ? 'ккал' : 'г'}). Сегодня — светлый
-          столбик.
+          {t(metric === 'kcal' ? 'history.charts.legendKcal' : 'history.charts.legendProtein', {
+            target: formatInt(target),
+          })}
         </Text>
 
         {weights.length >= 2 ? (
           <View style={styles.weight}>
-            <Text variant="titleSmall">Вес</Text>
+            <Text variant="titleSmall">{t('history.charts.weight')}</Text>
             <LineChart
               data={weights
                 .slice(-30)
@@ -137,8 +146,10 @@ export function HistoryCharts({ week, month, today, targets, weights }: Props) {
               disableScroll
             />
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-              {formatDecimal(weights[0]!.weightKg)} →{' '}
-              {formatDecimal(weights[weights.length - 1]!.weightKg)} кг
+              {t('history.charts.weightChange', {
+                from: formatDecimal(weights[0]!.weightKg),
+                to: formatDecimal(weights[weights.length - 1]!.weightKg),
+              })}
             </Text>
           </View>
         ) : null}

@@ -23,6 +23,8 @@ import { PortionsStrip } from '@/features/today/PortionsStrip';
 import { ProteinNudgeCard } from '@/features/today/ProteinNudgeCard';
 import { TodaySummaryCard } from '@/features/today/TodaySummaryCard';
 import { showUndo } from '@/features/undo/undoStore';
+import { t as translate, useT } from '@/i18n';
+import { content, useContent } from '@/i18n/content';
 import { useClock } from '@/lib/useClock';
 import { spacing } from '@/theme';
 import { SkeletonBlock } from '@/ui/Skeleton';
@@ -30,6 +32,8 @@ import { SkeletonBlock } from '@/ui/Skeleton';
 const STREAK_WINDOW_DAYS = 60;
 
 export default function TodayScreen() {
+  const t = useT();
+  const c = useContent();
   const { now, today } = useClock();
   const { profile } = useProfile();
   const logs = useDayLogs(today);
@@ -52,15 +56,19 @@ export default function TodayScreen() {
     () =>
       catalog.recipes
         .filter((r) => r.mealType === 'snack')
-        .map((r) => ({ id: r.id, name: r.name, protein: catalog.macros.get(r.id)?.protein ?? 0 }))
+        .map((r) => ({
+          id: r.id,
+          name: c.recipeName(r),
+          protein: catalog.macros.get(r.id)?.protein ?? 0,
+        }))
         .sort((a, b) => b.protein - a.protein)
         .slice(0, 2),
-    [catalog],
+    [catalog, c],
   );
 
   if (!profile || !catalog.isLoaded) {
     return (
-      <View style={styles.content} accessibilityLabel="Загрузка">
+      <View style={styles.content} accessibilityLabel={t('common.loading')}>
         <SkeletonBlock height={260} rounded={16} />
         <SkeletonBlock height={24} width="50%" />
         <SkeletonBlock height={180} rounded={16} />
@@ -73,7 +81,12 @@ export default function TodayScreen() {
 
   const eatPortion = (p: AvailablePortion) => {
     const log = repositories.portions.eat(p.id, mealNow);
-    showUndo(`Съедена порция: ${p.recipeName}`, () => repositories.logs.undo(log.id));
+    showUndo(
+      translate('today.portionEaten', {
+        name: content.recipeName({ id: p.recipeId, name: p.recipeName }),
+      }),
+      () => repositories.logs.undo(log.id),
+    );
   };
 
   return (
@@ -85,10 +98,10 @@ export default function TodayScreen() {
             onPress={() =>
               router.push({ pathname: '/cook/[id]', params: { id: activeCook.recipeId } })
             }
-            accessibilityHint="Вернуться к шагам рецепта">
+            accessibilityHint={t('today.continueCookingHint')}>
             <Card.Title
-              title="Продолжить готовку"
-              subtitle={activeCook.recipeName}
+              title={t('today.continueCooking')}
+              subtitle={c.recipeName({ id: activeCook.recipeId, name: activeCook.recipeName })}
               left={(props) => <Avatar.Icon {...props} icon="chef-hat" />}
             />
           </Card>
@@ -100,22 +113,22 @@ export default function TodayScreen() {
           <Chip
             icon="fire"
             style={styles.streak}
-            accessibilityLabel={`Белок в норме ${streak} дней подряд`}>
-            Белок в норме {streak} дн. подряд
+            accessibilityLabel={t('today.streak', { count: streak })}>
+            {t('today.streak', { count: streak })}
           </Chip>
         ) : null}
         {nudge !== null ? <ProteinNudgeCard grams={nudge} suggestions={snackSuggestions} /> : null}
         <PortionsStrip portions={portions} onEat={eatPortion} />
         <Text variant="titleMedium" accessibilityRole="header">
-          Что приготовить
+          {t('today.whatToCook')}
         </Text>
         <MealCategoryGrid kcalRanges={kcalRanges} coverImages={coverImages} />
       </ScrollView>
 
       <FAB
         icon="plus"
-        label="Добавить"
-        accessibilityLabel="Добавить вручную"
+        label={t('today.fab')}
+        accessibilityLabel={t('today.fabA11y')}
         style={styles.fab}
         onPress={() => router.push('/add-meal')}
       />

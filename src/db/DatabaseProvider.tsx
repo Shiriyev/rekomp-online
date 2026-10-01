@@ -4,6 +4,7 @@ import { useEffect, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 
+import { t } from '@/i18n';
 import { darkTheme, lightTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 
@@ -50,8 +51,8 @@ export function DatabaseProvider({ children }: { children: ReactNode }) {
       <PaperProvider theme={isDark ? darkTheme : lightTheme}>
         <EmptyState
           icon="database-alert-outline"
-          title="Не удалось открыть данные"
-          description="Перезапустите приложение. Если ошибка повторится — восстановите данные из бэкапа."
+          title={t('ui.database.errorTitle')}
+          description={t('ui.database.errorDescription')}
         />
       </PaperProvider>
     );

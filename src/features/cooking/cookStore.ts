@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { repositories } from '@/db';
 import type { ActiveSession, FinishOptions, FinishResult } from '@/db/repositories/cookRepo';
 import type { CookProgress, CookTimer } from '@/db/schema';
+import { t } from '@/i18n';
 import { endsAt, isDone, pauseTimer, remainingSec, resetTimer, startTimer } from '@/domain/cooking';
 
 import { cancelTimerNotification, scheduleTimerEnd } from './timerNotifications';
@@ -158,15 +159,17 @@ export const useCookStore = create<CookState>((set, get) => {
 
       const end = endsAt(started);
       if (end === null) return;
-      void scheduleTimerEnd('Таймер готов', label, (end - now) / 1000).then((notificationId) => {
-        // Keep the id only if this run is still the current one.
-        const current = get().progress.timers.find((t) => t.stepOrder === stepOrder);
-        if (current && current.startedAt === started.startedAt) {
-          updateTimer(stepOrder, (t) => (t ? { ...t, notificationId } : null));
-        } else {
-          void cancelTimerNotification(notificationId);
-        }
-      });
+      void scheduleTimerEnd(t('cooking.notification.title'), label, (end - now) / 1000).then(
+        (notificationId) => {
+          // Keep the id only if this run is still the current one.
+          const current = get().progress.timers.find((t) => t.stepOrder === stepOrder);
+          if (current && current.startedAt === started.startedAt) {
+            updateTimer(stepOrder, (t) => (t ? { ...t, notificationId } : null));
+          } else {
+            void cancelTimerNotification(notificationId);
+          }
+        },
+      );
     },
 
     pauseTimer: (stepOrder) => {

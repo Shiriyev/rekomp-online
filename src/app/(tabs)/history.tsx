@@ -12,6 +12,8 @@ import { DayCard } from '@/features/history/DayCard';
 import { DeleteEntryDialog } from '@/features/history/DeleteEntryDialog';
 import { planDelete, type DeletePlan } from '@/features/history/deleteEntry';
 import { HistoryCharts } from '@/features/history/HistoryCharts';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatDayLabel, formatInt, formatTime } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
@@ -20,6 +22,8 @@ import { SkeletonList } from '@/ui/Skeleton';
 
 export default function HistoryScreen() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const { today } = useClock();
   const yesterday = addDays(today, -1);
   const { profile } = useProfile();
@@ -71,21 +75,24 @@ export default function HistoryScreen() {
                 <Card.Content style={styles.latestRow}>
                   <View style={styles.flex}>
                     <Text variant="labelMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-                      Последняя запись · {formatTime(latest.timestamp)}
+                      {t('history.latest', { time: formatTime(latest.timestamp) })}
                     </Text>
                     <Text variant="bodyLarge" numberOfLines={1}>
-                      {latest.name} · {formatInt(latest.kcal)} ккал
+                      {t('history.latestLine', {
+                        name: content.entryName(latest),
+                        kcal: formatInt(latest.kcal),
+                      })}
                     </Text>
                   </View>
                   <Button mode="outlined" icon="undo" onPress={() => askDelete(latest)}>
-                    Отменить
+                    {t('common.actions.undo')}
                   </Button>
                 </Card.Content>
               </Card>
             ) : null}
           </View>
         }
-        ListEmptyComponent={<EmptyState icon="chart-timeline-variant" title="Пока нет записей" />}
+        ListEmptyComponent={<EmptyState icon="chart-timeline-variant" title={t('history.empty')} />}
         renderItem={({ item }) => (
           <DayCard
             label={formatDayLabel(item.localDate, today, yesterday)}

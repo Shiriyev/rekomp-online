@@ -3,6 +3,8 @@ import type { UndoPreview } from '@/db/repositories/cookRepo';
 import type { MealLog } from '@/db/schema';
 import { releasePhoto } from '@/features/photos/mealPhotos';
 import { showUndo } from '@/features/undo/undoStore';
+import { t } from '@/i18n';
+import { content } from '@/i18n/content';
 
 /** What the delete dialog should offer for an entry. */
 export type DeletePlan =
@@ -22,9 +24,7 @@ export function planDelete(log: MealLog): DeletePlan {
     kind: 'simple',
     log,
     message:
-      log.source === 'portion'
-        ? 'Порция вернётся в «Готовые порции».'
-        : 'Запись будет удалена из дневника.',
+      log.source === 'portion' ? t('history.delete.portionBack') : t('history.delete.fromDiary'),
   };
 }
 
@@ -35,9 +35,7 @@ const restoreLater =
     try {
       repositories.logs.restore(log, { productsReturned });
     } catch {
-      showUndo('Вернуть запись нельзя: порция уже съедена', undefined, () =>
-        releasePhoto(log.photoUri),
-      );
+      showUndo(t('history.delete.cannotRestore'), undefined, () => releasePhoto(log.photoUri));
     }
   };
 
@@ -49,7 +47,9 @@ export const deleteSimple = (log: MealLog) => {
   repositories.logs.undo(log.id);
   const returned = (log.pantryDelta?.length ?? 0) > 0;
   showUndo(
-    returned ? `Удалено, продукты вернулись домой: ${log.name}` : `Удалено: ${log.name}`,
+    t(returned ? 'history.delete.deletedReturned' : 'history.delete.deleted', {
+      name: content.entryName(log),
+    }),
     restoreLater(log, returned),
     releaseLater(log),
   );
@@ -60,7 +60,7 @@ export const deleteCookedWithProducts = (log: MealLog) => {
   if (!log.cookSessionId) return;
   const undone = repositories.cook.undo(log.cookSessionId);
   showUndo(
-    `Удалено, продукты вернулись домой: ${log.name}`,
+    t('history.delete.deletedReturned', { name: content.entryName(log) }),
     undone ? () => repositories.cook.redo(undone) : undefined,
     releaseLater(log),
   );
@@ -69,5 +69,9 @@ export const deleteCookedWithProducts = (log: MealLog) => {
 /** Deletes just the line: products stay deducted, portions stay in the fridge. */
 export const deleteEntryOnly = (log: MealLog) => {
   repositories.logs.removeEntryOnly(log.id);
-  showUndo(`Удалено: ${log.name}`, restoreLater(log), releaseLater(log));
+  showUndo(
+    t('history.delete.deleted', { name: content.entryName(log) }),
+    restoreLater(log),
+    releaseLater(log),
+  );
 };

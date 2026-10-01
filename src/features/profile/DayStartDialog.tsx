@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, RadioButton, Text } from 'react-native-paper';
 
 import { MAX_DAY_START_HOUR, MIN_DAY_START_HOUR } from '@/domain/day';
+import { useT } from '@/i18n';
 import { spacing } from '@/theme';
 
 type Props = {
@@ -21,32 +22,37 @@ export const dayStartLabel = (hour: number) => `${String(hour).padStart(2, '0')}
 
 /** Picks the hour the logical day starts; changing it re-files every entry after a confirm. */
 export function DayStartDialog({ current, onDismiss, onConfirm }: Props) {
+  const t = useT();
   const [hour, setHour] = useState(current);
   const [confirming, setConfirming] = useState(false);
 
   return (
     <Portal>
       <Dialog visible onDismiss={onDismiss}>
-        <Dialog.Title>{confirming ? 'Пересчитать записи?' : 'Когда начинается день'}</Dialog.Title>
+        <Dialog.Title>
+          {confirming
+            ? t('profile.dayStartDialog.confirmTitle')
+            : t('profile.dayStartDialog.title')}
+        </Dialog.Title>
         <Dialog.Content style={styles.content}>
           {confirming ? (
             <Text variant="bodyMedium">
-              Новый день будет начинаться в {dayStartLabel(hour)}. Все записи еды перераспределятся
-              по дням по этому правилу — итоги прошлых дней могут измениться.
+              {t('profile.dayStartDialog.confirmText', { time: dayStartLabel(hour) })}
             </Text>
           ) : (
             <>
-              <Text variant="bodyMedium">
-                Еда до этого часа считается во вчерашнем дне — поздний перекус после полуночи не
-                попадёт в завтра.
-              </Text>
+              <Text variant="bodyMedium">{t('profile.dayStartDialog.hint')}</Text>
               <ScrollView style={styles.list}>
                 <RadioButton.Group value={String(hour)} onValueChange={(v) => setHour(Number(v))}>
                   {HOURS.map((h) => (
                     <RadioButton.Item
                       key={h}
                       value={String(h)}
-                      label={h === 0 ? `${dayStartLabel(h)} (полночь)` : dayStartLabel(h)}
+                      label={
+                        h === 0
+                          ? t('profile.dayStartDialog.midnight', { time: dayStartLabel(h) })
+                          : dayStartLabel(h)
+                      }
                       style={styles.item}
                     />
                   ))}
@@ -57,13 +63,13 @@ export function DayStartDialog({ current, onDismiss, onConfirm }: Props) {
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={confirming ? () => setConfirming(false) : onDismiss}>
-            {confirming ? 'Назад' : 'Отмена'}
+            {confirming ? t('common.actions.back') : t('common.actions.cancel')}
           </Button>
           <Button
             mode="contained"
             disabled={!confirming && hour === current}
             onPress={() => (confirming ? onConfirm(hour) : setConfirming(true))}>
-            {confirming ? 'Пересчитать' : 'Далее'}
+            {confirming ? t('profile.recalculate') : t('common.actions.next')}
           </Button>
         </Dialog.Actions>
       </Dialog>

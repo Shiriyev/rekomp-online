@@ -1,6 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
 
+import { useT } from '@/i18n';
+
 type Props = {
   label: string;
   valueText: string;
@@ -17,6 +19,7 @@ export function QuantityStepper({
   onIncrement,
   decrementDisabled,
 }: Props) {
+  const t = useT();
   return (
     <View style={styles.row}>
       <IconButton
@@ -25,7 +28,7 @@ export function QuantityStepper({
         size={20}
         onPress={onDecrement}
         disabled={decrementDisabled}
-        accessibilityLabel={`Меньше: ${label}`}
+        accessibilityLabel={t('ui.stepper.decrement', { label })}
       />
       <Text variant="titleSmall" style={styles.value} accessibilityLiveRegion="polite">
         {valueText}
@@ -35,7 +38,7 @@ export function QuantityStepper({
         mode="outlined"
         size={20}
         onPress={onIncrement}
-        accessibilityLabel={`Больше: ${label}`}
+        accessibilityLabel={t('ui.stepper.increment', { label })}
       />
     </View>
   );

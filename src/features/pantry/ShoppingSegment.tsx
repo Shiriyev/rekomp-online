@@ -11,6 +11,8 @@ import { defaultAddAmount } from '@/domain/bulkAdd';
 import { shoppingStep, stepQuantity } from '@/domain/stock';
 import { convertAmount } from '@/domain/units';
 import { showUndo } from '@/features/undo/undoStore';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -22,6 +24,8 @@ import { ProductPickerSheet } from './ProductPickerSheet';
 
 export function ShoppingSegment() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const items = useShoppingItems();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
@@ -44,6 +48,12 @@ export function ShoppingSegment() {
   const open = items.filter((i) => !i.checked);
   const bought = items.filter((i) => i.checked);
   const linkedOpen = open.filter((i) => i.ingredientId && ingredients.has(i.ingredientId));
+
+  // Catalog-linked items follow the language; free-text items stay as typed.
+  const titleOf = (item: ShoppingItem) => {
+    const ingredient = item.ingredientId ? ingredients.get(item.ingredientId) : undefined;
+    return ingredient ? content.ingredientName(ingredient) : item.title;
+  };
 
   const togglePick = (id: string) =>
     setPicked((prev) => {
@@ -78,7 +88,10 @@ export function ShoppingSegment() {
       const ingredient = ingredients.get(item.ingredientId);
       if (after?.addedQuantity && ingredient) {
         showUndo(
-          `Домой: +${formatAmount(after.addedQuantity, ingredient.unit)} ${ingredient.name}`,
+          t('pantry.shopping.homeAdded', {
+            amount: formatAmount(after.addedQuantity, ingredient.unit),
+            name: content.ingredientName(ingredient),
+          }),
           () => repositories.shopping.setChecked(item.id, false),
         );
       }
@@ -89,10 +102,11 @@ export function ShoppingSegment() {
     const linked = !!item.ingredientId && ingredients.has(item.ingredientId);
     const amount =
       item.quantity !== null && item.unit !== null ? formatAmount(item.quantity, item.unit) : '';
+    const title = titleOf(item);
     return (
       <Checkbox.Item
         key={item.id}
-        label={amount ? `${item.title} — ${amount}` : item.title}
+        label={amount ? `${title} — ${amount}` : title}
         status={picked.has(item.id) ? 'checked' : 'unchecked'}
         onPress={() => togglePick(item.id)}
         disabled={!linked}
@@ -109,13 +123,14 @@ export function ShoppingSegment() {
     const step = ingredient ? shoppingStep(ingredient, packageOf.get(ingredient.id)) : 1;
     const amount =
       item.quantity !== null && item.unit !== null ? formatAmount(item.quantity, item.unit) : '';
+    const title = titleOf(item);
 
     return (
       <SwipeToDelete key={item.id} onDelete={() => repositories.shopping.remove(item.id)}>
         <View style={[styles.row, { backgroundColor: theme.colors.background }]}>
           <View style={styles.flex}>
             <Checkbox.Item
-              label={canEdit || !amount ? item.title : `${item.title} — ${amount}`}
+              label={canEdit || !amount ? title : `${title} — ${amount}`}
               status={item.checked ? 'checked' : 'unchecked'}
               onPress={() => toggle(item)}
               position="leading"
@@ -131,7 +146,7 @@ export function ShoppingSegment() {
           </View>
           {canEdit ? (
             <QuantityStepper
-              label={item.title}
+              label={title}
               valueText={amount}
               decrementDisabled={(item.quantity ?? 0) <= step}
               onDecrement={() =>
@@ -161,11 +176,11 @@ export function ShoppingSegment() {
             <Text
               variant="bodyMedium"
               style={[styles.flex, { color: theme.colors.onSurfaceVariant }]}>
-              Отметь купленное — количества зададим на следующем шаге.
+              {t('pantry.shopping.selectHint')}
             </Text>
           ) : (
             <Button mode="contained-tonal" icon="plus" onPress={() => pickerRef.current?.present()}>
-              Добавить продукт
+              {t('pantry.shopping.addProduct')}
             </Button>
           )}
           {linkedOpen.length > 1 || selecting ? (
@@ -175,7 +190,7 @@ export function ShoppingSegment() {
                 setSelecting((s) => !s);
                 setPicked(new Set());
               }}>
-              {selecting ? 'Отмена' : 'Купил несколько'}
+              {selecting ? t('common.actions.cancel') : t('pantry.shopping.boughtSeveral')}
             </Button>
           ) : null}
         </View>
@@ -183,8 +198,8 @@ export function ShoppingSegment() {
         {items.length === 0 ? (
           <EmptyState
             icon="cart-outline"
-            title="Список покупок пуст"
-            description="Добавь продукт из каталога или кнопкой «Добавить недостающее» в карточке блюда."
+            title={t('pantry.shopping.emptyTitle')}
+            description={t('pantry.shopping.emptyDescription')}
           />
         ) : null}
 
@@ -194,10 +209,10 @@ export function ShoppingSegment() {
           <>
             <View style={styles.boughtHeader}>
               <Text variant="titleSmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                Куплено · добавлено домой
+                {t('pantry.shopping.boughtHeader')}
               </Text>
               <Button compact onPress={() => repositories.shopping.clearChecked()}>
-                Очистить
+                {t('pantry.shopping.clear')}
               </Button>
             </View>
             {bought.map(row)}
@@ -208,7 +223,7 @@ export function ShoppingSegment() {
       {selecting ? (
         <Surface elevation={2} style={styles.bar}>
           <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
-            Выбрано: {picked.size}
+            {t('pantry.shopping.selected', { n: picked.size })}
           </Text>
           <Button
             mode="contained"
@@ -216,7 +231,7 @@ export function ShoppingSegment() {
             contentStyle={styles.next}
             disabled={picked.size === 0}
             onPress={continueToAmounts}>
-            Далее
+            {t('common.actions.next')}
           </Button>
         </Surface>
       ) : null}
@@ -224,16 +239,18 @@ export function ShoppingSegment() {
       <ProductPickerSheet
         sheetRef={pickerRef}
         ingredients={[...ingredients.values()]}
-        title="Добавить в список покупок"
-        amountHint="Сколько купить — при «купил» столько и добавится домой"
-        submitLabel="В список"
+        title={t('pantry.shopping.pickerTitle')}
+        amountHint={t('pantry.shopping.pickerHint')}
+        submitLabel={t('pantry.shopping.pickerSubmit')}
         describe={(i) => {
           const have = pantry.find((p) => p.ingredientId === i.id);
           const listed = open.some((o) => o.ingredientId === i.id);
           return (
             [
-              have ? `дома: ${formatAmount(have.quantity, i.unit)}` : null,
-              listed ? 'уже в списке' : null,
+              have
+                ? t('pantry.shopping.atHome', { amount: formatAmount(have.quantity, i.unit) })
+                : null,
+              listed ? t('pantry.shopping.alreadyListed') : null,
             ]
               .filter(Boolean)
               .join(' · ') || null
@@ -247,7 +264,12 @@ export function ShoppingSegment() {
             quantity: amount,
             unit: ingredient.unit,
           });
-          showUndo(`В списке: ${ingredient.name} ${formatAmount(amount, ingredient.unit)}`);
+          showUndo(
+            t('pantry.shopping.added', {
+              name: content.ingredientName(ingredient),
+              amount: formatAmount(amount, ingredient.unit),
+            }),
+          );
         }}
       />
     </View>

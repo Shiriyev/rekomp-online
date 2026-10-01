@@ -4,27 +4,34 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Card, Chip, Divider, SegmentedButtons, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { useProfile, useThemePreference } from '@/db/hooks';
+import { useLanguagePreference, useProfile, useThemePreference } from '@/db/hooks';
 import type { Profile } from '@/db/schema';
+import { LANGUAGE_PREFERENCES, type LanguagePreference } from '@/domain/language';
 import { THEME_PREFERENCES, type ThemePreference } from '@/domain/schemas';
 import { DayStartDialog, dayStartLabel } from '@/features/profile/DayStartDialog';
-import { ACTIVITY_TITLES, goalRateLabel, SEX_LABELS } from '@/features/profile/labels';
+import { activityTitle, goalRateLabel, sexLabel } from '@/features/profile/labels';
 import { WeightDialog } from '@/features/profile/WeightDialog';
 import { DataSection } from '@/features/backup/DataSection';
 import { showUndo } from '@/features/undo/undoStore';
-import { formatDecimal, formatInt, formatKcal, pluralRu } from '@/lib/format';
+import { t as translate, useT } from '@/i18n';
+import { formatDecimal, formatInt, formatKcal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
-const THEME_LABELS: Record<ThemePreference, string> = {
-  system: 'Авто',
-  light: 'Светлая',
-  dark: 'Тёмная',
+// Language names are always shown in their own language, so they are not translated.
+const LANGUAGE_NAMES: Record<Exclude<LanguagePreference, 'system'>, string> = {
+  ru: 'Русский',
+  en: 'English',
 };
+
+const languageLabel = (pref: LanguagePreference): string =>
+  pref === 'system' ? translate('profile.language.auto') : LANGUAGE_NAMES[pref];
 
 export default function ProfileScreen() {
   const theme = useAppTheme();
   const { profile } = useProfile();
+  const t = useT();
   const themePreference = useThemePreference();
+  const languagePreference = useLanguagePreference();
   const [weightOpen, setWeightOpen] = useState(false);
   const [dayStartOpen, setDayStartOpen] = useState(false);
 
@@ -41,61 +48,88 @@ export default function ProfileScreen() {
         <Card.Content style={styles.gap}>
           <View style={styles.titleRow}>
             <Text variant="labelLarge" style={{ color: theme.colors.onPrimaryContainer }}>
-              Цели на день
+              {t('profile.targetsTitle')}
             </Text>
-            <Chip compact>{profile.targetOverridden ? 'Вручную' : 'Рассчитано'}</Chip>
+            <Chip compact>
+              {profile.targetOverridden
+                ? t('profile.targetsManual')
+                : t('profile.targetsCalculated')}
+            </Chip>
           </View>
           <Text variant="displaySmall" style={{ color: theme.colors.onPrimaryContainer }}>
             {formatKcal(profile.kcalTarget)}
           </Text>
           <Text variant="titleMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-            Белок {formatInt(profile.proteinMinG)}–{formatInt(profile.proteinTargetG)} г
+            {t('profile.proteinRange', {
+              min: formatInt(profile.proteinMinG),
+              target: formatInt(profile.proteinTargetG),
+            })}
           </Text>
         </Card.Content>
       </Card>
 
       <Card mode="outlined">
         <Card.Content style={styles.gap}>
-          <Row label="Пол" value={SEX_LABELS[profile.sex]} />
+          <Row label={t('profile.rows.sex')} value={sexLabel(profile.sex)} />
           <Divider />
-          <Row label="Возраст" value={`${profile.age} лет`} />
+          <Row
+            label={t('profile.rows.age')}
+            value={t('profile.ageValue', { count: profile.age })}
+          />
           <Divider />
-          <Row label="Рост" value={`${formatDecimal(profile.heightCm)} см`} />
+          <Row
+            label={t('profile.rows.height')}
+            value={t('profile.heightValue', { value: formatDecimal(profile.heightCm) })}
+          />
           <Divider />
-          <Row label="Вес" value={`${formatDecimal(profile.weightKg)} кг`} />
+          <Row
+            label={t('profile.rows.weight')}
+            value={t('profile.weightValue', { value: formatDecimal(profile.weightKg) })}
+          />
           <Divider />
-          <Row label="Активность" value={ACTIVITY_TITLES[profile.activityLevel]} />
+          <Row label={t('profile.rows.activity')} value={activityTitle(profile.activityLevel)} />
           <Divider />
-          <Row label="Темп" value={goalRateLabel(profile.goalRateKgPerWeek)} />
+          <Row label={t('profile.rows.rate')} value={goalRateLabel(profile.goalRateKgPerWeek)} />
         </Card.Content>
         <Card.Actions>
-          <Button onPress={() => setWeightOpen(true)}>Обновить вес</Button>
+          <Button onPress={() => setWeightOpen(true)}>{t('profile.updateWeight')}</Button>
           <Button mode="contained-tonal" onPress={() => router.push('/edit-profile')}>
-            Изменить
+            {t('common.actions.edit')}
           </Button>
         </Card.Actions>
       </Card>
 
       <Card mode="outlined">
         <Card.Content style={styles.gap}>
-          <Row label="Новый день начинается" value={dayStartLabel(profile.dayStartHour)} />
+          <Row label={t('profile.rows.dayStart')} value={dayStartLabel(profile.dayStartHour)} />
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-            Еда до этого часа записывается во вчерашний день.
+            {t('profile.dayStartHint')}
           </Text>
         </Card.Content>
         <Card.Actions>
-          <Button onPress={() => setDayStartOpen(true)}>Изменить</Button>
+          <Button onPress={() => setDayStartOpen(true)}>{t('common.actions.edit')}</Button>
         </Card.Actions>
       </Card>
 
       <View style={styles.gap}>
         <Text variant="titleMedium" accessibilityRole="header">
-          Тема
+          {t('profile.theme.title')}
         </Text>
         <SegmentedButtons
           value={themePreference}
           onValueChange={(value) => repositories.settings.setTheme(value as ThemePreference)}
-          buttons={THEME_PREFERENCES.map((t) => ({ value: t, label: THEME_LABELS[t] }))}
+          buttons={THEME_PREFERENCES.map((p) => ({ value: p, label: t(`profile.theme.${p}`) }))}
+        />
+      </View>
+
+      <View style={styles.gap}>
+        <Text variant="titleMedium" accessibilityRole="header">
+          {t('profile.language.title')}
+        </Text>
+        <SegmentedButtons
+          value={languagePreference}
+          onValueChange={(value) => repositories.settings.setLanguage(value as LanguagePreference)}
+          buttons={LANGUAGE_PREFERENCES.map((p) => ({ value: p, label: languageLabel(p) }))}
         />
       </View>
 
@@ -118,8 +152,8 @@ export default function ProfileScreen() {
             const moved = repositories.profile.setDayStartHour(hour);
             showUndo(
               moved > 0
-                ? `Пересчитано: ${moved} ${pluralRu(moved, ['запись', 'записи', 'записей'])} в другом дне`
-                : 'Готово: записи остались в своих днях',
+                ? t('profile.dayStartMoved', { count: moved })
+                : t('profile.dayStartUnchanged'),
             );
           }}
         />

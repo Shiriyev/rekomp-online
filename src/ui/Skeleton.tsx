@@ -8,6 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { useT } from '@/i18n';
 import { radius, spacing, useAppTheme } from '@/theme';
 
 type BlockProps = { width?: DimensionValue; height: number; rounded?: number };
@@ -36,8 +37,12 @@ export function SkeletonBlock({ width = '100%', height, rounded = radius.sm }: B
 
 /** Generic list skeleton: thumbnail + two text lines per row. */
 export function SkeletonList({ rows = 4, thumb = 88 }: { rows?: number; thumb?: number }) {
+  const t = useT();
   return (
-    <View style={styles.list} accessibilityLabel="Загрузка" accessibilityRole="progressbar">
+    <View
+      style={styles.list}
+      accessibilityLabel={t('common.loading')}
+      accessibilityRole="progressbar">
       {Array.from({ length: rows }, (_, i) => (
         <View key={i} style={styles.row}>
           <SkeletonBlock width={thumb} height={thumb} rounded={radius.md} />
@@ -54,8 +59,12 @@ export function SkeletonList({ rows = 4, thumb = 88 }: { rows?: number; thumb?: 
 
 /** Skeleton of a screen with a hero image and a few sections. */
 export function SkeletonDetail() {
+  const t = useT();
   return (
-    <View style={styles.detail} accessibilityLabel="Загрузка" accessibilityRole="progressbar">
+    <View
+      style={styles.detail}
+      accessibilityLabel={t('common.loading')}
+      accessibilityRole="progressbar">
       <SkeletonBlock height={220} rounded={0} />
       <View style={styles.detailBody}>
         <SkeletonBlock height={28} width="70%" />

@@ -3,6 +3,7 @@ import { Card, Text } from 'react-native-paper';
 
 import { calculateTargets, type BodyInput } from '@/domain/calculator';
 import type { ActivityLevel, GoalRate } from '@/domain/types';
+import { useT } from '@/i18n';
 import { formatInt, formatKcal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
@@ -11,32 +12,38 @@ type Props = { body: BodyInput; activityLevel: ActivityLevel; goalRate: GoalRate
 /** Live result of the calculator while the user fills in the form. */
 export function TargetsPreview({ body, activityLevel, goalRate }: Props) {
   const theme = useAppTheme();
+  const tr = useT();
   const t = calculateTargets(body, activityLevel, goalRate);
 
   return (
     <Card mode="contained" style={{ backgroundColor: theme.colors.primaryContainer }}>
       <Card.Content style={styles.content}>
         <Text variant="labelLarge" style={{ color: theme.colors.onPrimaryContainer }}>
-          Расчёт на день
+          {tr('profile.preview.title')}
         </Text>
         <Text
           variant="displaySmall"
           style={{ color: theme.colors.onPrimaryContainer }}
-          accessibilityLabel={`Цель ${t.kcalTarget} килокалорий`}>
+          accessibilityLabel={tr('profile.preview.kcalA11y', { kcal: t.kcalTarget })}>
           {formatKcal(t.kcalTarget)}
         </Text>
         <Text variant="titleMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-          Белок {formatInt(t.proteinMinG)}–{formatInt(t.proteinTargetG)} г
+          {tr('profile.proteinRange', {
+            min: formatInt(t.proteinMinG),
+            target: formatInt(t.proteinTargetG),
+          })}
         </Text>
         <View style={styles.row}>
-          <Stat label="Обмен (BMR)" value={formatInt(t.bmr)} />
-          <Stat label="Расход (TDEE)" value={formatInt(t.tdee)} />
-          <Stat label="Дефицит" value={t.deficit === 0 ? '0' : `−${formatInt(t.deficit)}`} />
+          <Stat label={tr('profile.preview.bmr')} value={formatInt(t.bmr)} />
+          <Stat label={tr('profile.preview.tdee')} value={formatInt(t.tdee)} />
+          <Stat
+            label={tr('profile.preview.deficit')}
+            value={t.deficit === 0 ? '0' : `−${formatInt(t.deficit)}`}
+          />
         </View>
         {t.clampedToFloor ? (
           <Text variant="bodyMedium" style={{ color: theme.colors.warning }}>
-            Расчёт получился слишком низким — цель поднята до безопасного минимума. Выберите темп
-            помедленнее.
+            {tr('profile.preview.clamped')}
           </Text>
         ) : null}
       </Card.Content>

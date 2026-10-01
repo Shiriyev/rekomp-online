@@ -1,35 +1,43 @@
-import type { ActivityLevel, GoalRate, Sex } from '@/domain/types';
+import { ACTIVITY_LEVELS, type ActivityLevel, type GoalRate, type Sex } from '@/domain/types';
+import { currentLocale, t } from '@/i18n';
 
-export const SEX_LABELS: Record<Sex, string> = { male: 'Мужской', female: 'Женский' };
+// Functions, not constants: they read the current language (the tree remounts on a switch).
 
-export const ACTIVITY_OPTIONS: {
+export const sexLabel = (sex: Sex): string => t(`profile.sex.${sex}`);
+
+export type ActivityOption = {
   value: ActivityLevel;
   title: string;
   description: string;
   hint?: string;
-}[] = [
-  { value: 'sedentary', title: 'Минимальная', description: 'Сидячая работа, почти без спорта' },
-  { value: 'light', title: 'Лёгкая', description: '1–3 тренировки в неделю' },
-  {
-    value: 'moderate',
-    title: 'Средняя',
-    description: 'Много движения днём + 3–5 тренировок',
-    hint: 'Курьер на e-bike + зал 3×/нед — выбирай это',
-  },
-  { value: 'active', title: 'Высокая', description: 'Физический труд или ежедневные тренировки' },
-  { value: 'very_active', title: 'Очень высокая', description: 'Спорт 2 раза в день' },
-];
+};
 
-export const ACTIVITY_TITLES = Object.fromEntries(
-  ACTIVITY_OPTIONS.map((o) => [o.value, o.title]),
-) as Record<ActivityLevel, string>;
+export const activityTitle = (level: ActivityLevel): string => t(`profile.activity.${level}.title`);
 
-export const GOAL_OPTIONS: { value: GoalRate; label: string; description: string }[] = [
-  { value: 0, label: '0', description: 'Держать вес' },
-  { value: -0.25, label: '−0,25', description: 'Мягко' },
-  { value: -0.5, label: '−0,5', description: 'Рекомендуется' },
-  { value: -0.75, label: '−0,75', description: 'Быстро' },
+export const activityOptions = (): ActivityOption[] =>
+  ACTIVITY_LEVELS.map((value) => ({
+    value,
+    title: activityTitle(value),
+    description: t(`profile.activity.${value}.description`),
+    hint: value === 'moderate' ? t('profile.activity.moderateHint') : undefined,
+  }));
+
+export type GoalOption = { value: GoalRate; label: string; description: string };
+
+/** «−0,25» / «−0.25»: true minus sign, locale decimal separator. */
+const rateText = (rate: GoalRate): string => {
+  const abs = new Intl.NumberFormat(currentLocale(), { maximumFractionDigits: 2 }).format(
+    Math.abs(rate),
+  );
+  return rate < 0 ? `−${abs}` : abs;
+};
+
+export const goalOptions = (): GoalOption[] => [
+  { value: 0, label: rateText(0), description: t('profile.goal.keep') },
+  { value: -0.25, label: rateText(-0.25), description: t('profile.goal.soft') },
+  { value: -0.5, label: rateText(-0.5), description: t('profile.goal.recommended') },
+  { value: -0.75, label: rateText(-0.75), description: t('profile.goal.fast') },
 ];
 
 export const goalRateLabel = (rate: GoalRate): string =>
-  rate === 0 ? 'Держать вес' : `${GOAL_OPTIONS.find((o) => o.value === rate)?.label} кг/нед`;
+  rate === 0 ? t('profile.goal.keep') : t('profile.goal.rateValue', { rate: rateText(rate) });

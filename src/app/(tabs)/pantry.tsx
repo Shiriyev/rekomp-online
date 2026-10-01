@@ -7,18 +7,16 @@ import { repositories } from '@/db';
 import { HomeSegment } from '@/features/pantry/HomeSegment';
 import { PortionsSegment } from '@/features/pantry/PortionsSegment';
 import { ShoppingSegment } from '@/features/pantry/ShoppingSegment';
+import { useT } from '@/i18n';
 import { useClock } from '@/lib/useClock';
 import { spacing } from '@/theme';
 
 type Segment = 'home' | 'portions' | 'shopping';
 
-const SEGMENTS: { value: Segment; label: string }[] = [
-  { value: 'home', label: 'Дома' },
-  { value: 'portions', label: 'Порции' },
-  { value: 'shopping', label: 'Покупки' },
-];
+const SEGMENTS: Segment[] = ['home', 'portions', 'shopping'];
 
 export default function PantryScreen() {
+  const t = useT();
   const [segment, setSegment] = useState<Segment>('home');
   const { today } = useClock();
 
@@ -34,7 +32,7 @@ export default function PantryScreen() {
       <SegmentedButtons
         value={segment}
         onValueChange={(v) => setSegment(v as Segment)}
-        buttons={SEGMENTS}
+        buttons={SEGMENTS.map((value) => ({ value, label: t(`pantry.segments.${value}`) }))}
         density="small"
         style={styles.segments}
       />

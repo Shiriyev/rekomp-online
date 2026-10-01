@@ -9,15 +9,14 @@ import { z } from 'zod';
 import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
 import { defaultLowStockThreshold } from '@/domain/stock';
-import type { Unit } from '@/domain/types';
 import { numberText, optionalNumberText } from '@/features/forms/numberText';
+import { useT, useUnitLabel } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatDecimal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
 import { sheetInput } from '@/ui/sheetInput';
-
-const UNIT_LABELS: Record<Unit, string> = { g: 'г', ml: 'мл', pcs: 'шт' };
 
 const schema = z.object({
   quantity: numberText({ min: 0, max: 1_000_000 }),
@@ -40,6 +39,9 @@ const toText = (n: number | null) => (n === null ? '' : formatDecimal(n));
 /** Edit one pantry item: exact amount, «мало» threshold and the ingredient's КБЖУ. */
 export function PantryItemSheet({ ref, onRemove }: Props) {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
+  const unitLabel = useUnitLabel();
   const sheetRef = useRef<BottomSheetModal>(null);
   const [current, setCurrent] = useState<{ ingredient: Ingredient; quantity: number } | null>(null);
   const { control, handleSubmit, reset, setError } = useForm<
@@ -71,7 +73,7 @@ export function PantryItemSheet({ ref, onRemove }: Props) {
     handleSubmit((v) => {
       if (!ingredient) return;
       if (ingredient.unit === 'pcs' && v.gramsPerPiece === null) {
-        setError('gramsPerPiece', { message: 'Нужен вес 1 шт' });
+        setError('gramsPerPiece', { message: 'validation.pieceWeight' });
         return;
       }
       repositories.ingredients.updateSettings(ingredient.id, {
@@ -89,45 +91,52 @@ export function PantryItemSheet({ ref, onRemove }: Props) {
       {ingredient && current ? (
         <>
           <Text variant="titleLarge" accessibilityRole="header">
-            {ingredient.name}
+            {content.ingredientName(ingredient)}
           </Text>
           <View style={styles.row}>
             <NumberField
               control={control}
               name="quantity"
-              label="Дома"
-              suffix={UNIT_LABELS[ingredient.unit]}
+              label={t('pantry.item.quantity')}
+              suffix={unitLabel(ingredient.unit)}
               render={sheetInput}
             />
             <NumberField
               control={control}
               name="lowStockThreshold"
-              label={`Мало, если < ${defaultLowStockThreshold(ingredient.unit)}`}
-              suffix={UNIT_LABELS[ingredient.unit]}
+              label={t('pantry.item.lowThreshold', {
+                n: defaultLowStockThreshold(ingredient.unit),
+              })}
+              suffix={unitLabel(ingredient.unit)}
               render={sheetInput}
             />
           </View>
-          <Text variant="titleSmall">КБЖУ на 100 г</Text>
+          <Text variant="titleSmall">{t('pantry.item.nutritionTitle')}</Text>
           <View style={styles.row}>
-            <NumberField control={control} name="kcalPer100g" label="Ккал" render={sheetInput} />
+            <NumberField
+              control={control}
+              name="kcalPer100g"
+              label={t('pantry.item.kcal')}
+              render={sheetInput}
+            />
             <NumberField
               control={control}
               name="proteinPer100g"
-              label="Белок, г"
+              label={t('pantry.item.protein')}
               render={sheetInput}
             />
             {ingredient.unit === 'pcs' ? (
               <NumberField
                 control={control}
                 name="gramsPerPiece"
-                label="Вес 1 шт"
-                suffix="г"
+                label={t('bulkAdd.newProductForm.pieceWeight')}
+                suffix={unitLabel('g')}
                 render={sheetInput}
               />
             ) : null}
           </View>
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-            Значения ориентировочные — проверь по этикетке. Изменения пересчитают КБЖУ блюд.
+            {t('pantry.item.disclaimer')}
           </Text>
           <View style={styles.row}>
             <Button
@@ -137,10 +146,10 @@ export function PantryItemSheet({ ref, onRemove }: Props) {
                 onRemove(ingredient, current.quantity);
                 sheetRef.current?.dismiss();
               }}>
-              Убрать
+              {t('pantry.item.remove')}
             </Button>
             <Button mode="contained" style={styles.flex} onPress={save}>
-              Сохранить
+              {t('common.actions.save')}
             </Button>
           </View>
         </>

@@ -17,7 +17,7 @@ import { useCookStore } from '@/features/cooking/cookStore';
 import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
 import { cleanupOrphanPhotos } from '@/features/photos/mealPhotos';
 import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
-import { applyLanguage } from '@/i18n';
+import { applyLanguage, useT } from '@/i18n';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
 
@@ -40,6 +40,7 @@ export default function RootLayout() {
 
 function AppShell() {
   const preference = useThemePreference();
+  const t = useT();
   const system = useColorScheme();
   const isDark = preference === 'system' ? system === 'dark' : preference === 'dark';
   const { profile, isLoaded } = useProfile();
@@ -84,25 +85,28 @@ function AppShell() {
               <Stack.Screen name="(tabs)" />
               <Stack.Screen
                 name="edit-profile"
-                options={{ headerShown: true, title: 'Данные и цели' }}
+                options={{ headerShown: true, title: t('nav.headers.editProfile') }}
               />
               <Stack.Screen
                 name="recipes/[mealType]"
-                options={{ headerShown: true, title: 'Блюда' }}
+                options={{ headerShown: true, title: t('nav.headers.recipes') }}
               />
-              <Stack.Screen name="recipe/[id]" options={{ headerShown: true, title: 'Блюдо' }} />
+              <Stack.Screen
+                name="recipe/[id]"
+                options={{ headerShown: true, title: t('nav.headers.recipe') }}
+              />
               <Stack.Screen
                 name="history/[logId]"
-                options={{ headerShown: true, title: 'Запись' }}
+                options={{ headerShown: true, title: t('nav.headers.logEntry') }}
               />
               <Stack.Screen name="add-meal" options={{ headerShown: true }} />
               <Stack.Screen
                 name="bulk-add/index"
-                options={{ headerShown: true, title: 'Добавить домой' }}
+                options={{ headerShown: true, title: t('nav.headers.bulkAdd') }}
               />
               <Stack.Screen
                 name="bulk-add/amounts"
-                options={{ headerShown: true, title: 'Количество' }}
+                options={{ headerShown: true, title: t('nav.headers.bulkAmounts') }}
               />
               <Stack.Screen
                 name="cook/[id]"

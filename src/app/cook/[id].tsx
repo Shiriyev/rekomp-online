@@ -28,6 +28,8 @@ import { RecipeOverview } from '@/features/cooking/RecipeOverview';
 import { TimerCard } from '@/features/cooking/TimerCard';
 import { clearRecipeDraft, useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
 import { showUndo } from '@/features/undo/undoStore';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount, formatInt } from '@/lib/format';
 import { useNow } from '@/lib/useNow';
 import { spacing, useAppTheme } from '@/theme';
@@ -56,6 +58,8 @@ const parseServings = (raw: string | undefined, fallback: number) => {
 export default function CookScreen() {
   useKeepAwake();
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const params = useLocalSearchParams<{
     id: string;
     servings?: string;
@@ -103,16 +107,16 @@ export default function CookScreen() {
 
   const now = useNow(
     500,
-    progress.timers.some((t) => t.startedAt !== null),
+    progress.timers.some((timer) => timer.startedAt !== null),
   );
   const runningTimers = activeTimers(progress.timers, now);
 
   // Alert once per timer when it reaches zero while the screen is open.
   const alerted = useRef(new Set<string>());
   useEffect(() => {
-    for (const t of progress.timers) {
-      const key = `${t.stepOrder}:${t.startedAt}`;
-      if (t.startedAt !== null && isDone(t, now) && !alerted.current.has(key)) {
+    for (const timer of progress.timers) {
+      const key = `${timer.stepOrder}:${timer.startedAt}`;
+      if (timer.startedAt !== null && isDone(timer, now) && !alerted.current.has(key)) {
         alerted.current.add(key);
         void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         Vibration.vibrate([0, 400, 200, 400]);
@@ -134,7 +138,7 @@ export default function CookScreen() {
   }, [lines, ingredients, choices]);
 
   if (isLoaded && !recipe)
-    return <EmptyState icon="alert-circle-outline" title="Блюдо не найдено" />;
+    return <EmptyState icon="alert-circle-outline" title={t('cooking.screen.notFound')} />;
   if (!recipe || steps.length === 0) return null;
 
   const stepIndex = Math.min(progress.stepIndex, steps.length);
@@ -166,21 +170,25 @@ export default function CookScreen() {
     clearRecipeDraft(recipe.id);
     showUndo(
       eatNow
-        ? `Записано: +${formatInt(result.perPortion.kcal)} ккал, +${formatInt(result.perPortion.protein)} г белка`
-        : `В холодильнике: ${result.stored} порц.`,
+        ? t('cooking.undo.eaten', {
+            kcal: formatInt(result.perPortion.kcal),
+            protein: formatInt(result.perPortion.protein),
+          })
+        : t('cooking.undo.stored', { count: result.stored }),
       () => {
         try {
           repositories.cook.undo(result.sessionId);
         } catch {
-          showUndo('Отменить нельзя: порции уже съедены');
+          showUndo(t('cooking.undo.cannotUndo'));
         }
       },
     );
     router.dismissTo('/');
   };
 
-  const timerLabel = `${recipe.name}: шаг ${step.order}`;
-  const otherTimers = runningTimers.filter((t) => t.stepOrder !== step.order);
+  const recipeName = content.recipeName(recipe);
+  const timerLabel = t('cooking.screen.timerLabel', { recipe: recipeName, order: step.order });
+  const otherTimers = runningTimers.filter((timer) => timer.stepOrder !== step.order);
 
   return (
     <SafeAreaView
@@ -192,14 +200,16 @@ export default function CookScreen() {
         <IconButton
           icon="close"
           onPress={() => setExitOpen(true)}
-          accessibilityLabel="Выйти из готовки"
+          accessibilityLabel={t('cooking.screen.exitA11y')}
         />
         <View style={styles.flex}>
           <Text variant="labelLarge" numberOfLines={1}>
-            {recipe.name}
+            {recipeName}
           </Text>
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-            {finished ? 'Все шаги пройдены' : `Шаг ${stepIndex + 1} из ${steps.length}`}
+            {finished
+              ? t('cooking.screen.allStepsDone')
+              : t('cooking.screen.stepOf', { current: stepIndex + 1, total: steps.length })}
           </Text>
         </View>
       </View>
@@ -217,25 +227,30 @@ export default function CookScreen() {
           density="small"
           style={styles.viewSwitch}
           buttons={[
-            { value: 'steps', label: 'По шагам', icon: 'format-list-numbered' },
-            { value: 'overview', label: 'Весь рецепт', icon: 'text-long' },
+            { value: 'steps', label: t('cooking.screen.viewSteps'), icon: 'format-list-numbered' },
+            { value: 'overview', label: t('cooking.screen.viewOverview'), icon: 'text-long' },
           ]}
         />
       )}
 
       {otherTimers.length > 0 ? (
         <View style={styles.otherTimers}>
-          {otherTimers.map((t) => (
+          {otherTimers.map((timer) => (
             <Chip
-              key={t.stepOrder}
-              icon={isDone(t, now) ? 'bell-ring' : 'timer-outline'}
+              key={timer.stepOrder}
+              icon={isDone(timer, now) ? 'bell-ring' : 'timer-outline'}
               onPress={() => {
                 // Timers live on their steps: jump there in the step-by-step view.
                 repositories.settings.setCookView('steps');
-                go(steps.findIndex((s) => s.order === t.stepOrder));
+                go(steps.findIndex((s) => s.order === timer.stepOrder));
               }}
-              accessibilityLabel={`Таймер шага ${t.stepOrder}`}>
-              Шаг {t.stepOrder}: {isDone(t, now) ? 'готово' : formatTimer(remainingSec(t, now))}
+              accessibilityLabel={t('cooking.screen.otherTimerA11y', { order: timer.stepOrder })}>
+              {isDone(timer, now)
+                ? t('cooking.screen.otherTimerDone', { order: timer.stepOrder })
+                : t('cooking.screen.otherTimerLeft', {
+                    order: timer.stepOrder,
+                    time: formatTimer(remainingSec(timer, now)),
+                  })}
             </Chip>
           ))}
         </View>
@@ -243,7 +258,7 @@ export default function CookScreen() {
 
       {finished ? (
         <FinishView
-          recipeName={recipe.name}
+          recipeName={recipeName}
           perPortion={perPortion}
           servings={servings}
           isBatch={recipe.isBatch}
@@ -266,19 +281,23 @@ export default function CookScreen() {
           <GestureDetector gesture={swipe}>
             <ScrollView contentContainerStyle={styles.body}>
               <Text variant="headlineSmall" style={styles.stepText}>
-                {step.text}
+                {content.stepText(recipe.id, step.order, step.text)}
               </Text>
 
               {used.length > 0 ? (
                 <View style={styles.ingredients}>
                   {used.map((u) => {
                     const key = `${step.order}:${u.ingredientId}`;
-                    const name = ingredients.get(u.ingredientId)?.name ?? u.ingredientId;
-                    const amount = u.amount === null ? 'по вкусу' : formatAmount(u.amount, u.unit);
+                    const ingredient = ingredients.get(u.ingredientId);
+                    const name = ingredient ? content.ingredientName(ingredient) : u.ingredientId;
+                    const amount =
+                      u.amount === null
+                        ? t('cooking.screen.toTaste')
+                        : formatAmount(u.amount, u.unit);
                     return (
                       <Checkbox.Item
                         key={key}
-                        label={`${name} — ${amount}`}
+                        label={t('cooking.screen.ingredientLine', { name, amount })}
                         status={progress.checked.includes(key) ? 'checked' : 'unchecked'}
                         onPress={() => store().toggleChecked(key)}
                         position="leading"
@@ -294,7 +313,7 @@ export default function CookScreen() {
               {step.timerSec ? (
                 <TimerCard
                   durationSec={step.timerSec}
-                  timer={progress.timers.find((t) => t.stepOrder === step.order)}
+                  timer={progress.timers.find((timer) => timer.stepOrder === step.order)}
                   now={now}
                   onStart={() => store().startTimer(step.order, step.timerSec!, timerLabel)}
                   onPause={() => store().pauseTimer(step.order)}
@@ -312,7 +331,7 @@ export default function CookScreen() {
               onPress={() => go(stepIndex - 1)}
               contentStyle={styles.big}
               style={styles.flex}>
-              Назад
+              {t('common.actions.back')}
             </Button>
             <Button
               mode="contained"
@@ -320,7 +339,7 @@ export default function CookScreen() {
               contentStyle={[styles.big, styles.reverse]}
               onPress={() => go(stepIndex + 1)}
               style={styles.flex}>
-              {stepIndex === steps.length - 1 ? 'Готово' : 'Дальше'}
+              {stepIndex === steps.length - 1 ? t('cooking.screen.done') : t('cooking.screen.next')}
             </Button>
           </View>
         </>
@@ -328,11 +347,9 @@ export default function CookScreen() {
 
       <Portal>
         <Dialog visible={exitOpen} onDismiss={() => setExitOpen(false)}>
-          <Dialog.Title>Выйти из готовки?</Dialog.Title>
+          <Dialog.Title>{t('cooking.exit.title')}</Dialog.Title>
           <Dialog.Content>
-            <Text variant="bodyMedium">
-              Прогресс и таймеры сохранятся — продолжить можно с главного экрана.
-            </Text>
+            <Text variant="bodyMedium">{t('cooking.exit.body')}</Text>
           </Dialog.Content>
           <Dialog.Actions style={styles.dialogActions}>
             <Button
@@ -342,7 +359,7 @@ export default function CookScreen() {
                 store().abandon();
                 router.back();
               }}>
-              Отменить готовку
+              {t('cooking.exit.abandon')}
             </Button>
             <Button
               onPress={() => {
@@ -350,21 +367,27 @@ export default function CookScreen() {
                 store().leave();
                 router.back();
               }}>
-              Выйти
+              {t('cooking.exit.leave')}
             </Button>
             <Button mode="contained" onPress={() => setExitOpen(false)}>
-              Остаться
+              {t('cooking.exit.stay')}
             </Button>
           </Dialog.Actions>
         </Dialog>
 
         <Dialog visible={conflict !== null} dismissable={false}>
-          <Dialog.Title>Есть незаконченная готовка</Dialog.Title>
+          <Dialog.Title>{t('cooking.conflict.title')}</Dialog.Title>
           <Dialog.Content>
-            <Text variant="bodyMedium">«{conflict?.recipeName}» не доделано. Продолжить её?</Text>
+            <Text variant="bodyMedium">
+              {conflict
+                ? t('cooking.conflict.body', {
+                    name: content.recipeName({ id: conflict.recipeId, name: conflict.recipeName }),
+                  })
+                : null}
+            </Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => store().startFresh()}>Начать новую</Button>
+            <Button onPress={() => store().startFresh()}>{t('cooking.conflict.startNew')}</Button>
             <Button
               mode="contained"
               onPress={() => {
@@ -372,7 +395,7 @@ export default function CookScreen() {
                 store().leave();
                 router.replace({ pathname: '/cook/[id]', params: { id: conflict.recipeId } });
               }}>
-              Продолжить
+              {t('common.actions.continue')}
             </Button>
           </Dialog.Actions>
         </Dialog>

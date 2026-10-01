@@ -18,18 +18,14 @@ import { persistPhoto, releasePhoto } from '@/features/photos/mealPhotos';
 import { PhotoField } from '@/features/photos/PhotoField';
 import { PhotoViewer } from '@/features/photos/PhotoViewer';
 import { showUndo } from '@/features/undo/undoStore';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount, formatDayLabel, formatDecimal, formatInt, formatTime } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { SkeletonDetail } from '@/ui/Skeleton';
-
-const SOURCE_LABELS = {
-  recipe: 'Из рецепта',
-  portion: 'Порция из холодильника',
-  manual: 'Вручную',
-} as const;
 
 const SOURCE_ICONS = {
   recipe: 'chef-hat',
@@ -39,6 +35,8 @@ const SOURCE_ICONS = {
 
 export default function EntryDetailScreen() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const { logId } = useLocalSearchParams<{ logId: string }>();
   const { log, recipe, session, isLoaded } = useMealLogDetail(logId);
   const ingredients = useIngredientsMap();
@@ -55,9 +53,15 @@ export default function EntryDetailScreen() {
   }, [log, isLoaded, seen]);
 
   if (isLoaded && !log && !seen) {
-    return <EmptyState icon="alert-circle-outline" title="Запись не найдена" />;
+    return <EmptyState icon="alert-circle-outline" title={t('history.detail.notFound')} />;
   }
   if (!log) return <SkeletonDetail />;
+
+  const name = content.entryName(log);
+  const productName = (id: string) => {
+    const ingredient = ingredients.get(id);
+    return ingredient ? content.ingredientName(ingredient) : id;
+  };
 
   const photo = entryPhoto(log, recipe?.imageKey, (key) => key in RECIPE_IMAGES);
   const viewerSource =
@@ -79,7 +83,7 @@ export default function EntryDetailScreen() {
     if (picked === null) {
       const old = repositories.logs.setPhoto(log.id, null);
       showUndo(
-        'Фото удалено',
+        t('history.detail.photoRemoved'),
         () => repositories.logs.setPhoto(log.id, old),
         () => releasePhoto(old),
       );
@@ -89,7 +93,7 @@ export default function EntryDetailScreen() {
     const old = repositories.logs.setPhoto(log.id, uri);
     if (old) {
       showUndo(
-        'Фото заменено',
+        t('history.detail.photoReplaced'),
         () => {
           repositories.logs.setPhoto(log.id, old);
           releasePhoto(uri);
@@ -107,7 +111,7 @@ export default function EntryDetailScreen() {
           onPress={() => viewerSource && setViewerOpen(true)}
           disabled={!viewerSource}
           accessibilityRole="imagebutton"
-          accessibilityLabel={viewerSource ? `Фото: ${log.name}. Открыть на весь экран` : log.name}>
+          accessibilityLabel={viewerSource ? t('history.detail.photoA11y', { name }) : name}>
           {photo.kind === 'own' ? (
             <Image source={{ uri: photo.uri }} style={styles.hero} contentFit="cover" />
           ) : (
@@ -122,7 +126,7 @@ export default function EntryDetailScreen() {
 
         <View style={styles.section}>
           <Text variant="headlineSmall" accessibilityRole="header">
-            {log.name}
+            {name}
           </Text>
           <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
             {formatDayLabel(log.localDate, today, addDays(today, -1))} · {formatTime(log.timestamp)}{' '}
@@ -136,22 +140,24 @@ export default function EntryDetailScreen() {
           <Card.Content style={styles.macros}>
             <View>
               <Text variant="headlineMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-                {formatInt(log.kcal)} ккал
+                {t('common.kcalValue', { value: formatInt(log.kcal) })}
               </Text>
               <Text variant="titleMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-                {formatDecimal(log.protein)} г белка
+                {t('common.proteinValue', { value: formatDecimal(log.protein) })}
               </Text>
             </View>
             <Text variant="bodyMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-              Порций: {formatDecimal(log.servings)}
-              {session && session.servings > 1 ? `\nприготовлено ${session.servings}` : ''}
+              {t('history.detail.servings', { value: formatDecimal(log.servings) })}
+              {session && session.servings > 1
+                ? `\n${t('history.detail.cooked', { count: session.servings })}`
+                : ''}
             </Text>
           </Card.Content>
         </Card>
 
         <View style={styles.section}>
           <View style={styles.row}>
-            <Chip icon={SOURCE_ICONS[log.source]}>{SOURCE_LABELS[log.source]}</Chip>
+            <Chip icon={SOURCE_ICONS[log.source]}>{t(`history.detail.source.${log.source}`)}</Chip>
             {log.recipeId && recipe ? (
               <Button
                 compact
@@ -159,7 +165,7 @@ export default function EntryDetailScreen() {
                 onPress={() =>
                   router.push({ pathname: '/recipe/[id]', params: { id: recipe.id } })
                 }>
-                Открыть рецепт
+                {t('history.detail.openRecipe')}
               </Button>
             ) : null}
           </View>
@@ -168,14 +174,14 @@ export default function EntryDetailScreen() {
         {deducted.length > 0 ? (
           <View style={styles.section}>
             <Text variant="titleMedium" accessibilityRole="header">
-              Списано
+              {t('history.detail.deducted')}
             </Text>
             {deducted.map((d, i) => (
               <View key={d.ingredientId}>
                 {i > 0 ? <Divider /> : null}
                 <View style={styles.line}>
                   <Text variant="bodyLarge" style={styles.flex}>
-                    {ingredients.get(d.ingredientId)?.name ?? d.ingredientId}
+                    {productName(d.ingredientId)}
                   </Text>
                   <Text variant="bodyLarge">{formatAmount(d.amount, d.unit)}</Text>
                 </View>
@@ -187,15 +193,16 @@ export default function EntryDetailScreen() {
         {session?.usedAmounts && session.usedAmounts.length > 0 ? (
           <View style={styles.section}>
             <Text variant="titleMedium" accessibilityRole="header">
-              Использовано
-              {session.servings > 1 ? ` на ${session.servings} порц.` : ''}
+              {session.servings > 1
+                ? t('history.detail.usedFor', { count: session.servings })
+                : t('history.detail.used')}
             </Text>
             {session.usedAmounts.map((u, i) => (
               <View key={u.ingredientId}>
                 {i > 0 ? <Divider /> : null}
                 <View style={styles.line}>
                   <Text variant="bodyLarge" style={styles.flex}>
-                    {ingredients.get(u.ingredientId)?.name ?? u.ingredientId}
+                    {productName(u.ingredientId)}
                   </Text>
                   <Text variant="bodyLarge">{formatAmount(u.amount, u.unit)}</Text>
                 </View>
@@ -206,7 +213,7 @@ export default function EntryDetailScreen() {
 
         <View style={styles.section}>
           <Text variant="labelLarge" style={{ color: theme.colors.onSurfaceVariant }}>
-            {log.photoUri ? 'Своё фото' : 'Добавить своё фото'}
+            {log.photoUri ? t('addMeal.photo.own') : t('addMeal.photo.addOwn')}
           </Text>
           <PhotoField value={log.photoUri} onChange={changePhoto} showPreview={false} />
         </View>
@@ -217,7 +224,7 @@ export default function EntryDetailScreen() {
             icon="pencil-outline"
             onPress={() => editRef.current?.open(log)}
             contentStyle={styles.button}>
-            Изменить
+            {t('common.actions.edit')}
           </Button>
           <Button
             mode="outlined"
@@ -225,7 +232,7 @@ export default function EntryDetailScreen() {
             textColor={theme.colors.error}
             onPress={() => setDeletePlan(planDelete(log))}
             contentStyle={styles.button}>
-            Удалить запись
+            {t('history.detail.deleteEntry')}
           </Button>
         </View>
       </ScrollView>
@@ -235,7 +242,7 @@ export default function EntryDetailScreen() {
       <PhotoViewer
         source={viewerOpen ? viewerSource : null}
         onClose={() => setViewerOpen(false)}
-        accessibilityLabel={log.name}
+        accessibilityLabel={name}
       />
     </>
   );

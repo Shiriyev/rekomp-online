@@ -5,6 +5,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { IconButton } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useT } from '@/i18n';
+
 type Props = {
   source: ImageSource | number | null;
   onClose: () => void;
@@ -13,6 +15,7 @@ type Props = {
 
 /** Full-screen photo with pinch / double-tap zoom; Android back closes it. */
 export function PhotoViewer({ source, onClose, accessibilityLabel }: Props) {
+  const t = useT();
   return (
     <Modal
       visible={source !== null}
@@ -45,7 +48,7 @@ export function PhotoViewer({ source, onClose, accessibilityLabel }: Props) {
               containerColor="rgba(0,0,0,0.5)"
               size={28}
               onPress={onClose}
-              accessibilityLabel="Закрыть фото"
+              accessibilityLabel={t('ui.photoViewer.close')}
             />
           </View>
         </SafeAreaView>

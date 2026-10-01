@@ -3,6 +3,7 @@ import { Button, Card, IconButton, ProgressBar, Text } from 'react-native-paper'
 
 import type { CookTimer } from '@/db/schema';
 import { formatTimer, isDone, isRunning, remainingSec } from '@/domain/cooking';
+import { useT } from '@/i18n';
 import { spacing, useAppTheme } from '@/theme';
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 
 export function TimerCard({ durationSec, timer, now, onStart, onPause, onReset }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const state = timer ?? { durationSec, startedAt: null, elapsedSec: 0 };
   const running = isRunning(state, now);
   const done = timer !== undefined && isDone(state, now);
@@ -34,8 +36,12 @@ export function TimerCard({ durationSec, timer, now, onStart, onPause, onReset }
           style={styles.time}
           accessibilityRole="timer"
           accessibilityLiveRegion="polite"
-          accessibilityLabel={done ? 'Таймер готов' : `Осталось ${formatTimer(left)}`}>
-          {done ? 'Готово!' : formatTimer(left)}
+          accessibilityLabel={
+            done
+              ? t('cooking.timer.doneA11y')
+              : t('cooking.timer.leftA11y', { time: formatTimer(left) })
+          }>
+          {done ? t('cooking.timer.done') : formatTimer(left)}
         </Text>
         <ProgressBar
           progress={1 - left / durationSec}
@@ -50,7 +56,7 @@ export function TimerCard({ durationSec, timer, now, onStart, onPause, onReset }
               onPress={onPause}
               contentStyle={styles.big}
               style={styles.flex}>
-              Пауза
+              {t('cooking.timer.pause')}
             </Button>
           ) : (
             <Button
@@ -59,7 +65,11 @@ export function TimerCard({ durationSec, timer, now, onStart, onPause, onReset }
               onPress={onStart}
               contentStyle={styles.big}
               style={styles.flex}>
-              {done ? 'Ещё раз' : touched ? 'Продолжить' : 'Старт'}
+              {done
+                ? t('cooking.timer.again')
+                : touched
+                  ? t('common.actions.continue')
+                  : t('cooking.timer.start')}
             </Button>
           )}
           {touched ? (
@@ -68,7 +78,7 @@ export function TimerCard({ durationSec, timer, now, onStart, onPause, onReset }
               mode="outlined"
               size={28}
               onPress={onReset}
-              accessibilityLabel="Сбросить таймер"
+              accessibilityLabel={t('cooking.timer.resetA11y')}
             />
           ) : null}
         </View>

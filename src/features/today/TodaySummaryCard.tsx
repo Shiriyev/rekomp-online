@@ -3,6 +3,7 @@ import { Card, Text } from 'react-native-paper';
 
 import { remaining, type DaySummary, type Targets } from '@/domain/today';
 import { MEAL_LABELS, MEAL_ORDER } from '@/features/meals';
+import { useT } from '@/i18n';
 import { formatInt } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { MacroRing } from '@/ui/MacroRing';
@@ -11,6 +12,7 @@ type Props = { summary: DaySummary; targets: Targets };
 
 export function TodaySummaryCard({ summary, targets }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const { total, byMeal } = summary;
   const left = remaining(total, targets);
   const over = left.kcal < 0;
@@ -26,7 +28,10 @@ export function TodaySummaryCard({ summary, targets }: Props) {
               progress={total.kcal / targets.kcalTarget}
               color={kcalColor}
               trackColor={track}
-              accessibilityLabel={`Калории: ${formatInt(total.kcal)} из ${formatInt(targets.kcalTarget)}`}>
+              accessibilityLabel={t('today.summary.kcalA11y', {
+                eaten: formatInt(total.kcal),
+                target: formatInt(targets.kcalTarget),
+              })}>
               <Text
                 variant="headlineSmall"
                 numberOfLines={1}
@@ -39,13 +44,13 @@ export function TodaySummaryCard({ summary, targets }: Props) {
                 numberOfLines={1}
                 adjustsFontSizeToFit
                 style={[styles.ringText, { color: theme.colors.onSurfaceVariant }]}>
-                из {formatInt(targets.kcalTarget)} ккал
+                {t('today.summary.kcalOf', { target: formatInt(targets.kcalTarget) })}
               </Text>
             </MacroRing>
             <Text variant="bodyMedium" style={{ color: over ? theme.colors.error : undefined }}>
               {over
-                ? `Перебор ${formatInt(-left.kcal)} ккал`
-                : `Осталось ${formatInt(left.kcal)} ккал`}
+                ? t('today.summary.kcalOver', { kcal: formatInt(-left.kcal) })
+                : t('today.summary.kcalLeft', { kcal: formatInt(left.kcal) })}
             </Text>
           </View>
 
@@ -54,7 +59,10 @@ export function TodaySummaryCard({ summary, targets }: Props) {
               progress={total.protein / targets.proteinTargetG}
               color={theme.colors.protein}
               trackColor={track}
-              accessibilityLabel={`Белок: ${formatInt(total.protein)} из ${formatInt(targets.proteinTargetG)} грамм`}>
+              accessibilityLabel={t('today.summary.proteinA11y', {
+                eaten: formatInt(total.protein),
+                target: formatInt(targets.proteinTargetG),
+              })}>
               <Text
                 variant="headlineSmall"
                 numberOfLines={1}
@@ -67,15 +75,15 @@ export function TodaySummaryCard({ summary, targets }: Props) {
                 numberOfLines={1}
                 adjustsFontSizeToFit
                 style={[styles.ringText, { color: theme.colors.onSurfaceVariant }]}>
-                из {formatInt(targets.proteinTargetG)} г белка
+                {t('today.summary.proteinOf', { target: formatInt(targets.proteinTargetG) })}
               </Text>
             </MacroRing>
             <Text variant="bodyMedium">
               {left.proteinToMin > 0
-                ? `До минимума ${formatInt(left.proteinToMin)} г`
+                ? t('today.summary.toMin', { grams: formatInt(left.proteinToMin) })
                 : left.proteinToTarget > 0
-                  ? `До цели ${formatInt(left.proteinToTarget)} г`
-                  : 'Белок на сегодня есть ✓'}
+                  ? t('today.summary.toTarget', { grams: formatInt(left.proteinToTarget) })
+                  : t('today.summary.proteinDone')}
             </Text>
           </View>
         </View>

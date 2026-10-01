@@ -5,6 +5,7 @@ import { Card, Text } from 'react-native-paper';
 import type { MealType } from '@/domain/types';
 import { RECIPE_IMAGES } from '@/features/images';
 import { MEAL_ICONS, MEAL_LABELS, MEAL_ORDER } from '@/features/meals';
+import { t } from '@/i18n';
 import { formatInt } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -19,7 +20,9 @@ const rangeLabel = (r?: { min: number; max: number }) => {
   if (!r) return '';
   const min = Math.round(r.min / 10) * 10;
   const max = Math.round(r.max / 10) * 10;
-  return min === max ? `~${formatInt(min)} ккал` : `${formatInt(min)}–${formatInt(max)} ккал`;
+  return min === max
+    ? t('today.grid.kcalAbout', { kcal: formatInt(min) })
+    : t('today.grid.kcalRange', { min: formatInt(min), max: formatInt(max) });
 };
 
 /** 2×2 entry points into the recipe lists. */

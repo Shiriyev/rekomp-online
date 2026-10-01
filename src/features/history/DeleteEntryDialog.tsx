@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 import { useIngredientsMap } from '@/db/hooks';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
@@ -16,7 +18,13 @@ type Props = { plan: DeletePlan | null; onDone: () => void };
 
 export function DeleteEntryDialog({ plan, onDone }: Props) {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const ingredients = useIngredientsMap();
+  const productName = (id: string) => {
+    const ingredient = ingredients.get(id);
+    return ingredient ? content.ingredientName(ingredient) : id;
+  };
   const run = (fn: () => void) => {
     fn();
     onDone();
@@ -25,36 +33,44 @@ export function DeleteEntryDialog({ plan, onDone }: Props) {
   return (
     <Portal>
       <Dialog visible={plan !== null} onDismiss={onDone}>
-        <Dialog.Title>Удалить «{plan?.log.name}»?</Dialog.Title>
+        <Dialog.Title>
+          {t('history.delete.title', { name: plan ? content.entryName(plan.log) : '' })}
+        </Dialog.Title>
         <Dialog.Content style={styles.content}>
           {plan?.kind === 'simple' ? <Text variant="bodyMedium">{plan.message}</Text> : null}
           {plan?.kind === 'cooked' && plan.preview.canUndo ? (
             <>
               <Text variant="bodyMedium">
                 {plan.preview.products.length > 0
-                  ? 'Это блюдо из готовки. Вернуть продукты домой?'
-                  : 'Это блюдо из готовки. Дома тогда ничего не списалось — возвращать нечего.'}
+                  ? t('history.delete.cookedReturn')
+                  : t('history.delete.cookedNothing')}
               </Text>
               {plan.preview.products.map((p) => (
                 <Text key={p.ingredientId} variant="bodyMedium">
-                  • {ingredients.get(p.ingredientId)?.name ?? p.ingredientId}: +
-                  {formatAmount(p.amount, p.unit)}
+                  {t('history.delete.product', {
+                    name: productName(p.ingredientId),
+                    amount: formatAmount(p.amount, p.unit),
+                  })}
                 </Text>
               ))}
               {plan.preview.portionsToRemove > 0 ? (
                 <Text variant="bodyMedium" style={{ color: theme.colors.warning }}>
-                  Из холодильника уберутся порции этой готовки: {plan.preview.portionsToRemove}.
+                  {t('history.delete.portionsRemoved', {
+                    n: plan.preview.portionsToRemove,
+                  })}
                 </Text>
               ) : null}
             </>
           ) : null}
           {plan?.kind === 'manualProducts' ? (
             <>
-              <Text variant="bodyMedium">С этой записью списались продукты. Вернуть их домой?</Text>
+              <Text variant="bodyMedium">{t('history.delete.manualReturn')}</Text>
               {plan.products.map((p) => (
                 <Text key={p.ingredientId} variant="bodyMedium">
-                  • {ingredients.get(p.ingredientId)?.name ?? p.ingredientId}: +
-                  {formatAmount(p.amount, p.unit)}
+                  {t('history.delete.product', {
+                    name: productName(p.ingredientId),
+                    amount: formatAmount(p.amount, p.unit),
+                  })}
                 </Text>
               ))}
             </>
@@ -62,19 +78,19 @@ export function DeleteEntryDialog({ plan, onDone }: Props) {
           {plan?.kind === 'cooked' && !plan.preview.canUndo ? (
             <Text variant="bodyMedium">
               {plan.preview.reason === 'portions_eaten'
-                ? 'Порции из этой кастрюли уже ели, поэтому продукты вернуть нельзя — удалится только запись.'
-                : 'Удалится только запись.'}
+                ? t('history.delete.portionsEaten')
+                : t('history.delete.entryOnlyNote')}
             </Text>
           ) : null}
         </Dialog.Content>
         <Dialog.Actions style={styles.actions}>
-          <Button onPress={onDone}>Отмена</Button>
+          <Button onPress={onDone}>{t('common.actions.cancel')}</Button>
           {plan?.kind === 'simple' ? (
             <Button
               mode="contained"
               buttonColor={theme.colors.error}
               onPress={() => run(() => deleteSimple(plan.log))}>
-              Удалить
+              {t('common.actions.delete')}
             </Button>
           ) : null}
           {/* Dialog.Actions passes props to direct children, so no fragments here. */}
@@ -82,17 +98,17 @@ export function DeleteEntryDialog({ plan, onDone }: Props) {
             <Button
               textColor={theme.colors.error}
               onPress={() => run(() => deleteEntryOnly(plan.log))}>
-              Только запись
+              {t('history.delete.entryOnly')}
             </Button>
           ) : null}
           {plan?.kind === 'manualProducts' ? (
             <Button mode="contained" onPress={() => run(() => deleteSimple(plan.log))}>
-              Удалить и вернуть
+              {t('history.delete.deleteAndReturn')}
             </Button>
           ) : null}
           {plan?.kind === 'cooked' && plan.preview.canUndo ? (
             <Button mode="contained" onPress={() => run(() => deleteCookedWithProducts(plan.log))}>
-              Удалить и вернуть
+              {t('history.delete.deleteAndReturn')}
             </Button>
           ) : null}
         </Dialog.Actions>

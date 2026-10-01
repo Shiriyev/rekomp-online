@@ -4,7 +4,8 @@ import { Button, Chip, Text } from 'react-native-paper';
 import { useReducedMotion } from 'react-native-reanimated';
 
 import type { Macros } from '@/domain/types';
-import { formatInt, pluralRu } from '@/lib/format';
+import { useT } from '@/i18n';
+import { formatInt } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
 type Props = {
@@ -29,6 +30,7 @@ export function FinishView({
   onBack,
 }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const { width } = useWindowDimensions();
   const reduceMotion = useReducedMotion();
 
@@ -44,20 +46,25 @@ export function FinishView({
         />
       )}
       <Text variant="displaySmall" accessibilityRole="header" style={styles.center}>
-        Готово! 🎉
+        {t('cooking.finish.title')}
       </Text>
       <Text variant="titleLarge" style={styles.center}>
         {recipeName}
       </Text>
       <Text variant="headlineSmall" style={[styles.center, { color: theme.colors.primary }]}>
-        +{formatInt(perPortion.kcal)} ккал, +{formatInt(perPortion.protein)} г белка
+        {t('cooking.finish.macros', {
+          kcal: formatInt(perPortion.kcal),
+          protein: formatInt(perPortion.protein),
+        })}
       </Text>
       <Text variant="bodyMedium" style={[styles.center, { color: theme.colors.onSurfaceVariant }]}>
-        {isBatch ? `на порцию · всего порций: ${servings}` : 'на порцию'}
+        {isBatch
+          ? t('cooking.finish.perPortionBatch', { count: servings })
+          : t('cooking.finish.perPortion')}
       </Text>
       {firstTime ? (
         <Chip icon="medal-outline" style={styles.badge}>
-          Первая готовка этого блюда
+          {t('cooking.finish.firstTime')}
         </Chip>
       ) : null}
 
@@ -67,7 +74,7 @@ export function FinishView({
           icon="silverware-fork-knife"
           onPress={onEatNow}
           contentStyle={styles.big}>
-          {isBatch && servings > 1 ? 'Съесть сейчас 1 порцию' : 'Съесть сейчас'}
+          {isBatch && servings > 1 ? t('cooking.finish.eatOnePortion') : t('cooking.finish.eatNow')}
         </Button>
         <Button
           mode="outlined"
@@ -75,10 +82,10 @@ export function FinishView({
           onPress={onStoreAll}
           contentStyle={styles.big}>
           {isBatch && servings > 1
-            ? `Убрать все ${servings} ${pluralRu(servings, ['порцию', 'порции', 'порций'])} в холодильник`
-            : 'Убрать в холодильник'}
+            ? t('cooking.finish.storeAll', { count: servings })
+            : t('cooking.finish.store')}
         </Button>
-        <Button onPress={onBack}>Вернуться к шагам</Button>
+        <Button onPress={onBack}>{t('cooking.finish.backToSteps')}</Button>
       </View>
     </View>
   );

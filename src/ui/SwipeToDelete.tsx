@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { Text } from 'react-native-paper';
 
+import { useT } from '@/i18n';
 import { spacing, useAppTheme } from '@/theme';
 
 type Props = { onDelete: () => void; children: ReactNode; label?: string };
@@ -12,8 +13,9 @@ type Props = { onDelete: () => void; children: ReactNode; label?: string };
  * Swipe left to delete. Screens also offer a visible delete action (e.g. in the edit sheet)
  * so the feature is reachable without the gesture.
  */
-export function SwipeToDelete({ onDelete, children, label = 'Удалить' }: Props) {
+export function SwipeToDelete({ onDelete, children, label }: Props) {
   const theme = useAppTheme();
+  const t = useT();
 
   return (
     <ReanimatedSwipeable
@@ -29,7 +31,7 @@ export function SwipeToDelete({ onDelete, children, label = 'Удалить' }: 
             color={theme.colors.onErrorContainer}
           />
           <Text variant="labelLarge" style={{ color: theme.colors.onErrorContainer }}>
-            {label}
+            {label ?? t('common.actions.delete')}
           </Text>
         </View>
       )}>

@@ -4,6 +4,8 @@ import { Button, Dialog, Portal, Text } from 'react-native-paper';
 
 import { BackupFormatError } from '@/db/backup';
 import { showUndo } from '@/features/undo/undoStore';
+import { useT, useTranslateMessage } from '@/i18n';
+import { formatLongDate } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
 import {
@@ -17,13 +19,10 @@ import {
 type Dialogs =
   { kind: 'import'; picked: PickedBackup } | { kind: 'reset1' } | { kind: 'reset2' } | null;
 
-const exportedDate = (ms: number) =>
-  ms > 0
-    ? new Date(ms).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
-    : 'неизвестно';
-
 /** Profile → «Данные»: backup to a JSON file, restore, reset. */
 export function DataSection() {
+  const t = useT();
+  const translate = useTranslateMessage();
   const theme = useAppTheme();
   const [busy, setBusy] = useState(false);
   const [dialog, setDialog] = useState<Dialogs>(null);
@@ -34,7 +33,9 @@ export function DataSection() {
       await fn();
     } catch (e) {
       showUndo(
-        e instanceof BackupFormatError || e instanceof Error ? e.message : 'Что-то пошло не так',
+        e instanceof BackupFormatError || e instanceof Error
+          ? translate(e.message)
+          : t('common.somethingWrong'),
       );
     } finally {
       setBusy(false);
@@ -44,14 +45,13 @@ export function DataSection() {
   return (
     <View style={styles.section}>
       <Text variant="titleMedium" accessibilityRole="header">
-        Данные
+        {t('backup.title')}
       </Text>
       <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-        Всё хранится только на телефоне. Бэкап — это файл с твоими данными (включая вес): храни его
-        в надёжном месте.
+        {t('backup.privacy')}
       </Text>
       <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-        Фото не входят в резервную копию.
+        {t('backup.noPhotos')}
       </Text>
       <View style={styles.row}>
         <Button
@@ -60,7 +60,7 @@ export function DataSection() {
           disabled={busy}
           onPress={() => guard(exportAndShare)}
           style={styles.flex}>
-          Экспорт
+          {t('backup.export')}
         </Button>
         <Button
           mode="outlined"
@@ -73,31 +73,37 @@ export function DataSection() {
               if (picked) setDialog({ kind: 'import', picked });
             })
           }>
-          Импорт
+          {t('backup.import')}
         </Button>
       </View>
       <Button
         textColor={theme.colors.error}
         icon="delete-forever-outline"
         onPress={() => setDialog({ kind: 'reset1' })}>
-        Сбросить все данные
+        {t('backup.resetAll')}
       </Button>
       <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-        Фото блюд и продуктов — авторы Pexels (pexels.com), список в ATTRIBUTION.md.
+        {t('backup.photoCredits')}
       </Text>
 
       <Portal>
         <Dialog visible={dialog?.kind === 'import'} onDismiss={() => setDialog(null)}>
-          <Dialog.Title>Восстановить из бэкапа?</Dialog.Title>
+          <Dialog.Title>{t('backup.importTitle')}</Dialog.Title>
           <Dialog.Content>
             <Text variant="bodyMedium">
               {dialog?.kind === 'import'
-                ? `Бэкап от ${exportedDate(dialog.picked.backup.exportedAt)}, записей еды: ${dialog.picked.entries}. Все текущие данные будут заменены.`
+                ? t('backup.importText', {
+                    date:
+                      dialog.picked.backup.exportedAt > 0
+                        ? formatLongDate(dialog.picked.backup.exportedAt)
+                        : t('backup.unknownDate'),
+                    entries: dialog.picked.entries,
+                  })
                 : ''}
             </Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => setDialog(null)}>Отмена</Button>
+            <Button onPress={() => setDialog(null)}>{t('common.actions.cancel')}</Button>
             <Button
               mode="contained"
               onPress={() => {
@@ -106,36 +112,34 @@ export function DataSection() {
                 setDialog(null);
                 void guard(async () => {
                   applyBackup(backup);
-                  showUndo('Данные восстановлены');
+                  showUndo(t('backup.restored'));
                 });
               }}>
-              Заменить
+              {t('backup.replace')}
             </Button>
           </Dialog.Actions>
         </Dialog>
 
         <Dialog visible={dialog?.kind === 'reset1'} onDismiss={() => setDialog(null)}>
-          <Dialog.Title>Сбросить все данные?</Dialog.Title>
+          <Dialog.Title>{t('backup.reset1Title')}</Dialog.Title>
           <Dialog.Content>
-            <Text variant="bodyMedium">
-              Удалятся профиль, дневник, продукты, списки и каталог. Сначала можно сделать экспорт.
-            </Text>
+            <Text variant="bodyMedium">{t('backup.reset1Text')}</Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => setDialog(null)}>Отмена</Button>
+            <Button onPress={() => setDialog(null)}>{t('common.actions.cancel')}</Button>
             <Button textColor={theme.colors.error} onPress={() => setDialog({ kind: 'reset2' })}>
-              Продолжить
+              {t('common.actions.continue')}
             </Button>
           </Dialog.Actions>
         </Dialog>
 
         <Dialog visible={dialog?.kind === 'reset2'} onDismiss={() => setDialog(null)}>
-          <Dialog.Title>Точно удалить всё?</Dialog.Title>
+          <Dialog.Title>{t('backup.reset2Title')}</Dialog.Title>
           <Dialog.Content>
-            <Text variant="bodyMedium">Это нельзя отменить.</Text>
+            <Text variant="bodyMedium">{t('backup.reset2Text')}</Text>
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => setDialog(null)}>Нет</Button>
+            <Button onPress={() => setDialog(null)}>{t('backup.no')}</Button>
             <Button
               mode="contained"
               buttonColor={theme.colors.error}
@@ -143,7 +147,7 @@ export function DataSection() {
                 setDialog(null);
                 resetEverything();
               }}>
-              Удалить всё
+              {t('backup.deleteAll')}
             </Button>
           </Dialog.Actions>
         </Dialog>

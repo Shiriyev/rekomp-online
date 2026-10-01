@@ -8,6 +8,8 @@ import type { MealLog } from '@/db/schema';
 import { dayVerdict } from '@/domain/history';
 import type { Macros } from '@/domain/types';
 import { MEAL_ICONS, MEAL_LABELS } from '@/features/meals';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatInt, formatTime } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 
@@ -39,6 +41,7 @@ export function DayCard({
   onDelete,
 }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const verdict = dayVerdict(totals, targets);
   const kcalColor =
     verdict.kcal === 'ok'
@@ -47,7 +50,7 @@ export function DayCard({
         ? theme.colors.error
         : theme.colors.warning;
   const proteinColor = verdict.protein === 'ok' ? theme.colors.success : theme.colors.warning;
-  const kcalWord = verdict.kcal === 'ok' ? 'в норме' : verdict.kcal === 'over' ? 'перебор' : 'мало';
+  const kcalWord = t(`history.day.verdict.${verdict.kcal}`);
 
   return (
     <Card mode="outlined" style={styles.card}>
@@ -55,16 +58,24 @@ export function DayCard({
         onPress={onToggle}
         accessibilityRole="button"
         accessibilityState={{ expanded }}
-        accessibilityLabel={`${label}: ${formatInt(totals.kcal)} килокалорий, ${kcalWord}; белок ${formatInt(totals.protein)} грамм`}>
+        accessibilityLabel={t('history.day.a11y', {
+          label,
+          kcal: formatInt(totals.kcal),
+          verdict: kcalWord,
+          protein: formatInt(totals.protein),
+        })}>
         <View style={styles.header}>
           <View style={styles.flex}>
             <Text variant="titleMedium">{label}</Text>
             <View style={styles.totals}>
               <Text variant="bodyMedium" style={{ color: kcalColor }}>
-                {formatInt(totals.kcal)} / {formatInt(targets.kcalTarget)} ккал
+                {t('history.day.totalKcal', {
+                  kcal: formatInt(totals.kcal),
+                  target: formatInt(targets.kcalTarget),
+                })}
               </Text>
               <Text variant="bodyMedium" style={{ color: proteinColor }}>
-                {formatInt(totals.protein)} г белка
+                {t('common.proteinValue', { value: formatInt(totals.protein) })}
               </Text>
             </View>
           </View>
@@ -90,12 +101,14 @@ function DayEntries({
   onDelete: (log: MealLog) => void;
 }) {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const logs = useDayLogs(localDate);
 
   if (logs.length === 0) {
     return (
       <Text variant="bodyMedium" style={[styles.empty, { color: theme.colors.onSurfaceVariant }]}>
-        Записей нет
+        {t('history.day.noEntries')}
       </Text>
     );
   }
@@ -105,7 +118,9 @@ function DayEntries({
       {logs.map((log) => (
         <View key={log.id}>
           <Divider />
-          <TouchableRipple onPress={() => onOpen(log)} accessibilityHint="Открыть запись">
+          <TouchableRipple
+            onPress={() => onOpen(log)}
+            accessibilityHint={t('history.day.openHint')}>
             <View style={styles.entry}>
               {log.photoUri ? (
                 <Image
@@ -127,7 +142,7 @@ function DayEntries({
               )}
               <View style={styles.flex}>
                 <Text variant="bodyLarge" numberOfLines={1}>
-                  {log.name}
+                  {content.entryName(log)}
                 </Text>
                 <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
                   {formatTime(log.timestamp)} · {MEAL_LABELS[log.mealType]}
@@ -136,13 +151,13 @@ function DayEntries({
               <View style={styles.entryMacros}>
                 <Text variant="titleSmall">{formatInt(log.kcal)}</Text>
                 <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                  {formatInt(log.protein)} г
+                  {t('history.day.proteinShort', { value: formatInt(log.protein) })}
                 </Text>
               </View>
               <IconButton
                 icon="delete-outline"
                 onPress={() => onDelete(log)}
-                accessibilityLabel={`Удалить ${log.name}`}
+                accessibilityLabel={t('history.day.deleteEntry', { name: content.entryName(log) })}
               />
             </View>
           </TouchableRipple>

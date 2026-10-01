@@ -1,6 +1,8 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
+import { t } from '@/i18n';
+
 const CHANNEL_ID = 'cooking-timers';
 
 let channelReady: Promise<void> | null = null;
@@ -8,7 +10,7 @@ let channelReady: Promise<void> | null = null;
 function ensureChannel(): Promise<void> {
   if (Platform.OS !== 'android') return Promise.resolve();
   channelReady ??= Notifications.setNotificationChannelAsync(CHANNEL_ID, {
-    name: 'Таймеры готовки',
+    name: t('cooking.notification.channel'),
     importance: Notifications.AndroidImportance.MAX,
     vibrationPattern: [0, 400, 200, 400, 200, 400],
     enableVibrate: true,
