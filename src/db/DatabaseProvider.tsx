@@ -8,6 +8,7 @@ import { darkTheme, lightTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 
 import { db } from './client';
+import { runDataMigrations } from './logicalDay';
 import migrations from './migrations/migrations';
 import { runSeed } from './seed/runSeed';
 
@@ -17,11 +18,12 @@ SplashScreen.preventAutoHideAsync().catch(() => {
 
 let seedOutcome: { ok: true } | { ok: false; error: unknown } | undefined;
 
-/** Runs the (idempotent, synchronous) seed at most once per app process. */
+/** Runs the (idempotent, synchronous) seed and data migrations at most once per app process. */
 function ensureSeeded() {
   if (!seedOutcome) {
     try {
       runSeed(db);
+      runDataMigrations(db);
       seedOutcome = { ok: true };
     } catch (error) {
       seedOutcome = { ok: false, error };

@@ -7,10 +7,12 @@ import { repositories } from '@/db';
 import { useProfile, useThemePreference } from '@/db/hooks';
 import type { Profile } from '@/db/schema';
 import { THEME_PREFERENCES, type ThemePreference } from '@/domain/schemas';
+import { DayStartDialog, dayStartLabel } from '@/features/profile/DayStartDialog';
 import { ACTIVITY_TITLES, goalRateLabel, SEX_LABELS } from '@/features/profile/labels';
 import { WeightDialog } from '@/features/profile/WeightDialog';
 import { DataSection } from '@/features/backup/DataSection';
-import { formatDecimal, formatInt, formatKcal } from '@/lib/format';
+import { showUndo } from '@/features/undo/undoStore';
+import { formatDecimal, formatInt, formatKcal, pluralRu } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 
 const THEME_LABELS: Record<ThemePreference, string> = {
@@ -24,6 +26,7 @@ export default function ProfileScreen() {
   const { profile } = useProfile();
   const themePreference = useThemePreference();
   const [weightOpen, setWeightOpen] = useState(false);
+  const [dayStartOpen, setDayStartOpen] = useState(false);
 
   if (!profile) return null;
 
@@ -73,6 +76,18 @@ export default function ProfileScreen() {
         </Card.Actions>
       </Card>
 
+      <Card mode="outlined">
+        <Card.Content style={styles.gap}>
+          <Row label="Новый день начинается" value={dayStartLabel(profile.dayStartHour)} />
+          <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+            Еда до этого часа записывается во вчерашний день.
+          </Text>
+        </Card.Content>
+        <Card.Actions>
+          <Button onPress={() => setDayStartOpen(true)}>Изменить</Button>
+        </Card.Actions>
+      </Card>
+
       <View style={styles.gap}>
         <Text variant="titleMedium" accessibilityRole="header">
           Тема
@@ -92,6 +107,21 @@ export default function ProfileScreen() {
           profile={profile}
           onDismiss={() => setWeightOpen(false)}
           onSave={save}
+        />
+      ) : null}
+      {dayStartOpen ? (
+        <DayStartDialog
+          current={profile.dayStartHour}
+          onDismiss={() => setDayStartOpen(false)}
+          onConfirm={(hour) => {
+            setDayStartOpen(false);
+            const moved = repositories.profile.setDayStartHour(hour);
+            showUndo(
+              moved > 0
+                ? `Пересчитано: ${moved} ${pluralRu(moved, ['запись', 'записи', 'записей'])} в другом дне`
+                : 'Готово: записи остались в своих днях',
+            );
+          }}
         />
       ) : null}
     </ScrollView>

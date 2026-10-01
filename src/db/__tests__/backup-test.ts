@@ -11,6 +11,7 @@ import {
   parseBackup,
   resetAllData,
 } from '../backup';
+import { runDataMigrations } from '../logicalDay';
 import { createRepositories, type Repositories } from '../repositories';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
@@ -24,6 +25,8 @@ const NOW = Date.UTC(2026, 8, 27, 10);
 beforeEach(() => {
   ({ db, close } = createTestDb());
   runSeed(db);
+  // Same start-up sequence as DatabaseProvider.
+  runDataMigrations(db);
   repos = createRepositories(db);
 });
 afterEach(() => close());

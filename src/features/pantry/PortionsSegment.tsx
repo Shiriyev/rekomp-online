@@ -3,7 +3,8 @@ import { Button, Card, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
 import { useAvailablePortions } from '@/db/hooks';
-import { daysBetween, toLocalDate } from '@/domain/dates';
+import { daysBetween } from '@/domain/dates';
+import { deviceTimeZone, getLogicalDate } from '@/domain/day';
 import { suggestMealType } from '@/domain/today';
 import { showUndo } from '@/features/undo/undoStore';
 import { formatInt, formatKcal, pluralRu } from '@/lib/format';
@@ -24,7 +25,7 @@ const ageLabel = (days: number) =>
 
 export function PortionsSegment() {
   const theme = useAppTheme();
-  const { now, today } = useClock();
+  const { now, today, dayStartHour } = useClock();
   const portions = useAvailablePortions();
 
   if (portions.length === 0) {
@@ -40,7 +41,7 @@ export function PortionsSegment() {
   return (
     <ScrollView contentContainerStyle={styles.list}>
       {portions.map((p) => {
-        const age = daysBetween(toLocalDate(p.cookedAt), today);
+        const age = daysBetween(getLogicalDate(p.cookedAt, dayStartHour, deviceTimeZone()), today);
         const old = age > FRESH_DAYS;
         return (
           <Card key={p.id} mode="outlined">

@@ -1,12 +1,12 @@
 import { and, asc, count, desc, eq, isNotNull, isNull, ne } from 'drizzle-orm';
 
 import { afterTaking, planConsumption } from '../../domain/cooking';
-import { toLocalDate } from '../../domain/dates';
 import { recipeMacros, roundKcal, roundProtein } from '../../domain/nutrition';
 import type { PantryStock } from '../../domain/pantry';
 import type { Macros, MealType } from '../../domain/types';
 import { normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
+import { logicalDateAt } from '../logicalDay';
 import {
   cookSessions,
   ingredients,
@@ -190,7 +190,7 @@ export function createCookRepo(db: AppDb) {
         .values({
           id: newId(),
           timestamp: now,
-          localDate: toLocalDate(now),
+          localDate: logicalDateAt(tx, now),
           mealType: options.mealType,
           source: 'recipe',
           recipeId: recipe.id,

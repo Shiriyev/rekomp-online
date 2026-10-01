@@ -19,7 +19,7 @@ import type { AvailablePortion } from '@/db/repositories/portionsRepo';
 import type { ManualLogInput } from '@/domain/schemas';
 import type { MealType } from '@/domain/types';
 import { proteinStreak } from '@/domain/cooking';
-import { toLocalDate } from '@/domain/dates';
+import { addDays } from '@/domain/dates';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
 import { ManualEntrySheet } from '@/features/today/ManualEntrySheet';
 import { MealCategoryGrid } from '@/features/today/MealCategoryGrid';
@@ -42,7 +42,7 @@ export default function TodayScreen() {
   const catalog = useRecipeCatalog();
   const sheetRef = useRef<BottomSheetModal>(null);
   const activeCook = useActiveCook();
-  const since = toLocalDate(now.getTime() - STREAK_WINDOW_DAYS * 86_400_000);
+  const since = addDays(today, -STREAK_WINDOW_DAYS);
   const dailyProtein = useDailyProtein(since);
 
   const summary = useMemo(() => summarizeDay(logs), [logs]);

@@ -133,6 +133,8 @@ describe('logRepo', () => {
   // 21:30 UTC = 23:30 Budapest (27 Sep), 22:30 UTC = 00:30 Budapest (28 Sep).
   const lateEvening = Date.UTC(2026, 8, 27, 21, 30);
   const afterMidnight = Date.UTC(2026, 8, 27, 22, 30);
+  // 04:30 in Budapest: the logical day (starting 04:00) has rolled over.
+  const nextMorning = Date.UTC(2026, 8, 28, 2, 30);
 
   it('adds a validated manual entry grouped by local date', () => {
     const log = repos.logs.addManual(
@@ -151,18 +153,17 @@ describe('logRepo', () => {
     expect(log.id).toMatch(/^[0-9a-f-]{36}$/);
   });
 
-  it('computes day totals per local date', () => {
+  it('computes day totals per logical date (the day ends at 04:00)', () => {
     repos.logs.addManual({ name: 'A', kcal: 500, protein: 40, mealType: 'breakfast' }, lateEvening);
     repos.logs.addManual({ name: 'B', kcal: 200, protein: 10.5, mealType: 'snack' }, lateEvening);
-    repos.logs.addManual(
-      { name: 'C', kcal: 300, protein: 20, mealType: 'breakfast' },
-      afterMidnight,
-    );
+    // 00:30 still belongs to the 27th.
+    repos.logs.addManual({ name: 'C', kcal: 100, protein: 5, mealType: 'snack' }, afterMidnight);
+    repos.logs.addManual({ name: 'D', kcal: 300, protein: 20, mealType: 'breakfast' }, nextMorning);
 
-    expect(repos.logs.dayTotals('2026-09-27')).toEqual({ kcal: 700, protein: 50.5 });
+    expect(repos.logs.dayTotals('2026-09-27')).toEqual({ kcal: 800, protein: 55.5 });
     expect(repos.logs.dayTotals('2026-09-28')).toEqual({ kcal: 300, protein: 20 });
     expect(repos.logs.dayTotals('2026-09-29')).toEqual({ kcal: 0, protein: 0 });
-    expect(repos.logs.listByDate('2026-09-27').map((l) => l.name)).toEqual(['A', 'B']);
+    expect(repos.logs.listByDate('2026-09-27').map((l) => l.name)).toEqual(['A', 'B', 'C']);
   });
 
   it.each([

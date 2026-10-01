@@ -1,7 +1,8 @@
 import { eq } from 'drizzle-orm';
 
-import { toLocalDate } from '../../domain/dates';
+import { isValidDayStartHour } from '../../domain/day';
 import { profileSchema, type ProfileInput } from '../../domain/schemas';
+import { logicalDateAt, recomputeLocalDates } from '../logicalDay';
 import { profile, weightLogs, type Profile } from '../schema';
 import type { AppDb } from '../types';
 
@@ -17,9 +18,9 @@ export function createProfileRepo(db: AppDb) {
     save(input: ProfileInput, now: number = Date.now()): Profile {
       const values = profileSchema.parse(input);
       const row = { ...values, id: PROFILE_ID, updatedAt: now };
-      const weight = { localDate: toLocalDate(now), weightKg: values.weightKg };
 
       return db.transaction((tx) => {
+        const weight = { localDate: logicalDateAt(tx, now), weightKg: values.weightKg };
         tx.insert(weightLogs)
           .values(weight)
           .onConflictDoUpdate({ target: weightLogs.localDate, set: weight })
@@ -30,6 +31,26 @@ export function createProfileRepo(db: AppDb) {
           .onConflictDoUpdate({ target: profile.id, set: row })
           .returning()
           .get();
+      });
+    },
+
+    /**
+     * Changes when the logical day starts and re-files every meal entry under the new rule,
+     * in one transaction. Returns how many entries moved to another day.
+     */
+    setDayStartHour(hour: number, now: number = Date.now()): number {
+      if (!isValidDayStartHour(hour)) {
+        throw new RangeError(`dayStartHour must be an integer 0–6, got ${hour}`);
+      }
+      return db.transaction((tx) => {
+        const updated = tx
+          .update(profile)
+          .set({ dayStartHour: hour, updatedAt: now })
+          .where(eq(profile.id, PROFILE_ID))
+          .returning({ id: profile.id })
+          .all();
+        if (updated.length === 0) throw new Error('Profile not found');
+        return recomputeLocalDates(tx, hour);
       });
     },
   };

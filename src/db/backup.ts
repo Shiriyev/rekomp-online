@@ -1,6 +1,7 @@
 import { getTableColumns, type Column } from 'drizzle-orm';
 import type { SQLiteTable } from 'drizzle-orm/sqlite-core';
 
+import { dayStartHourOf, LOGICAL_DAY_MIGRATION_KEY, recomputeLocalDates } from './logicalDay';
 import * as schema from './schema';
 import { runSeed } from './seed/runSeed';
 import type { AppDb } from './types';
@@ -121,6 +122,7 @@ const BATCH = 40;
 
 /**
  * Replaces all data with the backup in one transaction: on any error nothing changes.
+ * Entries are re-filed under the logical-day rule (a v1 backup used calendar midnight).
  * The seed then runs to add anything newer than the backup (never overwriting it).
  */
 export function importBackup(db: AppDb, backup: Backup): void {
@@ -135,6 +137,11 @@ export function importBackup(db: AppDb, backup: Backup): void {
           .run();
       }
     }
+    recomputeLocalDates(tx, dayStartHourOf(tx));
+    tx.insert(schema.appMeta)
+      .values({ key: LOGICAL_DAY_MIGRATION_KEY, value: '1' })
+      .onConflictDoNothing()
+      .run();
   });
   runSeed(db);
 }

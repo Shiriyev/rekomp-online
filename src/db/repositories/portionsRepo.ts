@@ -1,8 +1,8 @@
 import { and, asc, eq, gt, sql } from 'drizzle-orm';
 
-import { toLocalDate } from '../../domain/dates';
 import type { MealType } from '../../domain/types';
 import { newId } from '../../lib/id';
+import { logicalDateAt } from '../logicalDay';
 import { mealLogs, preparedPortions, recipes, type MealLog, type PreparedPortion } from '../schema';
 import type { AppDb } from '../types';
 
@@ -65,7 +65,7 @@ export function createPortionsRepo(db: AppDb) {
           .values({
             id: newId(),
             timestamp: now,
-            localDate: toLocalDate(now),
+            localDate: logicalDateAt(tx, now),
             mealType,
             source: 'portion',
             recipeId: row.portion.recipeId,

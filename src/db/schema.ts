@@ -188,7 +188,7 @@ export const mealLogs = sqliteTable(
     id: text('id').primaryKey(),
     /** UTC milliseconds. */
     timestamp: integer('timestamp').notNull(),
-    /** Device-local day, YYYY-MM-DD. */
+    /** Logical day (domain/day.ts getLogicalDate), YYYY-MM-DD. */
     localDate: text('local_date').notNull(),
     mealType: text('meal_type', { enum: MEAL_TYPES }).notNull(),
     source: text('source', { enum: MEAL_LOG_SOURCES }).notNull(),
@@ -224,9 +224,14 @@ export const profile = sqliteTable(
     proteinTargetG: integer('protein_target_g').notNull(),
     proteinMinG: integer('protein_min_g').notNull(),
     targetOverridden: integer('target_overridden', { mode: 'boolean' }).notNull().default(false),
+    /** The logical day starts at this local hour (0–6): food before it counts for yesterday. */
+    dayStartHour: integer('day_start_hour').notNull().default(4),
     updatedAt: integer('updated_at').notNull(),
   },
-  (t) => [check('profile_single_row', sql`${t.id} = 1`)],
+  (t) => [
+    check('profile_single_row', sql`${t.id} = 1`),
+    check('profile_day_start_hour_range', sql`${t.dayStartHour} BETWEEN 0 AND 6`),
+  ],
 );
 
 export const weightLogs = sqliteTable('weight_logs', {

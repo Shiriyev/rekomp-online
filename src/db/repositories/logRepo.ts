@@ -1,6 +1,5 @@
 import { and, asc, desc, eq, sql } from 'drizzle-orm';
 
-import { toLocalDate } from '../../domain/dates';
 import {
   manualLogInputSchema,
   mealLogEditSchema,
@@ -9,6 +8,7 @@ import {
 } from '../../domain/schemas';
 import type { Macros } from '../../domain/types';
 import { newId } from '../../lib/id';
+import { logicalDateAt } from '../logicalDay';
 import { mealLogs, preparedPortions, type MealLog } from '../schema';
 import type { AppDb } from '../types';
 
@@ -21,7 +21,7 @@ export function createLogRepo(db: AppDb) {
         .values({
           id: newId(),
           timestamp: now,
-          localDate: toLocalDate(now),
+          localDate: logicalDateAt(db, now),
           mealType: data.mealType,
           source: 'manual',
           name: data.name,

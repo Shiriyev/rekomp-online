@@ -4,10 +4,10 @@ import { StyleSheet, View } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { toLocalDate } from '@/domain/dates';
 import { HomeSegment } from '@/features/pantry/HomeSegment';
 import { PortionsSegment } from '@/features/pantry/PortionsSegment';
 import { ShoppingSegment } from '@/features/pantry/ShoppingSegment';
+import { useClock } from '@/lib/useClock';
 import { spacing } from '@/theme';
 
 type Segment = 'home' | 'portions' | 'shopping';
@@ -20,12 +20,13 @@ const SEGMENTS: { value: Segment; label: string }[] = [
 
 export default function PantryScreen() {
   const [segment, setSegment] = useState<Segment>('home');
+  const { today } = useClock();
 
-  // Expired sales are switched off whenever the tab is opened.
+  // Expired sales are switched off whenever the tab is opened (and when the day rolls over).
   useFocusEffect(
     useCallback(() => {
-      repositories.lidl.clearExpiredSales(toLocalDate(Date.now()));
-    }, []),
+      repositories.lidl.clearExpiredSales(today);
+    }, [today]),
   );
 
   return (
