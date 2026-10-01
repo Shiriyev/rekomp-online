@@ -24,7 +24,7 @@ const renderCard = (
         targets={targets}
         expanded={expanded}
         onToggle={onToggle}
-        onEdit={jest.fn()}
+        onOpen={jest.fn()}
         onDelete={jest.fn()}
       />
     </PaperProvider>,

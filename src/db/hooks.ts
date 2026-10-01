@@ -25,6 +25,7 @@ import {
   recipeSteps,
   shoppingItems,
   weightLogs,
+  type CookSession,
   type Ingredient,
   type LidlProduct,
   type MealLog,
@@ -277,4 +278,32 @@ export function useCookView(): CookView {
   const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, COOK_VIEW_KEY)));
   const value = data[0]?.value;
   return COOK_VIEWS.find((v) => v === value) ?? 'steps';
+}
+
+export type MealLogDetail = {
+  log: MealLog | undefined;
+  recipe: Recipe | undefined;
+  session: CookSession | undefined;
+  isLoaded: boolean;
+};
+
+/** One entry with its recipe and cook session, for the history detail screen. */
+export function useMealLogDetail(logId: string): MealLogDetail {
+  const logQuery = useLiveQuery(db.select().from(mealLogs).where(eq(mealLogs.id, logId)), [logId]);
+  const log = logQuery.data[0];
+  const recipeId = log?.recipeId ?? '';
+  const sessionId = log?.cookSessionId ?? '';
+  const recipe = useLiveQuery(db.select().from(recipes).where(eq(recipes.id, recipeId)), [
+    recipeId,
+  ]);
+  const session = useLiveQuery(
+    db.select().from(cookSessions).where(eq(cookSessions.id, sessionId)),
+    [sessionId],
+  );
+  return {
+    log,
+    recipe: recipe.data[0],
+    session: session.data[0],
+    isLoaded: logQuery.updatedAt !== undefined,
+  };
 }

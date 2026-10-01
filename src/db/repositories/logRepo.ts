@@ -7,6 +7,7 @@ import {
   type ManualLogInput,
   type MealLogEditInput,
 } from '../../domain/schemas';
+import { isAllowedEntryTime } from '../../domain/entryDetail';
 import { planManualDeduction } from '../../domain/manualEntry';
 import type { Macros } from '../../domain/types';
 import { newId } from '../../lib/id';
@@ -168,17 +169,33 @@ export function createLogRepo(db: AppDb) {
       return db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1).get();
     },
 
-    /** Corrects an entry; the name of recipe/portion entries stays tied to the dish. */
-    update(id: string, input: MealLogEditInput): MealLog {
-      const values = mealLogEditSchema.parse(input);
-      const current = db.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
-      if (!current) throw new Error(`Meal log not found: ${id}`);
-      return db
-        .update(mealLogs)
-        .set({ ...values, name: current.source === 'manual' ? values.name : current.name })
-        .where(eq(mealLogs.id, id))
-        .returning()
-        .get();
+    /**
+     * Corrects an entry; the name of recipe/portion entries stays tied to the dish. A new
+     * time re-derives the logical day, so the entry may move to another day.
+     */
+    update(id: string, input: MealLogEditInput, now: number = Date.now()): MealLog {
+      const { timestamp, ...values } = mealLogEditSchema.parse(input);
+      if (timestamp !== undefined && !isAllowedEntryTime(timestamp, now)) {
+        throw new RangeError('Время записи не может быть в будущем');
+      }
+      return db.transaction((tx) => {
+        const current = tx.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
+        if (!current) throw new Error(`Meal log not found: ${id}`);
+        const moved =
+          timestamp === undefined || timestamp === current.timestamp
+            ? {}
+            : { timestamp, localDate: logicalDateAt(tx, timestamp) };
+        return tx
+          .update(mealLogs)
+          .set({
+            ...values,
+            ...moved,
+            name: current.source === 'manual' ? values.name : current.name,
+          })
+          .where(eq(mealLogs.id, id))
+          .returning()
+          .get();
+      });
     },
 
     /**

@@ -12,6 +12,8 @@ type Props = {
   value: string | null;
   onChange: (uri: string | null) => void;
   label?: string;
+  /** False when the screen already shows the photo large (detail screen). */
+  showPreview?: boolean;
 };
 
 const DENIED_TEXT: Record<PhotoSource, string> = {
@@ -20,7 +22,12 @@ const DENIED_TEXT: Record<PhotoSource, string> = {
 };
 
 /** Optional photo: take one or pick from the gallery, preview, replace or remove. */
-export function PhotoField({ value, onChange, label = 'Фото (необязательно)' }: Props) {
+export function PhotoField({
+  value,
+  onChange,
+  label = 'Фото (необязательно)',
+  showPreview = true,
+}: Props) {
   const theme = useAppTheme();
   const [busy, setBusy] = useState(false);
   const [denied, setDenied] = useState<{ source: PhotoSource; canAskAgain: boolean } | null>(null);
@@ -47,7 +54,7 @@ export function PhotoField({ value, onChange, label = 'Фото (необяза�
       <Text variant="labelLarge" style={{ color: theme.colors.onSurfaceVariant }}>
         {label}
       </Text>
-      {value ? (
+      {value && showPreview ? (
         <View style={styles.previewRow}>
           <Image
             source={{ uri: value }}
@@ -98,6 +105,16 @@ export function PhotoField({ value, onChange, label = 'Фото (необяза�
             style={styles.flex}>
             Из галереи
           </Button>
+          {value ? (
+            <IconButton
+              icon="delete-outline"
+              mode="outlined"
+              iconColor={theme.colors.error}
+              disabled={busy}
+              onPress={() => onChange(null)}
+              accessibilityLabel="Удалить фото"
+            />
+          ) : null}
         </View>
       )}
       {busy ? <ActivityIndicator accessibilityLabel="Обработка фото" /> : null}

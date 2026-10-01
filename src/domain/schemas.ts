@@ -145,5 +145,7 @@ export const mealLogEditSchema = z.object({
   kcal: z.number().int('Целое число').min(0).max(5000),
   protein: z.number().min(0).max(500),
   mealType: z.enum(MEAL_TYPES),
+  /** New time (UTC ms); the entry may move to another logical day. */
+  timestamp: z.number().int().positive().optional(),
 });
 export type MealLogEditInput = z.infer<typeof mealLogEditSchema>;

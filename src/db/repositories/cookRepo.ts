@@ -7,6 +7,7 @@ import type { Macros, MealType } from '../../domain/types';
 import { normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
 import { logicalDateAt } from '../logicalDay';
+import { takeFromPantry } from '../pantryMoves';
 import {
   cookSessions,
   ingredients,
@@ -17,6 +18,8 @@ import {
   recipes,
   type CookProgress,
   type CookSession,
+  type MealLog,
+  type PreparedPortion,
 } from '../schema';
 import type { AppDb } from '../types';
 
@@ -48,6 +51,9 @@ export type FinishResult = {
 };
 
 export type ActiveSession = CookSession & { recipeName: string };
+
+/** What an undo removed, so the «Отменить» of a delete can put it back. */
+export type UndoneCook = { sessionId: string; logs: MealLog[]; portions: PreparedPortion[] };
 
 export type UndoPreview =
   | { canUndo: true; products: PantryDeltaItem[]; portionsToRemove: number }
@@ -317,13 +323,14 @@ export function createCookRepo(db: AppDb) {
 
     /**
      * Undoes a finished cook: returns products to the pantry and removes its log and
-     * portions. Refused once any stored portion has been eaten. Idempotent.
+     * portions. Refused once any stored portion has been eaten. Idempotent (null when it
+     * was already undone). Returns what was removed, for `redo`.
      */
-    undo(sessionId: string, now: number = Date.now()): void {
-      db.transaction((tx) => {
+    undo(sessionId: string, now: number = Date.now()): UndoneCook | null {
+      return db.transaction((tx) => {
         const session = getSession(tx, sessionId);
         if (!session) throw new CookSessionError(`Cook session not found: ${sessionId}`);
-        if (session.undoneAt !== null) return;
+        if (session.undoneAt !== null) return null;
         if (session.finishedAt === null) throw new CookSessionError('Cook session is not finished');
 
         const portion = tx
@@ -357,9 +364,35 @@ export function createCookRepo(db: AppDb) {
             })
             .run();
         }
+        const logs = tx.select().from(mealLogs).where(eq(mealLogs.cookSessionId, sessionId)).all();
+        const portions = tx
+          .select()
+          .from(preparedPortions)
+          .where(eq(preparedPortions.cookSessionId, sessionId))
+          .all();
         tx.delete(mealLogs).where(eq(mealLogs.cookSessionId, sessionId)).run();
         tx.delete(preparedPortions).where(eq(preparedPortions.cookSessionId, sessionId)).run();
         tx.update(cookSessions).set({ undoneAt: now }).where(eq(cookSessions.id, sessionId)).run();
+        return { sessionId, logs, portions };
+      });
+    },
+
+    /**
+     * Reverses `undo` (the «Отменить» right after deleting a cooked dish): takes the products
+     * again (clamped at zero; the session then records what was really taken) and puts the
+     * log and portions back. No-op unless the session is currently undone.
+     */
+    redo(undone: UndoneCook, now: number = Date.now()): void {
+      db.transaction((tx) => {
+        const session = getSession(tx, undone.sessionId);
+        if (!session || session.undoneAt === null) return;
+        const taken = takeFromPantry(tx, session.pantryDelta ?? [], now);
+        for (const p of undone.portions) tx.insert(preparedPortions).values(p).run();
+        for (const l of undone.logs) tx.insert(mealLogs).values(l).run();
+        tx.update(cookSessions)
+          .set({ undoneAt: null, pantryDelta: taken })
+          .where(eq(cookSessions.id, session.id))
+          .run();
       });
     },
   };

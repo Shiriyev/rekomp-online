@@ -18,7 +18,7 @@ type Props = {
   targets: { kcalTarget: number; proteinMinG: number };
   expanded: boolean;
   onToggle: () => void;
-  onEdit: (log: MealLog) => void;
+  onOpen: (log: MealLog) => void;
   onDelete: (log: MealLog) => void;
 };
 
@@ -35,7 +35,7 @@ export function DayCard({
   targets,
   expanded,
   onToggle,
-  onEdit,
+  onOpen,
   onDelete,
 }: Props) {
   const theme = useAppTheme();
@@ -75,18 +75,18 @@ export function DayCard({
           />
         </View>
       </TouchableRipple>
-      {expanded ? <DayEntries localDate={localDate} onEdit={onEdit} onDelete={onDelete} /> : null}
+      {expanded ? <DayEntries localDate={localDate} onOpen={onOpen} onDelete={onDelete} /> : null}
     </Card>
   );
 }
 
 function DayEntries({
   localDate,
-  onEdit,
+  onOpen,
   onDelete,
 }: {
   localDate: string;
-  onEdit: (log: MealLog) => void;
+  onOpen: (log: MealLog) => void;
   onDelete: (log: MealLog) => void;
 }) {
   const theme = useAppTheme();
@@ -105,7 +105,7 @@ function DayEntries({
       {logs.map((log) => (
         <View key={log.id}>
           <Divider />
-          <TouchableRipple onPress={() => onEdit(log)} accessibilityHint="Изменить запись">
+          <TouchableRipple onPress={() => onOpen(log)} accessibilityHint="Открыть запись">
             <View style={styles.entry}>
               {log.photoUri ? (
                 <Image

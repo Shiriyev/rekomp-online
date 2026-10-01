@@ -1,17 +1,33 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useImperativeHandle, useRef, useState, type Ref } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, SegmentedButtons, Text, TextInput } from 'react-native-paper';
+import {
+  Button,
+  HelperText,
+  IconButton,
+  SegmentedButtons,
+  Text,
+  TextInput,
+} from 'react-native-paper';
 import { z } from 'zod';
 
 import { repositories } from '@/db';
 import type { MealLog } from '@/db/schema';
+import { deviceTimeZone, getLogicalDate } from '@/domain/day';
+import {
+  isAllowedEntryTime,
+  joinDateTime,
+  parseTimeOfDay,
+  shiftDate,
+  splitTimestamp,
+} from '@/domain/entryDetail';
 import { MEAL_TYPES } from '@/domain/types';
 import { numberText } from '@/features/forms/numberText';
 import { MEAL_LABELS, MEAL_ORDER } from '@/features/meals';
-import { formatDecimal } from '@/lib/format';
+import { formatDayLabel, formatDecimal } from '@/lib/format';
+import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
@@ -22,20 +38,34 @@ const schema = z.object({
   kcal: numberText({ min: 0, max: 5000 }, true),
   protein: numberText({ min: 0, max: 500 }),
   mealType: z.enum(MEAL_TYPES),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  time: z
+    .string()
+    .refine((t) => parseTimeOfDay(t) !== null, 'Время в формате ЧЧ:ММ, например 08:30'),
 });
 type Values = z.input<typeof schema>;
 
 export type EditEntrySheetHandle = { open: (log: MealLog) => void };
 
-type Props = { ref: Ref<EditEntrySheetHandle>; onDelete: (log: MealLog) => void };
+type Props = {
+  ref: Ref<EditEntrySheetHandle>;
+  /** Shown as a button in the sheet when given. */
+  onDelete?: (log: MealLog) => void;
+};
 
+/** Edit name (manual), kcal, protein, meal and time; a new time may move the entry to another day. */
 export function EditEntrySheet({ ref, onDelete }: Props) {
   const theme = useAppTheme();
+  const { now, today: logicalToday, dayStartHour } = useClock();
   const sheetRef = useRef<BottomSheetModal>(null);
   const [log, setLog] = useState<MealLog | null>(null);
-  const { control, handleSubmit, reset } = useForm<Values, unknown, z.output<typeof schema>>({
-    resolver: zodResolver(schema),
-  });
+  const { control, handleSubmit, reset, setValue, setError } = useForm<
+    Values,
+    unknown,
+    z.output<typeof schema>
+  >({ resolver: zodResolver(schema) });
+  const date = useWatch({ control, name: 'date' });
+  const time = useWatch({ control, name: 'time' });
 
   useImperativeHandle(ref, () => ({
     open: (next) => {
@@ -45,15 +75,29 @@ export function EditEntrySheet({ ref, onDelete }: Props) {
         kcal: String(next.kcal),
         protein: formatDecimal(next.protein),
         mealType: next.mealType,
+        ...splitTimestamp(next.timestamp),
       });
       sheetRef.current?.present();
     },
   }));
 
+  const today = splitTimestamp(now.getTime()).date;
+  const parsedTime = time ? parseTimeOfDay(time) : null;
+  const newTimestamp =
+    date && parsedTime ? joinDateTime(date, parsedTime.hour, parsedTime.minute) : null;
+  const logicalDay =
+    newTimestamp !== null ? getLogicalDate(newTimestamp, dayStartHour, deviceTimeZone()) : null;
+
   const save = () =>
-    handleSubmit((v) => {
+    handleSubmit(({ date: d, time: t, ...v }) => {
       if (!log) return;
-      repositories.logs.update(log.id, v);
+      const parsed = parseTimeOfDay(t)!;
+      const timestamp = joinDateTime(d, parsed.hour, parsed.minute);
+      if (!isAllowedEntryTime(timestamp, Date.now())) {
+        setError('time', { message: 'Время не может быть в будущем' });
+        return;
+      }
+      repositories.logs.update(log.id, { ...v, timestamp });
       sheetRef.current?.dismiss();
     })();
 
@@ -119,16 +163,75 @@ export function EditEntrySheet({ ref, onDelete }: Props) {
               />
             )}
           />
+
           <View style={styles.row}>
-            <Button
-              icon="delete-outline"
-              textColor={theme.colors.error}
-              onPress={() => {
-                sheetRef.current?.dismiss();
-                onDelete(log);
-              }}>
-              Удалить
-            </Button>
+            <IconButton
+              icon="chevron-left"
+              mode="outlined"
+              onPress={() => date && setValue('date', shiftDate(date, -1))}
+              accessibilityLabel="На день раньше"
+            />
+            <Text variant="bodyLarge" style={styles.dateLabel}>
+              {date ? formatDayLabel(date, today, shiftDate(today, -1)) : ''}
+            </Text>
+            <IconButton
+              icon="chevron-right"
+              mode="outlined"
+              disabled={!date || date >= today}
+              onPress={() => date && setValue('date', shiftDate(date, 1))}
+              accessibilityLabel="На день позже"
+            />
+            <Controller
+              control={control}
+              name="time"
+              render={({ field, fieldState }) => (
+                <TextInput
+                  mode="outlined"
+                  dense
+                  label="Время"
+                  accessibilityLabel="Время записи"
+                  value={field.value}
+                  onChangeText={field.onChange}
+                  keyboardType="numbers-and-punctuation"
+                  maxLength={5}
+                  error={!!fieldState.error}
+                  style={styles.time}
+                  render={sheetInput}
+                />
+              )}
+            />
+          </View>
+          <Controller
+            control={control}
+            name="time"
+            render={({ fieldState }) =>
+              fieldState.error ? (
+                <HelperText type="error" padding="none">
+                  {fieldState.error.message}
+                </HelperText>
+              ) : logicalDay && logicalDay !== log.localDate ? (
+                <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
+                  Запись переедет в день:{' '}
+                  {formatDayLabel(logicalDay, logicalToday, shiftDate(logicalToday, -1))}
+                </Text>
+              ) : (
+                <></>
+              )
+            }
+          />
+
+          <View style={styles.row}>
+            {onDelete ? (
+              <Button
+                icon="delete-outline"
+                textColor={theme.colors.error}
+                onPress={() => {
+                  sheetRef.current?.dismiss();
+                  onDelete(log);
+                }}>
+                Удалить
+              </Button>
+            ) : null}
             <Button mode="contained" style={styles.flex} onPress={save}>
               Сохранить
             </Button>
@@ -142,4 +245,6 @@ export function EditEntrySheet({ ref, onDelete }: Props) {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   row: { flexDirection: 'row', gap: spacing.sm, alignItems: 'center' },
+  dateLabel: { flex: 1, textAlign: 'center' },
+  time: { width: 92 },
 });

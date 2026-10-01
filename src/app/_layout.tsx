@@ -67,6 +67,10 @@ function AppShell() {
               />
               <Stack.Screen name="recipe/[id]" options={{ headerShown: true, title: 'Блюдо' }} />
               <Stack.Screen
+                name="history/[logId]"
+                options={{ headerShown: true, title: 'Запись' }}
+              />
+              <Stack.Screen
                 name="cook/[id]"
                 options={{ headerShown: false, gestureEnabled: false }}
               />

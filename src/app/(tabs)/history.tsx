@@ -1,5 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
-import { useMemo, useRef, useState } from 'react';
+import { router } from 'expo-router';
+import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 
@@ -10,7 +11,6 @@ import { dailySeries } from '@/domain/history';
 import { DayCard } from '@/features/history/DayCard';
 import { DeleteEntryDialog } from '@/features/history/DeleteEntryDialog';
 import { planDelete, type DeletePlan } from '@/features/history/deleteEntry';
-import { EditEntrySheet, type EditEntrySheetHandle } from '@/features/history/EditEntrySheet';
 import { HistoryCharts } from '@/features/history/HistoryCharts';
 import { formatDayLabel, formatInt, formatTime } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
@@ -26,7 +26,6 @@ export default function HistoryScreen() {
   const days = useDayAggregates();
   const weights = useWeightLogs();
   const latest = useLatestLog();
-  const editRef = useRef<EditEntrySheetHandle>(null);
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set([today]));
   const [deletePlan, setDeletePlan] = useState<DeletePlan | null>(null);
 
@@ -95,12 +94,13 @@ export default function HistoryScreen() {
             targets={profile}
             expanded={expanded.has(item.localDate)}
             onToggle={() => toggle(item.localDate)}
-            onEdit={(log) => editRef.current?.open(log)}
+            onOpen={(log) =>
+              router.push({ pathname: '/history/[logId]', params: { logId: log.id } })
+            }
             onDelete={askDelete}
           />
         )}
       />
-      <EditEntrySheet ref={editRef} onDelete={askDelete} />
       <DeleteEntryDialog plan={deletePlan} onDone={() => setDeletePlan(null)} />
     </View>
   );

@@ -58,8 +58,12 @@ export const deleteSimple = (log: MealLog) => {
 /** Cooked dish: undo the whole cook (products back home, its portions removed). */
 export const deleteCookedWithProducts = (log: MealLog) => {
   if (!log.cookSessionId) return;
-  repositories.cook.undo(log.cookSessionId);
-  showUndo(`Удалено, продукты вернулись домой: ${log.name}`, undefined, releaseLater(log));
+  const undone = repositories.cook.undo(log.cookSessionId);
+  showUndo(
+    `Удалено, продукты вернулись домой: ${log.name}`,
+    undone ? () => repositories.cook.redo(undone) : undefined,
+    releaseLater(log),
+  );
 };
 
 /** Deletes just the line: products stay deducted, portions stay in the fridge. */
