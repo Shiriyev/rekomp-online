@@ -1,12 +1,15 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { useMemo, useRef } from 'react';
+import { router } from 'expo-router';
+import { useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Checkbox, Text } from 'react-native-paper';
+import { Button, Checkbox, Surface, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
 import { useIngredientsMap, useLidlProducts, usePantryItems, useShoppingItems } from '@/db/hooks';
 import type { LidlProduct, ShoppingItem } from '@/db/schema';
+import { defaultAddAmount } from '@/domain/bulkAdd';
 import { shoppingStep, stepQuantity } from '@/domain/stock';
+import { convertAmount } from '@/domain/units';
 import { showUndo } from '@/features/undo/undoStore';
 import { formatAmount } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
@@ -14,6 +17,7 @@ import { EmptyState } from '@/ui/EmptyState';
 import { QuantityStepper } from '@/ui/QuantityStepper';
 import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
+import { useBulkAddStore } from './bulkAddStore';
 import { ProductPickerSheet } from './ProductPickerSheet';
 
 export function ShoppingSegment() {
@@ -23,6 +27,9 @@ export function ShoppingSegment() {
   const pantry = usePantryItems();
   const lidl = useLidlProducts();
   const pickerRef = useRef<BottomSheetModal>(null);
+  // «Купил несколько»: pick bought items, then set the amounts on one screen.
+  const [selecting, setSelecting] = useState(false);
+  const [picked, setPicked] = useState<Set<string>>(() => new Set());
 
   // Smallest Lidl package per ingredient: default amount and +/- step.
   const packageOf = useMemo(() => {
@@ -36,6 +43,33 @@ export function ShoppingSegment() {
 
   const open = items.filter((i) => !i.checked);
   const bought = items.filter((i) => i.checked);
+  const linkedOpen = open.filter((i) => i.ingredientId && ingredients.has(i.ingredientId));
+
+  const togglePick = (id: string) =>
+    setPicked((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
+  const continueToAmounts = () => {
+    const store = useBulkAddStore.getState();
+    store.start('shopping');
+    for (const item of linkedOpen) {
+      if (!picked.has(item.id) || !item.ingredientId) continue;
+      const ingredient = ingredients.get(item.ingredientId)!;
+      // What the list says to buy, else one package / the last amount.
+      const amount =
+        item.quantity !== null && item.unit !== null
+          ? convertAmount(item.quantity, item.unit, ingredient.unit, ingredient)
+          : defaultAddAmount(ingredient, packageOf.get(ingredient.id), ingredient.lastAddedAmount);
+      store.toggle(ingredient.id, amount, item.id);
+    }
+    setSelecting(false);
+    setPicked(new Set());
+    router.push('/bulk-add/amounts');
+  };
 
   const toggle = (item: ShoppingItem) => {
     repositories.shopping.setChecked(item.id, !item.checked);
@@ -49,6 +83,24 @@ export function ShoppingSegment() {
         );
       }
     }
+  };
+
+  const pickRow = (item: ShoppingItem) => {
+    const linked = !!item.ingredientId && ingredients.has(item.ingredientId);
+    const amount =
+      item.quantity !== null && item.unit !== null ? formatAmount(item.quantity, item.unit) : '';
+    return (
+      <Checkbox.Item
+        key={item.id}
+        label={amount ? `${item.title} — ${amount}` : item.title}
+        status={picked.has(item.id) ? 'checked' : 'unchecked'}
+        onPress={() => togglePick(item.id)}
+        disabled={!linked}
+        position="leading"
+        labelStyle={styles.label}
+        style={styles.item}
+      />
+    );
   };
 
   const row = (item: ShoppingItem) => {
@@ -104,13 +156,29 @@ export function ShoppingSegment() {
   return (
     <View style={styles.flex}>
       <ScrollView contentContainerStyle={styles.list}>
-        <Button
-          mode="contained-tonal"
-          icon="plus"
-          onPress={() => pickerRef.current?.present()}
-          style={styles.add}>
-          Добавить продукт
-        </Button>
+        <View style={styles.toolbar}>
+          {selecting ? (
+            <Text
+              variant="bodyMedium"
+              style={[styles.flex, { color: theme.colors.onSurfaceVariant }]}>
+              Отметь купленное — количества зададим на следующем шаге.
+            </Text>
+          ) : (
+            <Button mode="contained-tonal" icon="plus" onPress={() => pickerRef.current?.present()}>
+              Добавить продукт
+            </Button>
+          )}
+          {linkedOpen.length > 1 || selecting ? (
+            <Button
+              icon={selecting ? 'close' : 'checkbox-multiple-marked-outline'}
+              onPress={() => {
+                setSelecting((s) => !s);
+                setPicked(new Set());
+              }}>
+              {selecting ? 'Отмена' : 'Купил несколько'}
+            </Button>
+          ) : null}
+        </View>
 
         {items.length === 0 ? (
           <EmptyState
@@ -120,9 +188,9 @@ export function ShoppingSegment() {
           />
         ) : null}
 
-        {open.map(row)}
+        {selecting ? open.map(pickRow) : open.map(row)}
 
-        {bought.length > 0 ? (
+        {bought.length > 0 && !selecting ? (
           <>
             <View style={styles.boughtHeader}>
               <Text variant="titleSmall" style={{ color: theme.colors.onSurfaceVariant }}>
@@ -136,6 +204,22 @@ export function ShoppingSegment() {
           </>
         ) : null}
       </ScrollView>
+
+      {selecting ? (
+        <Surface elevation={2} style={styles.bar}>
+          <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
+            Выбрано: {picked.size}
+          </Text>
+          <Button
+            mode="contained"
+            icon="arrow-right"
+            contentStyle={styles.next}
+            disabled={picked.size === 0}
+            onPress={continueToAmounts}>
+            Далее
+          </Button>
+        </Surface>
+      ) : null}
 
       <ProductPickerSheet
         sheetRef={pickerRef}
@@ -173,7 +257,21 @@ export function ShoppingSegment() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   list: { padding: spacing.lg, gap: spacing.xs, paddingBottom: spacing.xxl },
-  add: { alignSelf: 'flex-start', marginBottom: spacing.sm },
+  toolbar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+    marginBottom: spacing.sm,
+  },
+  bar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+  },
+  next: { flexDirection: 'row-reverse', minHeight: 48 },
   row: { flexDirection: 'row', alignItems: 'center' },
   item: { paddingHorizontal: 0, minHeight: 48 },
   label: { textAlign: 'left' },

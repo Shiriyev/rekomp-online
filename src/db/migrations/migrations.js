@@ -9,6 +9,7 @@ import m0004 from './0004_pantry_thresholds.sql';
 import m0005 from './0005_logical_day.sql';
 import m0006 from './0006_meal_photo.sql';
 import m0007 from './0007_meal_log_pantry_delta.sql';
+import m0008 from './0008_ingredient_last_added.sql';
 
 export default {
   journal,
@@ -21,5 +22,6 @@ export default {
     m0005,
     m0006,
     m0007,
+    m0008,
   },
 };

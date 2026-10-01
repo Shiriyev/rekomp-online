@@ -212,6 +212,54 @@ export function createShoppingRepo(db: AppDb) {
       });
     },
 
+    /**
+     * «Купил несколько»: checks off several open items at once, adding the given amounts
+     * (ingredient unit) to the pantry, in one transaction. Returns the ids checked.
+     */
+    checkMany(
+      entries: readonly { itemId: string; amount: number }[],
+      now: number = Date.now(),
+    ): string[] {
+      for (const e of entries) {
+        if (!Number.isFinite(e.amount) || e.amount <= 0 || e.amount > 1_000_000) {
+          throw new RangeError(`Invalid amount ${e.amount}`);
+        }
+      }
+      return db.transaction((tx) => {
+        const checked: string[] = [];
+        for (const { itemId, amount } of entries) {
+          const item = tx.select().from(shoppingItems).where(eq(shoppingItems.id, itemId)).get();
+          if (!item || item.checked || !item.ingredientId) continue;
+          const ingredient = tx
+            .select()
+            .from(ingredients)
+            .where(eq(ingredients.id, item.ingredientId))
+            .get();
+          if (!ingredient) continue;
+          const added = normalizeQuantity(amount, ingredient.unit);
+          changePantry(tx, ingredient.id, added, now);
+          tx.update(ingredients)
+            .set({ lastAddedAmount: added })
+            .where(eq(ingredients.id, ingredient.id))
+            .run();
+          tx.update(shoppingItems)
+            .set({ checked: true, checkedAt: now, addedQuantity: added })
+            .where(eq(shoppingItems.id, itemId))
+            .run();
+          checked.push(itemId);
+        }
+        return checked;
+      });
+    },
+
+    /** Undo of `checkMany`: un-checks all of them (taking their amounts back) at once. */
+    uncheckMany(itemIds: readonly string[], now: number = Date.now()): void {
+      db.transaction((tx) => {
+        const repo = createShoppingRepo(tx);
+        for (const id of itemIds) repo.setChecked(id, false, now);
+      });
+    },
+
     /** Changes how much to buy of an open item (in its unit); must stay positive. */
     setQuantity(id: string, quantity: number): void {
       if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 100_000) {

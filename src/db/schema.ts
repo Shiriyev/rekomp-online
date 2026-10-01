@@ -51,6 +51,8 @@ export const ingredients = sqliteTable('ingredients', {
   isCustom: integer('is_custom', { mode: 'boolean' }).notNull().default(false),
   /** «Заканчивается» below this amount (ingredient unit); null = default by unit. */
   lowStockThreshold: real('low_stock_threshold'),
+  /** What was added «Домой» last time (ingredient unit): the next default amount. */
+  lastAddedAmount: real('last_added_amount'),
 });
 
 export const lidlProducts = sqliteTable(

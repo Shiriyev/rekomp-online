@@ -57,6 +57,13 @@
       "when": 1790861319523,
       "tag": "0007_meal_log_pantry_delta",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1790862123067,
+      "tag": "0008_ingredient_last_added",
+      "breakpoints": true
     }
   ]
 }

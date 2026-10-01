@@ -1,5 +1,5 @@
-import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { FlashList } from '@shopify/flash-list';
+import { router } from 'expo-router';
 import { useMemo, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FAB, Text, TouchableRipple } from 'react-native-paper';
@@ -20,7 +20,7 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { QuantityStepper } from '@/ui/QuantityStepper';
 import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
-import { ProductPickerSheet } from './ProductPickerSheet';
+import { useBulkAddStore } from './bulkAddStore';
 import { PantryItemSheet, type PantryItemSheetHandle } from './PantryItemSheet';
 
 type Row =
@@ -31,7 +31,6 @@ export function HomeSegment() {
   const theme = useAppTheme();
   const items = usePantryItems();
   const ingredients = useIngredientsMap();
-  const addRef = useRef<BottomSheetModal>(null);
   const editRef = useRef<PantryItemSheetHandle>(null);
 
   const rows = useMemo<Row[]>(() => {
@@ -51,6 +50,11 @@ export function HomeSegment() {
     });
   }, [items, ingredients]);
 
+  const openBulkAdd = () => {
+    useBulkAddStore.getState().start('home');
+    router.push('/bulk-add');
+  };
+
   const remove = (ingredient: Ingredient, quantity: number) => {
     repositories.pantry.remove(ingredient.id);
     showUndo(`Убрано: ${ingredient.name}`, () =>
@@ -66,7 +70,7 @@ export function HomeSegment() {
           title="Дома пока пусто"
           description="Добавь продукты — и блюда покажут, что можно приготовить."
           actionLabel="Добавить продукт"
-          onAction={() => addRef.current?.present()}
+          onAction={openBulkAdd}
         />
       ) : (
         <FlashList
@@ -130,25 +134,8 @@ export function HomeSegment() {
         icon="plus"
         label="Продукт"
         style={styles.fab}
-        onPress={() => addRef.current?.present()}
-        accessibilityLabel="Добавить продукт"
-      />
-
-      <ProductPickerSheet
-        sheetRef={addRef}
-        ingredients={[...ingredients.values()]}
-        title="Добавить домой"
-        amountHint="Сколько добавить (к тому, что уже есть)"
-        submitLabel="Добавить"
-        describe={(i) => {
-          const have = items.find((p) => p.ingredientId === i.id);
-          return have ? `дома: ${formatAmount(have.quantity, i.unit)}` : null;
-        }}
-        defaultAmount={(i) => quantityStep(i.unit)}
-        onSubmit={(ingredient, amount) => {
-          repositories.pantry.adjust(ingredient.id, amount);
-          showUndo(`Дома: +${formatAmount(amount, ingredient.unit)} ${ingredient.name}`);
-        }}
+        onPress={openBulkAdd}
+        accessibilityLabel="Добавить продукты"
       />
       <PantryItemSheet ref={editRef} onRemove={remove} />
     </View>

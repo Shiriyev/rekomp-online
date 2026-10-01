@@ -71,6 +71,14 @@ function AppShell() {
                 options={{ headerShown: true, title: 'Запись' }}
               />
               <Stack.Screen
+                name="bulk-add/index"
+                options={{ headerShown: true, title: 'Добавить домой' }}
+              />
+              <Stack.Screen
+                name="bulk-add/amounts"
+                options={{ headerShown: true, title: 'Количество' }}
+              />
+              <Stack.Screen
                 name="cook/[id]"
                 options={{ headerShown: false, gestureEnabled: false }}
               />

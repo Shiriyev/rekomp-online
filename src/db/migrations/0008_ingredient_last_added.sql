@@ -1,0 +1,1 @@
+ALTER TABLE `ingredients` ADD `last_added_amount` real;
