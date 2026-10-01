@@ -9,12 +9,16 @@ import {
   UNITS,
 } from './types';
 
+/** Stored meal photo (file:// URI inside the app's documents). */
+export const photoUriSchema = z.string().min(1).max(2048).nullable();
+
 /** Manual food entry ("купил сникерс"). */
 export const manualLogInputSchema = z.object({
   name: z.string().trim().min(1, 'Введите название').max(80, 'Не длиннее 80 символов'),
   kcal: z.number().int('Целое число').min(0).max(5000),
   protein: z.number().min(0).max(500),
   mealType: z.enum(MEAL_TYPES),
+  photoUri: photoUriSchema.optional(),
 });
 export type ManualLogInput = z.infer<typeof manualLogInputSchema>;
 

@@ -1,6 +1,6 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { RefObject } from 'react';
+import { useState, type RefObject } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Chip, HelperText, SegmentedButtons, Text, TextInput } from 'react-native-paper';
@@ -9,6 +9,7 @@ import type { ManualLogInput } from '@/domain/schemas';
 import type { Preset } from '@/domain/today';
 import type { MealType } from '@/domain/types';
 import { MEAL_LABELS, MEAL_ORDER } from '@/features/meals';
+import { PhotoField } from '@/features/photos/PhotoField';
 import { formatDecimal, formatInt } from '@/lib/format';
 import { spacing } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
@@ -21,7 +22,8 @@ type Props = {
   sheetRef: RefObject<BottomSheetModal | null>;
   defaultMealType: MealType;
   presets: Preset[];
-  onSubmit: (input: ManualLogInput) => void;
+  /** `photoTempUri`: a picked, compressed photo in the cache (moved into storage on save). */
+  onSubmit: (input: ManualLogInput, photoTempUri: string | null) => void;
 };
 
 const emptyValues = (mealType: MealType): ManualEntryFormValues => ({
@@ -36,10 +38,11 @@ export function ManualEntrySheet({ sheetRef, defaultMealType, presets, onSubmit 
     defaultValues: emptyValues(defaultMealType),
     resolver: zodResolver(manualEntryFormSchema),
   });
+  const [photo, setPhoto] = useState<string | null>(null);
 
   const submit = () =>
     handleSubmit((input) => {
-      onSubmit(input);
+      onSubmit(input, photo);
       sheetRef.current?.dismiss();
     })();
 
@@ -47,7 +50,10 @@ export function ManualEntrySheet({ sheetRef, defaultMealType, presets, onSubmit 
     <AppBottomSheet
       sheetRef={sheetRef}
       // Fresh form each time the sheet opens (not on keyboard-driven re-snaps).
-      onOpen={() => reset(emptyValues(defaultMealType))}>
+      onOpen={() => {
+        reset(emptyValues(defaultMealType));
+        setPhoto(null);
+      }}>
       <Text variant="titleLarge" accessibilityRole="header">
         Добавить вручную
       </Text>
@@ -130,6 +136,8 @@ export function ManualEntrySheet({ sheetRef, defaultMealType, presets, onSubmit 
           />
         )}
       />
+
+      <PhotoField value={photo} onChange={setPhoto} />
 
       <Button mode="contained" onPress={submit} contentStyle={styles.submit}>
         Добавить

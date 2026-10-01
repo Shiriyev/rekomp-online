@@ -6,6 +6,7 @@ import type { AppDb } from '../types';
 
 export const THEME_KEY = 'theme';
 export const COOK_VIEW_KEY = 'cook_view';
+export const PHOTO_CLEANUP_KEY = 'photo_cleanup_at';
 export const COOK_VIEWS = ['steps', 'overview'] as const;
 export type CookView = (typeof COOK_VIEWS)[number];
 
@@ -22,6 +23,17 @@ export function createSettingsRepo(db: AppDb) {
     setCookView(view: CookView): void {
       if (!COOK_VIEWS.includes(view)) throw new RangeError(`Unknown cook view ${view}`);
       setMeta(COOK_VIEW_KEY, view);
+    },
+
+    /** When the orphan-photo sweep last ran (epoch ms), or null. */
+    getPhotoCleanupAt(): number | null {
+      const row = db.select().from(appMeta).where(eq(appMeta.key, PHOTO_CLEANUP_KEY)).get();
+      const value = row ? Number(row.value) : Number.NaN;
+      return Number.isFinite(value) ? value : null;
+    },
+
+    setPhotoCleanupAt(ms: number): void {
+      setMeta(PHOTO_CLEANUP_KEY, String(ms));
     },
 
     getTheme(): ThemePreference {

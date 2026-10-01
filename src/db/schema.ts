@@ -202,6 +202,8 @@ export const mealLogs = sqliteTable(
     }),
     /** Set when a prepared portion was eaten, so Undo can put it back. */
     portionId: text('portion_id').references(() => preparedPortions.id, { onDelete: 'set null' }),
+    /** Own photo (file:// in documents/meal-photos); takes priority over the recipe image. */
+    photoUri: text('photo_uri'),
   },
   (t) => [
     index('meal_logs_local_date_idx').on(t.localDate),

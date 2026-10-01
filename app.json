@@ -46,7 +46,15 @@
           "hidden": true
         }
       ],
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Рекомп использует камеру, чтобы сфотографировать блюдо для записи в дневник.",
+          "photosPermission": "Рекомп открывает галерею, чтобы прикрепить фото блюда к записи.",
+          "microphonePermission": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

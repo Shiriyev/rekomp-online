@@ -7,6 +7,7 @@ import m0002 from './0002_shopping_items.sql';
 import m0003 from './0003_cook_session_progress.sql';
 import m0004 from './0004_pantry_thresholds.sql';
 import m0005 from './0005_logical_day.sql';
+import m0006 from './0006_meal_photo.sql';
 
 export default {
   journal,
@@ -17,5 +18,6 @@ export default {
     m0003,
     m0004,
     m0005,
+    m0006,
   },
 };

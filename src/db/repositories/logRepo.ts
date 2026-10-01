@@ -1,8 +1,9 @@
-import { and, asc, desc, eq, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, isNotNull, sql } from 'drizzle-orm';
 
 import {
   manualLogInputSchema,
   mealLogEditSchema,
+  photoUriSchema,
   type ManualLogInput,
   type MealLogEditInput,
 } from '../../domain/schemas';
@@ -28,9 +29,69 @@ export function createLogRepo(db: AppDb) {
           kcal: data.kcal,
           protein: data.protein,
           servings: 1,
+          photoUri: data.photoUri ?? null,
         })
         .returning()
         .get();
+    },
+
+    /** Sets or clears an entry's own photo; returns the previous one (to delete its file). */
+    setPhoto(id: string, photoUri: string | null): string | null {
+      const uri = photoUriSchema.parse(photoUri);
+      return db.transaction((tx) => {
+        const current = tx.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
+        if (!current) throw new Error(`Meal log not found: ${id}`);
+        tx.update(mealLogs).set({ photoUri: uri }).where(eq(mealLogs.id, id)).run();
+        return current.photoUri;
+      });
+    },
+
+    /** Every stored photo reference, for the orphan-file sweep. */
+    photoUris(): string[] {
+      return db
+        .selectDistinct({ uri: mealLogs.photoUri })
+        .from(mealLogs)
+        .where(isNotNull(mealLogs.photoUri))
+        .all()
+        .flatMap((r) => (r.uri ? [r.uri] : []));
+    },
+
+    isPhotoReferenced(photoUri: string): boolean {
+      return (
+        db
+          .select({ id: mealLogs.id })
+          .from(mealLogs)
+          .where(eq(mealLogs.photoUri, photoUri))
+          .limit(1)
+          .get() !== undefined
+      );
+    },
+
+    /**
+     * Puts back an entry removed by `undo` (the «Отменить» of a delete). For an eaten
+     * portion it takes the portion from the fridge again. Idempotent per entry id.
+     */
+    restore(log: MealLog): void {
+      db.transaction((tx) => {
+        const exists = tx
+          .select({ id: mealLogs.id })
+          .from(mealLogs)
+          .where(eq(mealLogs.id, log.id))
+          .get();
+        if (exists) return;
+        if (log.portionId) {
+          const taken = tx
+            .update(preparedPortions)
+            .set({ portionsLeft: sql`${preparedPortions.portionsLeft} - 1` })
+            .where(
+              and(eq(preparedPortions.id, log.portionId), gt(preparedPortions.portionsLeft, 0)),
+            )
+            .returning({ id: preparedPortions.id })
+            .all();
+          if (taken.length === 0) throw new Error('The portion is no longer in the fridge');
+        }
+        tx.insert(mealLogs).values(log).run();
+      });
     },
 
     listByDate(localDate: string): MealLog[] {

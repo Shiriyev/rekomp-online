@@ -2,6 +2,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
@@ -11,6 +12,7 @@ import { DatabaseProvider } from '@/db/DatabaseProvider';
 import { useProfile, useThemePreference } from '@/db/hooks';
 import { useCookStore } from '@/features/cooking/cookStore';
 import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
+import { cleanupOrphanPhotos } from '@/features/photos/mealPhotos';
 import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
@@ -37,6 +39,12 @@ function AppShell() {
   const system = useColorScheme();
   const isDark = preference === 'system' ? system === 'dark' : preference === 'dark';
   const { profile, isLoaded } = useProfile();
+
+  // Daily sweep of photo files no entry points to; off the start-up path.
+  useEffect(() => {
+    const timer = setTimeout(() => cleanupOrphanPhotos(), 3_000);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!isLoaded) return null;
   const hasProfile = profile !== undefined;

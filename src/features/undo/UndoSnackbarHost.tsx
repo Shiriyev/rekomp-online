@@ -9,6 +9,7 @@ export const UNDO_MS = 10_000;
 export function UndoSnackbarHost() {
   const current = useUndoStore((s) => s.current);
   const dismiss = useUndoStore((s) => s.dismiss);
+  const undo = useUndoStore((s) => s.undo);
 
   return (
     <Snackbar
@@ -22,10 +23,7 @@ export function UndoSnackbarHost() {
         current?.run
           ? {
               label: 'Отменить',
-              onPress: () => {
-                current.run?.();
-                dismiss();
-              },
+              onPress: undo,
             }
           : undefined
       }>

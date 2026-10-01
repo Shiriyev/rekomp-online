@@ -43,6 +43,13 @@
       "when": 1790860471833,
       "tag": "0005_logical_day",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1790860825564,
+      "tag": "0006_meal_photo",
+      "breakpoints": true
     }
   ]
 }

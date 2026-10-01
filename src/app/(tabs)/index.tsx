@@ -22,6 +22,7 @@ import { proteinStreak } from '@/domain/cooking';
 import { addDays } from '@/domain/dates';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
 import { ManualEntrySheet } from '@/features/today/ManualEntrySheet';
+import { persistPhoto, releasePhoto } from '@/features/photos/mealPhotos';
 import { MealCategoryGrid } from '@/features/today/MealCategoryGrid';
 import { PortionsStrip } from '@/features/today/PortionsStrip';
 import { ProteinNudgeCard } from '@/features/today/ProteinNudgeCard';
@@ -77,9 +78,25 @@ export default function TodayScreen() {
   const mealNow = suggestMealType(now);
   const streak = proteinStreak(dailyProtein, profile.proteinMinG, today);
 
-  const addManual = (input: ManualLogInput) => {
-    const log = repositories.logs.addManual(input);
-    showUndo(`Добавлено: ${log.name}`, () => repositories.logs.undo(log.id));
+  const addManual = (input: ManualLogInput, photoTempUri: string | null) => {
+    let photoUri: string | null = null;
+    try {
+      photoUri = photoTempUri ? persistPhoto(photoTempUri) : null;
+    } catch (e) {
+      // The entry matters more than its photo: save it without one.
+      if (__DEV__) console.warn('Could not store the photo', e);
+    }
+    let log;
+    try {
+      log = repositories.logs.addManual({ ...input, photoUri });
+    } catch (e) {
+      releasePhoto(photoUri);
+      throw e;
+    }
+    showUndo(`Добавлено: ${log.name}${photoTempUri && !photoUri ? ' (без фото)' : ''}`, () => {
+      repositories.logs.undo(log.id);
+      releasePhoto(log.photoUri);
+    });
   };
 
   const eatPortion = (p: AvailablePortion) => {

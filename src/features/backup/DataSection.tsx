@@ -50,6 +50,9 @@ export function DataSection() {
         Всё хранится только на телефоне. Бэкап — это файл с твоими данными (включая вес): храни его
         в надёжном месте.
       </Text>
+      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+        Фото не входят в резервную копию.
+      </Text>
       <View style={styles.row}>
         <Button
           mode="contained-tonal"

@@ -1,4 +1,5 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Image } from 'expo-image';
 import { StyleSheet, View } from 'react-native';
 import { Card, Divider, IconButton, Text, TouchableRipple } from 'react-native-paper';
 
@@ -8,7 +9,7 @@ import { dayVerdict } from '@/domain/history';
 import type { Macros } from '@/domain/types';
 import { MEAL_ICONS, MEAL_LABELS } from '@/features/meals';
 import { formatInt, formatTime } from '@/lib/format';
-import { spacing, useAppTheme } from '@/theme';
+import { radius, spacing, useAppTheme } from '@/theme';
 
 type Props = {
   label: string;
@@ -106,12 +107,24 @@ function DayEntries({
           <Divider />
           <TouchableRipple onPress={() => onEdit(log)} accessibilityHint="Изменить запись">
             <View style={styles.entry}>
-              <MaterialCommunityIcons
-                name={log.source === 'manual' ? MEAL_ICONS[log.mealType] : SOURCE_ICON[log.source]}
-                size={20}
-                color={theme.colors.onSurfaceVariant}
-                importantForAccessibility="no"
-              />
+              {log.photoUri ? (
+                <Image
+                  source={{ uri: log.photoUri }}
+                  style={styles.thumb}
+                  contentFit="cover"
+                  accessibilityIgnoresInvertColors
+                  accessible={false}
+                />
+              ) : (
+                <MaterialCommunityIcons
+                  name={
+                    log.source === 'manual' ? MEAL_ICONS[log.mealType] : SOURCE_ICON[log.source]
+                  }
+                  size={20}
+                  color={theme.colors.onSurfaceVariant}
+                  importantForAccessibility="no"
+                />
+              )}
               <View style={styles.flex}>
                 <Text variant="bodyLarge" numberOfLines={1}>
                   {log.name}
@@ -152,5 +165,6 @@ const styles = StyleSheet.create({
     minHeight: 56,
   },
   entryMacros: { alignItems: 'flex-end' },
+  thumb: { width: 36, height: 36, borderRadius: radius.sm },
   empty: { padding: spacing.lg, paddingTop: 0 },
 });
