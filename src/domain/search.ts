@@ -8,15 +8,16 @@ export function normalizeForSearch(text: string): string {
     .trim();
 }
 
-type Searchable = { name: string; nameHu: string | null };
+/** `aliases`: other names to match (e.g. the English one). */
+type Searchable = { name: string; nameHu: string | null; aliases?: readonly string[] };
 
-/** Case/accent-insensitive search over Russian and Hungarian names; prefix matches first. */
+/** Case/accent-insensitive search over Russian, Hungarian and alias names; prefix matches first. */
 export function searchIngredients<T extends Searchable>(items: readonly T[], query: string): T[] {
   const q = normalizeForSearch(query);
   if (q === '') return [...items];
   const scored: { item: T; score: number }[] = [];
   for (const item of items) {
-    const names = [item.name, item.nameHu ?? ''].map(normalizeForSearch);
+    const names = [item.name, item.nameHu ?? '', ...(item.aliases ?? [])].map(normalizeForSearch);
     const prefix = names.some(
       (n) => n.startsWith(q) || n.split(/\s+/).some((w) => w.startsWith(q)),
     );

@@ -1,9 +1,9 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   Button,
-  Card,
   Chip,
   Dialog,
   Divider,
@@ -15,7 +15,7 @@ import {
 
 import { repositories } from '@/db';
 import { useActiveSales, useIngredientsMap, usePantryStock, useRecipeDetail } from '@/db/hooks';
-import { recipeMacros, resolveLines, roundKcal, roundProtein } from '@/domain/nutrition';
+import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
 import { RECIPE_IMAGES } from '@/features/images';
@@ -28,19 +28,23 @@ import {
 } from '@/features/recipes/recipeDraftStore';
 import { StatusBadge } from '@/features/recipes/StatusBadge';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
+import { showUndo } from '@/features/undo/undoStore';
+import { t as translate, useT } from '@/i18n';
+import { content as contentNow, useContent } from '@/i18n/content';
 import { formatAmount, formatInt, formatKcal } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
-import { showUndo } from '@/features/undo/undoStore';
-import { spacing, useAppTheme } from '@/theme';
-import { AmountInput } from '@/ui/AmountInput';
+import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { SkeletonDetail } from '@/ui/Skeleton';
 
 const SERVING_OPTIONS = [1, 2, 3, 4] as const;
+const NIGHT_BEFORE_TAG = 'с вечера';
 
 export default function RecipeScreen() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { recipe, lines, hasCustom, isLoaded } = useRecipeDetail(id);
   const draft = useRecipeDraft(id);
@@ -69,15 +73,15 @@ export default function RecipeScreen() {
     const used = resolveLines(drafted, choices).filter(
       (l) => !ingredients.get(l.ingredientId)?.isStaple,
     );
-    const staples = lines
-      .map((l) => ingredients.get(l.ingredientId))
-      .filter((i) => i?.isStaple)
-      .map((i) => i!.name.toLocaleLowerCase('ru-RU'));
+    const staples = lines.flatMap((l) => {
+      const i = ingredients.get(l.ingredientId);
+      return i?.isStaple ? [contentNow.ingredientName(i).toLocaleLowerCase()] : [];
+    });
     return { check, macros, baseMacros, used, staples };
   }, [recipe, lines, draft, ingredients, pantry, servings, userChoices]);
 
   if (isLoaded && !recipe) {
-    return <EmptyState icon="alert-circle-outline" title="Блюдо не найдено" />;
+    return <EmptyState icon="alert-circle-outline" title={t('recipes.card.notFound')} />;
   }
   if (!recipe || !computed) return <SkeletonDetail />;
 
@@ -85,9 +89,10 @@ export default function RecipeScreen() {
   const perServing = macros.perServing;
   const after = kcalLeft - perServing.kcal;
   const drafted = Object.keys(draft).length > 0;
-  const kcalChanged = roundKcal(perServing.kcal) !== roundKcal(baseMacros.perServing.kcal);
-  const proteinChanged =
-    roundProtein(perServing.protein) !== roundProtein(baseMacros.perServing.protein);
+  const recipeName = content.recipeName(recipe);
+  // Compare what is shown, so «46 → 46» never appears.
+  const kcalChanged = formatInt(perServing.kcal) !== formatInt(baseMacros.perServing.kcal);
+  const proteinChanged = formatInt(perServing.protein) !== formatInt(baseMacros.perServing.protein);
   const baseAmountOf = (ingredientId: string) =>
     lines.find((l) => l.ingredientId === ingredientId)?.amountPerServing ?? 0;
 
@@ -116,20 +121,26 @@ export default function RecipeScreen() {
       draft,
     );
     clearRecipeDraft(recipe.id);
-    showUndo(`Записано: ${recipe.name}`, () => repositories.cook.undo(result.sessionId));
+    showUndo(translate('recipes.card.logged', { name: recipeName }), () =>
+      repositories.cook.undo(result.sessionId),
+    );
     router.back();
   };
 
   const saveAsMine = () => {
     repositories.recipes.saveCustomAmounts(recipe.id, applyAmountsMap(lines, draft));
     clearRecipeDraft(recipe.id);
-    setMessage('Сохранено как твоя версия рецепта');
+    setMessage(t('recipes.card.savedMine'));
   };
 
   const addMissing = () => {
     const n = repositories.shopping.addMissing(check.missing);
-    setMessage(n > 0 ? `В список покупок: ${n}` : 'Уже в списке покупок');
+    setMessage(
+      n > 0 ? t('recipes.card.addedToList', { count: n }) : t('recipes.card.alreadyInList'),
+    );
   };
+
+  const onColor = theme.colors.onPrimaryContainer;
 
   return (
     <>
@@ -140,80 +151,90 @@ export default function RecipeScreen() {
           fallbackIcon={MEAL_ICONS[recipe.mealType]}
           style={styles.hero}
           iconSize={72}
-          accessibilityLabel={recipe.name}
+          accessibilityLabel={recipeName}
         />
 
         <View style={styles.section}>
           <Text variant="headlineSmall" accessibilityRole="header">
-            {recipe.name}
+            {recipeName}
           </Text>
           <View style={styles.chips}>
-            <Chip compact icon="clock-outline">
-              {recipe.totalMinutes} мин
+            <Chip compact mode="outlined" icon="clock-outline">
+              {t('recipes.card.minutes', { minutes: recipe.totalMinutes })}
             </Chip>
             {recipe.prepNightBefore ? (
-              <Chip compact icon="weather-night">
-                С вечера
+              <Chip compact mode="outlined" icon="weather-night">
+                {t('recipes.card.nightBefore')}
               </Chip>
             ) : null}
             {recipe.tags
-              .filter((t) => t !== 'с вечера')
-              .map((t) => (
-                <Chip compact key={t}>
-                  {t}
+              .filter((tag) => tag !== NIGHT_BEFORE_TAG)
+              .map((tag) => (
+                <Chip compact mode="outlined" key={tag}>
+                  {content.tag(tag)}
                 </Chip>
               ))}
           </View>
         </View>
 
-        <Card
-          mode="contained"
-          style={[styles.inset, { backgroundColor: theme.colors.primaryContainer }]}>
-          <Card.Content style={styles.macros}>
-            <View>
+        <View style={[styles.macros, { backgroundColor: theme.colors.primaryContainer }]}>
+          <View style={styles.flex}>
+            <View style={styles.kcalRow}>
               <Text
                 variant="headlineMedium"
-                style={{ color: theme.colors.onPrimaryContainer }}
+                style={{ color: onColor }}
                 accessibilityLabel={
                   kcalChanged
-                    ? `${formatInt(perServing.kcal)} ккал, в рецепте ${formatInt(baseMacros.perServing.kcal)}`
+                    ? t('recipes.card.kcalA11y', {
+                        kcal: formatInt(perServing.kcal),
+                        base: formatInt(baseMacros.perServing.kcal),
+                      })
                     : formatKcal(perServing.kcal)
                 }>
-                {kcalChanged
-                  ? `${formatInt(baseMacros.perServing.kcal)} → ${formatKcal(perServing.kcal)}`
-                  : formatKcal(perServing.kcal)}
+                {formatKcal(perServing.kcal)}
               </Text>
-              <Text variant="titleMedium" style={{ color: theme.colors.onPrimaryContainer }}>
-                {proteinChanged
-                  ? `${formatInt(baseMacros.perServing.protein)} → ${formatInt(perServing.protein)} г белка`
-                  : `${formatInt(perServing.protein)} г белка`}
-              </Text>
+              {kcalChanged ? (
+                <Text variant="titleSmall" style={[styles.was, { color: onColor }]}>
+                  {formatInt(baseMacros.perServing.kcal)}
+                </Text>
+              ) : null}
             </View>
-            <View style={styles.macrosRight}>
-              <Text variant="bodySmall" style={{ color: theme.colors.onPrimaryContainer }}>
-                на порцию
-              </Text>
-              <Text
-                variant="bodyMedium"
-                style={{ color: after < 0 ? theme.colors.error : theme.colors.onPrimaryContainer }}>
-                {after < 0
-                  ? `перебор ${formatInt(-after)} ккал`
-                  : `останется ${formatInt(after)} ккал`}
-              </Text>
-            </View>
-          </Card.Content>
-        </Card>
+            <Text variant="titleMedium" style={{ color: onColor }}>
+              {t('common.proteinValue', { value: formatInt(perServing.protein) })}
+              {proteinChanged ? (
+                <Text style={styles.was}> {formatInt(baseMacros.perServing.protein)}</Text>
+              ) : null}
+            </Text>
+          </View>
+          <View style={styles.macrosRight}>
+            <Text variant="bodySmall" style={{ color: onColor }}>
+              {t('recipes.card.perServing')}
+            </Text>
+            <Text variant="bodyMedium" style={{ color: after < 0 ? theme.colors.error : onColor }}>
+              {after < 0
+                ? t('recipes.card.overKcal', { kcal: formatInt(-after) })
+                : t('recipes.card.leftKcal', { kcal: formatInt(after) })}
+            </Text>
+          </View>
+        </View>
 
         {recipe.isBatch ? (
           <View style={styles.section}>
-            <Text variant="titleMedium">Порций в кастрюле</Text>
+            <Text variant="titleMedium">{t('recipes.card.servings')}</Text>
             <SegmentedButtons
               value={String(servings)}
               onValueChange={(v) => setServings(Number(v))}
-              buttons={SERVING_OPTIONS.map((n) => ({ value: String(n), label: String(n) }))}
+              buttons={SERVING_OPTIONS.map((n) => ({
+                value: String(n),
+                label: String(n),
+                showSelectedCheck: false,
+              }))}
             />
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-              Всего {formatKcal(macros.total.kcal)}, {formatInt(macros.total.protein)} г белка
+              {t('recipes.card.batchTotal', {
+                kcal: formatKcal(macros.total.kcal),
+                protein: formatInt(macros.total.protein),
+              })}
             </Text>
           </View>
         ) : null}
@@ -221,62 +242,93 @@ export default function RecipeScreen() {
         <View style={styles.section}>
           <View style={styles.titleRow}>
             <Text variant="titleMedium" accessibilityRole="header">
-              Продукты{recipe.isBatch ? ` на ${servings}` : ''}
+              {recipe.isBatch
+                ? t('recipes.card.productsFor', { count: servings })
+                : t('recipes.card.products')}
             </Text>
             <StatusBadge check={check} />
           </View>
+
+          {drafted || hasCustom ? (
+            <View style={[styles.banner, { backgroundColor: theme.colors.secondaryContainer }]}>
+              <MaterialCommunityIcons
+                name={drafted ? 'tune-variant' : 'account-heart-outline'}
+                size={22}
+                color={theme.colors.onSecondaryContainer}
+              />
+              <View style={styles.flex}>
+                <Text variant="titleSmall" style={{ color: theme.colors.onSecondaryContainer }}>
+                  {drafted ? t('recipes.card.editedTitle') : t('recipes.card.myVersion')}
+                </Text>
+                {drafted ? (
+                  <Text variant="bodySmall" style={{ color: theme.colors.onSecondaryContainer }}>
+                    {t('recipes.card.editedHint')}
+                  </Text>
+                ) : null}
+                <View style={styles.bannerActions}>
+                  {drafted ? (
+                    <Button compact icon="restore" onPress={() => clearRecipeDraft(recipe.id)}>
+                      {t('recipes.card.resetDraft')}
+                    </Button>
+                  ) : null}
+                  {drafted ? (
+                    <Button compact icon="content-save-outline" onPress={saveAsMine}>
+                      {t('recipes.card.saveMine')}
+                    </Button>
+                  ) : (
+                    <Button
+                      compact
+                      icon="history"
+                      onPress={() => {
+                        repositories.recipes.resetCustomAmounts(recipe.id);
+                        setMessage(t('recipes.card.restoredOriginal'));
+                      }}>
+                      {t('recipes.card.restoreOriginal')}
+                    </Button>
+                  )}
+                </View>
+              </View>
+            </View>
+          ) : null}
+
           {used.map((line, index) => {
             const ingredient = ingredients.get(line.ingredientId);
             if (!ingredient) return null;
             const base = baseAmountOf(line.ingredientId);
-            const changed = Math.abs(line.amountPerServing - base) > 1e-9;
-            const stepper = (
-              <View style={styles.editor}>
-                <Text
-                  variant="bodySmall"
-                  style={[
-                    styles.flex,
-                    { color: changed ? theme.colors.primary : theme.colors.onSurfaceVariant },
-                  ]}>
-                  {servings > 1
-                    ? `${formatAmount(line.amountPerServing, line.unit)}/порц · ${formatAmount(line.amountPerServing * servings, line.unit)} всего`
-                    : `${formatAmount(line.amountPerServing, line.unit)} на порцию`}
-                  {changed ? ` (в рецепте ${formatAmount(base, line.unit)})` : ''}
-                </Text>
-                <AmountInput
-                  label={ingredient.name}
-                  value={line.amountPerServing}
-                  onChange={(n) => setDraftAmount(recipe.id, line.ingredientId, n, base, line.unit)}
-                  unit={line.unit}
-                  step={draftStep(line.unit)}
-                />
-              </View>
-            );
+            const name = content.ingredientName(ingredient);
+            const setAmount = (n: number) =>
+              setDraftAmount(recipe.id, line.ingredientId, n, base, line.unit);
             if (isRemoved(line)) {
               return (
-                <View key={line.ingredientId} style={styles.removed}>
+                <View key={line.ingredientId}>
                   {index > 0 ? <Divider /> : null}
                   <View style={styles.removedRow}>
-                    <Text
-                      variant="bodyLarge"
-                      style={[
-                        styles.flex,
-                        styles.strike,
-                        { color: theme.colors.onSurfaceDisabled },
-                      ]}>
-                      {ingredient.name}
-                    </Text>
-                    <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceDisabled }}>
-                      убрано
-                    </Text>
+                    <View
+                      style={[styles.removedIcon, { borderColor: theme.colors.outlineVariant }]}>
+                      <MaterialCommunityIcons
+                        name="minus"
+                        size={20}
+                        color={theme.colors.onSurfaceDisabled}
+                      />
+                    </View>
+                    <View style={styles.flex}>
+                      <Text
+                        variant="bodyLarge"
+                        style={[styles.strike, { color: theme.colors.onSurfaceDisabled }]}>
+                        {name}
+                      </Text>
+                      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceDisabled }}>
+                        {t('recipes.card.removed')} ·{' '}
+                        {t('recipes.card.inRecipe', { amount: formatAmount(base, line.unit) })}
+                      </Text>
+                    </View>
                     <Button
                       compact
+                      mode="outlined"
                       icon="undo"
-                      onPress={() =>
-                        setDraftAmount(recipe.id, line.ingredientId, base, base, line.unit)
-                      }
-                      accessibilityLabel={`Вернуть ${ingredient.name}`}>
-                      Вернуть
+                      onPress={() => setAmount(base)}
+                      accessibilityLabel={t('recipes.card.restoreA11y', { name })}>
+                      {t('recipes.card.restoreIngredient')}
                     </Button>
                   </View>
                 </View>
@@ -293,47 +345,28 @@ export default function RecipeScreen() {
                   alternatives={c.alternatives.flatMap((a) => ingredients.get(a) ?? [])}
                   sale={sales.get(c.line.ingredientId)}
                   servings={servings}
-                  changed={changed}
                   onChooseAlternative={(altId) => {
                     const group = c.line.altGroup;
                     if (group) setUserChoices((prev) => ({ ...prev, [group]: altId }));
                   }}
-                  footer={stepper}
+                  editor={{
+                    value: line.amountPerServing,
+                    base,
+                    step: draftStep(line.unit),
+                    onChange: setAmount,
+                  }}
                 />
               </View>
             );
           })}
-          {drafted || hasCustom ? (
-            <View style={styles.draftActions}>
-              {drafted ? (
-                <Button icon="restore" onPress={() => clearRecipeDraft(recipe.id)}>
-                  Сбросить к рецепту
-                </Button>
-              ) : null}
-              {drafted ? (
-                <Button icon="content-save-outline" onPress={saveAsMine}>
-                  Сохранить как мою версию
-                </Button>
-              ) : null}
-              {!drafted && hasCustom ? (
-                <Button
-                  icon="history"
-                  onPress={() => {
-                    repositories.recipes.resetCustomAmounts(recipe.id);
-                    setMessage('Вернули исходные количества');
-                  }}>
-                  Вернуть исходный рецепт
-                </Button>
-              ) : null}
-            </View>
-          ) : null}
+
           {staples.length > 0 ? (
             <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-              Специи по вкусу: {staples.join(', ')}
+              {t('recipes.card.staples', { list: staples.join(', ') })}
             </Text>
           ) : null}
           <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-            КБЖУ ориентировочные — проверь по этикетке.
+            {t('recipes.card.approx')}
           </Text>
         </View>
 
@@ -344,7 +377,7 @@ export default function RecipeScreen() {
               icon="cart-plus"
               onPress={addMissing}
               contentStyle={styles.button}>
-              Добавить недостающее в список
+              {t('recipes.card.addMissing')}
             </Button>
           ) : null}
           <Button
@@ -352,33 +385,39 @@ export default function RecipeScreen() {
             icon="chef-hat"
             onPress={() => (check.status === 'ok' ? startCooking() : setConfirmOpen(true))}
             contentStyle={styles.button}>
-            Начать готовить
+            {t('recipes.card.startCooking')}
           </Button>
           <Button
             mode="text"
             icon="silverware-fork-knife"
             onPress={justAte}
             contentStyle={styles.button}>
-            Просто съел(а)
+            {t('recipes.card.justAte')}
           </Button>
         </View>
       </ScrollView>
 
       <Portal>
         <Dialog visible={confirmOpen} onDismiss={() => setConfirmOpen(false)}>
-          <Dialog.Title>Не всё есть дома</Dialog.Title>
+          <Dialog.Title>{t('recipes.card.notAllTitle')}</Dialog.Title>
           <Dialog.Content style={styles.dialog}>
-            {check.missing.map((m) => (
-              <Text key={m.ingredientId} variant="bodyMedium">
-                • {ingredients.get(m.ingredientId)?.name}: не хватает{' '}
-                {formatAmount(m.amount, m.unit)}
-              </Text>
-            ))}
+            {check.missing.map((m) => {
+              const i = ingredients.get(m.ingredientId);
+              return (
+                <Text key={m.ingredientId} variant="bodyMedium">
+                  •{' '}
+                  {t('recipes.card.notEnough', {
+                    name: i ? content.ingredientName(i) : m.ingredientId,
+                    amount: formatAmount(m.amount, m.unit),
+                  })}
+                </Text>
+              );
+            })}
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => setConfirmOpen(false)}>Отмена</Button>
+            <Button onPress={() => setConfirmOpen(false)}>{t('common.actions.cancel')}</Button>
             <Button mode="contained" onPress={startCooking}>
-              Всё равно начать
+              {t('recipes.card.startAnyway')}
             </Button>
           </Dialog.Actions>
         </Dialog>
@@ -391,26 +430,6 @@ export default function RecipeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  content: { paddingBottom: spacing.xxl, gap: spacing.lg },
-  hero: { width: '100%', height: 220 },
-  section: { paddingHorizontal: spacing.lg, gap: spacing.sm },
-  inset: { marginHorizontal: spacing.lg },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
-  macros: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  macrosRight: { alignItems: 'flex-end', gap: 2 },
-  titleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  actions: { paddingHorizontal: spacing.lg, gap: spacing.md },
-  button: { minHeight: 52 },
-  dialog: { gap: spacing.xs },
-  flex: { flex: 1 },
-  editor: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingLeft: 60 },
-  removed: { opacity: 0.8 },
-  removedRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, minHeight: 56 },
-  strike: { textDecorationLine: 'line-through' },
-  draftActions: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
-});
-
 /** The full per-serving amounts the card currently shows. */
 const applyAmountsMap = (
   lines: readonly { ingredientId: string; amountPerServing: number }[],
@@ -419,3 +438,50 @@ const applyAmountsMap = (
   Object.fromEntries(
     lines.map((l) => [l.ingredientId, draft[l.ingredientId] ?? l.amountPerServing]),
   );
+
+const styles = StyleSheet.create({
+  flex: { flex: 1 },
+  content: { paddingBottom: spacing.xxl, gap: spacing.lg },
+  hero: { width: '100%', height: 240 },
+  section: { paddingHorizontal: spacing.lg, gap: spacing.sm },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  macros: {
+    marginHorizontal: spacing.lg,
+    borderRadius: radius.lg,
+    padding: spacing.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
+  kcalRow: { flexDirection: 'row', alignItems: 'baseline', gap: spacing.sm },
+  was: { textDecorationLine: 'line-through', opacity: 0.7 },
+  macrosRight: { alignItems: 'flex-end', gap: 2 },
+  titleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  banner: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    padding: spacing.md,
+    borderRadius: radius.lg,
+    alignItems: 'flex-start',
+  },
+  bannerActions: { flexDirection: 'row', flexWrap: 'wrap', marginLeft: -spacing.sm },
+  removedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    paddingVertical: spacing.md,
+  },
+  removedIcon: {
+    width: 52,
+    height: 52,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  strike: { textDecorationLine: 'line-through' },
+  actions: { paddingHorizontal: spacing.lg, gap: spacing.md },
+  button: { minHeight: 52 },
+  dialog: { gap: spacing.xs },
+});

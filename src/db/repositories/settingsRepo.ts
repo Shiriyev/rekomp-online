@@ -1,12 +1,18 @@
 import { eq } from 'drizzle-orm';
 
-import { themePreferenceSchema, type ThemePreference } from '../../domain/schemas';
+import type { LanguagePreference } from '../../domain/language';
+import {
+  languagePreferenceSchema,
+  themePreferenceSchema,
+  type ThemePreference,
+} from '../../domain/schemas';
 import { appMeta } from '../schema';
 import type { AppDb } from '../types';
 
 export const THEME_KEY = 'theme';
 export const COOK_VIEW_KEY = 'cook_view';
 export const PHOTO_CLEANUP_KEY = 'photo_cleanup_at';
+export const LANGUAGE_KEY = 'language';
 export const COOK_VIEWS = ['steps', 'overview'] as const;
 export type CookView = (typeof COOK_VIEWS)[number];
 
@@ -34,6 +40,16 @@ export function createSettingsRepo(db: AppDb) {
 
     setPhotoCleanupAt(ms: number): void {
       setMeta(PHOTO_CLEANUP_KEY, String(ms));
+    },
+
+    getLanguage(): LanguagePreference {
+      const row = db.select().from(appMeta).where(eq(appMeta.key, LANGUAGE_KEY)).get();
+      const parsed = languagePreferenceSchema.safeParse(row?.value);
+      return parsed.success ? parsed.data : 'system';
+    },
+
+    setLanguage(value: LanguagePreference): void {
+      setMeta(LANGUAGE_KEY, languagePreferenceSchema.parse(value));
     },
 
     getTheme(): ThemePreference {

@@ -12,7 +12,7 @@ import {
   resetTimer,
   startTimer,
   stepIngredients,
-  durationLabel,
+  durationParts,
   recipeOverview,
 } from '../cooking';
 import type { PantryStock } from '../pantry';
@@ -242,28 +242,28 @@ describe('recipeOverview', () => {
       { order: 3, text: 'Добавить овощи.', timerSec: 180 },
       { order: 4, text: 'Тушить под крышкой.', timerSec: 1200 },
     ]);
-    expect(o.entries.map((e) => [e.order, e.lead, e.startsAtMin])).toEqual([
-      [1, 'Сначала', 0],
-      [2, 'Затем 6 мин', 0],
-      [3, 'Затем 3 мин', 6],
-      [4, 'В конце 20 мин', 9],
+    expect(o.entries.map((e) => [e.order, e.position, e.timerSec, e.startsAtMin])).toEqual([
+      [1, 'first', null, 0],
+      [2, 'middle', 360, 0],
+      [3, 'middle', 180, 6],
+      [4, 'last', 1200, 9],
     ]);
     expect(o.timedTotalMin).toBe(29);
   });
 
   it('handles a single step and no steps', () => {
-    expect(recipeOverview([{ order: 1, text: 'Подать.', timerSec: null }]).entries[0]?.lead).toBe(
-      'Сначала',
-    );
+    expect(
+      recipeOverview([{ order: 1, text: 'Подать.', timerSec: null }]).entries[0]?.position,
+    ).toBe('first');
     expect(recipeOverview([])).toEqual({ entries: [], timedTotalMin: 0 });
   });
 
   it.each([
-    [30, '30 сек'],
-    [60, '1 мин'],
-    [90, '1,5 мин'],
-    [540, '9 мин'],
-  ])('durationLabel(%p) = %p', (s, label) => {
-    expect(durationLabel(s)).toBe(label);
+    [30, { unit: 'sec', value: 30 }],
+    [60, { unit: 'min', value: 1 }],
+    [90, { unit: 'min', value: 1.5 }],
+    [540, { unit: 'min', value: 9 }],
+  ] as const)('durationParts(%p) = %p', (s, parts) => {
+    expect(durationParts(s)).toEqual(parts);
   });
 });

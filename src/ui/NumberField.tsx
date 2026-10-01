@@ -2,6 +2,8 @@ import { Controller, type Control, type FieldPath, type FieldValues } from 'reac
 import { StyleSheet, View } from 'react-native';
 import { HelperText, TextInput, type TextInputProps } from 'react-native-paper';
 
+import { useTranslateMessage } from '@/i18n';
+
 type Props<T extends FieldValues, TOut extends FieldValues> = {
   /** Control of a form whose resolver may transform values (input T, output TOut). */
   control: Control<T, unknown, TOut>;
@@ -22,6 +24,7 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
   integer,
   render,
 }: Props<T, TOut>) {
+  const translate = useTranslateMessage();
   return (
     <Controller
       control={control}
@@ -42,7 +45,7 @@ export function NumberField<T extends FieldValues, TOut extends FieldValues = T>
           />
           {error ? (
             <HelperText type="error" padding="none">
-              {error.message}
+              {translate(error.message)}
             </HelperText>
           ) : null}
         </View>

@@ -4,14 +4,25 @@ import { useMemo } from 'react';
 
 import { isSaleActive } from '@/domain/lidl';
 import type { PantryStock } from '@/domain/pantry';
-import { themePreferenceSchema, type ThemePreference } from '@/domain/schemas';
+import type { LanguagePreference } from '@/domain/language';
+import {
+  languagePreferenceSchema,
+  themePreferenceSchema,
+  type ThemePreference,
+} from '@/domain/schemas';
 import { catalogMacros, recentPresets, type Preset } from '@/domain/today';
 import { applyAmounts } from '@/domain/recipeDraft';
 import type { Macros } from '@/domain/types';
 
 import { db } from './client';
 import type { AvailablePortion } from './repositories/portionsRepo';
-import { COOK_VIEW_KEY, COOK_VIEWS, THEME_KEY, type CookView } from './repositories/settingsRepo';
+import {
+  COOK_VIEW_KEY,
+  COOK_VIEWS,
+  LANGUAGE_KEY,
+  THEME_KEY,
+  type CookView,
+} from './repositories/settingsRepo';
 import {
   appMeta,
   cookSessions,
@@ -48,6 +59,12 @@ export function useProfile(): { profile: Profile | undefined; isLoaded: boolean 
 export function useThemePreference(): ThemePreference {
   const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, THEME_KEY)));
   const parsed = themePreferenceSchema.safeParse(data[0]?.value);
+  return parsed.success ? parsed.data : 'system';
+}
+
+export function useLanguagePreference(): LanguagePreference {
+  const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, LANGUAGE_KEY)));
+  const parsed = languagePreferenceSchema.safeParse(data[0]?.value);
   return parsed.success ? parsed.data : 'system';
 }
 

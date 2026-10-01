@@ -54,7 +54,8 @@
           "photosPermission": "Рекомп открывает галерею, чтобы прикрепить фото блюда к записи.",
           "microphonePermission": false
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,

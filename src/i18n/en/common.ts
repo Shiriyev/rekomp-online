@@ -1,0 +1,40 @@
+import type { Messages } from '../types';
+import type { common as ru } from '../ru/common';
+
+export const common: Messages<typeof ru> = {
+  units: { g: 'g', ml: 'ml', pcs: 'pcs' },
+  categories: {
+    dairy: 'Dairy',
+    meat: 'Meat',
+    grains: 'Grains',
+    vegetables: 'Vegetables',
+    fruits: 'Fruit',
+    eggs: 'Eggs',
+    bread: 'Bread',
+    canned: 'Canned',
+    oil: 'Oil',
+    spices: 'Spices',
+  },
+  meals: { breakfast: 'Breakfast', lunch: 'Lunch', snack: 'Snack', dinner: 'Dinner' },
+  actions: {
+    add: 'Add',
+    save: 'Save',
+    cancel: 'Cancel',
+    delete: 'Delete',
+    edit: 'Edit',
+    back: 'Back',
+    next: 'Next',
+    undo: 'Undo',
+    close: 'Close',
+    reset: 'Reset',
+    continue: 'Continue',
+  },
+  kcal: 'kcal',
+  kcalValue: '{{value}} kcal',
+  proteinValue: '{{value}} g protein',
+  grams: 'g',
+  today: 'Today',
+  yesterday: 'Yesterday',
+  loading: 'Loading',
+  somethingWrong: 'Something went wrong',
+};

@@ -1,5 +1,5 @@
 import { FlashList, type FlashListRef } from '@shopify/flash-list';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { useRef, useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -18,18 +18,20 @@ import { INGREDIENT_IMAGES } from '@/features/images';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { showUndo } from '@/features/undo/undoStore';
-import { formatAmount, pluralRu } from '@/lib/format';
+import { t as translate, translateMessage, useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
+import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { AmountInput } from '@/ui/AmountInput';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
-const products = (n: number) => `${n} ${pluralRu(n, ['продукт', 'продукта', 'продуктов'])}`;
-
-/** «Количество»: one stepper per picked product, then everything in one transaction. */
+/** «Количество»: one card per picked product, then everything in one transaction. */
 export default function BulkAmountsScreen() {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
   const insets = useSafeAreaInsets();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
@@ -65,21 +67,26 @@ export default function BulkAmountsScreen() {
             return itemId ? [{ itemId, amount: amounts[i.id] ?? 0 }] : [];
           }),
         );
-        showUndo(`Куплено и добавлено домой: ${products(ids.length)}`, () =>
+        showUndo(translate('bulkAdd.bought', { count: ids.length }), () =>
           repositories.shopping.uncheckMany(ids),
         );
       } else {
         const result = repositories.pantry.addMany(
           rows.map((i) => ({ ingredientId: i.id, amount: amounts[i.id] ?? 0 })),
         );
-        showUndo(`Добавлено ${products(result.items.length)}`, () =>
+        showUndo(translate('bulkAdd.added', { count: result.items.length }), () =>
           repositories.pantry.undoAddMany(result),
         );
       }
       clear();
       router.dismissTo('/pantry');
     } catch (e) {
-      showUndo(e instanceof Error ? `Не удалось добавить: ${e.message}` : 'Не удалось добавить');
+      showUndo(
+        translate('bulkAdd.failed', {
+          reason:
+            e instanceof Error ? translateMessage(e.message) : translate('common.somethingWrong'),
+        }),
+      );
     } finally {
       setSaving(false);
     }
@@ -89,8 +96,8 @@ export default function BulkAmountsScreen() {
     return (
       <EmptyState
         icon="basket-outline"
-        title="Ничего не выбрано"
-        actionLabel="Назад"
+        title={t('bulkAdd.nothingSelected')}
+        actionLabel={t('common.actions.back')}
         onAction={() => router.back()}
       />
     );
@@ -103,6 +110,7 @@ export default function BulkAmountsScreen() {
       ref={container}
       style={styles.flex}
       onLayout={() => container.current?.measureInWindow((_x, y) => setOffset(y))}>
+      <Stack.Screen options={{ title: t('bulkAdd.amountsTitle') }} />
       <KeyboardAvoidingView style={styles.flex} behavior="padding" keyboardVerticalOffset={offset}>
         <FlashList
           ref={listRef}
@@ -111,48 +119,68 @@ export default function BulkAmountsScreen() {
           extraData={amounts}
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={styles.list}
+          ListHeaderComponent={
+            <Text
+              variant="bodyMedium"
+              style={[styles.hint, { color: theme.colors.onSurfaceVariant }]}>
+              {t('bulkAdd.amountsHint')}
+            </Text>
+          }
           renderItem={({ item, index }) => {
             const amount = amounts[item.id] ?? 0;
             const have = stock.get(item.id);
             const after = afterAdding(have ?? null, amount, item.unit);
+            const name = content.ingredientName(item);
             return (
-              <SwipeToDelete onDelete={() => remove(item.id)} label="Убрать">
-                <View style={[styles.row, { backgroundColor: theme.colors.background }]}>
-                  <ImageWithFallback
-                    source={item.imageKey ? INGREDIENT_IMAGES[item.imageKey] : undefined}
-                    fallbackIcon={CATEGORY_ICONS[item.category]}
-                    style={styles.image}
-                    iconSize={22}
-                  />
-                  <View style={styles.flex}>
-                    <Text variant="bodyLarge" numberOfLines={2}>
-                      {item.name}
-                    </Text>
-                    <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                      {have !== undefined
-                        ? `было ${formatAmount(have, item.unit)} → станет ${formatAmount(after, item.unit)}`
-                        : `станет ${formatAmount(after, item.unit)}`}
-                    </Text>
-                    <AmountInput
-                      label={item.name}
-                      value={amount}
-                      onChange={(n) => setAmount(item.id, n)}
-                      unit={item.unit}
-                      step={bulkStep(item.unit)}
-                      inputRef={(r) => {
-                        inputs.current.set(index, r);
-                      }}
-                      returnKeyType={index < rows.length - 1 ? 'next' : 'done'}
-                      onSubmitEditing={index < rows.length - 1 ? () => focusNext(index) : undefined}
-                    />
+              <View style={styles.cardWrap}>
+                <SwipeToDelete onDelete={() => remove(item.id)} label={t('bulkAdd.swipeRemove')}>
+                  <View style={[styles.card, { backgroundColor: theme.colors.elevation.level1 }]}>
+                    <View style={styles.top}>
+                      <ImageWithFallback
+                        source={item.imageKey ? INGREDIENT_IMAGES[item.imageKey] : undefined}
+                        fallbackIcon={CATEGORY_ICONS[item.category]}
+                        style={styles.image}
+                        iconSize={24}
+                      />
+                      <View style={styles.flex}>
+                        <Text variant="titleMedium" numberOfLines={2}>
+                          {name}
+                        </Text>
+                        <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
+                          {have !== undefined
+                            ? t('bulkAdd.wasBecomes', { was: formatAmount(have, item.unit) })
+                            : ''}
+                          <Text style={{ color: theme.colors.primary, fontWeight: '700' }}>
+                            {t('bulkAdd.becomes', { amount: formatAmount(after, item.unit) })}
+                          </Text>
+                        </Text>
+                      </View>
+                      <IconButton
+                        icon="close"
+                        size={20}
+                        onPress={() => remove(item.id)}
+                        accessibilityLabel={t('bulkAdd.removeFromBatch', { name })}
+                      />
+                    </View>
+                    <View style={styles.stepper}>
+                      <AmountInput
+                        label={name}
+                        value={amount}
+                        onChange={(n) => setAmount(item.id, n)}
+                        unit={item.unit}
+                        step={bulkStep(item.unit)}
+                        inputRef={(r) => {
+                          inputs.current.set(index, r);
+                        }}
+                        returnKeyType={index < rows.length - 1 ? 'next' : 'done'}
+                        onSubmitEditing={
+                          index < rows.length - 1 ? () => focusNext(index) : undefined
+                        }
+                      />
+                    </View>
                   </View>
-                  <IconButton
-                    icon="close"
-                    onPress={() => remove(item.id)}
-                    accessibilityLabel={`Убрать из списка: ${item.name}`}
-                  />
-                </View>
-              </SwipeToDelete>
+                </SwipeToDelete>
+              </View>
             );
           }}
         />
@@ -162,10 +190,11 @@ export default function BulkAmountsScreen() {
             icon="check"
             onPress={addAll}
             disabled={saving || invalid}
-            contentStyle={styles.submit}>
+            contentStyle={styles.submit}
+            labelStyle={styles.submitLabel}>
             {source === 'shopping'
-              ? `Купил, добавить всё (${rows.length})`
-              : `Добавить всё (${rows.length})`}
+              ? t('bulkAdd.boughtAddAll', { count: rows.length })
+              : t('bulkAdd.addAll', { count: rows.length })}
           </Button>
         </Surface>
       </KeyboardAvoidingView>
@@ -175,15 +204,14 @@ export default function BulkAmountsScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  list: { paddingVertical: spacing.sm },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    paddingLeft: spacing.lg,
-    paddingVertical: spacing.sm,
-  },
-  image: { width: 48, height: 48, borderRadius: radius.sm },
+  list: { paddingHorizontal: spacing.lg, paddingBottom: spacing.lg },
+  hint: { paddingVertical: spacing.md },
+  cardWrap: { marginBottom: spacing.md, borderRadius: radius.lg, overflow: 'hidden' },
+  card: { padding: spacing.md, gap: spacing.sm, borderRadius: radius.lg },
+  top: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
+  image: { width: 56, height: 56, borderRadius: radius.md },
+  stepper: { flexDirection: 'row', justifyContent: 'flex-end' },
   bar: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
   submit: { minHeight: 52 },
+  submitLabel: { fontSize: 16 },
 });

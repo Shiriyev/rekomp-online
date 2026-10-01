@@ -2,14 +2,24 @@ import type MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIco
 import type { ComponentProps } from 'react';
 
 import type { MealType } from '@/domain/types';
+import { t } from '@/i18n';
 
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
-export const MEAL_LABELS: Record<MealType, string> = {
-  breakfast: 'Завтрак',
-  lunch: 'Обед',
-  snack: 'Перекус',
-  dinner: 'Ужин',
+/** Meal names in the current UI language (getters: the tree remounts on a language switch). */
+export const MEAL_LABELS: Readonly<Record<MealType, string>> = {
+  get breakfast() {
+    return t('common.meals.breakfast');
+  },
+  get lunch() {
+    return t('common.meals.lunch');
+  },
+  get snack() {
+    return t('common.meals.snack');
+  },
+  get dinner() {
+    return t('common.meals.dinner');
+  },
 };
 
 export const MEAL_ICONS: Record<MealType, IconName> = {

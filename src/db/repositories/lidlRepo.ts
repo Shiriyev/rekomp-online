@@ -7,7 +7,7 @@ import type { AppDb } from '../types';
 
 export class DuplicateBarcodeError extends Error {
   constructor() {
-    super('Товар с таким штрихкодом уже есть');
+    super('errors.duplicateBarcode');
     this.name = 'DuplicateBarcodeError';
   }
 }

@@ -135,9 +135,9 @@ describe('parseBackup', () => {
   it('rejects foreign files and newer formats', () => {
     expect(() => parseBackup({ foo: 1 })).toThrow(BackupFormatError);
     expect(() => parseBackup({ app: 'rekomp', formatVersion: 99, tables: {} })).toThrow(
-      'более новой версии',
+      'errors.backup.newerVersion',
     );
-    expect(() => parseBackup({ app: 'rekomp', formatVersion: 1 })).toThrow('нет данных');
+    expect(() => parseBackup({ app: 'rekomp', formatVersion: 1 })).toThrow('errors.backup.noData');
   });
 
   it('rejects unknown columns, wrong types and missing required fields', () => {
@@ -147,13 +147,13 @@ describe('parseBackup', () => {
       fn(copy);
       return () => parseBackup(copy);
     };
-    expect(tweak((b) => (b.tables.ingredients[0]!.hacked = 1))).toThrow('неизвестное поле hacked');
+    expect(tweak((b) => (b.tables.ingredients[0]!.hacked = 1))).toThrow('unknown field hacked');
     expect(tweak((b) => (b.tables.ingredients[0]!.kcalPer100g = 'много'))).toThrow(
-      'ожидалось число',
+      'number expected',
     );
-    expect(tweak((b) => delete b.tables.ingredients[0]!.name)).toThrow('обязательное поле');
+    expect(tweak((b) => delete b.tables.ingredients[0]!.name)).toThrow('required field is empty');
     expect(tweak((b) => ((b.tables as Record<string, unknown>).recipes = 'x'))).toThrow(
-      'ожидался список',
+      'list expected',
     );
   });
 

@@ -14,6 +14,7 @@ import { isBelowFloor } from '@/domain/calculator';
 import { parseDecimal, PROFILE_LIMITS, type ProfileInput } from '@/domain/schemas';
 import { SEXES, type GoalRate } from '@/domain/types';
 import { spacing, useAppTheme } from '@/theme';
+import { useTranslateMessage } from '@/i18n';
 import { NumberField } from '@/ui/NumberField';
 
 import { ACTIVITY_OPTIONS, GOAL_OPTIONS, SEX_LABELS } from './labels';
@@ -31,6 +32,7 @@ const inRange = (n: number, { min, max }: { min: number; max: number }) => n >= 
 
 export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Props) {
   const theme = useAppTheme();
+  const translate = useTranslateMessage();
   const { control, handleSubmit, formState } = useForm<ProfileFormValues, unknown, ProfileInput>({
     defaultValues,
     resolver: zodResolver(profileFormSchema),
@@ -72,7 +74,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
                 />
                 {fieldState.error ? (
                   <HelperText type="error" padding="none">
-                    {fieldState.error.message}
+                    {translate(fieldState.error.message)}
                   </HelperText>
                 ) : null}
               </>
@@ -117,7 +119,7 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
                 ))}
                 {fieldState.error ? (
                   <HelperText type="error" padding="none">
-                    {fieldState.error.message}
+                    {translate(fieldState.error.message)}
                   </HelperText>
                 ) : null}
               </RadioButton.Group>

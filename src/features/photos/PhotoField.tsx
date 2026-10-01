@@ -1,8 +1,10 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, IconButton, Text } from 'react-native-paper';
 
+import { useT } from '@/i18n';
 import { radius, spacing, useAppTheme } from '@/theme';
 
 import { pickPhoto, type PhotoSource } from './mealPhotos';
@@ -11,24 +13,14 @@ type Props = {
   /** Current photo URI (a picked cache file or a stored photo), or null. */
   value: string | null;
   onChange: (uri: string | null) => void;
-  label?: string;
   /** False when the screen already shows the photo large (detail screen). */
   showPreview?: boolean;
 };
 
-const DENIED_TEXT: Record<PhotoSource, string> = {
-  camera: 'Нет доступа к камере.',
-  library: 'Нет доступа к галерее.',
-};
-
-/** Optional photo: take one or pick from the gallery, preview, replace or remove. */
-export function PhotoField({
-  value,
-  onChange,
-  label = 'Фото (необязательно)',
-  showPreview = true,
-}: Props) {
+/** Optional photo: a tile with «Снять / Галерея», then a wide preview to replace or remove. */
+export function PhotoField({ value, onChange, showPreview = true }: Props) {
   const theme = useAppTheme();
+  const t = useT();
   const [busy, setBusy] = useState(false);
   const [denied, setDenied] = useState<{ source: PhotoSource; canAskAgain: boolean } | null>(null);
   const [failed, setFailed] = useState(false);
@@ -49,62 +41,66 @@ export function PhotoField({
     }
   };
 
+  const sourceButton = (source: PhotoSource) => {
+    const label = t(source === 'camera' ? 'addMeal.photo.take' : 'addMeal.photo.pick');
+    return (
+      <Pressable
+        key={source}
+        onPress={() => void pick(source)}
+        disabled={busy}
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        android_ripple={{ color: theme.colors.primary }}
+        style={[styles.source, { backgroundColor: theme.colors.elevation.level3 }]}>
+        <MaterialCommunityIcons
+          name={source === 'camera' ? 'camera-outline' : 'image-multiple-outline'}
+          size={26}
+          color={theme.colors.primary}
+        />
+        <Text variant="labelLarge" style={{ color: theme.colors.onSurface }}>
+          {label}
+        </Text>
+      </Pressable>
+    );
+  };
+
+  const overlayButton = (icon: string, label: string, onPress: () => void, color = '#FFFFFF') => (
+    <IconButton
+      icon={icon}
+      mode="contained"
+      containerColor="rgba(0,0,0,0.55)"
+      iconColor={color}
+      disabled={busy}
+      onPress={onPress}
+      accessibilityLabel={label}
+    />
+  );
+
   return (
     <View style={styles.container}>
-      <Text variant="labelLarge" style={{ color: theme.colors.onSurfaceVariant }}>
-        {label}
-      </Text>
       {value && showPreview ? (
-        <View style={styles.previewRow}>
+        <View style={styles.previewBox}>
           <Image
             source={{ uri: value }}
             style={styles.preview}
             contentFit="cover"
-            accessibilityLabel="Фото записи"
+            accessibilityLabel={t('addMeal.photo.preview')}
           />
-          <View style={styles.previewActions}>
-            <IconButton
-              icon="camera-outline"
-              mode="outlined"
-              disabled={busy}
-              onPress={() => void pick('camera')}
-              accessibilityLabel="Переснять фото"
-            />
-            <IconButton
-              icon="image-outline"
-              mode="outlined"
-              disabled={busy}
-              onPress={() => void pick('library')}
-              accessibilityLabel="Заменить фото из галереи"
-            />
-            <IconButton
-              icon="delete-outline"
-              mode="outlined"
-              iconColor={theme.colors.error}
-              disabled={busy}
-              onPress={() => onChange(null)}
-              accessibilityLabel="Удалить фото"
-            />
+          <View style={styles.overlay}>
+            {overlayButton('camera-outline', t('addMeal.photo.retake'), () => void pick('camera'))}
+            {overlayButton('image-outline', t('addMeal.photo.replace'), () => void pick('library'))}
+            {overlayButton(
+              'delete-outline',
+              t('addMeal.photo.remove'),
+              () => onChange(null),
+              '#FFB4AB',
+            )}
           </View>
         </View>
       ) : (
-        <View style={styles.row}>
-          <Button
-            mode="outlined"
-            icon="camera-outline"
-            disabled={busy}
-            onPress={() => void pick('camera')}
-            style={styles.flex}>
-            Сфотографировать
-          </Button>
-          <Button
-            mode="outlined"
-            icon="image-outline"
-            disabled={busy}
-            onPress={() => void pick('library')}
-            style={styles.flex}>
-            Из галереи
-          </Button>
+        <View style={[styles.tile, { borderColor: theme.colors.outlineVariant }]}>
+          {sourceButton('camera')}
+          {sourceButton('library')}
           {value ? (
             <IconButton
               icon="delete-outline"
@@ -112,30 +108,32 @@ export function PhotoField({
               iconColor={theme.colors.error}
               disabled={busy}
               onPress={() => onChange(null)}
-              accessibilityLabel="Удалить фото"
+              accessibilityLabel={t('addMeal.photo.remove')}
             />
           ) : null}
         </View>
       )}
-      {busy ? <ActivityIndicator accessibilityLabel="Обработка фото" /> : null}
+      {busy ? <ActivityIndicator accessibilityLabel={t('addMeal.photo.processing')} /> : null}
       {denied ? (
         <View style={styles.row}>
           <Text variant="bodySmall" style={[styles.flex, { color: theme.colors.error }]}>
-            {DENIED_TEXT[denied.source]}{' '}
-            {denied.canAskAgain
-              ? 'Разреши доступ, чтобы добавить фото.'
-              : 'Разреши доступ в настройках телефона.'}
+            {t(
+              denied.source === 'camera'
+                ? 'addMeal.photo.deniedCamera'
+                : 'addMeal.photo.deniedLibrary',
+            )}{' '}
+            {t(denied.canAskAgain ? 'addMeal.photo.askAgain' : 'addMeal.photo.openSettingsHint')}
           </Text>
           {!denied.canAskAgain ? (
             <Button compact onPress={() => void Linking.openSettings()}>
-              Настройки
+              {t('addMeal.photo.settings')}
             </Button>
           ) : null}
         </View>
       ) : null}
       {failed ? (
         <Text variant="bodySmall" style={{ color: theme.colors.error }}>
-          Не удалось обработать фото. Попробуй ещё раз.
+          {t('addMeal.photo.failed')}
         </Text>
       ) : null}
     </View>
@@ -146,7 +144,30 @@ const styles = StyleSheet.create({
   container: { gap: spacing.sm },
   flex: { flex: 1 },
   row: { flexDirection: 'row', gap: spacing.sm, alignItems: 'center' },
-  previewRow: { flexDirection: 'row', gap: spacing.md, alignItems: 'center' },
-  preview: { width: 96, height: 96, borderRadius: radius.md },
-  previewActions: { flexDirection: 'row', flexWrap: 'wrap', flex: 1 },
+  tile: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    borderWidth: 1.5,
+    borderStyle: 'dashed',
+    borderRadius: radius.lg,
+    padding: spacing.sm,
+  },
+  source: {
+    flex: 1,
+    height: 84,
+    borderRadius: radius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+    overflow: 'hidden',
+  },
+  previewBox: { borderRadius: radius.lg, overflow: 'hidden' },
+  preview: { width: '100%', aspectRatio: 16 / 10 },
+  overlay: {
+    position: 'absolute',
+    right: spacing.xs,
+    bottom: spacing.xs,
+    flexDirection: 'row',
+  },
 });

@@ -2,18 +2,22 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { getLocales, useLocales } from 'expo-localization';
+import { useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { repositories } from '@/db';
 import { DatabaseProvider } from '@/db/DatabaseProvider';
-import { useProfile, useThemePreference } from '@/db/hooks';
+import { useLanguagePreference, useProfile, useThemePreference } from '@/db/hooks';
+import { resolveLanguage } from '@/domain/language';
 import { useCookStore } from '@/features/cooking/cookStore';
 import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
 import { cleanupOrphanPhotos } from '@/features/photos/mealPhotos';
 import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
+import { applyLanguage } from '@/i18n';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
 
@@ -39,6 +43,27 @@ function AppShell() {
   const system = useColorScheme();
   const isDark = preference === 'system' ? system === 'dark' : preference === 'dark';
   const { profile, isLoaded } = useProfile();
+  const languagePreference = useLanguagePreference();
+  const locales = useLocales();
+  const language = resolveLanguage(
+    languagePreference,
+    locales.map((l) => l.languageCode),
+  );
+  // First frame already in the stored language (read synchronously, before children render).
+  const [applied, setApplied] = useState(() => {
+    const initial = resolveLanguage(
+      repositories.settings.getLanguage(),
+      getLocales().map((l) => l.languageCode),
+    );
+    applyLanguage(initial);
+    return initial;
+  });
+  // A change in the profile or the phone settings: switch now and remount below, so every
+  // screen (and every cached formatter) picks it up in this same render.
+  if (language !== applied) {
+    applyLanguage(language);
+    setApplied(language);
+  }
 
   // Daily sweep of photo files no entry points to; off the start-up path.
   useEffect(() => {
@@ -52,7 +77,7 @@ function AppShell() {
   return (
     <PaperProvider theme={isDark ? darkTheme : lightTheme}>
       <ThemeProvider value={isDark ? navDarkTheme : navLightTheme}>
-        <BottomSheetModalProvider>
+        <BottomSheetModalProvider key={applied}>
           <StatusBar style={isDark ? 'light' : 'dark'} />
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Protected guard={hasProfile}>
@@ -70,6 +95,7 @@ function AppShell() {
                 name="history/[logId]"
                 options={{ headerShown: true, title: 'Запись' }}
               />
+              <Stack.Screen name="add-meal" options={{ headerShown: true }} />
               <Stack.Screen
                 name="bulk-add/index"
                 options={{ headerShown: true, title: 'Добавить домой' }}

@@ -7,6 +7,8 @@ import type { Recipe } from '@/db/schema';
 import type { CookCheck } from '@/domain/pantry';
 import type { Macros } from '@/domain/types';
 import { MEAL_ICONS } from '@/features/meals';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatInt, formatKcal } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -17,6 +19,9 @@ type Props = { recipe: Recipe; macros: Macros; check: CookCheck; kcalLeftToday: 
 
 export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) {
   const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
+  const name = content.recipeName(recipe);
   const after = kcalLeftToday - macros.kcal;
 
   return (
@@ -24,7 +29,11 @@ export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) 
       mode="elevated"
       style={styles.card}
       onPress={() => router.push({ pathname: '/recipe/[id]', params: { id: recipe.id } })}
-      accessibilityLabel={`${recipe.name}, ${formatInt(macros.kcal)} ккал, ${formatInt(macros.protein)} г белка`}>
+      accessibilityLabel={t('recipes.listA11y', {
+        name,
+        kcal: formatInt(macros.kcal),
+        protein: formatInt(macros.protein),
+      })}>
       <View style={styles.row}>
         <ImageWithFallback
           source={recipe.imageKey ? RECIPE_IMAGES[recipe.imageKey] : undefined}
@@ -34,18 +43,23 @@ export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) 
         />
         <View style={styles.body}>
           <Text variant="titleMedium" numberOfLines={2}>
-            {recipe.name}
+            {name}
           </Text>
           <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-            {formatKcal(macros.kcal)} · {formatInt(macros.protein)} г белка · {recipe.totalMinutes}{' '}
-            мин
+            {t('recipes.listMeta', {
+              kcal: formatKcal(macros.kcal),
+              protein: formatInt(macros.protein),
+              minutes: recipe.totalMinutes,
+            })}
           </Text>
           <View style={styles.footer}>
             <StatusBadge check={check} />
             <Text
               variant="bodySmall"
               style={{ color: after < 0 ? theme.colors.error : theme.colors.onSurfaceVariant }}>
-              {after < 0 ? `перебор ${formatInt(-after)}` : `останется ${formatInt(after)}`}
+              {after < 0
+                ? t('recipes.over', { kcal: formatInt(-after) })
+                : t('recipes.left', { kcal: formatInt(after) })}
             </Text>
           </View>
         </View>

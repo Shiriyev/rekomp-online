@@ -1,5 +1,4 @@
-import type { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { router } from 'expo-router';
@@ -12,17 +11,13 @@ import {
   useDailyProtein,
   useDayLogs,
   useProfile,
-  useRecentPresets,
   useRecipeCatalog,
 } from '@/db/hooks';
 import type { AvailablePortion } from '@/db/repositories/portionsRepo';
-import type { ManualLogInput } from '@/domain/schemas';
 import type { MealType } from '@/domain/types';
 import { proteinStreak } from '@/domain/cooking';
 import { addDays } from '@/domain/dates';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
-import { ManualEntrySheet } from '@/features/today/ManualEntrySheet';
-import { persistPhoto, releasePhoto } from '@/features/photos/mealPhotos';
 import { MealCategoryGrid } from '@/features/today/MealCategoryGrid';
 import { PortionsStrip } from '@/features/today/PortionsStrip';
 import { ProteinNudgeCard } from '@/features/today/ProteinNudgeCard';
@@ -39,9 +34,7 @@ export default function TodayScreen() {
   const { profile } = useProfile();
   const logs = useDayLogs(today);
   const portions = useAvailablePortions();
-  const presets = useRecentPresets();
   const catalog = useRecipeCatalog();
-  const sheetRef = useRef<BottomSheetModal>(null);
   const activeCook = useActiveCook();
   const since = addDays(today, -STREAK_WINDOW_DAYS);
   const dailyProtein = useDailyProtein(since);
@@ -77,27 +70,6 @@ export default function TodayScreen() {
   const nudge = proteinNudge(now, summary.total.protein, profile.proteinMinG);
   const mealNow = suggestMealType(now);
   const streak = proteinStreak(dailyProtein, profile.proteinMinG, today);
-
-  const addManual = (input: ManualLogInput, photoTempUri: string | null) => {
-    let photoUri: string | null = null;
-    try {
-      photoUri = photoTempUri ? persistPhoto(photoTempUri) : null;
-    } catch (e) {
-      // The entry matters more than its photo: save it without one.
-      if (__DEV__) console.warn('Could not store the photo', e);
-    }
-    let log;
-    try {
-      log = repositories.logs.addManual({ ...input, photoUri });
-    } catch (e) {
-      releasePhoto(photoUri);
-      throw e;
-    }
-    showUndo(`Добавлено: ${log.name}${photoTempUri && !photoUri ? ' (без фото)' : ''}`, () => {
-      repositories.logs.undo(log.id);
-      releasePhoto(log.photoUri);
-    });
-  };
 
   const eatPortion = (p: AvailablePortion) => {
     const log = repositories.portions.eat(p.id, mealNow);
@@ -145,14 +117,7 @@ export default function TodayScreen() {
         label="Добавить"
         accessibilityLabel="Добавить вручную"
         style={styles.fab}
-        onPress={() => sheetRef.current?.present()}
-      />
-
-      <ManualEntrySheet
-        sheetRef={sheetRef}
-        defaultMealType={mealNow}
-        presets={presets}
-        onSubmit={addManual}
+        onPress={() => router.push('/add-meal')}
       />
     </View>
   );

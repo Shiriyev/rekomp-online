@@ -59,25 +59,26 @@ const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   typeof v === 'object' && v !== null && !Array.isArray(v);
 
 function checkValue(table: string, key: string, column: Column, value: unknown): void {
+  // Technical detail stays in English; the UI wraps it in a translated sentence.
   const fail = (why: string) => {
-    throw new BackupFormatError(`${table}.${key}: ${why}`);
+    throw new BackupFormatError(`errors.backup.corrupt|${table}.${key}: ${why}`);
   };
   if (value === null || value === undefined) {
-    if (column.notNull && !column.hasDefault) fail('обязательное поле пустое');
+    if (column.notNull && !column.hasDefault) fail('required field is empty');
     return;
   }
   switch (column.dataType) {
     case 'number':
-      if (typeof value !== 'number' || !Number.isFinite(value)) fail('ожидалось число');
+      if (typeof value !== 'number' || !Number.isFinite(value)) fail('number expected');
       break;
     case 'string':
-      if (typeof value !== 'string') fail('ожидалась строка');
+      if (typeof value !== 'string') fail('string expected');
       break;
     case 'boolean':
-      if (typeof value !== 'boolean') fail('ожидалось да/нет');
+      if (typeof value !== 'boolean') fail('boolean expected');
       break;
     case 'json':
-      if (typeof value !== 'object') fail('ожидался объект');
+      if (typeof value !== 'object') fail('object expected');
       break;
     default:
       break;
@@ -87,23 +88,25 @@ function checkValue(table: string, key: string, column: Column, value: unknown):
 /** Structural validation against the Drizzle column definitions; DB constraints do the rest. */
 export function parseBackup(raw: unknown): Backup {
   if (!isPlainObject(raw) || raw.app !== BACKUP_APP) {
-    throw new BackupFormatError('Это не файл бэкапа «Рекомп»');
+    throw new BackupFormatError('errors.backup.notBackup');
   }
   if (typeof raw.formatVersion !== 'number' || raw.formatVersion > BACKUP_FORMAT_VERSION) {
-    throw new BackupFormatError('Бэкап из более новой версии приложения — обнови приложение');
+    throw new BackupFormatError('errors.backup.newerVersion');
   }
-  if (!isPlainObject(raw.tables)) throw new BackupFormatError('В файле нет данных');
+  if (!isPlainObject(raw.tables)) throw new BackupFormatError('errors.backup.noData');
 
   const tables = {} as Backup['tables'];
   for (const name of TABLE_NAMES) {
     const rows = raw.tables[name] ?? [];
-    if (!Array.isArray(rows)) throw new BackupFormatError(`${name}: ожидался список`);
+    if (!Array.isArray(rows))
+      throw new BackupFormatError(`errors.backup.corrupt|${name}: list expected`);
     const columns = getTableColumns(TABLES[name]) as Record<string, Column>;
     tables[name] = rows.map((row, i) => {
-      if (!isPlainObject(row)) throw new BackupFormatError(`${name}[${i}]: ожидалась запись`);
+      if (!isPlainObject(row))
+        throw new BackupFormatError(`errors.backup.corrupt|${name}[${i}]: record expected`);
       for (const key of Object.keys(row)) {
         if (!(key in columns))
-          throw new BackupFormatError(`${name}[${i}]: неизвестное поле ${key}`);
+          throw new BackupFormatError(`errors.backup.corrupt|${name}[${i}]: unknown field ${key}`);
       }
       for (const [key, column] of Object.entries(columns))
         checkValue(`${name}[${i}]`, key, column, row[key]);

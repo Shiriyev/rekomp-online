@@ -8,6 +8,7 @@ import {
   SEXES,
   UNITS,
 } from './types';
+import { LANGUAGE_PREFERENCES } from './language';
 
 /** Stored meal photo (file:// URI inside the app's documents). */
 export const photoUriSchema = z.string().min(1).max(2048).nullable();
@@ -22,8 +23,8 @@ export const deductionItemSchema = z.object({
 export const manualLogInputSchema = z.object({
   /** Client-generated idempotency key: saving the same form twice creates one entry. */
   id: z.string().min(8).max(64).optional(),
-  name: z.string().trim().min(1, 'Введите название').max(80, 'Не длиннее 80 символов'),
-  kcal: z.number().int('Целое число').min(0).max(5000),
+  name: z.string().trim().min(1, 'validation.required').max(80, 'validation.maxLength|80'),
+  kcal: z.number().int('validation.integer').min(0).max(5000),
   protein: z.number().min(0).max(500),
   mealType: z.enum(MEAL_TYPES),
   photoUri: photoUriSchema.optional(),
@@ -78,7 +79,7 @@ export const profileSchema = z
   })
   .refine((p) => p.proteinMinG <= p.proteinTargetG, {
     path: ['proteinMinG'],
-    message: 'Минимум не может быть больше цели',
+    message: 'validation.minAboveTarget',
   });
 export type ProfileInput = z.infer<typeof profileSchema>;
 
@@ -86,9 +87,11 @@ export const THEME_PREFERENCES = ['system', 'light', 'dark'] as const;
 export type ThemePreference = (typeof THEME_PREFERENCES)[number];
 export const themePreferenceSchema = z.enum(THEME_PREFERENCES);
 
+export const languagePreferenceSchema = z.enum(LANGUAGE_PREFERENCES);
+
 export const customIngredientSchema = z
   .object({
-    name: z.string().trim().min(1, 'Введите название').max(60, 'Не длиннее 60 символов'),
+    name: z.string().trim().min(1, 'validation.required').max(60, 'validation.maxLength|60'),
     category: z.enum(INGREDIENT_CATEGORIES),
     unit: z.enum(UNITS),
     gramsPerPiece: z.number().positive().max(5000).nullable(),
@@ -97,7 +100,7 @@ export const customIngredientSchema = z
   })
   .refine((v) => v.unit !== 'pcs' || v.gramsPerPiece !== null, {
     path: ['gramsPerPiece'],
-    message: 'Укажите вес одной штуки',
+    message: 'validation.pieceWeight',
   });
 export type CustomIngredientInput = z.infer<typeof customIngredientSchema>;
 
@@ -106,13 +109,13 @@ export const ingredientSettingsSchema = ingredientNutritionSchema.extend({
 });
 export type IngredientSettingsInput = z.infer<typeof ingredientSettingsSchema>;
 
-const localDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Дата в формате ГГГГ-ММ-ДД');
+const localDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'validation.dateFormat');
 
 export const lidlProductSchema = z
   .object({
-    ingredientId: z.string().min(1, 'Выберите продукт'),
-    title: z.string().trim().min(1, 'Введите название').max(80),
-    packageSize: z.number().positive('Больше нуля').max(100_000),
+    ingredientId: z.string().min(1, 'validation.chooseProduct'),
+    title: z.string().trim().min(1, 'validation.required').max(80),
+    packageSize: z.number().positive('validation.positive').max(100_000),
     packageUnit: z.enum(UNITS),
     priceHuf: z.number().int().min(0).max(1_000_000).nullable(),
     onSale: z.boolean(),
@@ -120,7 +123,7 @@ export const lidlProductSchema = z
     barcode: z
       .string()
       .trim()
-      .regex(/^\d{8,14}$/, '8–14 цифр')
+      .regex(/^\d{8,14}$/, 'validation.barcode')
       .nullable(),
     notes: z.string().trim().max(200).nullable(),
   })
@@ -129,20 +132,20 @@ export type LidlProductInput = z.input<typeof lidlProductSchema>;
 
 export const shoppingItemInputSchema = z
   .object({
-    title: z.string().trim().min(1, 'Введите название').max(80),
+    title: z.string().trim().min(1, 'validation.required').max(80),
     ingredientId: z.string().min(1).nullable(),
     quantity: z.number().positive().max(100_000).nullable(),
     unit: z.enum(UNITS).nullable(),
   })
   .refine((v) => (v.quantity === null) === (v.unit === null), {
     path: ['quantity'],
-    message: 'Количество и единица указываются вместе',
+    message: 'validation.quantityWithUnit',
   });
 export type ShoppingItemInput = z.infer<typeof shoppingItemInputSchema>;
 
 export const mealLogEditSchema = z.object({
-  name: z.string().trim().min(1, 'Введите название').max(80, 'Не длиннее 80 символов'),
-  kcal: z.number().int('Целое число').min(0).max(5000),
+  name: z.string().trim().min(1, 'validation.required').max(80, 'validation.maxLength|80'),
+  kcal: z.number().int('validation.integer').min(0).max(5000),
   protein: z.number().min(0).max(500),
   mealType: z.enum(MEAL_TYPES),
   /** New time (UTC ms); the entry may move to another logical day. */

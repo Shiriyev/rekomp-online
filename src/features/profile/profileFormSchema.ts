@@ -16,17 +16,17 @@ const manualSchema = z
   })
   .refine((v) => v.proteinMinG <= v.proteinTargetG, {
     path: ['proteinMinG'],
-    message: 'Минимум не может быть больше цели',
+    message: 'validation.minAboveTarget',
   });
 
 /** Text-based form values → validated ProfileInput (calculated or manual targets). */
 export const profileFormSchema = z
   .object({
-    sex: z.enum(SEXES, { error: 'Выберите пол' }),
+    sex: z.enum(SEXES, { error: 'validation.chooseSex' }),
     age: numberText(PROFILE_LIMITS.age, true),
     heightCm: numberText(PROFILE_LIMITS.heightCm),
     weightKg: numberText(PROFILE_LIMITS.weightKg),
-    activityLevel: z.enum(ACTIVITY_LEVELS, { error: 'Выберите активность' }),
+    activityLevel: z.enum(ACTIVITY_LEVELS, { error: 'validation.chooseActivity' }),
     goalRate: z.enum(GOAL_KEYS).transform((v) => Number(v) as GoalRate),
     mode: z.enum(['calculate', 'manual']),
     kcalTarget: z.string(),

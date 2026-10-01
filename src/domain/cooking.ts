@@ -156,22 +156,21 @@ export function stepIngredients(
 type OverviewStep = { order: number; text: string; timerSec: number | null };
 
 export type OverviewEntry = OverviewStep & {
-  /** «Сначала 6 мин», «Затем», «В конце 25 мин». */
-  lead: string;
+  /** Where the step sits: the UI words it as «Сначала» / «Затем» / «В конце». */
+  position: 'first' | 'middle' | 'last';
   /** Minute on the timeline when this step starts, counting timers only. */
   startsAtMin: number;
 };
 
-/** «6 мин», «1,5 мин», «30 сек». */
-export function durationLabel(seconds: number): string {
-  if (seconds < 60) return `${Math.round(seconds)} сек`;
-  const minutes = Math.round((seconds / 60) * 10) / 10;
-  return `${String(minutes).replace('.', ',')} мин`;
+/** A timer length to show: seconds under a minute, else minutes with one decimal. */
+export function durationParts(seconds: number): { unit: 'sec' | 'min'; value: number } {
+  if (seconds < 60) return { unit: 'sec', value: Math.round(seconds) };
+  return { unit: 'min', value: Math.round((seconds / 60) * 10) / 10 };
 }
 
 /**
- * The recipe as one readable sequence: «Сначала 6 мин: …, затем 3 мин: …, в конце …».
- * Timings add up only the timers (parallel steps make this an upper estimate).
+ * The recipe as one readable sequence (first, then, …, at the end). Timings add up only
+ * the timers (parallel steps make this an upper estimate).
  */
 export function recipeOverview(steps: readonly OverviewStep[]): {
   entries: OverviewEntry[];
@@ -180,10 +179,9 @@ export function recipeOverview(steps: readonly OverviewStep[]): {
   const sorted = [...steps].sort((a, b) => a.order - b.order);
   let elapsedSec = 0;
   const entries = sorted.map((step, i) => {
-    const word =
-      i === 0 ? 'Сначала' : i === sorted.length - 1 && sorted.length > 1 ? 'В конце' : 'Затем';
-    const lead = step.timerSec ? `${word} ${durationLabel(step.timerSec)}` : word;
-    const entry = { ...step, lead, startsAtMin: Math.round(elapsedSec / 60) };
+    const position: OverviewEntry['position'] =
+      i === 0 ? 'first' : i === sorted.length - 1 ? 'last' : 'middle';
+    const entry = { ...step, position, startsAtMin: Math.round(elapsedSec / 60) };
     elapsedSec += step.timerSec ?? 0;
     return entry;
   });

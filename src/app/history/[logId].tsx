@@ -205,12 +205,10 @@ export default function EntryDetailScreen() {
         ) : null}
 
         <View style={styles.section}>
-          <PhotoField
-            value={log.photoUri}
-            onChange={changePhoto}
-            showPreview={false}
-            label={log.photoUri ? 'Своё фото' : 'Добавить своё фото'}
-          />
+          <Text variant="labelLarge" style={{ color: theme.colors.onSurfaceVariant }}>
+            {log.photoUri ? 'Своё фото' : 'Добавить своё фото'}
+          </Text>
+          <PhotoField value={log.photoUri} onChange={changePhoto} showPreview={false} />
         </View>
 
         <View style={styles.actions}>

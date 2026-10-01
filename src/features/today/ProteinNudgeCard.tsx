@@ -12,9 +12,9 @@ export function ProteinNudgeCard({ grams, suggestions }: Props) {
   const theme = useAppTheme();
 
   return (
-    <Card mode="contained" style={{ backgroundColor: theme.colors.secondaryContainer }}>
+    <Card mode="contained" style={{ backgroundColor: theme.colors.proteinContainer }}>
       <Card.Content style={styles.content}>
-        <Text variant="titleMedium" style={{ color: theme.colors.onSecondaryContainer }}>
+        <Text variant="titleMedium" style={{ color: theme.colors.onProteinContainer }}>
           Добери ~{formatInt(grams)} г белка
         </Text>
         <View style={styles.chips}>

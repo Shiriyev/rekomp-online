@@ -214,3 +214,11 @@ describe('schemas', () => {
     );
   });
 });
+
+describe('searchIngredients aliases', () => {
+  it('matches other-language names', () => {
+    const items = [{ name: 'Творог', nameHu: 'túró', aliases: ['Cottage cheese'] }];
+    expect(searchIngredients(items, 'cott')).toHaveLength(1);
+    expect(searchIngredients(items, 'cheese')).toHaveLength(1);
+  });
+});

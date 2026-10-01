@@ -1,5 +1,5 @@
 import { FlashList } from '@shopify/flash-list';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Checkbox, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
@@ -13,6 +13,8 @@ import { INGREDIENT_IMAGES } from '@/features/images';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { NewProductForm } from '@/features/pantry/NewProductForm';
+import { useT } from '@/i18n';
+import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -21,6 +23,8 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 export default function BulkSelectScreen() {
   const theme = useAppTheme();
   const insets = useSafeAreaInsets();
+  const t = useT();
+  const content = useContent();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
   const lidl = useLidlProducts();
@@ -35,10 +39,12 @@ export default function BulkSelectScreen() {
   const results = useMemo(
     () =>
       searchIngredients(
-        [...ingredients.values()].filter((i) => !i.isStaple),
+        [...ingredients.values()]
+          .filter((i) => !i.isStaple)
+          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
         query,
       ),
-    [ingredients, query],
+    [ingredients, query, content],
   );
   const exact = results.some((i) => normalizeForSearch(i.name) === normalizeForSearch(query));
   const defaultFor = (i: Ingredient) => defaultAddAmount(i, packages.get(i.id), i.lastAddedAmount);
@@ -46,11 +52,12 @@ export default function BulkSelectScreen() {
 
   return (
     <View style={styles.flex}>
+      <Stack.Screen options={{ title: t('bulkAdd.selectTitle') }} />
       <View style={styles.search}>
         <TextInput
           mode="outlined"
-          label="Поиск: творог, túró…"
-          accessibilityLabel="Поиск продукта"
+          label={t('bulkAdd.search')}
+          accessibilityLabel={t('bulkAdd.searchLabel')}
           value={query}
           onChangeText={(t) => {
             setQuery(t);
@@ -81,7 +88,7 @@ export default function BulkSelectScreen() {
                 />
               ) : (
                 <Button mode="outlined" icon="plus" onPress={() => setCreating(true)}>
-                  {`Новый продукт «${query.trim()}»`}
+                  {t('bulkAdd.newProduct', { name: query.trim() })}
                 </Button>
               )}
             </View>
@@ -95,7 +102,7 @@ export default function BulkSelectScreen() {
               onPress={() => toggle(item.id, defaultFor(item))}
               accessibilityRole="checkbox"
               accessibilityState={{ checked }}
-              accessibilityLabel={item.name}>
+              accessibilityLabel={content.ingredientName(item)}>
               <View style={styles.row}>
                 <Checkbox status={checked ? 'checked' : 'unchecked'} />
                 <ImageWithFallback
@@ -105,10 +112,10 @@ export default function BulkSelectScreen() {
                   iconSize={20}
                 />
                 <View style={styles.flex}>
-                  <Text variant="bodyLarge">{item.name}</Text>
+                  <Text variant="bodyLarge">{content.ingredientName(item)}</Text>
                   {have !== undefined ? (
                     <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                      дома: {formatAmount(have, item.unit)}
+                      {t('bulkAdd.atHome', { amount: formatAmount(have, item.unit) })}
                     </Text>
                   ) : null}
                 </View>
@@ -119,7 +126,7 @@ export default function BulkSelectScreen() {
       />
       <Surface elevation={2} style={[styles.bar, { paddingBottom: spacing.md + insets.bottom }]}>
         <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
-          Выбрано: {selected.length}
+          {t('bulkAdd.selected', { count: selected.length })}
         </Text>
         <Button
           mode="contained"
@@ -127,7 +134,7 @@ export default function BulkSelectScreen() {
           contentStyle={styles.next}
           disabled={selected.length === 0}
           onPress={() => router.push('/bulk-add/amounts')}>
-          Далее
+          {t('bulkAdd.next')}
         </Button>
       </Surface>
     </View>

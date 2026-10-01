@@ -8,12 +8,13 @@ import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
 import { INGREDIENT_CATEGORIES, UNITS } from '@/domain/types';
 import { numberText, optionalNumberText } from '@/features/forms/numberText';
-import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
+import { CATEGORY_ICONS, useCategoryLabel } from '@/features/ingredients';
 import { spacing } from '@/theme';
 import { NumberField } from '@/ui/NumberField';
+import { useT, useTranslateMessage } from '@/i18n';
 
 const schema = z.object({
-  name: z.string().trim().min(1, 'Введите название').max(60),
+  name: z.string().trim().min(1, 'validation.required').max(60, 'validation.maxLength|60'),
   category: z.enum(INGREDIENT_CATEGORIES),
   unit: z.enum(UNITS),
   gramsPerPiece: optionalNumberText({ min: 1, max: 5000 }),
@@ -29,6 +30,9 @@ type Props = {
 
 /** Minimal «новый продукт»: name, unit, kcal and protein per 100 g (+ weight of one piece). */
 export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
+  const t = useT();
+  const translate = useTranslateMessage();
+  const categoryLabel = useCategoryLabel();
   const form = useForm<z.input<typeof schema>, unknown, z.output<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -45,7 +49,7 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
   const create = () =>
     form.handleSubmit((values) => {
       if (values.unit === 'pcs' && values.gramsPerPiece === null) {
-        form.setError('gramsPerPiece', { message: 'Укажите вес одной штуки' });
+        form.setError('gramsPerPiece', { message: 'validation.pieceWeight' });
         return;
       }
       onCreated(repositories.ingredients.createCustom(values));
@@ -54,7 +58,7 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
   return (
     <Card mode="outlined">
       <Card.Content style={styles.content}>
-        <Text variant="titleMedium">Новый продукт</Text>
+        <Text variant="titleMedium">{t('bulkAdd.newProductForm.title')}</Text>
         <Controller
           control={form.control}
           name="name"
@@ -62,15 +66,15 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
             <View>
               <TextInput
                 mode="outlined"
-                label="Название"
-                accessibilityLabel="Название"
+                label={t('bulkAdd.newProductForm.name')}
+                accessibilityLabel={t('bulkAdd.newProductForm.name')}
                 value={field.value}
                 onChangeText={field.onChange}
                 error={!!fieldState.error}
               />
               {fieldState.error ? (
                 <HelperText type="error" padding="none">
-                  {fieldState.error.message}
+                  {translate(fieldState.error.message)}
                 </HelperText>
               ) : null}
             </View>
@@ -85,19 +89,32 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
               onValueChange={field.onChange}
               density="small"
               buttons={[
-                { value: 'g', label: 'Граммы' },
-                { value: 'ml', label: 'Мл' },
-                { value: 'pcs', label: 'Штуки' },
+                { value: 'g', label: t('bulkAdd.newProductForm.grams') },
+                { value: 'ml', label: t('bulkAdd.newProductForm.ml') },
+                { value: 'pcs', label: t('bulkAdd.newProductForm.pieces') },
               ]}
             />
           )}
         />
         {unit === 'pcs' ? (
-          <NumberField control={form.control} name="gramsPerPiece" label="Вес 1 шт" suffix="г" />
+          <NumberField
+            control={form.control}
+            name="gramsPerPiece"
+            label={t('bulkAdd.newProductForm.pieceWeight')}
+            suffix={t('common.units.g')}
+          />
         ) : null}
         <View style={styles.row}>
-          <NumberField control={form.control} name="kcalPer100g" label="Ккал / 100 г" />
-          <NumberField control={form.control} name="proteinPer100g" label="Белок / 100 г" />
+          <NumberField
+            control={form.control}
+            name="kcalPer100g"
+            label={t('bulkAdd.newProductForm.kcal')}
+          />
+          <NumberField
+            control={form.control}
+            name="proteinPer100g"
+            label={t('bulkAdd.newProductForm.protein')}
+          />
         </View>
         <Controller
           control={form.control}
@@ -111,16 +128,16 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
                   mode={field.value === c ? 'contained-tonal' : 'outlined'}
                   icon={CATEGORY_ICONS[c]}
                   onPress={() => field.onChange(c)}>
-                  {CATEGORY_LABELS[c]}
+                  {categoryLabel(c)}
                 </Button>
               ))}
             </View>
           )}
         />
         <View style={styles.row}>
-          <Button onPress={onCancel}>Отмена</Button>
+          <Button onPress={onCancel}>{t('common.actions.cancel')}</Button>
           <Button mode="contained" style={styles.flex} onPress={create}>
-            Создать и выбрать
+            {t('bulkAdd.newProductForm.create')}
           </Button>
         </View>
       </Card.Content>

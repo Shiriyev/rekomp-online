@@ -19,20 +19,16 @@ import { MEAL_LABELS } from '@/features/meals';
 import { RecipeListItem } from '@/features/recipes/RecipeListItem';
 import { useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
+import { useT } from '@/i18n';
 import { spacing } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { SkeletonList } from '@/ui/Skeleton';
-
-const SORT_LABELS: Record<RecipeSort, string> = {
-  protein: 'Больше белка',
-  kcal: 'Меньше ккал',
-  time: 'Быстрее',
-};
 
 const isMealType = (v: unknown): v is MealType =>
   typeof v === 'string' && (MEAL_TYPES as readonly string[]).includes(v);
 
 export default function RecipesScreen() {
+  const t = useT();
   const params = useLocalSearchParams<{ mealType: string }>();
   const meal = isMealType(params.mealType) ? params.mealType : null;
 
@@ -67,7 +63,7 @@ export default function RecipesScreen() {
     return sortRecipes(onlyCookable ? rows.filter((r) => r.check.status === 'ok') : rows, sort);
   }, [meal, catalog, linesByRecipe, drafts, ingredients, pantry, onlyCookable, sort]);
 
-  if (!meal) return <EmptyState icon="alert-circle-outline" title="Такой категории нет" />;
+  if (!meal) return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
   if (!catalog.isLoaded || ingredients.size === 0) {
     return (
       <>
@@ -100,7 +96,7 @@ export default function RecipesScreen() {
               style={styles.switchRow}>
               <View style={styles.switchInner}>
                 <Text variant="bodyLarge" style={styles.flex}>
-                  Только из моих продуктов
+                  {t('recipes.onlyMine')}
                 </Text>
                 <Switch value={onlyCookable} onValueChange={setOnlyCookable} />
               </View>
@@ -113,7 +109,7 @@ export default function RecipesScreen() {
                   selected={sort === s}
                   showSelectedCheck={false}
                   onPress={() => setSort(s)}>
-                  {SORT_LABELS[s]}
+                  {t(`recipes.sort.${s}` as const)}
                 </Chip>
               ))}
             </View>
@@ -123,9 +119,9 @@ export default function RecipesScreen() {
           onlyCookable ? (
             <EmptyState
               icon="fridge-off-outline"
-              title="Из твоих продуктов пока ничего"
-              description="Добавь продукты во вкладке «Продукты» или посмотри все блюда."
-              actionLabel="Показать все"
+              title={t('recipes.noneCookable')}
+              description={t('recipes.noneCookableHint')}
+              actionLabel={t('recipes.showAll')}
               onAction={() => setOnlyCookable(false)}
             />
           ) : null

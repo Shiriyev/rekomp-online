@@ -176,7 +176,7 @@ export function createLogRepo(db: AppDb) {
     update(id: string, input: MealLogEditInput, now: number = Date.now()): MealLog {
       const { timestamp, ...values } = mealLogEditSchema.parse(input);
       if (timestamp !== undefined && !isAllowedEntryTime(timestamp, now)) {
-        throw new RangeError('Время записи не может быть в будущем');
+        throw new RangeError('validation.futureTime');
       }
       return db.transaction((tx) => {
         const current = tx.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
