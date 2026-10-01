@@ -102,15 +102,17 @@ describe('deleting a cooked entry (phase 7 DoD)', () => {
   it('«только удалить запись» keeps the pantry deducted', () => {
     stock();
     const r = repos.cook.quickEat('P4', 1, {}, 'snack', NOW);
-    repos.logs.removeCookedEntryOnly(r.logId!);
+    repos.logs.removeEntryOnly(r.logId!);
     expect(repos.pantry.get('yogurt_01')?.quantity).toBe(325);
     expect(db.select().from(mealLogs).all()).toEqual([]);
   });
 
-  it('removeCookedEntryOnly ignores non-recipe entries', () => {
-    const log = repos.logs.addManual({ name: 'A', kcal: 1, protein: 1, mealType: 'snack' });
-    repos.logs.removeCookedEntryOnly(log.id);
-    expect(repos.logs.get(log.id)).toBeDefined();
+  it('removeEntryOnly ignores portion entries (they must give the portion back)', () => {
+    const s = repos.cook.start('O1', 2, {}, NOW);
+    const { portionId } = repos.cook.finish(s.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const eaten = repos.portions.eat(portionId!, 'lunch', NOW);
+    repos.logs.removeEntryOnly(eaten.id);
+    expect(repos.logs.get(eaten.id)).toBeDefined();
   });
 
   it('refuses the product return once portions from the pot were eaten', () => {

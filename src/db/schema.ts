@@ -204,6 +204,8 @@ export const mealLogs = sqliteTable(
     portionId: text('portion_id').references(() => preparedPortions.id, { onDelete: 'set null' }),
     /** Own photo (file:// in documents/meal-photos); takes priority over the recipe image. */
     photoUri: text('photo_uri'),
+    /** Manual entries: products taken from the pantry with it (positive = taken), for Undo. */
+    pantryDelta: text('pantry_delta', { mode: 'json' }).$type<PantryDelta>(),
   },
   (t) => [
     index('meal_logs_local_date_idx').on(t.localDate),

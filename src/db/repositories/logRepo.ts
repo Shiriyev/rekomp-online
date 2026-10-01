@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gt, isNotNull, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, inArray, isNotNull, sql } from 'drizzle-orm';
 
 import {
   manualLogInputSchema,
@@ -7,32 +7,64 @@ import {
   type ManualLogInput,
   type MealLogEditInput,
 } from '../../domain/schemas';
+import { planManualDeduction } from '../../domain/manualEntry';
 import type { Macros } from '../../domain/types';
 import { newId } from '../../lib/id';
 import { logicalDateAt } from '../logicalDay';
-import { mealLogs, preparedPortions, type MealLog } from '../schema';
+import { returnToPantry, stockOf, takeFromPantry } from '../pantryMoves';
+import { ingredients, mealLogs, preparedPortions, type MealLog } from '../schema';
 import type { AppDb } from '../types';
 
 export function createLogRepo(db: AppDb) {
   return {
+    /**
+     * Adds a manual entry and, optionally, takes the eaten products from «Дома» in the same
+     * transaction (clamped at zero; what was really taken is kept for Undo). With an `id`
+     * it is idempotent: a repeated save returns the first entry and deducts nothing.
+     */
     addManual(input: ManualLogInput, now: number = Date.now()): MealLog {
       const data = manualLogInputSchema.parse(input);
-      return db
-        .insert(mealLogs)
-        .values({
-          id: newId(),
-          timestamp: now,
-          localDate: logicalDateAt(db, now),
-          mealType: data.mealType,
-          source: 'manual',
-          name: data.name,
-          kcal: data.kcal,
-          protein: data.protein,
-          servings: 1,
-          photoUri: data.photoUri ?? null,
-        })
-        .returning()
-        .get();
+      return db.transaction((tx) => {
+        if (data.id) {
+          const existing = tx.select().from(mealLogs).where(eq(mealLogs.id, data.id)).get();
+          if (existing) return existing;
+        }
+
+        let pantryDelta = null;
+        const items = data.deductions ?? [];
+        if (items.length > 0) {
+          const ids = [...new Set(items.map((i) => i.ingredientId))];
+          const catalog = new Map(
+            tx
+              .select()
+              .from(ingredients)
+              .where(inArray(ingredients.id, ids))
+              .all()
+              .map((i) => [i.id, i]),
+          );
+          const { take } = planManualDeduction(items, catalog, stockOf(tx, ids));
+          const taken = takeFromPantry(tx, take, now);
+          pantryDelta = taken.length > 0 ? taken : null;
+        }
+
+        return tx
+          .insert(mealLogs)
+          .values({
+            id: data.id ?? newId(),
+            timestamp: now,
+            localDate: logicalDateAt(tx, now),
+            mealType: data.mealType,
+            source: 'manual',
+            name: data.name,
+            kcal: data.kcal,
+            protein: data.protein,
+            servings: 1,
+            photoUri: data.photoUri ?? null,
+            pantryDelta,
+          })
+          .returning()
+          .get();
+      });
     },
 
     /** Sets or clears an entry's own photo; returns the previous one (to delete its file). */
@@ -68,10 +100,11 @@ export function createLogRepo(db: AppDb) {
     },
 
     /**
-     * Puts back an entry removed by `undo` (the «Отменить» of a delete). For an eaten
-     * portion it takes the portion from the fridge again. Idempotent per entry id.
+     * Puts back a deleted entry (the «Отменить» of a delete). For an eaten portion it takes
+     * the portion from the fridge again; if its products were returned on delete
+     * (`productsReturned`), they are taken again. Idempotent per entry id.
      */
-    restore(log: MealLog): void {
+    restore(log: MealLog, options: { productsReturned?: boolean } = {}): void {
       db.transaction((tx) => {
         const exists = tx
           .select({ id: mealLogs.id })
@@ -90,7 +123,14 @@ export function createLogRepo(db: AppDb) {
             .all();
           if (taken.length === 0) throw new Error('The portion is no longer in the fridge');
         }
-        tx.insert(mealLogs).values(log).run();
+        let pantryDelta = log.pantryDelta;
+        if (options.productsReturned && pantryDelta && pantryDelta.length > 0) {
+          const taken = takeFromPantry(tx, pantryDelta, Date.now());
+          pantryDelta = taken.length > 0 ? taken : null;
+        }
+        tx.insert(mealLogs)
+          .values({ ...log, pantryDelta })
+          .run();
       });
     },
 
@@ -142,12 +182,12 @@ export function createLogRepo(db: AppDb) {
     },
 
     /**
-     * Deletes only the log line of a cooked dish; pantry and fridge portions stay as they are.
-     * Use cook.undo to also return products.
+     * Deletes only the log line of a cooked dish or a manual entry; products stay deducted
+     * and fridge portions stay as they are. Use `undo` / cook.undo to also return products.
      */
-    removeCookedEntryOnly(id: string): void {
+    removeEntryOnly(id: string): void {
       db.delete(mealLogs)
-        .where(and(eq(mealLogs.id, id), eq(mealLogs.source, 'recipe')))
+        .where(and(eq(mealLogs.id, id), inArray(mealLogs.source, ['recipe', 'manual'])))
         .run();
     },
 
@@ -163,11 +203,11 @@ export function createLogRepo(db: AppDb) {
     },
 
     /**
-     * Undoes a log entry: deletes it and, for an eaten portion, puts the portion back.
-     * Idempotent: undoing an already removed entry is a no-op. Cooking undo lives with
-     * cook sessions (it also restores pantry items).
+     * Undoes a log entry: deletes it, gives back products a manual entry took and, for an
+     * eaten portion, puts the portion back. Idempotent: undoing an already removed entry is
+     * a no-op. Cooking undo lives with cook sessions (it also restores pantry items).
      */
-    undo(id: string): void {
+    undo(id: string, now: number = Date.now()): void {
       db.transaction((tx) => {
         const log = tx.select().from(mealLogs).where(eq(mealLogs.id, id)).get();
         if (!log) return;
@@ -180,6 +220,7 @@ export function createLogRepo(db: AppDb) {
             .where(eq(preparedPortions.id, log.portionId))
             .run();
         }
+        if (log.pantryDelta) returnToPantry(tx, log.pantryDelta, now);
         tx.delete(mealLogs).where(eq(mealLogs.id, id)).run();
       });
     },

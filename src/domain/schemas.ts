@@ -12,13 +12,23 @@ import {
 /** Stored meal photo (file:// URI inside the app's documents). */
 export const photoUriSchema = z.string().min(1).max(2048).nullable();
 
+/** A product eaten with a manual entry, in the ingredient's unit. */
+export const deductionItemSchema = z.object({
+  ingredientId: z.string().min(1),
+  amount: z.number().positive().max(100_000),
+});
+
 /** Manual food entry ("купил сникерс"). */
 export const manualLogInputSchema = z.object({
+  /** Client-generated idempotency key: saving the same form twice creates one entry. */
+  id: z.string().min(8).max(64).optional(),
   name: z.string().trim().min(1, 'Введите название').max(80, 'Не длиннее 80 символов'),
   kcal: z.number().int('Целое число').min(0).max(5000),
   protein: z.number().min(0).max(500),
   mealType: z.enum(MEAL_TYPES),
   photoUri: photoUriSchema.optional(),
+  /** Optional: products taken from «Дома» in the same transaction. */
+  deductions: z.array(deductionItemSchema).max(30).optional(),
 });
 export type ManualLogInput = z.infer<typeof manualLogInputSchema>;
 

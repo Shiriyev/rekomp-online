@@ -1,0 +1,1 @@
+ALTER TABLE `meal_logs` ADD `pantry_delta` text;
