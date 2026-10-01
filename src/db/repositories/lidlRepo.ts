@@ -12,8 +12,13 @@ export class DuplicateBarcodeError extends Error {
   }
 }
 
-const isUniqueViolation = (e: unknown) =>
-  e instanceof Error && /UNIQUE/.test(`${e.message} ${String(e.cause ?? '')}`);
+// Duck-typed, not `instanceof Error`: a native driver's error class can come from another
+// JS realm (seen with better-sqlite3 under jest workers), which made this check flaky.
+const isUniqueViolation = (e: unknown) => {
+  if (typeof e !== 'object' || e === null) return false;
+  const { message, cause } = e as { message?: unknown; cause?: unknown };
+  return /UNIQUE/.test(`${String(message ?? '')} ${String(cause ?? '')}`);
+};
 
 export function createLidlRepo(db: AppDb) {
   const write = <T>(fn: () => T): T => {
