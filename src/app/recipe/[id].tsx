@@ -40,6 +40,7 @@ import { t as translate, useT } from '@/i18n';
 import { content as contentNow, useContent } from '@/i18n/content';
 import { formatAmount, formatInt, formatKcal } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
+import { useTransitionDone } from '@/lib/useTransitionDone';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -66,6 +67,7 @@ export default function RecipeScreen() {
   const [userChoices, setUserChoices] = useState<Record<string, string>>({});
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const ready = useTransitionDone();
 
   const servings = servingsOverride ?? recipe?.defaultServings ?? 1;
 
@@ -90,7 +92,7 @@ export default function RecipeScreen() {
   if (isLoaded && !recipe) {
     return <EmptyState icon="alert-circle-outline" title={t('recipes.card.notFound')} />;
   }
-  if (!recipe || !computed) return <SkeletonDetail />;
+  if (!ready || !recipe || !computed) return <SkeletonDetail still={!ready} />;
 
   const { check, macros, baseMacros, used, staples } = computed;
   const perServing = macros.perServing;

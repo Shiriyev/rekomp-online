@@ -20,6 +20,7 @@ import { RecipeListItem } from '@/features/recipes/RecipeListItem';
 import { useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { useT } from '@/i18n';
+import { useTransitionDone } from '@/lib/useTransitionDone';
 import { spacing } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { SkeletonList } from '@/ui/Skeleton';
@@ -40,6 +41,7 @@ export default function RecipesScreen() {
   const drafts = useRecipeDraftStore((s) => s.drafts);
   const [onlyCookable, setOnlyCookable] = useState(false);
   const [sort, setSort] = useState<RecipeSort>('protein');
+  const ready = useTransitionDone();
 
   const items = useMemo(() => {
     if (!meal || !catalog.isLoaded || ingredients.size === 0) return [];
@@ -64,11 +66,11 @@ export default function RecipesScreen() {
   }, [meal, catalog, linesByRecipe, drafts, ingredients, pantry, onlyCookable, sort]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
-  if (!catalog.isLoaded || ingredients.size === 0) {
+  if (!ready || !catalog.isLoaded || ingredients.size === 0) {
     return (
       <>
         <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />
-        <SkeletonList />
+        <SkeletonList still={!ready} />
       </>
     );
   }

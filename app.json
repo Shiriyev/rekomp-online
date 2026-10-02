@@ -55,7 +55,8 @@
           "microphonePermission": false
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      "./plugins/withProfileable"
     ],
     "experiments": {
       "typedRoutes": true,
