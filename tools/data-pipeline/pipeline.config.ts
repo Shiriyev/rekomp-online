@@ -48,6 +48,15 @@ export const config = {
 
   http: { retries: 5, backoffMs: 1_000, timeoutMs: 60_000 },
 
+  images: {
+    /** WebP quality and long side in px (PHASE_2 task 5). */
+    quality: 75,
+    recipeSide: 800,
+    productSide: 400,
+    /** Pexels allows ~200 requests/hour. */
+    pexelsPauseMs: 2_000,
+  },
+
   /** Recipe acceptance (PHASE_2 task 3). */
   filter: {
     excludedCategories: ['Dessert'] as readonly string[],

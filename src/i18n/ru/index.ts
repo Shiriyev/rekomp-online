@@ -1,3 +1,4 @@
+import { about } from './about';
 import { addMeal } from './addMeal';
 import { backup } from './backup';
 import { bulkAdd } from './bulkAdd';
@@ -30,4 +31,5 @@ export const ru = {
   profile,
   onboarding,
   backup,
+  about,
 };

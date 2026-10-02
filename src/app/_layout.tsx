@@ -101,6 +101,10 @@ function AppShell() {
               />
               <Stack.Screen name="add-meal" options={{ headerShown: true }} />
               <Stack.Screen
+                name="about-data"
+                options={{ headerShown: true, title: t('nav.headers.aboutData') }}
+              />
+              <Stack.Screen
                 name="bulk-add/index"
                 options={{ headerShown: true, title: t('nav.headers.bulkAdd') }}
               />

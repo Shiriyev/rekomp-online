@@ -1,5 +1,6 @@
 import type { ru } from '../ru';
 import type { Messages } from '../types';
+import { about } from './about';
 import { addMeal } from './addMeal';
 import { backup } from './backup';
 import { bulkAdd } from './bulkAdd';
@@ -31,4 +32,5 @@ export const en: Messages<typeof ru> = {
   profile,
   onboarding,
   backup,
+  about,
 };

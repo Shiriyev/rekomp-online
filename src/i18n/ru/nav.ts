@@ -13,5 +13,6 @@ export const nav = {
     logEntry: 'Запись',
     bulkAdd: 'Добавить домой',
     bulkAmounts: 'Количество',
+    aboutData: 'О данных',
   },
 } as const;

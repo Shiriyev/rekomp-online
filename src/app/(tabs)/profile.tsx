@@ -135,6 +135,10 @@ export default function ProfileScreen() {
 
       <DataSection />
 
+      <Button mode="text" icon="information-outline" onPress={() => router.push('/about-data')}>
+        {t('nav.headers.aboutData')}
+      </Button>
+
       {weightOpen ? (
         <WeightDialog
           visible

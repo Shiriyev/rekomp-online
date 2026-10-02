@@ -15,5 +15,6 @@ export const nav: Messages<typeof ru> = {
     logEntry: 'Entry',
     bulkAdd: 'Add to home',
     bulkAmounts: 'Amounts',
+    aboutData: 'About the data',
   },
 };
