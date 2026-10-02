@@ -2,6 +2,10 @@
  * Every tunable of the pipeline in one place (PHASE_2: «вынести в конфиг, не хардкодить»).
  * Sources, politeness limits, and later the recomposition criteria.
  */
+import { RECIPE_CRITERIA } from './src/lib/app.ts';
+/** Bump when the catalog content changes; the app updates its catalog when this grows. */
+export const CATALOG_VERSION = 1;
+
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,
 
@@ -67,17 +71,8 @@ export const config = {
     maxAlcoholShare: 0.1,
     /** Servings tried when sizing a portion. */
     servings: { min: 1, max: 6 },
-    /** kcal per serving by meal (the ranges of the v1 recipes). */
-    kcalRange: {
-      breakfast: [500, 620],
-      lunch: [560, 740],
-      dinner: [465, 530],
-      snack: [160, 215],
-    } as Record<'breakfast' | 'lunch' | 'dinner' | 'snack', readonly [number, number]>,
-    /** Protein: share of kcal (protein g × 4 / kcal) and grams per serving. */
-    protein: {
-      main: { minShare: 0.25, minGrams: 30 },
-      snack: { minShare: 0.2, minGrams: 10 },
-    },
+    /** kcal ranges and protein minimums, shared with the app's catalog validator. */
+    kcalRange: RECIPE_CRITERIA.kcalRange,
+    protein: RECIPE_CRITERIA.protein,
   },
 } as const;

@@ -87,7 +87,8 @@
     "format": "prettier --write .",
     "db:generate": "drizzle-kit generate",
     "test:coverage": "TZ=Europe/Budapest jest --coverage",
-    "images:fetch": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/fetch-images.ts"
+    "images:fetch": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/fetch-images.ts",
+    "catalog:validate": "npm --prefix tools/data-pipeline run validate"
   },
   "private": true,
   "jest": {
