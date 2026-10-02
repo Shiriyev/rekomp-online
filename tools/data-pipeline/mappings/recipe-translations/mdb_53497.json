@@ -1,0 +1,111 @@
+{
+ "nameRu": "Ном бань чок — камбоджийский суп с лапшой",
+ "descriptionRu": "Лёгкий куриный бульон с чесноком и рыбным соусом, рисовой лапшой, ростками маша и мятой.",
+ "descriptionEn": "A light chicken broth with garlic and fish sauce, served over rice noodles with bean sprouts and mint.",
+ "steps": [
+  {
+   "ru": "Разогрейте растительное масло в большой кастрюле на среднем огне.",
+   "en": "Heat the vegetable oil in a large pot over medium heat until it shimmers.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте чеснок, постоянно помешивая, до аромата и лёгкой золотистости.",
+   "en": "Sauté the garlic, stirring constantly, until fragrant and lightly golden.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте курицу и готовьте, иногда помешивая, пока она не побелеет со всех сторон.",
+   "en": "Add the chicken and cook, stirring occasionally, until opaque on all sides.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Влейте воду и доведите до кипения на сильном огне.",
+   "en": "Pour in the water and bring to a boil over high heat.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до слабого и вмешайте рыбный соус, соль и сахар.",
+   "en": "Reduce the heat to low and stir in the fish sauce, salt and sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_sauce",
+    "salt",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Варите без крышки, чтобы бульон стал насыщенным.",
+   "en": "Simmer uncovered to develop the flavours.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тем временем отварите рисовую лапшу по инструкции на упаковке до состояния аль денте.",
+   "en": "Meanwhile, cook the rice noodles according to the package until al dente.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Откиньте лапшу и промойте холодной водой.",
+   "en": "Drain the noodles and rinse under cold water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Разложите лапшу по мискам.",
+   "en": "Divide the noodles among bowls.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Разлейте по мискам горячий бульон с курицей.",
+   "en": "Ladle the hot broth and chicken over the noodles.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Выложите сверху ростки маша, рубленую мяту и по желанию кольца красного чили.",
+   "en": "Top with bean sprouts, chopped mint and red chilli slices if you like.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bean_sprouts",
+    "mint",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Сразу подавайте с дольками лайма.",
+   "en": "Serve immediately with lime wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

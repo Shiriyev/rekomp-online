@@ -1,0 +1,81 @@
+{
+ "nameRu": "Куриные лоллипопы",
+ "descriptionRu": "Куриные крылышки в форме «леденцов» в пряной панировке, обжаренные во фритюре и запечённые с соусом.",
+ "descriptionEn": "Chicken wing «lollipops» in a spiced coating, deep-fried and finished in the oven with sauce.",
+ "steps": [
+  {
+   "ru": "Промойте курицу с лимоном.",
+   "en": "Wash the chicken with lemon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Обсушите курицу.",
+   "en": "Drain the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Кухонными ножницами надрежьте мясо у кончика плечевой части крылышка.",
+   "en": "Using shears, cut through the meat at the tip of each drumette.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Обваляйте крылышки в смеси перца, паприки, чеснока, соли и крахмала.",
+   "en": "Coat the drumettes in the pepper, paprika, garlic, salt and cornstarch.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing",
+    "pepper",
+    "paprika_powder",
+    "garlic",
+    "salt",
+    "cornstarch"
+   ]
+  },
+  {
+   "ru": "Налейте в фритюрницу или кастрюлю столько масла, чтобы курица была полностью погружена.",
+   "en": "Pour oil into a deep fryer or saucepan, deep enough for the chicken to be submerged.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте курицу до золотисто-коричневого цвета.",
+   "en": "Fry the chicken until golden brown.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "По желанию смажьте курицу любимым соусом силиконовой кисточкой.",
+   "en": "If you like, brush the chicken with your favourite sauce using a silicone brush.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Поставьте курицу в духовку.",
+   "en": "Place the chicken in the oven.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

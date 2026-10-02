@@ -1,0 +1,140 @@
+{
+ "nameRu": "Рыбные крокеты фофос",
+ "descriptionRu": "Гоанско-португальские рыбные крокеты с картофелем, чили и специями в хрустящей панировке.",
+ "descriptionEn": "Goan-Portuguese fish croquettes with potato, chilli and spices in a crisp crumb coating.",
+ "steps": [
+  {
+   "ru": "Положите рыбу в сотейник с крышкой и залейте водой, чтобы она покрыла рыбу.",
+   "en": "Put the fish into a lidded pan and pour over enough water to cover.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "haddock"
+   ]
+  },
+  {
+   "ru": "Доведите до слабого кипения и припускайте под крышкой на слабом огне.",
+   "en": "Bring to a simmer and gently poach over low heat with the lid on.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "haddock"
+   ]
+  },
+  {
+   "ru": "Слейте воду и разберите рыбу на кусочки.",
+   "en": "Drain and flake the fish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "haddock"
+   ]
+  },
+  {
+   "ru": "Сложите в большую миску рыбу, картофель, зелёный чили, кинзу, зиру, чёрный перец, чеснок и имбирь.",
+   "en": "Put the fish, potato, green chilli, coriander, cumin, black pepper, garlic and ginger in a large bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "haddock",
+    "potato",
+    "green_chilli",
+    "coriander_leaf",
+    "cumin",
+    "pepper",
+    "garlic",
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Посолите, добавьте муку и хорошо перемешайте.",
+   "en": "Season, add the flour and mix well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "ru": "Вбейте одно яйцо и перемешайте массу.",
+   "en": "Break in one egg and stir the mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Разделите массу на 15 частей и сформуйте небольшие колбаски.",
+   "en": "Divide the mixture into 15 and form into small logs.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Слегка взбейте оставшиеся яйца в миске.",
+   "en": "Lightly whisk the remaining eggs in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Насыпьте панировочные сухари в другую миску.",
+   "en": "Put the breadcrumbs into another bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Обмакните каждый крокет во взбитое яйцо, затем обваляйте в сухарях.",
+   "en": "Dip each fofo in the beaten egg, then in the breadcrumbs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Уберите крокеты в холодильник.",
+   "en": "Chill the fofos.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Налейте в большую сковороду растительное масло слоем около 1 см и разогрейте на среднем огне.",
+   "en": "Heat a 1 cm layer of oil in a large frying pan over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте крокеты партиями с каждой стороны, аккуратно переворачивая, до ровного золотистого цвета.",
+   "en": "Fry the fofos in batches on each side, turning gently, until evenly golden brown.",
+   "timerSec": 120,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите на бумажное полотенце и повторите с остальными крокетами.",
+   "en": "Drain on kitchen paper and repeat with the remaining fofos.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Для салата смешайте лук, кинзу и лимонный сок со щепоткой соли.",
+   "en": "For the onion salad, mix the onion, coriander and lemon juice with a pinch of salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Подавайте крокеты с луковым салатом и манговым чатни.",
+   "en": "Serve the fofos with the onion salad and mango chutney.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

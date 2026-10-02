@@ -1,0 +1,69 @@
+{
+ "nameRu": "Баррамунди с марокканскими специями",
+ "descriptionRu": "Целая рыба, замаринованная в пряной заправке с чесноком и лимоном и запечённая в духовке.",
+ "descriptionEn": "Whole fish marinated in a spiced garlic and lemon dressing and roasted in the oven.",
+ "steps": [
+  {
+   "ru": "Сложите в кухонный комбайн зиру, кинзу, паприку, молотый перец чили, чеснок, лимонный сок и оливковое масло, добавьте щепотку соли.",
+   "en": "Tip the cumin, coriander, paprika, chilli powder, garlic, lemon juice and olive oil into a food processor with a pinch of salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cumin",
+    "coriander_leaf",
+    "paprika_powder",
+    "chilli_powder",
+    "garlic",
+    "lemon",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Измельчите до однородной заправки.",
+   "en": "Blitz to a dressing.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Сделайте на рыбе по три надреза с каждой стороны.",
+   "en": "Slash the fish three times on each side.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Обмажьте рыбу половиной заправки и оставьте мариноваться.",
+   "en": "Coat the fish with half of the dressing and set aside to marinate.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Разогрейте духовку до 220 °C (200 °C с конвекцией).",
+   "en": "Heat the oven to 220 °C (200 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите рыбу на противень и запекайте, пока мякоть не станет упругой, а глаза не побелеют.",
+   "en": "Place the fish on a roasting tray and roast until the flesh is firm and the eyes have turned white.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Подавайте с оставшейся заправкой и кускусом или рисом, приготовленными на пару.",
+   "en": "Serve with the rest of the dressing and steamed couscous or rice.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

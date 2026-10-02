@@ -1,0 +1,92 @@
+{
+ "nameRu": "Роган-джош из баранины",
+ "descriptionRu": "Индийское карри из нежной баранины, томлённой с пряностями и йогуртом в густом соусе.",
+ "descriptionEn": "Indian curry of tender lamb slowly simmered with spices and yogurt in a thick sauce.",
+ "steps": [
+  {
+   "ru": "Измельчите лук в кухонном комбайне как можно мельче.",
+   "en": "Whizz the onions in a food processor until very finely chopped.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Разогрейте растительное масло в большой кастрюле с толстым дном.",
+   "en": "Heat the oil in a large heavy-based pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук под крышкой, время от времени помешивая, пока он не станет золотистым и мягким.",
+   "en": "Fry the onion with the lid on, stirring now and then, until really golden and soft.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и имбирь и обжарьте ещё немного.",
+   "en": "Add the garlic and ginger and fry a little longer.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "garlic",
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Положите пасту карри, все специи, лавровый лист и томатную пасту и хорошо перемешайте на огне.",
+   "en": "Tip in the curry paste, all the spices, the bay leaves and the tomato purée and stir well over the heat.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "curry_paste",
+    "paprika_powder",
+    "cinnamon",
+    "cardamom",
+    "cloves",
+    "bay_leaf",
+    "tomato_puree"
+   ]
+  },
+  {
+   "ru": "Добавьте баранину и воду и перемешайте.",
+   "en": "Add the lamb and the water and stir to mix.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь и добавьте греческий йогурт.",
+   "en": "Turn down the heat and add the yogurt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и тушите на слабом огне, пока мясо не станет мягким, а соус — густым.",
+   "en": "Cover and gently simmer until the meat is tender and the sauce is nice and thick.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "ru": "Подавайте, посыпав рубленой кинзой, с отварным рисом басмати или пловом.",
+   "en": "Serve scattered with coriander, with plain basmati or pilau rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

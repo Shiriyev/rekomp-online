@@ -1,0 +1,87 @@
+{
+ "nameRu": "Паста путтанеска с сардинами",
+ "descriptionRu": "Спагетти в остром томатном соусе с сардинами, маслинами и пармезаном.",
+ "descriptionEn": "Spaghetti in a spicy tomato sauce with pilchards, black olives and Parmesan.",
+ "steps": [
+  {
+   "ru": "Отварите спагетти по инструкции на упаковке.",
+   "en": "Cook the pasta following the pack instructions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Разогрейте оливковое масло в сковороде с антипригарным покрытием.",
+   "en": "Heat the oil in a non-stick frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук, чеснок и перец чили до мягкости.",
+   "en": "Cook the onion, garlic and chilli until softened.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Вмешайте томатную пасту и прогрейте.",
+   "en": "Stir in the tomato purée and cook.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "tomato_puree"
+   ]
+  },
+  {
+   "ru": "Добавьте сардины вместе с соусом и готовьте, разминая рыбу деревянной ложкой.",
+   "en": "Add the pilchards with their sauce and cook, breaking up the fish with a wooden spoon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Добавьте маслины и готовьте ещё несколько минут.",
+   "en": "Add the olives and cook for a few more minutes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "black_olives"
+   ]
+  },
+  {
+   "ru": "Откиньте спагетти на дуршлаг, сохранив немного воды от варки.",
+   "en": "Drain the pasta, keeping a little of the cooking water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Переложите спагетти в сковороду, добавьте пару ложек воды от варки и хорошо перемешайте.",
+   "en": "Add the pasta to the pan with a couple of spoonfuls of the cooking water and toss everything together well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Разложите по тарелкам и посыпьте стружкой пармезана.",
+   "en": "Divide between plates and serve scattered with shaved Parmesan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parmesan"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

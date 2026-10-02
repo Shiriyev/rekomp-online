@@ -1,0 +1,80 @@
+{
+ "nameRu": "Курица по-испански с чоризо",
+ "descriptionRu": "Куриные бёдра, запечённые с чоризо, сладким перцем, томатами, оливками и фасолью.",
+ "descriptionEn": "Chicken thighs baked with chorizo, peppers, tomatoes, olives and butter beans.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией, газ 6).",
+   "en": "Heat the oven to 200 °C (180 °C fan, gas 6).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте оливковое масло в большой сковороде, пригодной для духовки, на среднем огне.",
+   "en": "Heat the olive oil in a large ovenproof frying pan over a medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук, чоризо и паприку со щепоткой соли и перца, пока овощи не размягчатся, а чоризо не пустит масло.",
+   "en": "Fry the onion, chorizo and pepper with a pinch of salt and pepper until the veg has softened and the chorizo has released its oils.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "onion",
+    "chorizo",
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте молотую паприку и чеснок и готовьте ещё несколько минут до появления аромата.",
+   "en": "Add the paprika and garlic and cook for a few more minutes until fragrant.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "paprika_powder",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте томаты, оливки и фасоль, перемешайте и приправьте.",
+   "en": "Tip in the tomatoes, olives and butter beans, stir to combine and season.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomatoes_canned",
+    "green_olives",
+    "butter_beans"
+   ]
+  },
+  {
+   "ru": "Уложите в соус куриные бёдра и хорошо посолите и поперчите.",
+   "en": "Nestle in the chicken thighs and season well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Запекайте в духовке, пока кожица не станет хрустящей, а мясо — мягким и готовым.",
+   "en": "Bake in the oven until the chicken skin is crisp and the meat is cooked through and tender.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Посыпьте петрушкой и подавайте.",
+   "en": "Scatter with the parsley and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

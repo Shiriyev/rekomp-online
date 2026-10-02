@@ -1,0 +1,91 @@
+{
+ "nameRu": "Жареные кальмары с солью и перцем",
+ "descriptionRu": "Хрустящие кальмары в пряной панировке с сычуаньским перцем и вьетнамским соусом для макания.",
+ "descriptionEn": "Crisp squid in a peppery coating with Sichuan pepper and a Vietnamese dipping sauce.",
+ "steps": [
+  {
+   "ru": "Для соуса смешайте в небольшой миске огурец, красный лук, красный чили, рисовый уксус, сахар и рыбный соус, пока сахар не растворится, и отставьте.",
+   "en": "For the dipping sauce, mix the cucumber, red onion, red chilli, rice vinegar, sugar and fish sauce in a small bowl until the sugar dissolves, then set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber",
+    "red_onion",
+    "red_chilli",
+    "rice_vinegar",
+    "sugar",
+    "fish_sauce"
+   ]
+  },
+  {
+   "ru": "В большой миске смешайте кукурузный крахмал и муку с обоими видами перца и морской солью.",
+   "en": "In a large bowl, mix the cornflour and plain flour with both peppers and sea salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "flour",
+    "pepper",
+    "sichuan_pepper"
+   ]
+  },
+  {
+   "ru": "Застелите поднос бумажными полотенцами и приготовьте ещё соли для посыпки.",
+   "en": "Line a tray with kitchen paper and have more salt ready for sprinkling.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте масло слоем около 7 см до 180 °C во фритюрнице, воке или глубокой кастрюле.",
+   "en": "Heat about 7 cm of oil to 180 °C in a deep fryer, wok or deep pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Без термометра проверьте масло кубиком хлеба: он должен зарумяниться за 20 секунд.",
+   "en": "Without a thermometer, test the oil with a cube of bread: it should brown in 20 seconds.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Хорошо обваляйте кальмаров в мучной смеси.",
+   "en": "Coat the squid well with the flour mix.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Жарьте кальмаров порциями до хрустящей корочки.",
+   "en": "Fry the squid in batches until crisp.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Выньте шумовкой, обсушите на бумажных полотенцах и посыпьте солью.",
+   "en": "Lift out with a slotted spoon, drain on the kitchen paper and sprinkle with a little more salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Посыпьте зелёным луком и чили и подавайте с соусом.",
+   "en": "Scatter with the spring onion and chilli and serve with the dipping sauce on the side.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion",
+    "green_chilli"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

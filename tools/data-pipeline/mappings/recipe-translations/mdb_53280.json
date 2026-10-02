@@ -1,0 +1,51 @@
+{
+ "nameRu": "Запечённая курица по-алжирски",
+ "descriptionRu": "Целая курица, запечённая в пряном маринаде с горчицей, бальзамическим уксусом и кайенским перцем.",
+ "descriptionEn": "A whole chicken roasted in a spicy marinade of mustard, balsamic vinegar and cayenne pepper.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 350 °F (175 °C).",
+   "en": "Preheat the oven to 350 °F (175 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Смешайте в форме для запекания воду, лук, оливковое масло, бальзамический уксус, горчицу, чеснок, чёрный и кайенский перец и соль.",
+   "en": "Mix the water, onion, olive oil, balsamic vinegar, Dijon mustard, garlic, black pepper, cayenne and salt in a roasting dish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water",
+    "onion",
+    "olive_oil",
+    "balsamic_vinegar",
+    "mustard",
+    "garlic",
+    "pepper",
+    "cayenne",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Положите курицу и переворачивайте, пока она полностью не покроется смесью.",
+   "en": "Add the chicken and turn until well coated with the mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Запекайте около полутора часов, пока термометр в самой толстой части бедра у кости не покажет 165 °F (74 °C).",
+   "en": "Bake for about 1 hour 30 minutes, until a thermometer in the thickest part of the thigh near the bone reads 165 °F (74 °C).",
+   "timerSec": 5400,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

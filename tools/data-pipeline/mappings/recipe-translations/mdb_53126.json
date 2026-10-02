@@ -1,0 +1,111 @@
+{
+ "nameRu": "Брун лапскаус (норвежское рагу из говядины с овощами)",
+ "descriptionRu": "Густое норвежское рагу из говядины с брюквой, морковью, картофелем и луком-пореем.",
+ "descriptionEn": "A hearty Norwegian stew of beef with swede, carrots, potatoes and leek.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в большой кастрюле.",
+   "en": "Heat the olive oil in a large pot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Нарежьте говядину кубиками по 2,5 см и обжарьте в масле.",
+   "en": "Cut the beef into 1 inch (2.5 cm) cubes and brown in the oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Нарежьте лук кубиками и добавьте к говядине.",
+   "en": "Dice the onion and add to the browning beef.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Влейте бульон и доведите до кипения.",
+   "en": "Add the stock and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь, накройте крышкой и тушите.",
+   "en": "Lower the heat, cover and simmer.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Очистите брюкву и сельдерей и нарежьте кубиками по 2,5 см.",
+   "en": "Peel the swede and celery and cut into 1 inch (2.5 cm) cubes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "swede",
+    "celery"
+   ]
+  },
+  {
+   "ru": "Добавьте их в кастрюлю, накройте и тушите дальше.",
+   "en": "Add them to the pot, cover and continue simmering.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "swede",
+    "celery"
+   ]
+  },
+  {
+   "ru": "Очистите морковь и картофель и нарежьте кубиками по 2,5 см.",
+   "en": "Peel the carrots and potatoes and cut into 1 inch (2.5 cm) cubes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Добавьте морковь и картофель в кастрюлю.",
+   "en": "Add the carrots and potatoes to the pot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Нарежьте лук-порей кольцами и добавьте в кастрюлю.",
+   "en": "Slice the leek into rings and add to the pot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "leek"
+   ]
+  },
+  {
+   "ru": "Накройте и тушите, помешивая как можно реже.",
+   "en": "Cover and continue simmering, stirring as little as possible.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посыпьте свежей петрушкой.",
+   "en": "Top with fresh parsley.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

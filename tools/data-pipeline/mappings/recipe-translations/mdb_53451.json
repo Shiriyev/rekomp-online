@@ -1,0 +1,145 @@
+{
+ "nameRu": "Бангладешское рыбное карри с дайконом",
+ "descriptionRu": "Белая рыба и дайкон, тушённые в пряном соусе с куркумой, кориандром и чили.",
+ "descriptionEn": "White fish and daikon simmered in a spiced sauce with turmeric, coriander and chilli.",
+ "steps": [
+  {
+   "ru": "Нарежьте рыбу кусками около 6 см, промойте и обсушите.",
+   "en": "Cut the fish into 2½ inch (6 cm) chunks, then rinse and drain.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Срежьте у дайкона концы и очистите его овощечисткой.",
+   "en": "Top and tail the daikon and peel it with a potato peeler.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "daikon"
+   ]
+  },
+  {
+   "ru": "Разрежьте дайкон поперёк, затем каждую половину вдоль и нарежьте полукружьями толщиной 2 см. Промойте.",
+   "en": "Cut the daikon in half widthways, then each half lengthways, and slice into 2 cm half-moons. Rinse.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "daikon"
+   ]
+  },
+  {
+   "ru": "Разогрейте масло в большом широком сотейнике на среднем огне.",
+   "en": "Heat the oil in a large, shallow saucepan over a medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Добавьте раздавленный чеснок и помешивайте до светло-золотистого цвета.",
+   "en": "Add the crushed garlic and stir until pale golden.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте измельчённый в пасту лук и соль и готовьте до мягкости и прозрачности, иногда помешивая.",
+   "en": "Add the onion paste and salt and cook until soft and translucent, stirring occasionally.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Влейте 200 мл воды, накройте и готовьте, пару раз перемешав.",
+   "en": "Pour in 200 ml of water, cover and cook, stirring once or twice.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте куркуму, кориандр и молотый чили и помешивайте пару минут, чтобы специи прожарились.",
+   "en": "Add the turmeric, ground coriander and chilli powder and stir for a couple of minutes so the spices cook through.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "turmeric",
+    "ground_coriander",
+    "chilli_powder"
+   ]
+  },
+  {
+   "ru": "Накройте и готовьте на слабом огне.",
+   "en": "Cover and cook over a low heat.",
+   "timerSec": 300,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Вмешайте дайкон, через минуту влейте 200 мл воды.",
+   "en": "Stir in the daikon, then after a minute or so add 200 ml of water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "daikon"
+   ]
+  },
+  {
+   "ru": "Накройте и готовьте на среднем огне.",
+   "en": "Cover and cook on a medium heat.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "daikon"
+   ]
+  },
+  {
+   "ru": "Добавьте рыбу и перемешайте, чтобы она покрылась специями.",
+   "en": "Add the fish and mix thoroughly so it is coated in the spices.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Встряхните сотейник, накройте и готовьте на среднем огне. После этого больше не перемешивайте.",
+   "en": "Gently shake the pan, cover and cook on a medium heat. Do not stir from this point on.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Тем временем вскипятите воду и аккуратно влейте 500 мл по краю сотейника, не на рыбу.",
+   "en": "Meanwhile, boil some water and carefully pour 500 ml into the sides of the pan, not directly onto the fish.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Слегка встряхните сотейник, накройте и тушите на сильном огне.",
+   "en": "Give the pan a gentle shake, cover and simmer over high heat.",
+   "timerSec": 900,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте рубленую кинзу и зелёный чили и готовьте ещё.",
+   "en": "Add the chopped coriander and green chillies and keep cooking.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "green_chilli"
+   ]
+  },
+  {
+   "ru": "Снимите с огня и сразу подавайте с рисом и дольками лайма.",
+   "en": "Turn off the heat and serve immediately with rice and lime wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

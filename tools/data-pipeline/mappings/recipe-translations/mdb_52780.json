@@ -1,0 +1,96 @@
+{
+ "nameRu": "Картофельный гратен с курицей",
+ "descriptionRu": "Тонко нарезанный картофель с луком под крем-фреш и пармезаном, подрумяненный под грилем и поданный с курицей и беконом.",
+ "descriptionEn": "Thinly sliced potatoes with onion under crème fraîche and Parmesan, browned under the grill and served with chicken and bacon.",
+ "steps": [
+  {
+   "ru": "Тонко нарежьте картофель.",
+   "en": "Thinly slice the potatoes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Отварите картофель, пока он не станет упругим, но ещё не мягким.",
+   "en": "Boil the potatoes until firm but not yet soft.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Тонко нарежьте лук.",
+   "en": "Thinly slice the onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выложите лук в форму для запекания, добавьте оливковое масло и куриный бульон.",
+   "en": "Put the onions in an oven dish and add the olive oil and chicken stock.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "olive_oil",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Готовьте, пока лук не станет мягким.",
+   "en": "Cook until the onions are soft.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Слейте воду с картофеля и выложите его на лук.",
+   "en": "Drain the potatoes and tip them over the onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Посолите, поперчите и распределите сверху крем-фреш так, чтобы он покрыл всё, но не залил.",
+   "en": "Season and spoon over the crème fraîche so everything is covered but not swimming.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "creme_fraiche"
+   ]
+  },
+  {
+   "ru": "Натрите сверху пармезан.",
+   "en": "Grate the Parmesan over the top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parmesan"
+   ]
+  },
+  {
+   "ru": "Подрумяньте гратен под грилем до золотистой корочки.",
+   "en": "Finish under the grill until nicely golden.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с курицей и беконом, зелёным горошком и шпинатом.",
+   "en": "Serve with the chicken and bacon, peas and spinach.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "bacon",
+    "peas",
+    "spinach"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

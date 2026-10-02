@@ -1,0 +1,101 @@
+{
+ "nameRu": "Курица карри с арахисовой пастой",
+ "descriptionRu": "Нежная курица в густом соусе из арахисовой пасты, йогурта, имбиря, чеснока и кинзы.",
+ "descriptionEn": "Tender chicken in a thick sauce of peanut butter, yogurt, ginger, garlic and coriander.",
+ "steps": [
+  {
+   "ru": "Тонко нарежьте четверть перца чили.",
+   "en": "Thinly slice a quarter of the chilli.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Положите оставшийся перец чили в блендер вместе с имбирём, чесноком, стеблями кинзы и третью её листьев.",
+   "en": "Put the rest of the chilli in a food processor with the ginger, garlic, coriander stalks and a third of the leaves.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "ginger",
+    "garlic",
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Измельчите до грубой пасты, при необходимости добавив немного воды.",
+   "en": "Blitz to a rough paste, adding a splash of water if needed.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте растительное масло на сковороде.",
+   "en": "Heat the oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Быстро обжарьте кусочки куриной грудки до румяности.",
+   "en": "Quickly brown the chicken chunks.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Добавьте пасту и готовьте, помешивая.",
+   "en": "Stir in the paste and cook.",
+   "timerSec": 60,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте арахисовую пасту, куриный бульон и йогурт.",
+   "en": "Add the peanut butter, stock and yogurt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "peanut_butter",
+    "chicken_stock",
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Когда соус слегка забулькает, готовьте, пока курица не будет готова, а соус не загустеет.",
+   "en": "When the sauce is gently bubbling, cook until the chicken is just cooked through and the sauce has thickened.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Вмешайте большую часть оставшейся кинзы.",
+   "en": "Stir in most of the remaining coriander.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Посыпьте сверху остатками кинзы и нарезанным чили.",
+   "en": "Scatter the rest of the coriander and the sliced chilli on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Подавайте с рисом или пюре из батата.",
+   "en": "Serve with rice or mashed sweet potato.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

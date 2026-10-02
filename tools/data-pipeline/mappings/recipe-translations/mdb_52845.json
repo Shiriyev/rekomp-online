@@ -1,0 +1,111 @@
+{
+ "nameRu": "Мясной рулет из индейки с фасолью",
+ "descriptionRu": "Рулет из фарша индейки с соусом барбекю, запечённый вместе с белой фасолью в томатном соусе.",
+ "descriptionEn": "A turkey mince meatloaf glazed with barbecue sauce and baked with white beans in tomato sauce.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 180 °C (160 °C с конвекцией, газ 4).",
+   "en": "Heat the oven to 180 °C (160 °C fan, gas 4).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте масло в большой сковороде и обжарьте лук до мягкости.",
+   "en": "Heat the oil in a large frying pan and cook the onion until softened.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "olive_oil",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок, вустерширский соус и две трети томатной пасты, перемешайте до однородности.",
+   "en": "Add the garlic, Worcestershire sauce and two thirds of the tomato purée and stir until combined.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "worcestershire_sauce",
+    "tomato_puree"
+   ]
+  },
+  {
+   "ru": "Отставьте смесь остывать.",
+   "en": "Set aside to cool.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите в большую миску фарш индейки, яйцо, сухари и остывшую луковую смесь, хорошо посолите и поперчите.",
+   "en": "Put the turkey mince, egg, breadcrumbs and cooled onion mix in a large bowl and season well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "turkey_mince",
+    "egg",
+    "breadcrumbs",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Перемешайте и сформируйте прямоугольный рулет.",
+   "en": "Mix everything together and shape into a rectangular loaf.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "turkey_mince"
+   ]
+  },
+  {
+   "ru": "Переложите рулет в большую форму для запекания и смажьте частью соуса барбекю.",
+   "en": "Place the loaf in a large roasting tin and spread some of the barbecue sauce over it.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bbq_sauce"
+   ]
+  },
+  {
+   "ru": "Запекайте рулет.",
+   "en": "Bake the meatloaf.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тем временем слейте жидкость только с одной банки фасоли, затем выложите фасоль из обеих банок в большую миску.",
+   "en": "Meanwhile, drain only one can of beans, then tip both cans into a large bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cannellini_beans"
+   ]
+  },
+  {
+   "ru": "Добавьте оставшийся соус барбекю и томатную пасту, посолите, поперчите и отставьте.",
+   "en": "Add the remaining barbecue sauce and tomato purée, season and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bbq_sauce",
+    "tomato_puree",
+    "cannellini_beans"
+   ]
+  },
+  {
+   "ru": "Разложите фасоль вокруг рулета и запекайте, пока рулет не пропечётся, а фасоль не прогреется.",
+   "en": "Scatter the beans around the meatloaf and bake until it is cooked through and the beans are piping hot.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "cannellini_beans"
+   ]
+  },
+  {
+   "ru": "Посыпьте петрушкой и подавайте рулет ломтиками.",
+   "en": "Scatter over the parsley and serve the meatloaf in slices.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

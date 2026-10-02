@@ -1,0 +1,78 @@
+{
+ "nameRu": "Кисло-острый суп",
+ "descriptionRu": "Китайский суп на курином бульоне с тофу, грибами, уксусом и острым соусом.",
+ "descriptionEn": "A Chinese chicken broth soup with tofu, mushrooms, vinegar and hot sauce.",
+ "steps": [
+  {
+   "ru": "Влейте куриный бульон в вок и доведите до кипения.",
+   "en": "Pour the chicken stock into a wok and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Добавьте соль, сахар, кунжутное масло, перец, острый соус, уксус и соевый соус и перемешайте.",
+   "en": "Add the salt, sugar, sesame oil, pepper, hot sauce, vinegar and soy sauce and stir for a few seconds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "sugar",
+    "sesame_oil",
+    "pepper",
+    "hot_sauce",
+    "vinegar",
+    "soy_sauce"
+   ]
+  },
+  {
+   "ru": "Добавьте в вок тофу, шампиньоны и древесные грибы.",
+   "en": "Add the tofu, mushrooms and wood ear mushrooms to the wok.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tofu",
+    "mushroom",
+    "shiitake"
+   ]
+  },
+  {
+   "ru": "В миске размешайте кукурузный крахмал с водой.",
+   "en": "In a bowl, whisk the cornstarch with the water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Понемногу вливайте смесь в суп, пока он не загустеет до нужной консистенции.",
+   "en": "Slowly add the mixture to the soup until it reaches the right thickness.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Слегка взбейте яйцо вилкой, влейте в суп и перемешайте.",
+   "en": "Lightly beat an egg with a fork, add it to the soup and stir.",
+   "timerSec": 8,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разлейте суп по тарелкам и выложите сверху свинину и нарезанный зелёный лук.",
+   "en": "Serve the soup in bowls and top with the pork and sliced spring onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork",
+    "spring_onion"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

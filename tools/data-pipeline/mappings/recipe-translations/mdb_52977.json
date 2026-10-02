@@ -1,0 +1,113 @@
+{
+ "nameRu": "Чорба — турецкий чечевичный суп",
+ "descriptionRu": "Густой турецкий суп-пюре из чечевицы с морковью, томатом и пряными специями.",
+ "descriptionEn": "A thick Turkish puréed lentil soup with carrot, tomato and warm spices.",
+ "steps": [
+  {
+   "ru": "Переберите чечевицу, удалив мусор.",
+   "en": "Pick through the lentils for any debris.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lentils_green"
+   ]
+  },
+  {
+   "ru": "Промойте чечевицу 2–3 раза, откиньте и отставьте.",
+   "en": "Rinse the lentils 2 or 3 times, drain and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lentils_green"
+   ]
+  },
+  {
+   "ru": "В большой кастрюле на огне выше среднего обжарьте лук на оливковом масле со щепоткой соли.",
+   "en": "In a large pot over medium-high heat, sauté the onion in olive oil with a pinch of salt.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "onion",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Добавьте морковь и готовьте ещё.",
+   "en": "Add the carrots and cook a little longer.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Добавьте томатную пасту и перемешивайте.",
+   "en": "Add the tomato paste and stir it around.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "tomato_puree"
+   ]
+  },
+  {
+   "ru": "Быстро добавьте зиру, паприку, мяту, тимьян, чёрный перец и хлопья чили и помешивайте, чтобы раскрылся аромат специй.",
+   "en": "Quickly add the cumin, paprika, mint, thyme, black pepper and chilli flakes and stir to bloom the spices.",
+   "timerSec": 10,
+   "ingredientRefs": [
+    "cumin",
+    "paprika_powder",
+    "mint",
+    "thyme",
+    "pepper",
+    "chilli_flakes"
+   ]
+  },
+  {
+   "ru": "Сразу добавьте чечевицу, воду, бульон и соль.",
+   "en": "Immediately add the lentils, water, stock and salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lentils_green",
+    "water",
+    "vegetable_stock",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Доведите суп до слабого кипения.",
+   "en": "Bring the soup to a gentle boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Убавьте огонь до умеренно слабого, наполовину накройте кастрюлю крышкой и варите, пока чечевица не разварится, а морковь не станет мягкой.",
+   "en": "Reduce the heat to medium-low, half-cover the pot and cook until the lentils have fallen apart and the carrots are fully cooked.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "lentils_green",
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Пюрируйте суп в блендере или погружным блендером до нужной консистенции.",
+   "en": "Blend the soup in a blender or with a hand blender to the consistency you like.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Попробуйте и при необходимости досолите.",
+   "en": "Taste and add more salt if needed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt"
+   ]
+  },
+  {
+   "ru": "Подавайте с раскрошенными крекерами или хлебом.",
+   "en": "Serve with crushed crackers or torn bread.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

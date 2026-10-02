@@ -1,0 +1,84 @@
+{
+ "nameRu": "Солонина с капустой по-ямайски",
+ "descriptionRu": "Ямайская солонина, тушённая с капустой, сладким перцем, помидорами и тимьяном.",
+ "descriptionEn": "Jamaican-style corned beef cooked with cabbage, peppers, tomatoes and thyme.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в сковороде или казане на огне выше среднего.",
+   "en": "Heat the olive oil in a skillet or Dutch pot over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте лук и зелёную паприку и обжаривайте.",
+   "en": "Add the onion and green pepper and sauté.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и помешивайте.",
+   "en": "Add the garlic and stir.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте нашинкованную капусту и готовьте, часто помешивая, до мягкости.",
+   "en": "Add the shredded cabbage and cook, stirring often, until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "ru": "Добавьте солонину, помидоры и тимьян и перемешайте.",
+   "en": "Add the corned beef, tomatoes and thyme and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "corned_beef",
+    "tomato",
+    "thyme"
+   ]
+  },
+  {
+   "ru": "Добавьте кетчуп и острый соус из перца скотч-бонет и перемешайте.",
+   "en": "Add the ketchup and Scotch bonnet pepper sauce and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ketchup"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до среднего и готовьте, пока солонина не прогреется.",
+   "en": "Reduce the heat to medium and cook until the corned beef is heated through.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "corned_beef"
+   ]
+  },
+  {
+   "ru": "Снимите с огня.",
+   "en": "Remove from the heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с белым рисом, хлебом или как самостоятельное блюдо.",
+   "en": "Serve with white rice, bread or on its own.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

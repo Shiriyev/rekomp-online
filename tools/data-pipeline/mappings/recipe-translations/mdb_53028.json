@@ -1,0 +1,119 @@
+{
+ "nameRu": "Шаурма с курицей",
+ "descriptionRu": "Пряные куриные бёдра с гриля в пите с овощами и йогуртовым соусом.",
+ "descriptionEn": "Spiced grilled chicken thighs in pita bread with salad and yogurt sauce.",
+ "steps": [
+  {
+   "ru": "Смешайте специи, лимонный сок и оливковое масло для маринада в большом пакете с застёжкой или в миске.",
+   "en": "Combine the spices, lemon juice and olive oil for the marinade in a large ziplock bag or bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "cumin",
+    "cardamom",
+    "cayenne",
+    "paprika_powder",
+    "lemon_juice",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте куриные бёдра и руками распределите маринад по каждому кусочку.",
+   "en": "Add the chicken and use your hands to coat each piece in the marinade.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Оставьте мариноваться в холодильнике на ночь или до суток.",
+   "en": "Marinate in the fridge overnight or up to 24 hours.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Для соуса смешайте в миске греческий йогурт с чесноком.",
+   "en": "For the sauce, mix the Greek yogurt with the garlic in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Накройте соус и уберите в холодильник до подачи.",
+   "en": "Cover the sauce and refrigerate until needed.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте гриль или большую сковороду с толстым дном на огне выше среднего. Смазывать маслом не обязательно — оно есть в маринаде.",
+   "en": "Heat a grill, barbecue or large heavy-based pan to medium-high. No need to oil it — the marinade already has oil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите курицу и обжарьте первую сторону до красивой подпалённой корочки.",
+   "en": "Place the chicken on the grill and cook the first side until nicely charred.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Переверните и обжарьте вторую сторону.",
+   "en": "Turn and cook the other side.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Снимите курицу, неплотно накройте фольгой и дайте отдохнуть.",
+   "en": "Remove the chicken, cover loosely with foil and leave to rest.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Нарежьте курицу и выложите на блюдо вместе с питой, салатом, помидорами и йогуртовым соусом.",
+   "en": "Slice the chicken and pile it onto a platter with the pita, lettuce, tomato and yogurt sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "pita",
+    "lettuce",
+    "tomato",
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Чтобы сделать ролл, смажьте питу йогуртовым соусом.",
+   "en": "To make a wrap, smear a pita with yogurt sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pita",
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Выложите немного салата, помидоров и курицы и сверните.",
+   "en": "Top with some lettuce, tomato and chicken and roll up.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lettuce",
+    "tomato",
+    "chicken_thigh"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true
+}

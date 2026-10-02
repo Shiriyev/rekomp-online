@@ -1,0 +1,89 @@
+{
+ "nameRu": "Бенгальское куриное карри с картофелем",
+ "descriptionRu": "Курица и картофель, тушённые в пряном томатном соусе с кинзой.",
+ "descriptionEn": "Chicken and potatoes simmered in a spiced tomato sauce with coriander.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в большой сковороде на среднем-сильном огне.",
+   "en": "Heat the olive oil in a large skillet over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте лук, помешивая, до прозрачности.",
+   "en": "Cook and stir the onions until translucent.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте имбирно-чесночную пасту и готовьте ещё.",
+   "en": "Add the ginger-garlic paste and keep cooking.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до среднего, вмешайте помидоры и готовьте, пока они не разварятся.",
+   "en": "Reduce the heat to medium, stir in the tomatoes and cook until pulpy.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Добавьте кайенский перец, карри, гарам масалу, куркуму и зиру и готовьте, помешивая.",
+   "en": "Season with the cayenne, curry powder, garam masala, turmeric and cumin; cook and stir.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "cayenne",
+    "curry_powder",
+    "garam_masala",
+    "turmeric",
+    "cumin"
+   ]
+  },
+  {
+   "ru": "Добавьте курицу и картофель.",
+   "en": "Add the chicken and potatoes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Тушите, иногда помешивая, пока картофель не станет мягким, а курица не приготовится.",
+   "en": "Simmer, stirring occasionally, until the potatoes are tender and the chicken is no longer pink in the centre.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "chicken_breast",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Посыпьте кинзой и тушите ещё.",
+   "en": "Sprinkle with the coriander and simmer a little longer.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Подавайте горячим.",
+   "en": "Serve hot.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

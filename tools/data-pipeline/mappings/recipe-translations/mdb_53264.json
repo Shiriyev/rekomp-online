@@ -1,0 +1,74 @@
+{
+ "nameRu": "Куриные шашлычки с копчёной паприкой",
+ "descriptionRu": "Кусочки куриного бедра со специями и копчёной паприкой, обжаренные на шпажках.",
+ "descriptionEn": "Spiced chicken thigh pieces with smoked paprika, seared on skewers.",
+ "steps": [
+  {
+   "ru": "Если шпажки деревянные, замочите их в воде.",
+   "en": "If using wooden skewers, soak them in water.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте куриное бедро кусочками по 3 см и выложите в миску.",
+   "en": "Cut the chicken thighs into 3 cm pieces and place in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Добавьте половину оливкового масла, семена фенхеля, зиру, паприку, чеснок и уксус, хорошо перемешайте и приправьте. Это можно сделать за день и убрать в холодильник.",
+   "en": "Add half of the olive oil, the fennel seeds, cumin, paprika, garlic and vinegar, toss well and season. This can be done up to a day ahead and refrigerated.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "fennel_seed",
+    "cumin",
+    "paprika_powder",
+    "garlic",
+    "wine_vinegar",
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Нанижите по 2–3 кусочка на каждую шпажку.",
+   "en": "Thread 2–3 pieces onto each skewer.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Налейте оставшееся масло на сковороду или смажьте им сковороду-гриль и сильно разогрейте.",
+   "en": "Pour the remaining oil into a frying pan or rub it onto a griddle pan and get it hot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте шашлычки с каждой стороны, при необходимости партиями. Готовые держите в тёплой духовке.",
+   "en": "Sear the skewers on each side, in batches if needed, keeping the cooked ones warm in a low oven.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "По желанию подавайте с соусом айоли.",
+   "en": "Serve with aïoli if you like.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mayonnaise"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

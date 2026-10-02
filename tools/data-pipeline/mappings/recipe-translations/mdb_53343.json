@@ -1,0 +1,137 @@
+{
+ "nameRu": "Туртьер (канадский мясной пирог)",
+ "descriptionRu": "Традиционный канадский пирог из песочного теста с начинкой из говяжьего и свиного фарша с пряностями.",
+ "descriptionEn": "A traditional Canadian shortcrust pie filled with spiced ground beef and pork.",
+ "steps": [
+  {
+   "ru": "Разогрейте растительное масло в большой сковороде на среднем-сильном огне.",
+   "en": "Heat the oil in a large sauté pan over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте лук и чеснок до мягкости.",
+   "en": "Sauté the onion and garlic until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте говяжий и свиной фарш и пряности и жарьте, пока мясо не подрумянится.",
+   "en": "Add the ground beef, pork and spices and cook until the meat is browned.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "pork_mince",
+    "summer_savory",
+    "cloves",
+    "nutmeg",
+    "bay_leaf"
+   ]
+  },
+  {
+   "ru": "Влейте говяжий бульон и доведите до слабого кипения.",
+   "en": "Add the beef broth and bring it to a simmer.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до умеренно слабого и вмешайте тёртый картофель.",
+   "en": "Reduce the heat to medium-low and stir in the grated potato.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Готовьте, пока жидкость почти не впитается.",
+   "en": "Cook until the liquid is almost absorbed.",
+   "timerSec": 900,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Удалите лавровый лист, посолите и поперчите по вкусу.",
+   "en": "Remove the bay leaf and season with salt and pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bay_leaf",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Снимите сковороду с огня и полностью остудите начинку — лучше всего она запекается охлаждённой.",
+   "en": "Remove the pan from the heat and let the filling cool completely; it bakes best chilled.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте духовку до 375 °F (190 °C).",
+   "en": "Preheat the oven to 375 °F (190 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "На слегка присыпанной мукой поверхности раскатайте один пласт теста тоньше 6 мм и выложите им форму для пирога диаметром 23 см.",
+   "en": "On a lightly floured surface, roll out one disc of dough to less than ¼ inch thick and line a 9-inch pie plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shortcrust_pastry"
+   ]
+  },
+  {
+   "ru": "Выложите остывшую начинку и разровняйте.",
+   "en": "Fill with the cooled mixture and spread it out evenly.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Раскатайте оставшееся тесто так же тонко, сделайте в центре отверстие для выхода пара и накройте начинку.",
+   "en": "Roll out the remaining dough to the same thickness, cut a hole in the centre for steam and place on top of the filling.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shortcrust_pastry"
+   ]
+  },
+  {
+   "ru": "Обрежьте тесто, оставив около 1 см за краем формы, и защипните края.",
+   "en": "Trim the dough to ½ inch beyond the edge of the pie plate and pinch the edges together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shortcrust_pastry"
+   ]
+  },
+  {
+   "ru": "Смажьте пирог взбитым яйцом.",
+   "en": "Brush the crust with the egg wash.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Выпекайте, пока тесто не станет насыщенного золотисто-коричневого цвета.",
+   "en": "Bake until the pastry is a rich golden brown.",
+   "timerSec": 2700,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Дайте пирогу остыть перед нарезкой.",
+   "en": "Let cool before slicing to serve.",
+   "timerSec": 900,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

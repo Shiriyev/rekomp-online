@@ -1,0 +1,176 @@
+{
+ "nameRu": "Имам баялды с бараниной на гриле и дзадзики",
+ "descriptionRu": "Запечённые баклажаны с томатной начинкой, поданные с бараньими котлетами на гриле и соусом дзадзики.",
+ "descriptionEn": "Baked aubergines with a tomato filling, served with grilled lamb chops and tzatziki.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 190 °C (170 °C с конвекцией, газ 5).",
+   "en": "Heat the oven to 190 °C (170 °C fan, gas 5).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разрежьте баклажаны вдоль пополам и глубоко надрежьте мякоть.",
+   "en": "Halve the aubergines lengthways and score the flesh deeply.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Щедро смажьте оливковым маслом и выложите на противень.",
+   "en": "Brush with a good layer of olive oil and put on a baking sheet.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока мякоть не станет достаточно мягкой, чтобы вынуть её ложкой.",
+   "en": "Roast until the flesh is soft enough to scoop out.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук на небольшом количестве масла до мягкости.",
+   "en": "Fry the onion in a little oil until soft.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и корицу и обжарьте.",
+   "en": "Add the garlic and cinnamon and fry.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic",
+    "cinnamon"
+   ]
+  },
+  {
+   "ru": "Когда баклажаны немного остынут, выньте ложкой мякоть.",
+   "en": "Once the aubergines are cool enough to handle, scoop out the centres.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Крупно нарежьте мякоть и добавьте к луку.",
+   "en": "Roughly chop the flesh and add it to the onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Разрежьте помидоры пополам и выньте семена с соком в сито над миской.",
+   "en": "Halve the tomatoes and scoop the seeds and juice into a sieve set over a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Нарежьте мякоть помидоров.",
+   "en": "Chop the tomato flesh.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Добавьте помидоры в сковороду и тушите всё до мягкости, при необходимости подлив масла.",
+   "en": "Add the tomatoes to the pan and cook everything until soft, adding a little more oil if needed.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Вмешайте петрушку, оставив немного для подачи.",
+   "en": "Stir in the parsley, keeping a little for scattering.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Уложите половинки баклажанов в форму для запекания и распределите по ним томатную начинку.",
+   "en": "Lay the aubergine halves in a baking dish and divide the tomato mixture between them.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Полейте томатным соком и сбрызните оливковым маслом.",
+   "en": "Pour over the tomato juice and drizzle with more olive oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока баклажаны не осядут.",
+   "en": "Bake until the aubergines have collapsed.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тем временем смешайте йогурт, огурец и мяту для дзадзики и переложите в небольшую миску.",
+   "en": "Meanwhile, mix the yogurt, cucumber and mint for the tzatziki and put in a small serving bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "cucumber",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Приправьте баранину солью, чёрным перцем и щепоткой паприки.",
+   "en": "Season the lamb with salt, black pepper and a pinch of paprika.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_chop",
+    "paprika_powder"
+   ]
+  },
+  {
+   "ru": "Обжарьте баранину на гриле или сковороде-гриль с каждой стороны, пока жир не зарумянится.",
+   "en": "Griddle, grill or barbecue the lamb on each side until the fat is nicely browned.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "lamb_chop"
+   ]
+  },
+  {
+   "ru": "Переложите на блюдо и выжмите сверху половинки лимона.",
+   "en": "Put in a serving dish and squeeze over the lemon halves.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Посыпьте баклажаны петрушкой и подавайте с бараниной и дзадзики.",
+   "en": "Scatter the aubergines with parsley and serve with the lamb and tzatziki.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

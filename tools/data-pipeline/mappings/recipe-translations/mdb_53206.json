@@ -1,0 +1,67 @@
+{
+ "nameRu": "Тайские куриные котлетки со сладким соусом чили",
+ "descriptionRu": "Котлетки из рубленой курицы с имбирём, кинзой и чили, поданные со сладким соусом чили и лаймом.",
+ "descriptionEn": "Minced chicken cakes with ginger, coriander and chilli, served with sweet chilli sauce and lime.",
+ "steps": [
+  {
+   "ru": "Положите курицу, чеснок, имбирь, лук, кинзу и зелёный чили в кухонный комбайн, посолите и поперчите.",
+   "en": "Put the chicken, garlic, ginger, onion, coriander and green chilli in a food processor and season well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "garlic",
+    "ginger",
+    "onion",
+    "coriander_leaf",
+    "green_chilli"
+   ]
+  },
+  {
+   "ru": "Измельчите, пока курица не превратится в фарш, а всё хорошо не перемешается.",
+   "en": "Blitz until the chicken is finely ground and everything is well mixed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Руками сформируйте шесть небольших котлеток.",
+   "en": "Use your hands to shape six small cakes.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте масло в сковороде.",
+   "en": "Heat the oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте котлетки на среднем огне, перевернув один раз.",
+   "en": "Fry the cakes over a medium heat, turning once.",
+   "timerSec": 480,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте горячими со сладким соусом чили, дольками лайма, кинзой, нашинкованным зелёным луком и красным чили.",
+   "en": "Serve hot with sweet chilli sauce, lime wedges, coriander, shredded spring onion and red chilli.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sweet_chilli_sauce",
+    "lime",
+    "coriander_leaf",
+    "spring_onion",
+    "red_chilli"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

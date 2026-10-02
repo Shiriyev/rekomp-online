@@ -1,0 +1,154 @@
+{
+ "nameRu": "Запечённая курица с ореховым соусом",
+ "descriptionRu": "Хрустящие куриные бёдра с пряностями и сливочным соусом из грецких орехов по-турецки.",
+ "descriptionEn": "Crisp spiced chicken thighs with a creamy Turkish-style walnut sauce.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией, газ 6).",
+   "en": "Heat the oven to 200 °C (180 °C fan, gas 6).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "В форме для запекания перемешайте курицу, зиру, паприку, часть оливкового масла, соль и перец.",
+   "en": "In a roasting tin, toss together the chicken, cumin, paprika, some of the olive oil and seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "cumin",
+    "paprika_powder",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока курица не станет хрустящей и не пропечётся.",
+   "en": "Roast until the chicken is crisp and cooked through.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Тем временем порвите одну питу на кусочки в небольшую миску.",
+   "en": "Meanwhile, tear up 1 pita and place it in a small bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pita"
+   ]
+  },
+  {
+   "ru": "Залейте питу парой ложек бульона и оставьте размокать.",
+   "en": "Pour over a couple of spoonfuls of chicken stock and leave to soak.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock",
+    "pita"
+   ]
+  },
+  {
+   "ru": "Обжарьте грецкие орехи на сухой сковороде до золотистого цвета.",
+   "en": "Dry-fry the walnuts in a frying pan until golden and toasted.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "walnut"
+   ]
+  },
+  {
+   "ru": "Переложите орехи в сторону.",
+   "en": "Set the walnuts aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "walnut"
+   ]
+  },
+  {
+   "ru": "Разогрейте в сковороде оставшееся оливковое масло.",
+   "en": "Heat the remaining oil in the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук и чеснок до мягкости.",
+   "en": "Cook the onion and garlic until softened.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Сложите в блендер размоченную питу, лук с чесноком и большую часть орехов.",
+   "en": "Put the soaked pita, the onion mixture and most of the nuts into a blender.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pita",
+    "onion",
+    "garlic",
+    "walnut"
+   ]
+  },
+  {
+   "ru": "Влейте оставшийся бульон и измельчите до состояния грубой пасты.",
+   "en": "Pour over the rest of the stock and whizz until a rough paste forms.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Верните соус в сковороду.",
+   "en": "Return the mixture to the pan.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте сливки и лимонный сок, посолите, поперчите и держите в тепле.",
+   "en": "Add the cream and lemon juice, season and keep warm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "single_cream",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Выложите готовую курицу на блюдо.",
+   "en": "Arrange the cooked chicken on a platter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Вмешайте в соус кинзу и переложите его в соусник.",
+   "en": "Stir the coriander through the sauce and spoon it into a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Крупно порубите оставшиеся орехи и посыпьте ими курицу.",
+   "en": "Roughly chop the remaining walnuts and scatter them over the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "walnut"
+   ]
+  },
+  {
+   "ru": "Подсушите оставшиеся питы, нарежьте треугольниками и подайте к курице.",
+   "en": "Toast the remaining pitas, cut into wedges and serve alongside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pita"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

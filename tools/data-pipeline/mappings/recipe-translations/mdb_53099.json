@@ -1,0 +1,108 @@
+{
+ "nameRu": "Австралийские бургеры на лепёшках наан",
+ "descriptionRu": "Говяжьи котлеты на поджаренном наане с рукколой, свёклой и сметанным соусом.",
+ "descriptionEn": "Beef patties on toasted naan with rocket, beetroot and a soured cream dip.",
+ "steps": [
+  {
+   "ru": "Выложите говяжий фарш в миску, посыпьте солью и перцем.",
+   "en": "Tip the beef mince into a bowl and sprinkle over salt and black pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Влажными руками вмешайте приправы в фарш.",
+   "en": "With wet hands, work the seasoning into the meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Разделите фарш на четыре части и сформируйте котлеты. На этом этапе их можно заморозить.",
+   "en": "Divide into four and shape into burgers. They can be frozen at this stage.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Нарежьте свёклу ломтиками.",
+   "en": "Slice the beetroot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beetroot"
+   ]
+  },
+  {
+   "ru": "Разрежьте лепёшки наан.",
+   "en": "Split the naan breads.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "naan"
+   ]
+  },
+  {
+   "ru": "Разогрейте сковороду-гриль или барбекю.",
+   "en": "Heat a griddle pan or barbecue.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подрумяньте наан с обеих сторон и отложите.",
+   "en": "Griddle the naans on both sides until lightly toasted and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "naan"
+   ]
+  },
+  {
+   "ru": "Выложите котлеты на гриль и жарьте с одной стороны.",
+   "en": "Add the burgers to the grill and cook.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Переверните и жарьте с другой стороны.",
+   "en": "Turn and cook the other side.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Положите на каждую тарелку половинку наана и горку рукколы.",
+   "en": "Set half a toasted naan on each plate and put a pile of rocket on each.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "naan",
+    "rocket"
+   ]
+  },
+  {
+   "ru": "Сверху выложите котлету, несколько ломтиков свёклы и ложку сметанного соуса.",
+   "en": "Top with a burger, a few slices of beetroot and a dollop of soured cream dip.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "beetroot",
+    "sour_cream"
+   ]
+  },
+  {
+   "ru": "Посолите, поперчите свежемолотым перцем и сразу подавайте с зелёным салатом.",
+   "en": "Sprinkle with salt and freshly ground black pepper and serve immediately with a green salad.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

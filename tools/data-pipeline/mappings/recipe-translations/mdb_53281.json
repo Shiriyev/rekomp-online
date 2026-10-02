@@ -1,0 +1,109 @@
+{
+ "nameRu": "Алжирская кефта (тефтели в томатном соусе)",
+ "descriptionRu": "Обжаренные котлетки из говяжьего фарша с чесноком в томатном соусе с луком и петрушкой.",
+ "descriptionEn": "Browned beef and garlic patties in a tomato sauce with onion and parsley.",
+ "steps": [
+  {
+   "ru": "Смешайте в большой миске говяжий фарш с половиной чеснока и небольшим количеством лука.",
+   "en": "In a large bowl, combine the beef mince with half the garlic and a little of the onion.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "garlic",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Вымешайте фарш руками до однородности.",
+   "en": "Mix with your hands until fully combined.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Сформуйте из фарша 12–14 продолговатых котлеток.",
+   "en": "Shape the mixture into 12 to 14 oblong patties.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Разогрейте большую сковороду на огне выше среднего.",
+   "en": "Heat a large skillet over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте котлетки партиями с обеих сторон до хрустящей корочки и готовности внутри.",
+   "en": "Brown the patties in batches until crispy on both sides and no longer pink in the centre.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Переложите тефтели в глубокое блюдо для подачи.",
+   "en": "Set the meatballs aside in a rimmed serving dish.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Убавьте огонь до среднего и добавьте оставшийся лук в жир на сковороде, посолите и поперчите.",
+   "en": "Reduce the heat to medium, stir the remaining onion into the drippings and season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Готовьте, постоянно помешивая, пока лук не станет мягким и прозрачным.",
+   "en": "Cook, stirring constantly, until the onion has softened and turned translucent.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Вмешайте оставшийся чеснок и готовьте ещё немного.",
+   "en": "Stir in the remaining garlic and cook briefly.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте помидоры, сушёную петрушку и рас-эль-ханут.",
+   "en": "Stir in the tomatoes, dried parsley and ras el hanout.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato",
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Влейте воду и тушите, пока помидоры не станут мягкими.",
+   "en": "Pour in the water and cook until the tomatoes are soft.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "water",
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Полейте тефтели томатным соусом и подавайте.",
+   "en": "Pour the tomato sauce over the meatballs to serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

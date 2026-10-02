@@ -1,0 +1,90 @@
+{
+ "nameRu": "Лягушачьи лапки в чесночном масле",
+ "descriptionRu": "Лягушачьи лапки, обжаренные до золотистой корочки в сливочном масле с чесноком и петрушкой.",
+ "descriptionEn": "Frog legs pan-fried until golden in garlic butter with parsley.",
+ "steps": [
+  {
+   "ru": "По желанию замочите лапки в молоке и уберите в холодильник на час.",
+   "en": "Optionally, soak the frog legs in the milk in the fridge for an hour.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "frog_legs",
+    "milk"
+   ]
+  },
+  {
+   "ru": "Промойте лапки и обсушите бумажным полотенцем.",
+   "en": "Rinse the legs and pat them dry with kitchen paper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "frog_legs"
+   ]
+  },
+  {
+   "ru": "Смешайте сливочное масло с чесноком.",
+   "en": "Mix the butter with the garlic to make garlic butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Положите в вок или большую сковороду оливковое масло и половину чесночного масла.",
+   "en": "Add the olive oil and half of the garlic butter to a wok or large frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "butter",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Нагрейте на сильном огне, пока масло не начнёт пениться, не давая ему подгореть.",
+   "en": "Place over high heat until the butter starts to foam; don't let it burn.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте лапки, регулярно переворачивая, до золотистой корочки с обеих сторон.",
+   "en": "Pan-fry the frog legs, turning regularly, until golden brown on both sides.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "frog_legs"
+   ]
+  },
+  {
+   "ru": "В самом конце добавьте оставшееся чесночное масло и свежую рубленую петрушку.",
+   "en": "At the very end, add the rest of the garlic butter and the freshly chopped parsley.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter",
+    "garlic",
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Посолите и поперчите по вкусу.",
+   "en": "Season with salt and pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Разложите по тарелкам и подавайте с хлебом на гриле и зелёным салатом.",
+   "en": "Divide between plates and serve with grilled bread and a green salad.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "frog_legs"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

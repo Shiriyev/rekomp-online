@@ -1,0 +1,107 @@
+{
+ "nameRu": "Сибас с хрустящим имбирём, чили и зелёным луком",
+ "descriptionRu": "Филе сибаса с хрустящей кожей, политое горячим маслом с имбирём, чесноком и чили.",
+ "descriptionEn": "Crisp-skinned sea bass fillets topped with sizzling ginger, garlic and chilli.",
+ "steps": [
+  {
+   "ru": "Посолите и поперчите филе сибаса.",
+   "en": "Season the sea bass fillets with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Сделайте на коже каждого филе по три надреза.",
+   "en": "Slash the skin of each fillet 3 times.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Разогрейте сковороду с толстым дном и добавьте немного растительного масла.",
+   "en": "Heat a heavy-based frying pan and add a little sunflower oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Когда масло разогреется, обжарьте филе кожей вниз, пока кожа не станет хрустящей и золотистой. Жарьте в два приёма.",
+   "en": "Once hot, fry the fillets skin-side down until the skin is very crisp and golden. Fry them in 2 batches.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Переверните филе и обжарьте ещё немного.",
+   "en": "Turn the fillets over and cook a little longer.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Переложите рыбу на блюдо и держите в тепле.",
+   "en": "Transfer to a serving plate and keep warm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Разогрейте в сковороде оставшееся масло.",
+   "en": "Heat the remaining oil in the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте имбирь, нарезанный соломкой, тонко нарезанный чеснок и чили до золотистого цвета.",
+   "en": "Fry the ginger cut into matchsticks, the thinly sliced garlic and the shredded chillies until golden.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "ginger",
+    "garlic",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Снимите сковороду с огня и вмешайте нашинкованный зелёный лук.",
+   "en": "Take off the heat and toss in the shredded spring onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion"
+   ]
+  },
+  {
+   "ru": "Сбрызните рыбу соевым соусом.",
+   "en": "Splash the fish with the soy sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "sea_bass"
+   ]
+  },
+  {
+   "ru": "Выложите на рыбу содержимое сковороды.",
+   "en": "Spoon the contents of the pan over the fish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ginger",
+    "garlic",
+    "red_chilli",
+    "spring_onion"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

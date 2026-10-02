@@ -1,0 +1,62 @@
+{
+ "nameRu": "Бараньи котлеты на кости с чили и имбирём",
+ "descriptionRu": "Бараньи котлеты на кости в маринаде с чесноком, имбирём и чили, обжаренные на углях.",
+ "descriptionEn": "Lamb chops marinated with garlic, ginger and chilli and cooked over hot coals.",
+ "steps": [
+  {
+   "ru": "Сложите в миску чеснок, имбирь, лимонный сок, оливковое масло, молотый перец чили и зиру, посолите и поперчите.",
+   "en": "Put the garlic in a bowl with the ginger, lemon juice, oil, chilli powder, cumin and seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "ginger",
+    "lemon_juice",
+    "olive_oil",
+    "chilli_powder",
+    "cumin"
+   ]
+  },
+  {
+   "ru": "Пробейте погружным блендером до однородности.",
+   "en": "Blitz with a hand blender until smooth.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обмажьте бараньи котлеты маринадом с обеих сторон.",
+   "en": "Use to coat the lamb chops on both sides.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_chop"
+   ]
+  },
+  {
+   "ru": "Оставьте мариноваться в холодильнике на пару часов или на ночь.",
+   "en": "Leave to marinate in the fridge for a couple of hours or overnight.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_chop"
+   ]
+  },
+  {
+   "ru": "Сильно разогрейте мангал.",
+   "en": "Heat a barbecue until hot.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Жарьте котлеты над углями с каждой стороны, пока они не приготовятся, оставаясь розовыми и сочными внутри.",
+   "en": "Barbecue the chops over the coals on each side until cooked but still pink and juicy in the centre.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "lamb_chop"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

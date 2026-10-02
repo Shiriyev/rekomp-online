@@ -1,0 +1,105 @@
+{
+ "nameRu": "Запечённый лосось с фенхелем и помидорами",
+ "descriptionRu": "Филе лосося, запечённое с фенхелем и помидорами черри, с лимоном и свежей зеленью.",
+ "descriptionEn": "Salmon fillet baked with fennel and cherry tomatoes, finished with lemon and fresh herbs.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 180 °C (160 °C с конвекцией).",
+   "en": "Heat the oven to 180 °C (160 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Срежьте с фенхеля зелень и отложите.",
+   "en": "Trim the fronds from the fennel and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fennel"
+   ]
+  },
+  {
+   "ru": "Разрежьте луковицы фенхеля пополам, а каждую половинку — на 3 дольки.",
+   "en": "Cut the fennel bulbs in half, then cut each half into 3 wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fennel"
+   ]
+  },
+  {
+   "ru": "Отварите фенхель в кипящей подсоленной воде.",
+   "en": "Cook the fennel in boiling salted water.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "fennel"
+   ]
+  },
+  {
+   "ru": "Хорошо слейте воду.",
+   "en": "Drain well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fennel"
+   ]
+  },
+  {
+   "ru": "Крупно нарубите зелень фенхеля и смешайте с петрушкой и лимонной цедрой.",
+   "en": "Roughly chop the fennel fronds and mix with the parsley and lemon zest.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fennel",
+    "parsley",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Разложите фенхель в неглубокой жаропрочной форме и добавьте помидоры черри.",
+   "en": "Spread the fennel over a shallow ovenproof dish, then add the cherry tomatoes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fennel",
+    "cherry_tomato"
+   ]
+  },
+  {
+   "ru": "Сбрызните оливковым маслом и запекайте.",
+   "en": "Drizzle with olive oil and bake.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Уложите лосося между овощами и сбрызните лимонным соком.",
+   "en": "Nestle the salmon among the vegetables and sprinkle with lemon juice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salmon",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока рыба только-только не приготовится.",
+   "en": "Bake until the fish is just cooked.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Посыпьте смесью зелени и подавайте с маслинами.",
+   "en": "Scatter over the herb mixture and serve with black olives.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "fennel",
+    "black_olives"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

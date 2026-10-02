@@ -1,0 +1,160 @@
+{
+ "nameRu": "Тортилья с солёной треской",
+ "descriptionRu": "Испанский омлет с картофелем, луком и солёной треской.",
+ "descriptionEn": "A Spanish omelette with potatoes, onion and salt cod.",
+ "steps": [
+  {
+   "ru": "Разогрейте половину оливкового масла в сковороде.",
+   "en": "Heat half the oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте лук на среднем огне до мягкости и светло-золотистого цвета.",
+   "en": "Sauté the onion over medium heat until soft and pale gold.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выньте лук из сковороды и отложите.",
+   "en": "Remove the onion from the pan and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выложите в сковороду картофель и готовьте до мягкости, но так, чтобы он не разваливался, аккуратно переворачивая и иногда накрывая крышкой.",
+   "en": "Add the potatoes to the pan and cook until tender but not falling apart, turning carefully and covering some of the time.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Верните в сковороду лук, добавьте чеснок и готовьте ещё.",
+   "en": "Return the onion to the pan with the garlic and cook a little longer.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Переложите в миску к яйцам, добавьте петрушку, соль и перец и перемешайте.",
+   "en": "Tip into a bowl with the eggs, parsley and some seasoning and mix together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg",
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Оставьте смесь постоять.",
+   "en": "Leave the mixture to sit.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тем временем положите треску в кастрюлю и залейте водой.",
+   "en": "Meanwhile, put the cod in a saucepan and cover with water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "ru": "Доведите до слабого кипения.",
+   "en": "Bring up to a simmer.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "ru": "Снимите с огня, накройте крышкой и оставьте.",
+   "en": "Remove from the heat, cover and leave.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "ru": "Слейте воду и дайте треске остыть.",
+   "en": "Drain and leave the cod to cool.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "ru": "Удалите кожу и кости.",
+   "en": "Remove the skin and any bones.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "ru": "Разберите рыбу на крупные кусочки и добавьте к картофельно-яичной смеси.",
+   "en": "Break the fish into large flakes and add to the potato and egg mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod",
+    "potato",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Разогрейте оставшееся масло в сковороде с антипригарным покрытием.",
+   "en": "Heat the rest of the oil in a non-stick frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Вылейте смесь и готовьте на огне ниже среднего, пока тортилья не схватится и не начнёт отходить от краёв. При необходимости накройте крышкой.",
+   "en": "Pour in the mixture and cook over medium-low heat until just set and coming away from the sides. Cover if needed to help the centre set.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Время от времени подводите лопатку под тортилью, чтобы она не прилипла, и следите, чтобы не пересушить.",
+   "en": "Run a spatula underneath every so often so it does not stick, and take care not to overcook it.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Сдвиньте тортилью на тарелку, накройте сковородой и переверните её обратно в сковороду сырой стороной вниз.",
+   "en": "Slide the tortilla onto a plate, put the pan on top and flip it back in, uncooked side down.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Готовьте на слабом огне до золотистого цвета или доведите до готовности под грилем.",
+   "en": "Cook over low heat until golden, or grill until just set.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Дайте немного остыть перед подачей.",
+   "en": "Leave to cool a little before serving.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

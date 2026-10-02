@@ -1,0 +1,222 @@
+{
+ "nameRu": "Курица с карамелизованным луком, запечённой морковью и пюре",
+ "descriptionRu": "Куриная грудка под карамелизованным луком и расплавленной моцареллой с запечённой морковью и картофельным пюре.",
+ "descriptionEn": "Chicken breast topped with caramelized onion and melted mozzarella, with roasted carrots and mashed potatoes.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 425 °F (220 °C).",
+   "en": "Preheat the oven to 425 °F (220 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Вымойте и обсушите все овощи.",
+   "en": "Wash and dry all the produce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "potato",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Очистите морковь и нарежьте наискосок кусочками толщиной около 6 мм.",
+   "en": "Trim and peel the carrots and cut on a diagonal into ¼-inch-thick pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Нарежьте картофель кубиками около 1 см.",
+   "en": "Dice the potatoes into ½-inch pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Разрежьте лук пополам, очистите и тонко нарежьте.",
+   "en": "Halve, peel and thinly slice the onion.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выложите морковь на противень, сбрызните растительным маслом, посолите, поперчите и перемешайте.",
+   "en": "Toss the carrots on a baking sheet with a drizzle of oil, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "oil",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Запекайте морковь до румяности и мягкости.",
+   "en": "Roast the carrots until browned and tender.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Тем временем положите картофель в кастрюлю и залейте подсоленной водой так, чтобы она покрывала его на 5 см.",
+   "en": "Meanwhile, place the potatoes in a pot with enough salted water to cover by 2 inches.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения и варите до мягкости.",
+   "en": "Bring to a boil and cook until tender.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Слейте воду, верните картофель в кастрюлю и накройте, чтобы он не остыл.",
+   "en": "Drain, return the potatoes to the pot and cover to keep warm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного растительного масла в большой сковороде на среднем-сильном огне.",
+   "en": "Heat a drizzle of oil in a large pan over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте лук, иногда помешивая, до мягкости и лёгкой румяности.",
+   "en": "Cook the onion, stirring occasionally, until lightly browned and softened.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Посыпьте лук сахаром.",
+   "en": "Sprinkle the onion with sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Вмешайте говяжий бульон и пару ложек воды, посолите и поперчите.",
+   "en": "Stir in the beef stock and a couple of tablespoons of water; season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Готовьте, пока лук не станет похожим на джем.",
+   "en": "Cook until jammy.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выключите огонь, переложите лук в небольшую миску и вымойте сковороду.",
+   "en": "Turn off the heat, transfer the onion to a small bowl and wash out the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Обсушите курицу бумажными полотенцами, посолите и поперчите со всех сторон.",
+   "en": "Pat the chicken dry with paper towels and season all over with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного масла в той же сковороде на среднем-сильном огне.",
+   "en": "Heat a drizzle of oil in the same pan over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте курицу с каждой стороны до румяности и готовности.",
+   "en": "Cook the chicken on each side until browned and cooked through.",
+   "timerSec": 360,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Ближе к концу выложите на курицу карамелизованный лук и моцареллу.",
+   "en": "Near the end of cooking, top the chicken with the caramelized onion and mozzarella.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "onion",
+    "mozzarella"
+   ]
+  },
+  {
+   "ru": "Накройте сковороду крышкой или противнем и держите, пока сыр не расплавится.",
+   "en": "Cover the pan with a lid or a baking sheet until the cheese melts.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "mozzarella"
+   ]
+  },
+  {
+   "ru": "Поставьте кастрюлю с картофелем на слабый огонь.",
+   "en": "Heat the pot with the potatoes over low heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Разомните картофель со сметаной, сливочным маслом, солью, перцем и небольшим количеством воды или молока до однородности.",
+   "en": "Mash the potatoes with the sour cream, butter, salt, pepper and a splash of water or milk until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "sour_cream",
+    "butter",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Разложите курицу, морковь и пюре по тарелкам.",
+   "en": "Divide the chicken, roasted carrots and mashed potatoes between plates.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "carrot",
+    "potato"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

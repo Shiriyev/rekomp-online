@@ -1,0 +1,139 @@
+{
+ "nameRu": "Жареный хек в бульоне с белой фасолью и чоризо",
+ "descriptionRu": "Хек с хрустящей кожицей на густом бульоне из белой фасоли с паприкой, с поджаренным хлебом и чоризо.",
+ "descriptionEn": "Crisp-skinned hake on a smoky paprika white bean broth, topped with fried bread and chorizo.",
+ "steps": [
+  {
+   "ru": "Слейте воду с замоченной фасоли и переложите её в большую кастрюлю с водой.",
+   "en": "Drain the soaked beans and tip them into a large pan of water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_beans_dry"
+   ]
+  },
+  {
+   "ru": "Добавьте целые зубчики чеснока (один оставьте), лавровый лист и тимьян и варите на слабом огне, пока фасоль не станет мягкой.",
+   "en": "Add the whole garlic cloves (keep one back), bay leaves and thyme, and simmer until the beans are cooked and tender.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "white_beans_dry",
+    "garlic",
+    "bay_leaf",
+    "thyme"
+   ]
+  },
+  {
+   "ru": "Снимите кастрюлю с огня и отставьте.",
+   "en": "Remove from the heat and set aside.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тем временем разогрейте часть оливкового масла на сковороде.",
+   "en": "Meanwhile, heat some of the olive oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте хлеб с оставшимся зубчиком чеснока до золотистой хрустящей корочки, затем выложите на бумажное полотенце.",
+   "en": "Fry the bread with the remaining garlic clove until golden and crisp, then drain on kitchen paper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bread_white",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Обжарьте в той же сковороде чоризо до хруста и держите в тепле вместе с хлебом.",
+   "en": "Fry the chorizo in the same pan until crisp and keep warm with the bread.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chorizo"
+   ]
+  },
+  {
+   "ru": "Добавьте ещё немного масла и лук и готовьте до мягкости.",
+   "en": "Add a little more oil and the onion and cook until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "olive_oil",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Вмешайте паприку.",
+   "en": "Stir in the paprika.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "paprika_powder"
+   ]
+  },
+  {
+   "ru": "Слейте фасоль и добавьте её к луку вместе с куриным бульоном и солью.",
+   "en": "Drain the beans and add them to the onions with the chicken stock and some salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_beans_dry",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Варите фасоль в бульоне.",
+   "en": "Cook the beans in the stock.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Вмешайте петрушку и держите в тепле.",
+   "en": "Stir through the parsley and keep warm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Посолите и поперчите хек, разогрейте на сковороде оставшееся масло.",
+   "en": "Season the hake and heat the remaining oil in the frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Выложите хек кожей вниз и жарьте на огне выше среднего до хрустящей кожицы.",
+   "en": "Put the hake in the pan skin-side down and cook over a medium-high heat to crisp up the skin.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Переверните рыбу и жарьте до готовности.",
+   "en": "Flip the fish over and cook until cooked through.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Разложите фасоль с бульоном по тарелкам, сверху положите хек, хлеб, чоризо и посыпьте тимьяном.",
+   "en": "Spoon the bean mix into bowls, place the hake on top and finish with the fried bread, chorizo and a little more thyme.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "bread_white",
+    "chorizo",
+    "thyme"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true
+}

@@ -1,0 +1,175 @@
+{
+ "nameRu": "Курица в медово-бальзамической глазури с хрустящей брокколи и картофелем",
+ "descriptionRu": "Обжаренная куриная грудка в медово-бальзамической глазури с запечёнными до хруста картофелем и брокколи.",
+ "descriptionEn": "Pan-seared chicken breast in a honey balsamic glaze with potatoes and broccoli roasted until crispy.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 425 °F (220 °C).",
+   "en": "Preheat the oven to 425 °F (220 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте картофель дольками толщиной около 1 см.",
+   "en": "Cut the potatoes into wedges about 1/2 inch thick.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Выложите картофель на одну половину противня, сбрызните растительным маслом, посолите, поперчите и перемешайте.",
+   "en": "Toss the potatoes on one side of a baking sheet with a drizzle of oil, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "oil"
+   ]
+  },
+  {
+   "ru": "Запекайте картофель на верхнем уровне духовки.",
+   "en": "Roast the potatoes on the top rack.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Тем временем разделите брокколи на небольшие соцветия.",
+   "en": "Meanwhile, cut the broccoli into bite-size florets.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Очистите и мелко нарежьте чеснок.",
+   "en": "Peel and finely chop the garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Смешайте в небольшой миске для микроволновки оливковое масло и половину чеснока.",
+   "en": "In a small microwave-safe bowl, combine the olive oil and half the garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Прогрейте в микроволновке, пока чеснок не зашкворчит.",
+   "en": "Microwave until the garlic sizzles.",
+   "timerSec": 30,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Достаньте противень, выложите брокколи на свободную половину и перемешайте с чесночным маслом, солью и перцем.",
+   "en": "Take the sheet out, add the broccoli to the empty side and toss with the garlic oil, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока картофель и брокколи не зарумянятся и не станут хрустящими.",
+   "en": "Keep roasting until the potatoes and broccoli are browned and crispy.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "potato",
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Обсушите куриную грудку бумажными полотенцами, посолите и поперчите со всех сторон.",
+   "en": "Pat the chicken dry with paper towels and season all over with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного растительного масла в большой сковороде на огне выше среднего.",
+   "en": "Heat a drizzle of oil in a large pan over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте курицу с каждой стороны до румяности и готовности. Если она темнеет слишком быстро, убавьте огонь до среднего.",
+   "en": "Cook the chicken on each side until browned and cooked through. If it browns too quickly, reduce the heat to medium.",
+   "timerSec": 360,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Снимите курицу со сковороды и дайте ей отдохнуть. Сковороду вымойте.",
+   "en": "Set the chicken aside to rest. Wash out the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Разогрейте сковороду, добавьте немного масла и оставшийся чеснок и готовьте до появления аромата.",
+   "en": "Heat the pan, add a drizzle of oil and the remaining garlic, and cook until fragrant.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "oil",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Влейте бальзамический уксус, мёд, куриный бульон и немного воды.",
+   "en": "Stir in the balsamic vinegar, honey, stock and a little water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "balsamic_vinegar",
+    "honey",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Уваривайте, пока глазурь не станет густой и блестящей.",
+   "en": "Simmer until thick and glossy.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Снимите с огня, вмешайте сливочное масло, посолите и поперчите.",
+   "en": "Remove from the heat, stir in the butter and season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Верните курицу в сковороду и обваляйте в глазури.",
+   "en": "Return the chicken to the pan and turn to coat in the glaze.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Разложите курицу, брокколи и картофель по тарелкам и полейте курицу оставшейся глазурью.",
+   "en": "Divide the chicken, broccoli and potatoes between plates and spoon the remaining glaze over the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "broccoli",
+    "potato"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

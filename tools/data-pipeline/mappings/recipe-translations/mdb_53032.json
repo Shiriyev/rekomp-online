@@ -1,0 +1,117 @@
+{
+ "nameRu": "Тонкацу — свиная отбивная в панко",
+ "descriptionRu": "Японская свиная отбивная в хрустящей панировке панко с густым кисло-сладким соусом.",
+ "descriptionEn": "Japanese pork cutlet in a crisp panko crust with a thick sweet and tangy sauce.",
+ "steps": [
+  {
+   "ru": "Срежьте крупный кусок жира с края каждой отбивной.",
+   "en": "Remove the large piece of fat on the edge of each chop.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Отбейте мясо между двумя листами пергамента молотком или скалкой до толщины около 1 см.",
+   "en": "Bash the meat between two sheets of baking parchment with a meat tenderiser or rolling pin to about 1 cm thick.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Руками верните мясу прежнюю форму — так оно останется сочнее.",
+   "en": "Use your hands to reshape the meat to its original shape so it stays succulent.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Разложите муку, взбитые яйца и сухари панко по трём широким мискам.",
+   "en": "Put the flour, beaten eggs and panko breadcrumbs into three wide bowls.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "egg",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Посолите и поперчите мясо.",
+   "en": "Season the meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Обваляйте мясо сначала в муке, затем в яйце, затем в сухарях.",
+   "en": "Dip the meat first in the flour, then in the egg, then in the breadcrumbs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop",
+    "flour",
+    "egg",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Налейте в большую сковороду масло слоем 2 см и разогрейте до 180 °C. Без термометра: брошенный панко должен чуть опуститься и начать жариться.",
+   "en": "Add oil to a large frying pan to come 2 cm up the side and heat to 180 °C. Without a thermometer, a little panko should sink slightly and then start to fry.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте две отбивные по полторы минуты с каждой стороны.",
+   "en": "Fry two chops for 1 min 30 secs on each side.",
+   "timerSec": 90,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Переложите отбивные на решётку и дайте им отдохнуть.",
+   "en": "Transfer the chops to a wire rack and leave to rest.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Так же обжарьте остальные отбивные.",
+   "en": "Repeat with the remaining chops.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Пока мясо отдыхает, смешайте венчиком кетчуп, вустерширский соус, устричный соус и сахар; если соус слишком густой, добавьте немного воды.",
+   "en": "While the pork rests, whisk the ketchup, Worcestershire sauce, oyster sauce and sugar together, adding a splash of water if it is too thick.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ketchup",
+    "worcestershire_sauce",
+    "oyster_sauce",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Нарежьте тонкацу и подавайте, полив соусом.",
+   "en": "Slice the tonkatsu and serve drizzled with the sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

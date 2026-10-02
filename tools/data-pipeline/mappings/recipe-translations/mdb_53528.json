@@ -1,0 +1,109 @@
+{
+ "nameRu": "Свиные отбивные по-креольски",
+ "descriptionRu": "Свиные отбивные в маринаде с горчицей и зирой, тушённые в соусе из лука и помидоров.",
+ "descriptionEn": "Pork chops marinated with mustard and cumin, braised in an onion and tomato sauce.",
+ "steps": [
+  {
+   "ru": "Положите свиные отбивные в пакет с застёжкой.",
+   "en": "Place the pork chops in a zip-lock bag.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Добавьте горчицу, зиру, чеснок, соль и перец.",
+   "en": "Add the mustard, cumin, garlic, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mustard",
+    "cumin",
+    "garlic",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Уберите в холодильник мариноваться или оставьте на ночь, следя, чтобы маринад равномерно покрывал отбивные.",
+   "en": "Refrigerate to marinate, or overnight, making sure the chops are evenly coated.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Разогрейте растительное масло в большой сковороде на среднем огне.",
+   "en": "In a large skillet, heat the oil over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте отбивные с каждой стороны.",
+   "en": "Cook the pork chops on each side.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Переложите свинину на тёплую тарелку.",
+   "en": "Remove the pork from the pan and keep it on a warm plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Выложите в ту же сковороду лук и помидоры, при необходимости добавив ещё немного масла.",
+   "en": "Add the onions and tomatoes to the same skillet, with a little more oil if needed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "tomato",
+    "oil"
+   ]
+  },
+  {
+   "ru": "Готовьте на сильном огне, часто помешивая, пока овощи не подрумянятся и не станут мягкими.",
+   "en": "Cook over high heat, stirring often so nothing burns, until browned and softened.",
+   "timerSec": 420,
+   "ingredientRefs": [
+    "onion",
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Верните отбивные в сковороду и накройте крышкой.",
+   "en": "Return the pork chops to the pan and cover.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до умеренно слабого и тушите, пока свинина не станет мягкой и едва розовой внутри.",
+   "en": "Reduce the heat to medium-low and simmer until the pork is tender and barely pink in the centre.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Разложите отбивные по тарелкам, полейте соусом, посыпьте кинзой и сразу подавайте.",
+   "en": "Divide the chops among plates, spoon the sauce over, add the coriander and serve immediately.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop",
+    "coriander_leaf"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

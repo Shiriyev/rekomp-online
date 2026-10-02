@@ -1,0 +1,151 @@
+{
+ "nameRu": "Тава коси (баранина, запечённая с йогуртом)",
+ "descriptionRu": "Албанская запеканка из тушёной баранины с рисом под пышной йогуртово-яичной корочкой.",
+ "descriptionEn": "Albanian bake of braised lamb and rice under a puffy golden yogurt and egg topping.",
+ "steps": [
+  {
+   "ru": "В большой сковороде с крышкой растопите сливочное масло вместе с оливковым.",
+   "en": "In a large pan with a lid, melt the butter and olive oil together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте баранину кубиками и обжарьте на среднем огне до румяности.",
+   "en": "Add the diced lamb and brown it over a medium heat.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок, орегано и две трети воды, посолите и поперчите.",
+   "en": "Add the garlic, oregano and two thirds of the water and season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "oregano",
+    "water",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Перемешайте, накройте крышкой и тушите, пару раз помешивая, чтобы баранина не пригорела.",
+   "en": "Mix well, cover with the lid and simmer, stirring a couple of times so the lamb doesn't burn.",
+   "timerSec": 3000,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "ru": "Когда жидкость почти выкипит, добавьте оставшуюся воду и рис.",
+   "en": "When the juices have nearly boiled away, add the remaining water and the rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water",
+    "rice"
+   ]
+  },
+  {
+   "ru": "Перемешайте и доведите до кипения.",
+   "en": "Mix together and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Накройте крышкой и готовьте, пока жидкость не выпарится и на мясе с рисом не останется лишь немного масла. Проверьте примерно через 8 минут.",
+   "en": "Cover and cook until the liquid has evaporated, leaving just a moist, oily coating over the lamb and rice. Check at around 8 minutes.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "lamb",
+    "rice"
+   ]
+  },
+  {
+   "ru": "Переложите баранину с рисом в форму для запекания так, чтобы они покрыли дно и осталось место для йогурта. Можно разложить по четырём порционным керамическим формам.",
+   "en": "Transfer the lamb and rice to a casserole dish so they cover the base with plenty of room left for the yogurt, or split between four ceramic bowls.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb",
+    "rice"
+   ]
+  },
+  {
+   "ru": "В небольшом сотейнике растопите сливочное масло на среднем огне.",
+   "en": "In a small saucepan, melt the butter over a medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Добавьте муку и, непрерывно помешивая, готовьте ру около двух минут, пока оно слегка не потемнеет. Ру не должно быть ни густым, ни слишком жидким.",
+   "en": "Add the flour and cook the roux for about two minutes, stirring constantly, until it darkens slightly. It should be neither thick nor too runny.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "ru": "Переложите ру в миску и отставьте.",
+   "en": "Pour the roux into a bowl and set aside.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "В миске смешайте греческий йогурт с яйцами, посолите и поперчите.",
+   "en": "In a mixing bowl, combine the yogurt and eggs and season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "egg",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте ру и быстро перемешайте до однородности.",
+   "en": "Add the roux and mix quickly until thoroughly combined.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Вылейте йогуртовую смесь на баранину с рисом и посыпьте орегано.",
+   "en": "Pour the yogurt mixture over the lamb and rice and sprinkle with a little oregano.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "oregano"
+   ]
+  },
+  {
+   "ru": "Поставьте форму на нижний уровень духовки и запекайте при 180 °C.",
+   "en": "Bake on the bottom shelf of the oven at 180 °C.",
+   "timerSec": 2100,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Переставьте на средний уровень и запекайте, пока йогурт не поднимется и не образуется золотистая корочка.",
+   "en": "Move to the middle shelf and bake until the yogurt has risen high and a golden crust has formed.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Дайте немного остыть перед подачей.",
+   "en": "Leave to cool slightly before serving.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

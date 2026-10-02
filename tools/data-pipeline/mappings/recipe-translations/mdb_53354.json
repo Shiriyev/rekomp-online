@@ -1,0 +1,136 @@
+{
+ "nameRu": "Ямайское карри из козлятины",
+ "descriptionRu": "Козлятина, замаринованная в карри и душистом перце и потушенная в скороварке с картофелем и острым перцем.",
+ "descriptionEn": "Goat marinated in curry powder and allspice, then pressure-cooked with potatoes and hot pepper.",
+ "steps": [
+  {
+   "ru": "Промойте козлятину водой с уксусом.",
+   "en": "Rinse the goat meat with vinegar and water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "goat"
+   ]
+  },
+  {
+   "ru": "Приправьте мясо частью порошка карри, универсальной приправой, молотым имбирём, душистым перцем, луком, чесноком и тимьяном.",
+   "en": "Season the goat with some of the curry powder, the all-purpose seasoning, ground ginger, allspice, onion, garlic and thyme.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "goat",
+    "curry_powder",
+    "seasoning_mix",
+    "ground_ginger",
+    "allspice",
+    "onion",
+    "garlic",
+    "thyme"
+   ]
+  },
+  {
+   "ru": "Оставьте мариноваться, можно на ночь.",
+   "en": "Leave to marinate, or up to overnight.",
+   "timerSec": 14400,
+   "ingredientRefs": [
+    "goat"
+   ]
+  },
+  {
+   "ru": "Выберите из мяса лук и чеснок и отложите.",
+   "en": "Remove the onion and garlic from the goat and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Включите в электрической скороварке режим обжаривания на максимум и налейте масло.",
+   "en": "Set an electric pressure cooker to high sauté and add the oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте козлятину с каждой стороны до румяности.",
+   "en": "Brown the goat meat on each side.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "goat"
+   ]
+  },
+  {
+   "ru": "Выньте мясо, добавьте ещё немного масла и оставшийся порошок карри и обжарьте несколько секунд.",
+   "en": "Remove the goat, add a little more oil and the remaining curry powder and sauté briefly.",
+   "timerSec": 10,
+   "ingredientRefs": [
+    "oil",
+    "curry_powder"
+   ]
+  },
+  {
+   "ru": "Добавьте лук и чеснок и обжарьте до мягкости. Если лук суховат, подлейте немного воды.",
+   "en": "Add the onion and garlic and sauté until softened. If the onions look dry, add a little water.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "water"
+   ]
+  },
+  {
+   "ru": "Верните мясо в скороварку, влейте воду и закройте крышку.",
+   "en": "Return the goat to the pressure cooker, add the water and close the lid.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "goat",
+    "water"
+   ]
+  },
+  {
+   "ru": "Готовьте под высоким давлением.",
+   "en": "Cook on high pressure.",
+   "timerSec": 2400,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Дайте давлению сброситься естественным путём, затем стравите остаток.",
+   "en": "Let the pressure release naturally, then release the remaining pressure.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Откройте скороварку, включите режим обжаривания и добавьте картофель и целый перец скотч-бонет.",
+   "en": "Open the pressure cooker, switch to sauté and add the potatoes and a whole scotch bonnet pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "ru": "Готовьте, пока картофель не станет мягким.",
+   "en": "Cook until the potatoes have softened.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Выньте перец скотч-бонет, посолите и поперчите по вкусу.",
+   "en": "Remove the scotch bonnet pepper and season with salt and pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "scotch_bonnet",
+    "salt",
+    "pepper"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

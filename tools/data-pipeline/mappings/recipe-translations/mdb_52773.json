@@ -1,0 +1,54 @@
+{
+ "nameRu": "Лосось в медовом соусе терияки",
+ "descriptionRu": "Лосось, обжаренный на сковороде в медово-соевой глазури терияки и посыпанный кунжутом.",
+ "descriptionEn": "Salmon pan-fried in a honey and soy teriyaki glaze and sprinkled with sesame seeds.",
+ "steps": [
+  {
+   "ru": "Смешайте ингредиенты медовой глазури терияки и хорошо взбейте венчиком.",
+   "en": "Mix the honey teriyaki glaze ingredients and whisk well to blend.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "sake"
+   ]
+  },
+  {
+   "ru": "Соедините лосося с глазурью.",
+   "en": "Combine the salmon with the glaze.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Разогрейте сковороду на умеренно слабом огне и влейте масло.",
+   "en": "Heat a skillet over medium-low heat and add the oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лосося с обеих сторон, пока он полностью не приготовится внутри, а глазурь не загустеет.",
+   "en": "Pan-fry the salmon on both sides until cooked through and the glaze has thickened.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Посыпьте кунжутом и сразу подавайте.",
+   "en": "Garnish with sesame seeds and serve immediately.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_seed"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

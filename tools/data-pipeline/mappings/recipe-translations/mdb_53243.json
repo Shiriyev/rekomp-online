@@ -1,0 +1,99 @@
+{
+ "nameRu": "Вьетнамские роллы с креветками и овощами",
+ "descriptionRu": "Роллы из рисовой бумаги с креветками, свежей зеленью и овощными спиральками, с кисло-сладким соусом для макания.",
+ "descriptionEn": "Rice paper rolls with prawns, fresh herbs and spiralized vegetables, served with a sweet and sour dipping sauce.",
+ "steps": [
+  {
+   "ru": "Для соуса смешайте в миске сок лайма, рисовый уксус, сахар, рыбный соус и чили с небольшим количеством воды.",
+   "en": "For the dipping sauce, mix the lime juice, rice vinegar, sugar, fish sauce and chilli with a little water in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime",
+    "rice_vinegar",
+    "brown_sugar",
+    "fish_sauce",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Оставьте соус, чтобы сахар растворился, а вкус раскрылся.",
+   "en": "Set aside to let the sugar dissolve and the flavours infuse.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Наполните широкую миску тёплой водой и расстелите для работы чистое влажное полотенце.",
+   "en": "Fill a wide bowl with warm water and lay out a clean damp tea towel to work on.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Окуните лист рисовой бумаги в воду на несколько секунд, пока он не станет мягким.",
+   "en": "Dip a rice paper wrapper into the water for a few seconds until it softens.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Аккуратно переложите лист на полотенце.",
+   "en": "Carefully place it onto the tea towel.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Выложите в центр листа несколько листиков мяты и кинзы.",
+   "en": "Put a few mint and coriander leaves in the centre of the wrapper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mint",
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Сверху положите две креветки и небольшую горсть спиралек из моркови и кабачка; слишком длинные спиральки нарежьте.",
+   "en": "Top with two prawns and a small handful of spiralized carrot and courgette, cutting up any spirals that are too long.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn",
+    "carrot",
+    "courgette"
+   ]
+  },
+  {
+   "ru": "Заверните боковые края к центру поверх начинки, затем подверните концы, чтобы начинка оказалась полностью закрыта.",
+   "en": "Fold the sides of the wrapper over the filling, then fold in the ends so the filling is completely encased.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Плотно сверните ролл.",
+   "en": "Roll up tightly.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Повторите с оставшимися листами и начинкой.",
+   "en": "Repeat until all the wrappers and filling are used.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте роллы наискосок и подавайте с соусом.",
+   "en": "Slice the rolls on a diagonal and serve with the dipping sauce.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

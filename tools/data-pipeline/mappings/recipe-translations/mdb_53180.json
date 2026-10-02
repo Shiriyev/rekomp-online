@@ -1,0 +1,55 @@
+{
+ "nameRu": "Креветки с чесноком и хересом",
+ "descriptionRu": "Испанская закуска из креветок, быстро обжаренных с чесноком и хересом.",
+ "descriptionEn": "A Spanish-style dish of prawns quickly fried with garlic and sherry.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в большой сковороде.",
+   "en": "Heat the olive oil in a large frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и обжарьте несколько секунд.",
+   "en": "Tip in the garlic and cook for a few seconds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Вмешайте креветки и готовьте пару минут, пока они не начнут розоветь.",
+   "en": "Stir in the prawns and cook for a couple of minutes until they start to turn pink.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Влейте херес и готовьте ещё несколько минут, пока креветки не будут готовы.",
+   "en": "Pour over the sherry and cook a few minutes more, just until the prawns are cooked through.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sherry",
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Посыпьте петрушкой и подавайте.",
+   "en": "Sprinkle with parsley and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

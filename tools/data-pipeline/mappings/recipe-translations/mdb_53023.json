@@ -1,0 +1,80 @@
+{
+ "nameRu": "Сельдь в масле по-польски",
+ "descriptionRu": "Вымоченная солёная сельдь, маринованная в масле с душистым перцем и лавровым листом.",
+ "descriptionEn": "Soaked salted herring marinated in oil with allspice and bay leaf.",
+ "steps": [
+  {
+   "ru": "Замочите сельдь в холодной воде.",
+   "en": "Soak the herring in cold water.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "herring"
+   ]
+  },
+  {
+   "ru": "Если рыба очень солёная, повторите, каждый раз меняя воду.",
+   "en": "If it is very salty, repeat, changing the water each time.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "herring"
+   ]
+  },
+  {
+   "ru": "Тщательно слейте воду.",
+   "en": "Drain thoroughly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "herring"
+   ]
+  },
+  {
+   "ru": "Нарежьте сельдь небольшими кусочками.",
+   "en": "Slice the herring into bite-size pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "herring"
+   ]
+  },
+  {
+   "ru": "Сложите кусочки в банку подходящего размера.",
+   "en": "Place the pieces in a jar large enough to hold them.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "herring"
+   ]
+  },
+  {
+   "ru": "Залейте оливковым маслом, добавьте душистый перец, чёрный перец горошком и лавровый лист.",
+   "en": "Cover with the oil and add the allspice, peppercorns and bay leaf.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "allspice",
+    "pepper",
+    "bay_leaf"
+   ]
+  },
+  {
+   "ru": "Закройте банку и уберите в холодильник на 2–3 дня. В холодильнике сельдь хранится до 2 недель.",
+   "en": "Close the jar and refrigerate for 2 to 3 days before eating. It keeps refrigerated for up to 2 weeks.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с мелко нарезанным луком или кольцами лука, лимоном и петрушкой или укропом.",
+   "en": "Serve with finely chopped or sliced onion, lemon, and parsley or dill.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "herring",
+    "onion"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": true
+}

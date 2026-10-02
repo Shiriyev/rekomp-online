@@ -1,0 +1,71 @@
+{
+ "nameRu": "Миланеса по-аргентински",
+ "descriptionRu": "Тонкие говяжьи отбивные в панировке из сухарей с чесноком и петрушкой, обжаренные до золотистой корочки.",
+ "descriptionEn": "Thin beef cutlets in a garlic and parsley breadcrumb coating, fried until golden.",
+ "steps": [
+  {
+   "ru": "Посолите и поперчите отбивные.",
+   "en": "Season the cutlets with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Смешайте панировочные сухари с петрушкой и чесноком.",
+   "en": "Mix the breadcrumbs with the parsley and garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "breadcrumbs",
+    "parsley",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Обмакните каждую отбивную во взбитое яйцо.",
+   "en": "Dip each cutlet in the beaten egg.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Обваляйте отбивные в смеси сухарей.",
+   "en": "Coat the cutlets with the breadcrumb mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Разогрейте масло в большой сковороде на среднем огне.",
+   "en": "Heat oil in a large pan over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжаривайте отбивные с каждой стороны до золотистого цвета и готовности.",
+   "en": "Fry the cutlets on each side until golden and cooked through.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Подавайте горячими с дольками лимона или салатом.",
+   "en": "Serve hot with lemon wedges or a side salad.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

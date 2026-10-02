@@ -1,0 +1,93 @@
+{
+ "nameRu": "Хэш из солонины с картофелем",
+ "descriptionRu": "Солонина и картофель с луком, обжаренные на сливочном масле до румяной корочки, с петрушкой и чёрным перцем.",
+ "descriptionEn": "Corned beef and potatoes with onion, fried in butter until crisp and browned, finished with parsley and black pepper.",
+ "steps": [
+  {
+   "ru": "Разогрейте сливочное масло в большой сковороде, лучше чугунной, на среднем огне.",
+   "en": "Heat the butter in a large skillet, preferably cast iron, over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Добавьте лук и готовьте несколько минут, пока он не станет прозрачным.",
+   "en": "Add the onion and cook for a few minutes until translucent.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Вмешайте нарезанные солонину и картофель.",
+   "en": "Mix in the chopped corned beef and potatoes.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "corned_beef",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Распределите смесь ровным слоем по сковороде.",
+   "en": "Spread the mixture out evenly over the pan.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Увеличьте огонь до сильного или выше среднего и прижмите смесь металлической лопаткой.",
+   "en": "Increase the heat to high or medium-high and press down on the mixture with a metal spatula.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Не перемешивайте, дайте картофелю и солонине подрумяниться — они должны шкворчать.",
+   "en": "Do not stir; let the potatoes and corned beef brown. Sizzling is a good sign.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "corned_beef"
+   ]
+  },
+  {
+   "ru": "Когда низ хорошо подрумянится, переверните смесь лопаткой частями и снова прижмите.",
+   "en": "Once nicely browned underneath, flip sections over with the spatula and press down again.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Продолжайте жарить так, пока картофель и солонина не зарумянятся. Если сильно пригорает, добавьте немного масла.",
+   "en": "Keep cooking this way until the potatoes and corned beef are nicely browned. Add a little more butter if it sticks too much.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "corned_beef",
+    "butter"
+   ]
+  },
+  {
+   "ru": "Снимите с огня и вмешайте рубленую петрушку.",
+   "en": "Remove from the heat and stir in the chopped parsley.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Щедро поперчите свежемолотым чёрным перцем и посолите по вкусу.",
+   "en": "Add plenty of freshly ground black pepper and salt to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pepper",
+    "salt"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

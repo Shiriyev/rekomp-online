@@ -1,0 +1,73 @@
+{
+ "nameRu": "Пряная курица на гриле с дымком трав",
+ "descriptionRu": "Куриные бёдра в маринаде с карри и лимоном, приготовленные на гриле на тлеющих травах.",
+ "descriptionEn": "Chicken thighs in a curry and lemon marinade, barbecued over smouldering herbs.",
+ "steps": [
+  {
+   "ru": "Разотрите чеснок со щепоткой соли в ступке.",
+   "en": "Smash the garlic with a little salt using a pestle and mortar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте цедру и сок лимона, порошок карри, хлопья чили, оливковое масло и молотый чёрный перец и разотрите в пасту. Можно сделать это в мини-комбайне.",
+   "en": "Add the lemon zest and juice, curry powder, chilli flakes, oil and a good grinding of black pepper and mix to a paste. A mini food processor works too.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon",
+    "curry_powder",
+    "chilli_flakes",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обваляйте курицу в маринаде и отставьте.",
+   "en": "Toss the chicken in the marinade and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Разожгите гриль.",
+   "en": "Light the barbecue.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Когда гриль раскалится, выложите на решётку пучки трав, а на них — курицу кожей вверх.",
+   "en": "When the barbecue is hot, lay the bunches of herbs on the grid and put the chicken on top, skin side up.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rosemary",
+    "thyme",
+    "bay_leaf",
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Закройте крышку гриля, если она есть, и готовьте, пока мясо не начнёт румяниться.",
+   "en": "Close the lid if your barbecue has one and cook until the meat starts to colour.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Переверните курицу и жарьте дальше, переворачивая по необходимости, пока она слегка не обуглится и не пропечётся до кости.",
+   "en": "Turn the chicken and keep cooking, turning as needed, until slightly charred and cooked through to the bone.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,116 @@
+{
+ "nameRu": "Бефстроганов",
+ "descriptionRu": "Обжаренная говядина с луком и шампиньонами в соусе из крем-фреш и горчицы.",
+ "descriptionEn": "Seared beef with onions and mushrooms in a crème fraîche and mustard sauce.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло на антипригарной сковороде.",
+   "en": "Heat the olive oil in a non-stick frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте нарезанный лук и готовьте на среднем огне до полной мягкости. Если начнёт пригорать, подлейте немного воды.",
+   "en": "Add the sliced onion and cook on a medium heat until completely softened, adding a splash of water if it starts to stick.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выдавите чеснок и готовьте ещё немного.",
+   "en": "Crush in the garlic and cook a little further.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте сливочное масло.",
+   "en": "Add the butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Когда масло слегка вспенится, добавьте шампиньоны и готовьте до полной мягкости.",
+   "en": "Once the butter is foaming a little, add the mushrooms and cook until completely softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Приправьте и переложите овощи с грибами на тарелку.",
+   "en": "Season everything well, then tip onto a plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Насыпьте муку в миску, добавьте щедрую щепотку соли и перца и обваляйте в ней говядину.",
+   "en": "Tip the flour into a bowl with a big pinch of salt and pepper, then toss the beef in the seasoned flour.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Выложите говядину на сковороду и обжаривайте до хорошей корочки. Если сковорода сухая, добавьте немного масла.",
+   "en": "Add the beef to the pan and fry until well coloured, adding a little oil if the pan looks dry.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Верните лук и грибы на сковороду.",
+   "en": "Tip the onions and mushrooms back into the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Взбейте крем-фреш с горчицей и говяжьим бульоном.",
+   "en": "Whisk the crème fraîche, mustard and beef stock together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "creme_fraiche",
+    "mustard",
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Влейте соус на сковороду и готовьте на среднем огне.",
+   "en": "Pour the sauce into the pan and cook over a medium heat.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "creme_fraiche",
+    "mustard",
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Посыпьте петрушкой и подавайте с пастой паппарделле или рисом.",
+   "en": "Scatter with parsley, then serve with pappardelle or rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

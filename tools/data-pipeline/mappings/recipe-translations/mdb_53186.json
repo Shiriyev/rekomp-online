@@ -1,0 +1,126 @@
+{
+ "nameRu": "Курица с шафраном, изюмом и кедровыми орехами",
+ "descriptionRu": "Курица, тушённая в хересе с шафраном, изюмом и тимьяном, посыпанная поджаренными кедровыми орехами.",
+ "descriptionEn": "Chicken braised in sherry with saffron, raisins and thyme, scattered with toasted pine nuts.",
+ "steps": [
+  {
+   "ru": "Разогрейте большую сковороду на сильном огне, курицу посолите и поперчите.",
+   "en": "Heat a large frying pan over a high heat and season the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Влейте оливковое масло и выложите курицу.",
+   "en": "Add the olive oil to the pan, then the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Обжарьте курицу с каждой стороны до румяности.",
+   "en": "Brown the chicken on each side.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Переложите курицу на тарелку и отставьте.",
+   "en": "Remove the chicken to a plate and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до среднего и обжарьте лук в оставшемся жире.",
+   "en": "Lower the heat to medium and fry the onions in the remaining fat.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте чеснок и шафран и готовьте ещё немного.",
+   "en": "Add the garlic and saffron and cook a little longer.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "garlic",
+    "saffron"
+   ]
+  },
+  {
+   "ru": "Влейте херес и уваривайте до сиропообразной консистенции.",
+   "en": "Add the sherry and simmer until syrupy.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "sherry"
+   ]
+  },
+  {
+   "ru": "Верните в сковороду куриные ножки, добавьте бульон, тимьян и изюм.",
+   "en": "Put the chicken leg pieces back in the pan and add the stock, thyme and raisins.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken",
+    "chicken_stock",
+    "thyme",
+    "raisins"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и томите на слабом огне.",
+   "en": "Cover and cook gently over a low heat.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте грудку и сок, оставшийся на тарелке.",
+   "en": "Add the breast meat and any juices left on the plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Тушите до готовности курицы и загустения соуса.",
+   "en": "Simmer until the chicken is cooked through and the sauce has reduced.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Пока курица готовится, разогрейте духовку до 200 °C (180 °C с конвекцией, газ 6).",
+   "en": "While the chicken cooks, heat the oven to 200 °C (fan 180 °C, gas 6).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Рассыпьте кедровые орехи на противне и запекайте до золотистого цвета.",
+   "en": "Scatter the pine nuts over a baking sheet and roast until golden and toasted.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "pine_nut"
+   ]
+  },
+  {
+   "ru": "Посолите курицу по вкусу, посыпьте кедровыми орехами и петрушкой и подавайте с рисом.",
+   "en": "Season the chicken to taste, scatter with the pine nuts and parsley and serve with rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken",
+    "pine_nut",
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

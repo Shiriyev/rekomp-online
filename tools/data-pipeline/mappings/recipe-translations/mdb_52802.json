@@ -1,0 +1,162 @@
+{
+ "nameRu": "Рыбный пирог с картофельным пюре",
+ "descriptionRu": "Белая рыба и креветки в сливочном соусе под шапкой картофельного пюре с сыром.",
+ "descriptionEn": "White fish and prawns in a creamy sauce under a cheesy mashed potato topping.",
+ "steps": [
+  {
+   "ru": "Положите картофель в большую кастрюлю с холодной подсоленной водой и доведите до кипения.",
+   "en": "Put the potatoes in a large pan of cold salted water and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь, накройте крышкой и варите на слабом огне до мягкости.",
+   "en": "Lower the heat, cover and simmer gently until tender.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Слейте воду и подержите картофель в кастрюле на слабом огне, чтобы испарилась лишняя влага.",
+   "en": "Drain, then return the potatoes to the pan over a low heat to drive off any excess water.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Разомните картофель с ложкой оливкового масла и приправьте.",
+   "en": "Mash the potatoes with 1 tbsp of the olive oil, then season.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Тем временем налейте молоко в большую сотейную сковороду, положите рыбу и доведите до кипения.",
+   "en": "Meanwhile, put the milk in a large sauté pan, add the fish and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "milk",
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Снимите с огня, накройте крышкой и оставьте постоять.",
+   "en": "Remove from the heat, cover and leave to stand.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Выньте рыбу, сохранив молоко, и промокните её бумажным полотенцем.",
+   "en": "Remove the fish, reserving the milk, and pat it dry with kitchen paper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "milk"
+   ]
+  },
+  {
+   "ru": "Аккуратно разберите рыбу на кусочки в форму для запекания, удалив кожу и кости.",
+   "en": "Gently flake the fish into an ovenproof dish, discarding the skin and any bones.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Разогрейте оставшееся масло в сотейнике, вмешайте муку и прогрейте.",
+   "en": "Heat the remaining oil in a pan, stir in the flour and cook.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "olive_oil",
+    "flour"
+   ]
+  },
+  {
+   "ru": "Постепенно влейте 200–250 мл отложенного молока, помешивая. Остальное молоко не понадобится.",
+   "en": "Gradually stir in 200–250 ml of the reserved milk. Discard the rest.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "milk"
+   ]
+  },
+  {
+   "ru": "Натрите в соус мускатный орех, приправьте и уваривайте до загустения.",
+   "en": "Grate in the nutmeg, season, then bubble until thick.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "nutmeg"
+   ]
+  },
+  {
+   "ru": "Вмешайте сливки.",
+   "en": "Stir in the cream.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cream"
+   ]
+  },
+  {
+   "ru": "Разогрейте духовку до 190 °C (170 °C с конвекцией).",
+   "en": "Preheat the oven to 190 °C (170 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Натрите топинамбур и выложите в форму к рыбе вместе с луком-пореем, креветками, петрушкой и укропом.",
+   "en": "Grate the Jerusalem artichokes and add to the dish with the leek, prawns, parsley and dill.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "jerusalem_artichoke",
+    "leek",
+    "prawn",
+    "parsley",
+    "dill",
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Добавьте в соус цедру и сок лимона, полейте им начинку и аккуратно перемешайте деревянной ложкой.",
+   "en": "Stir the lemon zest and juice into the sauce, pour it over the filling and mix gently with a wooden spoon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Выложите пюре поверх начинки и вилкой сделайте на нём гребешки — они подрумянятся при запекании.",
+   "en": "Spoon the mash over the filling and use a fork to make peaks, which will crisp and brown as it cooks.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Посыпьте сыром грюйер и запекайте до золотистой корочки.",
+   "en": "Sprinkle over the Gruyère and bake until golden and bubbling.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "gruyere"
+   ]
+  },
+  {
+   "ru": "Подавайте с тушёной зеленью.",
+   "en": "Serve with wilted greens.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

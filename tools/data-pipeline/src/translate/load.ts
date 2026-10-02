@@ -8,7 +8,7 @@ import path from 'node:path';
 import { z } from 'zod';
 
 import { MAPPINGS, ROOT } from '../lib/paths.ts';
-import { translationSchema, type Translation } from './check.ts';
+import { translationSchema, translationWarnings, type Translation } from './check.ts';
 
 const overridesSchema = z.record(z.string(), translationSchema.partial().strict());
 
@@ -24,23 +24,36 @@ export type LoadedTranslation = {
   overridden: boolean;
 };
 
-/** The translation for a recipe, or undefined when neither the cache nor a full override has one. */
+/** Hand-written translations, one file per recipe (committed, unlike the API cache). */
+export const MANUAL_DIR = path.join(MAPPINGS, 'recipe-translations');
+
+/** The base translation: a hand-written file wins over the cached API answer. */
+function baseTranslation(id: string): { translation: Translation; warnings: string[] } | undefined {
+  const manual = path.join(MANUAL_DIR, `${id}.json`);
+  if (existsSync(manual)) {
+    const translation = translationSchema.parse(JSON.parse(readFileSync(manual, 'utf8')));
+    return { translation, warnings: translationWarnings(translation) };
+  }
+  const cached = path.join(ROOT, 'cache', 'translate', `${id}.json`);
+  return existsSync(cached)
+    ? (JSON.parse(readFileSync(cached, 'utf8')) as { translation: Translation; warnings: string[] })
+    : undefined;
+}
+
+/** The translation for a recipe, or undefined when no source and no full override has one. */
 export function loadTranslation(
   id: string,
   overrides: Record<string, Partial<Translation>>,
 ): LoadedTranslation | undefined {
-  const file = path.join(ROOT, 'cache', 'translate', `${id}.json`);
-  const cached = existsSync(file)
-    ? (JSON.parse(readFileSync(file, 'utf8')) as { translation: Translation; warnings: string[] })
-    : undefined;
+  const base = baseTranslation(id);
   const override = overrides[id];
-  if (!cached) {
+  if (!base) {
     const full = override ? translationSchema.safeParse(override) : undefined;
     return full?.success ? { translation: full.data, warnings: [], overridden: true } : undefined;
   }
   return {
-    translation: { ...cached.translation, ...override },
-    warnings: override ? [] : cached.warnings,
+    translation: { ...base.translation, ...override },
+    warnings: override ? [] : base.warnings,
     overridden: override !== undefined,
   };
 }

@@ -1,0 +1,137 @@
+{
+ "nameRu": "Аям перчик (курица в пряном кокосовом соусе)",
+ "descriptionRu": "Малайзийская курица, замаринованная в пряном кокосовом соусе с тамариндом и запечённая в духовке.",
+ "descriptionEn": "Malaysian chicken marinated in a spiced coconut and tamarind sauce, then roasted in the oven.",
+ "steps": [
+  {
+   "ru": "Сложите ингредиенты для пряной пасты в блендер и измельчите до однородности.",
+   "en": "Put the spice paste ingredients in a blender and blend until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shallot",
+    "ginger",
+    "garlic",
+    "cayenne",
+    "turmeric",
+    "cumin",
+    "coriander_leaf",
+    "fennel"
+   ]
+  },
+  {
+   "ru": "Выложите пасту в сковороду и обжарьте на среднем огне до аромата, не давая пригореть. Если паста подсыхает, добавляйте по ложке воды или масла.",
+   "en": "Fry the spice paste in a pan over medium heat until fragrant, without burning it. If it gets too dry, add water or oil a spoonful at a time.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте гвоздику, кардамон, пасту тамаринда, кокосовое молоко, воду, сахар и соль.",
+   "en": "Add the cloves, cardamom, tamarind paste, coconut milk, water, sugar and salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tamarind_paste",
+    "coconut_milk",
+    "water",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Увеличьте огонь и доведите до кипения.",
+   "en": "Turn up the heat and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Убавьте огонь до умеренно-слабого и варите, иногда помешивая, пока соус немного не уварится.",
+   "en": "Turn the heat to medium-low and simmer, stirring occasionally, until slightly reduced.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Попробуйте соус и при необходимости доведите вкус. Лёгкая горчинка уйдёт при запекании.",
+   "en": "Taste the sauce and adjust the seasoning if needed. Any slight bitterness will go away in the oven.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Остудите соус, залейте им курицу и маринуйте в холодильнике от ночи до двух суток.",
+   "en": "Once the sauce has cooled, pour it over the chicken and marinate in the fridge overnight or up to two days.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Разогрейте духовку до 425 °F (220 °C).",
+   "en": "Preheat the oven to 425 °F (220 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выньте курицу из маринада.",
+   "en": "Remove the chicken from the marinade.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Выложите часть маринада на смазанный маслом или застеленный фольгой противень.",
+   "en": "Spoon some of the marinade onto a greased or foil-lined baking sheet.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите курицу сверху так, чтобы она полностью закрывала соус, иначе он подгорит.",
+   "en": "Lay the chicken on top so it fully covers the sauce, otherwise the sauce will burn.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Смажьте курицу оставшимся маринадом.",
+   "en": "Spread the remaining marinade over the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Запекайте, пока температура в самой толстой части курицы не достигнет 175 °F (80 °C).",
+   "en": "Roast until the thickest part of the chicken reaches at least 175 °F (80 °C).",
+   "timerSec": 2700,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Дайте курице отдохнуть.",
+   "en": "Let the chicken rest.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Смажьте курицу выделившимся маслом.",
+   "en": "Brush the chicken with some of the released oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Подавайте с соусом и рисом на пару или кокосовым рисом.",
+   "en": "Serve with the sauce over steamed rice or coconut rice.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true
+}

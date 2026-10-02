@@ -1,0 +1,69 @@
+{
+ "nameRu": "Курица «Маренго»",
+ "descriptionRu": "Куриные ножки, тушённые с шампиньонами, маслинами и томатной пассатой.",
+ "descriptionEn": "Chicken legs braised with mushrooms, black olives and tomato passata.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в большой жаропрочной кастрюле.",
+   "en": "Heat the oil in a large flameproof casserole dish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте шампиньоны, помешивая, пока они не начнут размягчаться.",
+   "en": "Stir-fry the mushrooms until they start to soften.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Добавьте куриные ножки и слегка обжарьте с каждой стороны, чтобы они подрумянились.",
+   "en": "Add the chicken legs and cook briefly on each side to colour them a little.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg"
+   ]
+  },
+  {
+   "ru": "Влейте пассату, раскрошите бульонный кубик и вмешайте маслины.",
+   "en": "Pour in the passata, crumble in the stock cube and stir in the olives.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "passata",
+    "stock_cube",
+    "black_olives"
+   ]
+  },
+  {
+   "ru": "Поперчите чёрным перцем — соль, скорее всего, не понадобится.",
+   "en": "Season with black pepper — you shouldn't need salt.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Накройте крышкой и тушите, пока курица не станет мягкой.",
+   "en": "Cover and simmer until the chicken is tender.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "chicken_leg"
+   ]
+  },
+  {
+   "ru": "Посыпьте рубленой петрушкой и подавайте с пастой и салатом или с пюре и зелёными овощами.",
+   "en": "Sprinkle with parsley and serve with pasta and a salad, or mash and green veg.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

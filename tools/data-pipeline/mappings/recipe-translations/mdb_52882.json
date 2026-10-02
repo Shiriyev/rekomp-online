@@ -1,0 +1,161 @@
+{
+ "nameRu": "Рыбная запеканка из трёх видов рыбы",
+ "descriptionRu": "Британский рыбный пирог: лосось и пикша в сливочном соусе с луком-пореем под картофельным пюре и сыром.",
+ "descriptionEn": "A British fish pie of salmon and haddock in a creamy leek sauce under mashed potato and cheese.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией).",
+   "en": "Preheat the oven to 200 °C (180 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите картофель в кастрюлю с холодной подсоленной водой.",
+   "en": "Put the potatoes into a saucepan of cold salted water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения и варите до полной мягкости.",
+   "en": "Bring to the boil and simmer until completely tender.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Хорошо слейте воду и разомните картофель со сливочным маслом и молоком.",
+   "en": "Drain well and mash with the butter and milk.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "butter",
+    "milk"
+   ]
+  },
+  {
+   "ru": "Поперчите пюре, попробуйте и при необходимости досолите.",
+   "en": "Season the mash with pepper, taste and add salt if necessary.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Для начинки растопите сливочное масло в сотейнике.",
+   "en": "For the filling, melt the butter in a saucepan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Добавьте лук-порей и перемешайте на огне.",
+   "en": "Add the leeks and stir over the heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "leek"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и тушите на слабом огне до мягкости.",
+   "en": "Cover and simmer gently until soft.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "leek"
+   ]
+  },
+  {
+   "ru": "Насыпьте муку в небольшую миску, влейте вино и взбейте до однородности.",
+   "en": "Measure the flour into a small bowl, add the wine and whisk until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "white_wine"
+   ]
+  },
+  {
+   "ru": "Влейте к луку-порею молоко и доведите до кипения.",
+   "en": "Add the milk to the leeks and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "milk",
+    "leek"
+   ]
+  },
+  {
+   "ru": "Добавьте винную смесь и энергично мешайте до загустения.",
+   "en": "Add the wine mixture and stir briskly until thickened.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "white_wine"
+   ]
+  },
+  {
+   "ru": "Посолите, поперчите, добавьте петрушку и рыбу.",
+   "en": "Season and add the parsley and fish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "salmon",
+    "haddock",
+    "smoked_haddock"
+   ]
+  },
+  {
+   "ru": "Перемешивайте на огне.",
+   "en": "Stir over the heat.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "salmon",
+    "haddock",
+    "smoked_haddock"
+   ]
+  },
+  {
+   "ru": "Переложите начинку в жаропрочную форму и распределите сверху яйца.",
+   "en": "Spoon into an ovenproof dish and scatter over the eggs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Дайте остыть, чтобы начинка загустела.",
+   "en": "Allow to cool until firm.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите пюре поверх рыбы и проведите по нему вилкой.",
+   "en": "Spoon the mashed potatoes over the fish mixture and mark with a fork.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Посыпьте сыром грюйер.",
+   "en": "Sprinkle with the Gruyère.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "gruyere"
+   ]
+  },
+  {
+   "ru": "Запекайте до золотистой корочки и пузырьков по краям.",
+   "en": "Bake until lightly golden on top and bubbling around the edges.",
+   "timerSec": 2400,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

@@ -1,0 +1,61 @@
+{
+ "nameRu": "Куриные голени по-тайски",
+ "descriptionRu": "Куриные голени, запечённые в глазури из сладкого соуса чили, апельсина и красной пасты карри.",
+ "descriptionEn": "Chicken drumsticks roasted in a glaze of sweet chilli sauce, orange and red curry paste.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией) и застелите противень фольгой.",
+   "en": "Heat the oven to 200 °C (180 °C fan) and line a baking tray with foil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Смешайте сладкий соус чили с цедрой и соком апельсина, чесноком, пастой карри и солью.",
+   "en": "Mix the sweet chilli sauce with the orange zest and juice, garlic, curry paste and a little salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sweet_chilli_sauce",
+    "orange",
+    "garlic",
+    "thai_red_curry_paste"
+   ]
+  },
+  {
+   "ru": "Добавьте куриные голени и хорошо обваляйте в маринаде.",
+   "en": "Add the chicken drumsticks and coat really well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "ru": "Разложите голени на фольге на расстоянии друг от друга и полейте оставшимся маринадом.",
+   "en": "Arrange the drumsticks on the foil, spaced apart, and coat with any marinade left in the bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "ru": "Запекайте до мягкости.",
+   "en": "Roast until tender.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "ru": "Заверните в фольгу или переложите в контейнер.",
+   "en": "Wrap in foil or pack into a food container.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

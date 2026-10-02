@@ -1,0 +1,66 @@
+{
+ "nameRu": "Сардины на гриле по-португальски",
+ "descriptionRu": "Сардины в маринаде с чесноком, паприкой, розмарином и чили, обжаренные на гриле.",
+ "descriptionEn": "Sardines marinated with garlic, paprika, rosemary and chilli, then grilled.",
+ "steps": [
+  {
+   "ru": "Смешайте в миске оливковое масло, чеснок, паприку, лимон, розмарин и чили, приправьте.",
+   "en": "In a bowl, mix the olive oil, garlic, paprika, lemon, rosemary and chilli with some seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "garlic",
+    "paprika_powder",
+    "lemon",
+    "rosemary",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Вылейте маринад в форму, добавьте сардины и хорошо перемешайте.",
+   "en": "Pour the marinade into a baking dish, add the sardines and toss really well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Накройте и уберите в холодильник на несколько часов.",
+   "en": "Cover and chill for a few hours.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Раскалите гриль или сковороду-гриль.",
+   "en": "Heat a barbecue or griddle pan until hot.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Жарьте сардины с каждой стороны до карамелизации и подпалин.",
+   "en": "Cook the sardines on each side until really caramelised and charred.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Выложите на блюдо, сбрызните маслом, посыпьте паприкой и полейте соком лимона.",
+   "en": "Put onto a serving plate, drizzle with oil, sprinkle with a little more paprika and squeeze over the lemon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "paprika_powder",
+    "lemon"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

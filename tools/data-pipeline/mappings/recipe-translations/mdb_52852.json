@@ -1,0 +1,98 @@
+{
+ "nameRu": "Салат нисуаз с тунцом",
+ "descriptionRu": "Тёплый салат с запечённым картофелем, тунцом, шпинатом, каперсами и яйцами.",
+ "descriptionEn": "A warm salad of roasted potatoes, tuna, spinach, capers and eggs.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией).",
+   "en": "Heat the oven to 200 °C (180 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Перемешайте картофель с двумя чайными ложками оливкового масла, солью и перцем.",
+   "en": "Toss the potatoes with 2 tsp of the olive oil and some seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Выложите картофель на большой противень и запекайте до хрустящей золотистой корочки, перемешав на середине времени.",
+   "en": "Tip the potatoes onto a large baking tray and roast until crisp, golden and cooked through, stirring halfway.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Тем временем положите яйца в небольшую кастрюлю с водой и доведите до кипения.",
+   "en": "Meanwhile, put the eggs in a small pan of water and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Варите яйца на слабом огне до нужной степени готовности.",
+   "en": "Simmer the eggs until cooked to your liking.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Переложите яйца в миску с холодной водой, чтобы остыли.",
+   "en": "Plunge the eggs into a bowl of cold water to cool.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Очистите яйца и разрежьте пополам.",
+   "en": "Peel the eggs and cut them in half.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "В большой салатнице взбейте оставшееся масло с винным уксусом, каперсами и нарезанными помидорами, приправьте.",
+   "en": "In a large salad bowl, whisk the remaining oil with the red wine vinegar, capers and chopped tomatoes, then season.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "oil",
+    "wine_vinegar",
+    "capers"
+   ]
+  },
+  {
+   "ru": "Добавьте красный лук, шпинат, тунец и картофель и аккуратно перемешайте.",
+   "en": "Add the red onion, spinach, tuna and potatoes and gently toss together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_onion",
+    "spinach",
+    "tuna_water",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Выложите сверху яйца и сразу подавайте.",
+   "en": "Top with the eggs and serve straight away.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

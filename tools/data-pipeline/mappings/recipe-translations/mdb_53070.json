@@ -1,0 +1,110 @@
+{
+ "nameRu": "Кальдерета из говядины",
+ "descriptionRu": "Филиппинское рагу из говядины с картофелем, морковью и сладким перцем в томатно-арахисовом соусе.",
+ "descriptionEn": "Filipino beef stew with potatoes, carrots and bell pepper in a tomato and peanut sauce.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в скороварке.",
+   "en": "Heat the oil in a pressure cooker.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук и чеснок, пока лук не станет мягким.",
+   "en": "Sauté the onion and garlic until the onion softens.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте говядину и обжаривайте, пока она не подрумянится снаружи.",
+   "en": "Add the beef and sauté until the outside turns light brown.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Добавьте соевый соус, томатную пасту и воду.",
+   "en": "Add the soy sauce, tomato purée and water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "tomato_puree",
+    "water"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения.",
+   "en": "Bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте бульонный кубик.",
+   "en": "Add the beef stock cube.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Закройте скороварку крышкой и готовьте.",
+   "en": "Close the pressure cooker and cook.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Тем временем обжарьте морковь и картофель на сковороде до румяности и отложите.",
+   "en": "Pan-fry the carrot and potato until browned and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "potato"
+   ]
+  },
+  {
+   "ru": "Добавьте в мясо молотый перец чили, печёночный паштет и арахисовую пасту и перемешайте.",
+   "en": "Add the chilli powder, liver spread and peanut butter to the meat and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chilli_powder",
+    "peanut_butter"
+   ]
+  },
+  {
+   "ru": "Добавьте сладкий перец и обжаренные картофель и морковь.",
+   "en": "Add the bell pepper and the fried potato and carrot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper",
+    "potato",
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и готовьте дальше.",
+   "en": "Cover and continue cooking.",
+   "timerSec": 420,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посолите, поперчите молотым чёрным перцем и подавайте.",
+   "en": "Season with salt and ground black pepper and serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

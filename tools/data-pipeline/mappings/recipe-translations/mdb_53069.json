@@ -1,0 +1,113 @@
+{
+ "nameRu": "Бистек по-филиппински",
+ "descriptionRu": "Говядина, тушённая в соевом соусе с лимоном и большим количеством лука.",
+ "descriptionEn": "Beef braised in soy sauce and lemon with plenty of onions.",
+ "steps": [
+  {
+   "ru": "Замаринуйте говядину в соевом соусе с лимонным соком и молотым чёрным перцем. Для лучшего результата оставьте на ночь.",
+   "en": "Marinate the beef in the soy sauce, lemon juice and ground black pepper. For best results, marinate overnight.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "beef",
+    "soy_sauce",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Разогрейте оливковое масло в сковороде.",
+   "en": "Heat the oil in a pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте половину лука до мягкости и отложите.",
+   "en": "Pan-fry half of the onions until soft, then set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Слейте маринад с говядины и сохраните его.",
+   "en": "Drain the marinade from the beef and keep it.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Обжарьте говядину на той же сковороде с каждой стороны.",
+   "en": "Pan-fry the beef in the same pan on each side.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Выньте мясо из сковороды и отложите.",
+   "en": "Remove the beef from the pan and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "При необходимости добавьте масла и обжарьте чеснок с оставшимся сырым луком, пока лук не станет мягким.",
+   "en": "Add more oil if needed and sauté the garlic and remaining raw onions until the onion softens.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "garlic",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Влейте оставшийся маринад и воду и доведите до кипения.",
+   "en": "Pour in the remaining marinade and the water and bring to a boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "water"
+   ]
+  },
+  {
+   "ru": "Верните говядину, накройте и тушите до мягкости мяса, при необходимости подливая воду.",
+   "en": "Add the beef, cover and simmer until tender, adding water as needed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "water"
+   ]
+  },
+  {
+   "ru": "Приправьте молотым чёрным перцем и солью по вкусу.",
+   "en": "Season with ground black pepper and salt to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt"
+   ]
+  },
+  {
+   "ru": "Выложите сверху обжаренный лук.",
+   "en": "Top with the pan-fried onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Переложите на блюдо и подавайте горячим.",
+   "en": "Transfer to a serving plate and serve hot.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

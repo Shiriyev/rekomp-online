@@ -1,0 +1,97 @@
+{
+ "nameRu": "Амок трей (камбоджийское рыбное карри)",
+ "descriptionRu": "Нежная рыба в кокосовом соусе с красной пастой карри, приготовленная на пару в банановых листьях.",
+ "descriptionEn": "Tender fish in a coconut red curry sauce, steamed in banana leaves.",
+ "steps": [
+  {
+   "ru": "В миске взбейте до однородности кокосовое молоко, пасту карри, рыбный соус, сахар и бульон.",
+   "en": "In a bowl, whisk the coconut milk, curry paste, fish sauce, sugar and stock until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coconut_milk",
+    "thai_red_curry_paste",
+    "fish_sauce",
+    "brown_sugar",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Разогрейте растительное масло в большой сковороде на среднем огне (около 350 °F / 175 °C) до лёгкого мерцания.",
+   "en": "Heat the vegetable oil in a large skillet over medium heat (about 350 °F / 175 °C) until shimmering.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Влейте кокосовую смесь и доведите до слабого кипения, иногда помешивая.",
+   "en": "Pour in the coconut milk mixture and bring to a gentle simmer, stirring occasionally.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "coconut_milk"
+   ]
+  },
+  {
+   "ru": "Добавьте кубики рыбы и листья каффир-лайма, полностью погрузив их в соус.",
+   "en": "Add the fish cubes and kaffir lime leaves, submerging them fully in the sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "lime_leaf"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь, накройте и готовьте, пока рыба не станет непрозрачной и не начнёт легко расслаиваться.",
+   "en": "Reduce the heat to low, cover and cook until the fish is opaque and flakes easily.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Медленно вмешайте взбитое яйцо и готовьте, пока соус слегка не загустеет.",
+   "en": "Slowly stir in the beaten egg and cook until the sauce thickens slightly.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Тем временем подержите банановые листья над газовым огнём, чтобы они стали гибкими, или возьмите пергамент.",
+   "en": "Meanwhile, pass the banana leaves briefly over a gas flame to make them pliable, or use parchment paper instead.",
+   "timerSec": 10,
+   "ingredientRefs": [
+    "banana_leaf"
+   ]
+  },
+  {
+   "ru": "Выложите карри в центр каждого листа и плотно заверните края конвертом.",
+   "en": "Spoon the curry into the centre of each banana leaf and fold the edges into a tight packet.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "banana_leaf"
+   ]
+  },
+  {
+   "ru": "Готовьте конверты в пароварке над кипящей водой до аромата.",
+   "en": "Steam the packets in a steamer basket over boiling water until heated through and fragrant.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Аккуратно разверните и подавайте с кинзой и дольками лайма.",
+   "en": "Carefully unwrap and garnish with fresh coriander and lime wedges before serving.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "lime"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

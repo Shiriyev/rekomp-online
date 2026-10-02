@@ -1,0 +1,83 @@
+{
+ "nameRu": "Макароны с сыром и курицей в стиле фахитос",
+ "descriptionRu": "Сливочные макароны с сыром чеддер, курицей, сладким перцем и пряной приправой для фахитос.",
+ "descriptionEn": "Creamy macaroni and cheddar with chicken, bell peppers and spicy fajita seasoning.",
+ "steps": [
+  {
+   "ru": "Обжарьте лук, паприку и чеснок на оливковом масле до прозрачности.",
+   "en": "Fry the onion, peppers and garlic in olive oil until translucent.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper",
+    "garlic",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Раздвиньте овощи, сделав в центре углубление, и выложите туда курицу.",
+   "en": "Make a well in the vegetables and add the chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Добавьте приправу и соль.",
+   "en": "Add the seasoning and salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "seasoning_mix",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Обжарьте курицу до лёгкого румянца.",
+   "en": "Let the chicken colour slightly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Добавьте сливки, бульон и макароны.",
+   "en": "Add the cream, stock and macaroni.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cream",
+    "chicken_stock",
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Готовьте на слабом огне.",
+   "en": "Cook on low heat.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Добавьте чеддер и перемешайте.",
+   "en": "Add the cheddar and stir to combine.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cheddar"
+   ]
+  },
+  {
+   "ru": "Посыпьте петрушкой и, по желанию, запечённым перцем.",
+   "en": "Top with parsley and roasted peppers, if you like.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,84 @@
+{
+ "nameRu": "Вьетнамский салат с курицей и рисовой лапшой",
+ "descriptionRu": "Освежающий салат из рисовой лапши, курицы, овощей и мяты с кисло-солёной заправкой.",
+ "descriptionEn": "A fresh salad of rice noodles, chicken, vegetables and mint with a tangy, savoury dressing.",
+ "steps": [
+  {
+   "ru": "Для заправки взбейте в большом салатнике перец чили, цедру и сок лайма, рыбный соус, соевый соус и кунжутное масло.",
+   "en": "For the dressing, whisk the chilli, lime zest and juice, fish sauce, soy sauce and sesame oil together in a large serving bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "lime",
+    "fish_sauce",
+    "soy_sauce",
+    "sesame_oil"
+   ]
+  },
+  {
+   "ru": "Отварите рисовую лапшу по инструкции на упаковке.",
+   "en": "Cook the noodles following the pack instructions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Откиньте лапшу и переложите в салатник с заправкой.",
+   "en": "Drain the noodles and add them to the bowl with the dressing.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Нарежьте морковь длинными лентами с помощью овощечистки.",
+   "en": "Peel the carrot into long strips using a vegetable peeler.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot"
+   ]
+  },
+  {
+   "ru": "Так же нарежьте огурец, пока не дойдёте до семечек. Семечки выбросьте.",
+   "en": "Do the same with the cucumber until you reach the seeds, then discard them.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber"
+   ]
+  },
+  {
+   "ru": "Добавьте к лапше морковь, огурец, разобранную на волокна готовую курицу, редис, красный лук и мяту.",
+   "en": "Add the carrot and cucumber to the noodles along with the shredded cooked chicken, radishes, red onion and mint.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "cucumber",
+    "chicken_breast",
+    "radish",
+    "red_onion",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Хорошо перемешайте, чтобы всё покрылось заправкой.",
+   "en": "Toss well to coat in the dressing.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посыпьте арахисом и подавайте.",
+   "en": "Scatter over the peanuts and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "peanut"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,65 @@
+{
+ "nameRu": "Пикадильо из стручковой фасоли с говядиной",
+ "descriptionRu": "Костариканское блюдо из мелко нарезанной стручковой фасоли, тушённой с говядиной, луком и тимьяном.",
+ "descriptionEn": "A Costa Rican dish of finely chopped green beans stewed with shredded beef, onion and thyme.",
+ "steps": [
+  {
+   "ru": "Разогрейте немного оливкового масла в кастрюле среднего размера на среднем огне.",
+   "en": "Heat some olive oil in a medium pot over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте лук, перец и чеснок и готовьте, пока лук не станет прозрачным.",
+   "en": "Add the onion, pepper and garlic and cook until the onion is translucent.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "pepper",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Тем временем мелко нарежьте стручковую фасоль.",
+   "en": "Meanwhile, finely chop the green beans.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "green_beans"
+   ]
+  },
+  {
+   "ru": "Добавьте в кастрюлю разобранное на волокна мясо, фасоль, тимьян, соль и перец и хорошо перемешайте.",
+   "en": "Add the shredded meat, green beans, thyme, salt and pepper to the pot and mix well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "green_beans",
+    "thyme",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Влейте воду, накройте крышкой и тушите.",
+   "en": "Add the water, cover and cook.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Снимите крышку и готовьте, пока фасоль не станет мягкой.",
+   "en": "Uncover and cook until the green beans are soft.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "green_beans"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

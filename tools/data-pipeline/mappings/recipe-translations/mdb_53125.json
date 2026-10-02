@@ -1,0 +1,89 @@
+{
+ "nameRu": "Карбонадер (норвежские говяжьи котлеты) с карамелизованным луком",
+ "descriptionRu": "Норвежские котлеты из говяжьего фарша с мускатным орехом, поданные с карамелизованным луком.",
+ "descriptionEn": "Norwegian beef patties seasoned with nutmeg, served with caramelised onions.",
+ "steps": [
+  {
+   "ru": "Натрите половину луковицы на тёрке и отложите.",
+   "en": "Grate half an onion and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Нарежьте оставшийся лук кольцами.",
+   "en": "Slice the rest of the onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Обжарьте нарезанный лук на сливочном масле на слабом или среднем огне до карамелизации.",
+   "en": "Fry the sliced onions in butter over low to medium heat until caramelised.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "butter"
+   ]
+  },
+  {
+   "ru": "Смешайте в миске говяжий фарш, тёртый лук, соль, перец, мускатный орех, крахмал и воду.",
+   "en": "In a bowl, mix the beef mince, grated onion, salt, pepper, nutmeg, starch and water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "onion",
+    "salt",
+    "pepper",
+    "nutmeg",
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Сформуйте из фарша колбаску и нарежьте её на 6 котлет.",
+   "en": "Shape the mixture into a log and cut it into 6 patties.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Ножом нанесите на каждую котлету лёгкую сеточку.",
+   "en": "Use a knife to score a light grid pattern on each patty.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте котлеты с обеих сторон на сливочном масле на сильном огне до румяности.",
+   "en": "Brown the patties on both sides in butter over high heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до слабого и жарьте до готовности.",
+   "en": "Turn the heat down to low and fry a little longer.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с луком и картофелем, тушёным горошком и коричневым соусом либо на ломтике хлеба.",
+   "en": "Serve with the onions and potatoes, stewed peas and brown sauce, or on a slice of bread.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

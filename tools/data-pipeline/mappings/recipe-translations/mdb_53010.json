@@ -1,0 +1,101 @@
+{
+ "nameRu": "Бургеры из баранины с соусом дзадзики",
+ "descriptionRu": "Сочные бургеры из бараньего фарша с булгуром и специями, поданные в булочках с огуречным соусом дзадзики.",
+ "descriptionEn": "Juicy spiced lamb and bulgur burgers served in buns with a cucumber tzatziki.",
+ "steps": [
+  {
+   "ru": "Высыпьте булгур в кастрюлю и залейте водой.",
+   "en": "Tip the bulgur into a pan and cover with water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bulgur"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения и варите.",
+   "en": "Bring to the boil and cook.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "bulgur"
+   ]
+  },
+  {
+   "ru": "Хорошо откиньте булгур на сито, отжимая лишнюю воду.",
+   "en": "Drain the bulgur really well in a sieve, pressing out any excess water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bulgur"
+   ]
+  },
+  {
+   "ru": "Для дзадзики отожмите огурец и вылейте сок.",
+   "en": "For the tzatziki, squeeze the cucumber and discard the juice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber"
+   ]
+  },
+  {
+   "ru": "Смешайте огурец с йогуртом, рубленой мятой и щепоткой соли.",
+   "en": "Mix the cucumber into the yogurt with the chopped mint and a little salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber",
+    "greek_yogurt",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Вмешайте булгур в бараний фарш вместе с зирой, кинзой, паприкой, чесноком, солью и перцем.",
+   "en": "Work the bulgur into the lamb with the cumin, coriander, paprika, garlic and seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bulgur",
+    "lamb_mince",
+    "cumin",
+    "coriander_leaf",
+    "paprika_powder",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Сформуйте из фарша 4 котлеты.",
+   "en": "Shape the mixture into 4 burgers.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_mince"
+   ]
+  },
+  {
+   "ru": "Смажьте котлеты небольшим количеством оливкового масла.",
+   "en": "Brush the burgers with a little olive oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте на сковороде или на гриле с каждой стороны до полной готовности.",
+   "en": "Fry or barbecue on each side until cooked all the way through.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "lamb_mince"
+   ]
+  },
+  {
+   "ru": "Подавайте в булочках (по желанию подрумяненных) с дзадзики, помидорами, луком и листиками мяты.",
+   "en": "Serve in the buns (toasted if you like) with the tzatziki, tomatoes, onion and a few mint leaves.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "burger_bun",
+    "mint"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,94 @@
+{
+ "nameRu": "Говядина в панировке (ломо де рес апанадо)",
+ "descriptionRu": "Отбитая маринованная говядина в хрустящей панировке, обжаренная до золотистого цвета.",
+ "descriptionEn": "Pounded marinated beef in a crisp breadcrumb coating, fried until golden.",
+ "steps": [
+  {
+   "ru": "Положите каждый кусок говядины между двумя листами плёнки и отбейте молотком до толщины 0,5–1 см.",
+   "en": "Place each piece of beef between two large sheets of plastic and pound with a mallet until ¼–½ inch thick.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Переложите мясо в стеклянную ёмкость, залейте приправой-маринадом и уберите в холодильник на несколько часов или на ночь.",
+   "en": "Place the beef in a glass container, add the aliños sauce and leave in the fridge for a few hours or overnight.",
+   "timerSec": 10800,
+   "ingredientRefs": [
+    "beef",
+    "seasoning_mix"
+   ]
+  },
+  {
+   "ru": "Смешайте на тарелке муку, панировочные сухари, зиру, соль, перец и петрушку.",
+   "en": "Combine the flour, breadcrumbs, cumin, salt, pepper and parsley on a plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "breadcrumbs",
+    "cumin",
+    "salt",
+    "pepper",
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Обваляйте мясо со всех сторон в мучной смеси.",
+   "en": "Coat the beef on all sides with the flour mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "flour",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Обмакните в яйца.",
+   "en": "Dip into the eggs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Ещё раз обваляйте в мучной смеси. Готовые куски можно сразу жарить или разложить на пергаменте.",
+   "en": "Coat again in the flour mixture. Fry straight away or lay on parchment paper until ready.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "flour",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "ru": "Разогрейте масло в большой сковороде на среднем огне до лёгкого дымка.",
+   "en": "Heat the oil in a large skillet over medium heat until it begins to smoke lightly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте мясо с каждой стороны до золотистого цвета.",
+   "en": "Fry the breaded beef on each side until golden brown.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Выложите на тарелку с бумажными полотенцами, чтобы стекло масло, и подавайте.",
+   "en": "Transfer to a plate lined with paper towels to drain off excess oil, then serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true
+}

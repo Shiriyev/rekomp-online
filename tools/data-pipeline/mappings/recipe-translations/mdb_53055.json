@@ -1,0 +1,98 @@
+{
+ "nameRu": "Чевапчичи",
+ "descriptionRu": "Балканские колбаски из говяжьего и свиного фарша с чесноком и паприкой, обжаренные на гриле.",
+ "descriptionEn": "Balkan grilled sausages of minced beef and pork with garlic and paprika.",
+ "steps": [
+  {
+   "ru": "Выложите говяжий и свиной фарш в миску.",
+   "en": "Place the minced beef and pork in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Очень мелко нарежьте лук.",
+   "en": "Chop the onion very finely.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Натрите чеснок на тёрке.",
+   "en": "Grate the garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте лук и чеснок к фаршу.",
+   "en": "Add the onion and garlic to the bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте рубленую петрушку, молотую паприку, разрыхлитель, сухари, воду, раскрошенный бульонный кубик, соль и перец.",
+   "en": "Add the chopped parsley, paprika, baking powder, breadcrumbs, water, crumbled stock cube, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "paprika_powder",
+    "baking_powder",
+    "breadcrumbs",
+    "water",
+    "stock_cube",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Хорошо вымесите фарш миксером с насадками-крюками.",
+   "en": "Mix well with a hand mixer fitted with dough hooks.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Накройте миску плёнкой и уберите в холодильник.",
+   "en": "Cover the bowl with cling film and leave to rest in the fridge.",
+   "timerSec": 7200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Сформируйте из фарша колбаски толщиной с большой палец и длиной 7–10 см.",
+   "en": "Shape the mixture into rolls about as thick as your thumb and 7–10 cm long.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Жарьте чевапчичи на разогретой сковороде-гриль или мангале, несколько раз переворачивая, до румяности и готовности.",
+   "en": "Grill the cevapi on a hot grill pan or barbecue, turning several times, until browned and cooked through.",
+   "timerSec": 840,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте горячими.",
+   "en": "Serve hot.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,159 @@
+{
+ "nameRu": "Кубинский сэндвич",
+ "descriptionRu": "Горячий прессованный сэндвич с запечённой свининой в цитрусовом маринаде, ветчиной, сыром и огурцами.",
+ "descriptionEn": "A hot pressed sandwich with citrus-marinated roast pork, ham, cheese and pickles.",
+ "steps": [
+  {
+   "ru": "Выложите свиные отбивные в стеклянную форму для запекания.",
+   "en": "Place the pork chops in a glass baking dish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Наколите мясо вилкой по всей поверхности и посолите.",
+   "en": "Poke holes all over the pork with a fork and season all over with salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_chop",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Сбрызните растительным маслом и перемешайте, чтобы мясо покрылось маслом.",
+   "en": "Drizzle with the oil and toss to coat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil",
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "В небольшой миске смешайте цедру и сок апельсина и лайма, орегано, чёрный перец, сушёный чеснок, зиру и луковый порошок.",
+   "en": "In a small bowl, combine the orange zest and juice, lime zest and juice, oregano, pepper, garlic powder, cumin and onion powder.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "orange",
+    "lime",
+    "oregano",
+    "pepper",
+    "garlic_powder"
+   ]
+  },
+  {
+   "ru": "Залейте свинину половиной маринада и оставьте.",
+   "en": "Add half of the marinade to the pork and let it rest.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Тем временем поставьте решётку в центр духовки и разогрейте её до 425 °F (220 °C).",
+   "en": "Meanwhile, arrange a rack in the centre of the oven and preheat to 425 °F (220 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте в оставшийся маринад горчицу и майонез и размешайте до однородности.",
+   "en": "Add the mustard and mayonnaise to the remaining marinade and stir until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mustard",
+    "mayonnaise"
+   ]
+  },
+  {
+   "ru": "Запекайте свинину, пока термометр в самой толстой части не покажет 140 °F (60 °C).",
+   "en": "Roast the pork until an instant-read thermometer in the thickest part registers 140 °F (60 °C).",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "pork_chop"
+   ]
+  },
+  {
+   "ru": "Разрежьте багет поперёк пополам, а затем каждую половину вдоль — получится 4 части.",
+   "en": "Cut the loaf in half crosswise, then cut each piece in half lengthwise to get 4 pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette"
+   ]
+  },
+  {
+   "ru": "Смажьте хлеб снаружи сливочным маслом.",
+   "en": "Spread butter on the outside of the bread.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette",
+    "butter"
+   ]
+  },
+  {
+   "ru": "Смажьте срезы горчичным соусом.",
+   "en": "Spread the mustard mixture on the cut sides of the bread.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette",
+    "mustard"
+   ]
+  },
+  {
+   "ru": "На две части хлеба выложите слоями половину сыра, ветчину, нарезанную свинину, маринованные огурцы и оставшийся сыр.",
+   "en": "On 2 bread pieces, layer half of the cheese, the ham, the sliced roast pork, the pickles and the remaining cheese.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "swiss_cheese",
+    "ham",
+    "pork_chop",
+    "dill_pickle"
+   ]
+  },
+  {
+   "ru": "Накройте оставшимися частями хлеба и заверните каждый сэндвич в фольгу.",
+   "en": "Close with the remaining bread pieces and wrap each sandwich in foil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette"
+   ]
+  },
+  {
+   "ru": "Разогрейте большую чугунную сковороду на среднем огне.",
+   "en": "Heat a large cast-iron skillet over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите сэндвичи в фольге на сковороду и придавите сверху другой тяжёлой сковородой.",
+   "en": "Place the foil-wrapped sandwiches in the skillet and press them down with another heavy skillet on top.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте сэндвичи с одной стороны.",
+   "en": "Grill the sandwiches on the first side.",
+   "timerSec": 240,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Переверните и обжарьте с другой стороны, пока хлеб не станет хрустящим, а сыр не расплавится.",
+   "en": "Turn and grill the other side until toasted and the cheese is melted.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "swiss_cheese"
+   ]
+  },
+  {
+   "ru": "Разрежьте каждый сэндвич пополам и подавайте.",
+   "en": "Cut each sandwich in half and serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

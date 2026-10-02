@@ -1,0 +1,128 @@
+{
+ "nameRu": "Карне мечада (венесуэльская рваная говядина)",
+ "descriptionRu": "Говядина, приготовленная в скороварке и разобранная на волокна, в томатном соусе с овощами.",
+ "descriptionEn": "Pressure-cooked beef shredded into a tomato sauce with vegetables.",
+ "steps": [
+  {
+   "ru": "Натрите говядину солью, перцем и измельчённым чесноком.",
+   "en": "Season the beef with salt, pepper and minced garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "salt",
+    "pepper",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Нарежьте одну луковицу на четыре крупные дольки.",
+   "en": "Cut one onion into 4 large wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Выложите говядину в скороварку, добавьте лук и бульон.",
+   "en": "Place the beef in the pressure cooker with the onion wedges and the stock.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "onion",
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Готовьте под давлением.",
+   "en": "Pressure cook.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  },
+  {
+   "ru": "Сбросьте давление и откройте крышку.",
+   "en": "Release the pressure and open the lid.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выньте говядину и отлейте в отдельную ёмкость 2 стакана бульона.",
+   "en": "Remove the beef and save 2 cups of the stock in another container.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Разберите говядину на волокна двумя вилками. Если мясо поддаётся с трудом, доготовьте ещё.",
+   "en": "Shred the beef with two forks. If it is not tender enough, cook a little longer.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  },
+  {
+   "ru": "Включите режим «Жарка» и влейте оливковое масло.",
+   "en": "Switch the cooker to sauté mode and add the olive oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Когда прибор подаст сигнал, добавьте нарезанные лук, паприку и помидоры и готовьте до мягкости.",
+   "en": "When it beeps, add the sliced onion, pepper and tomatoes and cook until tender.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper",
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Верните говядину в кастрюлю и перемешайте.",
+   "en": "Add the shredded beef back into the pot and mix.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  },
+  {
+   "ru": "Влейте полтора стакана отложенного бульона, добавьте вустерширский соус, томатную пасту, кетчуп и зиру и перемешайте.",
+   "en": "Pour in 1½ cups of the saved stock, add the Worcestershire sauce, tomato paste, ketchup and cumin, and mix.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock",
+    "worcestershire_sauce",
+    "tomato_puree",
+    "ketchup",
+    "cumin"
+   ]
+  },
+  {
+   "ru": "Если соус слишком густой, добавьте ещё немного бульона.",
+   "en": "If the sauce seems too dry, add a little more stock.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_stock"
+   ]
+  },
+  {
+   "ru": "Посолите, поперчите и подавайте.",
+   "en": "Season with salt and pepper and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

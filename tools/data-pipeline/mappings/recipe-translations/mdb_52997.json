@@ -1,0 +1,170 @@
+{
+ "nameRu": "Боул бан-ми с говядиной, майонезом шрирача, морковью и маринованным огурцом",
+ "descriptionRu": "Рис с жареным говяжьим фаршем в соевом соусе, хрустящими овощами и острым майонезом.",
+ "descriptionEn": "Rice topped with soy-glazed ground beef, crisp vegetables and spicy mayo.",
+ "steps": [
+  {
+   "ru": "Промойте рис в мелком сите до прозрачной воды.",
+   "en": "Rinse the rice in a fine-mesh sieve until the water runs clear.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Переложите рис в небольшую кастрюлю, залейте водой, посолите и доведите до кипения.",
+   "en": "Put the rice in a small pot with water and a pinch of salt and bring to a boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой, убавьте огонь до слабого и варите до мягкости.",
+   "en": "Cover, reduce the heat to low and cook until the rice is tender.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Снимите с огня и оставьте под крышкой до подачи.",
+   "en": "Take off the heat and keep covered until ready to serve.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Очистите и мелко нарежьте чеснок.",
+   "en": "Peel and finely chop the garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Снимите цедру с лайма и разрежьте его на четвертинки.",
+   "en": "Zest the lime and cut it into quarters.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  },
+  {
+   "ru": "Разрежьте огурец вдоль пополам и тонко нарежьте полукольцами.",
+   "en": "Halve the cucumber lengthwise and thinly slice crosswise into half-moons.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber"
+   ]
+  },
+  {
+   "ru": "Очистите лук и нарежьте средними кубиками.",
+   "en": "Peel the onion and cut it into medium dice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Очистите и натрите морковь.",
+   "en": "Peel and grate the carrot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot"
+   ]
+  },
+  {
+   "ru": "В миске смешайте огурец с соком половины лайма, щепоткой сахара и соли.",
+   "en": "In a bowl, combine the cucumber with the juice of half the lime, a little sugar and a pinch of salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cucumber",
+    "lime"
+   ]
+  },
+  {
+   "ru": "В маленькой миске смешайте майонез, щепотку чеснока, немного сока лайма и шрирачу по вкусу, посолите и поперчите.",
+   "en": "In a small bowl, mix mayonnaise, a pinch of garlic, a squeeze of lime juice and sriracha to taste; season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "lime"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного масла в большой сковороде на огне выше среднего.",
+   "en": "Heat a drizzle of oil in a large pan over medium-high heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте лук, помешивая, до мягкости.",
+   "en": "Cook the onion, stirring, until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте говяжий фарш, оставшийся чеснок и немного сахара.",
+   "en": "Add the beef, the remaining garlic and a little sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Жарьте, разбивая фарш на кусочки, пока он не подрумянится и не прожарится.",
+   "en": "Cook, breaking the meat into pieces, until browned and cooked through.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Вмешайте соевый соус, снимите с огня, посолите и поперчите по вкусу.",
+   "en": "Stir in the soy sauce, turn off the heat and season with salt and pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce"
+   ]
+  },
+  {
+   "ru": "Взрыхлите рис вилкой и вмешайте цедру лайма и кусочек сливочного масла.",
+   "en": "Fluff the rice with a fork and stir in the lime zest and a knob of butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice",
+    "lime"
+   ]
+  },
+  {
+   "ru": "Разложите рис по мискам, сверху выложите говядину, тёртую морковь и маринованный огурец.",
+   "en": "Divide the rice between bowls and top with the beef, grated carrot and pickled cucumber.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice",
+    "beef_mince",
+    "carrot",
+    "cucumber"
+   ]
+  },
+  {
+   "ru": "Сбрызните соком лайма и полейте майонезом шрирача.",
+   "en": "Squeeze over some lime juice and drizzle with the sriracha mayo.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

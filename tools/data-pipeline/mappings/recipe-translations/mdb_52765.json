@@ -1,0 +1,64 @@
+{
+ "nameRu": "Запеканка с курицей по-мексикански (энчилада)",
+ "descriptionRu": "Слои кукурузных тортилий, тушёной курицы, соуса энчилада и сыра, запечённые до румяной корочки.",
+ "descriptionEn": "Layers of corn tortillas, braised chicken, enchilada sauce and cheese, baked until golden.",
+ "steps": [
+  {
+   "ru": "Нарежьте каждую куриную грудку на 3 части и положите в небольшую кастрюлю.",
+   "en": "Cut each chicken breast into 3 pieces and put them in a small pot.",
+   "timerSec": null,
+   "ingredientRefs": ["chicken_breast"]
+  },
+  {
+   "ru": "Залейте курицу соусом энчилада и тушите под крышкой на слабом или среднем огне до готовности, иногда помешивая. Вода не нужна.",
+   "en": "Pour the enchilada sauce over the chicken and simmer covered on low to medium heat until cooked through, stirring occasionally. No water is needed.",
+   "timerSec": 1200,
+   "ingredientRefs": ["chicken_breast", "enchilada_sauce"]
+  },
+  {
+   "ru": "Выньте курицу из кастрюли и разберите её на волокна двумя вилками. Соус оставьте.",
+   "en": "Take the chicken out of the pot and shred it with two forks. Keep the sauce.",
+   "timerSec": null,
+   "ingredientRefs": ["chicken_breast"]
+  },
+  {
+   "ru": "Разогрейте духовку до 375 °F (190 °C).",
+   "en": "Preheat the oven to 375 °F (190 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Распределите немного оставшегося соуса по дну формы для запекания.",
+   "en": "Spread a little of the remaining sauce over the bottom of a baking dish.",
+   "timerSec": null,
+   "ingredientRefs": ["enchilada_sauce"]
+  },
+  {
+   "ru": "Выложите 2 тортильи, сверху треть курицы, треть соуса и треть сыра.",
+   "en": "Lay 2 tortillas, then top with a third of the chicken, a third of the sauce and a third of the cheese.",
+   "timerSec": null,
+   "ingredientRefs": ["corn_tortilla", "chicken_breast", "enchilada_sauce", "cheese"]
+  },
+  {
+   "ru": "Повторите слои ещё два раза, пока не закончатся тортильи, курица, соус и сыр.",
+   "en": "Repeat the layers twice more until the tortillas, chicken, sauce and cheese are used up.",
+   "timerSec": null,
+   "ingredientRefs": ["corn_tortilla", "chicken_breast", "enchilada_sauce", "cheese"]
+  },
+  {
+   "ru": "Запекайте без крышки, пока сыр не расплавится и не зарумянится.",
+   "en": "Bake uncovered until bubbling and the cheese has melted and browned.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте тёплой.",
+   "en": "Serve warm.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": ["lunch", "dinner"],
+ "isBatch": true,
+ "prepNightBefore": false
+}

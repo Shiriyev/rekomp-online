@@ -64,19 +64,86 @@ export function translationInput(
   };
 }
 
-const DURATION =
-  /(\d+(?:[.,]\d+)?)(?:\s*(?:-|–|to|or)\s*(\d+(?:[.,]\d+)?))?\s*(hours?|hrs?|minutes?|mins?|seconds?|secs?)\b/gi;
+const WORD_NUMBERS: Record<string, number> = {
+  a: 1,
+  an: 1,
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+  ten: 10,
+  eleven: 11,
+  twelve: 12,
+  fifteen: 15,
+  twenty: 20,
+  thirty: 30,
+  forty: 40,
+  'forty-five': 45,
+  fifty: 50,
+  sixty: 60,
+  ninety: 90,
+};
 
-/** Every duration stated in the source text, in seconds (both ends of «20 to 30 minutes»). */
+/** Durations in words and fractions → digits («half an hour» → «30 minutes»). */
+function normalizeDurations(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/(\d)\s*½/g, '$1.5')
+    .replace(/½/g, '0.5')
+    .replace(/\b(?:an?|one) hour and a half\b/g, '90 minutes')
+    .replace(/\bhalf an? hour\b/g, '30 minutes')
+    .replace(/\b(\w+(?:-\w+)?) and a half (hours?|minutes?|mins?)\b/g, (m, n: string, u: string) =>
+      WORD_NUMBERS[n] !== undefined || /^\d+$/.test(n)
+        ? `${Number(WORD_NUMBERS[n] ?? n) + 0.5} ${u}`
+        : m,
+    )
+    .replace(
+      /\b([a-z]+(?:-[a-z]+)?)(?=\s+(?:(?:more|further|extra|additional|or so)\s+)?(?:hours?|hrs?|minutes?|mins?|seconds?|secs?)\b)/g,
+      (m, w: string) => (WORD_NUMBERS[w] !== undefined ? String(WORD_NUMBERS[w]) : m),
+    )
+    .replace(
+      /(\d)\s+(?:more|further|extra|additional|or so)\s+(?=hours?|hrs?|minutes?|mins?|seconds?|secs?)/g,
+      '$1 ',
+    );
+}
+
+const NUM = String.raw`(\d+(?:[.,]\d+)?)`;
+const UNIT = String.raw`(hours?|hrs?|minutes?|mins?|seconds?|secs?)\b`;
+/** «20 minutes», «20 to 30 minutes», optionally followed by «(and) 30 seconds». */
+const DURATION = new RegExp(
+  String.raw`${NUM}(?:\s*(?:-|–|to|or)\s*${NUM})?\s*${UNIT}(?:,?\s*(?:and\s+)?${NUM}\s*${UNIT})?`,
+  'gi',
+);
+
+const unitSeconds = (unit: string) => {
+  const u = unit.toLowerCase();
+  return u.startsWith('h') ? 3600 : u.startsWith('m') ? 60 : 1;
+};
+const num = (v: string) => Number(v.replace(',', '.'));
+
+/**
+ * Every duration stated in the source text, in seconds: both ends of «20 to 30 minutes»,
+ * words («two minutes», «half an hour», «5 more minutes») and compounds («1 hour 30
+ * minutes» → 5400, and each part on its own).
+ */
 export function statedDurations(text: string): Set<number> {
   const out = new Set<number>();
-  for (const m of text.matchAll(DURATION)) {
-    const unit = m[3]!.toLowerCase();
-    const factor = unit.startsWith('h') ? 3600 : unit.startsWith('m') ? 60 : 1;
-    for (const v of [m[1], m[2]]) {
-      if (v === undefined) continue;
-      const n = Number(v.replace(',', '.'));
-      if (Number.isFinite(n) && n > 0) out.add(Math.round(n * factor));
+  const add = (n: number) => {
+    if (Number.isFinite(n) && n > 0) out.add(Math.round(n));
+  };
+  for (const m of normalizeDurations(text).matchAll(DURATION)) {
+    const first = unitSeconds(m[3]!);
+    const values = [m[1], m[2]].filter((v): v is string => v !== undefined).map(num);
+    for (const v of values) add(v * first);
+    if (m[4] !== undefined && m[5] !== undefined) {
+      const extra = num(m[4]) * unitSeconds(m[5]);
+      add(extra);
+      for (const v of values) add(v * first + extra);
     }
   }
   return out;

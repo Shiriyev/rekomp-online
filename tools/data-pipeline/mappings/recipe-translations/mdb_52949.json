@@ -1,0 +1,121 @@
+{
+ "nameRu": "Свинина в кисло-сладком соусе",
+ "descriptionRu": "Хрустящие полоски свинины в блестящем кисло-сладком томатном соусе по-китайски.",
+ "descriptionEn": "Crispy pork strips in a glossy Chinese-style sweet and sour tomato sauce.",
+ "steps": [
+  {
+   "ru": "Разбейте яйцо и отделите белок от желтка.",
+   "en": "Crack the egg and separate the white from the yolk.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Нарежьте свинину полосками.",
+   "en": "Slice the pork into strips.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "ru": "Приготовьте маринад: смешайте щепотку соли, часть крахмала, соевый соус и яичный белок.",
+   "en": "Make the marinade with a pinch of salt, some of the cornstarch, the soy sauce and the egg white.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "cornstarch",
+    "soy_sauce",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Замаринуйте полоски свинины.",
+   "en": "Marinate the pork strips.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "ru": "Смешайте оставшийся крахмал с водой и уксусом.",
+   "en": "Mix the remaining cornstarch with some water and the vinegar to make a starchy sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "water",
+    "vinegar"
+   ]
+  },
+  {
+   "ru": "Налейте масло в вок и разогрейте до 190 °C.",
+   "en": "Pour cooking oil into a wok and heat it to 190 °C (375 °F).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте полоски свинины до коричневого цвета.",
+   "en": "Add the marinated pork strips and fry until brown.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "ru": "Выньте свинину из вока и выложите на тарелку.",
+   "en": "Remove the pork from the wok and put it on a plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "ru": "Оставьте в воке немного масла, добавьте томатную пасту и сахар и прогрейте, пока масло и соус не соединятся.",
+   "en": "Leave a little oil in the wok, add the tomato paste and sugar, and heat until the oil and sauce are fully combined.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato_puree",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Влейте немного воды и хорошо прогрейте соус.",
+   "en": "Add a little water and heat the sauce through.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Верните свинину в соус.",
+   "en": "Add the pork strips to the sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "ru": "Влейте крахмальную смесь и обжаривайте, помешивая, пока свинина не покроется соусом.",
+   "en": "Pour in the starchy sauce and stir-fry until the pork and sauce are well mixed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch"
+   ]
+  },
+  {
+   "ru": "Выложите на тарелку и украсьте кинзой.",
+   "en": "Serve on a plate garnished with coriander.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

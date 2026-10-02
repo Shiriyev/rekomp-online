@@ -1,0 +1,94 @@
+{
+ "nameRu": "Лакра ме миш — капуста, тушённая с говядиной",
+ "descriptionRu": "Албанское рагу из говядины и капусты с паприкой и томатом, долго томлённое до мягкости.",
+ "descriptionEn": "An Albanian stew of beef and cabbage with paprika and tomato, slowly simmered until tender.",
+ "steps": [
+  {
+   "ru": "Разогрейте оливковое масло в сотейнике или кастрюле с крышкой.",
+   "en": "Heat some olive oil in a sauté pan or saucepan with a lid.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте лук, нарезанную кубиками говядину и паприку и обжаривайте, иногда помешивая, пока мясо полностью не подрумянится.",
+   "en": "Add the onions, diced beef and red peppers and fry, stirring occasionally, until the meat is fully browned.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "beef",
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте молотую паприку, томатную пасту и хлопья чили, посолите и поперчите.",
+   "en": "Add the paprika, tomato purée and chilli flakes and season with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "paprika_powder",
+    "tomato_puree",
+    "chilli_flakes",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Перемешайте и продолжайте обжаривать.",
+   "en": "Mix together and continue to fry.",
+   "timerSec": 120,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте капусту и перемешайте.",
+   "en": "Add the cabbage and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "ru": "Обжаривайте, иногда помешивая, пока почти всё масло не выпарится.",
+   "en": "Fry, stirring occasionally, until most of the oil has cooked away.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "ru": "Залейте кипятком так, чтобы вода покрыла капусту примерно на 2,5 см.",
+   "en": "Pour in the boiling water so it covers the cabbage by about 2.5 cm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и доведите до кипения.",
+   "en": "Put on the lid and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Тушите на слабом огне, пока капуста не станет мягкой, а мясо — нежным.",
+   "en": "Simmer until the cabbage is soft and the meat is tender.",
+   "timerSec": 9000,
+   "ingredientRefs": [
+    "cabbage",
+    "beef"
+   ]
+  },
+  {
+   "ru": "Разложите по глубоким тарелкам и дайте немного остыть перед подачей.",
+   "en": "Serve into wide bowls and leave to cool slightly.",
+   "timerSec": 300,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

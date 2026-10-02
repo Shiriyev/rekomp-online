@@ -1,0 +1,87 @@
+{
+ "nameRu": "Жареный краб с острым перцем",
+ "descriptionRu": "Крабовое мясо, обжаренное с луком и острым перцем скотч-бонет по-карибски.",
+ "descriptionEn": "Caribbean-style crab meat fried with onion and hot scotch bonnet pepper.",
+ "steps": [
+  {
+   "ru": "Промойте крабов и отварите в большой кастрюле с водой.",
+   "en": "Wash the crabs and boil them in a large pot of water.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "crab"
+   ]
+  },
+  {
+   "ru": "Выньте крабов из кипятка и остудите.",
+   "en": "Remove from the boiling water and leave to cool.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "crab"
+   ]
+  },
+  {
+   "ru": "Расколите клешни и панцири и выберите всё мясо.",
+   "en": "Crack the legs and open the backs to remove all the meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "crab"
+   ]
+  },
+  {
+   "ru": "Удалите семена из перца скотч-бонет и нарежьте его мелкими кубиками.",
+   "en": "Remove the seeds from the scotch bonnet and dice it.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "ru": "Нарежьте лук кубиками.",
+   "en": "Dice the onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук и острый перец в растительном масле на среднем огне, пока лук не станет прозрачным.",
+   "en": "Sauté the onions and scotch bonnet in the oil over medium heat until the onions start to turn translucent.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "scotch_bonnet",
+    "oil"
+   ]
+  },
+  {
+   "ru": "Добавьте крабовое мясо, чёрный перец и соль.",
+   "en": "Add the crab meat, black pepper and salt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "crab",
+    "pepper",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Готовьте на среднем огне, иногда помешивая.",
+   "en": "Cook over medium heat, stirring occasionally.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "crab"
+   ]
+  },
+  {
+   "ru": "Подавайте с гарниром из отварных крахмалистых овощей — тыквы, плантанов, картофеля, маниоки или хлебного дерева.",
+   "en": "Serve with boiled starchy vegetables such as pumpkin, plantain, potato, cassava or breadfruit.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

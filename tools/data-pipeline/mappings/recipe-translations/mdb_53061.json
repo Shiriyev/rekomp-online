@@ -1,0 +1,56 @@
+{
+ "nameRu": "Жареные сардины",
+ "descriptionRu": "Свежие сардины в муке, обжаренные во фритюре до хрустящей корочки, с ломтиком лимона.",
+ "descriptionEn": "Fresh sardines dusted in flour and deep-fried until crispy, served with a slice of lemon.",
+ "steps": [
+  {
+   "ru": "Промойте сардины под холодной водой.",
+   "en": "Wash the fish under the cold tap.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Обваляйте сардины в муке.",
+   "en": "Roll the sardines in the flour.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine",
+    "flour"
+   ]
+  },
+  {
+   "ru": "Обжарьте во фритюре до хрустящей корочки.",
+   "en": "Deep-fry in oil until crispy.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine",
+    "oil"
+   ]
+  },
+  {
+   "ru": "Выложите на бумажное полотенце, чтобы стекло лишнее масло.",
+   "en": "Lay on kitchen paper to drain off the excess oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sardine"
+   ]
+  },
+  {
+   "ru": "Посолите и подавайте горячими или холодными с ломтиком лимона.",
+   "en": "Season with salt and serve hot or cold with a slice of lemon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

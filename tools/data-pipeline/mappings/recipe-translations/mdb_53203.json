@@ -1,0 +1,161 @@
+{
+ "nameRu": "Тайский салат с рисовой лапшой",
+ "descriptionRu": "Рисовая лапша с ростками маша и листьями салата в заправке из лайма и рыбного соуса, со свиным фаршем или говяжьим стейком в кунжуте.",
+ "descriptionEn": "Rice noodles with bean sprouts and lettuce in a lime and fish sauce dressing, topped with pork mince or sesame-crusted steak.",
+ "steps": [
+  {
+   "ru": "Положите лапшу и ростки маша в жаропрочную миску и залейте кипятком.",
+   "en": "Place the noodles and bean sprouts in a heatproof bowl and cover with boiling water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "bean_sprouts"
+   ]
+  },
+  {
+   "ru": "Оставьте, пока лапша не станет мягкой.",
+   "en": "Leave until the noodles are tender.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Слейте воду, охладите под холодной проточной водой и снова слейте.",
+   "en": "Drain, cool under cold running water and drain again.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "bean_sprouts"
+   ]
+  },
+  {
+   "ru": "Верните лапшу в миску.",
+   "en": "Return the noodles to the bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Смешайте цедру и сок лайма, рыбный соус и сахар.",
+   "en": "Stir together the lime zest and juice, fish sauce and sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime",
+    "fish_sauce",
+    "brown_sugar"
+   ]
+  },
+  {
+   "ru": "Вмешайте заправку в лапшу вместе с красным луком и листьями салата.",
+   "en": "Stir the dressing into the noodles with the red onion and lettuce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_onion",
+    "lettuce",
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Вариант с фаршем: разогрейте немного растительного масла в сковороде с антипригарным покрытием.",
+   "en": "With mince: heat a little oil in a non-stick frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте свиной фарш с тёртым имбирём и щепоткой кайенского перца, помешивая, пока фарш не подрумянится и не приготовится.",
+   "en": "Stir-fry the pork mince with the grated ginger and a pinch of cayenne until browned and cooked through.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "pork_mince",
+    "ginger",
+    "cayenne"
+   ]
+  },
+  {
+   "ru": "Смешайте фарш с лапшой, разложите по мискам и подавайте тёплым.",
+   "en": "Mix into the noodles, divide between bowls and serve warm.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_mince",
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Вариант со стейком: разогрейте растительное масло в сковороде.",
+   "en": "With steak: heat the oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Насыпьте кунжут на тарелку.",
+   "en": "Tip the sesame seeds onto a plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_seed"
+   ]
+  },
+  {
+   "ru": "Вотрите в стейки масло и обваляйте их в кунжуте.",
+   "en": "Rub oil into the steaks and press them into the sesame seeds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "oil",
+    "sesame_seed"
+   ]
+  },
+  {
+   "ru": "Обжарьте стейки до средней прожарки с кровью, перевернув на середине.",
+   "en": "Fry the steaks for medium rare, turning halfway.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Дайте стейкам отдохнуть.",
+   "en": "Leave the steaks to rest.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Тонко нарежьте стейки.",
+   "en": "Thinly slice the steaks.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Вмешайте в лапшу красный чили без семян, нарезанный соломкой, и горсть листьев мяты.",
+   "en": "Toss the deseeded and shredded red chilli and a handful of mint leaves into the noodles.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Выложите сверху стейк и подавайте.",
+   "en": "Top with the steak to serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

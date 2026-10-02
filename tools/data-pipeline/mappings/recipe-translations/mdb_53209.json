@@ -1,0 +1,105 @@
+{
+ "nameRu": "Острая тайская лапша с креветками",
+ "descriptionRu": "Рисовая лапша с креветками, яичным омлетом, чили и имбирём, со свежей зеленью, лаймом и арахисом.",
+ "descriptionEn": "Rice noodles stir-fried with prawns, egg, chilli and ginger, finished with fresh herbs, lime and peanuts.",
+ "steps": [
+  {
+   "ru": "Отварите лапшу по инструкции на упаковке, откиньте и отставьте.",
+   "en": "Cook the noodles following the pack instructions, drain and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Разогрейте кунжутное масло в большой сковороде.",
+   "en": "Heat the sesame oil in a large frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_oil"
+   ]
+  },
+  {
+   "ru": "Влейте взбитые яйца и распределите по сковороде тонким омлетом.",
+   "en": "Pour in the beaten eggs and swirl around the pan to make a thin omelette.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Переверните омлет и жарьте с другой стороны.",
+   "en": "Flip the omelette over and cook the other side.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Выложите омлет и нарежьте тонкими полосками.",
+   "en": "Tip out the omelette and slice into thin strips.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Обжарьте в сковороде чили и имбирь.",
+   "en": "Fry the chilli and ginger in the pan.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "red_chilli",
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Добавьте лапшу, креветки и омлет.",
+   "en": "Tip in the noodles, prawns and egg.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "prawn",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Влейте соевый соус и обжаривайте, помешивая.",
+   "en": "Splash in the soy sauce and stir-fry.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "soy_sauce"
+   ]
+  },
+  {
+   "ru": "Добавьте рубленые кинзу и мяту.",
+   "en": "Throw in the chopped coriander and mint.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Полейте соком лайма и посыпьте цедрой.",
+   "en": "Pour over the lime juice and zest.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  },
+  {
+   "ru": "Посыпьте рубленым арахисом и подавайте.",
+   "en": "Sprinkle over the chopped peanuts and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "peanut"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

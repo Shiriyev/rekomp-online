@@ -1,0 +1,138 @@
+{
+ "nameRu": "Курица в кисло-сладком соусе",
+ "descriptionRu": "Обжаренная куриная бедрятина с ананасом и сладким перцем в кисло-сладком соусе.",
+ "descriptionEn": "Stir-fried chicken thigh with pineapple and bell pepper in a sweet and sour sauce.",
+ "steps": [
+  {
+   "ru": "Смешайте в миске курицу с яичным белком, половиной соли и кукурузным крахмалом, чтобы она равномерно покрылась.",
+   "en": "In a bowl, combine the chicken with the egg white, half of the salt and the cornstarch, stirring to coat evenly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "egg_white",
+    "salt",
+    "cornstarch"
+   ]
+  },
+  {
+   "ru": "Оставьте при комнатной температуре или в холодильнике до утра.",
+   "en": "Let sit at room temperature, or up to overnight in the fridge.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Для соуса взбейте ананасовый сок, уксус, кетчуп, оставшуюся соль и коричневый сахар.",
+   "en": "For the sauce, whisk together the pineapple juice, vinegar, ketchup, remaining salt and brown sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pineapple_juice",
+    "vinegar",
+    "ketchup",
+    "salt",
+    "brown_sugar"
+   ]
+  },
+  {
+   "ru": "Раскалите большую сковороду или вок на сильном огне, пока капля воды не будет мгновенно испаряться.",
+   "en": "Heat a large frying pan or wok over high heat until a bead of water instantly sizzles and evaporates.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Влейте большую часть растительного масла и распределите по сковороде.",
+   "en": "Pour in most of the oil and swirl to coat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Выложите курицу в один слой и жарьте не трогая, пока низ не подрумянится.",
+   "en": "Add the chicken in one layer and fry untouched until browned underneath.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Переверните и обжарьте другую сторону — внутри курица ещё должна быть розоватой.",
+   "en": "Flip and fry the other side; the chicken should still be pinkish in the middle.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Переложите курицу на чистую тарелку, оставив как можно больше масла в сковороде.",
+   "en": "Transfer the chicken to a clean plate, leaving as much oil in the pan as possible.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до среднего, добавьте оставшееся масло и прогрейте его.",
+   "en": "Reduce the heat to medium, add the remaining oil and let it heat up.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте кусочки паприки и имбирь.",
+   "en": "Fry the bell pepper chunks and ginger.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "bell_pepper",
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Добавьте ананас и соус и увеличьте огонь до сильного.",
+   "en": "Add the pineapple chunks and the sauce and turn the heat up to high.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pineapple"
+   ]
+  },
+  {
+   "ru": "Когда соус закипит, верните курицу.",
+   "en": "When the sauce is simmering, add the chicken back in.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Томите до готовности курицы. Проверьте, разрезав кусочек: если он розовый, готовьте ещё минуту.",
+   "en": "Simmer until the chicken is cooked through. Cut into a piece to check; if it is pink, cook a minute longer.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Попробуйте соус и при желании добавьте коричневого сахара или уксуса.",
+   "en": "Taste the sauce and add more brown sugar or vinegar if you like.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "brown_sugar",
+    "vinegar"
+   ]
+  },
+  {
+   "ru": "Подавайте горячей с белым или бурым рисом.",
+   "en": "Serve hot with steamed white or brown rice.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

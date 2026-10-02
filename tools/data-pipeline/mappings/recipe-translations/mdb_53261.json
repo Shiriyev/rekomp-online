@@ -1,0 +1,79 @@
+{
+ "nameRu": "Куриные крылышки с зирой, лимоном и чесноком",
+ "descriptionRu": "Крылышки в маринаде из лимона, чеснока и зиры, запечённые до хрустящей корочки с медовой глазурью.",
+ "descriptionEn": "Chicken wings marinated in lemon, garlic and cumin, baked until crisp with a honey glaze.",
+ "steps": [
+  {
+   "ru": "Острыми кухонными ножницами разрежьте каждое крылышко по суставу на две части.",
+   "en": "Using sharp kitchen scissors, cut each wing at the knuckle into two pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Смешайте чеснок, цедру и сок лимона, зиру и оливковое масло, щедро посолите и поперчите.",
+   "en": "Mix the garlic, lemon zest and juice, cumin and olive oil with plenty of seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "lemon",
+    "cumin",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Выложите крылышки в форму, залейте маринадом и перемешайте.",
+   "en": "Tip the marinade into a dish with the chicken wings and toss to coat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Накройте и уберите в холодильник мариноваться, а если есть время — на ночь.",
+   "en": "Cover and put in the fridge to marinate, or overnight if you have time.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией, газ 6) или разожгите гриль.",
+   "en": "Heat the oven to 200 °C (fan 180 °C, gas 6), or heat an outdoor barbecue.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Запекайте крылышки на противне до хрустящей корочки или жарьте на гриле.",
+   "en": "Bake the chicken wings on an oven tray until crisp, or cook them on the barbecue.",
+   "timerSec": 3000,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "ru": "Под конец приготовления полейте крылышки мёдом.",
+   "en": "Drizzle the honey over the wings for the final stretch of cooking.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "honey"
+   ]
+  },
+  {
+   "ru": "Подавайте на большом блюде с оливками, орехами, финиками, маринованным перцем и лепёшками.",
+   "en": "Serve on a platter with olives, nuts, dates, pickled chillies and flatbreads alongside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,97 @@
+{
+ "nameRu": "Форель в карамели по-вьетнамски",
+ "descriptionRu": "Филе форели и пак-чой, тушённые в карамельном соусе с рыбным соусом, чили и имбирём.",
+ "descriptionEn": "Trout fillets and bok choy simmered in a caramel sauce with fish sauce, chilli and ginger.",
+ "steps": [
+  {
+   "ru": "Положите сахар в большую неглубокую сковороду и добавьте немного воды.",
+   "en": "Put the sugar in a large shallow pan with a small splash of water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Нагревайте на слабом огне, покачивая сковороду, пока сахар не растворится.",
+   "en": "Heat gently, swirling the pan, until the sugar has dissolved.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Увеличьте огонь и кипятите сироп, пока он не станет тёмно-янтарным.",
+   "en": "Increase the heat and bubble the syrup until it turns dark amber.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Добавьте рыбный соус и большую часть чили и имбиря.",
+   "en": "Add the fish sauce and most of the chilli and ginger.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_sauce",
+    "red_chilli",
+    "ginger"
+   ]
+  },
+  {
+   "ru": "Разбавьте ложкой воды и снова прокипятите до густоты сиропа.",
+   "en": "Splash in a tablespoon of water to dilute and boil again until syrupy.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите филе форели кожей вниз и пак-чой срезом вниз.",
+   "en": "Add the trout fillets skin-side down and the bok choy cut-side down.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "trout",
+    "pak_choi"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и томите, пока рыба не приготовится, а пак-чой не станет мягким.",
+   "en": "Cover and simmer until the fish is cooked and the bok choy has wilted.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "trout",
+    "pak_choi"
+   ]
+  },
+  {
+   "ru": "Выключите огонь и выжмите сверху лимонный сок.",
+   "en": "Turn off the heat and squeeze over the lemon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Посыпьте оставшимся чили, имбирём и веточками кинзы.",
+   "en": "Scatter with the remaining chilli, ginger and the coriander sprigs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "ginger",
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Подавайте с рисом.",
+   "en": "Serve with rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

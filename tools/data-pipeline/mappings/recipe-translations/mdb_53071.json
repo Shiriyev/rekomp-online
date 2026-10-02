@@ -1,0 +1,142 @@
+{
+ "nameRu": "Говядина асадо по-филиппински",
+ "descriptionRu": "Говядина, тушённая в соево-томатном соусе с лимоном и лавровым листом, с жареным картофелем и морковью.",
+ "descriptionEn": "Beef braised in a soy and tomato sauce with lemon and bay leaves, served with fried potatoes and carrots.",
+ "steps": [
+  {
+   "ru": "Смешайте говядину с дроблёным чёрным перцем, соевым соусом, уксусом, лавровым листом, лимоном и томатным соусом.",
+   "en": "Combine the beef with crushed peppercorns, soy sauce, vinegar, bay leaves, lemon and tomato sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "pepper",
+    "soy_sauce",
+    "wine_vinegar",
+    "bay_leaf",
+    "lemon",
+    "tomato_sauce"
+   ]
+  },
+  {
+   "ru": "Оставьте говядину мариноваться.",
+   "en": "Leave the beef to marinate.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Переложите говядину вместе с маринадом в кастрюлю.",
+   "en": "Put the beef in a pot with the remaining marinade.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Влейте воду и доведите до кипения.",
+   "en": "Add the water and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Добавьте бульонный кубик и перемешайте.",
+   "en": "Add the stock cube and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "stock_cube"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и тушите на слабом огне.",
+   "en": "Cover the pot and cook over low heat.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Переверните куски говядины.",
+   "en": "Turn the beef over.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Добавьте томатную пасту и тушите, пока говядина не станет мягкой, затем отставьте.",
+   "en": "Add the tomato paste and keep cooking until the beef is tender, then set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato_puree",
+    "beef"
+   ]
+  },
+  {
+   "ru": "Разогрейте масло в сковороде и обжарьте картофель с обеих сторон до румяности.",
+   "en": "Heat oil in a pan and fry the potatoes on both sides until browned.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Переложите картофель на чистую тарелку.",
+   "en": "Transfer the potatoes to a clean plate.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Так же обжарьте морковь.",
+   "en": "Fry the carrots the same way.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Оставьте в сковороде немного масла и обжарьте лук с чесноком, пока лук не станет мягким.",
+   "en": "Keep a little of the oil in the pan and sauté the onion and garlic until the onion softens.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Влейте соус от тушёной говядины и доведите до кипения.",
+   "en": "Pour in the sauce from the beef stew and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте говядину и готовьте.",
+   "en": "Add the beef and cook.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Добавьте сливочное масло и дайте ему растаять.",
+   "en": "Add the butter and let it melt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Готовьте, пока соус не уварится вдвое.",
+   "en": "Keep cooking until the sauce has reduced by half.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

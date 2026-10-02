@@ -1,0 +1,82 @@
+{
+ "nameRu": "Курица с чили и базиликом в воке",
+ "descriptionRu": "Тайская курица, обжаренная в воке с чесноком, шалотом, чили и базиликом.",
+ "descriptionEn": "Thai chicken stir-fried with garlic, shallots, chillies and basil.",
+ "steps": [
+  {
+   "ru": "Сильно раскалите вок или большую сковороду и влейте половину масла.",
+   "en": "Heat a wok or large frying pan until very hot, then add half of the oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Когда масло сильно разогреется, добавьте курицу и обжаривайте на сильном огне до румяности со всех сторон.",
+   "en": "When it is very hot, add the chicken and stir-fry over a high heat until browned all over.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Выньте курицу шумовкой и отложите.",
+   "en": "Using a slotted spoon, take the chicken out of the pan and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Снова разогрейте вок и влейте оставшееся масло.",
+   "en": "Reheat the wok and add the remaining oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и шалот и обжаривайте до золотистого цвета.",
+   "en": "Toss in the garlic and shallots and stir-fry until golden brown.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "garlic",
+    "shallot"
+   ]
+  },
+  {
+   "ru": "Верните курицу в вок, добавьте чили, рыбный соус, соевый соус и сахар.",
+   "en": "Return the chicken to the wok and add the chillies, fish sauce, soy sauce and sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken",
+    "red_chilli",
+    "fish_sauce",
+    "soy_sauce",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Обжаривайте на сильном огне, пока курица не будет готова.",
+   "en": "Stir-fry over a high heat until the chicken is cooked through.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "ru": "Вмешайте листья базилика и сразу подавайте.",
+   "en": "Stir in the basil leaves and serve at once.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "basil"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,74 @@
+{
+ "nameRu": "Матамбре а-ля пицца",
+ "descriptionRu": "Аргентинский говяжий стейк на гриле с томатным соусом, моцареллой, орегано и оливками.",
+ "descriptionEn": "Argentinian grilled beef flank topped with tomato sauce, mozzarella, oregano and olives.",
+ "steps": [
+  {
+   "ru": "Слегка надрежьте мясо с обеих сторон — так оно станет мягче и прожарится равномернее.",
+   "en": "Lightly score the steak on both sides so it is more tender and cooks more evenly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  },
+  {
+   "ru": "Посолите и поперчите мясо.",
+   "en": "Season the steak with salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Обжарьте мясо на гриле с одной стороны до полуготовности.",
+   "en": "Grill one side until half-cooked.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  },
+  {
+   "ru": "Переверните мясо и смажьте обжаренную сторону томатным соусом.",
+   "en": "Turn the steak and spread tomato sauce over the cooked side.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank",
+    "tomato_sauce"
+   ]
+  },
+  {
+   "ru": "Выложите сверху моцареллу, орегано и оливки.",
+   "en": "Top with the mozzarella, oregano and olives.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mozzarella",
+    "oregano",
+    "green_olives"
+   ]
+  },
+  {
+   "ru": "Жарьте на гриле, пока сыр не расплавится и не начнёт пузыриться.",
+   "en": "Grill until the cheese is melted and bubbling.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mozzarella"
+   ]
+  },
+  {
+   "ru": "Нарежьте и подавайте горячим.",
+   "en": "Slice and serve hot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_flank"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

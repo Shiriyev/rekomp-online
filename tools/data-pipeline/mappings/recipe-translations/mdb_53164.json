@@ -1,0 +1,54 @@
+{
+ "nameRu": "Курица по-испански",
+ "descriptionRu": "Куриные бёдра, запечённые с луком, паприкой и лимоном.",
+ "descriptionEn": "Chicken thighs baked with onions, paprika and lemon.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 190 °C (170 °C с конвекцией).",
+   "en": "Heat the oven to 190 °C (170 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите все ингредиенты в большую широкую форму для запекания.",
+   "en": "Put all the ingredients into a large, wide ovenproof dish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "onion",
+    "paprika_powder",
+    "lemon",
+    "parsley",
+    "chicken_stock",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Перемешайте всё руками и приправьте.",
+   "en": "Mix everything together with your hands and season.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Запекайте, пока курица не зарумянится, а лук не станет мягким. Через 20 минут перемешайте лук.",
+   "en": "Bake until the chicken is golden and the onions tender, stirring the onions after 20 mins.",
+   "timerSec": 2700,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "onion"
+   ]
+  },
+  {
+   "ru": "Подавайте с рисом.",
+   "en": "Serve with rice.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

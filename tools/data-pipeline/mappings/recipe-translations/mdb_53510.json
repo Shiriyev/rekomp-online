@@ -1,0 +1,135 @@
+{
+ "nameRu": "Омар по-каймански",
+ "descriptionRu": "Мясо омара, тушённое со сладким и острым перцем, тимьяном и чесноком в лёгком соусе.",
+ "descriptionEn": "Lobster meat simmered with sweet and hot peppers, thyme and garlic in a light sauce.",
+ "steps": [
+  {
+   "ru": "Промойте омаров под холодной проточной водой.",
+   "en": "Rinse the lobsters under cold running water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения подсоленную воду в большой кастрюле.",
+   "en": "Bring salted water to the boil in a large pot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt"
+   ]
+  },
+  {
+   "ru": "Быстро опустите омаров в кипяток головой вниз.",
+   "en": "Quickly plunge the lobsters headfirst into the boiling water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и варите, пока омары не покраснеют.",
+   "en": "Cover and boil until the lobsters turn red.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Выньте омаров и дайте им остыть.",
+   "en": "Remove the lobsters and let them cool.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Отделите хвосты, разрежьте панцирь до середины и выньте мясо.",
+   "en": "Remove the tails and cut the shell down the middle to take out the meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Разрежьте мясо хвоста вдоль и удалите кишечную вену.",
+   "en": "Cut the tail meat down the middle and remove the vein.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Открутите клешни и ножки, расколите их щипцами для орехов и выньте мясо.",
+   "en": "Twist off the claws and legs, crack them with a nutcracker and remove the meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Нарежьте мясо омара.",
+   "en": "Chop the lobster meat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Разогрейте оливковое или сливочное масло в большой сковороде на слабом огне.",
+   "en": "Heat olive oil or butter in a large pan over low heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте паприку, перец скотч-бонет, тимьян и чеснок.",
+   "en": "Sauté the peppers, Scotch bonnet, thyme and garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper",
+    "scotch_bonnet",
+    "thyme",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте соль и куриный бульон.",
+   "en": "Add the salt and chicken stock.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Добавьте мясо омара и тушите.",
+   "en": "Add the lobster meat and simmer.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "lobster"
+   ]
+  },
+  {
+   "ru": "Загустите соус кукурузным крахмалом, разведённым в воде.",
+   "en": "Thicken the sauce with the cornstarch mixed with water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch"
+   ]
+  },
+  {
+   "ru": "Подавайте с овощами, салатом или рисом.",
+   "en": "Serve with vegetables, salad or rice.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

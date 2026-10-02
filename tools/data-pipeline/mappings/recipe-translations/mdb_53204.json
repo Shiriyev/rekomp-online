@@ -1,0 +1,64 @@
+{
+ "nameRu": "Куриные шашлычки с красной пастой карри",
+ "descriptionRu": "Шашлычки из курицы и овощей в тайской красной пасте карри с кокосовым молоком.",
+ "descriptionEn": "Chicken and vegetable skewers coated in Thai red curry paste and coconut milk.",
+ "steps": [
+  {
+   "ru": "Разогрейте гриль или сковороду-гриль до сильного жара.",
+   "en": "Fire up the barbecue or heat a griddle pan to high.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте куриную грудку кусочками.",
+   "en": "Cut the chicken breasts into pieces.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Смешайте в миске курицу, пасту карри и кокосовое молоко, чтобы курица равномерно покрылась.",
+   "en": "Tip the chicken, curry paste and coconut milk into a bowl and mix well until the chicken is evenly coated.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "thai_red_curry_paste",
+    "coconut_milk"
+   ]
+  },
+  {
+   "ru": "Нанижите на шпажки сладкий перец, кабачок, красный лук и курицу.",
+   "en": "Thread the pepper, courgette, red onion and chicken onto skewers.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper",
+    "courgette",
+    "red_onion",
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Жарьте шашлычки, время от времени переворачивая, пока курица не прожарится и не подрумянится.",
+   "en": "Cook the skewers, turning every so often, until the chicken is cooked through and charred.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Подавайте с рисом с зеленью, салатом и половинкой лайма.",
+   "en": "Serve with herby rice, salad and a lime half to squeeze over.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

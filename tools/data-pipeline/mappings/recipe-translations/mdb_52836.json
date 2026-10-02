@@ -1,0 +1,194 @@
+{
+ "nameRu": "Фидеуа с морепродуктами",
+ "descriptionRu": "Испанская тонкая вермишель, обжаренная и приготовленная в рыбном бульоне с шафраном, мидиями, креветками и кальмарами.",
+ "descriptionEn": "Spanish toasted vermicelli cooked in saffron fish stock with mussels, prawns and squid.",
+ "steps": [
+  {
+   "ru": "Вскипятите чайник.",
+   "en": "Boil the kettle.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Высыпьте мидии в дуршлаг и промойте под холодной водой.",
+   "en": "Empty the mussels into a colander and rinse under cold water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Выбросьте мидии с разбитыми раковинами, а также те, что не закрываются, если по ним постучать.",
+   "en": "Throw away any mussels with broken shells and any that stay open when tapped.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Удалите ножом наросты и «бородки» и хорошо промойте раковины.",
+   "en": "Pull off any barnacles or beards with a cutlery knife and rinse the shells well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Оставьте мидии в дуршлаге под холодной влажной тканью до начала готовки.",
+   "en": "Keep the mussels in the colander, covered with a cold damp cloth, until ready to cook.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Очистите креветки от панциря только на туловище, оставив головы и хвосты.",
+   "en": "Peel the prawn shells on the body only, leaving the heads and tails intact.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Надрежьте креветки вдоль спинки, удалите кишечную вену и уберите в холодильник до начала готовки.",
+   "en": "Score down the backs of the prawns, pull out the entrails and chill until ready to cook.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Положите шафран в небольшую чашку, залейте горячей водой из чайника и оставьте.",
+   "en": "Put the saffron in a small cup, cover with kettle-hot water and set aside.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "saffron"
+   ]
+  },
+  {
+   "ru": "Разломайте вермишель руками в миске на кусочки около 1 см.",
+   "en": "Crush the vermicelli in a bowl with your hands into pieces about 1 cm long.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Разогрейте оливковое масло в большой сковороде с высокими бортами или в сковороде для паэльи.",
+   "en": "Heat the oil in a large deep frying pan or a paella pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте лук, помешивая, до мягкости.",
+   "en": "Cook the onion, stirring, until soft.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и готовьте ещё немного.",
+   "en": "Add the garlic and cook a little more.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Всыпьте вермишель и обжаривайте, время от времени помешивая, до золотисто-коричневого цвета.",
+   "en": "Tip in the vermicelli and cook, stirring from time to time, until toasted brown.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Вмешайте паприку.",
+   "en": "Stir in the paprika.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "paprika_powder"
+   ]
+  },
+  {
+   "ru": "На умеренном огне вмешайте рыбу, кальмаров и шафран вместе с водой, хорошо посолите и поперчите.",
+   "en": "Over moderate heat, stir through the fish, squid and saffron with its water, seasoning well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "squid",
+    "saffron"
+   ]
+  },
+  {
+   "ru": "Разровняйте всё ровным слоем, залейте горячим рыбным бульоном и разложите сверху помидоры.",
+   "en": "Spread everything in an even layer, pour over the hot fish stock and scatter the tomatoes on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_stock",
+    "tomato"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения, плотно накройте крышкой или фольгой и готовьте на среднем огне.",
+   "en": "Bring to a simmer, cover tightly with a lid or foil and cook over medium heat.",
+   "timerSec": 360,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Снимите крышку и перемешайте, чтобы подсохший верхний слой вермишели ушёл вниз.",
+   "en": "Uncover and stir to incorporate the dry top layer of pasta.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pasta"
+   ]
+  },
+  {
+   "ru": "Воткните мидии в вермишель вертикально, сгибом раковины вниз.",
+   "en": "Push the mussels into the pasta hinge-side down so they stand straight up.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Разложите сверху креветки, плотно накройте и готовьте, пока мидии не раскроются, а креветки не порозовеют.",
+   "en": "Arrange the prawns on top, cover tightly and cook until the mussels open and the prawns turn pink.",
+   "timerSec": 360,
+   "ingredientRefs": [
+    "prawn",
+    "mussel"
+   ]
+  },
+  {
+   "ru": "Потомите ещё, чтобы выпарилась большая часть жидкости; немного оставьте, чтобы вермишель не слиплась.",
+   "en": "Simmer a little longer to cook off most of the liquid, leaving a little so the pasta does not stick.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Дайте постоять.",
+   "en": "Leave to sit.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Полейте лимонным соком, разложите сверху дольки лимона и посыпьте петрушкой.",
+   "en": "Squeeze over the lemon juice, arrange the wedges on top and scatter with parsley.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon",
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

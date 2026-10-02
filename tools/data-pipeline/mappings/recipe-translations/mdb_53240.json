@@ -1,0 +1,65 @@
+{
+ "nameRu": "Тофу с зеленью и кешью в воке",
+ "descriptionRu": "Быстрое вегетарианское блюдо из тофу, брокколи, пак-чоя и соевых бобов в соусе хойсин.",
+ "descriptionEn": "A quick vegetarian stir-fry of tofu, broccoli, pak choi and soya beans in hoisin sauce.",
+ "steps": [
+  {
+   "ru": "Разогрейте масло в антипригарном воке.",
+   "en": "Heat the oil in a non-stick wok.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Добавьте брокколи и обжаривайте на сильном огне, пока она не станет чуть мягкой. Если начнёт пригорать, подлейте немного воды.",
+   "en": "Add the broccoli and fry on a high heat until just tender, adding a little water if it begins to catch.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и чили и обжаривайте.",
+   "en": "Add the garlic and chilli and fry.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Добавьте зелёный лук, соевые бобы, пак-чой и тофу и перемешайте.",
+   "en": "Toss through the spring onions, soya beans, pak choi and tofu.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion",
+    "soybeans",
+    "pak_choi",
+    "tofu"
+   ]
+  },
+  {
+   "ru": "Обжаривайте, помешивая.",
+   "en": "Stir-fry.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте соус хойсин, соевый соус и кешью и прогрейте.",
+   "en": "Add the hoisin sauce, soy sauce and cashews and warm through.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "hoisin_sauce",
+    "soy_sauce",
+    "cashew"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

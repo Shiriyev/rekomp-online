@@ -1,0 +1,169 @@
+{
+ "nameRu": "Кеджери с копчёной пикшей",
+ "descriptionRu": "Пряный рис с копчёной рыбой, яйцами и петрушкой — классический британский завтрак индийского происхождения.",
+ "descriptionEn": "Spiced rice with smoked fish, eggs and parsley — a classic British breakfast with Indian roots.",
+ "steps": [
+  {
+   "ru": "Растопите сливочное масло в большой кастрюле.",
+   "en": "Melt the butter in a large saucepan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Добавьте мелко нарезанный лук и готовьте на среднем огне, пока он не станет мягким, но не зарумянится.",
+   "en": "Add the finely chopped onion and cook gently over a medium heat until softened but not browned.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "ru": "Добавьте надломленные коробочки кардамона, куркуму, палочку корицы и лавровый лист и прогрейте.",
+   "en": "Stir in the split cardamom pods, turmeric, cinnamon stick and bay leaves and cook.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "cardamom",
+    "turmeric",
+    "cinnamon",
+    "bay_leaf"
+   ]
+  },
+  {
+   "ru": "Всыпьте рис басмати и перемешивайте, пока он весь не покроется пряным маслом.",
+   "en": "Tip in the basmati rice and stir until it is all well coated in the spicy butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Влейте бульон, посолите и доведите до кипения.",
+   "en": "Pour in the stock, add salt and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Перемешайте один раз, чтобы рис не прилип ко дну.",
+   "en": "Stir once to release any rice from the bottom of the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Накройте плотной крышкой, убавьте огонь до слабого и варите.",
+   "en": "Cover with a close-fitting lid, reduce the heat to low and cook very gently.",
+   "timerSec": 720,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "ru": "Тем временем доведите до кипения воду в большой неглубокой сковороде.",
+   "en": "Meanwhile, bring some water to the boil in a large shallow pan.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите филе пикши и варите на слабом огне, пока рыба не будет едва готова.",
+   "en": "Add the haddock fillet and simmer until the fish is just cooked.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "smoked_haddock"
+   ]
+  },
+  {
+   "ru": "Выньте рыбу на тарелку и дайте ей немного остыть.",
+   "en": "Lift the fish out onto a plate and leave until cool enough to handle.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "smoked_haddock"
+   ]
+  },
+  {
+   "ru": "Сварите яйца вкрутую.",
+   "en": "Hard-boil the eggs.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Разберите рыбу на кусочки, удалив кожу и кости.",
+   "en": "Flake the fish, discarding any skin and bones.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "smoked_haddock"
+   ]
+  },
+  {
+   "ru": "Слейте воду и слегка остудите яйца.",
+   "en": "Drain the eggs and cool slightly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Очистите и нарежьте яйца.",
+   "en": "Peel and chop the eggs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Снимите крышку с риса и при желании удалите лавровый лист, корицу и кардамон.",
+   "en": "Uncover the rice and remove the bay leaves, cinnamon stick and cardamom pods if you wish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bay_leaf",
+    "cinnamon",
+    "cardamom"
+   ]
+  },
+  {
+   "ru": "Аккуратно вмешайте вилкой рыбу и яйца.",
+   "en": "Gently fork in the fish and the chopped eggs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "smoked_haddock",
+    "egg"
+   ]
+  },
+  {
+   "ru": "Снова накройте и держите на огне, пока рыба не прогреется.",
+   "en": "Cover again and return to the heat until the fish has heated through.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Вмешайте почти всю рубленую петрушку, посолите и поперчите по вкусу.",
+   "en": "Gently stir in almost all the parsley and season with salt and black pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Подавайте, посыпав оставшейся петрушкой, с дольками лимона.",
+   "en": "Serve scattered with the remaining parsley and garnished with lemon wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "lemon"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

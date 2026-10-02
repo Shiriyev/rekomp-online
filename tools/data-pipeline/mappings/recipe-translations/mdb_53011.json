@@ -1,0 +1,101 @@
+{
+ "nameRu": "Греческий салат с киноа и курицей",
+ "descriptionRu": "Киноа с фетой, маслинами, мятой и красным луком под куриным филе с острым чесночным маслом.",
+ "descriptionEn": "Quinoa with feta, olives, mint and red onion, topped with chicken and spicy garlic butter.",
+ "steps": [
+  {
+   "ru": "Отварите киноа по инструкции на упаковке.",
+   "en": "Cook the quinoa following the pack instructions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "quinoa"
+   ]
+  },
+  {
+   "ru": "Промойте киноа холодной водой и тщательно откиньте.",
+   "en": "Rinse the quinoa in cold water and drain thoroughly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "quinoa"
+   ]
+  },
+  {
+   "ru": "Тем временем разотрите сливочное масло с чили и чесноком в пасту.",
+   "en": "Meanwhile, mix the butter, chilli and garlic into a paste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter",
+    "red_chilli",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Перемешайте куриную грудку с двумя чайными ложками оливкового масла, солью и перцем.",
+   "en": "Toss the chicken breast in 2 tsp of the olive oil with some seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте курицу на раскалённой сковороде-гриль с каждой стороны до готовности.",
+   "en": "Cook the chicken in a hot griddle pan on each side until cooked through.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Переложите курицу на тарелку, разложите сверху острое масло и оставьте, чтобы оно растаяло.",
+   "en": "Transfer the chicken to a plate, dot with the spicy butter and set aside to melt.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "butter"
+   ]
+  },
+  {
+   "ru": "Выложите в миску помидоры, маслины, красный лук, фету и мяту.",
+   "en": "Tip the tomatoes, olives, red onion, feta and mint into a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "black_olives",
+    "red_onion",
+    "feta",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Добавьте готовую киноа.",
+   "en": "Toss in the cooked quinoa.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "quinoa"
+   ]
+  },
+  {
+   "ru": "Заправьте оставшимся оливковым маслом, соком и цедрой лимона, хорошо приправьте.",
+   "en": "Stir through the remaining olive oil, lemon juice and zest, and season well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Подавайте с курицей сверху, полив выделившимся сливочным соком.",
+   "en": "Serve with the chicken on top, drizzled with the buttery chicken juices.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -1,0 +1,78 @@
+{
+ "nameRu": "Суп с лососем и рисовой лапшой",
+ "descriptionRu": "Лёгкий бульон с тайской пастой карри, рисовой лапшой, шиитаке, кукурузой и лососем.",
+ "descriptionEn": "A light stock with Thai curry paste, rice noodles, shiitake, sweetcorn and salmon.",
+ "steps": [
+  {
+   "ru": "Влейте куриный бульон в большую кастрюлю и доведите до кипения.",
+   "en": "Pour the stock into a large pan and bring to the boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Вмешайте пасту карри.",
+   "en": "Stir in the curry paste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "thai_red_curry_paste"
+   ]
+  },
+  {
+   "ru": "Добавьте лапшу и варите.",
+   "en": "Add the noodles and cook.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Добавьте грибы и кукурузу и варите ещё немного.",
+   "en": "Tip in the mushrooms and sweetcorn and cook a little longer.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "shiitake",
+    "sweetcorn"
+   ]
+  },
+  {
+   "ru": "Положите лосось и варите до готовности.",
+   "en": "Add the salmon and cook until cooked through.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Снимите с огня и вмешайте сок лайма, соевый соус и щепотку сахара.",
+   "en": "Remove from the heat and stir in the lime juice, soy sauce and a pinch of sugar.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime",
+    "soy_sauce",
+    "brown_sugar"
+   ]
+  },
+  {
+   "ru": "Разлейте суп по тарелкам.",
+   "en": "Ladle into bowls.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Перед подачей посыпьте кинзой.",
+   "en": "Sprinkle over the coriander just before serving.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

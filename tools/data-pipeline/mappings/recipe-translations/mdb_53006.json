@@ -1,0 +1,92 @@
+{
+ "nameRu": "Мусака",
+ "descriptionRu": "Быстрая мусака из говядины с картофелем и баклажаном под запечённой йогуртовой заливкой с пармезаном.",
+ "descriptionEn": "A quick beef moussaka with potatoes and aubergine under a baked yogurt and parmesan topping.",
+ "steps": [
+  {
+   "ru": "Разогрейте гриль духовки на максимум.",
+   "en": "Heat the grill to high.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обжарьте говядину на сильном огне в глубокой сковороде, пригодной для духовки, до румяности.",
+   "en": "Brown the beef in a deep ovenproof frying pan over a high heat.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "ru": "Тем временем наколите баклажан вилкой.",
+   "en": "Meanwhile, prick the aubergine with a fork.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Приготовьте баклажан в микроволновке на полной мощности до мягкости.",
+   "en": "Microwave the aubergine on High until soft.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Смешайте йогурт, яйцо и пармезан, слегка посолите и поперчите.",
+   "en": "Mix the yogurt, egg and parmesan together and season lightly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "egg",
+    "parmesan"
+   ]
+  },
+  {
+   "ru": "Добавьте к говядине помидоры, томатную пасту и картофель, приправьте и прогрейте.",
+   "en": "Stir the tomatoes, purée and potatoes into the beef, season and heat through.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato",
+    "tomato_puree",
+    "potato",
+    "beef"
+   ]
+  },
+  {
+   "ru": "Разровняйте поверхность тыльной стороной ложки.",
+   "en": "Smooth the surface with the back of a spoon.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте готовый баклажан ломтиками и выложите сверху.",
+   "en": "Slice the cooked aubergine and arrange it on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "aubergine"
+   ]
+  },
+  {
+   "ru": "Залейте баклажаны йогуртовой смесью и разровняйте.",
+   "en": "Pour the yogurt mixture over the aubergine and smooth it out evenly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Поставьте под гриль, пока заливка не схватится и не зарумянится.",
+   "en": "Grill until the topping has set and turned golden.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

@@ -1,0 +1,96 @@
+{
+ "nameRu": "Быстрый кальмар с солью и перцем",
+ "descriptionRu": "Кальмар с сеточкой надрезов, обжаренный на гриле с солью, перцем и смесью «пять специй».",
+ "descriptionEn": "Scored squid griddled with salt, pepper and Chinese five-spice.",
+ "steps": [
+  {
+   "ru": "Вскройте очищенные тушки кальмара кухонными ножницами и разверните.",
+   "en": "Using kitchen scissors, cut open the cleaned squid bodies and open them out.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Хорошо промойте и обсушите.",
+   "en": "Wash well, then pat dry.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Крупного кальмара разрежьте на четыре примерно квадратных куска, мелкого просто разверните.",
+   "en": "Cut a large squid into four roughly square pieces; small squid can just be opened up.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Кончиком острого ножа сделайте на поверхности аккуратные надрезы сеточкой.",
+   "en": "Using the tip of a sharp knife, score the top in a neat criss-cross.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Смажьте маслом и отставьте, пока разогревается гриль или сковорода-гриль.",
+   "en": "Brush with oil and set aside while you heat the barbecue or griddle.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil",
+    "squid"
+   ]
+  },
+  {
+   "ru": "Смешайте морскую соль, смесь «пять специй» и свежемолотый чёрный перец.",
+   "en": "Mix sea salt, Chinese five-spice and freshly ground black pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "five_spice"
+   ]
+  },
+  {
+   "ru": "Перед самой жаркой посыпьте кальмара смесью с обеих сторон по вкусу.",
+   "en": "Just before cooking, sprinkle both sides of the squid with the mix to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Жарьте на сильно разогретой сковороде-гриль с каждой стороны, пока кальмар не начнёт закручиваться.",
+   "en": "Cook on a hot griddle pan on each side until the squid starts to curl.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "squid"
+   ]
+  },
+  {
+   "ru": "Щипцами переложите на блюдо и сбрызните кунжутным маслом.",
+   "en": "Transfer with tongs to a serving plate and drizzle with a little sesame oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_oil"
+   ]
+  },
+  {
+   "ru": "Украсьте листьями кинзы и подавайте со сладким соусом чили для макания.",
+   "en": "Garnish with coriander leaves and serve with sweet chilli sauce for dipping.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "sweet_chilli_sauce"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

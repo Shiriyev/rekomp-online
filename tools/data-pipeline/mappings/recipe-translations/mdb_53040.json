@@ -1,0 +1,147 @@
+{
+ "nameRu": "Эмпанадас с креветками и зелёным луком",
+ "descriptionRu": "Запечённые пирожки из нежного теста с начинкой из креветок, зелёного лука, чили и феты.",
+ "descriptionEn": "Baked pastries with a tender dough and a filling of prawns, spring onion, chilli and feta.",
+ "steps": [
+  {
+   "ru": "Для теста разотрите сливочное масло с мукой.",
+   "en": "For the dough, rub the butter into the flour.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter",
+    "flour"
+   ]
+  },
+  {
+   "ru": "Добавьте яичный белок и половину желтка (остаток сохраните), уксус, щепотку соли и столько холодной воды, чтобы получилось мягкое тесто.",
+   "en": "Add the egg white and half the yolk (keep the rest), the vinegar, a pinch of salt and enough cold water to make a soft dough.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg",
+    "wine_vinegar"
+   ]
+  },
+  {
+   "ru": "Вымесите тесто на присыпанной мукой поверхности до гладкости.",
+   "en": "Knead on a floured surface until smooth.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "ru": "Заверните тесто в плёнку и дайте ему отдохнуть.",
+   "en": "Wrap the dough and leave it to rest.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте духовку до 180 °C (160 °C с конвекцией, газ 4).",
+   "en": "Heat the oven to 180 °C (fan 160 °C, gas 4).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Обрежьте зелёные концы зелёного лука, а остальное мелко нарежьте.",
+   "en": "Trim the green ends of the spring onions and finely slice the rest.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного оливкового масла и аккуратно обжарьте лук до мягкости, не давая ему подрумяниться.",
+   "en": "Heat a little olive oil in a pan and fry the onions gently until soft but not browned.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil",
+    "spring_onion"
+   ]
+  },
+  {
+   "ru": "Добавьте чили и чеснок и перемешайте.",
+   "en": "Add the chilli and garlic and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте креветки и готовьте, пока они не станут непрозрачными. Хорошо посолите и поперчите.",
+   "en": "Add the prawns and cook until opaque. Season well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Выньте креветки и уварите оставшийся сок до загустения.",
+   "en": "Scoop out the prawns and bubble the juices until they thicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Верните креветки в сковороду.",
+   "en": "Add the prawns back to the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Разделите тесто на 8 шариков и тонко раскатайте каждый в круг на присыпанной мукой поверхности.",
+   "en": "Divide the dough into 8 balls and roll each out into a thin circle on a floured surface.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "ru": "Выложите начинку на половину каждого круга и посыпьте сверху фетой.",
+   "en": "Put some filling on one half of each circle and sprinkle the feta on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn",
+    "feta"
+   ]
+  },
+  {
+   "ru": "Накройте второй половиной теста, подрежьте край и плотно защипните.",
+   "en": "Fold the other half over, trim the edge and crimp tightly to seal.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите эмпанадас на смазанный маслом противень — на бок или стоя на незащипнутом крае.",
+   "en": "Put the empanadas on an oiled baking sheet, on their sides or standing on the uncrimped edge.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Смешайте оставшийся желток с каплей воды и смажьте верх эмпанадас.",
+   "en": "Mix the leftover yolk with a splash of water and brush the tops of the empanadas.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Выпекайте до золотистого цвета и лёгкой хрустящей корочки по краям.",
+   "en": "Bake until golden and slightly crisp around the edges.",
+   "timerSec": 1800,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

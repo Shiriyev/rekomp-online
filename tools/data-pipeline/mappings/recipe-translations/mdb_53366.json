@@ -1,0 +1,125 @@
+{
+ "nameRu": "Говядина с брокколи в воке",
+ "descriptionRu": "Китайская говядина, быстро обжаренная в воке с брокколи в устричном соусе.",
+ "descriptionEn": "Chinese-style beef quickly stir-fried with broccoli in oyster sauce.",
+ "steps": [
+  {
+   "ru": "Для маринада смешайте в миске соевый соус, херес, кукурузный крахмал и чёрный перец.",
+   "en": "For the marinade, stir together soy sauce, sherry, cornstarch and black pepper in a medium bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "sherry",
+    "cornstarch",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте ломтики говядины, перемешайте и оставьте.",
+   "en": "Add the beef slices, stir until coated and leave to stand.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Для соуса смешайте в небольшой миске устричный соус, херес, соевый соус и куриный бульон.",
+   "en": "For the sauce, stir together the oyster sauce, sherry, soy sauce and chicken stock in a small bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oyster_sauce",
+    "sherry",
+    "soy_sauce",
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Доведите кастрюлю воды до кипения.",
+   "en": "Bring a pot of water to the boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Опустите брокколи и варите до мягкости с хрустом.",
+   "en": "Add the broccoli and cook until crisp-tender.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Тщательно откиньте брокколи на дуршлаг.",
+   "en": "Drain the broccoli thoroughly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  },
+  {
+   "ru": "Сильно раскалите вок или большую сковороду, влейте масло и распределите его по поверхности.",
+   "en": "Heat a wok or large frying pan over high heat until very hot, add the oil and swirl to coat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Выложите говядину одним слоем, чтобы ломтики по возможности не касались друг друга.",
+   "en": "Add the beef and spread it out in a single layer, preferably not touching.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Жарьте говядину, не трогая.",
+   "en": "Fry the beef undisturbed.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "ru": "Переверните ломтики, добавьте чеснок и жарьте, пока мясо не перестанет быть розовым.",
+   "en": "Flip the beef, add the garlic and fry until no longer pink.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "beef_steak",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Размешайте крахмал в воде.",
+   "en": "Dissolve the cornstarch in the water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Влейте соус и крахмальную смесь и помешивайте, пока соус не закипит и не загустеет.",
+   "en": "Pour in the sauce and the cornstarch slurry and stir until the sauce boils and thickens.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "oyster_sauce",
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Вмешайте брокколи и сразу подавайте с рисом или без гарнира.",
+   "en": "Stir in the broccoli and serve immediately, with steamed rice or on its own.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "broccoli"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

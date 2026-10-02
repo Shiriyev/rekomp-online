@@ -1,0 +1,126 @@
+{
+ "nameRu": "Куриный салат с грибами и беконом",
+ "descriptionRu": "Салат из отварной курицы в горчично-сливочной заправке с хрустящим беконом и жареными шампиньонами.",
+ "descriptionEn": "Poached chicken in a creamy mustard dressing topped with crisp bacon and fried mushrooms.",
+ "steps": [
+  {
+   "ru": "Положите куриную грудку в кастрюлю и залейте водой.",
+   "en": "Place the chicken breast in a saucepan and cover with water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения, посолите и варите на слабом огне.",
+   "en": "Bring to the boil, add salt and simmer.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "salt",
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Остудите курицу и разберите мясо на волокна двумя вилками.",
+   "en": "Let the chicken cool, then shred the meat with two forks.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Мелко нарежьте лук-шалот.",
+   "en": "Finely chop the shallot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shallot"
+   ]
+  },
+  {
+   "ru": "Смешайте майонез, крем-фреш, горчицу и яблочный уксус.",
+   "en": "Stir the mayonnaise, crème fraîche, Dijon mustard and apple cider vinegar together.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mayonnaise",
+    "creme_fraiche",
+    "mustard",
+    "cider_vinegar"
+   ]
+  },
+  {
+   "ru": "Приправьте солью, перцем и, по вкусу, дополнительной горчицей.",
+   "en": "Season with salt, pepper and extra mustard to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper",
+    "mustard"
+   ]
+  },
+  {
+   "ru": "Соедините заправку с луком и курицей.",
+   "en": "Combine the dressing with the shallot and chicken.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shallot",
+    "chicken_breast"
+   ]
+  },
+  {
+   "ru": "Обжарьте бекон до хруста и переложите на тарелку с бумажными полотенцами.",
+   "en": "Fry the bacon until crisp and transfer to a plate lined with paper towels.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bacon"
+   ]
+  },
+  {
+   "ru": "Промойте шампиньоны и нарежьте ломтиками.",
+   "en": "Rinse and slice the mushrooms.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Обжарьте грибы в той же сковороде, где жарился бекон, до золотистого цвета.",
+   "en": "Fry the mushrooms in the bacon pan until golden.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Слегка посолите и поперчите грибы.",
+   "en": "Season the mushrooms with a little salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Выложите салат на блюдо, сверху разложите бекон, грибы и рубленую петрушку.",
+   "en": "Arrange the chicken salad in a serving dish and top with the bacon, mushrooms and chopped parsley.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bacon",
+    "mushroom",
+    "parsley"
+   ]
+  },
+  {
+   "ru": "Подавайте на ломтике светлого или тёмного хлеба.",
+   "en": "Serve on a slice of white or dark bread.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

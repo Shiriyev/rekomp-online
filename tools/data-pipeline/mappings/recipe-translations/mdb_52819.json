@@ -1,0 +1,100 @@
+{
+ "nameRu": "Тако с рыбой в каджунских специях",
+ "descriptionRu": "Белая рыба в остром каджунском маринаде в мягких тортильях с авокадо, сальсой и сметанным соусом.",
+ "descriptionEn": "White fish in a spicy Cajun coating, served in soft tortillas with avocado, salsa and a sour cream dressing.",
+ "steps": [
+  {
+   "ru": "На большой тарелке смешайте каджунскую приправу и кайенский перец с небольшим количеством соли и перца.",
+   "en": "On a large plate, mix the Cajun seasoning and cayenne pepper with a little salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cajun_seasoning",
+    "cayenne"
+   ]
+  },
+  {
+   "ru": "Обваляйте рыбу в смеси со всех сторон.",
+   "en": "Coat the fish all over with the spice mix.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного растительного масла на сковороде.",
+   "en": "Heat a little oil in a frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Выложите рыбу и обжарьте на среднем огне до золотистого цвета.",
+   "en": "Add the fish and fry over a medium heat until golden.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь и жарьте рыбу до готовности. Если она не помещается, жарьте в несколько заходов.",
+   "en": "Reduce the heat and keep frying until the fish is cooked through. Cook in batches if the pan is too small.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "ru": "Тем временем приготовьте соус: смешайте сметану, сок лимона и чеснок, слегка посолите и поперчите.",
+   "en": "Meanwhile, make the dressing: combine the sour cream, lemon juice and garlic with a little seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sour_cream",
+    "lemon",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Прогрейте тортильи в микроволновке, чтобы они стали мягкими.",
+   "en": "Warm the tortillas in the microwave to soften them.",
+   "timerSec": 10,
+   "ingredientRefs": [
+    "tortilla"
+   ]
+  },
+  {
+   "ru": "Выложите на тортильи авокадо, салат и зелёный лук.",
+   "en": "Pile the avocado, lettuce and spring onion onto the tortillas.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tortilla",
+    "avocado",
+    "lettuce",
+    "spring_onion"
+   ]
+  },
+  {
+   "ru": "Добавьте по ложке сальсы.",
+   "en": "Add a spoonful of salsa to each.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salsa"
+   ]
+  },
+  {
+   "ru": "Сверху положите крупные кусочки рыбы и полейте соусом.",
+   "en": "Top with large flakes of fish and drizzle over the dressing.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_fish",
+    "sour_cream"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

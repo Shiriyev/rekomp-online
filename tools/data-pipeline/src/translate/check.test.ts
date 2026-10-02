@@ -48,6 +48,23 @@ test('statedDurations collects single values, both ends of ranges and hours', ()
   assert.equal(statedDurations('Preheat oven to 375 F').size, 0);
 });
 
+test('statedDurations reads number words, «more» and compound durations', () => {
+  const has = (text: string, sec: number) =>
+    assert.ok(statedDurations(text).has(sec), `${text} → ${sec}`);
+  has('Cook for two minutes', 120);
+  has('fry for a minute', 60);
+  has('leave for half an hour', 1800);
+  has('simmer 5 more minutes', 300);
+  has('cook 1 more min', 60);
+  has('roast for about 1 hour 30 minutes', 5400);
+  has('fry 1 min 30 secs on each side', 90);
+  has('bake for 1 hour and 15 minutes', 4500);
+  has('bake for an hour and a half', 5400);
+  has('simmer for 1½ hours', 5400);
+  has('rest for two and a half hours', 9000);
+  assert.equal(statedDurations('Add a pinch of salt and two eggs').size, 0);
+});
+
 test('a valid translation has no errors', () => {
   assert.deepEqual(checkTranslation(ok, input), []);
 });

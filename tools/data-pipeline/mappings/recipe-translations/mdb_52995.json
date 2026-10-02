@@ -1,0 +1,166 @@
+{
+ "nameRu": "Слоппи джо со свининой барбекю",
+ "descriptionRu": "Булочки с рубленой свининой в соусе барбекю, маринованным луком и запечёнными картофельными дольками.",
+ "descriptionEn": "Buns filled with minced pork in barbecue sauce and pickled onion, with roasted potato wedges.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 450 °F (230 °C).",
+   "en": "Preheat the oven to 450 °F (230 °C).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Нарежьте картофель дольками толщиной около сантиметра.",
+   "en": "Cut the potatoes into ½-inch-thick wedges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Выложите картофель на противень, сбрызните маслом, посолите и поперчите.",
+   "en": "Toss the potatoes on a baking sheet with a drizzle of oil, salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "oil",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Запекайте картофель до румяности и мягкости.",
+   "en": "Roast the potatoes until browned and tender.",
+   "timerSec": 1500,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Тем временем очистите лук и нарежьте немного как можно тоньше, а остальное мелко порубите.",
+   "en": "Meanwhile, peel the onion, slice a little of it as thinly as possible and finely chop the rest.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_onion"
+   ]
+  },
+  {
+   "ru": "Очистите и мелко порубите чеснок.",
+   "en": "Peel and finely chop the garlic.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Разрежьте лайм пополам и выжмите сок в небольшую миску.",
+   "en": "Halve the lime and squeeze the juice into a small bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  },
+  {
+   "ru": "Разрежьте булочки пополам, смажьте срезы растопленным сливочным маслом.",
+   "en": "Halve the buns and brush the cut sides with melted butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bread_white"
+   ]
+  },
+  {
+   "ru": "Добавьте к соку лайма нарезанный тонко лук, немного сахара и щепотку соли, перемешайте и оставьте мариноваться.",
+   "en": "Add the thinly sliced onion, a little sugar and a pinch of salt to the lime juice, stir and set aside to quick-pickle.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_onion",
+    "lime",
+    "sugar",
+    "salt"
+   ]
+  },
+  {
+   "ru": "Разогрейте немного масла в большой сковороде на среднем огне, добавьте рубленый лук, посолите, поперчите и готовьте до мягкости, помешивая.",
+   "en": "Heat a drizzle of oil in a large pan over medium-high heat, add the chopped onion, season and cook, stirring, until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "oil",
+    "red_onion",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и готовьте до появления аромата.",
+   "en": "Add the garlic and cook until fragrant.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте свинину, посолите, поперчите и жарьте, разбивая на кусочки, до румяности и готовности.",
+   "en": "Add the pork, season and cook, breaking it up, until browned and cooked through.",
+   "timerSec": 360,
+   "ingredientRefs": [
+    "pork",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Пока жарится свинина, смешайте соус барбекю, маринад от лука, кетчуп, немного сахара и воды.",
+   "en": "While the pork cooks, combine the barbecue sauce, the onion pickling liquid, ketchup, a little sugar and water.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bbq_sauce",
+    "ketchup",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Влейте соус к свинине и готовьте, помешивая, до загустения. Попробуйте и досолите.",
+   "en": "Add the sauce mixture to the pork and cook, stirring, until thickened. Taste and season.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "bbq_sauce",
+    "pork",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "ru": "Подрумяньте булочки в духовке.",
+   "en": "Toast the buns in the oven until golden.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "bread_white"
+   ]
+  },
+  {
+   "ru": "Наполните булочки свининой, выложите сверху маринованный лук и полейте острым соусом.",
+   "en": "Fill the buns with the barbecue pork and top with the pickled onion and hot sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bread_white",
+    "pork",
+    "red_onion",
+    "hot_sauce"
+   ]
+  },
+  {
+   "ru": "Подавайте с картофельными дольками.",
+   "en": "Serve with the potato wedges on the side.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

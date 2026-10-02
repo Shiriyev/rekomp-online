@@ -1,0 +1,124 @@
+{
+ "nameRu": "Курица карри по-ямайски",
+ "descriptionRu": "Куриные бёдра, тушённые с картофелем в пряном соусе карри с острым перцем и тимьяном.",
+ "descriptionEn": "Chicken thighs stewed with potatoes in a spicy curry sauce with hot pepper and thyme.",
+ "steps": [
+  {
+   "ru": "Сложите в большую миску куриные бёдра, универсальную приправу, часть порошка карри, лук, зелёный лук, сладкий перец, чеснок, тимьян и, по желанию, перец скотч-бонет.",
+   "en": "Put the chicken thighs, all-purpose seasoning, some of the curry powder, onion, spring onions, green pepper, garlic, thyme and scotch bonnet (if using) into a large bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "seasoning_mix",
+    "curry_powder",
+    "onion",
+    "spring_onion",
+    "bell_pepper",
+    "garlic",
+    "thyme",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "ru": "Перемешайте так, чтобы все кусочки курицы покрылись приправами.",
+   "en": "Mix well, making sure every piece of chicken is covered with the seasoning.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Накройте и уберите мариноваться в холодильник — можно оставить на ночь.",
+   "en": "Cover and refrigerate to marinate — up to overnight.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Выньте из курицы лук, перцы и чеснок и отложите.",
+   "en": "Remove the onions, peppers and garlic from the chicken and set aside.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper",
+    "garlic",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "ru": "Разогрейте оливковое масло в большой кастрюле с толстым дном на среднем огне.",
+   "en": "Heat the olive oil in a large heavy-bottomed pot over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Добавьте оставшийся порошок карри и прогрейте, помешивая.",
+   "en": "Add the remaining curry powder and cook, stirring.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "curry_powder"
+   ]
+  },
+  {
+   "ru": "Добавьте лук, сладкий перец, чеснок, тимьян и скотч-бонет и готовьте, помешивая, пока лук не станет мягким. Если овощи суховаты, добавьте немного воды.",
+   "en": "Add the onions, green pepper, garlic, thyme and scotch bonnet and stir until the onions soften. If they look dry, add a little water.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper",
+    "garlic",
+    "thyme",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "ru": "Добавьте курицу и воду.",
+   "en": "Add the chicken and the water to the pot.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "water"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой, убавьте огонь до умеренно-слабого и тушите, иногда помешивая.",
+   "en": "Cover, reduce the heat to medium-low and cook, stirring occasionally.",
+   "timerSec": 2100,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Когда до конца останется около 15 минут, вмешайте нарезанный картофель и тушите дальше под крышкой.",
+   "en": "When about 15 minutes remain, stir in the chopped potato and continue cooking covered.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "ru": "Когда курица будет готова, а картофель — мягким, снимите кастрюлю с огня.",
+   "en": "Once the chicken is cooked and the potatoes are soft, remove from the heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посолите и поперчите по вкусу.",
+   "en": "Season with salt and pepper to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

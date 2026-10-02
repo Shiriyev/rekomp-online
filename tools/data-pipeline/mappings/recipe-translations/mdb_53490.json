@@ -1,0 +1,60 @@
+{
+ "nameRu": "Перцы, фаршированные зернёным творогом и фетой",
+ "descriptionRu": "Половинки сладкого перца с начинкой из зернёного творога, феты, зелени и лимонного сока без готовки.",
+ "descriptionEn": "No-cook sweet pepper halves filled with cottage cheese, feta, herbs and lemon juice.",
+ "steps": [
+  {
+   "ru": "Разрежьте перцы вдоль пополам.",
+   "en": "Cut the peppers in half lengthwise.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Удалите семена.",
+   "en": "Remove the seeds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Смешайте в миске фету, зернёный творог, часть шнитт-лука и петрушки, соль и лимонный сок.",
+   "en": "In a bowl, combine the feta, cottage cheese, some of the chives and parsley, the salt and the lemon juice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "feta",
+    "cottage_cheese",
+    "chives",
+    "parsley",
+    "salt",
+    "lemon_juice"
+   ]
+  },
+  {
+   "ru": "Наполните перцы начинкой.",
+   "en": "Fill the peppers with the mixture.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper"
+   ]
+  },
+  {
+   "ru": "Посыпьте сверху оставшимся шнитт-луком и петрушкой и подавайте.",
+   "en": "Top with the remaining chives and parsley and serve.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chives",
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "lunch",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

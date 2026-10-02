@@ -1,0 +1,100 @@
+{
+ "nameRu": "Тушёная капуста с говяжьим фаршем",
+ "descriptionRu": "Капуста, тушённая с говяжьим фаршем, морковью, сладким перцем и копчёной паприкой.",
+ "descriptionEn": "Cabbage braised with ground beef, carrots, bell pepper and smoked paprika.",
+ "steps": [
+  {
+   "ru": "Разогрейте большую сковороду или сотейник на среднем огне и влейте оливковое масло.",
+   "en": "Heat a large skillet or braiser over medium heat and add the olive oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "ru": "Выложите фарш и разбейте его на мелкие кусочки толкушкой или деревянной лопаткой.",
+   "en": "Add the ground beef and break it into small pieces with a potato masher or wooden spoon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Обжаривайте фарш до румяности.",
+   "en": "Cook the beef until browned.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "ru": "Добавьте лук, морковь, паприку, чеснок и томатную пасту.",
+   "en": "Stir in the onion, carrots, red pepper, garlic and tomato paste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "carrot",
+    "bell_pepper",
+    "garlic",
+    "tomato_puree"
+   ]
+  },
+  {
+   "ru": "Приправьте солью, чёрным перцем, копчёной паприкой и зирой.",
+   "en": "Season with salt, black pepper, smoked paprika and ground cumin.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper",
+    "paprika_powder",
+    "cumin"
+   ]
+  },
+  {
+   "ru": "Готовьте, часто помешивая.",
+   "en": "Cook, stirring frequently.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте нашинкованную капусту, яблочный уксус и воду и хорошо перемешайте.",
+   "en": "Add the chopped cabbage, apple cider vinegar and water and stir well to combine.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cabbage",
+    "cider_vinegar",
+    "water"
+   ]
+  },
+  {
+   "ru": "Убавьте огонь до умеренно слабого, накройте и тушите, иногда помешивая, чтобы капуста не пригорала.",
+   "en": "Reduce the heat to medium-low, cover and cook, stirring occasionally so the cabbage does not stick.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "ru": "Снимите крышку и проверьте капусту; при необходимости прибавьте огонь и выпарите лишнюю жидкость.",
+   "en": "Uncover and check the cabbage; if needed, increase the heat to medium-high and cook off the excess liquid.",
+   "timerSec": 420,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "ru": "Перед подачей посыпьте рубленой петрушкой.",
+   "en": "Sprinkle with chopped parsley before serving.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false
+}

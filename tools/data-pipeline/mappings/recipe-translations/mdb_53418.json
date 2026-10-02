@@ -1,0 +1,79 @@
+{
+ "nameRu": "Водяной шпинат со свининой, соевыми бобами и чесноком по-камбоджийски",
+ "descriptionRu": "Хрустящая зелень, быстро обжаренная в воке со свиным фаршем, ферментированными соевыми бобами и чесноком.",
+ "descriptionEn": "Crisp greens quickly stir-fried in a wok with pork mince, fermented soybeans and garlic.",
+ "steps": [
+  {
+   "ru": "Разогрейте растительное масло в воке или большой сковороде на среднем огне.",
+   "en": "Heat the vegetable oil in a wok or large pan over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Добавьте чеснок и обжарьте до появления аромата, не давая ему подгореть.",
+   "en": "Add the garlic and stir-fry until fragrant but not burnt.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Добавьте свиной фарш и разбейте его лопаткой.",
+   "en": "Add the pork mince and break it up with a spatula.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Обжаривайте, помешивая, пока фарш не подрумянится и не будет готов.",
+   "en": "Stir-fry until the pork is cooked through and browned.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Вмешайте ферментированные соевые бобы и готовьте ещё немного, хорошо перемешивая со свининой.",
+   "en": "Stir in the fermented soybeans and cook a little longer, mixing them well with the pork.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soybeans",
+    "pork_mince"
+   ]
+  },
+  {
+   "ru": "Добавьте нарезанную зелень и обжаривайте, чтобы она осталась ярко-зелёной и хрустящей.",
+   "en": "Toss in the cut greens and stir-fry so they stay bright green and crisp.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "leafy_greens"
+   ]
+  },
+  {
+   "ru": "Попробуйте и при необходимости добавьте рыбный соус или сахар.",
+   "en": "Taste and adjust the seasoning with fish sauce or sugar if needed.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_sauce",
+    "sugar"
+   ]
+  },
+  {
+   "ru": "Переложите на блюдо, посыпьте чили и сразу подавайте с рисом.",
+   "en": "Transfer to a serving dish, sprinkle with chilli and serve immediately with steamed rice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

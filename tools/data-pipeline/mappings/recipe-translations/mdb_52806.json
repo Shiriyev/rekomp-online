@@ -1,0 +1,102 @@
+{
+ "nameRu": "Курица тандури",
+ "descriptionRu": "Куриные бёдра в пряном йогуртовом маринаде, обжаренные на гриле до лёгкой корочки.",
+ "descriptionEn": "Chicken thighs in a spiced yogurt marinade, grilled until lightly charred.",
+ "steps": [
+  {
+   "ru": "Смешайте лимонный сок с паприкой и красным луком в большой неглубокой посуде.",
+   "en": "Mix the lemon juice with the paprika and red onions in a large shallow dish.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon",
+    "paprika_powder",
+    "red_onion"
+   ]
+  },
+  {
+   "ru": "Сделайте на каждом курином бедре по три надреза.",
+   "en": "Slash each chicken thigh three times.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Обваляйте бёдра в соке и оставьте.",
+   "en": "Turn the thighs in the juice and set aside.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "lemon"
+   ]
+  },
+  {
+   "ru": "Для маринада смешайте греческий йогурт, имбирь, чеснок, гарам масалу, зиру, молотый перец чили и куркуму.",
+   "en": "For the marinade, mix together the Greek yogurt, ginger, garlic, garam masala, cumin, chilli powder and turmeric.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "ginger",
+    "garlic",
+    "garam_masala",
+    "cumin",
+    "chilli_powder",
+    "turmeric"
+   ]
+  },
+  {
+   "ru": "Залейте курицу маринадом и хорошо перемешайте.",
+   "en": "Pour the marinade over the chicken and mix everything well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "greek_yogurt"
+   ]
+  },
+  {
+   "ru": "Накройте и уберите в холодильник минимум на час. Замариновать курицу можно и за сутки.",
+   "en": "Cover and chill for at least an hour. This can be done up to a day in advance.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Разогрейте гриль.",
+   "en": "Heat the grill.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите курицу на решётку, установленную над противнем.",
+   "en": "Lift the chicken pieces onto a rack over a baking tray.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "ru": "Смажьте курицу растительным маслом.",
+   "en": "Brush the chicken with a little oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "oil"
+   ]
+  },
+  {
+   "ru": "Жарьте на гриле с каждой стороны до лёгкой корочки и полной готовности.",
+   "en": "Grill on each side until lightly charred and completely cooked through.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}
