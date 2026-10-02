@@ -1,13 +1,11 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
-import { router } from 'expo-router';
 import { PaperProvider } from 'react-native-paper';
 
-import type { Ingredient, LidlProduct, Recipe, RecipeIngredient } from '@/db/schema';
+import type { Ingredient, LidlProduct, RecipeIngredient } from '@/db/schema';
 import { canCook } from '@/domain/pantry';
 import { lightTheme } from '@/theme';
 
 import { IngredientRow } from '../IngredientRow';
-import { RecipeListItem } from '../RecipeListItem';
 
 jest.mock('expo-router', () => ({ router: { push: jest.fn() } }));
 
@@ -110,66 +108,5 @@ describe('IngredientRow', () => {
     expect(screen.getByText('Скидка в Lidl до 02.10')).toBeOnTheScreen();
     await user.press(screen.getByText('или Греческий йогурт'));
     expect(onChoose).toHaveBeenCalledWith('greek');
-  });
-});
-
-describe('RecipeListItem', () => {
-  const recipe: Recipe = {
-    id: 'P1',
-    name: 'Скир + яблоко',
-    mealType: 'snack',
-    defaultServings: 1,
-    isBatch: false,
-    prepNightBefore: false,
-    totalMinutes: 2,
-    imageKey: null,
-    photoUri: null,
-    tags: [],
-    sortOrder: 0,
-    nameEn: null,
-    descriptionRu: null,
-    descriptionEn: null,
-    cuisine: null,
-    mealTypes: ['snack'],
-    source: 'own',
-    sourceId: null,
-    ingredientCount: 2,
-    kcalPerServing: 188,
-    proteinPerServing: 17,
-    proteinDensity: 9,
-    isArchived: false,
-    equipment: [],
-    mainProtein: 'dairy',
-  };
-
-  it('shows macros, status and the kcal left after eating, and opens the recipe', async () => {
-    const user = userEvent.setup();
-    await wrap(
-      <RecipeListItem
-        recipe={recipe}
-        macros={{ kcal: 188, protein: 17 }}
-        check={checkWith({})}
-        kcalLeftToday={828}
-      />,
-    );
-    expect(screen.getByText('188 ккал · 17 г белка · 2 мин')).toBeOnTheScreen();
-    expect(screen.getByText('Не хватает 1')).toBeOnTheScreen();
-    expect(screen.getByText('останется 640')).toBeOnTheScreen();
-
-    await user.press(screen.getByText('Скир + яблоко'));
-    expect(router.push).toHaveBeenCalledWith({ pathname: '/recipe/[id]', params: { id: 'P1' } });
-  });
-
-  it('warns when the dish would exceed the day', async () => {
-    await wrap(
-      <RecipeListItem
-        recipe={recipe}
-        macros={{ kcal: 188, protein: 17 }}
-        check={checkWith({ skyr: 150 })}
-        kcalLeftToday={100}
-      />,
-    );
-    expect(screen.getByText('Всё есть')).toBeOnTheScreen();
-    expect(screen.getByText('перебор 88')).toBeOnTheScreen();
   });
 });

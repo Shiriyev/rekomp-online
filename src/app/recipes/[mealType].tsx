@@ -1,145 +1,197 @@
 import { FlashList } from '@shopify/flash-list';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { memo, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Chip, Switch, Text, TouchableRipple } from 'react-native-paper';
+import { Text, TextInput, TouchableRipple } from 'react-native-paper';
 
-import {
-  useIngredientsMap,
-  usePantryStock,
-  useRecipeCatalog,
-  useRecipeLinesByRecipe,
-} from '@/db/hooks';
-import { recipeMacros } from '@/domain/nutrition';
-import { canCook } from '@/domain/pantry';
-import { applyAmounts } from '@/domain/recipeDraft';
-import { RECIPE_SORTS, recipeMeals, sortRecipes, type RecipeSort } from '@/domain/recipes';
+import { buildShelves, type Shelf } from '@/domain/browse';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { MEAL_LABELS } from '@/features/meals';
-import { RecipeListItem } from '@/features/recipes/RecipeListItem';
-import { useRecipeDraftStore } from '@/features/recipes/recipeDraftStore';
-import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
+import { RecipeCard } from '@/features/recipes/RecipeCard';
+import { RecipeFilterChips } from '@/features/recipes/RecipeFilterChips';
+import { useRecipeFilters } from '@/features/recipes/recipeFiltersStore';
+import { useBrowseRecipes, type BrowseItem } from '@/features/recipes/useBrowseRecipes';
 import { useT } from '@/i18n';
 import { useTransitionDone } from '@/lib/useTransitionDone';
-import { spacing } from '@/theme';
+import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { SkeletonList } from '@/ui/Skeleton';
 
 const isMealType = (v: unknown): v is MealType =>
   typeof v === 'string' && (MEAL_TYPES as readonly string[]).includes(v);
 
+/** Width of a card in a shelf: two and a bit fit, so the row reads as scrollable. */
+const SHELF_CARD_WIDTH = 164;
+/** A shelf shows its first recipes; «Все» opens the full grid. */
+const SHELF_PREVIEW = 12;
+
+/**
+ * Recipes of one meal: search, quick filters («Нет плиты», «Без свинины», …) and shelves
+ * («Можно приготовить сейчас», «Курица», …) that scroll sideways; «Все» opens a grid.
+ */
 export default function RecipesScreen() {
   const t = useT();
   const params = useLocalSearchParams<{ mealType: string }>();
   const meal = isMealType(params.mealType) ? params.mealType : null;
-
-  const catalog = useRecipeCatalog();
-  const linesByRecipe = useRecipeLinesByRecipe();
-  const ingredients = useIngredientsMap();
-  const pantry = usePantryStock();
-  const kcalLeft = useKcalLeftToday();
-  const drafts = useRecipeDraftStore((s) => s.drafts);
-  const [onlyCookable, setOnlyCookable] = useState(false);
-  const [sort, setSort] = useState<RecipeSort>('protein');
+  const [query, setQuery] = useState('');
   const ready = useTransitionDone();
-
-  const items = useMemo(() => {
-    if (!meal || !catalog.isLoaded || ingredients.size === 0) return [];
-    const rows = catalog.recipes
-      .filter((r) => recipeMeals(r).includes(meal))
-      .map((recipe) => {
-        // Amounts edited on a recipe card (draft) count here too.
-        const draft = drafts[recipe.id];
-        const lines = linesByRecipe.get(recipe.id) ?? [];
-        const drafted = draft ? applyAmounts(lines, draft) : lines;
-        return {
-          recipe,
-          macros: draft
-            ? recipeMacros(drafted, ingredients).perServing
-            : (catalog.macros.get(recipe.id) ?? { kcal: 0, protein: 0 }),
-          check: canCook(drafted, ingredients, pantry, recipe.defaultServings),
-          totalMinutes: recipe.totalMinutes,
-          sortOrder: recipe.sortOrder,
-        };
-      });
-    return sortRecipes(onlyCookable ? rows.filter((r) => r.check.status === 'ok') : rows, sort);
-  }, [meal, catalog, linesByRecipe, drafts, ingredients, pantry, onlyCookable, sort]);
+  const { items, isLoaded } = useBrowseRecipes(meal, query);
+  const clear = useRecipeFilters((s) => s.clear);
+  const shelves = useMemo(() => buildShelves(items), [items]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
-  if (!ready || !catalog.isLoaded || ingredients.size === 0) {
+  const title = <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />;
+  if (!ready || !isLoaded) {
     return (
       <>
-        <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />
+        {title}
         <SkeletonList still={!ready} />
+      </>
+    );
+  }
+
+  const header = (
+    <View>
+      <View style={styles.search}>
+        <TextInput
+          mode="outlined"
+          dense
+          placeholder={t('recipes.browse.search')}
+          accessibilityLabel={t('recipes.browse.search')}
+          value={query}
+          onChangeText={setQuery}
+          left={<TextInput.Icon icon="magnify" />}
+          right={query ? <TextInput.Icon icon="close" onPress={() => setQuery('')} /> : undefined}
+          autoCorrect={false}
+        />
+      </View>
+      <RecipeFilterChips />
+    </View>
+  );
+  const empty = (
+    <EmptyState
+      icon="silverware-variant"
+      title={t('recipes.browse.nothing')}
+      description={t('recipes.browse.nothingHint')}
+      actionLabel={t('recipes.browse.clearFilters')}
+      onAction={() => {
+        clear();
+        setQuery('');
+      }}
+    />
+  );
+
+  // Searching shows one grid of matches instead of shelves.
+  if (query.trim()) {
+    return (
+      <>
+        {title}
+        <FlashList
+          data={items}
+          numColumns={2}
+          keyExtractor={(i) => i.id}
+          keyboardShouldPersistTaps="handled"
+          ListHeaderComponent={header}
+          ListEmptyComponent={empty}
+          contentContainerStyle={styles.grid}
+          renderItem={({ item }) => <GridCell item={item} meal={meal} />}
+        />
       </>
     );
   }
 
   return (
     <>
-      <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />
+      {title}
       <FlashList
-        data={items}
-        keyExtractor={(item) => item.recipe.id}
-        renderItem={({ item }) => (
-          <RecipeListItem
-            recipe={item.recipe}
-            macros={item.macros}
-            check={item.check}
-            kcalLeftToday={kcalLeft}
-            meal={meal}
-          />
-        )}
-        ListHeaderComponent={
-          <View style={styles.header}>
-            <TouchableRipple
-              onPress={() => setOnlyCookable((v) => !v)}
-              accessibilityRole="switch"
-              accessibilityState={{ checked: onlyCookable }}
-              style={styles.switchRow}>
-              <View style={styles.switchInner}>
-                <Text variant="bodyLarge" style={styles.flex}>
-                  {t('recipes.onlyMine')}
-                </Text>
-                <Switch value={onlyCookable} onValueChange={setOnlyCookable} />
-              </View>
-            </TouchableRipple>
-            <View style={styles.chips}>
-              {RECIPE_SORTS.map((s) => (
-                <Chip
-                  key={s}
-                  mode={sort === s ? 'flat' : 'outlined'}
-                  selected={sort === s}
-                  showSelectedCheck={false}
-                  onPress={() => setSort(s)}>
-                  {t(`recipes.sort.${s}` as const)}
-                </Chip>
-              ))}
-            </View>
-          </View>
-        }
-        ListEmptyComponent={
-          onlyCookable ? (
-            <EmptyState
-              icon="fridge-off-outline"
-              title={t('recipes.noneCookable')}
-              description={t('recipes.noneCookableHint')}
-              actionLabel={t('recipes.showAll')}
-              onAction={() => setOnlyCookable(false)}
-            />
-          ) : null
-        }
+        data={shelves}
+        keyExtractor={(s) => s.shelf}
+        keyboardShouldPersistTaps="handled"
+        ListHeaderComponent={header}
+        ListEmptyComponent={empty}
         contentContainerStyle={styles.list}
+        renderItem={({ item }) => <ShelfRow shelf={item.shelf} items={item.recipes} meal={meal} />}
       />
     </>
   );
 }
 
+const ShelfRow = memo(function ShelfRow({
+  shelf,
+  items,
+  meal,
+}: {
+  shelf: Shelf;
+  items: BrowseItem[];
+  meal: MealType;
+}) {
+  const t = useT();
+  const theme = useAppTheme();
+  const open = () => router.push({ pathname: '/recipes/shelf', params: { meal, shelf } });
+  return (
+    <View style={styles.shelf}>
+      <TouchableRipple
+        onPress={open}
+        accessibilityRole="button"
+        accessibilityHint={t('recipes.browse.seeAll')}>
+        <View style={styles.shelfHeader}>
+          <View style={styles.flex}>
+            <Text variant="titleMedium" accessibilityRole="header">
+              {t(`recipes.shelves.${shelf}`)}
+            </Text>
+            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              {t('recipes.browse.shelfCount', { count: items.length })}
+            </Text>
+          </View>
+          <Text variant="labelLarge" style={{ color: theme.colors.primary }}>
+            {t('recipes.browse.seeAll')} ›
+          </Text>
+        </View>
+      </TouchableRipple>
+      <FlashList
+        horizontal
+        data={items.slice(0, SHELF_PREVIEW)}
+        keyExtractor={(i) => i.id}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.shelfRow}
+        ItemSeparatorComponent={Gap}
+        renderItem={({ item }) => (
+          <RecipeCard
+            recipe={item.recipe}
+            macros={item.macros}
+            missing={item.missing}
+            meal={meal}
+            width={SHELF_CARD_WIDTH}
+          />
+        )}
+      />
+    </View>
+  );
+});
+
+function GridCell({ item, meal }: { item: BrowseItem; meal: MealType }) {
+  return (
+    <View style={styles.cell}>
+      <RecipeCard recipe={item.recipe} macros={item.macros} missing={item.missing} meal={meal} />
+    </View>
+  );
+}
+
+const Gap = () => <View style={styles.gap} />;
+
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  search: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
   list: { paddingBottom: spacing.xl },
-  header: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md, gap: spacing.sm },
-  switchRow: { borderRadius: 12, minHeight: 48, justifyContent: 'center' },
-  switchInner: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  grid: { paddingHorizontal: spacing.md, paddingBottom: spacing.xl },
+  cell: { flex: 1, padding: spacing.xs },
+  shelf: { paddingTop: spacing.md },
+  shelfHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.xs,
+  },
+  shelfRow: { paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
+  gap: { width: spacing.sm },
 });

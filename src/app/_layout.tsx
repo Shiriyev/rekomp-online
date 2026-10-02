@@ -104,6 +104,7 @@ function AppShell() {
                 name="recipes/[mealType]"
                 options={{ headerShown: true, title: t('nav.headers.recipes') }}
               />
+              <Stack.Screen name="recipes/shelf" options={{ headerShown: true }} />
               <Stack.Screen
                 name="recipe/[id]"
                 options={{ headerShown: true, title: t('nav.headers.recipe') }}
