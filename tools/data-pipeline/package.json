@@ -1,0 +1,29 @@
+{
+  "name": "rekomp-data-pipeline",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Offline pipeline that builds the bundled recipe/product catalog. Not part of the app bundle.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "fetch": "npm run fetch:mealdb && npm run fetch:usda && npm run fetch:off",
+    "fetch:mealdb": "tsx --env-file-if-exists=../../.env.local src/fetch/mealdb.ts",
+    "fetch:usda": "tsx --env-file-if-exists=../../.env.local src/fetch/usda.ts",
+    "fetch:off": "tsx --env-file-if-exists=../../.env.local src/fetch/off.ts",
+    "build": "tsx --env-file-if-exists=../../.env.local src/build.ts",
+    "validate": "tsx src/validate.ts",
+    "report": "tsx src/report.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test 'src/**/*.test.ts'"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  }
+}

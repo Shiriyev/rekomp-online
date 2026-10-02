@@ -1,0 +1,4 @@
+node_modules/
+# Raw downloads and the translation cache are rebuilt by `npm run fetch` / `build`.
+raw/
+cache/

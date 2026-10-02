@@ -12,6 +12,14 @@ module.exports = defineConfig([
     },
   },
   {
-    ignores: ['dist/*', 'coverage/*', 'src/db/migrations/*', '.expo/*'],
+    ignores: [
+      'dist/*',
+      'coverage/*',
+      'src/db/migrations/*',
+      '.expo/*',
+      'tools/data-pipeline/raw/*',
+      'tools/data-pipeline/cache/*',
+      'tools/data-pipeline/node_modules/*',
+    ],
   },
 ]);
