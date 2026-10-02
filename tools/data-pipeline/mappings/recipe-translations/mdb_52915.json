@@ -1,0 +1,136 @@
+{
+ "nameRu": "Французский омлет",
+ "descriptionRu": "Нежный свёрнутый омлет на сливочном масле с пармезаном, мягкий и влажный внутри.",
+ "descriptionEn": "A tender rolled omelette cooked in butter with Parmesan, soft and moist inside.",
+ "steps": [
+  {
+   "ru": "Разогрейте антипригарную сковороду диаметром 20 см на среднем огне.",
+   "en": "Warm a 20 cm non-stick frying pan over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разбейте яйца в миску.",
+   "en": "Crack the eggs into a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Взбейте яйца вилкой, чтобы они перемешались, но не так тщательно, как для болтуньи.",
+   "en": "Beat the eggs with a fork so they break up and mix, but less thoroughly than for scrambled eggs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Прибавьте огонь чуть выше среднего и положите в сковороду кусочек сливочного масла: оно должно шипеть, но не темнеть.",
+   "en": "Turn the heat to medium-hot and drop a knob of butter into the pan: it should sizzle but not brown.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Приправьте яйца пармезаном, солью и перцем.",
+   "en": "Season the eggs with the Parmesan and a little salt and pepper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg",
+    "parmesan"
+   ]
+  },
+  {
+   "ru": "Вылейте яйца в сковороду.",
+   "en": "Pour the eggs into the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Дайте яйцам слегка схватиться пару секунд.",
+   "en": "Let the eggs bubble slightly for a couple of seconds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Деревянной вилкой или лопаткой несколько раз аккуратно сдвиньте массу от краёв к центру, чтобы она собралась складками.",
+   "en": "With a wooden fork or spatula, gently draw the mixture in from the sides a few times so it gathers in folds in the centre.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Через несколько секунд снова перемешайте, соединяя жидкое яйцо с схватившимся.",
+   "en": "After a few seconds, stir again to lightly combine the uncooked egg with the cooked.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Когда омлет частично схватится, перемешивайте чуть быстрее и остановитесь, пока сверху ещё остаётся немного жидкого яйца.",
+   "en": "When partly cooked, stir a bit faster, stopping while some barely cooked egg is left.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Держа сковороду ровно на огне, несколько раз встряхните её вперёд-назад, чтобы масса выровнялась.",
+   "en": "Holding the pan flat on the heat, shake it back and forth a few times to settle the mixture.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Ненадолго усильте огонь, чтобы низ омлета подрумянился.",
+   "en": "Give it a quick burst of heat to brown the underside.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Наклоните сковороду от себя, чтобы омлет сполз к краю.",
+   "en": "Tilt the pan away from you and let the omelette slide to the edge.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Вилкой сверните ближнюю к себе сторону на треть и продолжайте сворачивать, перекладывая омлет на тарелку, или просто сложите его пополам.",
+   "en": "With the fork, fold the nearest side over by a third and keep rolling so the omelette tips onto a plate, or simply fold it in half.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Накройте омлет бумажным полотенцем и слегка подправьте форму пальцами.",
+   "en": "Cover the omelette with kitchen paper and plump it up a little with your fingers.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Смажьте омлет вторым кусочком сливочного масла для блеска.",
+   "en": "Rub the other knob of butter over the omelette to glaze it.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "butter"
+   ]
+  },
+  {
+   "ru": "Подавайте сразу.",
+   "en": "Serve immediately.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

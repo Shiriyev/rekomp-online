@@ -1,0 +1,95 @@
+{
+ "nameRu": "Вонтоны со свининой",
+ "descriptionRu": "Хрустящие китайские пельмешки-треугольники со свининой и овощами, обжаренные во фритюре.",
+ "descriptionEn": "Crispy Chinese triangle dumplings filled with pork and vegetables, deep-fried until golden.",
+ "steps": [
+  {
+   "ru": "Смешайте в миске свинину, чеснок, имбирь, соевый соус, кунжутное масло, морковь, сельдерей и зелёный лук.",
+   "en": "Combine the pork, garlic, ginger, soy sauce, sesame oil, carrots, celery and spring onions in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork",
+    "garlic",
+    "ginger",
+    "soy_sauce",
+    "sesame_oil",
+    "carrot",
+    "celery",
+    "spring_onion"
+   ]
+  },
+  {
+   "ru": "Разделите листы теста для вонтонов.",
+   "en": "Separate the wonton skins.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "wonton_wrapper"
+   ]
+  },
+  {
+   "ru": "Положите в центр каждого листа полную чайную ложку начинки.",
+   "en": "Place a heaping teaspoon of filling in the centre of each skin.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "wonton_wrapper"
+   ]
+  },
+  {
+   "ru": "Смажьте водой два края листа на ширину около 6 мм (1/4 дюйма).",
+   "en": "Brush water along 2 borders of the skin, about 1/4 inch (6 mm) from the edge.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "ru": "Сложите лист треугольником и плотно защипните края.",
+   "en": "Fold the skin over to form a triangle, sealing the edges.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "wonton_wrapper"
+   ]
+  },
+  {
+   "ru": "Соедините два длинных внешних уголка и прижмите их друг к другу.",
+   "en": "Pinch the two long outside points together.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разогрейте масло до 450 °F (230 °C).",
+   "en": "Heat the oil to 450 °F (230 °C).",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжаривайте вонтоны по 4–5 штук до золотистого цвета.",
+   "en": "Fry the wontons 4 to 5 at a time until golden.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Дайте лишнему маслу стечь.",
+   "en": "Drain off the excess oil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с соусом.",
+   "en": "Serve with sauce.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "snack",
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

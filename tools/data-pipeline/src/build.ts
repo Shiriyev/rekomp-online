@@ -12,12 +12,13 @@ import { ensureDir, REPORTS, ROOT } from './lib/paths.ts';
 import { loadMealDb } from './mealdb/load.ts';
 import { loadUsda } from './usda/load.ts';
 
-const { canonical, ingredientMap, unitGrams } = loadMappings();
+const { canonical, ingredientMap, unitGrams, mealExtras } = loadMappings();
 const ctx: Context = {
   products: new Map(canonical.map((p) => [p.id, p])),
   map: ingredientMap.map,
   usda: new Map(loadUsda().map((f) => [f.fdcId, f])),
   unitGrams,
+  mealExtras,
 };
 
 const results = loadMealDb().map((r) => evaluate(r, ctx));

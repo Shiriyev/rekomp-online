@@ -169,3 +169,27 @@ test('estimateMinutes adds stated durations', () => {
   assert.equal(estimateMinutes('Marinate for 24 hours. Grill for 10 minutes.'), 10);
   assert.equal(estimateMinutes('Simmer 2 hours.\nLeave to rest 15 minutes.'), 120);
 });
+
+test('reviewed meal extras add a meal only with the same servings, or carry a small dish', () => {
+  const main = recipe([
+    ['500g', 'Chicken Breasts'],
+    ['200g', 'Rice'],
+    ['2 tbsp', 'Olive Oil'],
+  ]);
+  const withSnack: Context = { ...ctx, mealExtras: { mdb_1: ['snack'] } };
+  const big = evaluate(main, withSnack);
+  assert.equal(big.status, 'accepted');
+  if (big.status !== 'accepted') return;
+  // Lunch keeps its 3 servings; a snack would need 9, so it is not listed.
+  assert.equal(big.servings, 3);
+  assert.deepEqual(big.mealTypes, ['lunch']);
+
+  const small = recipe([['120g', 'Chicken Breasts']]);
+  const plain = evaluate(small, ctx);
+  assert.equal(plain.status === 'rejected' && plain.reason, 'no_serving_fits');
+  const snack = evaluate(small, withSnack);
+  assert.equal(snack.status, 'accepted');
+  if (snack.status !== 'accepted') return;
+  assert.equal(snack.mealType, 'snack');
+  assert.equal(snack.servings, 1);
+});

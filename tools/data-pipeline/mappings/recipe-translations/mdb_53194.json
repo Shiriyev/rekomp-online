@@ -1,0 +1,138 @@
+{
+ "nameRu": "Том ям с креветками",
+ "descriptionRu": "Кисло-острый тайский суп с креветками, грибами, лемонграссом и кокосовым молоком.",
+ "descriptionEn": "A hot and sour Thai soup with prawns, mushrooms, lemongrass and coconut milk.",
+ "steps": [
+  {
+   "ru": "Влейте 1,3 л воды в большую кастрюлю и поставьте на сильный огонь.",
+   "en": "Pour 1.3 litres of water into a large saucepan over high heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте лук, помидор, перец чили, имбирь или галангал, лемонграсс, головы креветок и бульонный кубик.",
+   "en": "Add the onion, tomato, chilli, galangal or ginger, lemongrass, prawn heads and stock cube.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "tomato",
+    "red_chilli",
+    "ginger",
+    "lemongrass",
+    "prawn",
+    "stock_cube"
+   ]
+  },
+  {
+   "ru": "Перемешайте и доведите до кипения.",
+   "en": "Stir and bring to a boil.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Убавьте огонь до среднего и варите, пока жидкость не уварится.",
+   "en": "Reduce the heat to medium and simmer until the liquid has reduced.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Аккуратно процедите горячий бульон в большую жаропрочную миску или кувшин.",
+   "en": "Carefully strain the hot broth into a large heatproof bowl or jug.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выбросьте головы креветок.",
+   "en": "Discard the prawn heads.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Верните процеженные овощи и травы в кастрюлю и залейте их бульоном.",
+   "en": "Return the strained vegetables and herbs to the saucepan and pour over the broth.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Добавьте вёшенки и листья каффир-лайма.",
+   "en": "Stir in the oyster mushrooms and lime leaves.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oyster_mushroom",
+    "lime_leaf"
+   ]
+  },
+  {
+   "ru": "Варите, пока грибы не станут мягкими.",
+   "en": "Cook until the mushrooms are tender.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "oyster_mushroom"
+   ]
+  },
+  {
+   "ru": "Добавьте 1 ст. л. сахара, рыбный соус, сок лайма, кокосовое молоко и креветки.",
+   "en": "Add 1 tbsp sugar, the fish sauce, lime juice, coconut milk and prawns.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_sauce",
+    "lime_juice",
+    "coconut_milk",
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Доведите до кипения и варите, пока креветки не будут готовы.",
+   "en": "Bring to the boil and cook until the prawns are cooked through.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Снимите кастрюлю с огня.",
+   "en": "Remove from the heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выньте лемонграсс.",
+   "en": "Remove the lemongrass.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemongrass"
+   ]
+  },
+  {
+   "ru": "По желанию вмешайте тайский чили-джем или сладкий соус чили.",
+   "en": "Stir in the Thai chilli jam or sweet chilli sauce, if using.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sweet_chilli_sauce"
+   ]
+  },
+  {
+   "ru": "По желанию посыпьте кинзой.",
+   "en": "Scatter over the coriander, if you like.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Подавайте.",
+   "en": "Serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

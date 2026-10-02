@@ -1,14 +1,14 @@
 # Recipe filter
 
-Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
+Recipes in TheMealDB: **790** · accepted: **112** · rejected: **678**
 
 ## Rejected by reason
 
 | Reason | Recipes |
 |---|---|
-| low_protein | 222 |
+| low_protein | 220 |
 | dessert | 167 |
-| no_serving_fits | 158 |
+| no_serving_fits | 151 |
 | too_many_ingredients | 64 |
 | too_long | 48 |
 | no_grams | 13 |
@@ -19,15 +19,16 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 
 | Meal | Primary | Fits (any) |
 |---|---|---|
-| breakfast | 1 | 1 |
-| lunch | 61 | 80 |
-| dinner | 39 | 44 |
-| snack | 2 | 2 |
+| breakfast | 1 | 3 |
+| lunch | 61 | 61 |
+| dinner | 39 | 39 |
+| snack | 11 | 11 |
 
 ## Top 20 by protein density
 
 | Recipe | Meal | Servings | kcal | Protein g | Protein % kcal |
 |---|---|---|---|---|---|
+| Jamaican Pepper Shrimp | snack | 2 | 205 | 38 | 74% |
 | Tandoori chicken | dinner | 5 | 508 | 76 | 60% |
 | Jamaican Curry Goat | dinner | 4 | 520 | 73 | 56% |
 | Red curry chicken kebabs | lunch | 1 | 623 | 85 | 55% |
@@ -47,7 +48,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 | Imam bayildi with BBQ lamb & tzatziki | lunch | 4 | 638 | 71 | 45% |
 | Salt cod tortilla | lunch | 4 | 569 | 63 | 44% |
 | Moussaka | lunch | 2 | 678 | 75 | 44% |
-| Brun Lapskaus (Norwegian Beef Vegetable Stew) | dinner | 4 | 521 | 57 | 44% |
 
 ## Conversions that used generic defaults (check these)
 
@@ -58,9 +58,13 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - mustard «1 tbsp»
 - tomato_puree «3 tsp»
 - peanut_butter «5 tblsp»
+- butter «2 knobs»
+- parmesan «1 tsp»
+- gruyere «4 tbs»
 - tomato_puree «1 tsp»
 - cornstarch «1 tsp»
 - brown_sugar «1 tbs»
+- cornstarch «1 tbs»
 - cornstarch «1 tbs»
 - lemon_juice «2 tbs»
 - sugar «2 tblsp»
@@ -74,6 +78,7 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - cornstarch «1/2 tbs»
 - sherry «2 tbsp»
 - pine_nut «2 tbsp»
+- sweet_chilli_sauce «1 tblsp»
 - garlic «3 tblsp chopped»
 - thai_red_curry_paste «2 tblsp»
 - sweet_chilli_sauce «2 tablespoons»
@@ -89,6 +94,7 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - worcestershire_sauce «2 tsp»
 - sherry «1 tsp»
 - cornstarch «1/2 tsp»
+- sesame_seed «2 tsp»
 - cornstarch «2 tsp»
 - brown_sugar «3  tablespoons»
 - flour «2 tablespoons»
@@ -292,7 +298,7 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Honey Cookies — Dessert
 - Biss Jaggery Modak — Dessert
 
-### low_protein (222)
+### low_protein (220)
 
 - Kapsalon — 24% kcal, 43 g/serving
 - Spaghetti Bolognese — 23% kcal, 38 g/serving
@@ -334,7 +340,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Full English Breakfast — 19% kcal, 24 g/serving
 - Ratatouille — 9% kcal, 13 g/serving
 - Three-cheese souffles — 22% kcal, 40 g/serving
-- French Omelette — 25% kcal, 40 g/serving
 - Fennel Dauphinoise — 8% kcal, 4 g/serving
 - Provençal Omelette Cake — 18% kcal, 25 g/serving
 - Tourtiere — 14% kcal, 24 g/serving
@@ -393,7 +398,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Sukuma Wiki — 8% kcal, 10 g/serving
 - Rømmegrøt – Norwegian Sour Cream Porridge — 9% kcal, 12 g/serving
 - Fiskesuppe (Creamy Norwegian Fish Soup) — 24% kcal, 40 g/serving
-- Spiced tortilla — 22% kcal, 35 g/serving
 - Gambas al ajillo — 11% kcal, 14 g/serving
 - Arroz con gambas y calamar — 25% kcal, 43 g/serving
 - Paella — 23% kcal, 38 g/serving
@@ -533,7 +537,7 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Cassava pizza — casabe (piece)
 - Venezuelan turnovers — masa_harina (piece)
 
-### no_serving_fits (158)
+### no_serving_fits (151)
 
 - Cream Cheese Tart — 3787 kcal total
 - Irish stew — 6479 kcal total
@@ -553,8 +557,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Split Pea Soup — 1990 kcal total
 - Pate Chinois — 2222 kcal total
 - Callaloo Jamaican Style — 789 kcal total
-- Wontons — 1104 kcal total
-- Egg Drop Soup — 408 kcal total
 - Fruit and Cream Cheese Breakfast Pastries — 4613 kcal total
 - Salmon Eggs Eggs Benedict — 1958 kcal total
 - Shakshuka — 850 kcal total
@@ -590,7 +592,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Quick gazpacho — 154 kcal total
 - Spanish tomato bread with jamón Serrano — 14236 kcal total
 - Zemiakové Placky — 1327 kcal total
-- Tom yum soup with prawns — 542 kcal total
 - Tom yum (hot & sour) soup with prawns — 450 kcal total
 - Thai beef stir-fry — 777 kcal total
 - Thai-style steamed fish — 300 kcal total
@@ -603,8 +604,6 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Steak & Vietnamese noodle salad — 912 kcal total
 - Purple sprouting broccoli tempura with nuoc cham — 849 kcal total
 - Vietnamese-style veggie hotpot — 434 kcal total
-- Vietnamese veg parcels — 827 kcal total
-- Salmon noodle wraps — 1100 kcal total
 - Ezme — 836 kcal total
 - Smoked aubergine purée — 280 kcal total
 - Hummus — 477 kcal total
@@ -620,11 +619,9 @@ Recipes in TheMealDB: **790** · accepted: **103** · rejected: **687**
 - Beetroot & red cabbage sauerkraut — 305 kcal total
 - Rye bread — 1462 kcal total
 - Cucumber & fennel salad — 448 kcal total
-- Jamaican Pepper Shrimp — 410 kcal total
 - Jamaican Festival (Sweet Dumpling) — 1433 kcal total
 - Jamaican Fried Dumplings — 3912 kcal total
 - Callaloo and SaltFish — 1324 kcal total
-- Silken Tofu with Sesame Soy Sauce — 543 kcal total
 - Sichuan Style Stir-Fried Chinese Long Beans — 318 kcal total
 - Air Fryer Egg Rolls — 1591 kcal total
 - Shrimp With Snow Peas — 878 kcal total

@@ -1,0 +1,81 @@
+{
+ "nameRu": "Шёлковый тофу с соевым соусом и кунжутом",
+ "descriptionRu": "Холодная китайская закуска из нежного тофу, политого соевым соусом и кунжутной пастой.",
+ "descriptionEn": "A cold Chinese appetiser of silky tofu drizzled with soy sauce and sesame paste.",
+ "steps": [
+  {
+   "ru": "Слейте жидкость с тофу.",
+   "en": "Drain the tofu.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "silken_tofu"
+   ]
+  },
+  {
+   "ru": "Аккуратно выложите тофу из упаковки на большую тарелку.",
+   "en": "Gently remove the tofu from its packaging onto a large plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "silken_tofu"
+   ]
+  },
+  {
+   "ru": "Осторожно нарежьте тофу поперёк пластинами толщиной около 1 см (1/2 дюйма).",
+   "en": "Carefully slice the tofu widthwise into 1/2-inch (1 cm) slabs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "silken_tofu"
+   ]
+  },
+  {
+   "ru": "Ладонями слегка сдвиньте ломтики вбок, чтобы они легли веером.",
+   "en": "With your palms, gently push the slices sideways so they fan out over the plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "silken_tofu"
+   ]
+  },
+  {
+   "ru": "Полейте тофу соевым соусом и кунжутной пастой.",
+   "en": "Drizzle the soy sauce and sesame sauce on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "tahini"
+   ]
+  },
+  {
+   "ru": "Посыпьте зелёным луком и кунжутом.",
+   "en": "Garnish with the scallions and sesame seeds.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion",
+    "sesame_seed"
+   ]
+  },
+  {
+   "ru": "Подавайте.",
+   "en": "Serve.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Остатки плотно накройте и храните в холодильнике до двух дней.",
+   "en": "Tightly cover leftovers and refrigerate for up to 2 days.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Ешьте холодным или разогревайте в микроволновке по 30 секунд, пока тофу не прогреется.",
+   "en": "Eat cold or reheat in the microwave in 30-second increments until warmed through.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "snack",
+  "lunch"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

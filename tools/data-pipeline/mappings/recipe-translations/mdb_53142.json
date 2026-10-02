@@ -1,0 +1,98 @@
+{
+ "nameRu": "Пряная испанская тортилья",
+ "descriptionRu": "Толстый испанский омлет с картофелем, помидорами черри, карри и кинзой.",
+ "descriptionEn": "A thick Spanish omelette with potatoes, cherry tomatoes, curry spices and coriander.",
+ "steps": [
+  {
+   "ru": "Разогрейте масло в большой сковороде.",
+   "en": "Heat the oil in a large frying pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "ru": "Обжарьте лук и половину перца чили до мягкости.",
+   "en": "Fry the onion and half the chilli until softened.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Всыпьте карри и обжаривайте ещё минуту.",
+   "en": "Tip in the curry powder and fry for 1 minute more.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "curry_powder"
+   ]
+  },
+  {
+   "ru": "Добавьте в сковороду помидоры черри, картофель и стебли кинзы.",
+   "en": "Add the cherry tomatoes, potatoes and coriander stalks to the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cherry_tomato",
+    "potato",
+    "coriander_leaf"
+   ]
+  },
+  {
+   "ru": "Хорошо посолите и поперчите яйца.",
+   "en": "Season the eggs well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Залейте овощи яйцами и готовьте на слабом огне, пока тортилья почти не схватится.",
+   "en": "Pour the eggs over the vegetables and cook gently until almost set.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "ru": "Разогрейте гриль духовки.",
+   "en": "Heat the grill.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Поставьте тортилью под гриль, пока верх не схватится.",
+   "en": "Flash the tortilla under the grill until the top is set.",
+   "timerSec": 120,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посыпьте листьями кинзы и оставшимся перцем чили.",
+   "en": "Scatter the coriander leaves and remaining chilli over the top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Нарежьте тортилью на сегменты.",
+   "en": "Slice the tortilla into wedges.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подавайте с зелёным салатом.",
+   "en": "Serve with a green salad.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "breakfast",
+  "lunch",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

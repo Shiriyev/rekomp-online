@@ -1,0 +1,85 @@
+{
+ "nameRu": "Китайский суп с яйцом",
+ "descriptionRu": "Лёгкий китайский суп на курином бульоне с горошком, грибами и яичными «хлопьями».",
+ "descriptionEn": "A light Chinese soup in chicken broth with peas, mushrooms and silky egg ribbons.",
+ "steps": [
+  {
+   "ru": "Влейте куриный бульон в вок и доведите до кипения.",
+   "en": "Pour the chicken broth into a wok and bring it to a boil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "ru": "Добавьте соль, сахар, перец и кунжутное масло.",
+   "en": "Add the salt, sugar, pepper and sesame oil.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "sugar",
+    "pepper",
+    "sesame_oil"
+   ]
+  },
+  {
+   "ru": "Когда бульон закипит, добавьте горошек и грибы.",
+   "en": "When the broth is boiling, add the peas and mushrooms.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock",
+    "peas",
+    "mushroom"
+   ]
+  },
+  {
+   "ru": "Смешайте в миске кукурузный крахмал с водой.",
+   "en": "Whisk the cornstarch and water together in a bowl.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "water"
+   ]
+  },
+  {
+   "ru": "Постепенно вливайте смесь в суп, пока он не загустеет до нужной консистенции.",
+   "en": "Slowly add the mixture to the soup until it reaches the right thickness.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch"
+   ]
+  },
+  {
+   "ru": "Слегка взбейте яйцо вилкой.",
+   "en": "Lightly beat the egg with a fork.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Медленно влейте яйцо в суп и помешивайте 8 секунд.",
+   "en": "Slowly pour the egg into the soup and stir for 8 seconds.",
+   "timerSec": 8,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Разлейте суп по тарелкам.",
+   "en": "Ladle the soup into bowls.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Посыпьте сверху зелёным луком.",
+   "en": "Top with the spring onions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion"
+   ]
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

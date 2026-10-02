@@ -1,0 +1,1578 @@
+[
+ {
+  "id": "own_b_syrniki",
+  "nameEn": "Cottage cheese pancakes with berries",
+  "nameRu": "Сырники с ягодами",
+  "descriptionRu": "Румяные сырники из творога с ягодами вместо сметаны.",
+  "descriptionEn": "Golden cottage cheese pancakes served with berries instead of sour cream.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 25,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "tvorog",
+    "grams": 250
+   },
+   {
+    "id": "egg",
+    "grams": 55
+   },
+   {
+    "id": "flour",
+    "grams": 25
+   },
+   {
+    "id": "oil",
+    "grams": 5
+   },
+   {
+    "id": "berries_frozen",
+    "grams": 100
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разомните творог вилкой с яйцом и щепоткой соли.",
+    "en": "Mash the cottage cheese with the egg and a pinch of salt.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog",
+     "egg",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Вмешайте муку — масса должна держать форму.",
+    "en": "Stir in the flour; the mixture should hold its shape.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "flour"
+    ]
+   },
+   {
+    "ru": "Сформуйте мокрыми руками 5–6 небольших сырников.",
+    "en": "With wet hands, shape 5–6 small patties.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   },
+   {
+    "ru": "Разогрейте масло на сковороде на среднем огне.",
+    "en": "Heat the oil in a frying pan over medium heat.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "oil"
+    ]
+   },
+   {
+    "ru": "Обжарьте сырники с одной стороны до румяности.",
+    "en": "Fry the patties on one side until golden.",
+    "timerSec": 240,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   },
+   {
+    "ru": "Переверните и жарьте под крышкой на слабом огне.",
+    "en": "Turn them over and cook covered over low heat.",
+    "timerSec": 300,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   },
+   {
+    "ru": "Разморозьте ягоды и подавайте с сырниками.",
+    "en": "Thaw the berries and serve with the pancakes.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "berries_frozen"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_ham_omelette",
+  "nameEn": "Ham and cheese omelette with toast",
+  "nameRu": "Омлет с ветчиной, сыром и тостом",
+  "descriptionRu": "Пышный омлет из яиц и белков с ветчиной, сыром и цельнозерновым тостом.",
+  "descriptionEn": "A fluffy egg and egg-white omelette with ham, cheese and wholegrain toast.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 15,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "egg",
+    "grams": 165
+   },
+   {
+    "id": "egg_white",
+    "grams": 100
+   },
+   {
+    "id": "ham",
+    "grams": 60
+   },
+   {
+    "id": "cheese",
+    "grams": 15
+   },
+   {
+    "id": "tomato",
+    "grams": 120
+   },
+   {
+    "id": "bread_wholegrain",
+    "grams": 45
+   },
+   {
+    "id": "oil",
+    "grams": 5
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   },
+   {
+    "id": "pepper",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Нарежьте ветчину и помидор кубиками.",
+    "en": "Dice the ham and the tomato.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "ham",
+     "tomato"
+    ]
+   },
+   {
+    "ru": "Взбейте яйца с белками, солью и перцем.",
+    "en": "Whisk the eggs with the egg whites, salt and pepper.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "egg_white",
+     "salt",
+     "pepper"
+    ]
+   },
+   {
+    "ru": "Разогрейте масло на сковороде и слегка обжарьте ветчину.",
+    "en": "Heat the oil in a frying pan and lightly fry the ham.",
+    "timerSec": 60,
+    "ingredientRefs": [
+     "oil",
+     "ham"
+    ]
+   },
+   {
+    "ru": "Влейте яйца и готовьте на среднем огне, пока низ не схватится.",
+    "en": "Pour in the eggs and cook over medium heat until the bottom sets.",
+    "timerSec": 180,
+    "ingredientRefs": [
+     "egg",
+     "egg_white"
+    ]
+   },
+   {
+    "ru": "Посыпьте тёртым сыром и помидором, накройте крышкой до готовности.",
+    "en": "Sprinkle with grated cheese and tomato, cover and cook until set.",
+    "timerSec": 120,
+    "ingredientRefs": [
+     "cheese",
+     "tomato"
+    ]
+   },
+   {
+    "ru": "Подсушите хлеб в тостере и подавайте с омлетом.",
+    "en": "Toast the bread and serve with the omelette.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "bread_wholegrain"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_skyr_oats",
+  "nameEn": "Oats with milk, skyr and banana",
+  "nameRu": "Овсянка на молоке со скиром и бананом",
+  "descriptionRu": "Тёплая овсянка, в которую в конце вмешивают скир — белка вдвое больше обычного.",
+  "descriptionEn": "Warm oats with skyr stirred in at the end, for twice the usual protein.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 10,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "oats",
+    "grams": 60
+   },
+   {
+    "id": "milk",
+    "grams": 200
+   },
+   {
+    "id": "skyr",
+    "grams": 200
+   },
+   {
+    "id": "banana",
+    "grams": 120
+   },
+   {
+    "id": "cinnamon",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Залейте овсянку молоком в небольшой кастрюле.",
+    "en": "Put the oats and milk in a small saucepan.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "oats",
+     "milk"
+    ]
+   },
+   {
+    "ru": "Варите на среднем огне, помешивая, до загустения.",
+    "en": "Cook over medium heat, stirring, until thick.",
+    "timerSec": 300,
+    "ingredientRefs": [
+     "oats",
+     "milk"
+    ]
+   },
+   {
+    "ru": "Снимите с огня и вмешайте скир.",
+    "en": "Take off the heat and stir in the skyr.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "skyr"
+    ]
+   },
+   {
+    "ru": "Нарежьте банан, выложите сверху и посыпьте корицей.",
+    "en": "Slice the banana on top and sprinkle with cinnamon.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "banana",
+     "cinnamon"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_skyr_bowl",
+  "nameEn": "Skyr bowl with muesli and berries",
+  "nameRu": "Скир-боул с мюсли и ягодами",
+  "descriptionRu": "Холодный завтрак за пять минут: скир, мюсли, ягоды и миндаль.",
+  "descriptionEn": "A five-minute cold breakfast: skyr, muesli, berries and almonds.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "skyr",
+    "grams": 300
+   },
+   {
+    "id": "muesli",
+    "grams": 50
+   },
+   {
+    "id": "berries_frozen",
+    "grams": 150
+   },
+   {
+    "id": "almond",
+    "grams": 15
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разморозьте ягоды или возьмите свежие.",
+    "en": "Thaw the berries or use fresh ones.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "berries_frozen"
+    ]
+   },
+   {
+    "ru": "Выложите скир в глубокую миску.",
+    "en": "Spoon the skyr into a deep bowl.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "skyr"
+    ]
+   },
+   {
+    "ru": "Посыпьте мюсли и ягодами.",
+    "en": "Top with the muesli and berries.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "muesli",
+     "berries_frozen"
+    ]
+   },
+   {
+    "ru": "Крупно порубите миндаль и посыпьте сверху.",
+    "en": "Roughly chop the almonds and scatter over.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "almond"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_egg_muffins",
+  "nameEn": "Egg muffins with spinach and feta",
+  "nameRu": "Яичные маффины со шпинатом и фетой",
+  "descriptionRu": "Запечённые яичные маффины с овощами и фетой — удобно взять с собой.",
+  "descriptionEn": "Baked egg muffins with vegetables and feta — easy to take with you.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 2,
+  "totalMinutes": 30,
+  "isBatch": true,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "egg",
+    "grams": 330
+   },
+   {
+    "id": "egg_white",
+    "grams": 200
+   },
+   {
+    "id": "spinach",
+    "grams": 150
+   },
+   {
+    "id": "feta",
+    "grams": 80
+   },
+   {
+    "id": "bell_pepper",
+    "grams": 150
+   },
+   {
+    "id": "onion",
+    "grams": 50
+   },
+   {
+    "id": "bread_wholegrain",
+    "grams": 100
+   },
+   {
+    "id": "oil",
+    "grams": 3
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   },
+   {
+    "id": "pepper",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разогрейте духовку до 180 °C и смажьте форму для маффинов маслом.",
+    "en": "Preheat the oven to 180 °C and grease a muffin tin with the oil.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "oil"
+    ]
+   },
+   {
+    "ru": "Мелко нарежьте лук, перец и шпинат.",
+    "en": "Finely chop the onion, pepper and spinach.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "onion",
+     "bell_pepper",
+     "spinach"
+    ]
+   },
+   {
+    "ru": "Взбейте яйца с белками, солью и перцем.",
+    "en": "Whisk the eggs with the egg whites, salt and pepper.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "egg_white",
+     "salt",
+     "pepper"
+    ]
+   },
+   {
+    "ru": "Вмешайте овощи и раскрошенную фету.",
+    "en": "Stir in the vegetables and crumbled feta.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "onion",
+     "bell_pepper",
+     "spinach",
+     "feta"
+    ]
+   },
+   {
+    "ru": "Разлейте смесь по формочкам на две трети.",
+    "en": "Fill the muffin cups two-thirds full.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg"
+    ]
+   },
+   {
+    "ru": "Запекайте до золотистого цвета.",
+    "en": "Bake until golden.",
+    "timerSec": 1200,
+    "ingredientRefs": [
+     "egg"
+    ]
+   },
+   {
+    "ru": "Подавайте по половине маффинов с цельнозерновым хлебом.",
+    "en": "Serve half of the muffins per person with wholegrain bread.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "bread_wholegrain"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_salmon_toast",
+  "nameEn": "Smoked salmon toast with eggs",
+  "nameRu": "Тост с копчёным лососем и яйцами",
+  "descriptionRu": "Цельнозерновые тосты с творогом, авокадо и копчёным лососем, с варёными яйцами.",
+  "descriptionEn": "Wholegrain toast with cottage cheese, avocado and smoked salmon, with boiled eggs.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 12,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "bread_wholegrain",
+    "grams": 70
+   },
+   {
+    "id": "cottage_cheese",
+    "grams": 60
+   },
+   {
+    "id": "smoked_salmon",
+    "grams": 80
+   },
+   {
+    "id": "egg",
+    "grams": 110
+   },
+   {
+    "id": "avocado",
+    "grams": 50
+   },
+   {
+    "id": "cucumber",
+    "grams": 50
+   },
+   {
+    "id": "dill",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Отварите яйца в кипящей воде.",
+    "en": "Boil the eggs.",
+    "timerSec": 480,
+    "ingredientRefs": [
+     "egg"
+    ]
+   },
+   {
+    "ru": "Остудите яйца в холодной воде и очистите.",
+    "en": "Cool the eggs in cold water and peel them.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg"
+    ]
+   },
+   {
+    "ru": "Подсушите хлеб в тостере.",
+    "en": "Toast the bread.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "bread_wholegrain"
+    ]
+   },
+   {
+    "ru": "Намажьте тосты зернёным творогом с размятым авокадо.",
+    "en": "Spread the toast with the cottage cheese and mashed avocado.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cottage_cheese",
+     "avocado"
+    ]
+   },
+   {
+    "ru": "Выложите лосось и ломтики огурца.",
+    "en": "Top with the salmon and cucumber slices.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "smoked_salmon",
+     "cucumber"
+    ]
+   },
+   {
+    "ru": "Подавайте с яйцами, посыпав укропом.",
+    "en": "Serve with the eggs, sprinkled with dill.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "dill"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_casserole",
+  "nameEn": "Cottage cheese bake",
+  "nameRu": "Творожная запеканка",
+  "descriptionRu": "Запеканка из творога с бананом и изюмом без сахара — на четыре завтрака.",
+  "descriptionEn": "A sugar-free cottage cheese bake with banana and raisins — four breakfasts.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 4,
+  "totalMinutes": 60,
+  "isBatch": true,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "tvorog",
+    "grams": 1000
+   },
+   {
+    "id": "egg",
+    "grams": 220
+   },
+   {
+    "id": "semolina",
+    "grams": 60
+   },
+   {
+    "id": "banana",
+    "grams": 240
+   },
+   {
+    "id": "raisins",
+    "grams": 40
+   },
+   {
+    "id": "butter",
+    "grams": 5
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разогрейте духовку до 180 °C и смажьте форму маслом.",
+    "en": "Preheat the oven to 180 °C and grease a baking dish with the butter.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "butter"
+    ]
+   },
+   {
+    "ru": "Разомните бананы вилкой.",
+    "en": "Mash the bananas with a fork.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "banana"
+    ]
+   },
+   {
+    "ru": "Смешайте творог, яйца, манку и бананы до однородности.",
+    "en": "Mix the cottage cheese, eggs, semolina and bananas until smooth.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog",
+     "egg",
+     "semolina",
+     "banana"
+    ]
+   },
+   {
+    "ru": "Вмешайте изюм.",
+    "en": "Stir in the raisins.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "raisins"
+    ]
+   },
+   {
+    "ru": "Дайте массе постоять, чтобы манка набухла.",
+    "en": "Leave the mixture to stand so the semolina swells.",
+    "timerSec": 900,
+    "ingredientRefs": [
+     "semolina"
+    ]
+   },
+   {
+    "ru": "Переложите в форму и разровняйте.",
+    "en": "Transfer to the dish and smooth the top.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   },
+   {
+    "ru": "Запекайте до золотистой корочки.",
+    "en": "Bake until golden on top.",
+    "timerSec": 2400,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   },
+   {
+    "ru": "Остудите и нарежьте на 4 порции.",
+    "en": "Cool and cut into 4 portions.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_burrito",
+  "nameEn": "Breakfast burrito with eggs and beans",
+  "nameRu": "Буррито с яйцами и фасолью",
+  "descriptionRu": "Тортилья с болтуньей, чёрной фасолью, сыром и сальсой.",
+  "descriptionEn": "A tortilla filled with scrambled eggs, black beans, cheese and salsa.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 15,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "tortilla",
+    "grams": 49
+   },
+   {
+    "id": "egg",
+    "grams": 110
+   },
+   {
+    "id": "egg_white",
+    "grams": 66
+   },
+   {
+    "id": "black_beans",
+    "grams": 80
+   },
+   {
+    "id": "cheese",
+    "grams": 30
+   },
+   {
+    "id": "tomato",
+    "grams": 60
+   },
+   {
+    "id": "salsa",
+    "grams": 30
+   },
+   {
+    "id": "oil",
+    "grams": 3
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Слейте и промойте фасоль.",
+    "en": "Drain and rinse the beans.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "black_beans"
+    ]
+   },
+   {
+    "ru": "Нарежьте помидор кубиками.",
+    "en": "Dice the tomato.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tomato"
+    ]
+   },
+   {
+    "ru": "Взбейте яйца с белками и щепоткой соли.",
+    "en": "Whisk the eggs with the egg whites and a pinch of salt.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "egg_white",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Разогрейте масло и приготовьте яичницу-болтунью, помешивая.",
+    "en": "Heat the oil and scramble the eggs, stirring.",
+    "timerSec": 180,
+    "ingredientRefs": [
+     "oil",
+     "egg",
+     "egg_white"
+    ]
+   },
+   {
+    "ru": "Прогрейте тортилью на сухой сковороде.",
+    "en": "Warm the tortilla in a dry pan.",
+    "timerSec": 30,
+    "ingredientRefs": [
+     "tortilla"
+    ]
+   },
+   {
+    "ru": "Выложите на тортилью яйца, фасоль, помидор, сыр и сальсу.",
+    "en": "Fill the tortilla with the eggs, beans, tomato, cheese and salsa.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "black_beans",
+     "tomato",
+     "cheese",
+     "salsa"
+    ]
+   },
+   {
+    "ru": "Сверните буррито и разрежьте пополам.",
+    "en": "Roll up the burrito and cut it in half.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tortilla"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_buckwheat",
+  "nameEn": "Buckwheat with eggs and cottage cheese",
+  "nameRu": "Гречка с яйцами и зернёным творогом",
+  "descriptionRu": "Сытный завтрак из гречки с варёными яйцами и зернёным творогом.",
+  "descriptionEn": "A filling breakfast of buckwheat with boiled eggs and cottage cheese.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 20,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "buckwheat",
+    "grams": 60
+   },
+   {
+    "id": "egg",
+    "grams": 110
+   },
+   {
+    "id": "cottage_cheese",
+    "grams": 150
+   },
+   {
+    "id": "butter",
+    "grams": 5
+   },
+   {
+    "id": "cucumber",
+    "grams": 100
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   },
+   {
+    "id": "dill",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Промойте гречку и залейте вдвое большим количеством подсоленной воды.",
+    "en": "Rinse the buckwheat and cover with twice its volume of salted water.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "buckwheat",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Варите под крышкой на слабом огне, пока вода не впитается.",
+    "en": "Simmer covered over low heat until the water is absorbed.",
+    "timerSec": 900,
+    "ingredientRefs": [
+     "buckwheat"
+    ]
+   },
+   {
+    "ru": "Одновременно отварите яйца.",
+    "en": "Meanwhile, boil the eggs.",
+    "timerSec": 480,
+    "ingredientRefs": [
+     "egg"
+    ]
+   },
+   {
+    "ru": "Заправьте гречку сливочным маслом.",
+    "en": "Stir the butter into the buckwheat.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "butter"
+    ]
+   },
+   {
+    "ru": "Подавайте с яйцами, творогом и огурцом, посыпав укропом.",
+    "en": "Serve with the eggs, cottage cheese and cucumber, sprinkled with dill.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg",
+     "cottage_cheese",
+     "cucumber",
+     "dill"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_b_oat_pancake",
+  "nameEn": "Oat pancake with cottage cheese and turkey ham",
+  "nameRu": "Овсяноблин с творогом и ветчиной из индейки",
+  "descriptionRu": "Блин из овсянки и яиц с начинкой из творога, ветчины и помидора.",
+  "descriptionEn": "An oat and egg pancake filled with cottage cheese, ham and tomato.",
+  "mealType": "breakfast",
+  "mealTypes": [
+   "breakfast"
+  ],
+  "servings": 1,
+  "totalMinutes": 15,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "oats",
+    "grams": 50
+   },
+   {
+    "id": "egg",
+    "grams": 110
+   },
+   {
+    "id": "milk",
+    "grams": 50
+   },
+   {
+    "id": "cottage_cheese",
+    "grams": 100
+   },
+   {
+    "id": "turkey_ham",
+    "grams": 50
+   },
+   {
+    "id": "tomato",
+    "grams": 100
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Смешайте овсянку, яйца, молоко и щепотку соли.",
+    "en": "Mix the oats, eggs, milk and a pinch of salt.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "oats",
+     "egg",
+     "milk",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Дайте смеси постоять, чтобы хлопья размякли.",
+    "en": "Let the mixture stand so the oats soften.",
+    "timerSec": 300,
+    "ingredientRefs": [
+     "oats"
+    ]
+   },
+   {
+    "ru": "Вылейте на разогретую антипригарную сковороду и жарьте до схватывания.",
+    "en": "Pour into a hot non-stick pan and cook until set.",
+    "timerSec": 180,
+    "ingredientRefs": [
+     "oats",
+     "egg"
+    ]
+   },
+   {
+    "ru": "Переверните и жарьте с другой стороны.",
+    "en": "Turn over and cook the other side.",
+    "timerSec": 120,
+    "ingredientRefs": [
+     "oats"
+    ]
+   },
+   {
+    "ru": "Выложите на половину блина творог, ветчину и нарезанный помидор.",
+    "en": "Spread the cottage cheese, ham and sliced tomato on one half.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cottage_cheese",
+     "turkey_ham",
+     "tomato"
+    ]
+   },
+   {
+    "ru": "Сложите блин пополам и подавайте.",
+    "en": "Fold the pancake in half and serve.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "oats"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_cottage_cucumber",
+  "nameEn": "Cottage cheese with cucumber and herbs",
+  "nameRu": "Зернёный творог с огурцом и зеленью",
+  "descriptionRu": "Лёгкий солёный перекус из зернёного творога со свежим огурцом.",
+  "descriptionEn": "A light savoury snack of cottage cheese with fresh cucumber.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "cottage_cheese",
+    "grams": 150
+   },
+   {
+    "id": "cucumber",
+    "grams": 150
+   },
+   {
+    "id": "dill",
+    "grams": 0
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   },
+   {
+    "id": "pepper",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Нарежьте огурец кубиками и мелко порубите укроп.",
+    "en": "Dice the cucumber and finely chop the dill.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cucumber",
+     "dill"
+    ]
+   },
+   {
+    "ru": "Смешайте с творогом, посолите и поперчите.",
+    "en": "Mix with the cottage cheese and season with salt and pepper.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cottage_cheese",
+     "salt",
+     "pepper"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_tuna_rye",
+  "nameEn": "Tuna on rye bread",
+  "nameRu": "Тунец на ржаном хлебе",
+  "descriptionRu": "Бутерброд на ржаном хлебе с тунцом и творогом — почти один белок.",
+  "descriptionEn": "Rye bread with tuna and cottage cheese — almost pure protein.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "tuna_water",
+    "grams": 60
+   },
+   {
+    "id": "rye_bread",
+    "grams": 32
+   },
+   {
+    "id": "cottage_cheese",
+    "grams": 30
+   },
+   {
+    "id": "cucumber",
+    "grams": 50
+   },
+   {
+    "id": "pepper",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разомните тунец вилкой с зернёным творогом и перцем.",
+    "en": "Mash the tuna with the cottage cheese and pepper.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tuna_water",
+     "cottage_cheese",
+     "pepper"
+    ]
+   },
+   {
+    "ru": "Выложите на ломтик ржаного хлеба.",
+    "en": "Spread on the slice of rye bread.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "rye_bread"
+    ]
+   },
+   {
+    "ru": "Сверху положите ломтики огурца.",
+    "en": "Top with cucumber slices.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cucumber"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_greek_yogurt",
+  "nameEn": "Greek yogurt with walnuts and berries",
+  "nameRu": "Греческий йогурт с орехами и ягодами",
+  "descriptionRu": "Греческий йогурт с ягодами и щепоткой грецких орехов.",
+  "descriptionEn": "Greek yogurt with berries and a few walnuts.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 3,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "greek_yogurt",
+    "grams": 170
+   },
+   {
+    "id": "berries_frozen",
+    "grams": 80
+   },
+   {
+    "id": "walnut",
+    "grams": 8
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Выложите йогурт в стакан или миску.",
+    "en": "Spoon the yogurt into a glass or bowl.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "greek_yogurt"
+    ]
+   },
+   {
+    "ru": "Добавьте ягоды и посыпьте рублеными орехами.",
+    "en": "Add the berries and sprinkle with chopped walnuts.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "berries_frozen",
+     "walnut"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_turkey_rolls",
+  "nameEn": "Turkey ham and cheese rolls",
+  "nameRu": "Рулетики из ветчины индейки с сыром",
+  "descriptionRu": "Хрустящие рулетики из ветчины индейки с сыром и огурцом.",
+  "descriptionEn": "Crunchy turkey ham rolls with cheese and cucumber.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "turkey_ham",
+    "grams": 60
+   },
+   {
+    "id": "cheese",
+    "grams": 15
+   },
+   {
+    "id": "cream_cheese",
+    "grams": 10
+   },
+   {
+    "id": "lettuce",
+    "grams": 30
+   },
+   {
+    "id": "cucumber",
+    "grams": 50
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Нарежьте огурец и сыр брусочками.",
+    "en": "Cut the cucumber and cheese into sticks.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cucumber",
+     "cheese"
+    ]
+   },
+   {
+    "ru": "Намажьте ломтики ветчины сливочным сыром.",
+    "en": "Spread the ham slices with the cream cheese.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "turkey_ham",
+     "cream_cheese"
+    ]
+   },
+   {
+    "ru": "Положите на каждый лист салата, огурец и сыр.",
+    "en": "Top each with lettuce, cucumber and cheese.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "lettuce",
+     "cucumber",
+     "cheese"
+    ]
+   },
+   {
+    "ru": "Сверните рулетиками.",
+    "en": "Roll them up.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "turkey_ham"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_berry_smoothie",
+  "nameEn": "Berry smoothie with skyr",
+  "nameRu": "Ягодный смузи со скиром",
+  "descriptionRu": "Густой ягодный смузи на молоке со скиром.",
+  "descriptionEn": "A thick berry smoothie made with milk and skyr.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "milk",
+    "grams": 200
+   },
+   {
+    "id": "skyr",
+    "grams": 120
+   },
+   {
+    "id": "berries_frozen",
+    "grams": 40
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Сложите молоко, скир и ягоды в блендер.",
+    "en": "Put the milk, skyr and berries in a blender.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "milk",
+     "skyr",
+     "berries_frozen"
+    ]
+   },
+   {
+    "ru": "Взбейте до однородности и сразу выпейте.",
+    "en": "Blend until smooth and drink straight away.",
+    "timerSec": 60,
+    "ingredientRefs": [
+     "milk"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_tvorog_apple",
+  "nameEn": "Cottage cheese with apple and cinnamon",
+  "nameRu": "Творог с яблоком и корицей",
+  "descriptionRu": "Творог с сочным яблоком и корицей — сладко без сахара.",
+  "descriptionEn": "Cottage cheese with juicy apple and cinnamon — sweet without sugar.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "tvorog",
+    "grams": 100
+   },
+   {
+    "id": "apple",
+    "grams": 90
+   },
+   {
+    "id": "cinnamon",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Натрите или нарежьте яблоко мелкими кубиками.",
+    "en": "Grate or finely dice the apple.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "apple"
+    ]
+   },
+   {
+    "ru": "Смешайте с творогом и посыпьте корицей.",
+    "en": "Mix with the cottage cheese and sprinkle with cinnamon.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "tvorog",
+     "cinnamon"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_white_omelette",
+  "nameEn": "Egg-white omelette with spinach",
+  "nameRu": "Белковый омлет со шпинатом",
+  "descriptionRu": "Лёгкий омлет из белков со шпинатом, помидорами и фетой.",
+  "descriptionEn": "A light egg-white omelette with spinach, tomatoes and feta.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 10,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "egg_white",
+    "grams": 200
+   },
+   {
+    "id": "spinach",
+    "grams": 50
+   },
+   {
+    "id": "cherry_tomato",
+    "grams": 60
+   },
+   {
+    "id": "feta",
+    "grams": 10
+   },
+   {
+    "id": "oil",
+    "grams": 3
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Разогрейте масло на сковороде и прогрейте шпинат, пока не опадёт.",
+    "en": "Heat the oil in a pan and wilt the spinach.",
+    "timerSec": 60,
+    "ingredientRefs": [
+     "oil",
+     "spinach"
+    ]
+   },
+   {
+    "ru": "Взбейте белки со щепоткой соли и влейте на сковороду.",
+    "en": "Whisk the egg whites with a pinch of salt and pour into the pan.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "egg_white",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Добавьте половинки помидоров черри и раскрошенную фету.",
+    "en": "Add the halved cherry tomatoes and crumbled feta.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cherry_tomato",
+     "feta"
+    ]
+   },
+   {
+    "ru": "Готовьте под крышкой на слабом огне до схватывания.",
+    "en": "Cook covered over low heat until set.",
+    "timerSec": 240,
+    "ingredientRefs": [
+     "egg_white"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_salmon_cucumber",
+  "nameEn": "Smoked salmon on cucumber and rye",
+  "nameRu": "Копчёный лосось с огурцом на ржаном хлебе",
+  "descriptionRu": "Закуска из копчёного лосося и творога на огурце и ржаном хлебе.",
+  "descriptionEn": "Smoked salmon and cottage cheese on cucumber rounds and rye bread.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 1,
+  "totalMinutes": 5,
+  "isBatch": false,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "rye_bread",
+    "grams": 20
+   },
+   {
+    "id": "cottage_cheese",
+    "grams": 50
+   },
+   {
+    "id": "smoked_salmon",
+    "grams": 60
+   },
+   {
+    "id": "cucumber",
+    "grams": 150
+   },
+   {
+    "id": "dill",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Нарежьте огурец толстыми кружками.",
+    "en": "Cut the cucumber into thick rounds.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "cucumber"
+    ]
+   },
+   {
+    "ru": "Намажьте хлеб и часть кружков огурца зернёным творогом.",
+    "en": "Spread the bread and some of the cucumber rounds with the cottage cheese.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "rye_bread",
+     "cucumber",
+     "cottage_cheese"
+    ]
+   },
+   {
+    "ru": "Выложите лосось и посыпьте укропом.",
+    "en": "Top with the salmon and sprinkle with dill.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "smoked_salmon",
+     "dill"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "own_s_chicken_skewers",
+  "nameEn": "Chicken and pepper skewers",
+  "nameRu": "Куриные шашлычки с перцем",
+  "descriptionRu": "Шашлычки из куриной грудки в йогурте с паприкой — на четыре перекуса.",
+  "descriptionEn": "Chicken breast skewers in a paprika yogurt marinade — four snacks.",
+  "mealType": "snack",
+  "mealTypes": [
+   "snack"
+  ],
+  "servings": 4,
+  "totalMinutes": 30,
+  "isBatch": true,
+  "prepNightBefore": false,
+  "lines": [
+   {
+    "id": "chicken_breast",
+    "grams": 400
+   },
+   {
+    "id": "yogurt",
+    "grams": 120
+   },
+   {
+    "id": "bell_pepper",
+    "grams": 200
+   },
+   {
+    "id": "oil",
+    "grams": 12
+   },
+   {
+    "id": "paprika_powder",
+    "grams": 0
+   },
+   {
+    "id": "garlic_powder",
+    "grams": 0
+   },
+   {
+    "id": "salt",
+    "grams": 0
+   }
+  ],
+  "steps": [
+   {
+    "ru": "Нарежьте курицу и перец кусочками одного размера.",
+    "en": "Cut the chicken and pepper into even pieces.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "chicken_breast",
+     "bell_pepper"
+    ]
+   },
+   {
+    "ru": "Смешайте йогурт, масло, паприку, сушёный чеснок и соль.",
+    "en": "Mix the yogurt, oil, paprika, garlic powder and salt.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "yogurt",
+     "oil",
+     "paprika_powder",
+     "garlic_powder",
+     "salt"
+    ]
+   },
+   {
+    "ru": "Замаринуйте курицу в йогурте.",
+    "en": "Marinate the chicken in the yogurt.",
+    "timerSec": 1200,
+    "ingredientRefs": [
+     "chicken_breast",
+     "yogurt"
+    ]
+   },
+   {
+    "ru": "Нанижите курицу и перец на шпажки.",
+    "en": "Thread the chicken and pepper onto skewers.",
+    "timerSec": null,
+    "ingredientRefs": [
+     "chicken_breast",
+     "bell_pepper"
+    ]
+   },
+   {
+    "ru": "Запекайте в духовке при 220 °C или на гриле, переворачивая.",
+    "en": "Bake at 220 °C or grill, turning.",
+    "timerSec": 900,
+    "ingredientRefs": [
+     "chicken_breast"
+    ]
+   }
+  ]
+ }
+]

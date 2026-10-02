@@ -1,0 +1,136 @@
+{
+ "nameRu": "Вьетнамские роллы в рисовой бумаге",
+ "descriptionRu": "Свежие роллы из рисовой бумаги с лапшой, курицей, овощами и зеленью, с кисло-острым соусом.",
+ "descriptionEn": "Fresh rice paper rolls with noodles, chicken, vegetables and herbs, served with a tangy dipping sauce.",
+ "steps": [
+  {
+   "ru": "Замочите рисовые блинчики по инструкции на упаковке или в кипятке.",
+   "en": "Soak the rice flour pancakes according to the pack instructions or in boiling water.",
+   "timerSec": 30,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Выньте блинчики и остудите на бумажном полотенце.",
+   "en": "Remove the pancakes and cool them on kitchen paper.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Замочите рисовую лапшу по инструкции на упаковке.",
+   "en": "Soak the rice noodles according to the pack instructions.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Откиньте лапшу.",
+   "en": "Drain the noodles.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Нарежьте лапшу отрезками по 2 см.",
+   "en": "Cut the noodles into 2 cm strips.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Положите рисовый блинчик на доску.",
+   "en": "Lay a rice pancake on a board.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_paper"
+   ]
+  },
+  {
+   "ru": "Выложите немного лапши, курицы, овощей и зелени примерно на трети высоты блинчика, оставив по бокам край 1 см.",
+   "en": "Arrange some noodles, chicken, vegetables and herb leaves about a third of the way up, leaving a 1 cm edge at the sides.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "chicken_breast",
+    "carrot",
+    "cucumber",
+    "bell_pepper",
+    "coriander_leaf",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Заверните боковые края блинчика на начинку.",
+   "en": "Fold the sides over the filling.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Сверните блинчик в плотный рулет.",
+   "en": "Roll it up lengthways to make a cigar.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Храните роллы в холодильнике под влажным бумажным полотенцем не дольше суток.",
+   "en": "Store the rolls in the fridge covered with moist kitchen paper for up to a day.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Смешайте для соуса рыбный соус, рисовый уксус, сок лайма и перец чили.",
+   "en": "Mix the fish sauce, rice vinegar, lime juice and chilli for the dipping sauce.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_sauce",
+    "rice_vinegar",
+    "lime",
+    "red_chilli"
+   ]
+  },
+  {
+   "ru": "Перелейте соус в пиалу.",
+   "en": "Pour the sauce into a bowl.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите роллы на тарелку вместе с листьями салата и зеленью.",
+   "en": "Arrange the rolls on a plate with the lettuce leaves and herbs.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lettuce",
+    "coriander_leaf",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Перед едой заверните каждый ролл в лист салата с веточкой зелени.",
+   "en": "To eat, wrap each roll in a lettuce leaf with a herb sprig.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lettuce",
+    "coriander_leaf",
+    "mint"
+   ]
+  },
+  {
+   "ru": "Обмакните ролл в соус.",
+   "en": "Dunk it into the sauce.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "snack",
+  "lunch"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

@@ -30,3 +30,11 @@ mdb_52993 (text 2), mdb_53490 (4 peppers, 1 serving), mdb_53343 (8–10), mdb_53
 ## Judgement calls (review `prepNightBefore`)
 - true: mdb_53533 (3 h or overnight), mdb_53152 (dried beans, soaking implied), mdb_53181 (soak 4 h or overnight), mdb_53023 (2–3 days in the fridge).
 - false although overnight is optional: mdb_52806, mdb_53069, mdb_53261, mdb_53264, mdb_53354; mdb_53171 salt cod (soaking not stated).
+
+## Breakfast/snack additions (meal-extras)
+- **mdb_53241 Vietnamese veg parcels** — «rice flour pancake» was mapped to wheat tortilla; now rice paper. Category Vegetarian but has chicken and fish sauce; the chicken goes in cooked.
+- **mdb_52955 Egg Drop Soup** — egg used but not listed; category Vegetarian but uses chicken broth.
+- **mdb_52915 French Omelette** — herbs and Gruyère listed but never used; «4 servings» from 3 eggs (kept: 4 snack portions).
+- **mdb_53248 Salmon noodle wraps** — butter used but not listed; chilli, coriander, lime listed but not used.
+- **mdb_53194 Tom yum** — water and sugar not listed; galangal → ginger, chilli jam → sweet chilli sauce.
+- **mdb_52948 Wontons** — frying oil at «450 degrees» (read as °F).

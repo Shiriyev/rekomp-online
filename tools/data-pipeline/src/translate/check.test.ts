@@ -53,6 +53,7 @@ test('statedDurations reads number words, «more» and compound durations', () =
     assert.ok(statedDurations(text).has(sec), `${text} → ${sec}`);
   has('Cook for two minutes', 120);
   has('fry for a minute', 60);
+  has('cook for another minute', 60);
   has('leave for half an hour', 1800);
   has('simmer 5 more minutes', 300);
   has('cook 1 more min', 60);

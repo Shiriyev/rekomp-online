@@ -68,6 +68,8 @@ export type Context = {
   map: Readonly<Record<string, string>>;
   usda: ReadonlyMap<number, UsdaFood>;
   unitGrams: UnitGrams;
+  /** Reviewed extra meals per recipe id (mappings/meal-extras.json), e.g. an omelette as breakfast. */
+  mealExtras?: Readonly<Record<string, readonly MealType[]>>;
 };
 
 /** Macros per 100 g the app will store for a product (manual values win). */
@@ -225,8 +227,10 @@ export function evaluate(r: MealDbRecipe, ctx: Context): Accepted | Rejected {
   const proteinShare = (total.protein * 4) / total.kcal;
 
   // Which meals fit, and with how many servings.
+  const base = allowedMeals(r.category);
+  const extra = (ctx.mealExtras?.[`mdb_${r.id}`] ?? []).filter((m) => !base.includes(m));
   const fits: { meal: MealType; servings: number; distance: number }[] = [];
-  for (const meal of allowedMeals(r.category)) {
+  for (const meal of [...base, ...extra]) {
     const [lo, hi] = f.kcalRange[meal];
     for (let n = f.servings.min; n <= f.servings.max; n++) {
       const kcal = total.kcal / n;
@@ -252,8 +256,16 @@ export function evaluate(r: MealDbRecipe, ctx: Context): Accepted | Rejected {
     );
   }
 
-  const best = [...passing].sort((a, b) => a.distance - b.distance)[0]!;
-  const mealTypes = MEALS.filter((m) => passing.some((x) => x.meal === m));
+  // The category's own meals decide the servings; reviewed extras only add meals that fit
+  // with the same servings, or carry a recipe that fits nothing else.
+  const fromBase = passing.filter((x) => base.includes(x.meal));
+  const best = [...(fromBase.length > 0 ? fromBase : passing)].sort(
+    (a, b) => a.distance - b.distance,
+  )[0]!;
+  // One recipe has one serving size: list only meals that fit with that size.
+  const mealTypes = MEALS.filter((m) =>
+    passing.some((x) => x.meal === m && x.servings === best.servings),
+  );
 
   const products = finalLines.map((l) => ctx.products.get(l.ingredientId)!);
   const tags = new Set<RecipeTag>();

@@ -1,0 +1,114 @@
+{
+ "nameRu": "Лосось с рисовой лапшой в пергаменте",
+ "descriptionRu": "Филе лосося, запечённое в пергаменте на рисовой лапше с зелёным луком и горошком.",
+ "descriptionEn": "Salmon fillet baked in parchment on rice noodles with spring onions and peas.",
+ "steps": [
+  {
+   "ru": "Разогрейте духовку до 200 °C (180 °C с конвекцией).",
+   "en": "Heat the oven to 200 °C (180 °C fan).",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите лапшу в миску и залейте кипятком так, чтобы он только покрыл её.",
+   "en": "Put the noodles in a bowl and pour over enough boiling water to just cover them.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Оставьте, пока лапша не станет гибкой, но не слишком мягкой.",
+   "en": "Leave until the noodles are bendable but not too soft.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Хорошо откиньте лапшу.",
+   "en": "Drain the noodles well.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Верните лапшу в миску и добавьте зелёный лук, горошек, соль, перец и треть сливочного масла.",
+   "en": "Return the noodles to the bowl with the spring onions, peas, salt, pepper and a third of the butter.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "spring_onion",
+    "peas"
+   ]
+  },
+  {
+   "ru": "Перемешайте, пока масло не растает.",
+   "en": "Mix well until the butter has melted.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Выложите лапшу с овощами на два больших квадрата пергамента.",
+   "en": "Pile the noodles and vegetables onto two large squares of baking parchment.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "ru": "Положите сверху лосося.",
+   "en": "Sit the salmon on top.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Нарежьте оставшееся масло ломтиками и разложите на лососе.",
+   "en": "Slice the remaining butter and arrange it over the salmon.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salmon"
+   ]
+  },
+  {
+   "ru": "Поднимите края бумаги над рыбой и сверните их вместе, чтобы запечатать.",
+   "en": "Bring the ends of the paper over the fish and fold them together to seal.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Подверните концы бумаги вниз, чтобы не осталось щелей.",
+   "en": "Tuck the ends of the paper underneath so there are no gaps.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Положите конверты на противень.",
+   "en": "Put the parcels on a baking sheet.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Запекайте конверты в духовке.",
+   "en": "Bake the parcels.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Переложите на тарелки и сразу подавайте.",
+   "en": "Transfer to plates and serve without delay.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "lunch",
+  "dinner",
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}

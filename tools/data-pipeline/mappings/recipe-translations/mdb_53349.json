@@ -1,0 +1,118 @@
+{
+ "nameRu": "Острые креветки по-ямайски",
+ "descriptionRu": "Креветки, тушённые в бульоне с жгучим перцем скотч-бонет, душистым перцем и тимьяном.",
+ "descriptionEn": "Shrimp simmered in stock with fiery Scotch bonnet peppers, allspice and thyme.",
+ "steps": [
+  {
+   "ru": "Смешайте в миске креветки, мелко нарезанный перец скотч-бонет, универсальную приправу, аннато и душистый перец.",
+   "en": "In a medium bowl, combine the shrimp with the minced Scotch bonnet, all-purpose seasoning, annatto and allspice.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn",
+    "scotch_bonnet",
+    "seasoning_mix",
+    "annatto",
+    "allspice"
+   ]
+  },
+  {
+   "ru": "Хорошо перемешайте, чтобы специи равномерно покрыли креветки.",
+   "en": "Toss well to coat evenly.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Оставьте креветки мариноваться.",
+   "en": "Let the shrimp marinate.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Разогрейте большую сковороду на среднем огне.",
+   "en": "Heat a large pan over medium heat.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Влейте бульон и доведите до слабого кипения.",
+   "en": "Add the shrimp stock and bring to a gentle simmer.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "fish_stock"
+   ]
+  },
+  {
+   "ru": "Добавьте лук и чеснок и готовьте до мягкости и аромата.",
+   "en": "Stir in the onion and garlic and cook until softened and fragrant.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "ru": "Выложите креветки и веточки тимьяна, распределив креветки по сковороде.",
+   "en": "Add the seasoned shrimp and thyme sprigs, spreading the shrimp in the pan.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn",
+    "thyme"
+   ]
+  },
+  {
+   "ru": "Накройте крышкой и готовьте, иногда помешивая, пока креветки не станут ярко-оранжевыми и не приготовятся.",
+   "en": "Cover and cook, stirring occasionally, until the shrimp turn bright orange and are cooked through.",
+   "timerSec": 420,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Добавьте уксус и перемешайте.",
+   "en": "Add the white vinegar and stir.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "vinegar"
+   ]
+  },
+  {
+   "ru": "Готовьте ещё 1 минуту.",
+   "en": "Cook for 1 more minute.",
+   "timerSec": 60,
+   "ingredientRefs": []
+  },
+  {
+   "ru": "Попробуйте и посолите по вкусу.",
+   "en": "Taste and add salt to taste.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt"
+   ]
+  },
+  {
+   "ru": "Шумовкой переложите креветки на тарелку.",
+   "en": "Using a slotted spoon, transfer the shrimp to a plate.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "ru": "Подавайте горячими, полив небольшим количеством жидкости из сковороды.",
+   "en": "Serve hot with some of the cooking liquid drizzled on top.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ],
+ "mealTypes": [
+  "snack",
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false
+}
