@@ -255,7 +255,7 @@ function main() {
         isBatch: r.isBatch,
         prepNightBefore: r.prepNightBefore,
         totalMinutes: r.totalMinutes,
-        imageKey: null,
+        imageKey: imageFile(`catalog/recipes/${r.id}`) ? `catalog/recipes/${r.id}` : null,
         source: 'own',
         sourceId: null,
         sortOrder: 0,

@@ -14,6 +14,7 @@ import sharp from 'sharp';
 import { config } from '../pipeline.config.ts';
 import type { Accepted } from './build/evaluate.ts';
 import { loadMappings } from './build/mappings.ts';
+import { loadOwnRecipes } from './own/recipes.ts';
 import { get, sleep } from './lib/http.ts';
 import { APP_ROOT, ensureDir, MAPPINGS, RAW, REPORTS, ROOT } from './lib/paths.ts';
 
@@ -158,7 +159,11 @@ async function main() {
   }
 
   // Recipes that left the catalog: drop their photo and credit.
-  const recipeFiles = new Set(accepted.map((r) => `recipes/${r.id}.webp`));
+  const recipeFiles = new Set(
+    [...accepted.map((r) => r.id), ...loadOwnRecipes().map((r) => r.id)].map(
+      (id) => `recipes/${id}.webp`,
+    ),
+  );
   for (const file of [...credits.keys()]) {
     if (file.startsWith('recipes/') && !recipeFiles.has(file)) {
       rmSync(path.join(OUT, file), { force: true });
@@ -179,12 +184,29 @@ async function main() {
   const notFound: string[] = [];
   const pending: { id: string; query: string; raw: string; credit: Credit }[] = [];
   const counts = { approved: 0, rejected: 0, pending: 0 };
-  for (const p of wanted) {
-    const file = `products/${p.id}.webp`;
+  // Own recipes (breakfasts and snacks) have no TheMealDB photo: reviewed Pexels photos too.
+  const targets = [
+    ...wanted.map((p) => ({
+      key: p.id,
+      file: `products/${p.id}.webp`,
+      defaultQuery: `${p.nameEn} food`,
+      maxSide: config.images.productSide,
+      large: false,
+    })),
+    ...loadOwnRecipes().map((r) => ({
+      key: r.id,
+      file: `recipes/${r.id}.webp`,
+      defaultQuery: r.nameEn,
+      maxSide: config.images.recipeSide,
+      large: true,
+    })),
+  ];
+  for (const target of targets) {
+    const { key, file, defaultQuery } = target;
     const out = path.join(OUT, file);
-    const raw = path.join(RAW, 'images', 'pexels', `${p.id}.jpg`);
+    const raw = path.join(RAW, 'images', 'pexels', `${key}.jpg`);
     const sidecar = raw.replace(/\.jpg$/, '.json');
-    const entry = review[p.id];
+    const entry = review[key];
     const unship = () => {
       rmSync(out, { force: true });
       credits.delete(file);
@@ -194,14 +216,14 @@ async function main() {
       unship();
       continue;
     }
-    const query = typeof entry === 'object' ? entry.query : `${p.nameEn} food`;
+    const query = typeof entry === 'object' ? entry.query : defaultQuery;
 
     let side = existsSync(sidecar)
       ? (JSON.parse(readFileSync(sidecar, 'utf8')) as Sidecar)
       : credits.has(file)
-        ? { ...credits.get(file)!, query: `${p.nameEn} food` } // photos from older runs
+        ? { ...credits.get(file)!, query: defaultQuery } // photos from older runs
         : undefined;
-    if (side && (side.query ?? `${p.nameEn} food`) !== query) {
+    if (side && (side.query ?? defaultQuery) !== query) {
       // A new query for this product: forget the old photo.
       for (const f of [raw, sidecar]) rmSync(f, { force: true });
       unship();
@@ -209,14 +231,14 @@ async function main() {
     }
     if (!side || !existsSync(raw)) {
       if (!apiKey) {
-        notFound.push(p.id);
+        notFound.push(key);
         continue;
       }
       const photo = await pexels(query, apiKey);
       searches++;
       await sleep(config.images.pexelsPauseMs);
       if (!photo) {
-        notFound.push(p.id);
+        notFound.push(key);
         unship();
         continue;
       }
@@ -228,7 +250,7 @@ async function main() {
         pageUrl: photo.url,
         query,
       };
-      await download(photo.src.medium, raw, true);
+      await download(target.large ? photo.src.large : photo.src.medium, raw, true);
     }
     // The credit sits next to the raw photo so an interrupted run does not lose it.
     ensureDir(path.dirname(sidecar));
@@ -238,13 +260,13 @@ async function main() {
     const approved = entry === 'ok' || (typeof entry === 'object' && entry.ok === true);
     if (!approved) {
       counts.pending++;
-      pending.push({ id: p.id, query, raw, credit });
+      pending.push({ id: key, query, raw, credit });
       unship();
       continue;
     }
     counts.approved++;
     credits.set(file, credit);
-    if (!existsSync(out)) await toWebp(raw, out, config.images.productSide);
+    if (!existsSync(out)) await toWebp(raw, out, target.maxSide);
   }
   writeFileSync(path.join(REPORTS, 'product-photos.html'), reviewPage(pending));
 

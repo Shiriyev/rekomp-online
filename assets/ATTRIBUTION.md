@@ -73,3 +73,17 @@ Photos of the original recipes and products (v1) are credited in the repository 
 | products/vegetable_stock.webp | [Cook Eat](https://www.pexels.com/@cookeat) | https://www.pexels.com/photo/stew-with-meat-and-vegetables-placed-in-white-ceramic-bowl-772518/ |
 | products/walnut.webp | [Valeriia Harbuz](https://www.pexels.com/@valeriia-harbuz-2161259) | https://www.pexels.com/photo/close-up-photo-of-brown-walnuts-5869852/ |
 | products/white_fish.webp | [dam i](https://www.pexels.com/@dami) | https://www.pexels.com/photo/delicious-grilled-salmon-with-vegetables-29748127/ |
+| recipes/own_b_burrito.webp | [Gonzalo Mendiola](https://www.pexels.com/@gonzalo-mendiola-95842233) | https://www.pexels.com/photo/close-up-shot-of-a-burrto-9258714/ |
+| recipes/own_b_ham_omelette.webp | [Karina Ustiuzhanina](https://www.pexels.com/@karina-ustiuzhanina-313369745) | https://www.pexels.com/photo/a-bread-with-scrambled-eggs-near-the-cup-of-coffee-on-the-table-14122642/ |
+| recipes/own_b_oat_pancake.webp | [Alisha Mishra](https://www.pexels.com/@alisha-mishra-579430) | https://www.pexels.com/photo/two-white-ceramic-bowls-1346381/ |
+| recipes/own_b_salmon_toast.webp | [Sabur Ahmed Jishan](https://www.pexels.com/@mdsabur99) | https://www.pexels.com/photo/cooked-food-on-the-plate-11663125/ |
+| recipes/own_b_skyr_bowl.webp | [Maguelonne PEIGNOT-CINTAS](https://www.pexels.com/@maguelonne-peignot-cintas-2152471948) | https://www.pexels.com/photo/nutritious-breakfast-bowl-with-cherries-and-granola-32214637/ |
+| recipes/own_b_skyr_oats.webp | [N G](https://www.pexels.com/@oceanofstars) | https://www.pexels.com/photo/delicious-smoothie-bowl-with-banana-and-granola-34122323/ |
+| recipes/own_b_syrniki.webp | [Tima Miroshnichenko](https://www.pexels.com/@tima-miroshnichenko) | https://www.pexels.com/photo/close-up-photo-of-syrniki-fried-quark-pancakes-6327617/ |
+| recipes/own_s_berry_smoothie.webp | [Cook Eat](https://www.pexels.com/@cookeat) | https://www.pexels.com/photo/blueberry-smoothie-6671856/ |
+| recipes/own_s_chicken_skewers.webp | [Thomas Fritscher](https://www.pexels.com/@thomas-fritscher-1675366234) | https://www.pexels.com/photo/delicious-grilled-meat-and-vegetable-skewers-on-bbq-37198642/ |
+| recipes/own_s_cottage_cucumber.webp | [Christina Voinova](https://www.pexels.com/@christina-voinova-42707474) | https://www.pexels.com/photo/food-ingredients-on-the-table-7368035/ |
+| recipes/own_s_greek_yogurt.webp | [Delano Jones](https://www.pexels.com/@delano-jones-32819) | https://www.pexels.com/photo/flat-lay-photo-of-berries-in-container-822647/ |
+| recipes/own_s_salmon_cucumber.webp | [Mony  Cruz](https://www.pexels.com/@mony-cruz-743773620) | https://www.pexels.com/photo/fresh-salmon-sashimi-platter-against-black-background-36292348/ |
+| recipes/own_s_tuna_rye.webp | [Piotr Arnoldes](https://www.pexels.com/@piotr-arnoldes-7862031) | https://www.pexels.com/photo/delicious-sandwiches-with-cheese-and-ham-slices-on-cutting-board-6493113/ |
+| recipes/own_s_white_omelette.webp | [miniperde](https://www.pexels.com/@miniperde) | https://www.pexels.com/photo/healthy-breakfast-plate-with-omelette-and-vegetables-31963657/ |
