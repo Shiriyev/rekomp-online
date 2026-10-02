@@ -9,7 +9,7 @@ import { useIngredientsMap, useLidlProducts, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount, smallestPackages } from '@/domain/bulkAdd';
 import { normalizeForSearch, searchIngredients } from '@/domain/search';
-import { INGREDIENT_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { NewProductForm } from '@/features/pantry/NewProductForm';
@@ -40,7 +40,7 @@ export default function BulkSelectScreen() {
     () =>
       searchIngredients(
         [...ingredients.values()]
-          .filter((i) => !i.isStaple)
+          .filter((i) => !i.isStaple && !i.isArchived)
           .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
         query,
       ),
@@ -106,7 +106,7 @@ export default function BulkSelectScreen() {
               <View style={styles.row}>
                 <Checkbox status={checked ? 'checked' : 'unchecked'} />
                 <ImageWithFallback
-                  source={item.imageKey ? INGREDIENT_IMAGES[item.imageKey] : undefined}
+                  source={bundledImage(item.imageKey)}
                   fallbackIcon={CATEGORY_ICONS[item.category]}
                   style={styles.image}
                   iconSize={20}

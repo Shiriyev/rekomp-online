@@ -7,16 +7,16 @@ import { t, useT } from '@/i18n';
 type IconName = ComponentProps<typeof MaterialCommunityIcons>['name'];
 
 export const CATEGORY_ICONS: Record<IngredientCategory, IconName> = {
-  dairy: 'cup-outline',
-  meat: 'food-drumstick-outline',
-  grains: 'barley',
+  dairy_eggs: 'cup-outline',
+  meat_poultry: 'food-drumstick-outline',
+  fish_seafood: 'fish',
+  grains_pasta_legumes: 'barley',
   vegetables: 'carrot',
-  fruits: 'fruit-cherries',
-  eggs: 'egg-outline',
-  bread: 'bread-slice-outline',
-  canned: 'food-variant',
-  oil: 'bottle-tonic-outline',
-  spices: 'shaker-outline',
+  fruits_berries: 'fruit-cherries',
+  bread_bakery: 'bread-slice-outline',
+  nuts_seeds: 'peanut-outline',
+  sauces_oils_spices: 'bottle-tonic-outline',
+  other: 'food-variant',
 };
 
 /** Category names in the current UI language. */

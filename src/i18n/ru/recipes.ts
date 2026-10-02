@@ -1,5 +1,13 @@
 /** Recipe list, recipe card and its ingredient rows. */
 export const recipes = {
+  tags: {
+    vegetarian: 'Вегетарианское',
+    vegan: 'Веганское',
+    pork: 'Свинина',
+    alcohol: 'С алкоголем',
+    lactose: 'С лактозой',
+    gluten: 'С глютеном',
+  },
   sort: { protein: 'Больше белка', kcal: 'Меньше ккал', time: 'Быстрее' },
   noCategory: 'Такой категории нет',
   onlyMine: 'Только из моих продуктов',

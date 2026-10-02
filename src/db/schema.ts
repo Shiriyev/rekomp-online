@@ -21,6 +21,8 @@ import {
   type GoalRate,
 } from '../domain/types';
 
+type MealTypeValue = (typeof MEAL_TYPES)[number];
+
 /** Timer of one step; wall-clock based so it survives the app being killed. */
 export type CookTimer = {
   stepOrder: number;
@@ -37,23 +39,50 @@ export type CookProgress = { stepIndex: number; checked: string[]; timers: CookT
 /** Per-ingredient amounts moved by a cook session, used for Undo. Positive = consumed. */
 export type PantryDelta = { ingredientId: string; amount: number; unit: (typeof UNITS)[number] }[];
 
-export const ingredients = sqliteTable('ingredients', {
-  id: text('id').primaryKey(),
-  name: text('name').notNull(),
-  nameHu: text('name_hu'),
-  category: text('category', { enum: INGREDIENT_CATEGORIES }).notNull(),
-  unit: text('unit', { enum: UNITS }).notNull(),
-  gramsPerPiece: real('grams_per_piece'),
-  kcalPer100g: real('kcal_per_100g').notNull(),
-  proteinPer100g: real('protein_per_100g').notNull(),
-  isStaple: integer('is_staple', { mode: 'boolean' }).notNull().default(false),
-  imageKey: text('image_key'),
-  isCustom: integer('is_custom', { mode: 'boolean' }).notNull().default(false),
-  /** «Заканчивается» below this amount (ingredient unit); null = default by unit. */
-  lowStockThreshold: real('low_stock_threshold'),
-  /** What was added «Домой» last time (ingredient unit): the next default amount. */
-  lastAddedAmount: real('last_added_amount'),
-});
+export const ingredients = sqliteTable(
+  'ingredients',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    nameHu: text('name_hu'),
+    category: text('category', { enum: INGREDIENT_CATEGORIES }).notNull(),
+    unit: text('unit', { enum: UNITS }).notNull(),
+    gramsPerPiece: real('grams_per_piece'),
+    kcalPer100g: real('kcal_per_100g').notNull(),
+    proteinPer100g: real('protein_per_100g').notNull(),
+    isStaple: integer('is_staple', { mode: 'boolean' }).notNull().default(false),
+    imageKey: text('image_key'),
+    isCustom: integer('is_custom', { mode: 'boolean' }).notNull().default(false),
+    // ---- catalog (PHASE_2): rewritten by the catalog update, never by the user ----
+    nameEn: text('name_en'),
+    synonyms: text('synonyms', { mode: 'json' })
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    subcategory: text('subcategory'),
+    fatPer100g: real('fat_per_100g'),
+    carbsPer100g: real('carbs_per_100g'),
+    tags: text('tags', { mode: 'json' })
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    /** usda | manual (catalog) | own (user-created). */
+    source: text('source').notNull().default('own'),
+    sourceId: text('source_id'),
+    /** Left the catalog but still referenced: hidden from pickers, kept for history/«Дома». */
+    isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
+    /** The user changed nutrition or piece weight: catalog updates keep the user's values. */
+    nutritionEdited: integer('nutrition_edited', { mode: 'boolean' }).notNull().default(false),
+    /** «Заканчивается» below this amount (ingredient unit); null = default by unit. */
+    lowStockThreshold: real('low_stock_threshold'),
+    /** What was added «Домой» last time (ingredient unit): the next default amount. */
+    lastAddedAmount: real('last_added_amount'),
+  },
+  (t) => [
+    index('ingredients_category_idx').on(t.category),
+    index('ingredients_archived_idx').on(t.isArchived),
+  ],
+);
 
 export const lidlProducts = sqliteTable(
   'lidl_products',
@@ -71,27 +100,62 @@ export const lidlProducts = sqliteTable(
     saleUntil: text('sale_until'),
     barcode: text('barcode').unique(),
     notes: text('notes'),
+    // ---- catalog columns (price, sale and notes above are the user's) ----
+    brand: text('brand'),
+    kcalPer100g: real('kcal_per_100g'),
+    proteinPer100g: real('protein_per_100g'),
+    imageKey: text('image_key'),
+    /** own (bundled) | off (Open Food Facts) | user. */
+    source: text('source').notNull().default('user'),
+    sourceId: text('source_id'),
+    isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
   },
   (t) => [index('lidl_products_ingredient_idx').on(t.ingredientId)],
 );
 
-export const recipes = sqliteTable('recipes', {
-  id: text('id').primaryKey(),
-  name: text('name').notNull(),
-  mealType: text('meal_type', { enum: MEAL_TYPES }).notNull(),
-  defaultServings: integer('default_servings').notNull().default(1),
-  isBatch: integer('is_batch', { mode: 'boolean' }).notNull().default(false),
-  prepNightBefore: integer('prep_night_before', { mode: 'boolean' }).notNull().default(false),
-  totalMinutes: integer('total_minutes').notNull(),
-  imageKey: text('image_key'),
-  /** The user's own photo of the dish (documents/meal-photos); replaces the bundled one. */
-  photoUri: text('photo_uri'),
-  tags: text('tags', { mode: 'json' })
-    .$type<string[]>()
-    .notNull()
-    .default(sql`'[]'`),
-  sortOrder: integer('sort_order').notNull().default(0),
-});
+export const recipes = sqliteTable(
+  'recipes',
+  {
+    id: text('id').primaryKey(),
+    name: text('name').notNull(),
+    mealType: text('meal_type', { enum: MEAL_TYPES }).notNull(),
+    defaultServings: integer('default_servings').notNull().default(1),
+    isBatch: integer('is_batch', { mode: 'boolean' }).notNull().default(false),
+    prepNightBefore: integer('prep_night_before', { mode: 'boolean' }).notNull().default(false),
+    totalMinutes: integer('total_minutes').notNull(),
+    imageKey: text('image_key'),
+    /** The user's own photo of the dish (documents/meal-photos); replaces the bundled one. */
+    photoUri: text('photo_uri'),
+    tags: text('tags', { mode: 'json' })
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    sortOrder: integer('sort_order').notNull().default(0),
+    // ---- catalog (PHASE_2) ----
+    nameEn: text('name_en'),
+    descriptionRu: text('description_ru'),
+    descriptionEn: text('description_en'),
+    cuisine: text('cuisine'),
+    /** Every meal the recipe fits (meal_type is the primary one). */
+    mealTypes: text('meal_types', { mode: 'json' })
+      .$type<MealTypeValue[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    /** own | mealdb */
+    source: text('source').notNull().default('own'),
+    sourceId: text('source_id'),
+    ingredientCount: integer('ingredient_count').notNull().default(0),
+    /** Precomputed for sorting/filtering; the screens still compute from the lines. */
+    kcalPerServing: real('kcal_per_serving').notNull().default(0),
+    proteinPerServing: real('protein_per_serving').notNull().default(0),
+    proteinDensity: real('protein_density').notNull().default(0),
+    isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
+  },
+  (t) => [
+    index('recipes_meal_type_idx').on(t.mealType),
+    index('recipes_archived_idx').on(t.isArchived),
+  ],
+);
 
 export const recipeIngredients = sqliteTable(
   'recipe_ingredients',
@@ -109,6 +173,7 @@ export const recipeIngredients = sqliteTable(
     altGroup: text('alt_group'),
     sortOrder: integer('sort_order').notNull().default(0),
     note: text('note'),
+    noteEn: text('note_en'),
   },
   (t) => [
     primaryKey({ columns: [t.recipeId, t.ingredientId] }),
@@ -124,6 +189,7 @@ export const recipeSteps = sqliteTable(
       .references(() => recipes.id, { onDelete: 'cascade' }),
     order: integer('step_order').notNull(),
     text: text('text').notNull(),
+    textEn: text('text_en'),
     timerSec: integer('timer_sec'),
     ingredientRefs: text('ingredient_refs', { mode: 'json' })
       .$type<string[]>()
@@ -296,6 +362,12 @@ export const shoppingItems = sqliteTable(
 );
 
 /** Small key/value store for app metadata such as the applied seed version. */
+/** Version of the bundled catalog last applied (key «catalogVersion»). Not backed up. */
+export const catalogMeta = sqliteTable('catalog_meta', {
+  key: text('key').primaryKey(),
+  value: text('value').notNull(),
+});
+
 export const appMeta = sqliteTable('app_meta', {
   key: text('key').primaryKey(),
   value: text('value').notNull(),

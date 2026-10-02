@@ -1,4 +1,4 @@
-import { sortRecipes } from '../recipes';
+import { recipeMeals, sortRecipes } from '../recipes';
 
 const r = (id: string, kcal: number, protein: number, totalMinutes: number, sortOrder: number) => ({
   id,
@@ -25,5 +25,16 @@ describe('sortRecipes', () => {
   it('does not mutate the input', () => {
     sortRecipes(ITEMS, 'protein');
     expect(ITEMS.map((x) => x.id)).toEqual(['a', 'b', 'c']);
+  });
+});
+
+describe('recipeMeals', () => {
+  it('uses all fitting meals, else the primary one', () => {
+    expect(recipeMeals({ mealType: 'lunch', mealTypes: ['lunch', 'dinner'] })).toEqual([
+      'lunch',
+      'dinner',
+    ]);
+    expect(recipeMeals({ mealType: 'snack', mealTypes: [] })).toEqual(['snack']);
+    expect(recipeMeals({ mealType: 'snack' })).toEqual(['snack']);
   });
 });

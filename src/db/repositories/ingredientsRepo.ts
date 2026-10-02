@@ -12,6 +12,25 @@ import { newId } from '../../lib/id';
 import { ingredients, type Ingredient } from '../schema';
 import type { AppDb } from '../types';
 
+type NutritionValues = {
+  kcalPer100g?: number;
+  proteinPer100g?: number;
+  gramsPerPiece?: number | null;
+};
+
+/**
+ * Marks a catalog product whose nutrition the user changed: later catalog updates keep the
+ * user's numbers instead of overwriting them.
+ */
+function editedFlag(current: Ingredient | undefined, next: NutritionValues) {
+  if (!current) return {};
+  const changed =
+    (next.kcalPer100g !== undefined && next.kcalPer100g !== current.kcalPer100g) ||
+    (next.proteinPer100g !== undefined && next.proteinPer100g !== current.proteinPer100g) ||
+    (next.gramsPerPiece !== undefined && next.gramsPerPiece !== current.gramsPerPiece);
+  return changed ? { nutritionEdited: true } : {};
+}
+
 export function createIngredientsRepo(db: AppDb) {
   return {
     list(): Ingredient[] {
@@ -35,7 +54,7 @@ export function createIngredientsRepo(db: AppDb) {
       const values = ingredientNutritionSchema.parse(input);
       const result = db
         .update(ingredients)
-        .set(values)
+        .set({ ...values, ...editedFlag(this.getById(id), values) })
         .where(eq(ingredients.id, id))
         .returning({ id: ingredients.id })
         .all();
@@ -47,7 +66,7 @@ export function createIngredientsRepo(db: AppDb) {
       const values = ingredientSettingsSchema.parse(input);
       const result = db
         .update(ingredients)
-        .set(values)
+        .set({ ...values, ...editedFlag(this.getById(id), values) })
         .where(eq(ingredients.id, id))
         .returning({ id: ingredients.id })
         .all();

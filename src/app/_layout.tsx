@@ -17,6 +17,7 @@ import { resolveLanguage } from '@/domain/language';
 import { useCookStore } from '@/features/cooking/cookStore';
 import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
 import { cleanupOrphanPhotos } from '@/features/photos/mealPhotos';
+import { UnsupportedProductsDialog } from '@/features/catalog/UnsupportedProductsDialog';
 import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
 import { applyLanguage, useT } from '@/i18n';
 import { darkTheme, lightTheme } from '@/theme';
@@ -129,6 +130,7 @@ function AppShell() {
             </Stack.Protected>
           </Stack>
           <UndoSnackbarHost />
+          {hasProfile ? <UnsupportedProductsDialog /> : null}
         </BottomSheetModalProvider>
       </ThemeProvider>
     </PaperProvider>

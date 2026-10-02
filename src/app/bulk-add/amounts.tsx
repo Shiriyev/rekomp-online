@@ -14,7 +14,7 @@ import { repositories } from '@/db';
 import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { afterAdding, bulkStep } from '@/domain/bulkAdd';
-import { INGREDIENT_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { showUndo } from '@/features/undo/undoStore';
@@ -137,7 +137,7 @@ export default function BulkAmountsScreen() {
                   <View style={[styles.card, { backgroundColor: theme.colors.elevation.level1 }]}>
                     <View style={styles.top}>
                       <ImageWithFallback
-                        source={item.imageKey ? INGREDIENT_IMAGES[item.imageKey] : undefined}
+                        source={bundledImage(item.imageKey)}
                         fallbackIcon={CATEGORY_ICONS[item.category]}
                         style={styles.image}
                         iconSize={24}

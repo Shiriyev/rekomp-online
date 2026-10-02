@@ -1,4 +1,4 @@
-import { RECIPE_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 
 type WithImage = { imageKey: string | null; photoUri: string | null };
 
@@ -6,5 +6,5 @@ type WithImage = { imageKey: string | null; photoUri: string | null };
 export function recipeImage(recipe: WithImage | undefined): number | { uri: string } | undefined {
   if (!recipe) return undefined;
   if (recipe.photoUri) return { uri: recipe.photoUri };
-  return recipe.imageKey ? RECIPE_IMAGES[recipe.imageKey] : undefined;
+  return bundledImage(recipe.imageKey);
 }

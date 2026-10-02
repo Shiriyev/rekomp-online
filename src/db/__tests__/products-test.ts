@@ -186,7 +186,7 @@ describe('ingredientsRepo custom products and settings', () => {
   it('creates a custom ingredient usable in the pantry', () => {
     const bar = repos.ingredients.createCustom({
       name: 'Протеиновый батончик',
-      category: 'dairy',
+      category: 'dairy_eggs',
       unit: 'pcs',
       gramsPerPiece: 60,
       kcalPer100g: 350,
@@ -201,7 +201,7 @@ describe('ingredientsRepo custom products and settings', () => {
   it('drops grams per piece for weight-based custom ingredients', () => {
     const c = repos.ingredients.createCustom({
       name: 'Кефир',
-      category: 'dairy',
+      category: 'dairy_eggs',
       unit: 'ml',
       gramsPerPiece: 250,
       kcalPer100g: 40,

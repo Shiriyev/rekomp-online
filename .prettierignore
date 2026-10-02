@@ -3,3 +3,6 @@ android/
 ios/
 coverage/
 .expo/
+# Generated files: keep them exactly as their tools write them.
+src/db/seed/catalog.v2.json
+src/db/migrations/meta/

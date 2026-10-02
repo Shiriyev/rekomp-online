@@ -6,6 +6,7 @@ import {
   type NutritionIngredient,
   type RecipeLine,
 } from './types';
+import { recipeMeals } from './recipes';
 
 type LoggedMeal = { mealType: MealType; kcal: number; protein: number };
 
@@ -82,7 +83,7 @@ export function recentPresets(manualLogsNewestFirst: readonly Preset[], limit = 
   return result;
 }
 
-type CatalogRecipe = { id: string; mealType: MealType };
+type CatalogRecipe = { id: string; mealType: MealType; mealTypes?: readonly MealType[] };
 type CatalogLine = RecipeLine & { recipeId: string };
 
 /** Per-serving macros for every recipe, keyed by recipe id. */
@@ -111,10 +112,12 @@ export function kcalRangeByMeal(
   for (const r of recipes) {
     const kcal = macros.get(r.id)?.kcal;
     if (kcal === undefined) continue;
-    const current = result[r.mealType];
-    result[r.mealType] = current
-      ? { min: Math.min(current.min, kcal), max: Math.max(current.max, kcal) }
-      : { min: kcal, max: kcal };
+    for (const meal of recipeMeals(r)) {
+      const current = result[meal];
+      result[meal] = current
+        ? { min: Math.min(current.min, kcal), max: Math.max(current.max, kcal) }
+        : { min: kcal, max: kcal };
+    }
   }
   return result;
 }

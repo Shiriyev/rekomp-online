@@ -17,6 +17,7 @@ import type { AvailablePortion } from '@/db/repositories/portionsRepo';
 import type { MealType } from '@/domain/types';
 import { proteinStreak } from '@/domain/cooking';
 import { addDays } from '@/domain/dates';
+import { recipeMeals } from '@/domain/recipes';
 import { kcalRangeByMeal, proteinNudge, suggestMealType, summarizeDay } from '@/domain/today';
 import { recipeImage } from '@/features/recipes/recipeImage';
 import { MealCategoryGrid } from '@/features/today/MealCategoryGrid';
@@ -59,7 +60,7 @@ export default function TodayScreen() {
   const snackSuggestions = useMemo(
     () =>
       catalog.recipes
-        .filter((r) => r.mealType === 'snack')
+        .filter((r) => recipeMeals(r).includes('snack'))
         .map((r) => ({
           id: r.id,
           name: c.recipeName(r),

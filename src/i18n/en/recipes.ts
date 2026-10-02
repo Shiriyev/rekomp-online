@@ -2,6 +2,14 @@ import type { recipes as ru } from '../ru/recipes';
 import type { Messages } from '../types';
 
 export const recipes: Messages<typeof ru> = {
+  tags: {
+    vegetarian: 'Vegetarian',
+    vegan: 'Vegan',
+    pork: 'Pork',
+    alcohol: 'With alcohol',
+    lactose: 'Contains lactose',
+    gluten: 'Contains gluten',
+  },
   sort: { protein: 'More protein', kcal: 'Fewer kcal', time: 'Quicker' },
   noCategory: 'No such category',
   onlyMine: 'Only from my food',

@@ -75,7 +75,7 @@ export function ProductPickerSheet({
     () =>
       searchIngredients(
         ingredients
-          .filter((i) => !i.isStaple)
+          .filter((i) => !i.isStaple && !i.isArchived)
           .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
         query,
       ).slice(0, MAX_RESULTS),
@@ -109,7 +109,7 @@ export function ProductPickerSheet({
   const startCustom = () => {
     customForm.reset({
       name: query.trim(),
-      category: 'dairy',
+      category: 'dairy_eggs',
       unit: 'g',
       gramsPerPiece: '',
       kcalPer100g: '',
@@ -217,7 +217,7 @@ export function ProductPickerSheet({
             name="category"
             render={({ field }) => (
               <View style={styles.chips}>
-                {INGREDIENT_CATEGORIES.filter((c) => c !== 'spices').map((c) => (
+                {INGREDIENT_CATEGORIES.filter((c) => c !== 'sauces_oils_spices').map((c) => (
                   <Button
                     key={c}
                     compact

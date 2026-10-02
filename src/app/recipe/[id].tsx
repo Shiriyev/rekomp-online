@@ -216,6 +216,11 @@ export default function RecipeScreen() {
           <Text variant="headlineSmall" accessibilityRole="header">
             {recipeName}
           </Text>
+          {content.recipeDescription(recipe) ? (
+            <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
+              {content.recipeDescription(recipe)}
+            </Text>
+          ) : null}
           <View style={styles.chips}>
             <Chip compact mode="outlined" icon="clock-outline">
               {t('recipes.card.minutes', { minutes: recipe.totalMinutes })}

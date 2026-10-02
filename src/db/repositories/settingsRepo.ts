@@ -1,3 +1,4 @@
+import { UNSUPPORTED_PRODUCTS_KEY } from '../catalog/apply';
 import { eq } from 'drizzle-orm';
 
 import type { LanguagePreference } from '../../domain/language';
@@ -25,6 +26,11 @@ export function createSettingsRepo(db: AppDb) {
       .run();
 
   return {
+    /** The one-time «no longer supported» list was seen: forget it. */
+    dismissUnsupportedProducts(): void {
+      db.delete(appMeta).where(eq(appMeta.key, UNSUPPORTED_PRODUCTS_KEY)).run();
+    },
+
     /** Cooking screen layout: step by step, or the whole recipe on one page. */
     setCookView(view: CookView): void {
       if (!COOK_VIEWS.includes(view)) throw new RangeError(`Unknown cook view ${view}`);

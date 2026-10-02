@@ -37,7 +37,7 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
     resolver: zodResolver(schema),
     defaultValues: {
       name: initialName,
-      category: 'dairy',
+      category: 'dairy_eggs',
       unit: 'g',
       gramsPerPiece: '',
       kcalPer100g: '',
@@ -121,7 +121,7 @@ export function NewProductForm({ initialName, onCreated, onCancel }: Props) {
           name="category"
           render={({ field }) => (
             <View style={styles.chips}>
-              {INGREDIENT_CATEGORIES.filter((c) => c !== 'spices').map((c) => (
+              {INGREDIENT_CATEGORIES.filter((c) => c !== 'sauces_oils_spices').map((c) => (
                 <Button
                   key={c}
                   compact

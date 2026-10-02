@@ -65,7 +65,14 @@ export function RecipeOverview({ steps, lines, ingredients, servings, choices, o
                 ? t('cooking.overview.fromMinute', { minute: e.startsAtMin })
                 : ''}
             </Text>
-            <Text variant="bodyLarge">{content.stepText(recipeId, e.order, e.text)}</Text>
+            <Text variant="bodyLarge">
+              {content.stepText(
+                recipeId,
+                e.order,
+                e.text,
+                steps.find((s) => s.order === e.order)?.textEn,
+              )}
+            </Text>
             {amounts ? (
               <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
                 {amounts}

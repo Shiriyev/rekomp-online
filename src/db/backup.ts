@@ -3,7 +3,7 @@ import type { SQLiteTable } from 'drizzle-orm/sqlite-core';
 
 import { dayStartHourOf, LOGICAL_DAY_MIGRATION_KEY, recomputeLocalDates } from './logicalDay';
 import * as schema from './schema';
-import { runSeed } from './seed/runSeed';
+import { applyBundledCatalog } from './catalog/bundled';
 import type { AppDb } from './types';
 
 export const BACKUP_APP = 'rekomp';
@@ -25,6 +25,9 @@ const TABLES = {
   profile: schema.profile,
   weight_logs: schema.weightLogs,
   app_meta: schema.appMeta,
+  // The catalog version travels with the data: restoring a backup made with this catalog
+  // is exact; an older backup (without it) gets the bundled catalog applied on top.
+  catalog_meta: schema.catalogMeta,
 } as const satisfies Record<string, SQLiteTable>;
 
 type TableName = keyof typeof TABLES;
@@ -127,7 +130,8 @@ const BATCH = 40;
 /**
  * Replaces all data with the backup in one transaction: on any error nothing changes.
  * Entries are re-filed under the logical-day rule (a v1 backup used calendar midnight).
- * The seed then runs to add anything newer than the backup (never overwriting it).
+ * The bundled catalog is then applied when it is newer than the backup's: an old backup
+ * gets the current catalog, its own data (pantry, history, prices, own products) is kept.
  */
 export function importBackup(db: AppDb, backup: Backup): void {
   db.transaction((tx) => {
@@ -147,15 +151,15 @@ export function importBackup(db: AppDb, backup: Backup): void {
       .onConflictDoNothing()
       .run();
   });
-  runSeed(db);
+  applyBundledCatalog(db);
 }
 
-/** Deletes everything and restores the factory seed (the app returns to onboarding). */
+/** Deletes everything and restores the bundled catalog (the app returns to onboarding). */
 export function resetAllData(db: AppDb): void {
   db.transaction((tx) => {
     for (const name of [...TABLE_NAMES].reverse()) tx.delete(TABLES[name]).run();
   });
-  runSeed(db);
+  applyBundledCatalog(db);
 }
 
 export const backupFileName = (now: Date = new Date()): string => {

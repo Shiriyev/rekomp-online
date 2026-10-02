@@ -4,7 +4,7 @@ import { Chip, Text } from 'react-native-paper';
 
 import type { Ingredient, LidlProduct, RecipeIngredient } from '@/db/schema';
 import type { LineCheck } from '@/domain/pantry';
-import { INGREDIENT_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
@@ -61,7 +61,12 @@ export function IngredientRow({
       : t(check.status === 'ok' ? 'recipes.row.ok' : 'recipes.row.missing');
   const changed = editor ? Math.abs(editor.value - editor.base) > 1e-9 : false;
   const unit = check.line.unit;
-  const note = content.lineNote(check.line.recipeId, check.line.ingredientId, check.line.note);
+  const note = content.lineNote(
+    check.line.recipeId,
+    check.line.ingredientId,
+    check.line.note,
+    check.line.noteEn,
+  );
 
   return (
     <View style={styles.row}>
@@ -70,7 +75,7 @@ export function IngredientRow({
         accessible
         accessibilityLabel={`${name}, ${amount}, ${detail}${changed ? `, ${t('recipes.row.changed')}` : ''}`}>
         <ImageWithFallback
-          source={ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined}
+          source={bundledImage(ingredient.imageKey)}
           fallbackIcon={CATEGORY_ICONS[ingredient.category]}
           style={styles.image}
           iconSize={24}

@@ -13,7 +13,7 @@ import {
 import { recipeMacros } from '@/domain/nutrition';
 import { canCook } from '@/domain/pantry';
 import { applyAmounts } from '@/domain/recipeDraft';
-import { RECIPE_SORTS, sortRecipes, type RecipeSort } from '@/domain/recipes';
+import { RECIPE_SORTS, recipeMeals, sortRecipes, type RecipeSort } from '@/domain/recipes';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { MEAL_LABELS } from '@/features/meals';
 import { RecipeListItem } from '@/features/recipes/RecipeListItem';
@@ -46,7 +46,7 @@ export default function RecipesScreen() {
   const items = useMemo(() => {
     if (!meal || !catalog.isLoaded || ingredients.size === 0) return [];
     const rows = catalog.recipes
-      .filter((r) => r.mealType === meal)
+      .filter((r) => recipeMeals(r).includes(meal))
       .map((recipe) => {
         // Amounts edited on a recipe card (draft) count here too.
         const draft = drafts[recipe.id];

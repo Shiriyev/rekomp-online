@@ -2,6 +2,7 @@ import { about } from './about';
 import { addMeal } from './addMeal';
 import { backup } from './backup';
 import { bulkAdd } from './bulkAdd';
+import { catalog } from './catalog';
 import { common } from './common';
 import { cooking } from './cooking';
 import { history } from './history';
@@ -32,4 +33,5 @@ export const ru = {
   onboarding,
   backup,
   about,
+  catalog,
 };

@@ -13,7 +13,7 @@ import {
 } from '../backup';
 import { runDataMigrations } from '../logicalDay';
 import { createRepositories, type Repositories } from '../repositories';
-import { runSeed } from '../seed/runSeed';
+import { applyBundledCatalog } from '../catalog/bundled';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
 
@@ -24,8 +24,8 @@ const NOW = Date.UTC(2026, 8, 27, 10);
 
 beforeEach(() => {
   ({ db, close } = createTestDb());
-  runSeed(db);
   // Same start-up sequence as DatabaseProvider.
+  applyBundledCatalog(db);
   runDataMigrations(db);
   repos = createRepositories(db);
 });
@@ -58,7 +58,7 @@ function populate() {
   });
   const bar = repos.ingredients.createCustom({
     name: 'Батончик',
-    category: 'dairy',
+    category: 'dairy_eggs',
     unit: 'pcs',
     gramsPerPiece: 60,
     kcalPer100g: 350,
@@ -174,10 +174,10 @@ describe('importBackup', () => {
     expect(withoutTimestamp(exportBackup(db))).toEqual(withoutTimestamp(good));
   });
 
-  it('re-adds seed content newer than an old backup', () => {
+  it('applies the bundled catalog over an old backup (no catalog version in it)', () => {
     const empty = parseBackup({ app: 'rekomp', formatVersion: 1, exportedAt: 1, tables: {} });
     importBackup(db, empty);
-    expect(repos.recipes.listDetails()).toHaveLength(16);
+    expect(repos.recipes.listDetails()).toHaveLength(146);
   });
 });
 

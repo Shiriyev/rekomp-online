@@ -10,7 +10,7 @@ import type { Ingredient } from '@/db/schema';
 import { isLowStock } from '@/domain/stock';
 import { INGREDIENT_CATEGORIES } from '@/domain/types';
 import { quantityStep } from '@/domain/units';
-import { INGREDIENT_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { showUndo } from '@/features/undo/undoStore';
 import { useT } from '@/i18n';
@@ -150,7 +150,7 @@ const PantryRow = memo(function PantryRow({ ingredient, quantity, onOpen, onRemo
         accessibilityHint={t('pantry.home.editHint')}>
         <View style={styles.row}>
           <ImageWithFallback
-            source={ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined}
+            source={bundledImage(ingredient.imageKey)}
             fallbackIcon={CATEGORY_ICONS[ingredient.category]}
             style={styles.image}
             iconSize={22}

@@ -281,7 +281,7 @@ export default function CookScreen() {
           <GestureDetector gesture={swipe}>
             <ScrollView contentContainerStyle={styles.body}>
               <Text variant="headlineSmall" style={styles.stepText}>
-                {content.stepText(recipe.id, step.order, step.text)}
+                {content.stepText(recipe.id, step.order, step.text, step.textEn)}
               </Text>
 
               {used.length > 0 ? (

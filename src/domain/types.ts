@@ -6,19 +6,34 @@ export type Unit = (typeof UNITS)[number];
 export const MEAL_TYPES = ['breakfast', 'lunch', 'snack', 'dinner'] as const;
 export type MealType = (typeof MEAL_TYPES)[number];
 
+/** Product categories of the catalog (PHASE_2), in display order. */
 export const INGREDIENT_CATEGORIES = [
-  'dairy',
-  'meat',
-  'grains',
+  'dairy_eggs',
+  'meat_poultry',
+  'fish_seafood',
+  'grains_pasta_legumes',
   'vegetables',
-  'fruits',
-  'eggs',
-  'bread',
-  'canned',
-  'oil',
-  'spices',
+  'fruits_berries',
+  'bread_bakery',
+  'nuts_seeds',
+  'sauces_oils_spices',
+  'other',
 ] as const;
 export type IngredientCategory = (typeof INGREDIENT_CATEGORIES)[number];
+
+/** v1 categories (old installs and backups) → catalog categories. */
+export const LEGACY_CATEGORIES: Readonly<Record<string, IngredientCategory>> = {
+  dairy: 'dairy_eggs',
+  eggs: 'dairy_eggs',
+  meat: 'meat_poultry',
+  grains: 'grains_pasta_legumes',
+  vegetables: 'vegetables',
+  fruits: 'fruits_berries',
+  bread: 'bread_bakery',
+  canned: 'other',
+  oil: 'sauces_oils_spices',
+  spices: 'sauces_oils_spices',
+};
 
 export const MEAL_LOG_SOURCES = ['recipe', 'portion', 'manual'] as const;
 export type MealLogSource = (typeof MEAL_LOG_SOURCES)[number];

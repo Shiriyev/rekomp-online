@@ -15,7 +15,14 @@ function setup() {
   const addIngredient = (id: string) =>
     db
       .insert(ingredients)
-      .values({ id, name: id, category: 'dairy', unit: 'g', kcalPer100g: 1, proteinPer100g: 1 })
+      .values({
+        id,
+        name: id,
+        category: 'dairy_eggs',
+        unit: 'g',
+        kcalPer100g: 1,
+        proteinPer100g: 1,
+      })
       .run();
   return {
     db,

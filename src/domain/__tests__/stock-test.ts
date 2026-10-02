@@ -171,7 +171,7 @@ describe('schemas', () => {
   it('requires grams per piece for piece-based custom ingredients', () => {
     const base = {
       name: 'Протеиновый батончик',
-      category: 'dairy' as const,
+      category: 'dairy_eggs' as const,
       kcalPer100g: 350,
       proteinPer100g: 30,
     };

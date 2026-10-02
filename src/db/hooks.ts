@@ -14,6 +14,7 @@ import { catalogMacros, recentPresets, type Preset } from '@/domain/today';
 import { applyAmounts } from '@/domain/recipeDraft';
 import type { Macros } from '@/domain/types';
 
+import { UNSUPPORTED_PRODUCTS_KEY } from './catalog/apply';
 import { db } from './client';
 import { createLiveStore, makeUseLiveQuery } from './live';
 import type { AvailablePortion } from './repositories/portionsRepo';
@@ -128,7 +129,10 @@ export type RecipeCatalog = { recipes: Recipe[]; macros: Map<string, Macros>; is
 
 /** Recipes with per-serving macros computed from ingredients; reacts to ingredient edits. */
 export function useRecipeCatalog(): RecipeCatalog {
-  const recipeRows = useLiveQuery(db.select().from(recipes).orderBy(asc(recipes.sortOrder)));
+  // Archived recipes (left the catalog, still in the history) are not offered.
+  const recipeRows = useLiveQuery(
+    db.select().from(recipes).where(eq(recipes.isArchived, false)).orderBy(asc(recipes.sortOrder)),
+  );
   const lineRows = useLiveQuery(db.select().from(recipeIngredients));
   // Only the nutrition columns: stock bookkeeping on products (last added amount, low-stock
   // threshold) then leaves the rows equal and the catalog maths is not redone.
@@ -357,6 +361,21 @@ export function useWeightLogs(): { localDate: string; weightKg: number }[] {
 export function useLatestLog(): MealLog | undefined {
   return useLiveQuery(db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1))
     .data[0];
+}
+
+/** Custom products the catalog update could not match (shown once). */
+export function useUnsupportedProducts(): string[] {
+  const { data } = useLiveQuery(
+    db.select().from(appMeta).where(eq(appMeta.key, UNSUPPORTED_PRODUCTS_KEY)),
+  );
+  return useMemo(() => {
+    try {
+      const parsed: unknown = data[0] ? JSON.parse(data[0].value) : [];
+      return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === 'string') : [];
+    } catch {
+      return [];
+    }
+  }, [data]);
 }
 
 export function useCookView(): CookView {

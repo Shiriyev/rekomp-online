@@ -15,7 +15,7 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   id,
   name,
   nameHu: null,
-  category: 'dairy',
+  category: 'dairy_eggs',
   unit: 'g',
   gramsPerPiece: null,
   kcalPer100g: 63,
@@ -25,6 +25,16 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   isCustom: false,
   lowStockThreshold: null,
   lastAddedAmount: null,
+  nameEn: null,
+  synonyms: [],
+  subcategory: null,
+  fatPer100g: null,
+  carbsPer100g: null,
+  tags: [],
+  source: 'own',
+  sourceId: null,
+  isArchived: false,
+  nutritionEdited: false,
   ...over,
 });
 
@@ -41,6 +51,7 @@ const line = (
   altGroup: null,
   sortOrder: 0,
   note: null,
+  noteEn: null,
   ...over,
 });
 
@@ -115,6 +126,18 @@ describe('RecipeListItem', () => {
     photoUri: null,
     tags: [],
     sortOrder: 0,
+    nameEn: null,
+    descriptionRu: null,
+    descriptionEn: null,
+    cuisine: null,
+    mealTypes: ['snack'],
+    source: 'own',
+    sourceId: null,
+    ingredientCount: 2,
+    kcalPerServing: 188,
+    proteinPerServing: 17,
+    proteinDensity: 9,
+    isArchived: false,
   };
 
   it('shows macros, status and the kcal left after eating, and opens the recipe', async () => {

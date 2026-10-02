@@ -11,7 +11,7 @@ import { EmptyState } from '@/ui/EmptyState';
 import { db } from './client';
 import { backfillRecipePhotos, runDataMigrations } from './logicalDay';
 import migrations from './migrations/migrations';
-import { runSeed } from './seed/runSeed';
+import { applyBundledCatalog } from './catalog/bundled';
 
 SplashScreen.preventAutoHideAsync().catch(() => {
   // Already hidden (e.g. fast refresh): nothing to do.
@@ -19,11 +19,11 @@ SplashScreen.preventAutoHideAsync().catch(() => {
 
 let seedOutcome: { ok: true } | { ok: false; error: unknown } | undefined;
 
-/** Runs the (idempotent, synchronous) seed and data migrations at most once per app process. */
+/** Runs the (idempotent, synchronous) catalog update and data migrations at most once per app process. */
 function ensureSeeded() {
   if (!seedOutcome) {
     try {
-      runSeed(db);
+      applyBundledCatalog(db);
       runDataMigrations(db);
       backfillRecipePhotos(db);
       seedOutcome = { ok: true };

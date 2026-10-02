@@ -157,4 +157,13 @@ describe('catalogMacros / kcalRangeByMeal', () => {
     });
     expect(kcalRangeByMeal(recipes, new Map())).toEqual({});
   });
+
+  it('counts a recipe in every meal it fits', () => {
+    const both = [{ id: 'X', mealType: 'lunch' as const, mealTypes: ['lunch', 'dinner'] as const }];
+    const m = catalogMacros(both, [line('X', 520)], ingredients);
+    expect(kcalRangeByMeal(both, m)).toEqual({
+      lunch: { min: 520, max: 520 },
+      dinner: { min: 520, max: 520 },
+    });
+  });
 });

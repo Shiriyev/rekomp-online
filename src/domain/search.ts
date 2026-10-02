@@ -1,9 +1,23 @@
 // One collator: `localeCompare(x, 'ru')` builds a new one per comparison on Hermes.
 const ruCollator = new Intl.Collator('ru');
 
-/** Lowercase and strip accents so "turo" finds "túró" and "ё" matches "е". */
+const normalized = new Map<string, string>();
+const MAX_CACHED = 5000;
+
+/** Lowercase and strip accents so "turo" finds "túró" and "ё" matches "е". Cached per text. */
 export function normalizeForSearch(text: string): string {
-  return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ё/g, 'е').trim();
+  const hit = normalized.get(text);
+  if (hit !== undefined) return hit;
+  const value = text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/ё/g, 'е')
+    .trim();
+  // Product names repeat on every keystroke; the query changes each time, so bound it.
+  if (normalized.size >= MAX_CACHED) normalized.clear();
+  normalized.set(text, value);
+  return value;
 }
 
 /** `aliases`: other names to match (e.g. the English one). */

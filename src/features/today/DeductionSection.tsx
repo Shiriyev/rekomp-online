@@ -12,7 +12,7 @@ import {
   type DeductionItem,
 } from '@/domain/manualEntry';
 import { searchIngredients } from '@/domain/search';
-import { INGREDIENT_IMAGES } from '@/features/images';
+import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
@@ -80,7 +80,7 @@ export function DeductionSection({ value, onChange, onCalculate }: Props) {
 
   const thumb = (i: Ingredient) => (
     <ImageWithFallback
-      source={i.imageKey ? INGREDIENT_IMAGES[i.imageKey] : undefined}
+      source={bundledImage(i.imageKey)}
       fallbackIcon={CATEGORY_ICONS[i.category]}
       style={styles.thumb}
       iconSize={20}
