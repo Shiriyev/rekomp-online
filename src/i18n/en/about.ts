@@ -19,9 +19,16 @@ export const about: Messages<typeof ru> = {
     },
     pexels: {
       title: 'Pexels',
-      body: 'Product photos, Pexels License. Photographers: {{count}}.',
+      body: 'Dish and product photos, Pexels License.',
     },
   },
   open: 'Open the {{name}} website',
-  footer: 'The full list of authors is in ATTRIBUTION.md in the app repository.',
+  photographers_one: '{{count}} photographer',
+  photographers_few: '{{count}} photographers',
+  photographers_many: '{{count}} photographers',
+  photographers_other: '{{count}} photographers',
+  photoCount_one: '{{count}} photo',
+  photoCount_few: '{{count}} photos',
+  photoCount_many: '{{count}} photos',
+  photoCount_other: '{{count}} photos',
 };

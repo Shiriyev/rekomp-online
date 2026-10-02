@@ -7,7 +7,6 @@ export const backup = {
   export: 'Экспорт',
   import: 'Импорт',
   resetAll: 'Сбросить все данные',
-  photoCredits: 'Фото блюд и продуктов — авторы Pexels (pexels.com), список в ATTRIBUTION.md.',
   shareTitle: 'Бэкап «Рекомп»',
   unknownDate: 'неизвестно',
   importTitle: 'Восстановить из бэкапа?',

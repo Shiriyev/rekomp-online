@@ -9,7 +9,6 @@ export const backup: Messages<typeof ru> = {
   export: 'Export',
   import: 'Import',
   resetAll: 'Reset all data',
-  photoCredits: 'Dish and product photos by Pexels authors (pexels.com), listed in ATTRIBUTION.md.',
   shareTitle: 'Rekomp backup',
   unknownDate: 'unknown',
   importTitle: 'Restore from backup?',

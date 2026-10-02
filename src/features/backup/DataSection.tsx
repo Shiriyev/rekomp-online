@@ -82,9 +82,6 @@ export function DataSection() {
         onPress={() => setDialog({ kind: 'reset1' })}>
         {t('backup.resetAll')}
       </Button>
-      <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-        {t('backup.photoCredits')}
-      </Text>
 
       <Portal>
         <Dialog visible={dialog?.kind === 'import'} onDismiss={() => setDialog(null)}>

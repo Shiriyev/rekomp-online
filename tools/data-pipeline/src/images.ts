@@ -74,6 +74,8 @@ function attribution(credits: readonly Credit[]): string {
       'License (ODbL) 1.0; product photos: Creative Commons Attribution-ShareAlike (CC BY-SA).',
     '- **Pexels** (https://www.pexels.com) — product photos under the Pexels License.',
     '',
+    'Photos of the original recipes and products (v1) are credited in the repository root `ATTRIBUTION.md`.',
+    '',
     '## Product photos (Pexels)',
     '',
     '| File | Photographer | Source |',

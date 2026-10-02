@@ -17,9 +17,16 @@ export const about = {
     },
     pexels: {
       title: 'Pexels',
-      body: 'Фото продуктов, лицензия Pexels. Авторов фото: {{count}}.',
+      body: 'Фото блюд и продуктов, лицензия Pexels.',
     },
   },
   open: 'Открыть сайт {{name}}',
-  footer: 'Полный список авторов — в файле ATTRIBUTION.md в репозитории приложения.',
+  photographers_one: 'Авторы фото: {{count}}',
+  photographers_few: 'Авторы фото: {{count}}',
+  photographers_many: 'Авторы фото: {{count}}',
+  photographers_other: 'Авторы фото: {{count}}',
+  photoCount_one: '{{count}} фото',
+  photoCount_few: '{{count}} фото',
+  photoCount_many: '{{count}} фото',
+  photoCount_other: '{{count}} фото',
 } as const;
