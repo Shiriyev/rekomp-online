@@ -23,7 +23,8 @@
     "translate": "tsx --env-file-if-exists=../../.env.local src/translate.ts",
     "translate:check": "tsx src/translateCheck.ts",
     "own:check": "tsx src/ownCheck.ts",
-    "catalog": "tsx src/catalog.ts"
+    "catalog": "tsx src/catalog.ts",
+    "brand": "tsx src/brand.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
