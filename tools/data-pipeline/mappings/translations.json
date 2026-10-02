@@ -1,0 +1,1674 @@
+{
+  "tvorog": {
+    "ru": "Творог",
+    "hu": "túró"
+  },
+  "skyr": {
+    "ru": "Скир",
+    "hu": "skyr"
+  },
+  "greek_yogurt": {
+    "ru": "Греческий йогурт",
+    "hu": "görög joghurt"
+  },
+  "yogurt_01": {
+    "ru": "Йогурт 0,1%",
+    "hu": "zsírszegény joghurt"
+  },
+  "egg": {
+    "ru": "Яйцо",
+    "hu": "tojás"
+  },
+  "oats": {
+    "ru": "Овсянка",
+    "hu": "zabpehely"
+  },
+  "muesli": {
+    "ru": "Мюсли",
+    "hu": "müzli"
+  },
+  "berries_frozen": {
+    "ru": "Замороженные ягоды",
+    "hu": "fagyasztott bogyós gyümölcs"
+  },
+  "banana": {
+    "ru": "Банан",
+    "hu": "banán"
+  },
+  "apple": {
+    "ru": "Яблоко",
+    "hu": "alma"
+  },
+  "bread_wholegrain": {
+    "ru": "Цельнозерновой хлеб",
+    "hu": "teljes kiőrlésű kenyér"
+  },
+  "cucumber": {
+    "ru": "Огурец",
+    "hu": "uborka"
+  },
+  "tomato": {
+    "ru": "Помидор",
+    "hu": "paradicsom"
+  },
+  "chicken_breast": {
+    "ru": "Куриная грудка (сырая)",
+    "hu": "csirkemell"
+  },
+  "turkey_mince": {
+    "ru": "Фарш индейки",
+    "hu": "darált pulyka"
+  },
+  "rice": {
+    "ru": "Рис (сухой)",
+    "hu": "rizs"
+  },
+  "penne": {
+    "ru": "Пенне (сухие)",
+    "hu": "penne tészta"
+  },
+  "lentils_green": {
+    "ru": "Зелёная чечевица (сухая)",
+    "hu": "zöld lencse"
+  },
+  "potato": {
+    "ru": "Картофель",
+    "hu": "burgonya"
+  },
+  "veg_frozen": {
+    "ru": "Замороженные овощи",
+    "hu": "fagyasztott zöldségkeverék"
+  },
+  "passata": {
+    "ru": "Пассата",
+    "hu": "paradicsompüré (passata)"
+  },
+  "tomatoes_canned": {
+    "ru": "Томаты консерв.",
+    "hu": "hámozott paradicsom konzerv"
+  },
+  "onion": {
+    "ru": "Лук",
+    "hu": "vöröshagyma"
+  },
+  "bell_pepper": {
+    "ru": "Паприка",
+    "hu": "kaliforniai paprika"
+  },
+  "cheese": {
+    "ru": "Сыр",
+    "hu": "sajt (trappista)"
+  },
+  "tuna_water": {
+    "ru": "Тунец в с/с (слитый)",
+    "hu": "tonhal saját lében"
+  },
+  "oil": {
+    "ru": "Масло растительное",
+    "hu": "étolaj"
+  },
+  "cumin": {
+    "ru": "Зира",
+    "hu": "kömény"
+  },
+  "salt": {
+    "ru": "Соль",
+    "hu": "só"
+  },
+  "pepper": {
+    "ru": "Перец чёрный",
+    "hu": "feketebors"
+  },
+  "paprika_powder": {
+    "ru": "Паприка молотая",
+    "hu": "őrölt paprika"
+  },
+  "chicken_thigh": {
+    "ru": "Куриное бедро",
+    "hu": "csirke felsőcomb"
+  },
+  "chicken_leg": {
+    "ru": "Куриная ножка",
+    "hu": "csirkecomb"
+  },
+  "chicken_drumstick": {
+    "ru": "Куриная голень",
+    "hu": "csirke alsócomb"
+  },
+  "chicken_wing": {
+    "ru": "Куриные крылышки",
+    "hu": "csirkeszárny"
+  },
+  "chicken": {
+    "ru": "Курица",
+    "hu": "csirke"
+  },
+  "chicken_liver": {
+    "ru": "Куриная печень",
+    "hu": "csirkemáj"
+  },
+  "turkey": {
+    "ru": "Индейка",
+    "hu": "pulykahús"
+  },
+  "turkey_ham": {
+    "ru": "Ветчина из индейки",
+    "hu": "pulykasonka"
+  },
+  "duck_leg": {
+    "ru": "Утиная ножка",
+    "hu": "kacsacomb"
+  },
+  "goat": {
+    "ru": "Козлятина",
+    "hu": "kecskehús"
+  },
+  "frog_legs": {
+    "ru": "Лягушачьи лапки",
+    "hu": "békacomb"
+  },
+  "beef": {
+    "ru": "Говядина",
+    "hu": "marhahús"
+  },
+  "beef_mince": {
+    "ru": "Говяжий фарш",
+    "hu": "darált marhahús"
+  },
+  "beef_steak": {
+    "ru": "Говяжий стейк",
+    "hu": "marhasteak"
+  },
+  "beef_flank": {
+    "ru": "Говяжья пашина (фланк)",
+    "hu": "marha hasaalja (flank)"
+  },
+  "beef_brisket": {
+    "ru": "Говяжья грудинка",
+    "hu": "marha szegy"
+  },
+  "corned_beef": {
+    "ru": "Солонина (консерв.)",
+    "hu": "sózott marhahús konzerv"
+  },
+  "oxtail": {
+    "ru": "Бычий хвост",
+    "hu": "ökörfarok"
+  },
+  "lamb": {
+    "ru": "Баранина",
+    "hu": "bárányhús"
+  },
+  "lamb_shoulder": {
+    "ru": "Баранья лопатка",
+    "hu": "báránylapocka"
+  },
+  "lamb_chop": {
+    "ru": "Бараньи котлеты на кости",
+    "hu": "bárányborda"
+  },
+  "lamb_mince": {
+    "ru": "Бараний фарш",
+    "hu": "darált bárányhús"
+  },
+  "lamb_kidney": {
+    "ru": "Бараньи почки",
+    "hu": "bárányvese"
+  },
+  "pork": {
+    "ru": "Свинина",
+    "hu": "sertéshús"
+  },
+  "pork_mince": {
+    "ru": "Свиной фарш",
+    "hu": "darált sertéshús"
+  },
+  "pork_shoulder": {
+    "ru": "Свиная лопатка",
+    "hu": "sertéslapocka"
+  },
+  "pork_chop": {
+    "ru": "Свиная отбивная на кости",
+    "hu": "sertéskaraj szelet"
+  },
+  "pork_tenderloin": {
+    "ru": "Свиная вырезка",
+    "hu": "sertésszűzpecsenye"
+  },
+  "pork_belly": {
+    "ru": "Свиная грудинка",
+    "hu": "sertéshas"
+  },
+  "pork_ribs": {
+    "ru": "Свиные рёбра",
+    "hu": "sertésoldalas"
+  },
+  "pork_hock": {
+    "ru": "Свиная рулька / ножки",
+    "hu": "csülök"
+  },
+  "bacon": {
+    "ru": "Бекон",
+    "hu": "bacon"
+  },
+  "ham": {
+    "ru": "Ветчина",
+    "hu": "sonka"
+  },
+  "cured_ham": {
+    "ru": "Сыровяленая ветчина",
+    "hu": "érlelt sonka"
+  },
+  "chorizo": {
+    "ru": "Чоризо",
+    "hu": "chorizo"
+  },
+  "sausage": {
+    "ru": "Свиные колбаски",
+    "hu": "sertéskolbász (friss)"
+  },
+  "kabanos": {
+    "ru": "Кабанос (копчёные колбаски)",
+    "hu": "kabanos"
+  },
+  "black_pudding": {
+    "ru": "Кровяная колбаса",
+    "hu": "véres hurka"
+  },
+  "salmon": {
+    "ru": "Лосось (филе)",
+    "hu": "lazacfilé"
+  },
+  "smoked_salmon": {
+    "ru": "Копчёный лосось",
+    "hu": "füstölt lazac"
+  },
+  "cod": {
+    "ru": "Треска",
+    "hu": "tőkehal"
+  },
+  "white_fish": {
+    "ru": "Белая рыба (филе)",
+    "hu": "fehér húsú hal (filé)"
+  },
+  "haddock": {
+    "ru": "Пикша",
+    "hu": "foltos tőkehal"
+  },
+  "smoked_haddock": {
+    "ru": "Копчёная пикша",
+    "hu": "füstölt foltos tőkehal"
+  },
+  "salt_cod": {
+    "ru": "Солёная треска",
+    "hu": "sózott tőkehal"
+  },
+  "sea_bass": {
+    "ru": "Сибас",
+    "hu": "tengeri sügér"
+  },
+  "mackerel": {
+    "ru": "Скумбрия",
+    "hu": "makréla"
+  },
+  "herring": {
+    "ru": "Сельдь",
+    "hu": "hering"
+  },
+  "trout": {
+    "ru": "Форель",
+    "hu": "pisztráng"
+  },
+  "sardine": {
+    "ru": "Сардины (консерв.)",
+    "hu": "szardínia konzerv"
+  },
+  "prawn": {
+    "ru": "Креветки",
+    "hu": "garnélarák"
+  },
+  "dried_shrimp": {
+    "ru": "Сушёные креветки",
+    "hu": "szárított garnélarák"
+  },
+  "seafood_mix": {
+    "ru": "Морской коктейль (замороженный)",
+    "hu": "fagyasztott tenger gyümölcsei"
+  },
+  "squid": {
+    "ru": "Кальмар",
+    "hu": "tintahal"
+  },
+  "mussel": {
+    "ru": "Мидии",
+    "hu": "kagyló (fekete)"
+  },
+  "clam": {
+    "ru": "Моллюски (клэмы)",
+    "hu": "vongole kagyló"
+  },
+  "oyster": {
+    "ru": "Устрицы",
+    "hu": "osztriga"
+  },
+  "conch": {
+    "ru": "Конх (морская улитка)",
+    "hu": "kürtcsiga"
+  },
+  "lobster": {
+    "ru": "Омар",
+    "hu": "homár"
+  },
+  "crab": {
+    "ru": "Крабовое мясо",
+    "hu": "rákhús"
+  },
+  "egg_yolk": {
+    "ru": "Яичный желток",
+    "hu": "tojássárgája"
+  },
+  "egg_white": {
+    "ru": "Яичный белок",
+    "hu": "tojásfehérje"
+  },
+  "milk": {
+    "ru": "Молоко",
+    "hu": "tej"
+  },
+  "buttermilk": {
+    "ru": "Пахта",
+    "hu": "író"
+  },
+  "evaporated_milk": {
+    "ru": "Сгущённое молоко без сахара",
+    "hu": "sűrített tej (cukrozatlan)"
+  },
+  "condensed_milk": {
+    "ru": "Сгущёнка",
+    "hu": "édesített sűrített tej"
+  },
+  "cream": {
+    "ru": "Сливки жирные",
+    "hu": "tejszín (habtejszín)"
+  },
+  "single_cream": {
+    "ru": "Сливки 20%",
+    "hu": "főzőtejszín"
+  },
+  "clotted_cream": {
+    "ru": "Топлёные сливки (clotted cream)",
+    "hu": "clotted cream (sűrű tejszín)"
+  },
+  "sour_cream": {
+    "ru": "Сметана",
+    "hu": "tejföl"
+  },
+  "creme_fraiche": {
+    "ru": "Крем-фреш",
+    "hu": "crème fraîche"
+  },
+  "butter": {
+    "ru": "Сливочное масло",
+    "hu": "vaj"
+  },
+  "vegan_butter": {
+    "ru": "Растительное масло-спред",
+    "hu": "növényi vaj"
+  },
+  "yogurt": {
+    "ru": "Натуральный йогурт",
+    "hu": "natúr joghurt"
+  },
+  "cottage_cheese": {
+    "ru": "Зернёный творог",
+    "hu": "cottage cheese (szemcsés túró)"
+  },
+  "cheddar": {
+    "ru": "Чеддер",
+    "hu": "cheddar sajt"
+  },
+  "parmesan": {
+    "ru": "Пармезан",
+    "hu": "parmezán"
+  },
+  "pecorino": {
+    "ru": "Пекорино",
+    "hu": "pecorino"
+  },
+  "gruyere": {
+    "ru": "Грюйер",
+    "hu": "gruyère sajt"
+  },
+  "swiss_cheese": {
+    "ru": "Эмменталь",
+    "hu": "ementáli sajt"
+  },
+  "manchego": {
+    "ru": "Манчего",
+    "hu": "manchego sajt"
+  },
+  "mozzarella": {
+    "ru": "Моцарелла",
+    "hu": "mozzarella"
+  },
+  "feta": {
+    "ru": "Фета",
+    "hu": "feta sajt"
+  },
+  "goat_cheese": {
+    "ru": "Козий сыр",
+    "hu": "kecskesajt"
+  },
+  "brie": {
+    "ru": "Бри",
+    "hu": "brie sajt"
+  },
+  "blue_cheese": {
+    "ru": "Сыр с плесенью (голубой)",
+    "hu": "kéksajt"
+  },
+  "cream_cheese": {
+    "ru": "Сливочный сыр",
+    "hu": "krémsajt"
+  },
+  "ricotta": {
+    "ru": "Рикотта",
+    "hu": "ricotta"
+  },
+  "mascarpone": {
+    "ru": "Маскарпоне",
+    "hu": "mascarpone"
+  },
+  "paneer": {
+    "ru": "Панир",
+    "hu": "paneer sajt"
+  },
+  "queso_fresco": {
+    "ru": "Кесо фреско (свежий сыр)",
+    "hu": "queso fresco (friss sajt)"
+  },
+  "cheese_sauce": {
+    "ru": "Сырный соус",
+    "hu": "sajtszósz"
+  },
+  "brown_rice": {
+    "ru": "Бурый рис (сухой)",
+    "hu": "barna rizs"
+  },
+  "pasta": {
+    "ru": "Макароны (сухие)",
+    "hu": "száraz tészta"
+  },
+  "rice_noodles": {
+    "ru": "Рисовая лапша (сухая)",
+    "hu": "rizstészta"
+  },
+  "egg_noodles": {
+    "ru": "Яичная лапша (сухая)",
+    "hu": "tojásos tészta"
+  },
+  "udon_noodles": {
+    "ru": "Лапша удон",
+    "hu": "udon tészta"
+  },
+  "couscous": {
+    "ru": "Кускус (сухой)",
+    "hu": "kuszkusz"
+  },
+  "quinoa": {
+    "ru": "Киноа (сухая)",
+    "hu": "quinoa"
+  },
+  "bulgur": {
+    "ru": "Булгур (сухой)",
+    "hu": "bulgur"
+  },
+  "semolina": {
+    "ru": "Манная крупа",
+    "hu": "búzadara"
+  },
+  "buckwheat": {
+    "ru": "Гречка (сухая)",
+    "hu": "hajdina"
+  },
+  "tapioca": {
+    "ru": "Тапиока",
+    "hu": "tápióka"
+  },
+  "wheat_grain": {
+    "ru": "Пшеница (зерно)",
+    "hu": "búzaszem"
+  },
+  "rye_grain": {
+    "ru": "Рожь (зерно)",
+    "hu": "rozsszem"
+  },
+  "cornmeal": {
+    "ru": "Кукурузная крупа",
+    "hu": "kukoricadara"
+  },
+  "masa_harina": {
+    "ru": "Кукурузная мука (маса)",
+    "hu": "kukoricaliszt (masa harina)"
+  },
+  "flour": {
+    "ru": "Мука пшеничная",
+    "hu": "búzaliszt"
+  },
+  "self_raising_flour": {
+    "ru": "Мука с разрыхлителем",
+    "hu": "önkelesztő liszt"
+  },
+  "bread_flour": {
+    "ru": "Хлебопекарная мука",
+    "hu": "kenyérliszt (BL80)"
+  },
+  "wholemeal_flour": {
+    "ru": "Цельнозерновая мука",
+    "hu": "teljes kiőrlésű liszt"
+  },
+  "rye_flour": {
+    "ru": "Ржаная мука",
+    "hu": "rozsliszt"
+  },
+  "buckwheat_flour": {
+    "ru": "Гречневая мука",
+    "hu": "hajdinaliszt"
+  },
+  "rice_flour": {
+    "ru": "Рисовая мука",
+    "hu": "rizsliszt"
+  },
+  "glutinous_rice_flour": {
+    "ru": "Клейкая рисовая мука",
+    "hu": "ragacsos rizsliszt"
+  },
+  "chickpea_flour": {
+    "ru": "Нутовая мука",
+    "hu": "csicseriborsóliszt"
+  },
+  "cassava_flour": {
+    "ru": "Мука из маниоки",
+    "hu": "manióka liszt"
+  },
+  "cornstarch": {
+    "ru": "Кукурузный крахмал",
+    "hu": "kukoricakeményítő"
+  },
+  "chickpeas": {
+    "ru": "Нут (консерв.)",
+    "hu": "csicseriborsó konzerv"
+  },
+  "kidney_beans": {
+    "ru": "Красная фасоль (консерв.)",
+    "hu": "vörösbab konzerv"
+  },
+  "black_beans": {
+    "ru": "Чёрная фасоль (консерв.)",
+    "hu": "fekete bab konzerv"
+  },
+  "cannellini_beans": {
+    "ru": "Белая фасоль (консерв.)",
+    "hu": "fehérbab konzerv"
+  },
+  "butter_beans": {
+    "ru": "Фасоль лима (консерв.)",
+    "hu": "vajbab konzerv"
+  },
+  "pinto_beans": {
+    "ru": "Фасоль пинто (консерв.)",
+    "hu": "pinto bab konzerv"
+  },
+  "white_beans_dry": {
+    "ru": "Белая фасоль (сухая)",
+    "hu": "száraz fehérbab"
+  },
+  "soybeans": {
+    "ru": "Соевые бобы (сухие)",
+    "hu": "szójabab"
+  },
+  "broad_beans": {
+    "ru": "Бобы",
+    "hu": "lóbab"
+  },
+  "split_peas": {
+    "ru": "Колотый горох (сухой)",
+    "hu": "sárgaborsó (felezett)"
+  },
+  "refried_beans": {
+    "ru": "Фасолевое пюре (рефрито)",
+    "hu": "frijoles refritos (babpüré)"
+  },
+  "baked_beans": {
+    "ru": "Фасоль в томатном соусе",
+    "hu": "sült bab paradicsomszószban"
+  },
+  "mung_bean_paste": {
+    "ru": "Паста из маша",
+    "hu": "mungóbab-krém"
+  },
+  "tofu": {
+    "ru": "Тофу",
+    "hu": "tofu"
+  },
+  "silken_tofu": {
+    "ru": "Шёлковый тофу",
+    "hu": "selyemtofu"
+  },
+  "tempeh": {
+    "ru": "Темпе",
+    "hu": "tempeh"
+  },
+  "hummus": {
+    "ru": "Хумус",
+    "hu": "hummusz"
+  },
+  "falafel": {
+    "ru": "Фалафель",
+    "hu": "falafel"
+  },
+  "red_onion": {
+    "ru": "Красный лук",
+    "hu": "lilahagyma"
+  },
+  "shallot": {
+    "ru": "Лук-шалот",
+    "hu": "mogyoróhagyma"
+  },
+  "spring_onion": {
+    "ru": "Зелёный лук",
+    "hu": "újhagyma"
+  },
+  "garlic": {
+    "ru": "Чеснок",
+    "hu": "fokhagyma"
+  },
+  "leek": {
+    "ru": "Лук-порей",
+    "hu": "póréhagyma"
+  },
+  "ginger": {
+    "ru": "Имбирь",
+    "hu": "gyömbér"
+  },
+  "carrot": {
+    "ru": "Морковь",
+    "hu": "sárgarépa"
+  },
+  "celery": {
+    "ru": "Стебель сельдерея",
+    "hu": "szárzeller"
+  },
+  "celeriac": {
+    "ru": "Корень сельдерея",
+    "hu": "zellergumó"
+  },
+  "fennel": {
+    "ru": "Фенхель",
+    "hu": "édeskömény (gumó)"
+  },
+  "red_chilli": {
+    "ru": "Красный перец чили",
+    "hu": "piros chili"
+  },
+  "green_chilli": {
+    "ru": "Зелёный перец чили",
+    "hu": "zöld chili"
+  },
+  "jalapeno": {
+    "ru": "Халапеньо",
+    "hu": "jalapeño"
+  },
+  "scotch_bonnet": {
+    "ru": "Перец скотч-бонет (хабанеро)",
+    "hu": "scotch bonnet (habanero) paprika"
+  },
+  "aubergine": {
+    "ru": "Баклажан",
+    "hu": "padlizsán"
+  },
+  "courgette": {
+    "ru": "Кабачок (цукини)",
+    "hu": "cukkini"
+  },
+  "butternut_squash": {
+    "ru": "Тыква баттернат",
+    "hu": "sütőtök (butternut)"
+  },
+  "pumpkin": {
+    "ru": "Тыква",
+    "hu": "tök (sütőtök)"
+  },
+  "pumpkin_puree": {
+    "ru": "Тыквенное пюре (консерв.)",
+    "hu": "sütőtökpüré konzerv"
+  },
+  "cabbage": {
+    "ru": "Белокочанная капуста",
+    "hu": "fejes káposzta"
+  },
+  "red_cabbage": {
+    "ru": "Краснокочанная капуста",
+    "hu": "lila káposzta"
+  },
+  "chinese_cabbage": {
+    "ru": "Пекинская капуста",
+    "hu": "kínai kel"
+  },
+  "pak_choi": {
+    "ru": "Пак-чой",
+    "hu": "pak choi"
+  },
+  "broccoli": {
+    "ru": "Брокколи",
+    "hu": "brokkoli"
+  },
+  "spinach": {
+    "ru": "Шпинат",
+    "hu": "spenót"
+  },
+  "kale": {
+    "ru": "Кале (кудрявая капуста)",
+    "hu": "fodros kel"
+  },
+  "leafy_greens": {
+    "ru": "Листовая зелень (амарант)",
+    "hu": "leveles zöld (amaránt)"
+  },
+  "lettuce": {
+    "ru": "Салат листовой",
+    "hu": "fejes saláta"
+  },
+  "rocket": {
+    "ru": "Руккола",
+    "hu": "rukkola"
+  },
+  "mushroom": {
+    "ru": "Шампиньоны",
+    "hu": "csiperkegomba"
+  },
+  "shiitake": {
+    "ru": "Шиитаке",
+    "hu": "shiitake gomba"
+  },
+  "oyster_mushroom": {
+    "ru": "Вёшенки",
+    "hu": "laskagomba"
+  },
+  "green_beans": {
+    "ru": "Стручковая фасоль",
+    "hu": "zöldbab"
+  },
+  "snap_peas": {
+    "ru": "Сахарный горошек (стручки)",
+    "hu": "cukorborsó"
+  },
+  "peas": {
+    "ru": "Зелёный горошек (замороженный)",
+    "hu": "zöldborsó (fagyasztott)"
+  },
+  "sweetcorn": {
+    "ru": "Кукуруза (консерв.)",
+    "hu": "csemegekukorica konzerv"
+  },
+  "corn_on_the_cob": {
+    "ru": "Кукуруза в початках",
+    "hu": "főzőkukorica (csöves)"
+  },
+  "creamed_corn": {
+    "ru": "Кукуруза кремовая (консерв.)",
+    "hu": "tejszínes kukorica konzerv"
+  },
+  "asparagus": {
+    "ru": "Спаржа",
+    "hu": "spárga"
+  },
+  "beetroot": {
+    "ru": "Свёкла",
+    "hu": "cékla"
+  },
+  "radish": {
+    "ru": "Редис",
+    "hu": "retek"
+  },
+  "daikon": {
+    "ru": "Дайкон",
+    "hu": "jégcsapretek (daikon)"
+  },
+  "turnip": {
+    "ru": "Репа",
+    "hu": "tarlórépa"
+  },
+  "swede": {
+    "ru": "Брюква",
+    "hu": "karórépa"
+  },
+  "parsnip": {
+    "ru": "Пастернак",
+    "hu": "paszternák"
+  },
+  "jerusalem_artichoke": {
+    "ru": "Топинамбур",
+    "hu": "csicsóka"
+  },
+  "sweet_potato": {
+    "ru": "Батат",
+    "hu": "édesburgonya"
+  },
+  "cassava": {
+    "ru": "Маниок",
+    "hu": "manióka"
+  },
+  "taro": {
+    "ru": "Таро",
+    "hu": "taró"
+  },
+  "breadfruit": {
+    "ru": "Хлебное дерево (плод)",
+    "hu": "kenyérfa termése"
+  },
+  "plantain": {
+    "ru": "Плантан (овощной банан)",
+    "hu": "főzőbanán"
+  },
+  "bean_sprouts": {
+    "ru": "Ростки маша",
+    "hu": "babcsíra"
+  },
+  "bamboo_shoots": {
+    "ru": "Побеги бамбука",
+    "hu": "bambuszrügy"
+  },
+  "water_chestnut": {
+    "ru": "Водяной орех (консерв.)",
+    "hu": "vízigesztenye konzerv"
+  },
+  "palm_heart": {
+    "ru": "Пальмовая сердцевина",
+    "hu": "pálmaszív"
+  },
+  "grape_leaves": {
+    "ru": "Виноградные листья (маринованные)",
+    "hu": "savanyított szőlőlevél"
+  },
+  "cherry_tomato": {
+    "ru": "Помидоры черри",
+    "hu": "koktélparadicsom"
+  },
+  "dill_pickle": {
+    "ru": "Маринованный огурец",
+    "hu": "csemege uborka"
+  },
+  "sauerkraut": {
+    "ru": "Квашеная капуста",
+    "hu": "savanyú káposzta"
+  },
+  "capers": {
+    "ru": "Каперсы",
+    "hu": "kapribogyó"
+  },
+  "green_olives": {
+    "ru": "Зелёные оливки",
+    "hu": "zöld olívabogyó"
+  },
+  "black_olives": {
+    "ru": "Маслины",
+    "hu": "fekete olívabogyó"
+  },
+  "fries": {
+    "ru": "Картофель фри (замороженный)",
+    "hu": "hasábburgonya (fagyasztott)"
+  },
+  "banana_leaf": {
+    "ru": "Банановый лист",
+    "hu": "banánlevél"
+  },
+  "lemon": {
+    "ru": "Лимон",
+    "hu": "citrom"
+  },
+  "lime": {
+    "ru": "Лайм",
+    "hu": "lime"
+  },
+  "orange": {
+    "ru": "Апельсин",
+    "hu": "narancs"
+  },
+  "grapefruit": {
+    "ru": "Грейпфрут",
+    "hu": "grapefruit"
+  },
+  "avocado": {
+    "ru": "Авокадо",
+    "hu": "avokádó"
+  },
+  "mango": {
+    "ru": "Манго",
+    "hu": "mangó"
+  },
+  "pineapple": {
+    "ru": "Ананас",
+    "hu": "ananász"
+  },
+  "papaya": {
+    "ru": "Папайя",
+    "hu": "papaja"
+  },
+  "pomegranate": {
+    "ru": "Гранат",
+    "hu": "gránátalma"
+  },
+  "strawberry": {
+    "ru": "Клубника",
+    "hu": "eper"
+  },
+  "raspberry": {
+    "ru": "Малина",
+    "hu": "málna"
+  },
+  "blackberry": {
+    "ru": "Ежевика",
+    "hu": "szeder"
+  },
+  "cherry": {
+    "ru": "Черешня",
+    "hu": "cseresznye"
+  },
+  "cranberry": {
+    "ru": "Клюква",
+    "hu": "vörösáfonya"
+  },
+  "apricot": {
+    "ru": "Абрикос",
+    "hu": "sárgabarack"
+  },
+  "dried_apricot": {
+    "ru": "Курага",
+    "hu": "aszalt sárgabarack"
+  },
+  "prune": {
+    "ru": "Чернослив",
+    "hu": "aszalt szilva"
+  },
+  "raisins": {
+    "ru": "Изюм",
+    "hu": "mazsola"
+  },
+  "longan": {
+    "ru": "Лонган",
+    "hu": "longan"
+  },
+  "coconut": {
+    "ru": "Кокос (мякоть)",
+    "hu": "kókuszdió (friss)"
+  },
+  "desiccated_coconut": {
+    "ru": "Кокосовая стружка",
+    "hu": "kókuszreszelék"
+  },
+  "lemon_juice": {
+    "ru": "Лимонный сок",
+    "hu": "citromlé"
+  },
+  "lime_juice": {
+    "ru": "Сок лайма",
+    "hu": "limelé"
+  },
+  "orange_juice": {
+    "ru": "Апельсиновый сок",
+    "hu": "narancslé"
+  },
+  "pineapple_juice": {
+    "ru": "Ананасовый сок",
+    "hu": "ananászlé"
+  },
+  "lemon_zest": {
+    "ru": "Цедра лимона",
+    "hu": "citromhéj (reszelt)"
+  },
+  "orange_zest": {
+    "ru": "Цедра апельсина",
+    "hu": "narancshéj (reszelt)"
+  },
+  "bread_white": {
+    "ru": "Белый хлеб",
+    "hu": "fehér kenyér"
+  },
+  "baguette": {
+    "ru": "Багет",
+    "hu": "bagett"
+  },
+  "rye_bread": {
+    "ru": "Ржаной хлеб",
+    "hu": "rozskenyér"
+  },
+  "pita": {
+    "ru": "Пита",
+    "hu": "pita"
+  },
+  "naan": {
+    "ru": "Наан",
+    "hu": "naan kenyér"
+  },
+  "tortilla": {
+    "ru": "Пшеничная тортилья",
+    "hu": "búzatortilla"
+  },
+  "corn_tortilla": {
+    "ru": "Кукурузная тортилья",
+    "hu": "kukoricatortilla"
+  },
+  "taco_shell": {
+    "ru": "Тако (хрустящая лепёшка)",
+    "hu": "taco héj"
+  },
+  "burger_bun": {
+    "ru": "Булочка",
+    "hu": "zsemle / hamburgerzsemle"
+  },
+  "english_muffin": {
+    "ru": "Английский маффин",
+    "hu": "angol muffin"
+  },
+  "pretzel": {
+    "ru": "Брецель",
+    "hu": "perec"
+  },
+  "casabe": {
+    "ru": "Касабе (лепёшка из маниоки)",
+    "hu": "casabe (maniókalepény)"
+  },
+  "puff_pastry": {
+    "ru": "Слоёное тесто",
+    "hu": "leveles tészta"
+  },
+  "shortcrust_pastry": {
+    "ru": "Песочное тесто",
+    "hu": "omlós tészta"
+  },
+  "filo_pastry": {
+    "ru": "Тесто фило",
+    "hu": "réteslap (filo)"
+  },
+  "wonton_wrapper": {
+    "ru": "Тесто для вонтонов",
+    "hu": "wonton tésztalap"
+  },
+  "rice_paper": {
+    "ru": "Рисовая бумага",
+    "hu": "rizspapír"
+  },
+  "egg_roll": {
+    "ru": "Яичные роллы (заморож.)",
+    "hu": "tojásos tekercs (fagyasztott)"
+  },
+  "breadcrumbs": {
+    "ru": "Панировочные сухари",
+    "hu": "zsemlemorzsa"
+  },
+  "chicken_stock": {
+    "ru": "Куриный бульон",
+    "hu": "csirkealaplé"
+  },
+  "vegetable_stock": {
+    "ru": "Овощной бульон",
+    "hu": "zöldségalaplé"
+  },
+  "beef_stock": {
+    "ru": "Говяжий бульон",
+    "hu": "marhaalaplé"
+  },
+  "fish_stock": {
+    "ru": "Рыбный бульон",
+    "hu": "halalaplé"
+  },
+  "stock_cube": {
+    "ru": "Бульонный кубик",
+    "hu": "leveskocka"
+  },
+  "tomato_puree": {
+    "ru": "Томатная паста",
+    "hu": "paradicsomsűrítmény"
+  },
+  "tomato_sauce": {
+    "ru": "Томатный соус",
+    "hu": "paradicsomszósz"
+  },
+  "soy_sauce": {
+    "ru": "Соевый соус",
+    "hu": "szójaszósz"
+  },
+  "fish_sauce": {
+    "ru": "Рыбный соус",
+    "hu": "halszósz"
+  },
+  "oyster_sauce": {
+    "ru": "Устричный соус",
+    "hu": "osztrigaszósz"
+  },
+  "hoisin_sauce": {
+    "ru": "Соус хойсин",
+    "hu": "hoisin szósz"
+  },
+  "plum_sauce": {
+    "ru": "Сливовый соус",
+    "hu": "szilvaszósz"
+  },
+  "worcestershire_sauce": {
+    "ru": "Вустерширский соус",
+    "hu": "worcestershire szósz"
+  },
+  "hot_sauce": {
+    "ru": "Острый соус",
+    "hu": "csípős szósz"
+  },
+  "sriracha": {
+    "ru": "Шрирача",
+    "hu": "sriracha"
+  },
+  "chilli_sauce": {
+    "ru": "Соус чили",
+    "hu": "chiliszósz"
+  },
+  "sweet_chilli_sauce": {
+    "ru": "Сладкий соус чили",
+    "hu": "édes chiliszósz"
+  },
+  "bbq_sauce": {
+    "ru": "Соус барбекю",
+    "hu": "barbecue szósz"
+  },
+  "ketchup": {
+    "ru": "Кетчуп",
+    "hu": "ketchup"
+  },
+  "mayonnaise": {
+    "ru": "Майонез",
+    "hu": "majonéz"
+  },
+  "mustard": {
+    "ru": "Горчица",
+    "hu": "mustár"
+  },
+  "horseradish": {
+    "ru": "Хрен",
+    "hu": "torma"
+  },
+  "salsa": {
+    "ru": "Сальса",
+    "hu": "salsa"
+  },
+  "enchilada_sauce": {
+    "ru": "Соус для энчилады",
+    "hu": "enchiladaszósz"
+  },
+  "vinaigrette": {
+    "ru": "Заправка винегрет",
+    "hu": "vinaigrette öntet"
+  },
+  "beef_gravy": {
+    "ru": "Мясная подливка",
+    "hu": "marhahús mártás (gravy)"
+  },
+  "vinegar": {
+    "ru": "Уксус столовый",
+    "hu": "ecet"
+  },
+  "wine_vinegar": {
+    "ru": "Винный уксус",
+    "hu": "borecet"
+  },
+  "rice_vinegar": {
+    "ru": "Рисовый уксус",
+    "hu": "rizsecet"
+  },
+  "cider_vinegar": {
+    "ru": "Яблочный уксус",
+    "hu": "almaecet"
+  },
+  "balsamic_vinegar": {
+    "ru": "Бальзамический уксус",
+    "hu": "balzsamecet"
+  },
+  "tahini": {
+    "ru": "Тахини",
+    "hu": "tahini (szezámkrém)"
+  },
+  "thai_red_curry_paste": {
+    "ru": "Тайская красная паста карри",
+    "hu": "thai vörös currypaszta"
+  },
+  "thai_green_curry_paste": {
+    "ru": "Тайская зелёная паста карри",
+    "hu": "thai zöld currypaszta"
+  },
+  "curry_paste": {
+    "ru": "Индийская паста карри",
+    "hu": "indiai currypaszta"
+  },
+  "chilli_bean_paste": {
+    "ru": "Острая бобовая паста (доубанцзян)",
+    "hu": "csípős babpaszta (doubanjiang)"
+  },
+  "red_pepper_paste": {
+    "ru": "Перечная паста",
+    "hu": "paprikakrém (pirospaprika-paszta)"
+  },
+  "tamarind_paste": {
+    "ru": "Паста тамаринда",
+    "hu": "tamarindpaszta"
+  },
+  "pomegranate_molasses": {
+    "ru": "Гранатовый соус (наршараб)",
+    "hu": "gránátalma-szirup"
+  },
+  "pickle_brine": {
+    "ru": "Огуречный рассол",
+    "hu": "savanyúság leve"
+  },
+  "olive_oil": {
+    "ru": "Оливковое масло",
+    "hu": "olívaolaj"
+  },
+  "sesame_oil": {
+    "ru": "Кунжутное масло",
+    "hu": "szezámolaj"
+  },
+  "peanut_oil": {
+    "ru": "Арахисовое масло",
+    "hu": "földimogyoró-olaj"
+  },
+  "coconut_oil": {
+    "ru": "Кокосовое масло",
+    "hu": "kókuszolaj"
+  },
+  "lard": {
+    "ru": "Смалец",
+    "hu": "sertészsír"
+  },
+  "goose_fat": {
+    "ru": "Гусиный жир",
+    "hu": "libazsír"
+  },
+  "tallow": {
+    "ru": "Говяжий / бараний жир",
+    "hu": "faggyú"
+  },
+  "shortening": {
+    "ru": "Кулинарный жир",
+    "hu": "növényi sütőzsír"
+  },
+  "parsley": {
+    "ru": "Петрушка",
+    "hu": "petrezselyem"
+  },
+  "coriander_leaf": {
+    "ru": "Кинза",
+    "hu": "koriander (friss)"
+  },
+  "basil": {
+    "ru": "Базилик",
+    "hu": "bazsalikom"
+  },
+  "dill": {
+    "ru": "Укроп",
+    "hu": "kapor"
+  },
+  "mint": {
+    "ru": "Мята",
+    "hu": "menta"
+  },
+  "thyme": {
+    "ru": "Тимьян",
+    "hu": "kakukkfű"
+  },
+  "rosemary": {
+    "ru": "Розмарин",
+    "hu": "rozmaring"
+  },
+  "oregano": {
+    "ru": "Орегано",
+    "hu": "oregánó"
+  },
+  "marjoram": {
+    "ru": "Майоран",
+    "hu": "majoránna"
+  },
+  "sage": {
+    "ru": "Шалфей",
+    "hu": "zsálya"
+  },
+  "tarragon": {
+    "ru": "Эстрагон",
+    "hu": "tárkony"
+  },
+  "chives": {
+    "ru": "Шнитт-лук",
+    "hu": "metélőhagyma"
+  },
+  "wild_garlic": {
+    "ru": "Черемша",
+    "hu": "medvehagyma"
+  },
+  "bay_leaf": {
+    "ru": "Лавровый лист",
+    "hu": "babérlevél"
+  },
+  "summer_savory": {
+    "ru": "Чабер",
+    "hu": "borsfű"
+  },
+  "mixed_herbs": {
+    "ru": "Смесь сушёных трав",
+    "hu": "szárított fűszerkeverék (zöldfűszer)"
+  },
+  "lime_leaf": {
+    "ru": "Листья каффир-лайма",
+    "hu": "kaffir limelevél"
+  },
+  "lemongrass": {
+    "ru": "Лемонграсс",
+    "hu": "citromfű (citronella)"
+  },
+  "pandan_leaf": {
+    "ru": "Лист пандана",
+    "hu": "pandanlevél"
+  },
+  "cinnamon": {
+    "ru": "Корица",
+    "hu": "fahéj"
+  },
+  "nutmeg": {
+    "ru": "Мускатный орех",
+    "hu": "szerecsendió"
+  },
+  "cloves": {
+    "ru": "Гвоздика",
+    "hu": "szegfűszeg"
+  },
+  "allspice": {
+    "ru": "Душистый перец",
+    "hu": "szegfűbors"
+  },
+  "cardamom": {
+    "ru": "Кардамон",
+    "hu": "kardamom"
+  },
+  "turmeric": {
+    "ru": "Куркума",
+    "hu": "kurkuma"
+  },
+  "ground_ginger": {
+    "ru": "Имбирь молотый",
+    "hu": "őrölt gyömbér"
+  },
+  "garlic_powder": {
+    "ru": "Чеснок сушёный",
+    "hu": "fokhagymapor"
+  },
+  "onion_powder": {
+    "ru": "Лук сушёный молотый",
+    "hu": "hagymapor"
+  },
+  "ground_coriander": {
+    "ru": "Кориандр молотый",
+    "hu": "őrölt koriandermag"
+  },
+  "cayenne": {
+    "ru": "Кайенский перец",
+    "hu": "cayenne-bors"
+  },
+  "chilli_powder": {
+    "ru": "Молотый перец чили",
+    "hu": "chilipor"
+  },
+  "chilli_flakes": {
+    "ru": "Хлопья чили",
+    "hu": "chilipehely"
+  },
+  "curry_powder": {
+    "ru": "Карри (порошок)",
+    "hu": "curry por"
+  },
+  "garam_masala": {
+    "ru": "Гарам масала",
+    "hu": "garam masala"
+  },
+  "five_spice": {
+    "ru": "Смесь «пять специй»",
+    "hu": "kínai ötfűszer"
+  },
+  "star_anise": {
+    "ru": "Бадьян",
+    "hu": "csillagánizs"
+  },
+  "fennel_seed": {
+    "ru": "Семена фенхеля",
+    "hu": "édesköménymag"
+  },
+  "caraway": {
+    "ru": "Тмин",
+    "hu": "köménymag (konyhakömény)"
+  },
+  "mustard_powder": {
+    "ru": "Горчичный порошок",
+    "hu": "mustárpor"
+  },
+  "saffron": {
+    "ru": "Шафран",
+    "hu": "sáfrány"
+  },
+  "sumac": {
+    "ru": "Сумах",
+    "hu": "szumák"
+  },
+  "sichuan_pepper": {
+    "ru": "Сычуаньский перец",
+    "hu": "szecsuáni bors"
+  },
+  "ras_el_hanout": {
+    "ru": "Рас-эль-ханут",
+    "hu": "ras el hanout"
+  },
+  "harissa_spice": {
+    "ru": "Харисса (сухая смесь)",
+    "hu": "harissa fűszerkeverék"
+  },
+  "cajun_seasoning": {
+    "ru": "Каджунская приправа",
+    "hu": "cajun fűszerkeverék"
+  },
+  "jerk_seasoning": {
+    "ru": "Приправа джерк",
+    "hu": "jerk fűszerkeverék"
+  },
+  "seasoning_mix": {
+    "ru": "Универсальная приправа",
+    "hu": "fűszerkeverék"
+  },
+  "annatto": {
+    "ru": "Аннато (ачиоте)",
+    "hu": "annató (achiote)"
+  },
+  "mahleb": {
+    "ru": "Махлеб",
+    "hu": "mahleb"
+  },
+  "dried_sorrel": {
+    "ru": "Каркаде (сушёный гибискус)",
+    "hu": "szárított hibiszkusz"
+  },
+  "vanilla_extract": {
+    "ru": "Ванильный экстракт",
+    "hu": "vaníliakivonat"
+  },
+  "vanilla_pod": {
+    "ru": "Стручок ванили",
+    "hu": "vaníliarúd"
+  },
+  "almond_extract": {
+    "ru": "Миндальный экстракт",
+    "hu": "mandulaaroma"
+  },
+  "rose_water": {
+    "ru": "Розовая вода",
+    "hu": "rózsavíz"
+  },
+  "peanut": {
+    "ru": "Арахис",
+    "hu": "földimogyoró"
+  },
+  "peanut_butter": {
+    "ru": "Арахисовая паста",
+    "hu": "mogyoróvaj"
+  },
+  "almond": {
+    "ru": "Миндаль",
+    "hu": "mandula"
+  },
+  "walnut": {
+    "ru": "Грецкие орехи",
+    "hu": "dió"
+  },
+  "pine_nut": {
+    "ru": "Кедровые орехи",
+    "hu": "fenyőmag"
+  },
+  "cashew": {
+    "ru": "Кешью",
+    "hu": "kesudió"
+  },
+  "pistachio": {
+    "ru": "Фисташки",
+    "hu": "pisztácia"
+  },
+  "hazelnut": {
+    "ru": "Фундук",
+    "hu": "mogyoró"
+  },
+  "chestnut": {
+    "ru": "Каштаны",
+    "hu": "gesztenye"
+  },
+  "sesame_seed": {
+    "ru": "Кунжут",
+    "hu": "szezámmag"
+  },
+  "sunflower_seed": {
+    "ru": "Семечки подсолнечника",
+    "hu": "napraforgómag"
+  },
+  "poppy_seed": {
+    "ru": "Мак",
+    "hu": "mák"
+  },
+  "white_wine": {
+    "ru": "Белое вино",
+    "hu": "fehérbor"
+  },
+  "red_wine": {
+    "ru": "Красное вино",
+    "hu": "vörösbor"
+  },
+  "sherry": {
+    "ru": "Херес",
+    "hu": "sherry"
+  },
+  "sake": {
+    "ru": "Саке / рисовое вино",
+    "hu": "szaké / rizsbor"
+  },
+  "mirin": {
+    "ru": "Мирин",
+    "hu": "mirin"
+  },
+  "brandy": {
+    "ru": "Бренди",
+    "hu": "brandy"
+  },
+  "beer": {
+    "ru": "Пиво",
+    "hu": "sör"
+  },
+  "cider": {
+    "ru": "Сидр",
+    "hu": "almabor (cider)"
+  },
+  "water": {
+    "ru": "Вода",
+    "hu": "víz"
+  },
+  "coconut_milk": {
+    "ru": "Кокосовое молоко",
+    "hu": "kókusztej"
+  },
+  "coconut_cream": {
+    "ru": "Кокосовые сливки",
+    "hu": "kókusztejszín"
+  },
+  "soya_milk": {
+    "ru": "Соевое молоко",
+    "hu": "szójaital"
+  },
+  "almond_milk": {
+    "ru": "Миндальное молоко",
+    "hu": "mandulaital"
+  },
+  "sugar": {
+    "ru": "Сахар",
+    "hu": "cukor"
+  },
+  "brown_sugar": {
+    "ru": "Коричневый сахар",
+    "hu": "barna cukor"
+  },
+  "icing_sugar": {
+    "ru": "Сахарная пудра",
+    "hu": "porcukor"
+  },
+  "sugar_syrup": {
+    "ru": "Сахарный сироп",
+    "hu": "cukorszirup"
+  },
+  "honey": {
+    "ru": "Мёд",
+    "hu": "méz"
+  },
+  "maple_syrup": {
+    "ru": "Кленовый сироп",
+    "hu": "juharszirup"
+  },
+  "molasses": {
+    "ru": "Меласса (патока)",
+    "hu": "melasz"
+  },
+  "jam": {
+    "ru": "Джем",
+    "hu": "lekvár"
+  },
+  "mincemeat": {
+    "ru": "Фруктовая начинка минсмит",
+    "hu": "mincemeat (gyümölcstöltelék)"
+  },
+  "cocoa": {
+    "ru": "Какао-порошок",
+    "hu": "kakaópor"
+  },
+  "baking_powder": {
+    "ru": "Разрыхлитель",
+    "hu": "sütőpor"
+  },
+  "baking_soda": {
+    "ru": "Пищевая сода",
+    "hu": "szódabikarbóna"
+  },
+  "yeast": {
+    "ru": "Дрожжи",
+    "hu": "élesztő"
+  },
+  "flax_egg": {
+    "ru": "Льняное «яйцо»",
+    "hu": "lenmagtojás (vegán tojáspótló)"
+  }
+}

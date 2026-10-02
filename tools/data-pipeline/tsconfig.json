@@ -1,15 +1,24 @@
 {
   "compilerOptions": {
     "target": "ES2023",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false,
     "skipLibCheck": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["src/**/*.ts", "pipeline.config.ts"]
+  "include": [
+    "src/**/*.ts",
+    "pipeline.config.ts",
+    "../../src/domain/**/*.ts"
+  ],
+  "exclude": [
+    "../../src/domain/__tests__/**"
+  ]
 }

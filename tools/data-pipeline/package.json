@@ -16,7 +16,9 @@
     "validate": "tsx src/validate.ts",
     "report": "tsx src/report.ts",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test 'src/**/*.test.ts'"
+    "test": "tsx --test 'src/**/*.test.ts'",
+    "map:draft": "tsx src/mapDraft.ts",
+    "usda:find": "tsx src/usdaFind.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
@@ -24,6 +26,8 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "csv-parse": "^7.0.3",
+    "parse-ingredient": "^3.0.0",
     "zod": "^4.6.5"
   }
 }

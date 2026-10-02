@@ -1,0 +1,176 @@
+{
+  "default": {
+    "tsp": 5,
+    "tbsp": 15,
+    "cup": 240,
+    "can": 400,
+    "clove": 5,
+    "slice": 30,
+    "handful": 30,
+    "bunch": 50,
+    "sprig": 2,
+    "stick": 100,
+    "knob": 10
+  },
+  "perProduct": {
+    "prawn": {
+      "piece": 15,
+      "cup": 145
+    },
+    "pork": {
+      "piece": 150,
+      "cup": 140
+    },
+    "lamb": {
+      "piece": 120
+    },
+    "squid": {
+      "piece": 150
+    },
+    "rice_noodles": {
+      "piece": 100
+    },
+    "cured_ham": {
+      "piece": 15
+    },
+    "chorizo": {
+      "piece": 70
+    },
+    "chinese_cabbage": {
+      "piece": 900
+    },
+    "beef_stock": {
+      "piece": 500
+    },
+    "chicken_stock": {
+      "piece": 500
+    },
+    "sweetcorn": {
+      "piece": 100
+    },
+    "sour_cream": {
+      "piece": 150
+    },
+    "pork_hock": {
+      "piece": 500
+    },
+    "egg_noodles": {
+      "piece": 60
+    },
+    "breadfruit": {
+      "piece": 700
+    },
+    "black_pudding": {
+      "piece": 60
+    },
+    "tomatoes_canned": {
+      "piece": 400
+    },
+    "tofu": {
+      "piece": 400
+    },
+    "smoked_salmon": {
+      "piece": 25
+    },
+    "sardine": {
+      "piece": 40
+    },
+    "ricotta": {
+      "piece": 250
+    },
+    "pumpkin": {
+      "piece": 1500
+    },
+    "puff_pastry": {
+      "piece": 320
+    },
+    "mascarpone": {
+      "piece": 250
+    },
+    "lobster": {
+      "piece": 150
+    },
+    "kidney_beans": {
+      "piece": 400
+    },
+    "chickpeas": {
+      "piece": 400
+    },
+    "hazelnut": {
+      "piece": 1.5
+    },
+    "goat_cheese": {
+      "piece": 100
+    },
+    "feta": {
+      "piece": 200
+    },
+    "creme_fraiche": {
+      "piece": 200,
+      "cup": 240
+    },
+    "lemon_juice": {
+      "piece": 30
+    },
+    "bell_pepper": {
+      "cup": 150
+    },
+    "lentils_green": {
+      "cup": 190
+    },
+    "pine_nut": {
+      "cup": 135
+    },
+    "greek_yogurt": {
+      "cup": 245
+    },
+    "cheese": {
+      "cup": 100
+    },
+    "cassava_flour": {
+      "cup": 130
+    },
+    "tvorog": {
+      "cup": 225
+    },
+    "tahini": {
+      "cup": 240
+    },
+    "shiitake": {
+      "cup": 70
+    },
+    "rye_flour": {
+      "cup": 102
+    },
+    "rice_flour": {
+      "cup": 158
+    },
+    "red_onion": {
+      "cup": 160
+    },
+    "queso_fresco": {
+      "cup": 120
+    },
+    "corned_beef": {
+      "cup": 140
+    },
+    "chicken": {
+      "cup": 140
+    },
+    "capers": {
+      "cup": 135
+    },
+    "cannellini_beans": {
+      "cup": 180
+    },
+    "butternut_squash": {
+      "cup": 140
+    },
+    "buckwheat": {
+      "cup": 170
+    },
+    "beef_flank": {
+      "cup": 140
+    }
+  }
+}
