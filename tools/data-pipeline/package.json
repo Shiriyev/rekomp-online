@@ -18,7 +18,9 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test 'src/**/*.test.ts'",
     "map:draft": "tsx src/mapDraft.ts",
-    "usda:find": "tsx src/usdaFind.ts"
+    "usda:find": "tsx src/usdaFind.ts",
+    "images": "tsx --env-file-if-exists=../../.env.local src/images.ts",
+    "translate": "tsx --env-file-if-exists=../../.env.local src/translate.ts"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
@@ -26,8 +28,10 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
     "csv-parse": "^7.0.3",
     "parse-ingredient": "^3.0.0",
+    "sharp": "^0.35.5",
     "zod": "^4.6.5"
   }
 }
