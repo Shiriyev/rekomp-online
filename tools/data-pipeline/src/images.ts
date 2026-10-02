@@ -157,6 +157,15 @@ async function main() {
     });
   }
 
+  // Recipes that left the catalog: drop their photo and credit.
+  const recipeFiles = new Set(accepted.map((r) => `recipes/${r.id}.webp`));
+  for (const file of [...credits.keys()]) {
+    if (file.startsWith('recipes/') && !recipeFiles.has(file)) {
+      rmSync(path.join(OUT, file), { force: true });
+      credits.delete(file);
+    }
+  }
+
   // ---------- products ----------
   // Only photos a person approved in mappings/photo-review.json ship; keyword search picks
   // wrong pictures often (live chickens for «chicken stock»), the rest keep the placeholder.

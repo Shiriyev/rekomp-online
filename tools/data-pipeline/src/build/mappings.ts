@@ -86,6 +86,7 @@ export function loadMappings() {
     ingredientMap: read('ingredient-map.json', ingredientMapSchema),
     translations: read('translations.json', translationsSchema),
     unitGrams: read('unit-grams.json', unitGramsSchema),
+    excluded: read('excluded-recipes.json', z.record(z.string(), z.string().min(1)), {}),
     mealExtras: read(
       'meal-extras.json',
       z.record(z.string(), z.array(z.enum(['breakfast', 'lunch', 'dinner', 'snack']))),

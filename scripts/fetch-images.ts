@@ -31,7 +31,7 @@ export const IMAGE_QUERIES: Entry[] = [
     [
       ['z1', 'cottage cheese berries oatmeal bowl'],
       ['z2', 'oatmeal bowl yogurt boiled eggs'],
-      ['z3', 'sunny side up eggs toast breakfast plate'],
+      ['z3', 'eggs cottage cheese toast breakfast', 4],
       ['z4', 'yogurt bowl granola banana slices', 2],
       ['o1', 'chicken rice vegetables pilaf'],
       ['o2', 'lentil stew chicken tomato'],

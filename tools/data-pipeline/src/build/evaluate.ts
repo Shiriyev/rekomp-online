@@ -46,6 +46,7 @@ export type Accepted = {
 };
 
 export type RejectReason =
+  | 'excluded'
   | 'dessert'
   | 'too_many_ingredients'
   | 'unmapped_ingredient'
@@ -70,6 +71,8 @@ export type Context = {
   unitGrams: UnitGrams;
   /** Reviewed extra meals per recipe id (mappings/meal-extras.json), e.g. an omelette as breakfast. */
   mealExtras?: Readonly<Record<string, readonly MealType[]>>;
+  /** Reviewed exclusions with the reason (mappings/excluded-recipes.json). */
+  excluded?: Readonly<Record<string, string>>;
 };
 
 /** Macros per 100 g the app will store for a product (manual values win). */
@@ -128,6 +131,8 @@ const reject = (r: MealDbRecipe, reason: RejectReason, detail = ''): Rejected =>
 
 export function evaluate(r: MealDbRecipe, ctx: Context): Accepted | Rejected {
   const f = config.filter;
+  const excluded = ctx.excluded?.[`mdb_${r.id}`];
+  if (excluded) return reject(r, 'excluded', excluded);
   if (f.excludedCategories.includes(r.category)) return reject(r, 'dessert', r.category);
   if (r.lines.length > f.maxIngredients) {
     return reject(r, 'too_many_ingredients', String(r.lines.length));

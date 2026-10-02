@@ -102,6 +102,7 @@
  "lemon_juice": "reject",
  "lettuce": "ok",
  "lime": "reject",
+ "lime_juice": "reject",
  "lobster": "reject",
  "mayonnaise": "reject",
  "milk": "ok",
@@ -115,6 +116,7 @@
   "ok": true
  },
  "orange": "ok",
+ "oyster_mushroom": "ok",
  "oyster_sauce": "reject",
  "pak_choi": "reject",
  "parmesan": "reject",
@@ -153,6 +155,7 @@
  "sherry": "reject",
  "shiitake": "ok",
  "shortcrust_pastry": "reject",
+ "silken_tofu": "reject",
  "single_cream": "reject",
  "smoked_haddock": "reject",
  "sour_cream": "reject",
@@ -172,6 +175,7 @@
  "sweet_chilli_sauce": "reject",
  "sweetcorn": "ok",
  "swiss_cheese": "reject",
+ "tahini": "reject",
  "tamarind_paste": "reject",
  "thai_red_curry_paste": "reject",
  "tofu": "reject",
@@ -190,5 +194,6 @@
  "white_fish": "ok",
  "white_wine": "reject",
  "wine_vinegar": "reject",
+ "wonton_wrapper": "reject",
  "worcestershire_sauce": "reject"
 }

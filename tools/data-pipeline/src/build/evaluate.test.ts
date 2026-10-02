@@ -193,3 +193,18 @@ test('reviewed meal extras add a meal only with the same servings, or carry a sm
   assert.equal(snack.mealType, 'snack');
   assert.equal(snack.servings, 1);
 });
+
+test('a reviewed exclusion wins over every other rule', () => {
+  const r = evaluate(
+    recipe([
+      ['500g', 'Chicken Breasts'],
+      ['200g', 'Rice'],
+    ]),
+    {
+      ...ctx,
+      excluded: { mdb_1: 'wrong instructions' },
+    },
+  );
+  assert.equal(r.status === 'rejected' && r.reason, 'excluded');
+  assert.equal(r.status === 'rejected' && r.detail, 'wrong instructions');
+});

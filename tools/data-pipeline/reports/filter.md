@@ -1,6 +1,6 @@
 # Recipe filter
 
-Recipes in TheMealDB: **790** · accepted: **112** · rejected: **678**
+Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 
 ## Rejected by reason
 
@@ -14,6 +14,7 @@ Recipes in TheMealDB: **790** · accepted: **112** · rejected: **678**
 | no_grams | 13 |
 | alcohol_based | 11 |
 | unmapped_ingredient | 4 |
+| excluded | 1 |
 
 ## Accepted by meal
 
@@ -21,7 +22,7 @@ Recipes in TheMealDB: **790** · accepted: **112** · rejected: **678**
 |---|---|---|
 | breakfast | 1 | 3 |
 | lunch | 61 | 61 |
-| dinner | 39 | 39 |
+| dinner | 38 | 38 |
 | snack | 11 | 11 |
 
 ## Top 20 by protein density
@@ -815,3 +816,7 @@ Recipes in TheMealDB: **790** · accepted: **112** · rejected: **678**
 - Chicken Congee — ginger cordial
 - Choripán — chimichurri sauce
 - Arepa Pabellón — corn arepa filled with mozarella cheese, meat
+
+### excluded (1)
+
+- Beef Mechado — Beef Mechado: the instructions describe grilled beef skewers, not the stew, and use ingredients that are not listed
