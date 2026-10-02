@@ -1,5 +1,5 @@
 import { and, asc, desc, eq, gt, gte, isNotNull, isNull, sql } from 'drizzle-orm';
-import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
+import { addDatabaseChangeListener } from 'expo-sqlite';
 import { useMemo } from 'react';
 
 import { isSaleActive } from '@/domain/lidl';
@@ -15,6 +15,7 @@ import { applyAmounts } from '@/domain/recipeDraft';
 import type { Macros } from '@/domain/types';
 
 import { db } from './client';
+import { createLiveStore, makeUseLiveQuery } from './live';
 import type { AvailablePortion } from './repositories/portionsRepo';
 import {
   COOK_VIEW_KEY,
@@ -49,6 +50,12 @@ import {
   type RecipeStep,
   type ShoppingItem,
 } from './schema';
+
+const liveStore = createLiveStore((onChange) => {
+  const subscription = addDatabaseChangeListener((event) => onChange(event.tableName));
+  return () => subscription.remove();
+});
+const useLiveQuery = makeUseLiveQuery(liveStore);
 
 /** Reactive profile row. `isLoaded` is false until the first query resolves. */
 export function useProfile(): { profile: Profile | undefined; isLoaded: boolean } {
@@ -123,7 +130,20 @@ export type RecipeCatalog = { recipes: Recipe[]; macros: Map<string, Macros>; is
 export function useRecipeCatalog(): RecipeCatalog {
   const recipeRows = useLiveQuery(db.select().from(recipes).orderBy(asc(recipes.sortOrder)));
   const lineRows = useLiveQuery(db.select().from(recipeIngredients));
-  const ingredientRows = useLiveQuery(db.select().from(ingredients));
+  // Only the nutrition columns: stock bookkeeping on products (last added amount, low-stock
+  // threshold) then leaves the rows equal and the catalog maths is not redone.
+  const ingredientRows = useLiveQuery(
+    db
+      .select({
+        id: ingredients.id,
+        unit: ingredients.unit,
+        gramsPerPiece: ingredients.gramsPerPiece,
+        kcalPer100g: ingredients.kcalPer100g,
+        proteinPer100g: ingredients.proteinPer100g,
+        isStaple: ingredients.isStaple,
+      })
+      .from(ingredients),
+  );
   const custom = useCustomAmounts();
 
   return useMemo(() => {
@@ -143,7 +163,15 @@ export function useRecipeCatalog(): RecipeCatalog {
 
 /** Pantry as a stock map for domain checks. */
 export function usePantryStock(): PantryStock {
-  const { data } = useLiveQuery(db.select().from(pantryItems));
+  const { data } = useLiveQuery(
+    db
+      .select({
+        ingredientId: pantryItems.ingredientId,
+        quantity: pantryItems.quantity,
+        unit: pantryItems.unit,
+      })
+      .from(pantryItems),
+  );
   return useMemo(
     () => new Map(data.map((p) => [p.ingredientId, { quantity: p.quantity, unit: p.unit }])),
     [data],

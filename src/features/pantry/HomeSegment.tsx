@@ -1,6 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
-import { useMemo, useRef } from 'react';
+import { memo, useCallback, useMemo, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { FAB, Text, TouchableRipple } from 'react-native-paper';
 
@@ -13,8 +13,9 @@ import { quantityStep } from '@/domain/units';
 import { INGREDIENT_IMAGES } from '@/features/images';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { showUndo } from '@/features/undo/undoStore';
-import { currentLocale, useT } from '@/i18n';
+import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
+import { compareNames } from '@/lib/collate';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -46,9 +47,7 @@ export function HomeSegment() {
       const inCategory = joined
         .filter((j) => j.ingredient.category === category)
         .sort((a, b) =>
-          content
-            .ingredientName(a.ingredient)
-            .localeCompare(content.ingredientName(b.ingredient), currentLocale()),
+          compareNames(content.ingredientName(a.ingredient), content.ingredientName(b.ingredient)),
         );
       if (inCategory.length === 0) return [];
       return [
@@ -63,12 +62,19 @@ export function HomeSegment() {
     router.push('/bulk-add');
   };
 
-  const remove = (ingredient: Ingredient, quantity: number) => {
-    repositories.pantry.remove(ingredient.id);
-    showUndo(t('pantry.home.removed', { name: content.ingredientName(ingredient) }), () =>
-      repositories.pantry.setQuantity(ingredient.id, quantity),
-    );
-  };
+  const remove = useCallback(
+    (ingredient: Ingredient, quantity: number) => {
+      repositories.pantry.remove(ingredient.id);
+      showUndo(t('pantry.home.removed', { name: content.ingredientName(ingredient) }), () =>
+        repositories.pantry.setQuantity(ingredient.id, quantity),
+      );
+    },
+    [t, content],
+  );
+  const openItem = useCallback(
+    (ingredient: Ingredient, quantity: number) => editRef.current?.open(ingredient, quantity),
+    [],
+  );
 
   return (
     <View style={styles.flex}>
@@ -97,42 +103,13 @@ export function HomeSegment() {
                 </Text>
               );
             }
-            const { ingredient, quantity } = row;
-            const low = isLowStock(quantity, ingredient.unit, ingredient.lowStockThreshold);
-            const step = quantityStep(ingredient.unit);
             return (
-              <SwipeToDelete onDelete={() => remove(ingredient, quantity)}>
-                <TouchableRipple
-                  onPress={() => editRef.current?.open(ingredient, quantity)}
-                  style={{ backgroundColor: theme.colors.background }}
-                  accessibilityHint={t('pantry.home.editHint')}>
-                  <View style={styles.row}>
-                    <ImageWithFallback
-                      source={
-                        ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined
-                      }
-                      fallbackIcon={CATEGORY_ICONS[ingredient.category]}
-                      style={styles.image}
-                      iconSize={22}
-                    />
-                    <View style={styles.flex}>
-                      <Text variant="bodyLarge">{content.ingredientName(ingredient)}</Text>
-                      {low ? (
-                        <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
-                          {quantity === 0 ? t('pantry.home.outOfStock') : t('pantry.home.lowStock')}
-                        </Text>
-                      ) : null}
-                    </View>
-                    <QuantityStepper
-                      label={content.ingredientName(ingredient)}
-                      valueText={formatAmount(quantity, ingredient.unit)}
-                      decrementDisabled={quantity <= 0}
-                      onDecrement={() => repositories.pantry.adjust(ingredient.id, -step)}
-                      onIncrement={() => repositories.pantry.adjust(ingredient.id, step)}
-                    />
-                  </View>
-                </TouchableRipple>
-              </SwipeToDelete>
+              <PantryRow
+                ingredient={row.ingredient}
+                quantity={row.quantity}
+                onOpen={openItem}
+                onRemove={remove}
+              />
             );
           }}
         />
@@ -149,6 +126,55 @@ export function HomeSegment() {
     </View>
   );
 }
+
+type RowProps = {
+  ingredient: Ingredient;
+  quantity: number;
+  onOpen: (ingredient: Ingredient, quantity: number) => void;
+  onRemove: (ingredient: Ingredient, quantity: number) => void;
+};
+
+/** One product at home. Memoized: a «+» on one row re-renders only that row. */
+const PantryRow = memo(function PantryRow({ ingredient, quantity, onOpen, onRemove }: RowProps) {
+  const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
+  const low = isLowStock(quantity, ingredient.unit, ingredient.lowStockThreshold);
+  const step = quantityStep(ingredient.unit);
+  const name = content.ingredientName(ingredient);
+  return (
+    <SwipeToDelete onDelete={() => onRemove(ingredient, quantity)}>
+      <TouchableRipple
+        onPress={() => onOpen(ingredient, quantity)}
+        style={{ backgroundColor: theme.colors.background }}
+        accessibilityHint={t('pantry.home.editHint')}>
+        <View style={styles.row}>
+          <ImageWithFallback
+            source={ingredient.imageKey ? INGREDIENT_IMAGES[ingredient.imageKey] : undefined}
+            fallbackIcon={CATEGORY_ICONS[ingredient.category]}
+            style={styles.image}
+            iconSize={22}
+          />
+          <View style={styles.flex}>
+            <Text variant="bodyLarge">{name}</Text>
+            {low ? (
+              <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
+                {quantity === 0 ? t('pantry.home.outOfStock') : t('pantry.home.lowStock')}
+              </Text>
+            ) : null}
+          </View>
+          <QuantityStepper
+            label={name}
+            valueText={formatAmount(quantity, ingredient.unit)}
+            decrementDisabled={quantity <= 0}
+            onDecrement={() => repositories.pantry.adjust(ingredient.id, -step)}
+            onIncrement={() => repositories.pantry.adjust(ingredient.id, step)}
+          />
+        </View>
+      </TouchableRipple>
+    </SwipeToDelete>
+  );
+});
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },

@@ -8,6 +8,7 @@ import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { enableFreeze } from 'react-native-screens';
 
 import { repositories } from '@/db';
 import { DatabaseProvider } from '@/db/DatabaseProvider';
@@ -20,6 +21,10 @@ import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
 import { applyLanguage, useT } from '@/i18n';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
+
+// Screens that are not visible (other tabs, screens under the current one) stop
+// re-rendering on every database change and catch up when shown again.
+enableFreeze(true);
 
 // Timer notifications stay quiet while the cooking screen shows its own alert.
 configureNotificationHandler(() => useCookStore.getState().screenOpen);

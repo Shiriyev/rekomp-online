@@ -15,10 +15,14 @@ import { HistoryCharts } from '@/features/history/HistoryCharts';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatDayLabel, formatInt, formatTime } from '@/lib/format';
+import { useAfterFirstFrame } from '@/lib/useAfterFirstFrame';
 import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { SkeletonList } from '@/ui/Skeleton';
+
+/** Roughly the charts card, so the list does not jump when they appear. */
+const CHARTS_PLACEHOLDER_HEIGHT = 560;
 
 export default function HistoryScreen() {
   const theme = useAppTheme();
@@ -32,6 +36,8 @@ export default function HistoryScreen() {
   const latest = useLatestLog();
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set([today]));
   const [deletePlan, setDeletePlan] = useState<DeletePlan | null>(null);
+  // The charts are the heavy part: the tab shows first, the charts a frame later.
+  const chartsReady = useAfterFirstFrame();
 
   const byDate = useMemo(() => new Map(days.map((d) => [d.localDate, d])), [days]);
   const week = useMemo(() => dailySeries(byDate, today, 7), [byDate, today]);
@@ -63,13 +69,17 @@ export default function HistoryScreen() {
         contentContainerStyle={styles.list}
         ListHeaderComponent={
           <View>
-            <HistoryCharts
-              week={week}
-              month={month}
-              today={today}
-              targets={profile}
-              weights={weights}
-            />
+            {chartsReady ? (
+              <HistoryCharts
+                week={week}
+                month={month}
+                today={today}
+                targets={profile}
+                weights={weights}
+              />
+            ) : (
+              <View style={styles.chartsPlaceholder} />
+            )}
             {latest ? (
               <Card mode="contained" style={styles.latest}>
                 <Card.Content style={styles.latestRow}>
@@ -116,6 +126,7 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   list: { paddingTop: spacing.md, paddingBottom: spacing.xxl },
+  chartsPlaceholder: { height: CHARTS_PLACEHOLDER_HEIGHT },
   latest: { marginHorizontal: spacing.lg, marginBottom: spacing.md },
   latestRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
 });

@@ -1,11 +1,9 @@
+// One collator: `localeCompare(x, 'ru')` builds a new one per comparison on Hermes.
+const ruCollator = new Intl.Collator('ru');
+
 /** Lowercase and strip accents so "turo" finds "túró" and "ё" matches "е". */
 export function normalizeForSearch(text: string): string {
-  return text
-    .toLocaleLowerCase('ru-RU')
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/ё/g, 'е')
-    .trim();
+  return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ё/g, 'е').trim();
 }
 
 /** `aliases`: other names to match (e.g. the English one). */
@@ -25,6 +23,6 @@ export function searchIngredients<T extends Searchable>(items: readonly T[], que
     if (prefix || contains) scored.push({ item, score: prefix ? 0 : 1 });
   }
   return scored
-    .sort((a, b) => a.score - b.score || a.item.name.localeCompare(b.item.name, 'ru'))
+    .sort((a, b) => a.score - b.score || ruCollator.compare(a.item.name, b.item.name))
     .map((s) => s.item);
 }
