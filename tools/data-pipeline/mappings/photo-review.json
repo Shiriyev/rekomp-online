@@ -30,18 +30,12 @@
  "carrot": "ok",
  "cashew": "ok",
  "celery": "reject",
- "cheddar": {
-  "query": "cheddar cheese block",
-  "ok": true
- },
+ "cheddar": "reject",
  "cherry_tomato": "ok",
  "chicken": "ok",
  "chicken_drumstick": "ok",
  "chicken_leg": "ok",
- "chicken_stock": {
-  "query": "chicken broth bowl",
-  "ok": true
- },
+ "chicken_stock": "reject",
  "chicken_thigh": "ok",
  "chicken_wing": "ok",
  "chorizo": "reject",
@@ -111,10 +105,7 @@
  "mussel": "reject",
  "mustard": "reject",
  "naan": "ok",
- "olive_oil": {
-  "query": "olive oil bottle",
-  "ok": true
- },
+ "olive_oil": "reject",
  "orange": "ok",
  "oyster_mushroom": "ok",
  "oyster_sauce": "reject",

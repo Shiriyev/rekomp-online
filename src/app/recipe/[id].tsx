@@ -18,6 +18,7 @@ import { repositories } from '@/db';
 import { useActiveSales, useIngredientsMap, usePantryStock, useRecipeDetail } from '@/db/hooks';
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
+import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
 import {
   persistPhoto,
@@ -47,13 +48,15 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { SkeletonDetail } from '@/ui/Skeleton';
 
 const SERVING_OPTIONS = [1, 2, 3, 4] as const;
+const isMealType = (v: unknown): v is MealType =>
+  typeof v === 'string' && (MEAL_TYPES as readonly string[]).includes(v);
 const NIGHT_BEFORE_TAG = 'с вечера';
 
 export default function RecipeScreen() {
   const theme = useAppTheme();
   const t = useT();
   const content = useContent();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, meal } = useLocalSearchParams<{ id: string; meal?: string }>();
   const { recipe, lines, hasCustom, isLoaded } = useRecipeDetail(id);
   const draft = useRecipeDraft(id);
   const setDraftAmount = useRecipeDraftStore((s) => s.setAmount);
@@ -172,7 +175,8 @@ export default function RecipeScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: MEAL_LABELS[recipe.mealType] }} />
+      {/* Titled with the list it was opened from; a recipe can fit several meals. */}
+      <Stack.Screen options={{ title: MEAL_LABELS[isMealType(meal) ? meal : recipe.mealType] }} />
       <ScrollView contentContainerStyle={styles.content}>
         <View>
           <ImageWithFallback

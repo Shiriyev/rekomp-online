@@ -26,11 +26,9 @@ Photos of the original recipes and products (v1) are credited in the repository 
 | products/burger_bun.webp | [Ana Madeleine Uribe](https://www.pexels.com/@bananamade) | https://www.pexels.com/photo/close-up-of-burger-buns-on-a-wooden-cutting-board-4775241/ |
 | products/carrot.webp | [umberto dez](https://www.pexels.com/@umberto-dez-6691815) | https://www.pexels.com/photo/close-up-of-freshly-grated-carrots-38802742/ |
 | products/cashew.webp | [Bilal Moazzam](https://www.pexels.com/@bilal-moazzam-3225124) | https://www.pexels.com/photo/assorted-mixed-nuts-in-glass-bowl-on-wooden-table-37180553/ |
-| products/cheddar.webp | [Charles Haacker](https://www.pexels.com/@charles-haacker-567762) | https://www.pexels.com/photo/close-up-photo-of-cheese-with-mold-11098743/ |
 | products/cherry_tomato.webp | [frank minjarez](https://www.pexels.com/@frank-minjarez-333886454) | https://www.pexels.com/photo/pile-of-fresh-cherry-tomatoes-18254763/ |
 | products/chicken_drumstick.webp | [Kunal Lakhotia](https://www.pexels.com/@kunal-lakhotia-781256899) | https://www.pexels.com/photo/crispy-chicken-lollipops-with-spicy-dip-29631422/ |
 | products/chicken_leg.webp | [Thomas Fritscher](https://www.pexels.com/@thomas-fritscher-1675366234) | https://www.pexels.com/photo/delicious-grilled-meat-and-vegetable-skewers-on-bbq-37198642/ |
-| products/chicken_stock.webp | [Cook Eat](https://www.pexels.com/@cookeat) | https://www.pexels.com/photo/stew-with-meat-and-vegetables-placed-in-white-ceramic-bowl-772518/ |
 | products/chicken_thigh.webp | [J KREATOR](https://www.pexels.com/@jkreat0r) | https://www.pexels.com/photo/grilled-chicken-biryani-on-decorative-plate-32986476/ |
 | products/chicken_wing.webp | [Wok Stop London](https://www.pexels.com/@wok-stop-london-3091664) | https://www.pexels.com/photo/close-up-shot-of-a-delicious-dish-on-a-wooden-tray-5946433/ |
 | products/chicken.webp | [Ali Dashti](https://www.pexels.com/@ali-dashti-506667798) | https://www.pexels.com/photo/meal-with-meat-and-rice-17650171/ |
@@ -50,7 +48,6 @@ Photos of the original recipes and products (v1) are credited in the repository 
 | products/milk.webp | [Dhenny Napitupulu](https://www.pexels.com/@dhennynapitupulu) | https://www.pexels.com/photo/bottles-of-milk-in-bowl-18258533/ |
 | products/mozzarella.webp | [Farhad Ibrahimzade](https://www.pexels.com/@farhad) | https://www.pexels.com/photo/a-food-platter-with-sliced-tomatoes-8696570/ |
 | products/naan.webp | [Nosh Caterers](https://www.pexels.com/@nosh-caterers-2148640437) | https://www.pexels.com/photo/flavorful-garlic-naan-bread-close-up-30203311/ |
-| products/olive_oil.webp | [Tara Clark](https://www.pexels.com/@tara-clark-89384110) | https://www.pexels.com/photo/a-person-holding-a-basket-9070120/ |
 | products/orange.webp | [Maira  Matsui](https://www.pexels.com/@maira-matsui-3440407) | https://www.pexels.com/photo/vibrant-fresh-oranges-at-a-market-display-37543950/ |
 | products/oyster_mushroom.webp | [umberto dez](https://www.pexels.com/@umberto-dez-6691815) | https://www.pexels.com/photo/close-up-of-sliced-mushrooms-for-cooking-38802717/ |
 | products/pasta.webp | [umberto dez](https://www.pexels.com/@umberto-dez-6691815) | https://www.pexels.com/photo/close-up-of-uncooked-fusilli-pasta-spirals-38802734/ |

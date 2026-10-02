@@ -183,7 +183,8 @@ describe('upgrade of a v1 install', () => {
 it('changes nothing when the catalog cannot be used', () => {
   runSeed(db);
   const before = db.select().from(recipes).all();
-  expect(() => applyCatalog(db, 2, () => catalog)).toThrow('expected 2');
+  const wrong = catalog.catalogVersion + 1;
+  expect(() => applyCatalog(db, wrong, () => catalog)).toThrow(`expected ${wrong}`);
   expect(db.select().from(recipes).all()).toEqual(before);
   expect(storedCatalogVersion(db)).toBe(0);
 });

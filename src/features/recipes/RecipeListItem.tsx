@@ -4,7 +4,7 @@ import { Card, Text } from 'react-native-paper';
 
 import type { Recipe } from '@/db/schema';
 import type { CookCheck } from '@/domain/pantry';
-import type { Macros } from '@/domain/types';
+import type { Macros, MealType } from '@/domain/types';
 import { MEAL_ICONS } from '@/features/meals';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
@@ -15,9 +15,16 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { recipeImage } from './recipeImage';
 import { StatusBadge } from './StatusBadge';
 
-type Props = { recipe: Recipe; macros: Macros; check: CookCheck; kcalLeftToday: number };
+type Props = {
+  recipe: Recipe;
+  macros: Macros;
+  check: CookCheck;
+  kcalLeftToday: number;
+  /** The list it is shown in: the card is titled with this meal. */
+  meal?: MealType;
+};
 
-export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) {
+export function RecipeListItem({ recipe, macros, check, kcalLeftToday, meal }: Props) {
   const theme = useAppTheme();
   const t = useT();
   const content = useContent();
@@ -28,7 +35,12 @@ export function RecipeListItem({ recipe, macros, check, kcalLeftToday }: Props) 
     <Card
       mode="elevated"
       style={styles.card}
-      onPress={() => router.push({ pathname: '/recipe/[id]', params: { id: recipe.id } })}
+      onPress={() =>
+        router.push({
+          pathname: '/recipe/[id]',
+          params: meal ? { id: recipe.id, meal } : { id: recipe.id },
+        })
+      }
       accessibilityLabel={t('recipes.listA11y', {
         name,
         kcal: formatInt(macros.kcal),

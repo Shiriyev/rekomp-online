@@ -87,6 +87,7 @@ export default function RecipesScreen() {
             macros={item.macros}
             check={item.check}
             kcalLeftToday={kcalLeft}
+            meal={meal}
           />
         )}
         ListHeaderComponent={

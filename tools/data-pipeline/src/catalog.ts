@@ -9,9 +9,11 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { CATALOG_VERSION } from '../pipeline.config.ts';
-import { productMacros, type Accepted, type RecipeTag } from './build/evaluate.ts';
+import { productMacros, type Accepted, type MealType, type RecipeTag } from './build/evaluate.ts';
 import { loadMappings, type Canonical } from './build/mappings.ts';
 import {
+  proteinCriteria,
+  RECIPE_CRITERIA,
   RECIPES_EN,
   SEED_LIDL,
   SEED_RECIPES,
@@ -50,9 +52,29 @@ const V1_SINGLE = { defaultServings: 1, isBatch: false } as const;
 const round = (n: number, digits: number) => Math.round(n * 10 ** digits) / 10 ** digits;
 
 /** grams of a product → amount in its own unit (ml ≈ g, as in the app). */
-function fromGrams(grams: number, p: Canonical): number {
-  if (p.unit === 'pcs') return round(grams / p.gramsPerPiece!, 2);
+function fromGrams(grams: number, p: Canonical, exact = false): number {
+  // «0,38 pcs» of an onion reads badly: pieces go to the nearest quarter (at least ¼),
+  // unless that pushes the recipe out of its meal criteria (`exact`).
+  if (p.unit === 'pcs') {
+    const pieces = grams / p.gramsPerPiece!;
+    return exact ? round(pieces, 2) : Math.max(0.25, Math.round(pieces * 4) / 4);
+  }
   return round(grams, 1);
+}
+
+/** Whether per-serving values meet the criteria of every listed meal (as the validator checks). */
+function meetsCriteria(meals: readonly MealType[], kcal: number, protein: number): boolean {
+  const share = kcal > 0 ? (protein * 4) / kcal : 0;
+  return meals.every((m) => {
+    const [lo, hi] = RECIPE_CRITERIA.kcalRange[m];
+    const p = proteinCriteria(m);
+    return (
+      Math.round(kcal) >= lo &&
+      Math.round(kcal) <= hi &&
+      share >= p.minShare &&
+      protein >= p.minGrams
+    );
+  });
 }
 
 const RU_MEASURE: [RegExp, string][] = [
@@ -260,6 +282,32 @@ function main() {
   }
 
   // ---------- TheMealDB ----------
+  const linesFor = (a: Accepted, exact: boolean) =>
+    a.lines.map((l) => {
+      const p = products.get(l.ingredientId)!;
+      return {
+        ingredientId: l.ingredientId,
+        amountPerServing: l.staple ? 0 : fromGrams(l.grams / a.servings, p, exact),
+        unit: p.unit,
+        // «Oil for frying», «lime to serve»: no amount, outside the nutrition, optional.
+        optional: l.staple && !p.isStaple,
+        altGroup: null,
+        note: l.staple ? ruMeasure(l.rawMeasure) : null,
+        noteEn: l.staple ? l.rawMeasure.trim() || 'to taste' : null,
+      };
+    });
+  /** Quarter pieces when the recipe still meets its criteria with them, else exact amounts. */
+  const mealdbLines = (a: Accepted) => {
+    const rounded = linesFor(a, false);
+    const { perServing } = recipeMacros(
+      rounded.map((l, sortOrder) => ({ ...l, sortOrder })),
+      nutrition,
+    );
+    return meetsCriteria(a.mealTypes, perServing.kcal, perServing.protein)
+      ? rounded
+      : linesFor(a, true);
+  };
+
   const accepted = JSON.parse(
     readFileSync(path.join(ROOT, 'cache', 'evaluated.json'), 'utf8'),
   ) as Accepted[];
@@ -292,19 +340,7 @@ function main() {
         sourceId: a.sourceId,
         sortOrder: 0,
       },
-      a.lines.map((l) => {
-        const p = products.get(l.ingredientId)!;
-        return {
-          ingredientId: l.ingredientId,
-          amountPerServing: l.staple ? 0 : fromGrams(l.grams / a.servings, p),
-          unit: p.unit,
-          // «Oil for frying», «lime to serve»: no amount, outside the nutrition, optional.
-          optional: l.staple && !p.isStaple,
-          altGroup: null,
-          note: l.staple ? ruMeasure(l.rawMeasure) : null,
-          noteEn: l.staple ? l.rawMeasure.trim() || 'to taste' : null,
-        };
-      }),
+      mealdbLines(a),
       t.steps.map((s) => ({
         text: s.ru,
         textEn: s.en,
