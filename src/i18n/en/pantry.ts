@@ -10,6 +10,10 @@ export const pantry: Messages<typeof ru> = {
   },
   segments: { home: 'At home', portions: 'Portions', shopping: 'Shopping' },
   home: {
+    all: 'All',
+    low: 'Running low',
+    search: 'Search at home',
+    nothingFound: 'Nothing found',
     removed: 'Removed: {{name}}',
     emptyTitle: 'Nothing at home yet',
     emptyDescription: 'Add products and dishes will show what you can cook.',

@@ -1,14 +1,15 @@
 import { FlashList } from '@shopify/flash-list';
 import { router } from 'expo-router';
-import { memo, useCallback, useMemo, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { FAB, Text, TouchableRipple } from 'react-native-paper';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Card, Chip, FAB, IconButton, Text, TextInput } from 'react-native-paper';
 
 import { repositories } from '@/db';
 import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
+import { searchIngredients } from '@/domain/search';
 import { isLowStock } from '@/domain/stock';
-import { INGREDIENT_CATEGORIES } from '@/domain/types';
+import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
 import { quantityStep } from '@/domain/units';
 import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
@@ -20,42 +21,63 @@ import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
-import { QuantityStepper } from '@/ui/QuantityStepper';
-import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
 import { useBulkAddStore } from './bulkAddStore';
 import { PantryItemSheet, type PantryItemSheetHandle } from './PantryItemSheet';
 
-type Row =
-  | { type: 'header'; key: string; title: string }
-  | { type: 'item'; key: string; ingredient: Ingredient; quantity: number };
+type Stock = { ingredient: Ingredient; quantity: number; low: boolean };
+/** Chip above the grid: everything, what runs out, or one category. */
+type Filter = 'all' | 'low' | IngredientCategory;
 
+/**
+ * «Дома»: everything at home as a two-column grid of photo tiles, with search and chips
+ * (all, running low, each category with its count) so a long list stays readable.
+ */
 export function HomeSegment() {
-  const theme = useAppTheme();
   const t = useT();
   const content = useContent();
   const items = usePantryItems();
   const ingredients = useIngredientsMap();
   const editRef = useRef<PantryItemSheetHandle>(null);
+  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<Filter>('all');
 
-  const rows = useMemo<Row[]>(() => {
-    const joined = items.flatMap((p) => {
-      const ingredient = ingredients.get(p.ingredientId);
-      return ingredient ? [{ ingredient, quantity: p.quantity }] : [];
-    });
-    return INGREDIENT_CATEGORIES.flatMap((category) => {
-      const inCategory = joined
-        .filter((j) => j.ingredient.category === category)
-        .sort((a, b) =>
+  const stock = useMemo<Stock[]>(() => {
+    const order = new Map(INGREDIENT_CATEGORIES.map((c, i) => [c, i]));
+    return items
+      .flatMap((p) => {
+        const ingredient = ingredients.get(p.ingredientId);
+        if (!ingredient) return [];
+        const low = isLowStock(p.quantity, ingredient.unit, ingredient.lowStockThreshold);
+        return [{ ingredient, quantity: p.quantity, low }];
+      })
+      .sort(
+        (a, b) =>
+          (order.get(a.ingredient.category) ?? 0) - (order.get(b.ingredient.category) ?? 0) ||
           compareNames(content.ingredientName(a.ingredient), content.ingredientName(b.ingredient)),
-        );
-      if (inCategory.length === 0) return [];
-      return [
-        { type: 'header' as const, key: `h:${category}`, title: CATEGORY_LABELS[category] },
-        ...inCategory.map((j) => ({ type: 'item' as const, key: j.ingredient.id, ...j })),
-      ];
-    });
+      );
   }, [items, ingredients, content]);
+
+  const counts = useMemo(() => {
+    const byCategory = new Map<IngredientCategory, number>();
+    for (const s of stock)
+      byCategory.set(s.ingredient.category, (byCategory.get(s.ingredient.category) ?? 0) + 1);
+    return { byCategory, low: stock.filter((s) => s.low).length };
+  }, [stock]);
+
+  const shown = useMemo(() => {
+    const inFilter = stock.filter((s) =>
+      filter === 'all' ? true : filter === 'low' ? s.low : s.ingredient.category === filter,
+    );
+    if (!query.trim()) return inFilter;
+    const named = inFilter.map((s) => ({
+      ...s,
+      name: s.ingredient.name,
+      nameHu: s.ingredient.nameHu,
+      aliases: content.searchAliases(s.ingredient),
+    }));
+    return searchIngredients(named, query);
+  }, [stock, filter, query, content]);
 
   const openBulkAdd = () => {
     useBulkAddStore.getState().start('home');
@@ -76,9 +98,20 @@ export function HomeSegment() {
     [],
   );
 
+  const chips: { id: Filter; label: string; count: number }[] = [
+    { id: 'all', label: t('pantry.home.all'), count: stock.length },
+    ...(counts.low > 0
+      ? [{ id: 'low' as const, label: t('pantry.home.low'), count: counts.low }]
+      : []),
+    ...INGREDIENT_CATEGORIES.flatMap((c) => {
+      const n = counts.byCategory.get(c) ?? 0;
+      return n > 0 ? [{ id: c, label: CATEGORY_LABELS[c], count: n }] : [];
+    }),
+  ];
+
   return (
     <View style={styles.flex}>
-      {rows.length === 0 ? (
+      {stock.length === 0 ? (
         <EmptyState
           icon="fridge-outline"
           title={t('pantry.home.emptyTitle')}
@@ -88,30 +121,61 @@ export function HomeSegment() {
         />
       ) : (
         <FlashList
-          data={rows}
-          keyExtractor={(r) => r.key}
-          getItemType={(r) => r.type}
-          contentContainerStyle={styles.list}
-          renderItem={({ item: row }) => {
-            if (row.type === 'header') {
-              return (
-                <Text
-                  variant="titleSmall"
-                  style={[styles.header, { color: theme.colors.primary }]}
-                  accessibilityRole="header">
-                  {row.title}
-                </Text>
-              );
-            }
-            return (
-              <PantryRow
-                ingredient={row.ingredient}
-                quantity={row.quantity}
+          data={shown}
+          numColumns={2}
+          keyExtractor={(s) => s.ingredient.id}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.grid}
+          ListHeaderComponent={
+            <View>
+              <View style={styles.search}>
+                <TextInput
+                  mode="outlined"
+                  dense
+                  placeholder={t('pantry.home.search')}
+                  accessibilityLabel={t('pantry.home.search')}
+                  value={query}
+                  onChangeText={setQuery}
+                  left={<TextInput.Icon icon="magnify" />}
+                  right={
+                    query ? <TextInput.Icon icon="close" onPress={() => setQuery('')} /> : undefined
+                  }
+                  autoCorrect={false}
+                />
+              </View>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.chips}
+                keyboardShouldPersistTaps="handled">
+                {chips.map((c) => (
+                  <Chip
+                    key={c.id}
+                    compact
+                    mode={filter === c.id ? 'flat' : 'outlined'}
+                    selected={filter === c.id}
+                    showSelectedCheck={false}
+                    icon={c.id === 'low' ? 'alert-outline' : undefined}
+                    onPress={() => setFilter(c.id)}>
+                    {`${c.label} · ${c.count}`}
+                  </Chip>
+                ))}
+              </ScrollView>
+            </View>
+          }
+          ListEmptyComponent={
+            <EmptyState icon="magnify-close" title={t('pantry.home.nothingFound')} />
+          }
+          renderItem={({ item }) => (
+            <View style={styles.cell}>
+              <PantryTile
+                ingredient={item.ingredient}
+                quantity={item.quantity}
+                low={item.low}
                 onOpen={openItem}
-                onRemove={remove}
               />
-            );
-          }}
+            </View>
+          )}
         />
       )}
 
@@ -127,67 +191,86 @@ export function HomeSegment() {
   );
 }
 
-type RowProps = {
+type TileProps = {
   ingredient: Ingredient;
   quantity: number;
+  low: boolean;
   onOpen: (ingredient: Ingredient, quantity: number) => void;
-  onRemove: (ingredient: Ingredient, quantity: number) => void;
 };
 
-/** One product at home. Memoized: a «+» on one row re-renders only that row. */
-const PantryRow = memo(function PantryRow({ ingredient, quantity, onOpen, onRemove }: RowProps) {
+/** One product at home: photo, name, amount and −/+. Memoized: a «+» redraws one tile. */
+const PantryTile = memo(function PantryTile({ ingredient, quantity, low, onOpen }: TileProps) {
   const theme = useAppTheme();
   const t = useT();
   const content = useContent();
-  const low = isLowStock(quantity, ingredient.unit, ingredient.lowStockThreshold);
-  const step = quantityStep(ingredient.unit);
   const name = content.ingredientName(ingredient);
+  const step = quantityStep(ingredient.unit);
   return (
-    <SwipeToDelete onDelete={() => onRemove(ingredient, quantity)}>
-      <TouchableRipple
-        onPress={() => onOpen(ingredient, quantity)}
-        style={{ backgroundColor: theme.colors.background }}
-        accessibilityHint={t('pantry.home.editHint')}>
-        <View style={styles.row}>
-          <ImageWithFallback
-            source={bundledImage(ingredient.imageKey)}
-            fallbackIcon={CATEGORY_ICONS[ingredient.category]}
-            style={styles.image}
-            iconSize={22}
+    <Card
+      mode="contained"
+      style={styles.tile}
+      onPress={() => onOpen(ingredient, quantity)}
+      accessibilityLabel={`${name}, ${formatAmount(quantity, ingredient.unit)}`}
+      accessibilityHint={t('pantry.home.editHint')}>
+      <ImageWithFallback
+        source={bundledImage(ingredient.imageKey)}
+        fallbackIcon={CATEGORY_ICONS[ingredient.category]}
+        style={styles.image}
+        iconSize={32}
+      />
+      <View style={styles.body}>
+        <Text variant="titleSmall" numberOfLines={2} style={styles.name}>
+          {name}
+        </Text>
+        <Text
+          variant="labelSmall"
+          numberOfLines={1}
+          style={{ color: low ? theme.colors.warning : theme.colors.onSurfaceVariant }}>
+          {low
+            ? quantity === 0
+              ? t('pantry.home.outOfStock')
+              : t('pantry.home.lowStock')
+            : CATEGORY_LABELS[ingredient.category]}
+        </Text>
+        <View style={styles.stepper}>
+          <IconButton
+            icon="minus"
+            size={18}
+            mode="outlined"
+            disabled={quantity <= 0}
+            onPress={() => repositories.pantry.adjust(ingredient.id, -step)}
+            accessibilityLabel={t('ui.stepper.decrement', { label: name })}
+            style={styles.button}
           />
-          <View style={styles.flex}>
-            <Text variant="bodyLarge">{name}</Text>
-            {low ? (
-              <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
-                {quantity === 0 ? t('pantry.home.outOfStock') : t('pantry.home.lowStock')}
-              </Text>
-            ) : null}
-          </View>
-          <QuantityStepper
-            label={name}
-            valueText={formatAmount(quantity, ingredient.unit)}
-            decrementDisabled={quantity <= 0}
-            onDecrement={() => repositories.pantry.adjust(ingredient.id, -step)}
-            onIncrement={() => repositories.pantry.adjust(ingredient.id, step)}
+          <Text variant="titleSmall" style={styles.amount} numberOfLines={1}>
+            {formatAmount(quantity, ingredient.unit)}
+          </Text>
+          <IconButton
+            icon="plus"
+            size={18}
+            mode="outlined"
+            onPress={() => repositories.pantry.adjust(ingredient.id, step)}
+            accessibilityLabel={t('ui.stepper.increment', { label: name })}
+            style={styles.button}
           />
         </View>
-      </TouchableRipple>
-    </SwipeToDelete>
+      </View>
+    </Card>
   );
 });
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  list: { paddingBottom: 96 },
-  header: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, paddingBottom: spacing.xs },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    paddingLeft: spacing.lg,
-    paddingRight: spacing.sm,
-    minHeight: 64,
-  },
-  image: { width: 40, height: 40, borderRadius: radius.sm },
+  grid: { paddingHorizontal: spacing.md, paddingBottom: 96 },
+  search: { paddingHorizontal: spacing.xs, paddingTop: spacing.md },
+  chips: { gap: spacing.sm, paddingHorizontal: spacing.xs, paddingVertical: spacing.sm },
+  cell: { flex: 1, padding: spacing.xs },
+  tile: { overflow: 'hidden', borderRadius: radius.md },
+  image: { width: '100%', aspectRatio: 16 / 10 },
+  body: { padding: spacing.sm, gap: 2 },
+  name: { minHeight: 40 },
+  stepper: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  button: { margin: 0 },
+  amount: { flex: 1, textAlign: 'center' },
   fab: { position: 'absolute', right: spacing.lg, bottom: spacing.lg },
 });

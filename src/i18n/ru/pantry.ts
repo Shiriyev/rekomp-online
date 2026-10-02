@@ -8,6 +8,10 @@ export const pantry = {
   },
   segments: { home: 'Дома', portions: 'Порции', shopping: 'Покупки' },
   home: {
+    all: 'Все',
+    low: 'Заканчивается',
+    search: 'Поиск дома',
+    nothingFound: 'Ничего не нашлось',
     removed: 'Убрано: {{name}}',
     emptyTitle: 'Дома пока пусто',
     emptyDescription: 'Добавь продукты — и блюда покажут, что можно приготовить.',

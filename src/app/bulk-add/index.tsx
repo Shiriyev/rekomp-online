@@ -1,55 +1,109 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { FlashList } from '@shopify/flash-list';
 import { router, Stack } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button, Checkbox, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
+import { memo, useMemo, useState } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Chip, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useIngredientsMap, useLidlProducts, usePantryItems } from '@/db/hooks';
+import {
+  useIngredientsMap,
+  useLidlProducts,
+  usePantryItems,
+  useRecipeLinesByRecipe,
+} from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount, smallestPackages } from '@/domain/bulkAdd';
 import { searchIngredients, suggestSimilar } from '@/domain/search';
+import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
 import { bundledImage } from '@/features/bundledImage';
-import { CATEGORY_ICONS } from '@/features/ingredients';
+import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { NotInCatalog } from '@/features/pantry/NotInCatalog';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
+import { compareNames } from '@/lib/collate';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
-/** «Добавить домой»: search with multi-select; the selection survives new queries. */
+/** Category chip, or the products already ticked. */
+type Filter = 'all' | 'selected' | IngredientCategory;
+
+/**
+ * «Добавить домой»: the catalog as a three-column photo grid with search and category
+ * chips; tap tiles to pick several products, the selection survives new searches.
+ */
 export default function BulkSelectScreen() {
-  const theme = useAppTheme();
   const insets = useSafeAreaInsets();
   const t = useT();
   const content = useContent();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
   const lidl = useLidlProducts();
+  const linesByRecipe = useRecipeLinesByRecipe();
   const selected = useBulkAddStore((s) => s.selected);
   const toggle = useBulkAddStore((s) => s.toggle);
   const select = useBulkAddStore((s) => s.select);
   const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<Filter>('all');
 
   const packages = useMemo(() => smallestPackages(lidl), [lidl]);
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
-  const available = useMemo(
-    () =>
-      [...ingredients.values()]
-        .filter((i) => !i.isStaple && !i.isArchived)
-        .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-    [ingredients, content],
-  );
-  const results = useMemo(() => searchIngredients(available, query), [available, query]);
+  // How many recipes use each product: common products first, rare ones (usually without a
+  // photo) further down.
+  const popularity = useMemo(() => {
+    const uses = new Map<string, number>();
+    for (const lines of linesByRecipe.values())
+      for (const l of lines) uses.set(l.ingredientId, (uses.get(l.ingredientId) ?? 0) + 1);
+    return uses;
+  }, [linesByRecipe]);
+  // Catalog order: category, then how common, then name in the UI language.
+  const available = useMemo(() => {
+    const order = new Map(INGREDIENT_CATEGORIES.map((c, i) => [c, i]));
+    return [...ingredients.values()]
+      .filter((i) => !i.isStaple && !i.isArchived)
+      .map((i) => ({ ...i, aliases: content.searchAliases(i) }))
+      .sort(
+        (a, b) =>
+          (order.get(a.category) ?? 0) - (order.get(b.category) ?? 0) ||
+          (popularity.get(b.id) ?? 0) - (popularity.get(a.id) ?? 0) ||
+          compareNames(content.ingredientName(a), content.ingredientName(b)),
+      );
+  }, [ingredients, content, popularity]);
+  const selectedSet = useMemo(() => new Set(selected), [selected]);
+
+  const counts = useMemo(() => {
+    const map = new Map<IngredientCategory, number>();
+    for (const i of available) map.set(i.category, (map.get(i.category) ?? 0) + 1);
+    return map;
+  }, [available]);
+
+  const results = useMemo(() => {
+    const inFilter =
+      filter === 'all'
+        ? available
+        : filter === 'selected'
+          ? available.filter((i) => selectedSet.has(i.id))
+          : available.filter((i) => i.category === filter);
+    return searchIngredients(inFilter, query);
+  }, [available, filter, selectedSet, query]);
   // Products come only from the catalog: nothing found → look-alikes, never a new product.
   const suggestions = useMemo(
-    () => (results.length === 0 ? suggestSimilar(available, query) : []),
+    () => (results.length === 0 && query.trim() ? suggestSimilar(available, query) : []),
     [available, query, results.length],
   );
   const defaultFor = (i: Ingredient) => defaultAddAmount(i, packages.get(i.id), i.lastAddedAmount);
-  const selectedSet = new Set(selected);
+
+  const chips: { id: Filter; label: string }[] = [
+    { id: 'all', label: t('pantry.home.all') },
+    ...(selected.length > 0
+      ? [{ id: 'selected' as const, label: t('bulkAdd.selected', { count: selected.length }) }]
+      : []),
+    ...INGREDIENT_CATEGORIES.flatMap((c) =>
+      counts.get(c) ? [{ id: c, label: `${CATEGORY_LABELS[c]} · ${counts.get(c)}` }] : [],
+    ),
+  ];
 
   return (
     <View style={styles.flex}>
@@ -57,20 +111,43 @@ export default function BulkSelectScreen() {
       <View style={styles.search}>
         <TextInput
           mode="outlined"
-          label={t('bulkAdd.search')}
+          dense
+          placeholder={t('bulkAdd.search')}
           accessibilityLabel={t('bulkAdd.searchLabel')}
           value={query}
           onChangeText={setQuery}
           left={<TextInput.Icon icon="magnify" />}
+          right={query ? <TextInput.Icon icon="close" onPress={() => setQuery('')} /> : undefined}
           autoCorrect={false}
         />
       </View>
+      <View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.chips}
+          keyboardShouldPersistTaps="handled">
+          {chips.map((c) => (
+            <Chip
+              key={c.id}
+              compact
+              mode={filter === c.id ? 'flat' : 'outlined'}
+              selected={filter === c.id}
+              showSelectedCheck={false}
+              icon={c.id === 'all' || c.id === 'selected' ? undefined : CATEGORY_ICONS[c.id]}
+              onPress={() => setFilter(c.id)}>
+              {c.label}
+            </Chip>
+          ))}
+        </ScrollView>
+      </View>
       <FlashList
         data={results}
+        numColumns={3}
         keyExtractor={(i) => i.id}
-        extraData={selected}
+        extraData={selectedSet}
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.list}
+        contentContainerStyle={styles.grid}
         ListEmptyComponent={
           query.trim() ? (
             <NotInCatalog
@@ -82,35 +159,16 @@ export default function BulkSelectScreen() {
             />
           ) : null
         }
-        renderItem={({ item }) => {
-          const checked = selectedSet.has(item.id);
-          const have = stock.get(item.id);
-          return (
-            <TouchableRipple
-              onPress={() => toggle(item.id, defaultFor(item))}
-              accessibilityRole="checkbox"
-              accessibilityState={{ checked }}
-              accessibilityLabel={content.ingredientName(item)}>
-              <View style={styles.row}>
-                <Checkbox status={checked ? 'checked' : 'unchecked'} />
-                <ImageWithFallback
-                  source={bundledImage(item.imageKey)}
-                  fallbackIcon={CATEGORY_ICONS[item.category]}
-                  style={styles.image}
-                  iconSize={20}
-                />
-                <View style={styles.flex}>
-                  <Text variant="bodyLarge">{content.ingredientName(item)}</Text>
-                  {have !== undefined ? (
-                    <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                      {t('bulkAdd.atHome', { amount: formatAmount(have, item.unit) })}
-                    </Text>
-                  ) : null}
-                </View>
-              </View>
-            </TouchableRipple>
-          );
-        }}
+        renderItem={({ item }) => (
+          <View style={styles.cell}>
+            <SelectTile
+              ingredient={item}
+              checked={selectedSet.has(item.id)}
+              have={stock.get(item.id)}
+              onToggle={() => toggle(item.id, defaultFor(item))}
+            />
+          </View>
+        )}
       />
       <Surface elevation={2} style={[styles.bar, { paddingBottom: spacing.md + insets.bottom }]}>
         <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
@@ -129,18 +187,85 @@ export default function BulkSelectScreen() {
   );
 }
 
+type TileProps = {
+  ingredient: Ingredient;
+  checked: boolean;
+  /** Amount already at home, if any. */
+  have: number | undefined;
+  onToggle: () => void;
+};
+
+/** A product to tick: square photo with a check mark, name and what is at home. */
+const SelectTile = memo(function SelectTile({ ingredient, checked, have, onToggle }: TileProps) {
+  const theme = useAppTheme();
+  const t = useT();
+  const content = useContent();
+  const name = content.ingredientName(ingredient);
+  return (
+    <TouchableRipple
+      onPress={onToggle}
+      borderless
+      style={[
+        styles.tile,
+        {
+          borderColor: checked ? theme.colors.primary : 'transparent',
+          backgroundColor: theme.colors.surfaceVariant,
+        },
+      ]}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked }}
+      accessibilityLabel={name}>
+      <View>
+        <ImageWithFallback
+          source={bundledImage(ingredient.imageKey)}
+          fallbackIcon={CATEGORY_ICONS[ingredient.category]}
+          style={styles.image}
+          iconSize={28}
+        />
+        {checked ? (
+          <View style={[styles.check, { backgroundColor: theme.colors.primary }]}>
+            <MaterialCommunityIcons name="check" size={18} color={theme.colors.onPrimary} />
+          </View>
+        ) : null}
+        <View style={styles.tileBody}>
+          <Text variant="labelLarge" numberOfLines={2} style={styles.name}>
+            {name}
+          </Text>
+          <Text
+            variant="labelSmall"
+            numberOfLines={1}
+            style={{ color: theme.colors.onSurfaceVariant }}>
+            {have !== undefined
+              ? t('bulkAdd.atHome', { amount: formatAmount(have, ingredient.unit) })
+              : ' '}
+          </Text>
+        </View>
+      </View>
+    </TouchableRipple>
+  );
+});
+
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  search: { paddingHorizontal: spacing.lg, paddingTop: spacing.md, paddingBottom: spacing.sm },
-  list: { paddingBottom: spacing.lg },
-  row: {
-    flexDirection: 'row',
+  search: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
+  chips: { gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
+  grid: { paddingHorizontal: spacing.md, paddingBottom: spacing.lg },
+  cell: { flex: 1, padding: spacing.xs },
+  tile: { borderRadius: radius.md, borderWidth: 2, overflow: 'hidden' },
+  image: { width: '100%', aspectRatio: 1 },
+  check: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
     alignItems: 'center',
-    gap: spacing.md,
-    paddingHorizontal: spacing.md,
-    minHeight: 56,
+    justifyContent: 'center',
   },
-  image: { width: 36, height: 36, borderRadius: radius.sm },
+  tileBody: { padding: spacing.xs, gap: 1 },
+  // Two lines reserved so tiles in a row line up.
+  name: { minHeight: 36 },
   bar: {
     flexDirection: 'row',
     alignItems: 'center',
