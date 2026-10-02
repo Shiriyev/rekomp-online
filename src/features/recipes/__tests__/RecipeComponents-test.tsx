@@ -138,6 +138,8 @@ describe('RecipeListItem', () => {
     proteinPerServing: 17,
     proteinDensity: 9,
     isArchived: false,
+    equipment: [],
+    mainProtein: 'dairy',
   };
 
   it('shows macros, status and the kcal left after eating, and opens the recipe', async () => {

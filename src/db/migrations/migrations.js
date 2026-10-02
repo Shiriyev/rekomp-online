@@ -13,21 +13,24 @@ import m0008 from './0008_ingredient_last_added.sql';
 import m0009 from './0009_recipe_amounts.sql';
 import m0010 from './0010_recipe_photo.sql';
 import m0011 from './0011_catalog.sql';
+import m0012 from './0012_recipe_equipment.sql';
 
-export default {
-  journal,
-  migrations: {
-    m0000,
-    m0001,
-    m0002,
-    m0003,
-    m0004,
-    m0005,
-    m0006,
-    m0007,
-    m0008,
-    m0009,
-    m0010,
-    m0011,
-  },
-};
+  export default {
+    journal,
+    migrations: {
+      m0000,
+m0001,
+m0002,
+m0003,
+m0004,
+m0005,
+m0006,
+m0007,
+m0008,
+m0009,
+m0010,
+m0011,
+m0012
+    }
+  }
+  

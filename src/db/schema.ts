@@ -149,6 +149,13 @@ export const recipes = sqliteTable(
     kcalPerServing: real('kcal_per_serving').notNull().default(0),
     proteinPerServing: real('protein_per_serving').notNull().default(0),
     proteinDensity: real('protein_density').notNull().default(0),
+    /** Equipment the steps need (stove, oven, blender…), for the «нет плиты» filters. */
+    equipment: text('equipment', { mode: 'json' })
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'`),
+    /** Where most of the protein comes from (poultry, fish, …), for the shelves. */
+    mainProtein: text('main_protein').notNull().default('other'),
     isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
   },
   (t) => [

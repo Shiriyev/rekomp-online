@@ -31,6 +31,41 @@ export const PRODUCT_TAGS = [
   'gluten',
 ] as const;
 
+/** Kitchen equipment a recipe needs (from its steps), for the «нет плиты» filters. */
+export const EQUIPMENT = [
+  'stove',
+  'oven',
+  'grill',
+  'microwave',
+  'multicooker',
+  'blender',
+  'mixer',
+] as const;
+export type Equipment = (typeof EQUIPMENT)[number];
+/** Heat sources: a recipe needing none of them is made without cooking. */
+export const HEAT_SOURCES: readonly Equipment[] = [
+  'stove',
+  'oven',
+  'grill',
+  'microwave',
+  'multicooker',
+];
+
+/** Where most of a recipe's protein comes from, for the «Курица / Рыба / …» shelves. */
+export const MAIN_PROTEINS = [
+  'poultry',
+  'beef',
+  'pork',
+  'lamb',
+  'fish',
+  'seafood',
+  'eggs',
+  'dairy',
+  'legumes',
+  'other',
+] as const;
+export type MainProtein = (typeof MAIN_PROTEINS)[number];
+
 const id = z.string().regex(/^[A-Za-z0-9_]+$/);
 const text = z.string().trim().min(1);
 const per100 = (max: number) => z.number().min(0).max(max);
@@ -94,6 +129,8 @@ export const catalogRecipeSchema = z
     totalMinutes: z.number().int().positive(),
     imageKey: text.nullable(),
     tags: z.array(z.enum(PRODUCT_TAGS)),
+    equipment: z.array(z.enum(EQUIPMENT)),
+    mainProtein: z.enum(MAIN_PROTEINS),
     source: z.enum(['own', 'mealdb']),
     sourceId: text.nullable(),
     sortOrder: z.number().int().min(0),

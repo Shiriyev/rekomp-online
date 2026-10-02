@@ -14,6 +14,7 @@ import { loadMappings, type Canonical } from './build/mappings.ts';
 import {
   proteinCriteria,
   RECIPE_CRITERIA,
+  type MainProtein,
   RECIPES_EN,
   SEED_LIDL,
   SEED_RECIPES,
@@ -24,7 +25,13 @@ import {
   type CatalogStep,
   type CatalogVariant,
 } from './lib/app.ts';
-import { recipeMacros, type NutritionIngredient, type Unit } from './lib/domain.ts';
+import {
+  ingredientMacros,
+  recipeMacros,
+  type NutritionIngredient,
+  type Unit,
+} from './lib/domain.ts';
+import { detectEquipment } from './build/equipment.ts';
 import { APP_ROOT, ROOT } from './lib/paths.ts';
 import { loadOwnRecipes } from './own/recipes.ts';
 import { loadOverrides, loadTranslation } from './translate/load.ts';
@@ -48,6 +55,47 @@ export function imageFile(key: string): string | undefined {
 /** Same lunch defaults as the v1 seed (runSeed): lunches are cooked for 3 days. */
 const V1_LUNCH = { defaultServings: 3, isBatch: true } as const;
 const V1_SINGLE = { defaultServings: 1, isBatch: false } as const;
+
+const SEAFOOD = new Set([
+  'prawn',
+  'dried_shrimp',
+  'seafood_mix',
+  'squid',
+  'mussel',
+  'clam',
+  'oyster',
+  'conch',
+  'lobster',
+  'crab',
+]);
+
+/** Shelf of a protein source by its catalog category. */
+function proteinShelf(p: Canonical): MainProtein {
+  switch (p.category) {
+    case 'meat_poultry':
+      if (p.subcategory === 'chicken' || p.subcategory === 'turkey' || p.id.startsWith('turkey'))
+        return 'poultry';
+      if (
+        p.subcategory === 'beef' ||
+        p.id.startsWith('beef') ||
+        p.id === 'corned_beef' ||
+        p.id === 'oxtail'
+      )
+        return 'beef';
+      if (p.subcategory === 'pork' || p.id.startsWith('pork') || p.tags.includes('pork'))
+        return 'pork';
+      if (p.id.startsWith('chicken') || p.id.startsWith('duck')) return 'poultry';
+      return 'lamb';
+    case 'fish_seafood':
+      return SEAFOOD.has(p.id) ? 'seafood' : 'fish';
+    case 'dairy_eggs':
+      return p.subcategory === 'eggs' ? 'eggs' : 'dairy';
+    case 'grains_pasta_legumes':
+      return p.subcategory === 'legumes' ? 'legumes' : 'other';
+    default:
+      return 'other';
+  }
+}
 
 const round = (n: number, digits: number) => Math.round(n * 10 ** digits) / 10 ** digits;
 
@@ -175,10 +223,28 @@ function main() {
     return [...tags];
   };
 
+  /** The product giving most of the protein decides the shelf («Курица», «Рыба», …). */
+  const mainProteinOf = (lines: readonly CatalogLine[]): MainProtein => {
+    let best: { id: string; protein: number } | null = null;
+    for (const l of lines) {
+      if (l.optional) continue;
+      const n = nutrition.get(l.ingredientId)!;
+      const { protein } = ingredientMacros(n, l.amountPerServing, l.unit);
+      if (!best || protein > best.protein) best = { id: l.ingredientId, protein };
+    }
+    return best ? proteinShelf(products.get(best.id)!) : 'other';
+  };
+
   const push = (
     r: Omit<
       CatalogRecipe,
-      'kcalPerServing' | 'proteinPerServing' | 'proteinDensity' | 'ingredientCount' | 'tags'
+      | 'kcalPerServing'
+      | 'proteinPerServing'
+      | 'proteinDensity'
+      | 'ingredientCount'
+      | 'tags'
+      | 'equipment'
+      | 'mainProtein'
     >,
     lines: Omit<CatalogLine, 'recipeId' | 'sortOrder'>[],
     steps: Omit<CatalogStep, 'recipeId' | 'order'>[],
@@ -188,6 +254,8 @@ function main() {
     recipes.push({
       ...r,
       tags: tagsOf(lines.map((l) => l.ingredientId)),
+      equipment: detectEquipment(steps.map((s) => s.textEn)),
+      mainProtein: mainProteinOf(catalogLines),
       ingredientCount: lines.length,
       kcalPerServing: round(perServing.kcal, 1),
       proteinPerServing: round(perServing.protein, 1),

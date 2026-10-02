@@ -6,6 +6,11 @@ export { RECIPE_CRITERIA, proteinCriteria } from '../../../../src/db/catalog/cri
 export {
   catalogSchema,
   CATALOG_CATEGORIES,
+  EQUIPMENT,
+  HEAT_SOURCES,
+  MAIN_PROTEINS,
+  type Equipment,
+  type MainProtein,
   type Catalog,
   type CatalogIngredient,
   type CatalogLine,

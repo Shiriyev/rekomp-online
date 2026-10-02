@@ -101,6 +101,8 @@ function tiny(): Catalog {
         totalMinutes: 20,
         imageKey: null,
         tags: [],
+        equipment: ['stove'],
+        mainProtein: 'poultry',
         source: 'own',
         sourceId: null,
         sortOrder: 0,
