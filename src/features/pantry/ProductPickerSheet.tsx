@@ -1,24 +1,24 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMemo, useState, type RefObject } from 'react';
-import { Controller, useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { Button, HelperText, List, SegmentedButtons, Text, TextInput } from 'react-native-paper';
+import { Button, List, Text, TextInput } from 'react-native-paper';
 import { z } from 'zod';
 
-import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
-import { searchIngredients } from '@/domain/search';
-import { INGREDIENT_CATEGORIES, UNITS } from '@/domain/types';
-import { numberText, optionalNumberText } from '@/features/forms/numberText';
-import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
-import { currentLocale, useT, useTranslateMessage, useUnitLabel } from '@/i18n';
+import { searchIngredients, suggestSimilar } from '@/domain/search';
+import { numberText } from '@/features/forms/numberText';
+import { CATEGORY_ICONS } from '@/features/ingredients';
+import { useT, useUnitLabel } from '@/i18n';
 import { content as contentNames, useContent } from '@/i18n/content';
 import { formatAmount, formatDecimal } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
 import { sheetInput } from '@/ui/sheetInput';
+
+import { NotInCatalog } from './NotInCatalog';
 
 type Props = {
   sheetRef: RefObject<BottomSheetModal | null>;
@@ -37,21 +37,11 @@ const MAX_RESULTS = 30;
 
 const amountSchema = z.object({ amount: numberText({ min: 0.5, max: 100_000 }) });
 
-const customSchema = z.object({
-  name: z.string().trim().min(1, 'validation.required').max(60, 'validation.maxLength|60'),
-  category: z.enum(INGREDIENT_CATEGORIES),
-  unit: z.enum(UNITS),
-  gramsPerPiece: optionalNumberText({ min: 1, max: 5000 }),
-  kcalPer100g: numberText({ min: 0, max: 900 }),
-  proteinPer100g: numberText({ min: 0, max: 100 }),
-  amount: numberText({ min: 0.5, max: 100_000 }),
-});
-
-type Step = { kind: 'search' } | { kind: 'amount'; ingredient: Ingredient } | { kind: 'custom' };
+type Step = { kind: 'search' } | { kind: 'amount'; ingredient: Ingredient };
 
 /**
- * Pick a catalog product and an amount. Unknown products are created first
- * (custom ingredient), so everything stays linked to the catalog.
+ * Pick a catalog product and an amount. Products come only from the catalog: a search
+ * that finds nothing offers look-alikes instead of creating a product.
  */
 export function ProductPickerSheet({
   sheetRef,
@@ -65,32 +55,31 @@ export function ProductPickerSheet({
 }: Props) {
   const theme = useAppTheme();
   const t = useT();
-  const translate = useTranslateMessage();
   const content = useContent();
   const unitLabel = useUnitLabel();
   const [step, setStep] = useState<Step>({ kind: 'search' });
   const [query, setQuery] = useState('');
 
-  const results = useMemo(
+  const available = useMemo(
     () =>
-      searchIngredients(
-        ingredients
-          .filter((i) => !i.isStaple && !i.isArchived)
-          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-        query,
-      ).slice(0, MAX_RESULTS),
-    [ingredients, query, content],
+      ingredients
+        .filter((i) => !i.isStaple && !i.isArchived)
+        .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
+    [ingredients, content],
+  );
+  const results = useMemo(
+    () => searchIngredients(available, query).slice(0, MAX_RESULTS),
+    [available, query],
+  );
+  const suggestions = useMemo(
+    () => (results.length === 0 ? suggestSimilar(available, query) : []),
+    [available, query, results.length],
   );
 
   const amountForm = useForm<z.input<typeof amountSchema>, unknown, z.output<typeof amountSchema>>({
     resolver: zodResolver(amountSchema),
     defaultValues: { amount: '' },
   });
-  const customForm = useForm<z.input<typeof customSchema>, unknown, z.output<typeof customSchema>>({
-    resolver: zodResolver(customSchema),
-  });
-  const customUnit = useWatch({ control: customForm.control, name: 'unit' });
-
   const reset = () => {
     setStep({ kind: 'search' });
     setQuery('');
@@ -104,19 +93,6 @@ export function ProductPickerSheet({
   const add = (ingredient: Ingredient, amount: number) => {
     onSubmit(ingredient, amount);
     sheetRef.current?.dismiss();
-  };
-
-  const startCustom = () => {
-    customForm.reset({
-      name: query.trim(),
-      category: 'dairy_eggs',
-      unit: 'g',
-      gramsPerPiece: '',
-      kcalPer100g: '',
-      proteinPer100g: '',
-      amount: '',
-    });
-    setStep({ kind: 'custom' });
   };
 
   return (
@@ -148,11 +124,9 @@ export function ProductPickerSheet({
               />
             ))}
           </View>
-          <Button mode="outlined" icon="plus" onPress={startCustom}>
-            {query.trim()
-              ? t('pantry.picker.newProductNamed', { name: query.trim() })
-              : t('pantry.picker.newProduct')}
-          </Button>
+          {query.trim() && results.length === 0 ? (
+            <NotInCatalog suggestions={suggestions} onPick={pick} />
+          ) : null}
         </>
       ) : null}
 
@@ -184,119 +158,6 @@ export function ProductPickerSheet({
           </View>
         </>
       ) : null}
-
-      {step.kind === 'custom' ? (
-        <>
-          <Text variant="titleLarge" accessibilityRole="header">
-            {t('pantry.picker.newProduct')}
-          </Text>
-          <Controller
-            control={customForm.control}
-            name="name"
-            render={({ field, fieldState }) => (
-              <View>
-                <TextInput
-                  mode="outlined"
-                  label={t('bulkAdd.newProductForm.name')}
-                  accessibilityLabel={t('bulkAdd.newProductForm.name')}
-                  value={field.value}
-                  onChangeText={field.onChange}
-                  error={!!fieldState.error}
-                  render={sheetInput}
-                />
-                {fieldState.error ? (
-                  <HelperText type="error" padding="none">
-                    {translate(fieldState.error.message)}
-                  </HelperText>
-                ) : null}
-              </View>
-            )}
-          />
-          <Controller
-            control={customForm.control}
-            name="category"
-            render={({ field }) => (
-              <View style={styles.chips}>
-                {INGREDIENT_CATEGORIES.filter((c) => c !== 'sauces_oils_spices').map((c) => (
-                  <Button
-                    key={c}
-                    compact
-                    mode={field.value === c ? 'contained-tonal' : 'outlined'}
-                    icon={CATEGORY_ICONS[c]}
-                    onPress={() => field.onChange(c)}>
-                    {CATEGORY_LABELS[c]}
-                  </Button>
-                ))}
-              </View>
-            )}
-          />
-          <Controller
-            control={customForm.control}
-            name="unit"
-            render={({ field }) => (
-              <SegmentedButtons
-                value={field.value}
-                onValueChange={field.onChange}
-                buttons={[
-                  { value: 'g', label: t('bulkAdd.newProductForm.grams') },
-                  { value: 'ml', label: t('bulkAdd.newProductForm.ml') },
-                  { value: 'pcs', label: t('bulkAdd.newProductForm.pieces') },
-                ]}
-              />
-            )}
-          />
-          {customUnit === 'pcs' ? (
-            <NumberField
-              control={customForm.control}
-              name="gramsPerPiece"
-              label={t('bulkAdd.newProductForm.pieceWeight')}
-              suffix={unitLabel('g')}
-              render={sheetInput}
-            />
-          ) : null}
-          <View style={styles.row}>
-            <NumberField
-              control={customForm.control}
-              name="kcalPer100g"
-              label={t('bulkAdd.newProductForm.kcal')}
-              render={sheetInput}
-            />
-            <NumberField
-              control={customForm.control}
-              name="proteinPer100g"
-              label={t('bulkAdd.newProductForm.protein')}
-              render={sheetInput}
-            />
-          </View>
-          <NumberField
-            control={customForm.control}
-            name="amount"
-            label={t('pantry.picker.amount')}
-            suffix={unitLabel(customUnit ?? 'g')}
-            render={sheetInput}
-          />
-          <View style={styles.row}>
-            <Button onPress={() => setStep({ kind: 'search' })}>{t('common.actions.back')}</Button>
-            <Button
-              mode="contained"
-              style={styles.flex}
-              onPress={() =>
-                customForm.handleSubmit(({ amount, ...values }) => {
-                  if (values.unit === 'pcs' && values.gramsPerPiece === null) {
-                    customForm.setError('gramsPerPiece', { message: 'validation.pieceWeight' });
-                    return;
-                  }
-                  const created = repositories.ingredients.createCustom(values);
-                  add(created, amount);
-                })()
-              }>
-              {t('pantry.picker.create', {
-                action: submitLabel.toLocaleLowerCase(currentLocale()),
-              })}
-            </Button>
-          </View>
-        </>
-      ) : null}
     </AppBottomSheet>
   );
 }
@@ -308,6 +169,5 @@ export const stockLabel = (i: Ingredient, quantity: number) =>
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   row: { flexDirection: 'row', gap: spacing.sm, alignItems: 'center' },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
   item: { minHeight: 56 },
 });

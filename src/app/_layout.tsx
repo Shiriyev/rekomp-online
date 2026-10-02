@@ -1,4 +1,5 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { Image } from 'expo-image';
 import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -74,7 +75,11 @@ function AppShell() {
 
   // Daily sweep of photo files no entry points to; off the start-up path.
   useEffect(() => {
-    const timer = setTimeout(() => cleanupOrphanPhotos(), 3_000);
+    const timer = setTimeout(() => {
+      cleanupOrphanPhotos();
+      // Images are no longer disk-cached (see ImageWithFallback): drop what older builds stored.
+      void Image.clearDiskCache().catch(() => false);
+    }, 3_000);
     return () => clearTimeout(timer);
   }, []);
 

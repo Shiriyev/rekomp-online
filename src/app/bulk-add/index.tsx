@@ -8,11 +8,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIngredientsMap, useLidlProducts, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount, smallestPackages } from '@/domain/bulkAdd';
-import { normalizeForSearch, searchIngredients } from '@/domain/search';
+import { searchIngredients, suggestSimilar } from '@/domain/search';
 import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
-import { NewProductForm } from '@/features/pantry/NewProductForm';
+import { NotInCatalog } from '@/features/pantry/NotInCatalog';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
@@ -32,21 +32,22 @@ export default function BulkSelectScreen() {
   const toggle = useBulkAddStore((s) => s.toggle);
   const select = useBulkAddStore((s) => s.select);
   const [query, setQuery] = useState('');
-  const [creating, setCreating] = useState(false);
 
   const packages = useMemo(() => smallestPackages(lidl), [lidl]);
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
-  const results = useMemo(
+  const available = useMemo(
     () =>
-      searchIngredients(
-        [...ingredients.values()]
-          .filter((i) => !i.isStaple && !i.isArchived)
-          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-        query,
-      ),
-    [ingredients, query, content],
+      [...ingredients.values()]
+        .filter((i) => !i.isStaple && !i.isArchived)
+        .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
+    [ingredients, content],
   );
-  const exact = results.some((i) => normalizeForSearch(i.name) === normalizeForSearch(query));
+  const results = useMemo(() => searchIngredients(available, query), [available, query]);
+  // Products come only from the catalog: nothing found → look-alikes, never a new product.
+  const suggestions = useMemo(
+    () => (results.length === 0 ? suggestSimilar(available, query) : []),
+    [available, query, results.length],
+  );
   const defaultFor = (i: Ingredient) => defaultAddAmount(i, packages.get(i.id), i.lastAddedAmount);
   const selectedSet = new Set(selected);
 
@@ -59,10 +60,7 @@ export default function BulkSelectScreen() {
           label={t('bulkAdd.search')}
           accessibilityLabel={t('bulkAdd.searchLabel')}
           value={query}
-          onChangeText={(t) => {
-            setQuery(t);
-            setCreating(false);
-          }}
+          onChangeText={setQuery}
           left={<TextInput.Icon icon="magnify" />}
           autoCorrect={false}
         />
@@ -73,25 +71,15 @@ export default function BulkSelectScreen() {
         extraData={selected}
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.list}
-        ListHeaderComponent={
-          query.trim() && !exact ? (
-            <View style={styles.create}>
-              {creating ? (
-                <NewProductForm
-                  initialName={query.trim()}
-                  onCancel={() => setCreating(false)}
-                  onCreated={(i) => {
-                    select(i.id, defaultFor(i));
-                    setCreating(false);
-                    setQuery('');
-                  }}
-                />
-              ) : (
-                <Button mode="outlined" icon="plus" onPress={() => setCreating(true)}>
-                  {t('bulkAdd.newProduct', { name: query.trim() })}
-                </Button>
-              )}
-            </View>
+        ListEmptyComponent={
+          query.trim() ? (
+            <NotInCatalog
+              suggestions={suggestions}
+              onPick={(i) => {
+                select(i.id, defaultFor(i));
+                setQuery('');
+              }}
+            />
           ) : null
         }
         renderItem={({ item }) => {
@@ -145,7 +133,6 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   search: { paddingHorizontal: spacing.lg, paddingTop: spacing.md, paddingBottom: spacing.sm },
   list: { paddingBottom: spacing.lg },
-  create: { paddingHorizontal: spacing.lg, paddingBottom: spacing.sm },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

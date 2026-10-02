@@ -2,6 +2,12 @@ import type { pantry as ru } from '../ru/pantry';
 import type { Messages } from '../types';
 
 export const pantry: Messages<typeof ru> = {
+  pieceWeight: 'Weight of 1 pc',
+  notInCatalog: {
+    title: 'This product is not in the catalog',
+    maybe: 'Did you mean:',
+    tryOther: 'Try another name — in English, Russian or Hungarian.',
+  },
   segments: { home: 'At home', portions: 'Portions', shopping: 'Shopping' },
   home: {
     removed: 'Removed: {{name}}',
@@ -44,10 +50,7 @@ export const pantry: Messages<typeof ru> = {
   picker: {
     search: 'Search: cottage cheese, túró…',
     searchLabel: 'Search products',
-    newProduct: 'New product',
-    newProductNamed: 'New product “{{name}}”',
     amount: 'Amount',
-    create: 'Create and {{action}}',
   },
   shopping: {
     homeAdded: 'Home: +{{amount}} {{name}}',

@@ -1,5 +1,11 @@
 /** Section «pantry»: the «Продукты» tab (Дома / Порции / Покупки). Russian is the source of truth for keys. */
 export const pantry = {
+  pieceWeight: 'Вес 1 шт',
+  notInCatalog: {
+    title: 'Такого продукта нет в каталоге',
+    maybe: 'Может быть, вы искали:',
+    tryOther: 'Попробуйте другое название — по-русски, по-венгерски или по-английски.',
+  },
   segments: { home: 'Дома', portions: 'Порции', shopping: 'Покупки' },
   home: {
     removed: 'Убрано: {{name}}',
@@ -42,10 +48,7 @@ export const pantry = {
   picker: {
     search: 'Поиск: творог, túró…',
     searchLabel: 'Поиск продукта',
-    newProduct: 'Новый продукт',
-    newProductNamed: 'Новый продукт «{{name}}»',
     amount: 'Количество',
-    create: 'Создать: {{action}}',
   },
   shopping: {
     homeAdded: 'Домой: +{{amount}} {{name}}',

@@ -7,7 +7,6 @@ export const bulkAdd: Messages<typeof ru> = {
   search: 'Search: cottage cheese, túró…',
   searchLabel: 'Search products',
   atHome: 'at home: {{amount}}',
-  newProduct: 'New product “{{name}}”',
   selected: 'Selected: {{count}}',
   next: 'Next',
   amountsHint: 'Amounts are added to what you already have.',
@@ -27,15 +26,4 @@ export const bulkAdd: Messages<typeof ru> = {
   bought_many: 'Bought and added home: {{count}} products',
   bought_other: 'Bought and added home: {{count}} products',
   failed: 'Could not add: {{reason}}',
-  newProductForm: {
-    title: 'New product',
-    name: 'Name',
-    grams: 'Grams',
-    ml: 'Ml',
-    pieces: 'Pieces',
-    pieceWeight: 'Weight of 1 pc',
-    kcal: 'Kcal / 100 g',
-    protein: 'Protein / 100 g',
-    create: 'Create and select',
-  },
 };

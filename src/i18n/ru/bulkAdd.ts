@@ -5,7 +5,6 @@ export const bulkAdd = {
   search: 'Поиск: творог, túró…',
   searchLabel: 'Поиск продукта',
   atHome: 'дома: {{amount}}',
-  newProduct: 'Новый продукт «{{name}}»',
   selected: 'Выбрано: {{count}}',
   next: 'Далее',
   amountsHint: 'Количества прибавятся к тому, что уже есть дома.',
@@ -25,15 +24,4 @@ export const bulkAdd = {
   bought_many: 'Куплено и добавлено домой: {{count}} продуктов',
   bought_other: 'Куплено и добавлено домой: {{count}} продукта',
   failed: 'Не удалось добавить: {{reason}}',
-  newProductForm: {
-    title: 'Новый продукт',
-    name: 'Название',
-    grams: 'Граммы',
-    ml: 'Мл',
-    pieces: 'Штуки',
-    pieceWeight: 'Вес 1 шт',
-    kcal: 'Ккал / 100 г',
-    protein: 'Белок / 100 г',
-    create: 'Создать и выбрать',
-  },
 } as const;

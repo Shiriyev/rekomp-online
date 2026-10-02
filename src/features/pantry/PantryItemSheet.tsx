@@ -129,7 +129,7 @@ export function PantryItemSheet({ ref, onRemove }: Props) {
               <NumberField
                 control={control}
                 name="gramsPerPiece"
-                label={t('bulkAdd.newProductForm.pieceWeight')}
+                label={t('pantry.pieceWeight')}
                 suffix={unitLabel('g')}
                 render={sheetInput}
               />

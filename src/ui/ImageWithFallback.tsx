@@ -24,7 +24,12 @@ export function ImageWithFallback({
   accessibilityLabel,
 }: Props) {
   const theme = useAppTheme();
-  const [failed, setFailed] = useState(false);
+  // Lists (FlashList) reuse row views: the key ties state and pixels to this very source,
+  // so a reused row never shows the previous product's photo or its «failed» placeholder.
+  const sourceKey =
+    source === undefined ? 'none' : typeof source === 'number' ? String(source) : source.uri;
+  const [failedKey, setFailedKey] = useState<string | null>(null);
+  const failed = failedKey === sourceKey;
 
   if (source === undefined || failed) {
     return (
@@ -48,7 +53,12 @@ export function ImageWithFallback({
       style={[styles.image, style]}
       contentFit="cover"
       transition={200}
-      onError={() => setFailed(true)}
+      recyclingKey={sourceKey}
+      // Every image here is a local file (bundled or the user's photo). A disk cache only
+      // costs space, and it is keyed by Android resource ids that shift between app builds:
+      // after an update it served the old picture under a product's new id.
+      cachePolicy="memory"
+      onError={() => setFailedKey(sourceKey)}
       accessibilityLabel={accessibilityLabel}
     />
   );
