@@ -73,6 +73,8 @@ Photos of the original recipes and products (v1) are credited in the repository 
 | products/walnut.webp | [Valeriia Harbuz](https://www.pexels.com/@valeriia-harbuz-2161259) | https://www.pexels.com/photo/close-up-photo-of-brown-walnuts-5869852/ |
 | products/white_fish.webp | [dam i](https://www.pexels.com/@dami) | https://www.pexels.com/photo/delicious-grilled-salmon-with-vegetables-29748127/ |
 | recipes/own_b_burrito.webp | [Gonzalo Mendiola](https://www.pexels.com/@gonzalo-mendiola-95842233) | https://www.pexels.com/photo/close-up-shot-of-a-burrto-9258714/ |
+| recipes/own_b_casserole.webp | [Christina Voinova](https://www.pexels.com/@christina-voinova-42707474) | https://www.pexels.com/photo/close-up-of-food-7368078/ |
+| recipes/own_b_egg_muffins.webp | [Alisha Mishra](https://www.pexels.com/@alisha-mishra-579430) | https://www.pexels.com/photo/two-white-ceramic-bowls-1346381/ |
 | recipes/own_b_ham_omelette.webp | [Karina Ustiuzhanina](https://www.pexels.com/@karina-ustiuzhanina-313369745) | https://www.pexels.com/photo/a-bread-with-scrambled-eggs-near-the-cup-of-coffee-on-the-table-14122642/ |
 | recipes/own_b_oat_pancake.webp | [Alisha Mishra](https://www.pexels.com/@alisha-mishra-579430) | https://www.pexels.com/photo/two-white-ceramic-bowls-1346381/ |
 | recipes/own_b_salmon_toast.webp | [Sabur Ahmed Jishan](https://www.pexels.com/@mdsabur99) | https://www.pexels.com/photo/cooked-food-on-the-plate-11663125/ |
@@ -85,4 +87,6 @@ Photos of the original recipes and products (v1) are credited in the repository 
 | recipes/own_s_greek_yogurt.webp | [Delano Jones](https://www.pexels.com/@delano-jones-32819) | https://www.pexels.com/photo/flat-lay-photo-of-berries-in-container-822647/ |
 | recipes/own_s_salmon_cucumber.webp | [Mony  Cruz](https://www.pexels.com/@mony-cruz-743773620) | https://www.pexels.com/photo/fresh-salmon-sashimi-platter-against-black-background-36292348/ |
 | recipes/own_s_tuna_rye.webp | [Piotr Arnoldes](https://www.pexels.com/@piotr-arnoldes-7862031) | https://www.pexels.com/photo/delicious-sandwiches-with-cheese-and-ham-slices-on-cutting-board-6493113/ |
+| recipes/own_s_turkey_rolls.webp | [elmira sez](https://www.pexels.com/@elmiraseyedzade) | https://www.pexels.com/photo/beef-rolls-on-wooden-table-9511511/ |
+| recipes/own_s_tvorog_apple.webp | [Vladimír  Sládek](https://www.pexels.com/@vladimir-sladek-127740023) | https://www.pexels.com/photo/white-cream-on-white-ceramic-bowl-10165775/ |
 | recipes/own_s_white_omelette.webp | [miniperde](https://www.pexels.com/@miniperde) | https://www.pexels.com/photo/healthy-breakfast-plate-with-omelette-and-vegetables-31963657/ |

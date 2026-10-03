@@ -109,8 +109,14 @@
  "orange": "ok",
  "own_b_buckwheat": "reject",
  "own_b_burrito": "ok",
- "own_b_casserole": "reject",
- "own_b_egg_muffins": "reject",
+ "own_b_casserole": {
+  "query": "cottage cheese casserole",
+  "ok": true
+ },
+ "own_b_egg_muffins": {
+  "query": "mini frittata",
+  "ok": true
+ },
  "own_b_ham_omelette": "ok",
  "own_b_oat_pancake": {
   "query": "oatmeal omelette",
@@ -129,8 +135,14 @@
   "ok": true
  },
  "own_s_tuna_rye": "ok",
- "own_s_turkey_rolls": "reject",
- "own_s_tvorog_apple": "reject",
+ "own_s_turkey_rolls": {
+  "query": "deli meat rolls appetizer",
+  "ok": true
+ },
+ "own_s_tvorog_apple": {
+  "query": "cottage cheese with apple",
+  "ok": true
+ },
  "own_s_white_omelette": "ok",
  "oyster_mushroom": "ok",
  "oyster_sauce": "reject",
