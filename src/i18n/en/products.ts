@@ -2,6 +2,11 @@ import type { products as ru } from '../ru/products';
 import type { Messages } from '../types';
 
 export const products: Messages<typeof ru> = {
+  categories: 'Categories',
+  count_one: '{{count}} product',
+  count_few: '{{count}} products',
+  count_many: '{{count}} products',
+  count_other: '{{count}} products',
   search: 'Search products',
   searchLabel: 'Search in Russian, Hungarian or English',
   all: 'All',

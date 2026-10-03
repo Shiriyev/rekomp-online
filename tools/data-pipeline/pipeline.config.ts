@@ -4,7 +4,7 @@
  */
 import { RECIPE_CRITERIA } from './src/lib/app.ts';
 /** Bump when the catalog content changes; the app updates its catalog when this grows. */
-export const CATALOG_VERSION = 9;
+export const CATALOG_VERSION = 10;
 
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,

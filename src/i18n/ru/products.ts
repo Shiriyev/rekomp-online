@@ -1,5 +1,10 @@
 /** Section «products»: product search, chips, the filter sheet and the product card. */
 export const products = {
+  categories: 'Категории',
+  count_one: '{{count}} продукт',
+  count_few: '{{count}} продукта',
+  count_many: '{{count}} продуктов',
+  count_other: '{{count}} продукта',
   search: 'Поиск продуктов',
   searchLabel: 'Поиск по-русски, по-венгерски или по-английски',
   all: 'Все',

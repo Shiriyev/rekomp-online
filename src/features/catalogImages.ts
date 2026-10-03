@@ -89,7 +89,6 @@ export const CATALOG_IMAGES: Readonly<Record<string, number>> = {
   'catalog/products/jam': require('../../assets/images/catalog/products/jam.webp'),
   'catalog/products/jerusalem_artichoke': require('../../assets/images/catalog/products/jerusalem_artichoke.webp'),
   'catalog/products/kale': require('../../assets/images/catalog/products/kale.webp'),
-  'catalog/products/ketchup': require('../../assets/images/catalog/products/ketchup.webp'),
   'catalog/products/kidney_beans': require('../../assets/images/catalog/products/kidney_beans.webp'),
   'catalog/products/lamb': require('../../assets/images/catalog/products/lamb.webp'),
   'catalog/products/lamb_chop': require('../../assets/images/catalog/products/lamb_chop.webp'),

@@ -25,6 +25,8 @@ type Props = {
   inset?: number;
   /** The grid/list switch (lists inside sheets have no grid). */
   viewToggle?: boolean;
+  /** «Все» and category chips; off where categories are cards («Добавить домой»). */
+  categoryChips?: boolean;
 };
 
 /**
@@ -38,6 +40,7 @@ export function ProductToolbar({
   renderInput,
   inset = spacing.lg,
   viewToggle = true,
+  categoryChips = true,
 }: Props) {
   const t = useT();
   const categoryLabel = useCategoryLabel();
@@ -99,15 +102,18 @@ export function ProductToolbar({
           {t(`products.sort.${state.sort}`)}
         </Chip>
         {extraChips}
-        <Chip
-          compact
-          mode={state.category === null ? 'flat' : 'outlined'}
-          selected={state.category === null}
-          showSelectedCheck={false}
-          onPress={() => update({ category: null, subcategory: null })}>
-          {`${t('products.all')} · ${counts.total}`}
-        </Chip>
+        {categoryChips ? (
+          <Chip
+            compact
+            mode={state.category === null ? 'flat' : 'outlined'}
+            selected={state.category === null}
+            showSelectedCheck={false}
+            onPress={() => update({ category: null, subcategory: null })}>
+            {`${t('products.all')} · ${counts.total}`}
+          </Chip>
+        ) : null}
         {INGREDIENT_CATEGORIES.flatMap((c) => {
+          if (!categoryChips) return [];
           const n = counts.categories.get(c) ?? 0;
           if (n === 0 && state.category !== c) return [];
           const on = state.category === c;

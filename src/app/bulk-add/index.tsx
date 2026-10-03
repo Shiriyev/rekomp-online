@@ -1,7 +1,7 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { FlashList } from '@shopify/flash-list';
-import { router, Stack } from 'expo-router';
-import { memo, useMemo, useState } from 'react';
+import { router, Stack, useNavigation } from 'expo-router';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Chip, Surface, Text, TouchableRipple } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,9 +9,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
+import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
 import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
+import { CategoryCard } from '@/features/products/CategoryCard';
 import { openProductCard, ProductRow } from '@/features/products/ProductRow';
 import { ProductsEmpty } from '@/features/products/ProductsEmpty';
 import { ProductToolbar } from '@/features/products/ProductToolbar';
@@ -23,9 +25,10 @@ import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
 /**
- * «Добавить домой»: the catalog as a three-column photo grid (or a list) with search,
- * category chips and filters; tap to pick several products, the selection survives new
- * searches. Long-press opens the product card.
+ * «Добавить домой»: category cards first (Овощи, Фрукты, …); a category opens its products
+ * as a three-column photo grid (or a list) with subcategory chips. Typing a search shows
+ * matching products from every category at once. Tap to pick several products, the
+ * selection survives new searches; long-press opens the product card.
  */
 export default function BulkSelectScreen() {
   const insets = useSafeAreaInsets();
@@ -43,7 +46,48 @@ export default function BulkSelectScreen() {
     [ingredients],
   );
   const browser = useProductBrowser('add', available, stock);
-  const { state, results, similar } = browser;
+  const { state, results, similar, update, counts, factsOf } = browser;
+  const navigation = useNavigation();
+
+  // Every visit starts at the categories.
+  useEffect(() => {
+    update({ category: null, subcategory: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on open
+  }, []);
+  const searching = browser.query.trim() !== '';
+  const showCategories = state.category === null && !searching && !onlySelected;
+  const openCategory = useCallback(
+    (category: IngredientCategory) => update({ category, subcategory: null }),
+    [update],
+  );
+  const backToCategories = useCallback(
+    () => update({ category: null, subcategory: null }),
+    [update],
+  );
+  // Back (header or system) inside a category returns to the categories first.
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        // Only a plain «back»: leaving after «Готово» (dismissTo) must go through.
+        const type = e.data.action.type;
+        if (state.category === null || (type !== 'GO_BACK' && type !== 'POP')) return;
+        e.preventDefault();
+        backToCategories();
+      }),
+    [navigation, state.category, backToCategories],
+  );
+  // Cover of each category: its most needed product that has a photo.
+  const covers = useMemo(() => {
+    const map = new Map<IngredientCategory, number | { uri: string }>();
+    const byUse = [...available].sort((a, b) => factsOf(b).uses - factsOf(a).uses);
+    for (const i of byUse) {
+      if (map.has(i.category)) continue;
+      const image = bundledImage(i.imageKey);
+      if (image !== undefined) map.set(i.category, image);
+    }
+    return map;
+  }, [available, factsOf]);
+  const categories = INGREDIENT_CATEGORIES.filter((c) => (counts.categories.get(c) ?? 0) > 0);
   const selectedSet = useMemo(() => new Set(selected), [selected]);
   const shown = useMemo(
     () => (onlySelected ? results.filter((i) => selectedSet.has(i.id)) : results),
@@ -58,18 +102,26 @@ export default function BulkSelectScreen() {
       <ProductToolbar
         browser={browser}
         screen="add"
+        categoryChips={false}
         extraChips={
-          selected.length > 0 || onlySelected ? (
-            <Chip
-              compact
-              icon="check"
-              mode={onlySelected ? 'flat' : 'outlined'}
-              selected={onlySelected}
-              showSelectedCheck={false}
-              onPress={() => setOnlySelected((v) => !v)}>
-              {t('bulkAdd.selected', { count: selected.length })}
-            </Chip>
-          ) : null
+          <>
+            {state.category !== null && !searching ? (
+              <Chip compact icon="arrow-left" mode="outlined" onPress={backToCategories}>
+                {t('products.categories')}
+              </Chip>
+            ) : null}
+            {selected.length > 0 || onlySelected ? (
+              <Chip
+                compact
+                icon="check"
+                mode={onlySelected ? 'flat' : 'outlined'}
+                selected={onlySelected}
+                showSelectedCheck={false}
+                onPress={() => setOnlySelected((v) => !v)}>
+                {t('bulkAdd.selected', { count: selected.length })}
+              </Chip>
+            ) : null}
+          </>
         }
       />
       {similar && shown.length > 0 ? (
@@ -77,37 +129,59 @@ export default function BulkSelectScreen() {
           {t('products.similar')}
         </Text>
       ) : null}
-      <FlashList
-        key={state.view}
-        data={shown}
-        numColumns={grid ? 3 : 1}
-        keyExtractor={(i) => i.id}
-        extraData={selectedSet}
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={grid ? styles.grid : styles.list}
-        ListEmptyComponent={
-          <ProductsEmpty browser={browser} onReset={() => setOnlySelected(false)} />
-        }
-        renderItem={({ item }) =>
-          grid ? (
+      {showCategories ? (
+        <FlashList
+          key="categories"
+          data={categories}
+          numColumns={2}
+          keyExtractor={(c) => c}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.grid}
+          ListEmptyComponent={<ProductsEmpty browser={browser} />}
+          renderItem={({ item }) => (
             <View style={styles.cell}>
-              <SelectTile
+              <CategoryCard
+                category={item}
+                count={counts.categories.get(item) ?? 0}
+                cover={covers.get(item)}
+                onPress={openCategory}
+              />
+            </View>
+          )}
+        />
+      ) : (
+        <FlashList
+          key={state.view}
+          data={shown}
+          numColumns={grid ? 3 : 1}
+          keyExtractor={(i) => i.id}
+          extraData={selectedSet}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={grid ? styles.grid : styles.list}
+          ListEmptyComponent={
+            <ProductsEmpty browser={browser} onReset={() => setOnlySelected(false)} />
+          }
+          renderItem={({ item }) =>
+            grid ? (
+              <View style={styles.cell}>
+                <SelectTile
+                  ingredient={item}
+                  checked={selectedSet.has(item.id)}
+                  have={stock.get(item.id)}
+                  onToggle={() => toggle(item.id, defaultFor(item))}
+                />
+              </View>
+            ) : (
+              <SelectRow
                 ingredient={item}
                 checked={selectedSet.has(item.id)}
                 have={stock.get(item.id)}
                 onToggle={() => toggle(item.id, defaultFor(item))}
               />
-            </View>
-          ) : (
-            <SelectRow
-              ingredient={item}
-              checked={selectedSet.has(item.id)}
-              have={stock.get(item.id)}
-              onToggle={() => toggle(item.id, defaultFor(item))}
-            />
-          )
-        }
-      />
+            )
+          }
+        />
+      )}
       <Surface elevation={2} style={[styles.bar, { paddingBottom: spacing.md + insets.bottom }]}>
         <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
           {t('bulkAdd.selected', { count: selected.length })}

@@ -616,13 +616,6 @@
   "pageUrl": "https://www.themealdb.com/images/ingredients/Kale.png"
  },
  {
-  "file": "products/ketchup.webp",
-  "source": "TheMealDB",
-  "author": null,
-  "authorUrl": null,
-  "pageUrl": "https://www.themealdb.com/images/ingredients/Tomato%20Ketchup.png"
- },
- {
   "file": "products/kidney_beans.webp",
   "source": "Pexels",
   "author": "I Own My Food Art",
