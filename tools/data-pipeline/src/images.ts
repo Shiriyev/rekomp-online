@@ -17,6 +17,7 @@ import { loadMappings } from './build/mappings.ts';
 import { normalizeName } from './ingredients/normalize.ts';
 import { loadMealDb } from './mealdb/load.ts';
 import { loadOwnRecipes } from './own/recipes.ts';
+import { brandedIds } from './photoCandidates.ts';
 import { get, sleep } from './lib/http.ts';
 import { APP_ROOT, ensureDir, MAPPINGS, RAW, REPORTS, ROOT } from './lib/paths.ts';
 
@@ -98,6 +99,9 @@ function attribution(credits: readonly Credit[]): string {
   ].join('\n');
 }
 
+/** `npm run images -- --rebuild`: re-encode every shipped photo from its cached original. */
+const REBUILD = process.argv.includes('--rebuild');
+
 async function toWebp(input: string, output: string, maxSide: number): Promise<void> {
   ensureDir(path.dirname(output));
   await sharp(input)
@@ -156,7 +160,7 @@ async function main() {
       await sleep(config.mealdb.pauseMs);
     }
     const file = `recipes/${r.id}.webp`;
-    if (!existsSync(path.join(OUT, file)))
+    if (REBUILD || !existsSync(path.join(OUT, file)))
       await toWebp(raw, path.join(OUT, file), config.images.recipeSide);
     credits.set(file, {
       file,
@@ -187,7 +191,12 @@ async function main() {
   const v1 = new Set(readdirSync(V1_PHOTOS).map((f) => f.replace(/\.\w+$/, '')));
   const used = new Set(accepted.flatMap((r) => r.lines.map((l) => l.ingredientId)));
   const shipped = canonical.filter((p) => used.has(p.id) || v1.has(p.id));
-  const wanted = shipped.filter((p) => !v1.has(p.id) && !p.isStaple);
+  // Products in recipes, plus any product with an approved photo (picked for a branded one).
+  const isApproved = (e: PhotoReview[string] | undefined) =>
+    e === 'ok' || (typeof e === 'object' && e.ok === true);
+  const wanted = canonical.filter(
+    (p) => !v1.has(p.id) && !p.isStaple && (shipped.includes(p) || isApproved(review[p.id])),
+  );
   const apiKey = process.env.PEXELS_API_KEY;
   let searches = 0;
   const notFound: string[] = [];
@@ -275,7 +284,7 @@ async function main() {
     }
     counts.approved++;
     credits.set(file, credit);
-    if (!existsSync(out)) await toWebp(raw, out, target.maxSide);
+    if (REBUILD || !existsSync(out)) await toWebp(raw, out, target.maxSide);
   }
   writeFileSync(path.join(REPORTS, 'product-photos.html'), reviewPage(pending));
 
@@ -294,6 +303,7 @@ async function main() {
       sourceNames.set(id, names);
     }
   }
+  const branded = new Set(brandedIds());
   let ingredientImages = 0;
   let ingredientFetches = 0;
   for (const p of canonical) {
@@ -301,6 +311,12 @@ async function main() {
     const file = `products/${p.id}.webp`;
     const out = path.join(OUT, file);
     if (credits.get(file)?.source === 'Pexels' && existsSync(out)) continue; // a reviewed photo
+    if (branded.has(p.id)) {
+      // The TheMealDB picture shows a brand: no photo rather than an advert.
+      rmSync(out, { force: true });
+      credits.delete(file);
+      continue;
+    }
     const names = [...(sourceNames.get(p.id) ?? new Map()).entries()].sort((a, b) => b[1] - a[1]);
     const name = names[0]?.[0];
     if (!name) continue;
@@ -317,7 +333,7 @@ async function main() {
         continue; // no image for that name
       }
     }
-    if (!existsSync(out)) {
+    if (REBUILD || !existsSync(out)) {
       ensureDir(path.dirname(out));
       await sharp(raw)
         .resize({

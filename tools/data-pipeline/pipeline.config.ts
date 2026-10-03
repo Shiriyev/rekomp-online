@@ -4,7 +4,7 @@
  */
 import { RECIPE_CRITERIA } from './src/lib/app.ts';
 /** Bump when the catalog content changes; the app updates its catalog when this grows. */
-export const CATALOG_VERSION = 8;
+export const CATALOG_VERSION = 9;
 
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,
@@ -29,10 +29,10 @@ export const config = {
   http: { retries: 5, backoffMs: 1_000, timeoutMs: 60_000 },
 
   images: {
-    /** WebP quality and long side in px (PHASE_2 task 5). */
-    quality: 75,
-    recipeSide: 800,
-    productSide: 400,
+    /** WebP quality and long side in px: about the size cards are drawn at on a phone. */
+    quality: 70,
+    recipeSide: 560,
+    productSide: 320,
     /** Pexels allows ~200 requests/hour. */
     pexelsPauseMs: 2_000,
   },

@@ -19,6 +19,7 @@
     "map:draft": "tsx src/mapDraft.ts",
     "usda:find": "tsx src/usdaFind.ts",
     "images": "tsx --env-file-if-exists=../../.env.local src/images.ts",
+    "photo:candidates": "tsx --env-file-if-exists=../../.env.local src/photoCandidates.ts",
     "translate": "tsx --env-file-if-exists=../../.env.local src/translate.ts",
     "translate:check": "tsx src/translateCheck.ts",
     "own:check": "tsx src/ownCheck.ts",

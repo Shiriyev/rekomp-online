@@ -15,7 +15,10 @@
  "beef_steak": "ok",
  "beef_stock": "reject",
  "beetroot": "ok",
- "black_olives": "reject",
+ "black_olives": {
+  "query": "Black olives",
+  "ok": true
+ },
  "bread_white": "ok",
  "breadcrumbs": "reject",
  "broccoli": "ok",
@@ -62,7 +65,10 @@
  "enchilada_sauce": "reject",
  "fennel": "reject",
  "feta": "reject",
- "fish_sauce": "reject",
+ "fish_sauce": {
+  "query": "Fish sauce",
+  "ok": true
+ },
  "fish_stock": "reject",
  "flour": "reject",
  "frog_legs": "reject",
@@ -74,7 +80,10 @@
   "query": "green chili peppers",
   "ok": true
  },
- "green_olives": "reject",
+ "green_olives": {
+  "query": "Green olives",
+  "ok": true
+ },
  "gruyere": "reject",
  "haddock": "reject",
  "ham": "reject",
@@ -93,7 +102,10 @@
  "leafy_greens": "ok",
  "leek": "ok",
  "lemon": "ok",
- "lemon_juice": "reject",
+ "lemon_juice": {
+  "query": "Lemon juice",
+  "ok": true
+ },
  "lettuce": "ok",
  "lime": "reject",
  "lime_juice": "reject",
@@ -175,14 +187,23 @@
  "salsa": "reject",
  "salt_cod": "reject",
  "sardine": "ok",
- "scotch_bonnet": "reject",
+ "scotch_bonnet": {
+  "query": "Scotch bonnet / habanero",
+  "ok": true
+ },
  "sea_bass": "ok",
  "sesame_oil": "reject",
  "sesame_seed": "reject",
  "shallot": "ok",
- "sherry": "reject",
+ "sherry": {
+  "query": "Sherry",
+  "ok": true
+ },
  "shiitake": "ok",
- "shortcrust_pastry": "reject",
+ "shortcrust_pastry": {
+  "query": "Shortcrust pastry",
+  "ok": true
+ },
  "silken_tofu": "reject",
  "single_cream": "reject",
  "smoked_haddock": "reject",
@@ -204,11 +225,20 @@
  "sweetcorn": "ok",
  "swiss_cheese": "reject",
  "tahini": "reject",
- "tamarind_paste": "reject",
+ "tamarind_paste": {
+  "query": "Tamarind paste",
+  "ok": true
+ },
  "thai_red_curry_paste": "reject",
- "tofu": "reject",
+ "tofu": {
+  "query": "Tofu",
+  "ok": true
+ },
  "tomato_puree": "reject",
- "tomato_sauce": "reject",
+ "tomato_sauce": {
+  "query": "Tomato sauce",
+  "ok": true
+ },
  "tortilla": "ok",
  "trout": "ok",
  "vegetable_stock": {
@@ -223,5 +253,121 @@
  "white_wine": "reject",
  "wine_vinegar": "reject",
  "wonton_wrapper": "reject",
- "worcestershire_sauce": "reject"
+ "worcestershire_sauce": "reject",
+ "almond_milk": {
+  "query": "Almond milk",
+  "ok": true
+ },
+ "beer": {
+  "query": "Beer",
+  "ok": true
+ },
+ "brandy": {
+  "query": "Brandy",
+  "ok": true
+ },
+ "bread_flour": {
+  "query": "Strong bread flour",
+  "ok": true
+ },
+ "buckwheat": {
+  "query": "Buckwheat",
+  "ok": true
+ },
+ "buttermilk": {
+  "query": "Buttermilk",
+  "ok": true
+ },
+ "chestnut": {
+  "query": "Chestnuts",
+  "ok": true
+ },
+ "chickpeas": {
+  "query": "Chickpeas",
+  "ok": true
+ },
+ "cider": {
+  "query": "Cider",
+  "ok": true
+ },
+ "coconut_cream": {
+  "query": "Coconut cream",
+  "ok": true
+ },
+ "condensed_milk": {
+  "query": "Sweetened condensed milk",
+  "ok": true
+ },
+ "couscous": {
+  "query": "Couscous",
+  "ok": true
+ },
+ "cream_cheese": {
+  "query": "Cream cheese",
+  "ok": true
+ },
+ "egg_noodles": {
+  "query": "Egg noodles",
+  "ok": true
+ },
+ "egg_roll": {
+  "query": "Egg rolls",
+  "ok": true
+ },
+ "hummus": {
+  "query": "Hummus",
+  "ok": true
+ },
+ "jam": {
+  "query": "Jam",
+  "ok": true
+ },
+ "kidney_beans": {
+  "query": "Kidney beans",
+  "ok": true
+ },
+ "manchego": {
+  "query": "Manchego",
+  "ok": true
+ },
+ "maple_syrup": {
+  "query": "Maple syrup",
+  "ok": true
+ },
+ "orange_juice": {
+  "query": "Orange juice",
+  "ok": true
+ },
+ "pork_tenderloin": {
+  "query": "Pork tenderloin",
+  "ok": true
+ },
+ "pretzel": {
+  "query": "Soft pretzel",
+  "ok": true
+ },
+ "ricotta": {
+  "query": "Ricotta",
+  "ok": true
+ },
+ "rye_bread": {
+  "query": "Rye bread",
+  "ok": true
+ },
+ "sausage": {
+  "query": "Pork sausages",
+  "ok": true
+ },
+ "soya_milk": {
+  "query": "Soy milk",
+  "ok": true
+ },
+ "turkey": {
+  "query": "Turkey meat",
+  "ok": true
+ },
+ "yogurt": {
+  "query": "Natural yogurt",
+  "ok": true
+ }
 }
