@@ -25,19 +25,7 @@ const open = () =>
     .sort();
 
 describe('shoppingRepo.addMissing', () => {
-  it('rounds shortages up to whole Lidl packages (the amount to actually buy)', () => {
-    const n = repos.shopping.addMissing([
-      { ingredientId: 'tvorog', amount: 49.2, unit: 'g' }, // pack 250 g
-      { ingredientId: 'egg', amount: 1.5, unit: 'pcs' }, // pack of 10
-    ]);
-    expect(n).toBe(2);
-    expect(open()).toEqual([
-      ['egg', 'Яйцо', 10, 'pcs'],
-      ['tvorog', 'Творог', 250, 'g'],
-    ]);
-  });
-
-  it('rounds up to whole units without a Lidl package', () => {
+  it('rounds shortages up to whole units (the amount to actually buy)', () => {
     repos.shopping.addMissing([
       { ingredientId: 'apple', amount: 1.5, unit: 'pcs' },
       { ingredientId: 'cucumber', amount: 99.2, unit: 'g' },
@@ -49,9 +37,10 @@ describe('shoppingRepo.addMissing', () => {
   });
 
   it('stores the amount in the ingredient unit even if the shortage uses another', () => {
-    // 150 g of onion = 1.5 шт → 1 kg Lidl pack (10 шт at 100 g each).
-    repos.shopping.addMissing([{ ingredientId: 'onion', amount: 150, unit: 'g' }]);
-    expect(open()).toEqual([['onion', 'Лук', 10, 'pcs']]);
+    // 150 g of onion = 1.5 шт (100 g each) → 2 шт.
+    const n = repos.shopping.addMissing([{ ingredientId: 'onion', amount: 150, unit: 'g' }]);
+    expect(n).toBe(1);
+    expect(open()).toEqual([['onion', 'Лук', 2, 'pcs']]);
   });
 
   it('is idempotent and keeps the larger amount', () => {
@@ -60,7 +49,7 @@ describe('shoppingRepo.addMissing', () => {
     expect(repos.shopping.addMissing([shortage])).toBe(0);
     expect(repos.shopping.addMissing([{ ...shortage, amount: 60 }])).toBe(0);
     expect(repos.shopping.addMissing([{ ...shortage, amount: 300 }])).toBe(1);
-    expect(open()).toEqual([['tvorog', 'Творог', 500, 'g']]);
+    expect(open()).toEqual([['tvorog', 'Творог', 300, 'g']]);
   });
 
   it('lets the amount of an open item be changed, but not below zero or when bought', () => {

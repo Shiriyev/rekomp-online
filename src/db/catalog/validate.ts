@@ -5,7 +5,7 @@ import { proteinCriteria, RECIPE_CRITERIA } from './criteria';
 import { CATALOG_CATEGORIES, catalogSchema, type Catalog } from './schema';
 
 /** v1 ids that must survive into the catalog, unless `v1IdMap` says where they went. */
-export type V1Ids = { ingredients: string[]; productVariants: string[]; recipes: string[] };
+export type V1Ids = { ingredients: string[]; recipes: string[] };
 export type V1IdMap = Record<keyof V1Ids, Record<string, string>>;
 
 export type ValidateOptions = {
@@ -60,7 +60,6 @@ export function validateCatalog(raw: unknown, options: ValidateOptions): Validat
   // ---------- unique ids ----------
   for (const [name, ids] of [
     ['ingredient', c.ingredients.map((i) => i.id)],
-    ['variant', c.productVariants.map((v) => v.id)],
     ['recipe', c.recipes.map((r) => r.id)],
     ['recipe line', c.recipeIngredients.map((l) => `${l.recipeId}/${l.ingredientId}`)],
     ['recipe step', c.recipeSteps.map((s) => `${s.recipeId}/${s.order}`)],
@@ -91,15 +90,6 @@ export function validateCatalog(raw: unknown, options: ValidateOptions): Validat
   }
   for (const [key, ids] of byName)
     if (ids.length > 1) err(`duplicate name in ${key}: ${ids.join(', ')}`);
-
-  for (const v of c.productVariants) {
-    if (!ingredients.has(v.ingredientId))
-      err(`variant ${v.id}: unknown ingredient ${v.ingredientId}`);
-    if (v.imageKey !== null && !options.imageExists(v.imageKey))
-      err(`variant ${v.id}: image ${v.imageKey} does not exist`);
-  }
-  for (const d of duplicates(c.productVariants.flatMap((v) => (v.barcode ? [v.barcode] : []))))
-    err(`duplicate barcode: ${d}`);
 
   // ---------- recipes ----------
   const recipes = new Map(c.recipes.map((r) => [r.id, r]));
@@ -181,10 +171,9 @@ export function validateCatalog(raw: unknown, options: ValidateOptions): Validat
   // ---------- v1 ids ----------
   const present: Record<keyof V1Ids, Set<string>> = {
     ingredients: new Set(ingredients.keys()),
-    productVariants: new Set(c.productVariants.map((v) => v.id)),
     recipes: new Set(recipes.keys()),
   };
-  for (const kind of ['ingredients', 'productVariants', 'recipes'] as const) {
+  for (const kind of ['ingredients', 'recipes'] as const) {
     for (const v1 of options.v1Ids[kind]) {
       const target = options.v1IdMap[kind][v1] ?? v1;
       if (!present[kind].has(target))

@@ -6,7 +6,6 @@ import {
   catalogMeta,
   cookSessions,
   ingredients,
-  lidlProducts,
   mealLogs,
   pantryItems,
   preparedPortions,
@@ -32,8 +31,8 @@ export type CatalogUpdate =
   | {
       applied: true;
       version: number;
-      archived: { ingredients: number; recipes: number; variants: number };
-      deleted: { ingredients: number; recipes: number; variants: number };
+      archived: { ingredients: number; recipes: number };
+      deleted: { ingredients: number; recipes: number };
       /** Custom products moved onto a catalog product with the same name. */
       merged: number;
       /** Custom products with no catalog match (archived, listed for the user). */
@@ -152,28 +151,6 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
         .run();
     }
 
-    // ---------- packages (price, sale, notes and barcode stay the user's) ----------
-    for (const v of catalog.productVariants) {
-      const catalogColumns = {
-        ingredientId: v.ingredientId,
-        title: v.title,
-        brand: v.brand,
-        packageSize: v.packageSize,
-        packageUnit: v.packageUnit,
-        kcalPer100g: v.kcalPer100g,
-        proteinPer100g: v.proteinPer100g,
-        imageKey: v.imageKey,
-        source: v.source,
-        sourceId: v.sourceId,
-        isArchived: false,
-        ...(v.barcode ? { barcode: v.barcode } : {}),
-      };
-      tx.insert(lidlProducts)
-        .values({ id: v.id, ...catalogColumns })
-        .onConflictDoUpdate({ target: lidlProducts.id, set: catalogColumns })
-        .run();
-    }
-
     // ---------- recipes (the user's own photo stays) ----------
     for (const r of catalog.recipes) {
       const { id, ...catalogColumns } = r;
@@ -191,8 +168,8 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
     inBatches(catalog.recipeSteps, (rows) => tx.insert(recipeSteps).values(rows).run());
 
     // ---------- what left the catalog ----------
-    const archived = { ingredients: 0, recipes: 0, variants: 0 };
-    const deleted = { ingredients: 0, recipes: 0, variants: 0 };
+    const archived = { ingredients: 0, recipes: 0 };
+    const deleted = { ingredients: 0, recipes: 0 };
 
     const goneRecipes = tx
       .select({ id: recipes.id })
@@ -219,29 +196,6 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
       } else {
         tx.delete(recipes).where(eq(recipes.id, id)).run(); // lines, steps, own amounts cascade
         deleted.recipes++;
-      }
-    }
-
-    const catalogVariantIds = catalog.productVariants.map((v) => v.id);
-    const goneVariants = tx
-      .select()
-      .from(lidlProducts)
-      .where(
-        and(
-          notInArray(lidlProducts.id, catalogVariantIds.length ? catalogVariantIds : ['']),
-          inArray(lidlProducts.source, ['own', 'off']),
-          eq(lidlProducts.isArchived, false),
-        ),
-      )
-      .all();
-    for (const v of goneVariants) {
-      // A price or a note is the user's work: keep the package, archived.
-      if (v.priceHuf !== null || v.onSale || v.notes) {
-        tx.update(lidlProducts).set({ isArchived: true }).where(eq(lidlProducts.id, v.id)).run();
-        archived.variants++;
-      } else {
-        tx.delete(lidlProducts).where(eq(lidlProducts.id, v.id)).run();
-        deleted.variants++;
       }
     }
 
@@ -334,11 +288,6 @@ function isReferenced(tx: Tx, id: string): boolean {
       .where(eq(shoppingItems.ingredientId, id))
       .get() ??
     tx
-      .select({ id: lidlProducts.id })
-      .from(lidlProducts)
-      .where(eq(lidlProducts.ingredientId, id))
-      .get() ??
-    tx
       .select({ id: recipeIngredients.recipeId })
       .from(recipeIngredients)
       .where(eq(recipeIngredients.ingredientId, id))
@@ -372,10 +321,6 @@ function moveReferences(tx: Tx, from: string, to: string) {
   tx.update(shoppingItems)
     .set({ ingredientId: to })
     .where(eq(shoppingItems.ingredientId, from))
-    .run();
-  tx.update(lidlProducts)
-    .set({ ingredientId: to })
-    .where(eq(lidlProducts.ingredientId, from))
     .run();
   tx.delete(recipeCustomAmounts).where(eq(recipeCustomAmounts.ingredientId, from)).run();
 }

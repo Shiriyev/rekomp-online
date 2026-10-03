@@ -159,8 +159,6 @@ export const recipes = {
     missing: 'нет',
     changed: 'изменено',
     notePerServing: '{{note}} на порцию',
-    sale: 'Скидка в Lidl',
-    saleUntil: 'Скидка в Lidl до {{date}}',
     alternative: 'или {{name}}',
   },
 } as const;

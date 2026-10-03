@@ -87,17 +87,6 @@ function populate() {
     true,
     NOW,
   );
-  repos.lidl.create({
-    ingredientId: 'skyr',
-    title: 'Skyr 450 g',
-    packageSize: 450,
-    packageUnit: 'g',
-    priceHuf: 699,
-    onSale: true,
-    saleUntil: '2026-10-04',
-    barcode: '5900000000001',
-    notes: null,
-  });
 }
 
 const withoutTimestamp = <T extends { exportedAt: number }>(b: T) => ({ ...b, exportedAt: 0 });

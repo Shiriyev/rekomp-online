@@ -4,7 +4,7 @@
  */
 import { RECIPE_CRITERIA } from './src/lib/app.ts';
 /** Bump when the catalog content changes; the app updates its catalog when this grows. */
-export const CATALOG_VERSION = 6;
+export const CATALOG_VERSION = 7;
 
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,
@@ -24,30 +24,6 @@ export const config = {
       foundation: /FoodData_Central_foundation_food_csv_[\d-]+\.zip/,
       srLegacy: /FoodData_Central_sr_legacy_food_csv_[\d-]+\.zip/,
     },
-  },
-
-  off: {
-    base: 'https://world.openfoodfacts.org/api/v2/search',
-    stores: 'lidl',
-    country: 'en:hungary',
-    pageSize: 100,
-    /** Search API limit is 10 req/min/IP; stay well below it. */
-    pauseMs: 7_000,
-    fields: [
-      'code',
-      'product_name',
-      'product_name_hu',
-      'product_name_en',
-      'brands',
-      'quantity',
-      'product_quantity',
-      'product_quantity_unit',
-      'categories_tags',
-      'nutriments',
-      'image_front_url',
-      'stores_tags',
-      'countries_tags',
-    ],
   },
 
   http: { retries: 5, backoffMs: 1_000, timeoutMs: 60_000 },

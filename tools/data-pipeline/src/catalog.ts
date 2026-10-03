@@ -16,14 +16,12 @@ import {
   RECIPE_CRITERIA,
   type MainProtein,
   RECIPES_EN,
-  SEED_LIDL,
   SEED_RECIPES,
   type Catalog,
   type CatalogIngredient,
   type CatalogLine,
   type CatalogRecipe,
   type CatalogStep,
-  type CatalogVariant,
 } from './lib/app.ts';
 import {
   ingredientMacros,
@@ -193,22 +191,6 @@ function main() {
       },
     ]),
   );
-
-  // ---------- product variants (v1 Lidl packages; Open Food Facts later) ----------
-  const productVariants: CatalogVariant[] = SEED_LIDL.map((v) => ({
-    id: v.id,
-    ingredientId: v.ingredientId,
-    title: v.title,
-    brand: null,
-    packageSize: v.packageSize,
-    packageUnit: v.packageUnit,
-    barcode: null,
-    kcalPer100g: null,
-    proteinPer100g: null,
-    imageKey: null,
-    source: 'own' as const,
-    sourceId: null,
-  }));
 
   const recipes: CatalogRecipe[] = [];
   const recipeIngredients: CatalogLine[] = [];
@@ -436,7 +418,6 @@ function main() {
   const catalog: Catalog = {
     catalogVersion: CATALOG_VERSION,
     ingredients,
-    productVariants,
     recipes: ordered,
     recipeIngredients,
     recipeSteps,
@@ -454,11 +435,7 @@ function main() {
 
   // ---------- static requires for the bundled photos ----------
   const keys = [
-    ...new Set(
-      [...ingredients, ...ordered, ...productVariants].flatMap((x) =>
-        x.imageKey ? [x.imageKey] : [],
-      ),
-    ),
+    ...new Set([...ingredients, ...ordered].flatMap((x) => (x.imageKey ? [x.imageKey] : []))),
   ].sort();
   writeFileSync(
     IMAGES_MODULE,
@@ -477,7 +454,7 @@ function main() {
 
   const count = (m: string) => ordered.filter((r) => r.mealTypes.includes(m as never)).length;
   console.log(
-    `catalog v${CATALOG_VERSION}: ${ingredients.length} products, ${productVariants.length} variants, ` +
+    `catalog v${CATALOG_VERSION}: ${ingredients.length} products, ` +
       `${ordered.length} recipes (${ordered.filter((r) => r.source === 'own').length} own, ` +
       `${ordered.filter((r) => r.source === 'mealdb').length} TheMealDB; ` +
       `breakfast ${count('breakfast')}, lunch ${count('lunch')}, dinner ${count('dinner')}, snack ${count('snack')}), ` +

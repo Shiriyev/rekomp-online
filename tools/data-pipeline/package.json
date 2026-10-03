@@ -8,10 +8,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "fetch": "npm run fetch:mealdb && npm run fetch:usda && npm run fetch:off",
+    "fetch": "npm run fetch:mealdb && npm run fetch:usda",
     "fetch:mealdb": "tsx --env-file-if-exists=../../.env.local src/fetch/mealdb.ts",
     "fetch:usda": "tsx --env-file-if-exists=../../.env.local src/fetch/usda.ts",
-    "fetch:off": "tsx --env-file-if-exists=../../.env.local src/fetch/off.ts",
     "build": "tsx --env-file-if-exists=../../.env.local src/build.ts",
     "validate": "tsx src/validate.ts",
     "report": "tsx src/report.ts",

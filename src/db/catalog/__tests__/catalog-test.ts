@@ -4,7 +4,6 @@ import path from 'node:path';
 import v1IdMap from '../../../../tools/data-pipeline/mappings/v1-id-map.json';
 import catalogJson from '../../seed/catalog.v2.json';
 import { SEED_INGREDIENTS } from '../../seed/ingredients';
-import { SEED_LIDL } from '../../seed/lidl';
 import { SEED_RECIPES } from '../../seed/recipes';
 import type { Catalog } from '../schema';
 import { validateCatalog, type ValidateOptions } from '../validate';
@@ -15,7 +14,6 @@ const imageExists = (key: string) =>
 
 const v1Ids = {
   ingredients: SEED_INGREDIENTS.map((i) => i.id),
-  productVariants: SEED_LIDL.map((v) => v.id),
   recipes: SEED_RECIPES.map((r) => r.id),
 };
 
@@ -35,8 +33,8 @@ describe('bundled catalog (src/db/seed/catalog.v2.json)', () => {
 
 const options: ValidateOptions = {
   imageExists: (key) => key === 'ok',
-  v1Ids: { ingredients: ['chicken'], productVariants: [], recipes: [] },
-  v1IdMap: { ingredients: {}, productVariants: {}, recipes: {} },
+  v1Ids: { ingredients: ['chicken'], recipes: [] },
+  v1IdMap: { ingredients: {}, recipes: {} },
 };
 
 function tiny(): Catalog {
@@ -86,7 +84,6 @@ function tiny(): Catalog {
         imageKey: null,
       },
     ],
-    productVariants: [],
     recipes: [
       {
         id: 'r1',
@@ -169,24 +166,10 @@ describe('validateCatalog', () => {
     c.ingredients.push({ ...c.ingredients[0]!, name: 'Другая' });
     c.recipeSteps[0]!.ingredientRefs = ['ghost'];
     c.recipes[0]!.imageKey = 'missing';
-    c.productVariants.push({
-      id: 'v1',
-      ingredientId: 'nope',
-      title: 'X',
-      brand: null,
-      packageSize: 1,
-      packageUnit: 'g',
-      barcode: null,
-      kcalPer100g: null,
-      proteinPer100g: null,
-      imageKey: null,
-      source: 'own',
-      sourceId: null,
-    });
+
     expect(errorsOf(c)).toEqual(
       expect.arrayContaining([
         'duplicate ingredient id: chicken',
-        'variant v1: unknown ingredient nope',
         'recipe r1 step 1: ghost is not an ingredient',
         'recipe r1: image missing does not exist',
       ]),

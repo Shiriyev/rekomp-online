@@ -6,9 +6,9 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Chip, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useIngredientsMap, useLidlProducts, usePantryItems } from '@/db/hooks';
+import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
-import { defaultAddAmount, smallestPackages } from '@/domain/bulkAdd';
+import { defaultAddAmount } from '@/domain/bulkAdd';
 import { searchIngredients, suggestSimilar } from '@/domain/search';
 import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
 import { bundledImage } from '@/features/bundledImage';
@@ -36,14 +36,12 @@ export default function BulkSelectScreen() {
   const content = useContent();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
-  const lidl = useLidlProducts();
   const selected = useBulkAddStore((s) => s.selected);
   const toggle = useBulkAddStore((s) => s.toggle);
   const select = useBulkAddStore((s) => s.select);
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
 
-  const packages = useMemo(() => smallestPackages(lidl), [lidl]);
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
   const sort = useProductSort((x) => x.sort);
   const popularity = useProductPopularity();
@@ -81,7 +79,7 @@ export default function BulkSelectScreen() {
     () => (results.length === 0 && query.trim() ? suggestSimilar(available, query) : []),
     [available, query, results.length],
   );
-  const defaultFor = (i: Ingredient) => defaultAddAmount(i, packages.get(i.id), i.lastAddedAmount);
+  const defaultFor = (i: Ingredient) => defaultAddAmount(i, i.lastAddedAmount);
 
   const chips: { id: Filter; label: string }[] = [
     { id: 'all', label: t('pantry.home.all') },

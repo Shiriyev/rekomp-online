@@ -161,8 +161,6 @@ export const recipes: Messages<typeof ru> = {
     missing: 'none',
     changed: 'changed',
     notePerServing: '{{note}} per serving',
-    sale: 'On sale at Lidl',
-    saleUntil: 'On sale at Lidl until {{date}}',
     alternative: 'or {{name}}',
   },
 };

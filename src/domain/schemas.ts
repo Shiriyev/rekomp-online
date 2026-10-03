@@ -109,27 +109,6 @@ export const ingredientSettingsSchema = ingredientNutritionSchema.extend({
 });
 export type IngredientSettingsInput = z.infer<typeof ingredientSettingsSchema>;
 
-const localDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'validation.dateFormat');
-
-export const lidlProductSchema = z
-  .object({
-    ingredientId: z.string().min(1, 'validation.chooseProduct'),
-    title: z.string().trim().min(1, 'validation.required').max(80),
-    packageSize: z.number().positive('validation.positive').max(100_000),
-    packageUnit: z.enum(UNITS),
-    priceHuf: z.number().int().min(0).max(1_000_000).nullable(),
-    onSale: z.boolean(),
-    saleUntil: localDateSchema.nullable(),
-    barcode: z
-      .string()
-      .trim()
-      .regex(/^\d{8,14}$/, 'validation.barcode')
-      .nullable(),
-    notes: z.string().trim().max(200).nullable(),
-  })
-  .transform((v) => (v.onSale ? v : { ...v, saleUntil: null }));
-export type LidlProductInput = z.input<typeof lidlProductSchema>;
-
 export const shoppingItemInputSchema = z
   .object({
     title: z.string().trim().min(1, 'validation.required').max(80),

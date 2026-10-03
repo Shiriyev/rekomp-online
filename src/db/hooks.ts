@@ -2,7 +2,6 @@ import { and, asc, desc, eq, gt, gte, isNotNull, isNull, sql } from 'drizzle-orm
 import { addDatabaseChangeListener } from 'expo-sqlite';
 import { useMemo } from 'react';
 
-import { isSaleActive } from '@/domain/lidl';
 import type { PantryStock } from '@/domain/pantry';
 import type { LanguagePreference } from '@/domain/language';
 import {
@@ -30,7 +29,6 @@ import {
   cookSessions,
   favoriteRecipes,
   ingredients,
-  lidlProducts,
   mealLogs,
   pantryItems,
   preparedPortions,
@@ -43,7 +41,6 @@ import {
   weightLogs,
   type CookSession,
   type Ingredient,
-  type LidlProduct,
   type MealLog,
   type PantryItem,
   type Profile,
@@ -258,17 +255,6 @@ export function useRecipeDetail(id: string): RecipeDetailData {
   };
 }
 
-/** Lidl products currently on sale, keyed by ingredient id (expired sales drop out automatically). */
-export function useActiveSales(today: string): Map<string, LidlProduct> {
-  const { data } = useLiveQuery(
-    db.select().from(lidlProducts).where(eq(lidlProducts.onSale, true)),
-  );
-  return useMemo(
-    () => new Map(data.filter((p) => isSaleActive(p, today)).map((p) => [p.ingredientId, p])),
-    [data, today],
-  );
-}
-
 export type ActiveCook = { id: string; recipeId: string; recipeName: string } | undefined;
 
 /** Unfinished cooking session to offer «Продолжить готовку». */
@@ -331,10 +317,6 @@ export function useShoppingItems(): ShoppingItem[] {
       .from(shoppingItems)
       .orderBy(asc(shoppingItems.checked), asc(shoppingItems.createdAt)),
   ).data;
-}
-
-export function useLidlProducts(): LidlProduct[] {
-  return useLiveQuery(db.select().from(lidlProducts).orderBy(asc(lidlProducts.title))).data;
 }
 
 export type DayAggregate = { localDate: string; kcal: number; protein: number; entries: number };

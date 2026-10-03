@@ -82,8 +82,6 @@ function attribution(credits: readonly Credit[]): string {
       `(${recipes} photos in \`assets/images/catalog/recipes/\`). Texts translated and split into steps; ` +
       `${productPhotos} product photos from its ingredient images (\`assets/images/catalog/products/\`).`,
     '- **USDA FoodData Central** (https://fdc.nal.usda.gov) — nutrition per 100 g. Public domain (CC0 1.0).',
-    '- **Open Food Facts** (https://world.openfoodfacts.org) — store products. Database: Open Database ' +
-      'License (ODbL) 1.0; product photos: Creative Commons Attribution-ShareAlike (CC BY-SA).',
     '- **Pexels** (https://www.pexels.com) — product photos under the Pexels License.',
     '',
     'Photos of the original recipes and products (v1) are credited in the repository root `ATTRIBUTION.md`.',

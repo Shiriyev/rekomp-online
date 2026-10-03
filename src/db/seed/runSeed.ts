@@ -1,22 +1,14 @@
 import { eq, inArray } from 'drizzle-orm';
 
-import {
-  appMeta,
-  ingredients,
-  lidlProducts,
-  recipeIngredients,
-  recipes,
-  recipeSteps,
-} from '../schema';
+import { appMeta, ingredients, recipeIngredients, recipes, recipeSteps } from '../schema';
 import type { AppDb } from '../types';
 import { SEED_INGREDIENTS } from './ingredients';
-import { SEED_LIDL } from './lidl';
 import { SEED_RECIPES, type SeedRecipe } from './recipes';
 
 /**
  * Bump when seed content changes; recipes are re-synced, user-edited ingredients are kept.
  * v2: U4 shakshuka uses 1 slice of bread (was 2) to match the reference ~470 kcal.
- * v3: starter Lidl catalog (inserted once; user edits are kept).
+ * v3: starter store packages (dropped since; the version stays so nothing re-runs).
  */
 export const SEED_VERSION = 3;
 const SEED_VERSION_KEY = 'seed_version';
@@ -77,7 +69,6 @@ export function runSeed(db: AppDb): { applied: boolean } {
     if (current && Number(current.value) >= SEED_VERSION) return { applied: false };
 
     tx.insert(ingredients).values(SEED_INGREDIENTS).onConflictDoNothing().run();
-    tx.insert(lidlProducts).values(SEED_LIDL).onConflictDoNothing().run();
 
     const recipeIds = SEED_RECIPES.map((r) => r.id);
     tx.delete(recipeIngredients).where(inArray(recipeIngredients.recipeId, recipeIds)).run();

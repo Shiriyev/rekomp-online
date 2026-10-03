@@ -6,13 +6,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { CATALOG_FILE, imageFile } from './catalog.ts';
-import {
-  SEED_INGREDIENTS,
-  SEED_LIDL,
-  SEED_RECIPES,
-  validateCatalog,
-  type V1IdMap,
-} from './lib/app.ts';
+import { SEED_INGREDIENTS, SEED_RECIPES, validateCatalog, type V1IdMap } from './lib/app.ts';
 import { MAPPINGS } from './lib/paths.ts';
 
 const raw: unknown = JSON.parse(readFileSync(CATALOG_FILE, 'utf8'));
@@ -20,7 +14,6 @@ const result = validateCatalog(raw, {
   imageExists: (key) => imageFile(key) !== undefined,
   v1Ids: {
     ingredients: SEED_INGREDIENTS.map((i) => i.id),
-    productVariants: SEED_LIDL.map((v) => v.id),
     recipes: SEED_RECIPES.map((r) => r.id),
   },
   criteriaWarningsOnly: SEED_RECIPES.map((r) => r.id),
@@ -36,7 +29,7 @@ if (!result.ok) {
   const c = result.catalog;
   console.log(
     `validate: OK — catalog v${c.catalogVersion}: ${c.ingredients.length} products, ` +
-      `${c.productVariants.length} variants, ${c.recipes.length} recipes, ` +
+      `${c.recipes.length} recipes, ` +
       `${c.recipeIngredients.length} lines, ${c.recipeSteps.length} steps`,
   );
 }

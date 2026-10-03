@@ -1,12 +1,12 @@
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { router } from 'expo-router';
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Checkbox, Surface, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { useIngredientsMap, useLidlProducts, usePantryItems, useShoppingItems } from '@/db/hooks';
-import type { LidlProduct, ShoppingItem } from '@/db/schema';
+import { useIngredientsMap, usePantryItems, useShoppingItems } from '@/db/hooks';
+import type { ShoppingItem } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
 import { shoppingStep, stepQuantity } from '@/domain/stock';
 import { convertAmount } from '@/domain/units';
@@ -29,21 +29,10 @@ export function ShoppingSegment() {
   const items = useShoppingItems();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
-  const lidl = useLidlProducts();
   const pickerRef = useRef<BottomSheetModal>(null);
   // «Купил несколько»: pick bought items, then set the amounts on one screen.
   const [selecting, setSelecting] = useState(false);
   const [picked, setPicked] = useState<Set<string>>(() => new Set());
-
-  // Smallest Lidl package per ingredient: default amount and +/- step.
-  const packageOf = useMemo(() => {
-    const map = new Map<string, LidlProduct>();
-    for (const p of lidl) {
-      const current = map.get(p.ingredientId);
-      if (!current || p.packageSize < current.packageSize) map.set(p.ingredientId, p);
-    }
-    return map;
-  }, [lidl]);
 
   const open = items.filter((i) => !i.checked);
   const bought = items.filter((i) => i.checked);
@@ -69,11 +58,11 @@ export function ShoppingSegment() {
     for (const item of linkedOpen) {
       if (!picked.has(item.id) || !item.ingredientId) continue;
       const ingredient = ingredients.get(item.ingredientId)!;
-      // What the list says to buy, else one package / the last amount.
+      // What the list says to buy, else the last amount.
       const amount =
         item.quantity !== null && item.unit !== null
           ? convertAmount(item.quantity, item.unit, ingredient.unit, ingredient)
-          : defaultAddAmount(ingredient, packageOf.get(ingredient.id), ingredient.lastAddedAmount);
+          : defaultAddAmount(ingredient, ingredient.lastAddedAmount);
       store.toggle(ingredient.id, amount, item.id);
     }
     setSelecting(false);
@@ -120,7 +109,7 @@ export function ShoppingSegment() {
   const row = (item: ShoppingItem) => {
     const ingredient = item.ingredientId ? ingredients.get(item.ingredientId) : undefined;
     const canEdit = !item.checked && ingredient && item.quantity !== null && item.unit !== null;
-    const step = ingredient ? shoppingStep(ingredient, packageOf.get(ingredient.id)) : 1;
+    const step = ingredient ? shoppingStep(ingredient) : 1;
     const amount =
       item.quantity !== null && item.unit !== null ? formatAmount(item.quantity, item.unit) : '';
     const title = titleOf(item);
@@ -256,7 +245,7 @@ export function ShoppingSegment() {
               .join(' · ') || null
           );
         }}
-        defaultAmount={(i) => shoppingStep(i, packageOf.get(i.id))}
+        defaultAmount={(i) => shoppingStep(i)}
         onSubmit={(ingredient, amount) => {
           repositories.shopping.add({
             title: ingredient.name,

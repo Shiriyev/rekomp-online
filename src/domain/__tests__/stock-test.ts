@@ -1,5 +1,5 @@
-import { addDays, daysBetween, parseDayMonth } from '../dates';
-import { customIngredientSchema, lidlProductSchema, shoppingItemInputSchema } from '../schemas';
+import { addDays, daysBetween } from '../dates';
+import { customIngredientSchema, shoppingItemInputSchema } from '../schemas';
 import { normalizeForSearch, searchIngredients } from '../search';
 import {
   defaultLowStockThreshold,
@@ -28,57 +28,21 @@ describe('purchaseAmount', () => {
   const egg = { id: 'egg', unit: 'pcs' as const, gramsPerPiece: 55 };
   const tvorog = { id: 'tvorog', unit: 'g' as const, gramsPerPiece: null };
 
-  it('rounds up to whole packages', () => {
-    expect(
-      purchaseAmount({ quantity: 300, unit: 'g' }, tvorog, { packageSize: 250, packageUnit: 'g' }),
-    ).toBe(500);
-    expect(
-      purchaseAmount({ quantity: 250, unit: 'g' }, tvorog, { packageSize: 250, packageUnit: 'g' }),
-    ).toBe(250);
-    expect(
-      purchaseAmount({ quantity: 2, unit: 'pcs' }, egg, { packageSize: 10, packageUnit: 'pcs' }),
-    ).toBe(10);
+  it('adds the wanted amount, converted to the product unit', () => {
+    expect(purchaseAmount({ quantity: 150, unit: 'g' }, tvorog)).toBe(150);
+    expect(purchaseAmount({ quantity: 110, unit: 'g' }, egg)).toBe(2);
   });
 
-  it('buys one package when no amount was given', () => {
-    expect(
-      purchaseAmount({ quantity: null, unit: null }, tvorog, {
-        packageSize: 250,
-        packageUnit: 'g',
-      }),
-    ).toBe(250);
-  });
-
-  it('converts package units to the ingredient unit', () => {
-    // A 330 g pack of eggs = 6 pieces.
-    expect(
-      purchaseAmount({ quantity: 3, unit: 'pcs' }, egg, { packageSize: 330, packageUnit: 'g' }),
-    ).toBe(6);
-  });
-
-  it('falls back to the wanted amount without a package', () => {
-    expect(purchaseAmount({ quantity: 150, unit: 'g' }, tvorog, undefined)).toBe(150);
-    expect(purchaseAmount({ quantity: null, unit: null }, egg, undefined)).toBe(1);
-    expect(purchaseAmount({ quantity: null, unit: null }, tvorog, undefined)).toBe(0);
-    expect(
-      purchaseAmount({ quantity: 150, unit: 'g' }, tvorog, { packageSize: 0, packageUnit: 'g' }),
-    ).toBe(150);
+  it('adds one piece (or nothing by weight) without an amount', () => {
+    expect(purchaseAmount({ quantity: null, unit: null }, egg)).toBe(1);
+    expect(purchaseAmount({ quantity: null, unit: null }, tvorog)).toBe(0);
   });
 });
 
 describe('shoppingStep', () => {
-  const egg = { id: 'egg', unit: 'pcs' as const, gramsPerPiece: 55 };
-  const tvorog = { id: 'tvorog', unit: 'g' as const, gramsPerPiece: null };
-
-  it('steps by one package when the product is in the Lidl catalog', () => {
-    expect(shoppingStep(tvorog, { packageSize: 250, packageUnit: 'g' })).toBe(250);
-    expect(shoppingStep(egg, { packageSize: 10, packageUnit: 'pcs' })).toBe(10);
-  });
-
-  it('falls back to 50 g / 1 шт', () => {
-    expect(shoppingStep(tvorog, undefined)).toBe(50);
-    expect(shoppingStep(egg, undefined)).toBe(1);
-    expect(shoppingStep(tvorog, { packageSize: 0, packageUnit: 'g' })).toBe(50);
+  it('steps by 50 g / 50 ml / 1 шт', () => {
+    expect([shoppingStep({ unit: 'g' }), shoppingStep({ unit: 'ml' })]).toEqual([50, 50]);
+    expect(shoppingStep({ unit: 'pcs' })).toBe(1);
   });
 });
 
@@ -146,25 +110,6 @@ describe('dates', () => {
     // Across the DST change (25 Oct 2026).
     expect(daysBetween('2026-10-24', '2026-10-26')).toBe(2);
   });
-
-  it.each([
-    ['05.10', '2026-10-05'],
-    ['5/10', '2026-10-05'],
-    ['27.09', '2026-09-27'],
-    ['20.09', '2027-09-20'],
-    ['01.03.2027', '2027-03-01'],
-  ])('parses %p relative to 2026-09-27', (input, expected) => {
-    expect(parseDayMonth(input, '2026-09-27')).toBe(expected);
-  });
-
-  it('handles 29.02 only when next February has it', () => {
-    expect(parseDayMonth('29.02', '2026-09-27')).toBeNull();
-    expect(parseDayMonth('29.02', '2027-09-27')).toBe('2028-02-29');
-  });
-
-  it.each(['', '31.02.2026', '32.01', '12', 'abc', '1.13'])('rejects %p', (input) => {
-    expect(parseDayMonth(input, '2026-09-27')).toBeNull();
-  });
 });
 
 describe('schemas', () => {
@@ -184,24 +129,6 @@ describe('schemas', () => {
     expect(
       customIngredientSchema.safeParse({ ...base, unit: 'g', gramsPerPiece: null }).success,
     ).toBe(true);
-  });
-
-  it('drops the sale date when the product is not on sale and validates barcodes', () => {
-    const base = {
-      ingredientId: 'tvorog',
-      title: 'Túró 250 g',
-      packageSize: 250,
-      packageUnit: 'g' as const,
-      priceHuf: 549,
-      saleUntil: '2026-10-01',
-      barcode: null,
-      notes: null,
-    };
-    expect(lidlProductSchema.parse({ ...base, onSale: false }).saleUntil).toBeNull();
-    expect(lidlProductSchema.parse({ ...base, onSale: true }).saleUntil).toBe('2026-10-01');
-    expect(lidlProductSchema.safeParse({ ...base, onSale: false, barcode: '12ab' }).success).toBe(
-      false,
-    );
   });
 
   it('requires quantity and unit together on shopping items', () => {

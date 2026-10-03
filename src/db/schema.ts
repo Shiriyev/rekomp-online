@@ -86,35 +86,6 @@ export const ingredients = sqliteTable(
   ],
 );
 
-export const lidlProducts = sqliteTable(
-  'lidl_products',
-  {
-    id: text('id').primaryKey(),
-    ingredientId: text('ingredient_id')
-      .notNull()
-      .references(() => ingredients.id, { onDelete: 'cascade' }),
-    title: text('title').notNull(),
-    packageSize: real('package_size').notNull(),
-    packageUnit: text('package_unit', { enum: UNITS }).notNull(),
-    priceHuf: integer('price_huf'),
-    onSale: integer('on_sale', { mode: 'boolean' }).notNull().default(false),
-    /** Inclusive last day of the sale, YYYY-MM-DD. */
-    saleUntil: text('sale_until'),
-    barcode: text('barcode').unique(),
-    notes: text('notes'),
-    // ---- catalog columns (price, sale and notes above are the user's) ----
-    brand: text('brand'),
-    kcalPer100g: real('kcal_per_100g'),
-    proteinPer100g: real('protein_per_100g'),
-    imageKey: text('image_key'),
-    /** own (bundled) | off (Open Food Facts) | user. */
-    source: text('source').notNull().default('user'),
-    sourceId: text('source_id'),
-    isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
-  },
-  (t) => [index('lidl_products_ingredient_idx').on(t.ingredientId)],
-);
-
 export const recipes = sqliteTable(
   'recipes',
   {
@@ -392,8 +363,6 @@ export const appMeta = sqliteTable('app_meta', {
 
 export type Ingredient = typeof ingredients.$inferSelect;
 export type NewIngredient = typeof ingredients.$inferInsert;
-export type LidlProduct = typeof lidlProducts.$inferSelect;
-export type NewLidlProduct = typeof lidlProducts.$inferInsert;
 export type Recipe = typeof recipes.$inferSelect;
 export type NewRecipe = typeof recipes.$inferInsert;
 export type RecipeIngredient = typeof recipeIngredients.$inferSelect;

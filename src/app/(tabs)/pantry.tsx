@@ -1,14 +1,11 @@
-import { useFocusEffect } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 
-import { repositories } from '@/db';
 import { HomeSegment } from '@/features/pantry/HomeSegment';
 import { PortionsSegment } from '@/features/pantry/PortionsSegment';
 import { ShoppingSegment } from '@/features/pantry/ShoppingSegment';
 import { useT } from '@/i18n';
-import { useClock } from '@/lib/useClock';
 import { spacing } from '@/theme';
 
 type Segment = 'home' | 'portions' | 'shopping';
@@ -18,14 +15,6 @@ const SEGMENTS: Segment[] = ['home', 'portions', 'shopping'];
 export default function PantryScreen() {
   const t = useT();
   const [segment, setSegment] = useState<Segment>('home');
-  const { today } = useClock();
-
-  // Expired sales are switched off whenever the tab is opened (and when the day rolls over).
-  useFocusEffect(
-    useCallback(() => {
-      repositories.lidl.clearExpiredSales(today);
-    }, [today]),
-  );
 
   return (
     <View style={styles.flex}>

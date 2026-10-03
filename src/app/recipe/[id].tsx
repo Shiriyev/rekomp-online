@@ -16,7 +16,6 @@ import {
 
 import { repositories } from '@/db';
 import {
-  useActiveSales,
   useFavoriteRecipeIds,
   useIngredientsMap,
   usePantryStock,
@@ -46,7 +45,6 @@ import { showUndo } from '@/features/undo/undoStore';
 import { t as translate, useT } from '@/i18n';
 import { content as contentNow, useContent } from '@/i18n/content';
 import { formatAmount, formatInt, formatKcal } from '@/lib/format';
-import { useClock } from '@/lib/useClock';
 import { useTransitionDone } from '@/lib/useTransitionDone';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -68,8 +66,6 @@ export default function RecipeScreen() {
   const setDraftAmount = useRecipeDraftStore((s) => s.setAmount);
   const ingredients = useIngredientsMap();
   const pantry = usePantryStock();
-  const { today } = useClock();
-  const sales = useActiveSales(today);
   const kcalLeft = useKcalLeftToday();
 
   const [servingsOverride, setServings] = useState<number | null>(null);
@@ -446,7 +442,6 @@ export default function RecipeScreen() {
                   check={c}
                   ingredient={ingredient}
                   alternatives={c.alternatives.flatMap((a) => ingredients.get(a) ?? [])}
-                  sale={sales.get(c.line.ingredientId)}
                   servings={servings}
                   onChooseAlternative={(altId) => {
                     const group = c.line.altGroup;

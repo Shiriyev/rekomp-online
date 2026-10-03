@@ -16,6 +16,7 @@ import m0011 from './0011_catalog.sql';
 import m0012 from './0012_recipe_equipment.sql';
 import m0013 from './0013_stock_tracked.sql';
 import m0014 from './0014_favorite_recipes.sql';
+import m0015 from './0015_drop_lidl_products.sql';
 
   export default {
     journal,
@@ -34,7 +35,8 @@ m0010,
 m0011,
 m0012,
 m0013,
-m0014
+m0014,
+m0015
     }
   }
   

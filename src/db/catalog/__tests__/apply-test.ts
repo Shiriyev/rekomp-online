@@ -7,15 +7,7 @@ import { eq } from 'drizzle-orm';
 
 import catalogJson from '../../seed/catalog.v2.json';
 import { createRepositories } from '../../repositories';
-import {
-  appMeta,
-  ingredients,
-  lidlProducts,
-  mealLogs,
-  pantryItems,
-  recipes,
-  recipeSteps,
-} from '../../schema';
+import { appMeta, ingredients, mealLogs, pantryItems, recipes, recipeSteps } from '../../schema';
 import { runSeed } from '../../seed/runSeed';
 import { createTestDb } from '../../testing/createTestDb';
 import type { AppDb } from '../../types';
@@ -71,10 +63,6 @@ describe('upgrade of a v1 install', () => {
     });
     repos.recipes.saveCustomAmounts('Z1', { tvorog: 200 });
     repos.recipes.setPhoto('Z1', 'file:///photos/z1.jpg');
-    db.update(lidlProducts)
-      .set({ priceHuf: 899, notes: 'мой' })
-      .where(eq(lidlProducts.id, 'lidl_skyr'))
-      .run();
     // An old row still in a v1 category (as after importing a v1 backup).
     db.update(ingredients)
       .set({ category: 'dairy' as never })
@@ -83,7 +71,7 @@ describe('upgrade of a v1 install', () => {
     return repos;
   }
 
-  it('keeps pantry, own amounts, photos, prices and edited nutrition', () => {
+  it('keeps pantry, own amounts, photos and edited nutrition', () => {
     const repos = v1WithUserData();
     apply(db);
 
@@ -91,8 +79,6 @@ describe('upgrade of a v1 install', () => {
     expect(db.select().from(recipes).where(eq(recipes.id, 'Z1')).get()?.photoUri).toBe(
       'file:///photos/z1.jpg',
     );
-    const lidl = db.select().from(lidlProducts).where(eq(lidlProducts.id, 'lidl_skyr')).get();
-    expect([lidl?.priceHuf, lidl?.notes, lidl?.source]).toEqual([899, 'мой', 'own']);
 
     const egg = repos.ingredients.getById('egg');
     expect([egg?.kcalPer100g, egg?.gramsPerPiece, egg?.lowStockThreshold]).toEqual([150, 60, 4]);
@@ -137,7 +123,7 @@ describe('upgrade of a v1 install', () => {
       .run();
 
     const result = apply(db);
-    expect(result.applied && result.archived).toEqual({ ingredients: 1, recipes: 1, variants: 0 });
+    expect(result.applied && result.archived).toEqual({ ingredients: 1, recipes: 1 });
     expect(
       db.select().from(ingredients).where(eq(ingredients.id, 'old_unused')).get(),
     ).toBeUndefined();

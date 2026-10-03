@@ -2,13 +2,13 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Chip, Text } from 'react-native-paper';
 
-import type { Ingredient, LidlProduct, RecipeIngredient } from '@/db/schema';
+import type { Ingredient, RecipeIngredient } from '@/db/schema';
 import type { LineCheck } from '@/domain/pantry';
 import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { formatAmount, formatDayMonth } from '@/lib/format';
+import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { AmountInput } from '@/ui/AmountInput';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -25,7 +25,6 @@ type Props = {
   check: LineCheck<RecipeIngredient>;
   ingredient: Ingredient;
   alternatives: Ingredient[];
-  sale: LidlProduct | undefined;
   /** Notes such as «1 ч.л.» are per serving. */
   servings: number;
   onChooseAlternative: (ingredientId: string) => void;
@@ -39,7 +38,6 @@ export function IngredientRow({
   check,
   ingredient,
   alternatives,
-  sale,
   servings,
   onChooseAlternative,
   editor,
@@ -87,13 +85,6 @@ export function IngredientRow({
           {note ? (
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
               {servings > 1 ? t('recipes.row.notePerServing', { note }) : note}
-            </Text>
-          ) : null}
-          {sale ? (
-            <Text variant="bodySmall" style={{ color: theme.colors.secondary }}>
-              {sale.saleUntil
-                ? t('recipes.row.saleUntil', { date: formatDayMonth(sale.saleUntil) })
-                : t('recipes.row.sale')}
             </Text>
           ) : null}
         </View>

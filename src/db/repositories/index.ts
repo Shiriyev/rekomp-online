@@ -1,7 +1,6 @@
 import type { AppDb } from '../types';
 import { createCookRepo } from './cookRepo';
 import { createIngredientsRepo } from './ingredientsRepo';
-import { createLidlRepo } from './lidlRepo';
 import { createLogRepo } from './logRepo';
 import { createPantryRepo } from './pantryRepo';
 import { createPortionsRepo } from './portionsRepo';
@@ -21,7 +20,6 @@ export function createRepositories(db: AppDb) {
     profile: createProfileRepo(db),
     settings: createSettingsRepo(db),
     shopping: createShoppingRepo(db),
-    lidl: createLidlRepo(db),
   };
 }
 

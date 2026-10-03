@@ -13,10 +13,6 @@ export const about: Messages<typeof ru> = {
       title: 'USDA FoodData Central',
       body: 'Calories and macros of products. Public domain (CC0).',
     },
-    off: {
-      title: 'Open Food Facts',
-      body: 'Store products: database under ODbL, photos under CC BY-SA.',
-    },
     pexels: {
       title: 'Pexels',
       body: 'Dish and product photos, Pexels License.',

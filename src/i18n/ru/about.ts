@@ -11,10 +11,6 @@ export const about = {
       title: 'USDA FoodData Central',
       body: 'Калорийность и БЖУ продуктов. Общественное достояние (CC0).',
     },
-    off: {
-      title: 'Open Food Facts',
-      body: 'Товары из магазинов: база данных — ODbL, фото — CC BY-SA.',
-    },
     pexels: {
       title: 'Pexels',
       body: 'Фото блюд и продуктов, лицензия Pexels.',

@@ -5,13 +5,7 @@ import { shoppingItemInputSchema, type ShoppingItemInput } from '../../domain/sc
 import { purchaseAmount } from '../../domain/stock';
 import { convertAmount, normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
-import {
-  ingredients,
-  lidlProducts,
-  pantryItems,
-  shoppingItems,
-  type ShoppingItem,
-} from '../schema';
+import { ingredients, pantryItems, shoppingItems, type ShoppingItem } from '../schema';
 import type { AppDb } from '../types';
 
 /** Shopping amounts are whole grams/ml/pieces, rounded up so the recipe is covered. */
@@ -29,14 +23,6 @@ export function createShoppingRepo(db: AppDb) {
           exceptId ? ne(shoppingItems.id, exceptId) : undefined,
         ),
       )
-      .get();
-
-  const smallestPackage = (tx: AppDb, ingredientId: string) =>
-    tx
-      .select()
-      .from(lidlProducts)
-      .where(eq(lidlProducts.ingredientId, ingredientId))
-      .orderBy(asc(lidlProducts.packageSize))
       .get();
 
   const changePantry = (tx: AppDb, ingredientId: string, delta: number, now: number) => {
@@ -82,19 +68,7 @@ export function createShoppingRepo(db: AppDb) {
           const ingredient = byId.get(s.ingredientId);
           if (!ingredient) throw new Error(`Ingredient not found: ${s.ingredientId}`);
           const name = ingredient.name;
-          // The list shows what to actually buy: whole Lidl packages when the catalog knows them.
-          const product = smallestPackage(tx, ingredient.id);
-          const inIngredientUnit = convertAmount(s.amount, s.unit, ingredient.unit, ingredient);
-          const quantity = product
-            ? normalizeQuantity(
-                purchaseAmount(
-                  { quantity: inIngredientUnit, unit: ingredient.unit },
-                  ingredient,
-                  product,
-                ),
-                ingredient.unit,
-              )
-            : toBuy(inIngredientUnit);
+          const quantity = toBuy(convertAmount(s.amount, s.unit, ingredient.unit, ingredient));
           const unit = ingredient.unit;
           const open = openFor(tx, s.ingredientId);
           if (!open) {
@@ -161,7 +135,7 @@ export function createShoppingRepo(db: AppDb) {
     },
 
     /**
-     * «Купил»: adds whole Lidl packages (or the wanted amount) to the pantry. Un-checking
+     * «Купил»: adds the wanted amount to the pantry. Un-checking
      * takes that amount back out. Idempotent for repeated taps in the same state.
      */
     setChecked(id: string, checked: boolean, now: number = Date.now()): void {
@@ -178,15 +152,8 @@ export function createShoppingRepo(db: AppDb) {
               .where(eq(ingredients.id, item.ingredientId))
               .get();
             if (ingredient) {
-              // Exactly what the list says; without an amount, one package (or 1 шт).
-              added =
-                item.quantity !== null && item.unit !== null
-                  ? convertAmount(item.quantity, item.unit, ingredient.unit, ingredient)
-                  : purchaseAmount(
-                      { quantity: null, unit: null },
-                      ingredient,
-                      smallestPackage(tx, ingredient.id),
-                    );
+              // Exactly what the list says; without an amount, 1 шт.
+              added = purchaseAmount(item, ingredient);
               if (added > 0) changePantry(tx, ingredient.id, added, now);
             }
           }

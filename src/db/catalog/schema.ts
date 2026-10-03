@@ -97,24 +97,6 @@ export const catalogIngredientSchema = z
   })
   .strict();
 
-export const catalogVariantSchema = z
-  .object({
-    id,
-    ingredientId: id,
-    title: text,
-    brand: text.nullable(),
-    packageSize: z.number().positive(),
-    packageUnit: z.enum(UNITS),
-    barcode: text.nullable(),
-    /** Label values when known; otherwise the canonical product's are used. */
-    kcalPer100g: per100(900).nullable(),
-    proteinPer100g: per100(100).nullable(),
-    imageKey: text.nullable(),
-    source: z.enum(['own', 'off']),
-    sourceId: text.nullable(),
-  })
-  .strict();
-
 export const catalogRecipeSchema = z
   .object({
     id,
@@ -174,7 +156,6 @@ export const catalogSchema = z
   .object({
     catalogVersion: z.number().int().positive(),
     ingredients: z.array(catalogIngredientSchema),
-    productVariants: z.array(catalogVariantSchema),
     recipes: z.array(catalogRecipeSchema),
     recipeIngredients: z.array(catalogLineSchema),
     recipeSteps: z.array(catalogStepSchema),
@@ -183,7 +164,6 @@ export const catalogSchema = z
 
 export type Catalog = z.infer<typeof catalogSchema>;
 export type CatalogIngredient = z.infer<typeof catalogIngredientSchema>;
-export type CatalogVariant = z.infer<typeof catalogVariantSchema>;
 export type CatalogRecipe = z.infer<typeof catalogRecipeSchema>;
 export type CatalogLine = z.infer<typeof catalogLineSchema>;
 export type CatalogStep = z.infer<typeof catalogStepSchema>;

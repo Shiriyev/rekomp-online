@@ -1,12 +1,11 @@
 import catalogCredits from '../../../assets/images/catalog/credits.json';
 import v1Credits from '../../../assets/images/manifest.json';
 
-export type DataSourceId = 'mealdb' | 'usda' | 'off' | 'pexels';
+export type DataSourceId = 'mealdb' | 'usda' | 'pexels';
 
 export const DATA_SOURCES: readonly { id: DataSourceId; url: string }[] = [
   { id: 'mealdb', url: 'https://www.themealdb.com' },
   { id: 'usda', url: 'https://fdc.nal.usda.gov' },
-  { id: 'off', url: 'https://world.openfoodfacts.org' },
   { id: 'pexels', url: 'https://www.pexels.com' },
 ];
 

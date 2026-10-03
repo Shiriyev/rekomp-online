@@ -1,7 +1,7 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
 import { PaperProvider } from 'react-native-paper';
 
-import type { Ingredient, LidlProduct, RecipeIngredient } from '@/db/schema';
+import type { Ingredient, RecipeIngredient } from '@/db/schema';
 import { canCook } from '@/domain/pantry';
 import { lightTheme } from '@/theme';
 
@@ -84,7 +84,6 @@ describe('IngredientRow', () => {
         check={checkWith(stock).lines[0]!}
         ingredient={SKYR}
         alternatives={[GREEK]}
-        sale={undefined}
         servings={1}
         onChooseAlternative={jest.fn()}
       />,
@@ -92,21 +91,18 @@ describe('IngredientRow', () => {
     expect(screen.getByLabelText(label)).toBeOnTheScreen();
   });
 
-  it('lets the user pick an alternative and shows an active Lidl sale', async () => {
+  it('lets the user pick an alternative', async () => {
     const user = userEvent.setup();
     const onChoose = jest.fn();
-    const sale = { saleUntil: '2026-10-02' } as LidlProduct;
     await wrap(
       <IngredientRow
         check={checkWith({ skyr: 200 }).lines[0]!}
         ingredient={SKYR}
         alternatives={[GREEK]}
-        sale={sale}
         servings={1}
         onChooseAlternative={onChoose}
       />,
     );
-    expect(screen.getByText('Скидка в Lidl до 02.10')).toBeOnTheScreen();
     await user.press(screen.getByText('или Греческий йогурт'));
     expect(onChoose).toHaveBeenCalledWith('greek');
   });
