@@ -99,6 +99,13 @@
       "when": 1790985962580,
       "tag": "0013_stock_tracked",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1790986111542,
+      "tag": "0014_favorite_recipes",
+      "breakpoints": true
     }
   ]
 }

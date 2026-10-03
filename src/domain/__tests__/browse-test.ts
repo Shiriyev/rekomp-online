@@ -18,6 +18,7 @@ const r = (id: string, over: Partial<BrowseRecipe> = {}): BrowseRecipe => ({
   mainProtein: 'poultry',
   macros: { kcal: 500, protein: 40 },
   missing: 3,
+  favorite: false,
   ...over,
 });
 
@@ -49,6 +50,21 @@ describe('applyRecipeFilters', () => {
     expect(run('no_lactose')).toEqual(['stew', 'smoothie', 'cake']);
     expect(run('quick15')).toEqual(['salad', 'smoothie']);
     expect(run('quick30', 'no_oven')).toEqual(['salad', 'smoothie']);
+  });
+
+  it('filters by stock, protein and size, and by main protein (any of)', () => {
+    const more = [
+      r('ready', { missing: 0, macros: { kcal: 500, protein: 45 }, ingredientCount: 4 }),
+      r('fish', { mainProtein: 'fish', macros: { kcal: 500, protein: 20 } }),
+      r('beef', { mainProtein: 'beef', macros: { kcal: 500, protein: 30 } }),
+    ];
+    const f = (active: RecipeFilter[], proteins: string[] = []) =>
+      ids(applyRecipeFilters(more, new Set(active), new Set(proteins)));
+    expect(f(['cookable'])).toEqual(['ready']);
+    expect(f(['protein40'])).toEqual(['ready']);
+    expect(f(['few_ingredients'])).toEqual(['ready']);
+    expect(f([], ['fish', 'beef'])).toEqual(['fish', 'beef']);
+    expect(f(['protein40'], ['fish'])).toEqual([]);
   });
 });
 
@@ -85,6 +101,11 @@ describe('shelves', () => {
     expect(ids(shelfRecipes(sameTime, 'quick'))).toEqual(['more', 'less']);
     const sameMissing = sameTime.map((x) => ({ ...x, missing: 1 }));
     expect(ids(shelfRecipes(sameMissing, 'almost'))).toEqual(['more', 'less']);
+  });
+
+  it('puts favourites first', () => {
+    const withFav = [...recipes, r('fav', { favorite: true })];
+    expect(buildShelves(withFav)[0]).toEqual({ shelf: 'favorites', recipes: [withFav.at(-1)] });
   });
 
   it('lists only non-empty shelves, in display order', () => {

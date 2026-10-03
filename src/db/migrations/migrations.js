@@ -15,6 +15,7 @@ import m0010 from './0010_recipe_photo.sql';
 import m0011 from './0011_catalog.sql';
 import m0012 from './0012_recipe_equipment.sql';
 import m0013 from './0013_stock_tracked.sql';
+import m0014 from './0014_favorite_recipes.sql';
 
   export default {
     journal,
@@ -32,7 +33,8 @@ m0009,
 m0010,
 m0011,
 m0012,
-m0013
+m0013,
+m0014
     }
   }
   

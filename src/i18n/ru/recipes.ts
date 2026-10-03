@@ -1,6 +1,24 @@
 /** Recipe list, recipe card and its ingredient rows. */
 export const recipes = {
   browse: {
+    filters: 'Фильтры',
+    filtersCount: 'Фильтры · {{count}}',
+    show_one: 'Показать {{count}} блюдо',
+    show_few: 'Показать {{count}} блюда',
+    show_many: 'Показать {{count}} блюд',
+    show_other: 'Показать {{count}} блюда',
+    reset: 'Сбросить',
+    groups: {
+      equipment: 'Чего нет на кухне',
+      diet: 'Питание',
+      time: 'Время',
+      more: 'Ещё',
+      protein: 'Главный продукт',
+    },
+    save: 'В избранное',
+    unsave: 'Убрать из избранного',
+    saved: 'Сохранено в избранное',
+    unsaved: 'Убрано из избранного',
     search: 'Поиск блюда',
     seeAll: 'Все',
     shelfCount_one: '{{count}} блюдо',
@@ -19,6 +37,9 @@ export const recipes = {
     missing_other: 'Нет {{count}}',
   },
   filters: {
+    cookable: 'Только из моих продуктов',
+    protein40: 'Белок от 40 г',
+    few_ingredients: 'До 5 ингредиентов',
     no_stove: 'Нет плиты',
     no_oven: 'Нет духовки',
     no_blender: 'Нет блендера',
@@ -33,6 +54,7 @@ export const recipes = {
     quick30: 'До 30 мин',
   },
   shelves: {
+    favorites: 'Избранное',
     cookable: 'Можно приготовить сейчас',
     almost: 'Не хватает 1–2 продуктов',
     no_cook: 'Без готовки',

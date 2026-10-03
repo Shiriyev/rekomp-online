@@ -15,7 +15,13 @@ import {
 } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { useActiveSales, useIngredientsMap, usePantryStock, useRecipeDetail } from '@/db/hooks';
+import {
+  useActiveSales,
+  useFavoriteRecipeIds,
+  useIngredientsMap,
+  usePantryStock,
+  useRecipeDetail,
+} from '@/db/hooks';
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
 import { isStockTracked, MEAL_TYPES, type MealType } from '@/domain/types';
@@ -71,6 +77,7 @@ export default function RecipeScreen() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const ready = useTransitionDone();
+  const isFavorite = useFavoriteRecipeIds().has(id);
 
   const servings = servingsOverride ?? recipe?.defaultServings ?? 1;
 
@@ -198,6 +205,20 @@ export default function RecipeScreen() {
             accessibilityLabel={recipeName}
           />
           <View style={styles.heroActions}>
+            <IconButton
+              icon={isFavorite ? 'heart' : 'heart-outline'}
+              mode="contained"
+              containerColor="rgba(0,0,0,0.55)"
+              iconColor={isFavorite ? theme.colors.error : '#FFFFFF'}
+              onPress={() => {
+                const saved = repositories.recipes.toggleFavorite(recipe.id);
+                setMessage(saved ? t('recipes.browse.saved') : t('recipes.browse.unsaved'));
+              }}
+              accessibilityLabel={
+                isFavorite ? t('recipes.browse.unsave') : t('recipes.browse.save')
+              }
+              accessibilityState={{ selected: isFavorite }}
+            />
             <IconButton
               icon="camera-outline"
               mode="contained"

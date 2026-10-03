@@ -4,6 +4,7 @@ import { sanitizeAmounts } from '../../domain/recipeDraft';
 import { photoUriSchema } from '../../domain/schemas';
 import type { MealType } from '../../domain/types';
 import {
+  favoriteRecipes,
   recipeCustomAmounts,
   recipeIngredients,
   recipes,
@@ -106,6 +107,23 @@ export function createRecipesRepo(db: AppDb) {
         if (!current) throw new Error(`Recipe not found: ${recipeId}`);
         tx.update(recipes).set({ photoUri: uri }).where(eq(recipes.id, recipeId)).run();
         return current.photoUri;
+      });
+    },
+
+    /** Saves or un-saves a recipe («Избранное»); returns whether it is saved now. */
+    toggleFavorite(recipeId: string, now: number = Date.now()): boolean {
+      return db.transaction((tx) => {
+        const saved = tx
+          .select()
+          .from(favoriteRecipes)
+          .where(eq(favoriteRecipes.recipeId, recipeId))
+          .get();
+        if (saved) {
+          tx.delete(favoriteRecipes).where(eq(favoriteRecipes.recipeId, recipeId)).run();
+          return false;
+        }
+        tx.insert(favoriteRecipes).values({ recipeId, createdAt: now }).run();
+        return true;
       });
     },
 

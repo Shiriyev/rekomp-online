@@ -8,7 +8,7 @@ import { buildShelves, type Shelf } from '@/domain/browse';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { MEAL_LABELS } from '@/features/meals';
 import { RecipeCard } from '@/features/recipes/RecipeCard';
-import { RecipeFilterChips } from '@/features/recipes/RecipeFilterChips';
+import { RecipeFilterBar } from '@/features/recipes/RecipeFilterBar';
 import { useRecipeFilters } from '@/features/recipes/recipeFiltersStore';
 import { useBrowseRecipes, type BrowseItem } from '@/features/recipes/useBrowseRecipes';
 import { useT } from '@/i18n';
@@ -65,7 +65,7 @@ export default function RecipesScreen() {
           autoCorrect={false}
         />
       </View>
-      <RecipeFilterChips />
+      <RecipeFilterBar resultCount={items.length} />
     </View>
   );
   const empty = (
@@ -160,6 +160,7 @@ const ShelfRow = memo(function ShelfRow({
             recipe={item.recipe}
             macros={item.macros}
             missing={item.missing}
+            favorite={item.favorite}
             meal={meal}
             width={SHELF_CARD_WIDTH}
           />
@@ -172,7 +173,13 @@ const ShelfRow = memo(function ShelfRow({
 function GridCell({ item, meal }: { item: BrowseItem; meal: MealType }) {
   return (
     <View style={styles.cell}>
-      <RecipeCard recipe={item.recipe} macros={item.macros} missing={item.missing} meal={meal} />
+      <RecipeCard
+        recipe={item.recipe}
+        macros={item.macros}
+        missing={item.missing}
+        favorite={item.favorite}
+        meal={meal}
+      />
     </View>
   );
 }

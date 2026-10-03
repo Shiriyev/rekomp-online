@@ -5,7 +5,7 @@ import { ZodError } from 'zod';
 
 import { createRepositories, type Repositories } from '../repositories';
 import type { ProfileInput } from '../../domain/schemas';
-import { appMeta, pantryItems, weightLogs } from '../schema';
+import { appMeta, favoriteRecipes, pantryItems, weightLogs } from '../schema';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
@@ -241,5 +241,18 @@ describe('settingsRepo', () => {
   it('rejects unknown themes', () => {
     // @ts-expect-error: invalid on purpose
     expect(() => repos.settings.setTheme('neon')).toThrow(ZodError);
+  });
+});
+
+describe('favourite recipes', () => {
+  it('toggles a recipe in and out of the favourites', () => {
+    const { db, close } = createTestDb();
+    runSeed(db);
+    const repos = createRepositories(db);
+    expect(repos.recipes.toggleFavorite('Z1', 1)).toBe(true);
+    expect(db.select().from(favoriteRecipes).all()).toEqual([{ recipeId: 'Z1', createdAt: 1 }]);
+    expect(repos.recipes.toggleFavorite('Z1', 2)).toBe(false);
+    expect(db.select().from(favoriteRecipes).all()).toEqual([]);
+    close();
   });
 });

@@ -28,6 +28,7 @@ import {
 import {
   appMeta,
   cookSessions,
+  favoriteRecipes,
   ingredients,
   lidlProducts,
   mealLogs,
@@ -361,6 +362,14 @@ export function useWeightLogs(): { localDate: string; weightKg: number }[] {
 export function useLatestLog(): MealLog | undefined {
   return useLiveQuery(db.select().from(mealLogs).orderBy(desc(mealLogs.timestamp)).limit(1))
     .data[0];
+}
+
+/** Ids of the saved recipes («Избранное»). */
+export function useFavoriteRecipeIds(): ReadonlySet<string> {
+  const { data } = useLiveQuery(
+    db.select({ recipeId: favoriteRecipes.recipeId }).from(favoriteRecipes),
+  );
+  return useMemo(() => new Set(data.map((r) => r.recipeId)), [data]);
 }
 
 /** Custom products the catalog update could not match (shown once). */

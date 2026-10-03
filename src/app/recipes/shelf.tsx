@@ -8,7 +8,7 @@ import { shelfRecipes, SHELVES, type Shelf } from '@/domain/browse';
 import { RECIPE_SORTS, sortRecipes, type RecipeSort } from '@/domain/recipes';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { RecipeCard } from '@/features/recipes/RecipeCard';
-import { RecipeFilterChips } from '@/features/recipes/RecipeFilterChips';
+import { RecipeFilterBar } from '@/features/recipes/RecipeFilterBar';
 import { useRecipeFilters } from '@/features/recipes/recipeFiltersStore';
 import { useBrowseRecipes } from '@/features/recipes/useBrowseRecipes';
 import { useT } from '@/i18n';
@@ -63,7 +63,7 @@ export default function ShelfScreen() {
         contentContainerStyle={styles.grid}
         ListHeaderComponent={
           <View>
-            <RecipeFilterChips />
+            <RecipeFilterBar resultCount={rows.length} />
             <View style={styles.sorts}>
               {RECIPE_SORTS.map((s) => (
                 <Chip
@@ -94,6 +94,7 @@ export default function ShelfScreen() {
               recipe={item.recipe}
               macros={item.macros}
               missing={item.missing}
+              favorite={item.favorite}
               meal={meal}
             />
           </View>

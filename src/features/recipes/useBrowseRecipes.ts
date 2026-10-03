@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import {
+  useFavoriteRecipeIds,
   useIngredientsMap,
   usePantryStock,
   useRecipeCatalog,
@@ -35,6 +36,8 @@ export function useBrowseRecipes(
   const pantry = usePantryStock();
   const drafts = useRecipeDraftStore((s) => s.drafts);
   const active = useRecipeFilters((s) => s.active);
+  const proteins = useRecipeFilters((s) => s.proteins);
+  const favorites = useFavoriteRecipeIds();
   const content = useContent();
   const isLoaded = catalog.isLoaded && ingredients.size > 0;
 
@@ -61,14 +64,15 @@ export function useBrowseRecipes(
             ? recipeMacros(drafted, ingredients).perServing
             : (catalog.macros.get(recipe.id) ?? { kcal: 0, protein: 0 }),
           missing: check.missing.length,
+          favorite: favorites.has(recipe.id),
           recipe,
           check,
         };
       });
-  }, [meal, isLoaded, catalog, linesByRecipe, drafts, ingredients, pantry]);
+  }, [meal, isLoaded, catalog, linesByRecipe, drafts, ingredients, pantry, favorites]);
 
   const items = useMemo(() => {
-    const filtered = applyRecipeFilters(all, new Set(active));
+    const filtered = applyRecipeFilters(all, new Set(active), new Set(proteins));
     if (!query.trim()) return filtered;
     // Same accent/case-insensitive search as products, over Russian and English names.
     const named = filtered.map((i) => ({
@@ -78,7 +82,7 @@ export function useBrowseRecipes(
       aliases: [content.recipeName(i.recipe)],
     }));
     return searchIngredients(named, query);
-  }, [all, active, query, content]);
+  }, [all, active, proteins, query, content]);
 
   return { items, isLoaded };
 }

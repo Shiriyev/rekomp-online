@@ -2,8 +2,9 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { router } from 'expo-router';
 import { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Card, Text } from 'react-native-paper';
+import { Card, IconButton, Text } from 'react-native-paper';
 
+import { repositories } from '@/db';
 import type { Recipe } from '@/db/schema';
 import type { Macros, MealType } from '@/domain/types';
 import { MEAL_ICONS } from '@/features/meals';
@@ -24,6 +25,8 @@ type Props = {
   meal?: MealType;
   /** Fixed width in a horizontal shelf; grids let it fill the column. */
   width?: number;
+  /** Saved to «Избранное»: a filled heart; tapping the heart toggles it. */
+  favorite?: boolean;
 };
 
 /** Photo card of a recipe for shelves and grids: name, kcal · protein, time, stock status. */
@@ -33,6 +36,7 @@ export const RecipeCard = memo(function RecipeCard({
   missing,
   meal,
   width,
+  favorite = false,
 }: Props) {
   const theme = useAppTheme();
   const t = useT();
@@ -56,12 +60,25 @@ export const RecipeCard = memo(function RecipeCard({
         kcal: formatInt(macros.kcal),
         protein: formatInt(macros.protein),
       })}>
-      <ImageWithFallback
-        source={recipeImage(recipe)}
-        fallbackIcon={MEAL_ICONS[recipe.mealType]}
-        style={styles.image}
-        iconSize={36}
-      />
+      <View>
+        <ImageWithFallback
+          source={recipeImage(recipe)}
+          fallbackIcon={MEAL_ICONS[recipe.mealType]}
+          style={styles.image}
+          iconSize={36}
+        />
+        <IconButton
+          icon={favorite ? 'heart' : 'heart-outline'}
+          iconColor={favorite ? theme.colors.error : '#FFFFFF'}
+          containerColor="rgba(0,0,0,0.45)"
+          mode="contained"
+          size={18}
+          style={styles.heart}
+          onPress={() => repositories.recipes.toggleFavorite(recipe.id)}
+          accessibilityLabel={favorite ? t('recipes.browse.unsave') : t('recipes.browse.save')}
+          accessibilityState={{ selected: favorite }}
+        />
+      </View>
       <View style={styles.body}>
         <Text variant="titleSmall" numberOfLines={2} style={styles.name}>
           {name}
@@ -99,6 +116,7 @@ const styles = StyleSheet.create({
   card: { overflow: 'hidden', borderRadius: radius.md },
   fill: { flex: 1 },
   image: { width: '100%', aspectRatio: 4 / 3 },
+  heart: { position: 'absolute', top: 2, right: 2, margin: 0 },
   body: { padding: spacing.sm, gap: 2 },
   // Two lines reserved so cards in a row line up.
   name: { minHeight: 40 },

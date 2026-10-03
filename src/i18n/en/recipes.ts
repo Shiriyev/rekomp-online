@@ -3,6 +3,24 @@ import type { Messages } from '../types';
 
 export const recipes: Messages<typeof ru> = {
   browse: {
+    filters: 'Filters',
+    filtersCount: 'Filters · {{count}}',
+    show_one: 'Show {{count}} dish',
+    show_few: 'Show {{count}} dishes',
+    show_many: 'Show {{count}} dishes',
+    show_other: 'Show {{count}} dishes',
+    reset: 'Reset',
+    groups: {
+      equipment: 'Not in my kitchen',
+      diet: 'Diet',
+      time: 'Time',
+      more: 'More',
+      protein: 'Main ingredient',
+    },
+    save: 'Save to favourites',
+    unsave: 'Remove from favourites',
+    saved: 'Saved to favourites',
+    unsaved: 'Removed from favourites',
     search: 'Search dishes',
     seeAll: 'All',
     shelfCount_one: '{{count}} dish',
@@ -21,6 +39,9 @@ export const recipes: Messages<typeof ru> = {
     missing_other: '{{count}} missing',
   },
   filters: {
+    cookable: 'Only from my products',
+    protein40: 'Protein 40 g+',
+    few_ingredients: 'Up to 5 ingredients',
     no_stove: 'No stove',
     no_oven: 'No oven',
     no_blender: 'No blender',
@@ -35,6 +56,7 @@ export const recipes: Messages<typeof ru> = {
     quick30: 'Up to 30 min',
   },
   shelves: {
+    favorites: 'Favourites',
     cookable: 'You can cook now',
     almost: 'Missing 1–2 products',
     no_cook: 'No cooking',
