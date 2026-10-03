@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    borderWidth: 1.5,
-    borderStyle: 'dashed',
+    // Solid, not dashed: Android draws dashed rounded borders unreliably.
+    borderWidth: 1,
     borderRadius: radius.lg,
     padding: spacing.sm,
   },

@@ -148,7 +148,10 @@ const ShelfRow = memo(function ShelfRow({
           </Text>
         </View>
       </TouchableRipple>
+      {/* Keyed by shelf: the outer list recycles rows, and a reused horizontal list would
+          keep the previous shelf's scroll offset (an empty or half-shifted row). */}
       <FlashList
+        key={shelf}
         horizontal
         data={items.slice(0, SHELF_PREVIEW)}
         keyExtractor={(i) => i.id}
