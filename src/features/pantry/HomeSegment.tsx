@@ -16,7 +16,6 @@ import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { showUndo } from '@/features/undo/undoStore';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { compareNames } from '@/lib/collate';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -24,6 +23,8 @@ import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
 import { useBulkAddStore } from './bulkAddStore';
 import { PantryItemSheet, type PantryItemSheetHandle } from './PantryItemSheet';
+import { sortProducts, useProductPopularity, useProductSort } from './productSort';
+import { ProductSortChip } from './ProductSortChip';
 
 type Stock = { ingredient: Ingredient; quantity: number; low: boolean };
 /** Chip above the grid: everything, what runs out, or one category. */
@@ -42,21 +43,26 @@ export function HomeSegment() {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<Filter>('all');
 
+  const sort = useProductSort((x) => x.sort);
+  const popularity = useProductPopularity();
   const stock = useMemo<Stock[]>(() => {
-    const order = new Map(INGREDIENT_CATEGORIES.map((c, i) => [c, i]));
-    return items
-      .flatMap((p) => {
-        const ingredient = ingredients.get(p.ingredientId);
-        if (!ingredient) return [];
-        const low = isLowStock(p.quantity, ingredient.unit, ingredient.lowStockThreshold);
-        return [{ ingredient, quantity: p.quantity, low }];
-      })
-      .sort(
-        (a, b) =>
-          (order.get(a.ingredient.category) ?? 0) - (order.get(b.ingredient.category) ?? 0) ||
-          compareNames(content.ingredientName(a.ingredient), content.ingredientName(b.ingredient)),
-      );
-  }, [items, ingredients, content]);
+    const rows = items.flatMap((p) => {
+      const ingredient = ingredients.get(p.ingredientId);
+      if (!ingredient) return [];
+      const low = isLowStock(p.quantity, ingredient.unit, ingredient.lowStockThreshold);
+      return [{ ingredient, quantity: p.quantity, low }];
+    });
+    return sortProducts(
+      rows,
+      sort,
+      (r) => ({
+        id: r.ingredient.id,
+        category: r.ingredient.category,
+        name: content.ingredientName(r.ingredient),
+      }),
+      popularity,
+    );
+  }, [items, ingredients, content, sort, popularity]);
 
   const counts = useMemo(() => {
     const byCategory = new Map<IngredientCategory, number>();
@@ -148,6 +154,7 @@ export function HomeSegment() {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.chips}
                 keyboardShouldPersistTaps="handled">
+                <ProductSortChip />
                 {chips.map((c) => (
                   <Chip
                     key={c.id}

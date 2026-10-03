@@ -1,5 +1,16 @@
 /** Recipe list, recipe card and its ingredient rows. */
 export const recipes = {
+  equipment: {
+    stove: 'плита',
+    oven: 'духовка',
+    grill: 'гриль',
+    microwave: 'микроволновка',
+    multicooker: 'мультиварка или скороварка',
+    blender: 'блендер',
+    mixer: 'миксер',
+    noCook: 'без готовки',
+    needs: 'Нужно: {{list}}',
+  },
   browse: {
     filters: 'Фильтры',
     filtersCount: 'Фильтры · {{count}}',

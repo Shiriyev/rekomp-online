@@ -6,12 +6,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Chip, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import {
-  useIngredientsMap,
-  useLidlProducts,
-  usePantryItems,
-  useRecipeLinesByRecipe,
-} from '@/db/hooks';
+import { useIngredientsMap, useLidlProducts, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount, smallestPackages } from '@/domain/bulkAdd';
 import { searchIngredients, suggestSimilar } from '@/domain/search';
@@ -20,9 +15,10 @@ import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { NotInCatalog } from '@/features/pantry/NotInCatalog';
+import { sortProducts, useProductPopularity, useProductSort } from '@/features/pantry/productSort';
+import { ProductSortChip } from '@/features/pantry/ProductSortChip';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { compareNames } from '@/lib/collate';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -41,7 +37,6 @@ export default function BulkSelectScreen() {
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
   const lidl = useLidlProducts();
-  const linesByRecipe = useRecipeLinesByRecipe();
   const selected = useBulkAddStore((s) => s.selected);
   const toggle = useBulkAddStore((s) => s.toggle);
   const select = useBulkAddStore((s) => s.select);
@@ -50,27 +45,20 @@ export default function BulkSelectScreen() {
 
   const packages = useMemo(() => smallestPackages(lidl), [lidl]);
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
-  // How many recipes use each product: common products first, rare ones (usually without a
-  // photo) further down.
-  const popularity = useMemo(() => {
-    const uses = new Map<string, number>();
-    for (const lines of linesByRecipe.values())
-      for (const l of lines) uses.set(l.ingredientId, (uses.get(l.ingredientId) ?? 0) + 1);
-    return uses;
-  }, [linesByRecipe]);
-  // Catalog order: category, then how common, then name in the UI language.
-  const available = useMemo(() => {
-    const order = new Map(INGREDIENT_CATEGORIES.map((c, i) => [c, i]));
-    return [...ingredients.values()]
-      .filter((i) => !i.isStaple && !i.isArchived)
-      .map((i) => ({ ...i, aliases: content.searchAliases(i) }))
-      .sort(
-        (a, b) =>
-          (order.get(a.category) ?? 0) - (order.get(b.category) ?? 0) ||
-          (popularity.get(b.id) ?? 0) - (popularity.get(a.id) ?? 0) ||
-          compareNames(content.ingredientName(a), content.ingredientName(b)),
-      );
-  }, [ingredients, content, popularity]);
+  const sort = useProductSort((x) => x.sort);
+  const popularity = useProductPopularity();
+  const available = useMemo(
+    () =>
+      sortProducts(
+        [...ingredients.values()]
+          .filter((i) => !i.isStaple && !i.isArchived)
+          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
+        sort,
+        (i) => ({ id: i.id, category: i.category, name: content.ingredientName(i) }),
+        popularity,
+      ),
+    [ingredients, content, sort, popularity],
+  );
   const selectedSet = useMemo(() => new Set(selected), [selected]);
 
   const counts = useMemo(() => {
@@ -127,6 +115,7 @@ export default function BulkSelectScreen() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.chips}
           keyboardShouldPersistTaps="handled">
+          <ProductSortChip />
           {chips.map((c) => (
             <Chip
               key={c.id}

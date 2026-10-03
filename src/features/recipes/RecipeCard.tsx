@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { Card, IconButton, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
+import { HEAT_SOURCES as HEAT } from '@/db/catalog/schema';
 import type { Recipe } from '@/db/schema';
 import type { Macros, MealType } from '@/domain/types';
 import { MEAL_ICONS } from '@/features/meals';
@@ -14,6 +15,7 @@ import { formatInt, formatKcal } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
+import { EQUIPMENT_ICONS, isEquipment, NO_COOK_ICON } from './equipment';
 import { recipeImage } from './recipeImage';
 
 type Props = {
@@ -67,6 +69,7 @@ export const RecipeCard = memo(function RecipeCard({
           style={styles.image}
           iconSize={36}
         />
+        <EquipmentBadges equipment={recipe.equipment} />
         <IconButton
           icon={favorite ? 'heart' : 'heart-outline'}
           iconColor={favorite ? theme.colors.error : '#FFFFFF'}
@@ -112,11 +115,44 @@ export const RecipeCard = memo(function RecipeCard({
   );
 });
 
+/** What the recipe needs (stove, oven, grill…), as small icons over the photo. */
+function EquipmentBadges({ equipment }: { equipment: readonly string[] }) {
+  const t = useT();
+  const known = equipment.filter(isEquipment);
+  const noCook = !known.some((e) => HEAT.includes(e));
+  const icons = noCook
+    ? [NO_COOK_ICON, ...known.map((e) => EQUIPMENT_ICONS[e])]
+    : known.map((e) => EQUIPMENT_ICONS[e]);
+  const label = noCook
+    ? [t('recipes.equipment.noCook'), ...known.map((e) => t(`recipes.equipment.${e}`))].join(', ')
+    : t('recipes.equipment.needs', {
+        list: known.map((e) => t(`recipes.equipment.${e}`)).join(', '),
+      });
+  return (
+    <View style={styles.badges} accessible accessibilityLabel={label}>
+      {icons.map((icon) => (
+        <View key={icon} style={styles.badge}>
+          <MaterialCommunityIcons name={icon} size={15} color="#FFFFFF" />
+        </View>
+      ))}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   card: { overflow: 'hidden', borderRadius: radius.md },
   fill: { flex: 1 },
   image: { width: '100%', aspectRatio: 4 / 3 },
   heart: { position: 'absolute', top: 2, right: 2, margin: 0 },
+  badges: { position: 'absolute', top: 8, left: 8, flexDirection: 'row', gap: 4 },
+  badge: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'rgba(0,0,0,0.55)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   body: { padding: spacing.sm, gap: 2 },
   // Two lines reserved so cards in a row line up.
   name: { minHeight: 40 },

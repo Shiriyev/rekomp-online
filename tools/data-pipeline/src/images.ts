@@ -14,6 +14,8 @@ import sharp from 'sharp';
 import { config } from '../pipeline.config.ts';
 import type { Accepted } from './build/evaluate.ts';
 import { loadMappings } from './build/mappings.ts';
+import { normalizeName } from './ingredients/normalize.ts';
+import { loadMealDb } from './mealdb/load.ts';
 import { loadOwnRecipes } from './own/recipes.ts';
 import { get, sleep } from './lib/http.ts';
 import { APP_ROOT, ensureDir, MAPPINGS, RAW, REPORTS, ROOT } from './lib/paths.ts';
@@ -53,6 +55,9 @@ img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}figure{margin:0
 <main>${cards}</main>`;
 }
 
+/** Light, slightly warm background behind ingredient cut-outs (matches photo tiles). */
+const INGREDIENT_BACKGROUND = '#F4F3EE';
+
 const OUT = path.join(APP_ROOT, 'assets', 'images', 'catalog');
 const V1_PHOTOS = path.join(APP_ROOT, 'assets', 'images', 'ingredients');
 const CREDITS = path.join(OUT, 'credits.json');
@@ -60,7 +65,12 @@ const ATTRIBUTION = path.join(APP_ROOT, 'assets', 'ATTRIBUTION.md');
 
 function attribution(credits: readonly Credit[]): string {
   const pexels = credits.filter((c) => c.source === 'Pexels');
-  const recipes = credits.filter((c) => c.source === 'TheMealDB').length;
+  const recipes = credits.filter(
+    (c) => c.source === 'TheMealDB' && c.file.startsWith('recipes/'),
+  ).length;
+  const productPhotos = credits.filter(
+    (c) => c.source === 'TheMealDB' && c.file.startsWith('products/'),
+  ).length;
   return [
     '# Attribution',
     '',
@@ -69,7 +79,8 @@ function attribution(credits: readonly Credit[]): string {
     '## Data',
     '',
     '- **TheMealDB** (https://www.themealdb.com) — recipes and dish photos ' +
-      `(${recipes} photos in \`assets/images/catalog/recipes/\`). Texts translated and split into steps.`,
+      `(${recipes} photos in \`assets/images/catalog/recipes/\`). Texts translated and split into steps; ` +
+      `${productPhotos} product photos from its ingredient images (\`assets/images/catalog/products/\`).`,
     '- **USDA FoodData Central** (https://fdc.nal.usda.gov) — nutrition per 100 g. Public domain (CC0 1.0).',
     '- **Open Food Facts** (https://world.openfoodfacts.org) — store products. Database: Open Database ' +
       'License (ODbL) 1.0; product photos: Creative Commons Attribution-ShareAlike (CC BY-SA).',
@@ -269,6 +280,70 @@ async function main() {
     if (!existsSync(out)) await toWebp(raw, out, target.maxSide);
   }
   writeFileSync(path.join(REPORTS, 'product-photos.html'), reviewPage(pending));
+
+  // ---------- TheMealDB ingredient images for products still without a photo ----------
+  // Clean cut-outs on a light background, named like the ingredients TheMealDB recipes use;
+  // for each product the source name used most often in the recipes.
+  const { ingredientMap } = loadMappings();
+  const sourceNames = new Map<string, Map<string, number>>();
+  for (const recipe of loadMealDb()) {
+    for (const line of recipe.lines) {
+      const id = ingredientMap.map[normalizeName(line.ingredient)];
+      if (!id) continue;
+      const names = sourceNames.get(id) ?? new Map<string, number>();
+      const name = line.ingredient.trim();
+      names.set(name, (names.get(name) ?? 0) + 1);
+      sourceNames.set(id, names);
+    }
+  }
+  let ingredientImages = 0;
+  let ingredientFetches = 0;
+  for (const p of canonical) {
+    if (p.isStaple || v1.has(p.id)) continue;
+    const file = `products/${p.id}.webp`;
+    const out = path.join(OUT, file);
+    if (credits.get(file)?.source === 'Pexels' && existsSync(out)) continue; // a reviewed photo
+    const names = [...(sourceNames.get(p.id) ?? new Map()).entries()].sort((a, b) => b[1] - a[1]);
+    const name = names[0]?.[0];
+    if (!name) continue;
+    const raw = path.join(RAW, 'images', 'mealdb-ingredients', `${p.id}.png`);
+    if (!existsSync(raw)) {
+      try {
+        await download(
+          `https://www.themealdb.com/images/ingredients/${encodeURIComponent(name)}-medium.png`,
+          raw,
+        );
+        ingredientFetches++;
+        await sleep(config.mealdb.pauseMs);
+      } catch {
+        continue; // no image for that name
+      }
+    }
+    if (!existsSync(out)) {
+      ensureDir(path.dirname(out));
+      await sharp(raw)
+        .resize({
+          width: config.images.productSide,
+          height: config.images.productSide,
+          fit: 'contain',
+          background: INGREDIENT_BACKGROUND,
+        })
+        .flatten({ background: INGREDIENT_BACKGROUND })
+        .webp({ quality: config.images.quality })
+        .toFile(out);
+    }
+    credits.set(file, {
+      file,
+      source: 'TheMealDB',
+      author: null,
+      authorUrl: null,
+      pageUrl: `https://www.themealdb.com/images/ingredients/${encodeURIComponent(name)}.png`,
+    });
+    ingredientImages++;
+  }
+  console.log(
+    `images: ${ingredientImages} products with a TheMealDB ingredient image (${ingredientFetches} downloaded)`,
+  );
 
   ensureDir(OUT);
   const sorted = [...credits.values()].sort((a, b) => a.file.localeCompare(b.file));

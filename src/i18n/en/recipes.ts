@@ -2,6 +2,17 @@ import type { recipes as ru } from '../ru/recipes';
 import type { Messages } from '../types';
 
 export const recipes: Messages<typeof ru> = {
+  equipment: {
+    stove: 'stove',
+    oven: 'oven',
+    grill: 'grill',
+    microwave: 'microwave',
+    multicooker: 'multicooker or pressure cooker',
+    blender: 'blender',
+    mixer: 'mixer',
+    noCook: 'no cooking',
+    needs: 'Needs: {{list}}',
+  },
   browse: {
     filters: 'Filters',
     filtersCount: 'Filters · {{count}}',

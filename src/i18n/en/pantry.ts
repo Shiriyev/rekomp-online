@@ -9,6 +9,7 @@ export const pantry: Messages<typeof ru> = {
     tryOther: 'Try another name — in English, Russian or Hungarian.',
   },
   segments: { home: 'At home', portions: 'Portions', shopping: 'Shopping' },
+  sort: { popular: 'Most needed', alpha: 'A–Z' },
   home: {
     all: 'All',
     low: 'Running low',

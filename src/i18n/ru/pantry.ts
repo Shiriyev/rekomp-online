@@ -7,6 +7,7 @@ export const pantry = {
     tryOther: 'Попробуйте другое название — по-русски, по-венгерски или по-английски.',
   },
   segments: { home: 'Дома', portions: 'Порции', shopping: 'Покупки' },
+  sort: { popular: 'Чаще нужны', alpha: 'По алфавиту' },
   home: {
     all: 'Все',
     low: 'Заканчивается',
