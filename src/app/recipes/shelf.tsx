@@ -1,11 +1,9 @@
 import { FlashList } from '@shopify/flash-list';
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Chip } from 'react-native-paper';
 
-import { shelfRecipes, SHELVES, type Shelf } from '@/domain/browse';
-import { RECIPE_SORTS, sortRecipes, type RecipeSort } from '@/domain/recipes';
+import { cuisinesOf, shelfRecipes, SHELVES, type Shelf } from '@/domain/browse';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { RecipeCard } from '@/features/recipes/RecipeCard';
 import { RecipeFilterBar } from '@/features/recipes/RecipeFilterBar';
@@ -22,23 +20,21 @@ const isMealType = (v: unknown): v is MealType =>
 const isShelf = (v: unknown): v is Shelf =>
   typeof v === 'string' && (SHELVES as readonly string[]).includes(v);
 
-/** Every recipe of one shelf as a two-column grid, with the same quick filters. */
+/** Every recipe of one shelf as a two-column grid, with the same filters and sort. */
 export default function ShelfScreen() {
   const t = useT();
   const params = useLocalSearchParams<{ meal: string; shelf: string }>();
   const meal = isMealType(params.meal) ? params.meal : null;
   const shelf = isShelf(params.shelf) ? params.shelf : null;
   const ready = useTransitionDone();
-  const { items, isLoaded } = useBrowseRecipes(meal);
+  const { items, all, isLoaded, sortList } = useBrowseRecipes(meal);
   const clear = useRecipeFilters((s) => s.clear);
-  // null keeps the shelf's own order (e.g. «Не хватает 1–2» by what is missing).
-  const [sort, setSort] = useState<RecipeSort | null>(null);
-
-  const rows = useMemo(() => {
-    if (!shelf) return [];
-    const inShelf = shelfRecipes(items, shelf);
-    return sort ? sortRecipes(inShelf, sort) : inShelf;
-  }, [items, shelf, sort]);
+  // Without a chosen sort the shelf keeps its own order (e.g. «Не хватает 1–2» by what is missing).
+  const rows = useMemo(
+    () => (shelf ? sortList(shelfRecipes(items, shelf)) : []),
+    [items, shelf, sortList],
+  );
+  const cuisines = useMemo(() => cuisinesOf(all), [all]);
 
   if (!meal || !shelf) {
     return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
@@ -61,24 +57,7 @@ export default function ShelfScreen() {
         numColumns={2}
         keyExtractor={(i) => i.id}
         contentContainerStyle={styles.grid}
-        ListHeaderComponent={
-          <View>
-            <RecipeFilterBar resultCount={rows.length} />
-            <View style={styles.sorts}>
-              {RECIPE_SORTS.map((s) => (
-                <Chip
-                  key={s}
-                  compact
-                  mode={sort === s ? 'flat' : 'outlined'}
-                  selected={sort === s}
-                  showSelectedCheck={false}
-                  onPress={() => setSort((cur) => (cur === s ? null : s))}>
-                  {t(`recipes.sort.${s}` as const)}
-                </Chip>
-              ))}
-            </View>
-          </View>
-        }
+        ListHeaderComponent={<RecipeFilterBar resultCount={rows.length} cuisines={cuisines} />}
         ListEmptyComponent={
           <EmptyState
             icon="silverware-variant"
@@ -106,11 +85,5 @@ export default function ShelfScreen() {
 
 const styles = StyleSheet.create({
   grid: { paddingHorizontal: spacing.md, paddingBottom: spacing.xl },
-  sorts: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-    paddingHorizontal: spacing.sm,
-    paddingBottom: spacing.sm,
-  },
   cell: { flex: 1, padding: spacing.xs },
 });

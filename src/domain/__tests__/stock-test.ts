@@ -1,6 +1,6 @@
 import { addDays, daysBetween } from '../dates';
 import { customIngredientSchema, shoppingItemInputSchema } from '../schemas';
-import { normalizeForSearch, searchIngredients } from '../search';
+import { createSearchIndex, normalizeForSearch } from '../search';
 import {
   defaultLowStockThreshold,
   isLowStock,
@@ -61,6 +61,11 @@ describe('stepQuantity', () => {
     expect(stepQuantity(current, step, dir)).toBe(expected);
   });
 });
+
+const searchIngredients = (
+  items: readonly { name: string; nameHu: string | null; aliases?: string[] }[],
+  q: string,
+) => createSearchIndex(items, (i) => [i.name, i.nameHu, ...(i.aliases ?? [])]).search(q).items;
 
 describe('search', () => {
   const items = [

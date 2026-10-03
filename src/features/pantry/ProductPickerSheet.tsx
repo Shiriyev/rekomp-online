@@ -63,7 +63,7 @@ export function ProductPickerSheet({
 
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
   const available = useMemo(
-    () => ingredients.filter((i) => !i.isStaple && !i.isArchived),
+    () => ingredients.filter((i) => !i.isStaple && !i.isArchived && i.stockTracked),
     [ingredients],
   );
   const browser = useProductBrowser('shopping', available, stock);

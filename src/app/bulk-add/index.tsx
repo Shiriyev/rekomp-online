@@ -38,7 +38,8 @@ export default function BulkSelectScreen() {
 
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
   const available = useMemo(
-    () => [...ingredients.values()].filter((i) => !i.isStaple && !i.isArchived),
+    // Broth and the like are never kept at home (not tracked).
+    () => [...ingredients.values()].filter((i) => !i.isStaple && !i.isArchived && i.stockTracked),
     [ingredients],
   );
   const browser = useProductBrowser('add', available, stock);

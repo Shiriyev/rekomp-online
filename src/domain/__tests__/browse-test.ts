@@ -1,10 +1,15 @@
 import {
   applyRecipeFilters,
   buildShelves,
+  countRecipeFilters,
+  cuisinesOf,
   isNoCookRecipe,
+  NO_RECIPE_FILTERS,
+  proteinDensity,
   shelfRecipes,
   type BrowseRecipe,
   type RecipeFilter,
+  type RecipeFilterState,
 } from '../browse';
 
 const r = (id: string, over: Partial<BrowseRecipe> = {}): BrowseRecipe => ({
@@ -16,6 +21,8 @@ const r = (id: string, over: Partial<BrowseRecipe> = {}): BrowseRecipe => ({
   equipment: ['stove'],
   tags: [],
   mainProtein: 'poultry',
+  cuisine: null,
+  source: 'mealdb',
   macros: { kcal: 500, protein: 40 },
   missing: 3,
   favorite: false,
@@ -24,6 +31,11 @@ const r = (id: string, over: Partial<BrowseRecipe> = {}): BrowseRecipe => ({
 
 const ids = (rs: { id: string }[]) => rs.map((x) => x.id);
 
+const state = (over: Partial<RecipeFilterState>): RecipeFilterState => ({
+  ...NO_RECIPE_FILTERS,
+  ...over,
+});
+
 describe('applyRecipeFilters', () => {
   const recipes = [
     r('stew', { equipment: ['stove', 'oven'], tags: ['pork', 'gluten'], totalMinutes: 60 }),
@@ -31,7 +43,7 @@ describe('applyRecipeFilters', () => {
     r('smoothie', { equipment: ['blender'], tags: ['vegetarian'], totalMinutes: 5 }),
     r('cake', { equipment: ['oven', 'mixer', 'grill', 'microwave'], totalMinutes: 25 }),
   ];
-  const run = (...f: RecipeFilter[]) => ids(applyRecipeFilters(recipes, new Set(f)));
+  const run = (...toggles: RecipeFilter[]) => ids(applyRecipeFilters(recipes, state({ toggles })));
 
   it('keeps everything without filters', () => {
     expect(run()).toEqual(['stew', 'salad', 'smoothie', 'cake']);
@@ -44,27 +56,105 @@ describe('applyRecipeFilters', () => {
     expect(run('no_mixer', 'no_grill', 'no_microwave')).toEqual(['stew', 'salad', 'smoothie']);
   });
 
-  it('filters by diet and time, all filters together', () => {
+  it('filters by diet, all filters together', () => {
     expect(run('vegetarian')).toEqual(['salad', 'smoothie']);
     expect(run('no_pork', 'no_gluten')).toEqual(['salad', 'smoothie', 'cake']);
     expect(run('no_lactose')).toEqual(['stew', 'smoothie', 'cake']);
-    expect(run('quick15')).toEqual(['salad', 'smoothie']);
-    expect(run('quick30', 'no_oven')).toEqual(['salad', 'smoothie']);
   });
 
-  it('filters by stock, protein and size, and by main protein (any of)', () => {
-    const more = [
-      r('ready', { missing: 0, macros: { kcal: 500, protein: 45 }, ingredientCount: 4 }),
-      r('fish', { mainProtein: 'fish', macros: { kcal: 500, protein: 20 } }),
-      r('beef', { mainProtein: 'beef', macros: { kcal: 500, protein: 30 } }),
+  it('filters by time and ingredient count (up to)', () => {
+    expect(ids(applyRecipeFilters(recipes, state({ maxMinutes: 15 })))).toEqual([
+      'salad',
+      'smoothie',
+    ]);
+    expect(
+      ids(applyRecipeFilters(recipes, state({ maxMinutes: 30, toggles: ['no_oven'] }))),
+    ).toEqual(['salad', 'smoothie']);
+    const few = [r('few', { ingredientCount: 5 }), r('many', { ingredientCount: 9 })];
+    expect(ids(applyRecipeFilters(few, state({ maxIngredients: 5 })))).toEqual(['few']);
+    expect(ids(applyRecipeFilters(few, state({ maxIngredients: 10 })))).toEqual(['few', 'many']);
+  });
+
+  it('filters by stock: cookable, at most 2 missing, batch', () => {
+    const stock = [
+      r('ready', { missing: 0 }),
+      r('two', { missing: 2, isBatch: true }),
+      r('three', { missing: 3 }),
     ];
-    const f = (active: RecipeFilter[], proteins: string[] = []) =>
-      ids(applyRecipeFilters(more, new Set(active), new Set(proteins)));
-    expect(f(['cookable'])).toEqual(['ready']);
-    expect(f(['protein40'])).toEqual(['ready']);
-    expect(f(['few_ingredients'])).toEqual(['ready']);
-    expect(f([], ['fish', 'beef'])).toEqual(['fish', 'beef']);
-    expect(f(['protein40'], ['fish'])).toEqual([]);
+    const f = (...toggles: RecipeFilter[]) => ids(applyRecipeFilters(stock, state({ toggles })));
+    expect(f('cookable')).toEqual(['ready']);
+    expect(f('almost')).toEqual(['ready', 'two']);
+    expect(f('batch')).toEqual(['two']);
+  });
+
+  it('filters by kcal range, protein and protein per 100 kcal per serving', () => {
+    const macros = [
+      r('light', { macros: { kcal: 350, protein: 35 } }), // 10 g / 100 kcal
+      r('mid', { macros: { kcal: 400, protein: 30 } }), // 7.5
+      r('big', { macros: { kcal: 800, protein: 50 } }), // 6.25
+      r('empty', { macros: { kcal: 0, protein: 0 } }),
+    ];
+    const f = (over: Partial<RecipeFilterState>) => ids(applyRecipeFilters(macros, state(over)));
+    expect(f({ kcal: 'upto400' })).toEqual(['light', 'empty']);
+    expect(f({ kcal: 'from400' })).toEqual(['mid']);
+    expect(f({ kcal: 'from600' })).toEqual([]);
+    expect(f({ kcal: 'from800' })).toEqual(['big']);
+    expect(f({ minProtein: 30 })).toEqual(['light', 'mid', 'big']);
+    expect(f({ minProtein: 40 })).toEqual(['big']);
+    expect(f({ minDensity: 10 })).toEqual(['light']);
+    expect(f({ minDensity: 8, minProtein: 40 })).toEqual([]);
+  });
+
+  it('filters by main protein and cuisine (any of), and by source', () => {
+    const more = [
+      r('fish', { mainProtein: 'fish', cuisine: 'Thai', source: 'own' }),
+      r('beef', { mainProtein: 'beef', cuisine: 'British' }),
+      r('plain', { mainProtein: 'eggs' }),
+    ];
+    const f = (over: Partial<RecipeFilterState>) => ids(applyRecipeFilters(more, state(over)));
+    expect(f({ proteins: ['fish', 'beef'] })).toEqual(['fish', 'beef']);
+    expect(f({ cuisines: ['Thai', 'British'] })).toEqual(['fish', 'beef']);
+    expect(f({ cuisines: ['Thai'], proteins: ['beef'] })).toEqual([]);
+    expect(f({ source: 'own' })).toEqual(['fish']);
+    expect(f({ source: 'mealdb' })).toEqual(['beef', 'plain']);
+  });
+});
+
+describe('countRecipeFilters / proteinDensity / cuisinesOf', () => {
+  it('counts every active choice', () => {
+    expect(countRecipeFilters(NO_RECIPE_FILTERS)).toBe(0);
+    expect(
+      countRecipeFilters(
+        state({
+          toggles: ['cookable', 'no_oven'],
+          proteins: ['fish'],
+          cuisines: ['Thai'],
+          kcal: 'upto400',
+          minProtein: 30,
+          minDensity: 8,
+          maxMinutes: 15,
+          maxIngredients: 5,
+          source: 'own',
+        }),
+      ),
+    ).toBe(10);
+  });
+
+  it('computes protein per 100 kcal', () => {
+    expect(proteinDensity({ kcal: 400, protein: 40 })).toBe(10);
+    expect(proteinDensity({ kcal: 0, protein: 5 })).toBe(0);
+  });
+
+  it('lists cuisines by how many recipes have them, then by name', () => {
+    expect(
+      cuisinesOf([
+        { cuisine: 'Thai' },
+        { cuisine: null },
+        { cuisine: 'British' },
+        { cuisine: 'Thai' },
+        { cuisine: 'Algerian' },
+      ]),
+    ).toEqual(['Thai', 'Algerian', 'British']);
   });
 });
 

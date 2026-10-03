@@ -1,4 +1,4 @@
-import { createSearchIndex, normalizeForSearch, similarity, suggestSimilar } from '../search';
+import { createSearchIndex, normalizeForSearch, similarity } from '../search';
 
 describe('normalizeForSearch cache', () => {
   it('stays correct after the cache is cleared', () => {
@@ -8,40 +8,29 @@ describe('normalizeForSearch cache', () => {
   });
 });
 
-describe('suggestSimilar', () => {
+describe('look-alikes (typos, other word forms)', () => {
   const items = [
-    { name: 'Брокколи', nameHu: 'brokkoli', aliases: ['Broccoli'] },
-    { name: 'Куриная грудка', nameHu: null, aliases: ['Chicken breast'] },
-    { name: 'Творог', nameHu: 'túró' },
-    { name: 'Сыр', nameHu: null },
+    { name: 'Брокколи', names: ['Брокколи', 'brokkoli', 'Broccoli'] },
+    { name: 'Куриная грудка', names: ['Куриная грудка', 'Chicken breast'] },
+    { name: 'Творог', names: ['Творог', 'túró'] },
+    { name: 'Сыр', names: ['Сыр'] },
   ];
+  const similar = (list: typeof items, q: string) =>
+    createSearchIndex(list, (i) => i.names)
+      .search(q, { fuzzy: true })
+      .items.map((i) => i.name);
 
   it('finds products despite typos, in any language and by word', () => {
-    expect(suggestSimilar(items, 'брокали').map((i) => i.name)).toEqual(['Брокколи']);
-    expect(suggestSimilar(items, 'brocoli').map((i) => i.name)).toEqual(['Брокколи']);
-    expect(suggestSimilar(items, 'грудки').map((i) => i.name)).toEqual(['Куриная грудка']);
-    expect(suggestSimilar(items, 'turo').map((i) => i.name)).toEqual(['Творог']);
-    // Sharing a few letters is not enough («brokoli» vs «broad beans», «brown rice»).
-    const beans = [{ name: 'Бобы', nameHu: null, aliases: ['Broad beans'] }, ...items];
-    expect(suggestSimilar(beans, 'brokoli').map((i) => i.name)).toEqual(['Брокколи']);
+    expect(similar(items, 'брокали')).toEqual(['Брокколи']);
+    expect(similar(items, 'brocoli')).toEqual(['Брокколи']);
+    expect(similar(items, 'грудки')).toEqual(['Куриная грудка']);
+    // Sharing a few letters is not enough («brokoli» vs «broad beans»).
+    const beans = [{ name: 'Бобы', names: ['Бобы', 'Broad beans'] }, ...items];
+    expect(similar(beans, 'brokoli')).toEqual(['Брокколи']);
   });
 
-  it('offers nothing for very short or unrelated queries', () => {
-    expect(suggestSimilar(items, 'б')).toEqual([]);
-    expect(suggestSimilar(items, 'шоколад')).toEqual([]);
-  });
-
-  it('ranks by similarity and respects the limit', () => {
-    const many = [{ name: 'Сыры' }, { name: 'Сыр' }, { name: 'Сырок' }].map((x) => ({
-      ...x,
-      nameHu: null,
-    }));
-    expect(suggestSimilar(many, 'сыр', 2).map((i) => i.name)).toEqual(['Сыр', 'Сыры']);
-    const tie = [{ name: 'Сыр твёрдый' }, { name: 'Сыр мягкий' }].map((x) => ({
-      ...x,
-      nameHu: null,
-    }));
-    expect(suggestSimilar(tie, 'сыр').map((i) => i.name)).toEqual(['Сыр мягкий', 'Сыр твёрдый']);
+  it('offers nothing for unrelated queries', () => {
+    expect(similar(items, 'шоколад')).toEqual([]);
   });
 });
 

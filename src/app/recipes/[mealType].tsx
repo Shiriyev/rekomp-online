@@ -4,14 +4,15 @@ import { memo, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, TextInput, TouchableRipple } from 'react-native-paper';
 
-import { buildShelves, type Shelf } from '@/domain/browse';
+import { buildShelves, cuisinesOf, type Shelf } from '@/domain/browse';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
 import { MEAL_LABELS } from '@/features/meals';
 import { RecipeCard } from '@/features/recipes/RecipeCard';
 import { RecipeFilterBar } from '@/features/recipes/RecipeFilterBar';
-import { useRecipeFilters } from '@/features/recipes/recipeFiltersStore';
+import { useActiveFilterCount, useRecipeFilters } from '@/features/recipes/recipeFiltersStore';
 import { useBrowseRecipes, type BrowseItem } from '@/features/recipes/useBrowseRecipes';
 import { useT } from '@/i18n';
+import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { useTransitionDone } from '@/lib/useTransitionDone';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
@@ -26,8 +27,9 @@ const SHELF_CARD_WIDTH = 164;
 const SHELF_PREVIEW = 12;
 
 /**
- * Recipes of one meal: search, quick filters («Нет плиты», «Без свинины», …) and shelves
- * («Можно приготовить сейчас», «Курица», …) that scroll sideways; «Все» opens a grid.
+ * Recipes of one meal: search (names and ingredients), filters and sort («Нет плиты»,
+ * «до 600 ккал», «Под остаток дня», …) and shelves («Можно приготовить сейчас», «Курица»,
+ * …) that scroll sideways; «Все» opens a grid.
  */
 export default function RecipesScreen() {
   const t = useT();
@@ -35,9 +37,15 @@ export default function RecipesScreen() {
   const meal = isMealType(params.mealType) ? params.mealType : null;
   const [query, setQuery] = useState('');
   const ready = useTransitionDone();
-  const { items, isLoaded } = useBrowseRecipes(meal, query);
+  const settled = useDebouncedValue(query, 150);
+  const { items, all, isLoaded, sortList } = useBrowseRecipes(meal, settled);
   const clear = useRecipeFilters((s) => s.clear);
-  const shelves = useMemo(() => buildShelves(items), [items]);
+  const filterCount = useActiveFilterCount();
+  const shelves = useMemo(
+    () => buildShelves(items).map((s) => ({ ...s, recipes: sortList(s.recipes) })),
+    [items, sortList],
+  );
+  const cuisines = useMemo(() => cuisinesOf(all), [all]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
   const title = <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />;
@@ -65,14 +73,18 @@ export default function RecipesScreen() {
           autoCorrect={false}
         />
       </View>
-      <RecipeFilterBar resultCount={items.length} />
+      <RecipeFilterBar resultCount={items.length} cuisines={cuisines} />
     </View>
   );
   const empty = (
     <EmptyState
       icon="silverware-variant"
       title={t('recipes.browse.nothing')}
-      description={t('recipes.browse.nothingHint')}
+      description={
+        settled.trim() && filterCount === 0
+          ? t('recipes.browse.nothingSearchHint')
+          : t('recipes.browse.nothingHint')
+      }
       actionLabel={t('recipes.browse.clearFilters')}
       onAction={() => {
         clear();
@@ -82,7 +94,7 @@ export default function RecipesScreen() {
   );
 
   // Searching shows one grid of matches instead of shelves.
-  if (query.trim()) {
+  if (settled.trim()) {
     return (
       <>
         {title}
