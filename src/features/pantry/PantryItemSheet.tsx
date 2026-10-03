@@ -3,13 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useImperativeHandle, useRef, useState, type Ref } from 'react';
 import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button, IconButton, Text } from 'react-native-paper';
 import { z } from 'zod';
 
 import { repositories } from '@/db';
 import type { Ingredient } from '@/db/schema';
 import { defaultLowStockThreshold } from '@/domain/stock';
 import { numberText, optionalNumberText } from '@/features/forms/numberText';
+import { openProductCard } from '@/features/products/ProductRow';
 import { useT, useUnitLabel } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatDecimal } from '@/lib/format';
@@ -90,9 +91,19 @@ export function PantryItemSheet({ ref, onRemove }: Props) {
     <AppBottomSheet sheetRef={sheetRef}>
       {ingredient && current ? (
         <>
-          <Text variant="titleLarge" accessibilityRole="header">
-            {content.ingredientName(ingredient)}
-          </Text>
+          <View style={styles.row}>
+            <Text variant="titleLarge" accessibilityRole="header" style={styles.flex}>
+              {content.ingredientName(ingredient)}
+            </Text>
+            <IconButton
+              icon="information-outline"
+              onPress={() => {
+                sheetRef.current?.dismiss();
+                openProductCard(ingredient.id);
+              }}
+              accessibilityLabel={t('products.card.openHint')}
+            />
+          </View>
           <View style={styles.row}>
             <NumberField
               control={control}

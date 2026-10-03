@@ -11,6 +11,7 @@ import { history } from './history';
 import { nav } from './nav';
 import { onboarding } from './onboarding';
 import { pantry } from './pantry';
+import { products } from './products';
 import { profile } from './profile';
 import { recipes } from './recipes';
 import { today } from './today';
@@ -35,4 +36,5 @@ export const en: Messages<typeof ru> = {
   backup,
   about,
   catalog,
+  products,
 };

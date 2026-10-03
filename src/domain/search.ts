@@ -97,3 +97,50 @@ export function suggestSimilar<T extends Searchable>(
     .slice(0, limit)
     .map((s) => s.item);
 }
+
+export type SearchIndex<T> = {
+  /** Matches (prefix matches first), else look-alikes when `fuzzy` is set; all for ''. */
+  search: (query: string, options?: { fuzzy?: boolean }) => { items: T[]; similar: boolean };
+};
+
+/**
+ * Search over a fixed list, normalised once: the screens rebuild it when the list changes,
+ * not on every keystroke. `names` gives every name to match (any language, synonyms).
+ * Results keep the list's order within the prefix and the contains group.
+ */
+export function createSearchIndex<T>(
+  items: readonly T[],
+  names: (item: T) => readonly (string | null | undefined)[],
+): SearchIndex<T> {
+  const entries = items.map((item) => {
+    const full = names(item).flatMap((n) => {
+      const v = n ? normalizeForSearch(n) : '';
+      return v ? [v] : [];
+    });
+    return { item, full, words: full.flatMap((n) => n.split(/\s+/)) };
+  });
+  return {
+    search(query, options) {
+      const q = normalizeForSearch(query);
+      if (q === '') return { items: [...items], similar: false };
+      const prefix: T[] = [];
+      const contains: T[] = [];
+      for (const e of entries) {
+        if (e.full.some((n) => n.startsWith(q)) || e.words.some((w) => w.startsWith(q)))
+          prefix.push(e.item);
+        else if (e.full.some((n) => n.includes(q))) contains.push(e.item);
+      }
+      if (prefix.length + contains.length > 0 || !options?.fuzzy || q.length < 2)
+        return { items: [...prefix, ...contains], similar: false };
+      const scored: { item: T; score: number }[] = [];
+      for (const e of entries) {
+        let best = 0;
+        for (const n of [...e.full, ...e.words]) best = Math.max(best, similarity(q, n));
+        if (best >= MIN_SIMILARITY) scored.push({ item: e.item, score: best });
+      }
+      // Stable sort: equal scores keep the list order.
+      scored.sort((a, b) => b.score - a.score);
+      return { items: scored.map((s) => s.item), similar: true };
+    },
+  };
+}

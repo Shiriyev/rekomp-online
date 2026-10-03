@@ -5,16 +5,11 @@ export const pantry: Messages<typeof ru> = {
   pieceWeight: 'Weight of 1 pc',
   notInCatalog: {
     title: 'This product is not in the catalog',
-    maybe: 'Did you mean:',
     tryOther: 'Try another name — in English, Russian or Hungarian.',
   },
   segments: { home: 'At home', portions: 'Portions', shopping: 'Shopping' },
-  sort: { popular: 'Most needed', alpha: 'A–Z' },
   home: {
-    all: 'All',
     low: 'Running low',
-    search: 'Search at home',
-    nothingFound: 'Nothing found',
     removed: 'Removed: {{name}}',
     emptyTitle: 'Nothing at home yet',
     emptyDescription: 'Add products and dishes will show what you can cook.',
@@ -53,8 +48,10 @@ export const pantry: Messages<typeof ru> = {
     discarded: 'Thrown away: {{name}}',
   },
   picker: {
-    search: 'Search: cottage cheese, túró…',
-    searchLabel: 'Search products',
+    more_one: '{{count}} more — refine the search or pick a category',
+    more_few: '{{count}} more — refine the search or pick a category',
+    more_many: '{{count}} more — refine the search or pick a category',
+    more_other: '{{count}} more — refine the search or pick a category',
     amount: 'Amount',
   },
   shopping: {

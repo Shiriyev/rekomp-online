@@ -2,160 +2,110 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { FlashList } from '@shopify/flash-list';
 import { router, Stack } from 'expo-router';
 import { memo, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Chip, Surface, Text, TextInput, TouchableRipple } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Button, Chip, Surface, Text, TouchableRipple } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
-import { searchIngredients, suggestSimilar } from '@/domain/search';
-import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
 import { bundledImage } from '@/features/bundledImage';
-import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
+import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
-import { NotInCatalog } from '@/features/pantry/NotInCatalog';
-import { sortProducts, useProductPopularity, useProductSort } from '@/features/pantry/productSort';
-import { ProductSortChip } from '@/features/pantry/ProductSortChip';
+import { openProductCard, ProductRow } from '@/features/products/ProductRow';
+import { ProductsEmpty } from '@/features/products/ProductsEmpty';
+import { ProductToolbar } from '@/features/products/ProductToolbar';
+import { useProductBrowser } from '@/features/products/useProductBrowser';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 
-/** Category chip, or the products already ticked. */
-type Filter = 'all' | 'selected' | IngredientCategory;
-
 /**
- * «Добавить домой»: the catalog as a three-column photo grid with search and category
- * chips; tap tiles to pick several products, the selection survives new searches.
+ * «Добавить домой»: the catalog as a three-column photo grid (or a list) with search,
+ * category chips and filters; tap to pick several products, the selection survives new
+ * searches. Long-press opens the product card.
  */
 export default function BulkSelectScreen() {
   const insets = useSafeAreaInsets();
   const t = useT();
-  const content = useContent();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
   const selected = useBulkAddStore((s) => s.selected);
   const toggle = useBulkAddStore((s) => s.toggle);
-  const select = useBulkAddStore((s) => s.select);
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState<Filter>('all');
+  const [onlySelected, setOnlySelected] = useState(false);
 
   const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
-  const sort = useProductSort((x) => x.sort);
-  const popularity = useProductPopularity();
   const available = useMemo(
-    () =>
-      sortProducts(
-        [...ingredients.values()]
-          .filter((i) => !i.isStaple && !i.isArchived)
-          .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-        sort,
-        (i) => ({ id: i.id, category: i.category, name: content.ingredientName(i) }),
-        popularity,
-      ),
-    [ingredients, content, sort, popularity],
+    () => [...ingredients.values()].filter((i) => !i.isStaple && !i.isArchived),
+    [ingredients],
   );
+  const browser = useProductBrowser('add', available, stock);
+  const { state, results, similar } = browser;
   const selectedSet = useMemo(() => new Set(selected), [selected]);
-
-  const counts = useMemo(() => {
-    const map = new Map<IngredientCategory, number>();
-    for (const i of available) map.set(i.category, (map.get(i.category) ?? 0) + 1);
-    return map;
-  }, [available]);
-
-  const results = useMemo(() => {
-    const inFilter =
-      filter === 'all'
-        ? available
-        : filter === 'selected'
-          ? available.filter((i) => selectedSet.has(i.id))
-          : available.filter((i) => i.category === filter);
-    return searchIngredients(inFilter, query);
-  }, [available, filter, selectedSet, query]);
-  // Products come only from the catalog: nothing found → look-alikes, never a new product.
-  const suggestions = useMemo(
-    () => (results.length === 0 && query.trim() ? suggestSimilar(available, query) : []),
-    [available, query, results.length],
+  const shown = useMemo(
+    () => (onlySelected ? results.filter((i) => selectedSet.has(i.id)) : results),
+    [results, onlySelected, selectedSet],
   );
   const defaultFor = (i: Ingredient) => defaultAddAmount(i, i.lastAddedAmount);
-
-  const chips: { id: Filter; label: string }[] = [
-    { id: 'all', label: t('pantry.home.all') },
-    ...(selected.length > 0
-      ? [{ id: 'selected' as const, label: t('bulkAdd.selected', { count: selected.length }) }]
-      : []),
-    ...INGREDIENT_CATEGORIES.flatMap((c) =>
-      counts.get(c) ? [{ id: c, label: `${CATEGORY_LABELS[c]} · ${counts.get(c)}` }] : [],
-    ),
-  ];
+  const grid = state.view === 'grid';
 
   return (
     <View style={styles.flex}>
       <Stack.Screen options={{ title: t('bulkAdd.selectTitle') }} />
-      <View style={styles.search}>
-        <TextInput
-          mode="outlined"
-          dense
-          placeholder={t('bulkAdd.search')}
-          accessibilityLabel={t('bulkAdd.searchLabel')}
-          value={query}
-          onChangeText={setQuery}
-          left={<TextInput.Icon icon="magnify" />}
-          right={query ? <TextInput.Icon icon="close" onPress={() => setQuery('')} /> : undefined}
-          autoCorrect={false}
-        />
-      </View>
-      <View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.chips}
-          keyboardShouldPersistTaps="handled">
-          <ProductSortChip />
-          {chips.map((c) => (
+      <ProductToolbar
+        browser={browser}
+        screen="add"
+        extraChips={
+          selected.length > 0 || onlySelected ? (
             <Chip
-              key={c.id}
               compact
-              mode={filter === c.id ? 'flat' : 'outlined'}
-              selected={filter === c.id}
+              icon="check"
+              mode={onlySelected ? 'flat' : 'outlined'}
+              selected={onlySelected}
               showSelectedCheck={false}
-              icon={c.id === 'all' || c.id === 'selected' ? undefined : CATEGORY_ICONS[c.id]}
-              onPress={() => setFilter(c.id)}>
-              {c.label}
+              onPress={() => setOnlySelected((v) => !v)}>
+              {t('bulkAdd.selected', { count: selected.length })}
             </Chip>
-          ))}
-        </ScrollView>
-      </View>
+          ) : null
+        }
+      />
+      {similar && shown.length > 0 ? (
+        <Text variant="labelLarge" style={styles.similar}>
+          {t('products.similar')}
+        </Text>
+      ) : null}
       <FlashList
-        data={results}
-        numColumns={3}
+        key={state.view}
+        data={shown}
+        numColumns={grid ? 3 : 1}
         keyExtractor={(i) => i.id}
         extraData={selectedSet}
         keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.grid}
+        contentContainerStyle={grid ? styles.grid : styles.list}
         ListEmptyComponent={
-          query.trim() ? (
-            <NotInCatalog
-              suggestions={suggestions}
-              onPick={(i) => {
-                select(i.id, defaultFor(i));
-                setQuery('');
-              }}
-            />
-          ) : null
+          <ProductsEmpty browser={browser} onReset={() => setOnlySelected(false)} />
         }
-        renderItem={({ item }) => (
-          <View style={styles.cell}>
-            <SelectTile
+        renderItem={({ item }) =>
+          grid ? (
+            <View style={styles.cell}>
+              <SelectTile
+                ingredient={item}
+                checked={selectedSet.has(item.id)}
+                have={stock.get(item.id)}
+                onToggle={() => toggle(item.id, defaultFor(item))}
+              />
+            </View>
+          ) : (
+            <SelectRow
               ingredient={item}
               checked={selectedSet.has(item.id)}
               have={stock.get(item.id)}
               onToggle={() => toggle(item.id, defaultFor(item))}
             />
-          </View>
-        )}
+          )
+        }
       />
       <Surface elevation={2} style={[styles.bar, { paddingBottom: spacing.md + insets.bottom }]}>
         <Text variant="titleMedium" style={styles.flex} accessibilityLiveRegion="polite">
@@ -191,6 +141,7 @@ const SelectTile = memo(function SelectTile({ ingredient, checked, have, onToggl
   return (
     <TouchableRipple
       onPress={onToggle}
+      onLongPress={() => openProductCard(ingredient.id)}
       borderless
       style={[
         styles.tile,
@@ -232,11 +183,37 @@ const SelectTile = memo(function SelectTile({ ingredient, checked, have, onToggl
   );
 });
 
+/** List view: the shared product row with what is at home and a check box. */
+const SelectRow = memo(function SelectRow({ ingredient, checked, have, onToggle }: TileProps) {
+  const theme = useAppTheme();
+  const t = useT();
+  return (
+    <ProductRow
+      ingredient={ingredient}
+      onPress={onToggle}
+      selected={checked}
+      accessibilityRole="checkbox"
+      subtitle={
+        have !== undefined
+          ? t('bulkAdd.atHome', { amount: formatAmount(have, ingredient.unit) })
+          : undefined
+      }
+      trailing={
+        <MaterialCommunityIcons
+          name={checked ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
+          size={24}
+          color={checked ? theme.colors.primary : theme.colors.onSurfaceVariant}
+        />
+      }
+    />
+  );
+});
+
 const styles = StyleSheet.create({
   flex: { flex: 1 },
-  search: { paddingHorizontal: spacing.lg, paddingTop: spacing.md },
-  chips: { gap: spacing.sm, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
   grid: { paddingHorizontal: spacing.md, paddingBottom: spacing.lg },
+  list: { paddingHorizontal: spacing.sm, paddingBottom: spacing.lg },
+  similar: { paddingHorizontal: spacing.lg, paddingBottom: spacing.xs },
   cell: { flex: 1, padding: spacing.xs },
   tile: { borderRadius: radius.md, borderWidth: 2, overflow: 'hidden' },
   image: { width: '100%', aspectRatio: 1 },

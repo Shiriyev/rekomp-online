@@ -10,3 +10,16 @@ jest.mock('react-native-reanimated', () => ({
   // Not included in the shipped mock.
   useReducedMotion: () => false,
 }));
+
+// SQLite key-value store (remembered filters): in memory for tests.
+jest.mock('expo-sqlite/kv-store', () => {
+  const data = new Map<string, string>();
+  return {
+    __esModule: true,
+    default: {
+      getItemSync: (key: string) => data.get(key) ?? null,
+      setItemSync: (key: string, value: string) => void data.set(key, value),
+      removeItemSync: (key: string) => data.delete(key),
+    },
+  };
+});

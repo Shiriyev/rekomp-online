@@ -11,12 +11,13 @@ import {
   planManualDeduction,
   type DeductionItem,
 } from '@/domain/manualEntry';
-import { searchIngredients } from '@/domain/search';
+import { createSearchIndex } from '@/domain/search';
 import { bundledImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatAmount } from '@/lib/format';
+import { useDebouncedValue } from '@/lib/useDebouncedValue';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { AmountInput } from '@/ui/AmountInput';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
@@ -49,17 +50,21 @@ export function DeductionSection({ value, onChange, onCalculate }: Props) {
       }),
     [pantryItems, ingredients],
   );
+  // Built when the stock changes, searched as the (debounced) query changes.
+  const index = useMemo(
+    () => createSearchIndex(atHome, (i) => [i.name, i.nameHu, ...content.searchAliases(i)]),
+    [atHome, content],
+  );
+  const settled = useDebouncedValue(query, 150);
   const results = useMemo(() => {
     const chosen = new Set(value.map((v) => v.ingredientId));
     // Once something is picked, more products come from the search, so the page stays short.
-    if (chosen.size > 0 && query.trim() === '') return [];
-    return searchIngredients(
-      atHome.map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-      query,
-    )
-      .filter((i) => !chosen.has(i.id))
+    if (chosen.size > 0 && settled.trim() === '') return [];
+    return index
+      .search(settled, { fuzzy: true })
+      .items.filter((i) => !chosen.has(i.id))
       .slice(0, MAX_RESULTS);
-  }, [atHome, query, value, content]);
+  }, [index, settled, value]);
   const plan = useMemo(
     () => (ingredients.size > 0 ? planManualDeduction(value, ingredients, stock) : null),
     [value, ingredients, stock],

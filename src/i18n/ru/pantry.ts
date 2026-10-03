@@ -3,16 +3,11 @@ export const pantry = {
   pieceWeight: 'Вес 1 шт',
   notInCatalog: {
     title: 'Такого продукта нет в каталоге',
-    maybe: 'Может быть, вы искали:',
     tryOther: 'Попробуйте другое название — по-русски, по-венгерски или по-английски.',
   },
   segments: { home: 'Дома', portions: 'Порции', shopping: 'Покупки' },
-  sort: { popular: 'Чаще нужны', alpha: 'По алфавиту' },
   home: {
-    all: 'Все',
     low: 'Заканчивается',
-    search: 'Поиск дома',
-    nothingFound: 'Ничего не нашлось',
     removed: 'Убрано: {{name}}',
     emptyTitle: 'Дома пока пусто',
     emptyDescription: 'Добавь продукты — и блюда покажут, что можно приготовить.',
@@ -51,8 +46,10 @@ export const pantry = {
     discarded: 'Выброшено: {{name}}',
   },
   picker: {
-    search: 'Поиск: творог, túró…',
-    searchLabel: 'Поиск продукта',
+    more_one: 'Ещё {{count}} — уточни поиск или выбери категорию',
+    more_few: 'Ещё {{count}} — уточни поиск или выбери категорию',
+    more_many: 'Ещё {{count}} — уточни поиск или выбери категорию',
+    more_other: 'Ещё {{count}} — уточни поиск или выбери категорию',
     amount: 'Количество',
   },
   shopping: {

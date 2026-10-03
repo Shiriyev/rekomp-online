@@ -3,13 +3,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMemo, useState, type RefObject } from 'react';
 import { useForm } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
-import { Button, List, Text, TextInput } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { z } from 'zod';
 
+import { usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
-import { searchIngredients, suggestSimilar } from '@/domain/search';
 import { numberText } from '@/features/forms/numberText';
-import { CATEGORY_ICONS } from '@/features/ingredients';
+import { ProductRow } from '@/features/products/ProductRow';
+import { ProductToolbar } from '@/features/products/ProductToolbar';
+import { useProductBrowser } from '@/features/products/useProductBrowser';
 import { useT, useUnitLabel } from '@/i18n';
 import { content as contentNames, useContent } from '@/i18n/content';
 import { formatAmount, formatDecimal } from '@/lib/format';
@@ -17,8 +19,6 @@ import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
 import { sheetInput } from '@/ui/sheetInput';
-
-import { NotInCatalog } from './NotInCatalog';
 
 type Props = {
   sheetRef: RefObject<BottomSheetModal | null>;
@@ -33,7 +33,8 @@ type Props = {
   onSubmit: (ingredient: Ingredient, amount: number) => void;
 };
 
-const MAX_RESULTS = 30;
+/** A sheet is not a list view: past this, the search or a category narrows it down. */
+const MAX_RESULTS = 40;
 
 const amountSchema = z.object({ amount: numberText({ min: 0.5, max: 100_000 }) });
 
@@ -58,23 +59,15 @@ export function ProductPickerSheet({
   const content = useContent();
   const unitLabel = useUnitLabel();
   const [step, setStep] = useState<Step>({ kind: 'search' });
-  const [query, setQuery] = useState('');
+  const pantry = usePantryItems();
 
+  const stock = useMemo(() => new Map(pantry.map((p) => [p.ingredientId, p.quantity])), [pantry]);
   const available = useMemo(
-    () =>
-      ingredients
-        .filter((i) => !i.isStaple && !i.isArchived)
-        .map((i) => ({ ...i, aliases: content.searchAliases(i) })),
-    [ingredients, content],
+    () => ingredients.filter((i) => !i.isStaple && !i.isArchived),
+    [ingredients],
   );
-  const results = useMemo(
-    () => searchIngredients(available, query).slice(0, MAX_RESULTS),
-    [available, query],
-  );
-  const suggestions = useMemo(
-    () => (results.length === 0 ? suggestSimilar(available, query) : []),
-    [available, query, results.length],
-  );
+  const browser = useProductBrowser('shopping', available, stock);
+  const results = browser.results.slice(0, MAX_RESULTS);
 
   const amountForm = useForm<z.input<typeof amountSchema>, unknown, z.output<typeof amountSchema>>({
     resolver: zodResolver(amountSchema),
@@ -82,7 +75,7 @@ export function ProductPickerSheet({
   });
   const reset = () => {
     setStep({ kind: 'search' });
-    setQuery('');
+    browser.setQuery('');
   };
 
   const pick = (ingredient: Ingredient) => {
@@ -102,30 +95,46 @@ export function ProductPickerSheet({
           <Text variant="titleLarge" accessibilityRole="header">
             {title}
           </Text>
-          <TextInput
-            mode="outlined"
-            label={t('pantry.picker.search')}
-            accessibilityLabel={t('pantry.picker.searchLabel')}
-            value={query}
-            onChangeText={setQuery}
-            left={<TextInput.Icon icon="magnify" />}
-            render={sheetInput}
-            autoCorrect={false}
-          />
+          <View style={styles.toolbar}>
+            <ProductToolbar
+              browser={browser}
+              screen="shopping"
+              renderInput={sheetInput}
+              inset={0}
+              viewToggle={false}
+            />
+          </View>
+          {browser.similar && results.length > 0 ? (
+            <Text variant="labelLarge">{t('products.similar')}</Text>
+          ) : null}
           <View>
             {results.map((i) => (
-              <List.Item
+              <ProductRow
                 key={i.id}
-                title={content.ingredientName(i)}
-                description={[i.nameHu, describe?.(i)].filter(Boolean).join(' · ')}
-                left={(props) => <List.Icon {...props} icon={CATEGORY_ICONS[i.category]} />}
+                ingredient={i}
+                subtitle={describe?.(i) ?? undefined}
                 onPress={() => pick(i)}
-                style={styles.item}
               />
             ))}
           </View>
-          {query.trim() && results.length === 0 ? (
-            <NotInCatalog suggestions={suggestions} onPick={pick} />
+          {results.length === 0 ? (
+            <View style={styles.empty}>
+              <Text variant="titleMedium">{t('products.nothing')}</Text>
+              <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
+                {t('products.nothingHint')}
+              </Text>
+              <Button
+                onPress={() => {
+                  browser.reset();
+                  browser.setQuery('');
+                }}>
+                {t('products.reset')}
+              </Button>
+            </View>
+          ) : browser.results.length > MAX_RESULTS ? (
+            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+              {t('pantry.picker.more', { count: browser.results.length - MAX_RESULTS })}
+            </Text>
           ) : null}
         </>
       ) : null}
@@ -169,5 +178,6 @@ export const stockLabel = (i: Ingredient, quantity: number) =>
 const styles = StyleSheet.create({
   flex: { flex: 1 },
   row: { flexDirection: 'row', gap: spacing.sm, alignItems: 'center' },
-  item: { minHeight: 56 },
+  toolbar: { marginTop: -spacing.md },
+  empty: { alignItems: 'center', gap: spacing.xs, paddingVertical: spacing.lg },
 });
