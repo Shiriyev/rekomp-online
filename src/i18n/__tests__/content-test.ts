@@ -1,6 +1,8 @@
 /** @jest-environment node */
 import { SEED_INGREDIENTS } from '../../db/seed/ingredients';
 import { SEED_RECIPES } from '../../db/seed/recipes';
+import { applyLanguage } from '..';
+import { content, setRecipeNamesEn } from '../content';
 import { INGREDIENTS_EN, RECIPES_EN, TAGS_EN } from '../content/en';
 
 const CYRILLIC = /[Ѐ-ӿ]/;
@@ -58,5 +60,27 @@ describe('English built-in content', () => {
       ...Object.values(TAGS_EN),
     ];
     expect(strings.filter((s) => CYRILLIC.test(s))).toEqual([]);
+  });
+});
+
+describe('names of entries that keep only a recipe id', () => {
+  afterEach(() => {
+    applyLanguage('ru');
+    setRecipeNamesEn([]);
+  });
+
+  it('uses the English recipe name from the database for diary entries', () => {
+    setRecipeNamesEn([
+      { id: 'mdb_1', nameEn: 'Chicken stew' },
+      { id: 'mdb_2', nameEn: null },
+    ]);
+    const entry = (recipeId: string) => ({ name: 'Рагу', recipeId, source: 'recipe' });
+    expect(content.entryName(entry('mdb_1'))).toBe('Рагу');
+    applyLanguage('en');
+    expect(content.entryName(entry('mdb_1'))).toBe('Chicken stew');
+    expect(content.entryName(entry('mdb_2'))).toBe('Рагу');
+    expect(content.entryName({ name: 'Сникерс', recipeId: null, source: 'manual' })).toBe(
+      'Сникерс',
+    );
   });
 });

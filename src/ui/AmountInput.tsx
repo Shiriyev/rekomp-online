@@ -13,9 +13,10 @@ import { Text } from 'react-native-paper';
 import { parseDecimal } from '@/domain/schemas';
 import type { Unit } from '@/domain/types';
 import { useUnitLabel } from '@/i18n';
+import { formatInputNumber } from '@/lib/format';
 import { radius, spacing, useAppTheme } from '@/theme';
 
-const toText = (n: number) => String(n).replace('.', ',');
+const toText = formatInputNumber;
 
 type Props = {
   /** Spoken name of what is being changed, e.g. «Творог». */

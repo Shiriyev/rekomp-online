@@ -10,13 +10,26 @@ type Named = { id: string; name: string; nameEn?: string | null };
 const RECIPE_TAG_IDS = new Set(['vegetarian', 'vegan', 'pork', 'alcohol', 'lactose', 'gluten']);
 
 /**
+ * English names of every recipe by id, for rows that keep only the id and the Russian name
+ * (diary entries, cooked portions). Filled from the database by `useRecipeNamesEn`.
+ */
+const recipeNamesEn = new Map<string, string>();
+
+export function setRecipeNamesEn(rows: readonly { id: string; nameEn: string | null }[]): void {
+  recipeNamesEn.clear();
+  for (const r of rows) if (r.nameEn) recipeNamesEn.set(r.id, r.nameEn);
+}
+
+/**
  * Display names for built-in content in the current language. Russian returns the stored
  * text unchanged; English uses the catalog's English column, then the v1 English texts by
  * id, and falls back to the stored text.
  */
 export const content = {
   recipeName: (r: Named): string =>
-    (currentLanguage() === 'en' && (r.nameEn || RECIPES_EN[r.id]?.name)) || r.name,
+    (currentLanguage() === 'en' &&
+      (r.nameEn || recipeNamesEn.get(r.id) || RECIPES_EN[r.id]?.name)) ||
+    r.name,
 
   /** One-line description of a catalog recipe (v1 recipes have none). */
   recipeDescription: (r: {

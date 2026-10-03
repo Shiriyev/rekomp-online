@@ -4,7 +4,7 @@ import { NavigationBar } from 'expo-navigation-bar';
 import { Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { getLocales, useLocales } from 'expo-localization';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
@@ -13,7 +13,12 @@ import { enableFreeze } from 'react-native-screens';
 
 import { repositories } from '@/db';
 import { DatabaseProvider } from '@/db/DatabaseProvider';
-import { useLanguagePreference, useProfile, useThemePreference } from '@/db/hooks';
+import {
+  useLanguagePreference,
+  useProfile,
+  useRecipeEnglishNames,
+  useThemePreference,
+} from '@/db/hooks';
 import { resolveLanguage } from '@/domain/language';
 import { useCookStore } from '@/features/cooking/cookStore';
 import { configureNotificationHandler } from '@/features/cooking/timerNotifications';
@@ -21,6 +26,7 @@ import { cleanupOrphanPhotos } from '@/features/photos/mealPhotos';
 import { UnsupportedProductsDialog } from '@/features/catalog/UnsupportedProductsDialog';
 import { UndoSnackbarHost } from '@/features/undo/UndoSnackbarHost';
 import { applyLanguage, useT } from '@/i18n';
+import { setRecipeNamesEn } from '@/i18n/content';
 import { darkTheme, lightTheme } from '@/theme';
 import { navDarkTheme, navLightTheme } from '@/theme/navigation';
 
@@ -52,6 +58,10 @@ function AppShell() {
   const isDark = preference === 'system' ? system === 'dark' : preference === 'dark';
   const { profile, isLoaded } = useProfile();
   const languagePreference = useLanguagePreference();
+  // Diary entries and portions keep only a recipe id: give `content` the English names.
+  // During render on purpose (the first read is synchronous), so screens get them at once.
+  const englishNames = useRecipeEnglishNames();
+  useMemo(() => setRecipeNamesEn(englishNames), [englishNames]);
   const locales = useLocales();
   const language = resolveLanguage(
     languagePreference,

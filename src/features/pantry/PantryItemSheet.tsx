@@ -13,7 +13,7 @@ import { numberText, optionalNumberText } from '@/features/forms/numberText';
 import { openProductCard } from '@/features/products/ProductRow';
 import { useT, useUnitLabel } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { formatDecimal } from '@/lib/format';
+import { formatInputNumber } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
@@ -35,7 +35,7 @@ type Props = {
   onRemove: (ingredient: Ingredient, quantity: number) => void;
 };
 
-const toText = (n: number | null) => (n === null ? '' : formatDecimal(n));
+const toText = (n: number | null) => (n === null ? '' : formatInputNumber(n));
 
 /** Edit one pantry item: exact amount, «мало» threshold and the ingredient's КБЖУ. */
 export function PantryItemSheet({ ref, onRemove }: Props) {

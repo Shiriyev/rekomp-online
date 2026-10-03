@@ -14,7 +14,7 @@ import { ProductToolbar } from '@/features/products/ProductToolbar';
 import { useProductBrowser } from '@/features/products/useProductBrowser';
 import { useT, useUnitLabel } from '@/i18n';
 import { content as contentNames, useContent } from '@/i18n/content';
-import { formatAmount, formatDecimal } from '@/lib/format';
+import { formatAmount, formatInputNumber } from '@/lib/format';
 import { spacing, useAppTheme } from '@/theme';
 import { AppBottomSheet } from '@/ui/AppBottomSheet';
 import { NumberField } from '@/ui/NumberField';
@@ -79,7 +79,7 @@ export function ProductPickerSheet({
   };
 
   const pick = (ingredient: Ingredient) => {
-    amountForm.reset({ amount: formatDecimal(defaultAmount(ingredient)) });
+    amountForm.reset({ amount: formatInputNumber(defaultAmount(ingredient)) });
     setStep({ kind: 'amount', ingredient });
   };
 

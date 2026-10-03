@@ -347,6 +347,11 @@ export function useLatestLog(): MealLog | undefined {
 }
 
 /** Ids of the saved recipes («Избранное»). */
+/** English names of all recipes, archived ones too (the diary still shows them). */
+export function useRecipeEnglishNames(): { id: string; nameEn: string | null }[] {
+  return useLiveQuery(db.select({ id: recipes.id, nameEn: recipes.nameEn }).from(recipes)).data;
+}
+
 export function useFavoriteRecipeIds(): ReadonlySet<string> {
   const { data } = useLiveQuery(
     db.select({ recipeId: favoriteRecipes.recipeId }).from(favoriteRecipes),

@@ -1,3 +1,6 @@
+import { parseDecimal } from '@/domain/schemas';
+import { applyLanguage } from '@/i18n';
+
 import {
   formatAmount,
   formatDayLabel,
@@ -5,6 +8,7 @@ import {
   formatDayMonth,
   formatDecimal,
   formatGrams,
+  formatInputNumber,
   formatInt,
   formatKcal,
   pluralRu,
@@ -19,6 +23,12 @@ describe('format', () => {
     expect(formatDecimal(82.5)).toBe('82,5');
     expect(nbsp(formatKcal(2150))).toBe('2 150 ккал');
     expect(formatGrams(61.44)).toBe('61,4 г');
+  });
+
+  it('fills text fields without grouping, so the value reads back the same', () => {
+    expect(formatInputNumber(12000)).toBe('12000');
+    expect(formatInputNumber(12.5)).toBe('12,5');
+    expect(formatInputNumber(0.333)).toBe('0,33');
   });
 
   it.each([
@@ -63,5 +73,16 @@ describe('formatDayLabel / formatTime', () => {
 
   it('formats local time', () => {
     expect(formatTime(Date.UTC(2026, 8, 27, 15, 12))).toBe('17:12');
+  });
+});
+
+describe('formatInputNumber in English', () => {
+  afterEach(() => applyLanguage('ru'));
+
+  it('uses a point and no thousands separator («1,200» would read back as 1.2)', () => {
+    applyLanguage('en');
+    expect(formatInputNumber(1200)).toBe('1200');
+    expect(formatInputNumber(13.5)).toBe('13.5');
+    expect(parseDecimal(formatInputNumber(1200))).toBe(1200);
   });
 });

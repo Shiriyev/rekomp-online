@@ -28,7 +28,7 @@ import {
 import { saveManualEntry } from '@/features/today/saveManualEntry';
 import { useT, useTranslateMessage } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { formatAmount, formatDecimal, formatInt } from '@/lib/format';
+import { formatAmount, formatDecimal, formatInputNumber, formatInt } from '@/lib/format';
 import { newId } from '@/lib/id';
 import { radius, spacing, useAppTheme } from '@/theme';
 import { NumberField } from '@/ui/NumberField';
@@ -71,7 +71,7 @@ export default function AddMealScreen() {
     if (force || !manualMacros) {
       const m = deductionMacros(items, ingredients);
       setValue('kcal', String(m.kcal), { shouldValidate: formState.isSubmitted });
-      setValue('protein', formatDecimal(m.protein), { shouldValidate: formState.isSubmitted });
+      setValue('protein', formatInputNumber(m.protein), { shouldValidate: formState.isSubmitted });
     }
     // The name follows the products until the user writes their own.
     const name = getValues('name');

@@ -27,6 +27,20 @@ export const formatInt = (n: number): string => numberFormat(0).format(Math.roun
 /** "82,5" / "82.5" */
 export const formatDecimal = (n: number): string => numberFormat(1).format(n);
 
+/**
+ * A number to put in a text field: the language's decimal separator, no grouping (a
+ * «1,200» would read back as 1.2), up to two decimals. `parseDecimal` reads it back.
+ */
+export const formatInputNumber = (n: number): string => {
+  const key = `in:${currentLocale()}`;
+  let f = cache.get(key) as Intl.NumberFormat | undefined;
+  if (!f) {
+    f = new Intl.NumberFormat(currentLocale(), { maximumFractionDigits: 2, useGrouping: false });
+    cache.set(key, f);
+  }
+  return f.format(n);
+};
+
 export const formatKcal = (n: number): string => t('common.kcalValue', { value: formatInt(n) });
 
 export const formatGrams = (n: number): string => `${formatDecimal(n)} ${t('common.grams')}`;

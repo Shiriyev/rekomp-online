@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { buildProfile } from '@/domain/profile';
 import { PROFILE_LIMITS } from '@/domain/schemas';
 import { numberText } from '@/features/forms/numberText';
+import { formatInputNumber } from '@/lib/format';
 import { ACTIVITY_LEVELS, GOAL_RATES, SEXES, type GoalRate } from '@/domain/types';
 import type { Profile } from '@/db/schema';
 
@@ -51,7 +52,7 @@ export const profileFormSchema = z
 
 export type ProfileFormValues = z.input<typeof profileFormSchema>;
 
-const str = (n: number | undefined) => (n === undefined ? '' : String(n).replace('.', ','));
+const str = (n: number | undefined) => (n === undefined ? '' : formatInputNumber(n));
 
 export function profileToFormValues(
   p: Profile | undefined,
