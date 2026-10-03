@@ -109,6 +109,7 @@ export const recipes: Messages<typeof ru> = {
     myVersion: 'Your version of the recipe',
     restoreOriginal: 'Restore original',
     restoredOriginal: 'Original amounts restored',
+    basics: 'Also: {{list}} — a stock cube and water will do',
     staples: 'Spices to taste: {{list}}',
     approx: 'Nutrition is approximate — check the label.',
     addMissing: 'Add missing to the list',

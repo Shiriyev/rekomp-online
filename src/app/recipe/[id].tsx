@@ -18,7 +18,7 @@ import { repositories } from '@/db';
 import { useActiveSales, useIngredientsMap, usePantryStock, useRecipeDetail } from '@/db/hooks';
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
-import { MEAL_TYPES, type MealType } from '@/domain/types';
+import { isStockTracked, MEAL_TYPES, type MealType } from '@/domain/types';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
 import {
   persistPhoto,
@@ -82,14 +82,25 @@ export default function RecipeScreen() {
     const check = canCook(drafted, ingredients, pantry, servings, choices);
     const macros = recipeMacros(drafted, ingredients, { servings, choices });
     const baseMacros = recipeMacros(lines, ingredients, { servings, choices });
-    const used = resolveLines(drafted, choices).filter(
-      (l) => !ingredients.get(l.ingredientId)?.isStaple,
-    );
+    const resolved = resolveLines(drafted, choices);
+    const used = resolved.filter((l) => {
+      const i = ingredients.get(l.ingredientId);
+      return i ? isStockTracked(i) : false;
+    });
+    // Broth and the like: in the recipe and its nutrition, but not kept track of at home.
+    const basics = resolved.flatMap((l) => {
+      const i = ingredients.get(l.ingredientId);
+      return i && !i.isStaple && !isStockTracked(i) && l.amountPerServing > 0
+        ? [
+            `${contentNow.ingredientName(i).toLocaleLowerCase()} ${formatAmount(l.amountPerServing * servings, l.unit)}`,
+          ]
+        : [];
+    });
     const staples = lines.flatMap((l) => {
       const i = ingredients.get(l.ingredientId);
       return i?.isStaple ? [contentNow.ingredientName(i).toLocaleLowerCase()] : [];
     });
-    return { check, macros, baseMacros, used, staples };
+    return { check, macros, baseMacros, used, staples, basics };
   }, [recipe, lines, draft, ingredients, pantry, servings, userChoices]);
 
   if (isLoaded && !recipe) {
@@ -97,7 +108,7 @@ export default function RecipeScreen() {
   }
   if (!ready || !recipe || !computed) return <SkeletonDetail still={!ready} />;
 
-  const { check, macros, baseMacros, used, staples } = computed;
+  const { check, macros, baseMacros, used, staples, basics } = computed;
   const perServing = macros.perServing;
   const after = kcalLeft - perServing.kcal;
   const drafted = Object.keys(draft).length > 0;
@@ -431,6 +442,11 @@ export default function RecipeScreen() {
             );
           })}
 
+          {basics.length > 0 ? (
+            <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
+              {t('recipes.card.basics', { list: basics.join(', ') })}
+            </Text>
+          ) : null}
           {staples.length > 0 ? (
             <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
               {t('recipes.card.staples', { list: staples.join(', ') })}

@@ -172,6 +172,7 @@ function main() {
       // USDA carbs are «by difference» and can come out slightly negative for meat.
       carbsPer100g: m.carbs === null ? null : round(Math.max(0, m.carbs), 1),
       isStaple: p.isStaple,
+      stockTracked: p.stockTracked,
       tags: p.tags,
       source: p.manualMacros ? 'manual' : 'usda',
       sourceId: p.manualMacros || p.usdaFdcId === null ? null : String(p.usdaFdcId),

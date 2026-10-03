@@ -1,6 +1,6 @@
 import { resolveLines, type AltChoices } from './nutrition';
 import type { Shortage } from './pantry';
-import type { NutritionIngredient, RecipeLine, Unit } from './types';
+import { isStockTracked, type NutritionIngredient, type RecipeLine, type Unit } from './types';
 import { convertAmount } from './units';
 
 /** Per-serving amount per ingredient id, in the recipe line's unit. */
@@ -64,7 +64,7 @@ export function usedAmounts(
 ): Shortage[] {
   return resolveLines(lines, choices).flatMap((line) => {
     const ingredient = ingredients.get(line.ingredientId);
-    if (!ingredient || ingredient.isStaple || isRemoved(line)) return [];
+    if (!ingredient || !isStockTracked(ingredient) || isRemoved(line)) return [];
     const amount = convertAmount(
       line.amountPerServing * servings,
       line.unit,

@@ -40,6 +40,8 @@ export const canonicalSchema = z
     usdaFdcId: z.number().int().positive().nullable(),
     manualMacros: macros.nullable(),
     isStaple: z.boolean(),
+    /** false: made at home from basics (broth), never «missing» in a recipe. */
+    stockTracked: z.boolean().default(true),
     tags: z.array(z.enum(TAGS)),
     synonyms: z.array(z.string()),
   })

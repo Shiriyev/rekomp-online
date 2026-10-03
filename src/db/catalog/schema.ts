@@ -87,6 +87,8 @@ export const catalogIngredientSchema = z
     fatPer100g: per100(100).nullable(),
     carbsPer100g: per100(100).nullable(),
     isStaple: z.boolean(),
+    /** false: not tracked at home (broth from water and a cube); still in nutrition. */
+    stockTracked: z.boolean(),
     tags: z.array(z.enum(PRODUCT_TAGS)),
     source: z.enum(['usda', 'manual']),
     /** USDA FoodData Central fdcId when source = usda. */

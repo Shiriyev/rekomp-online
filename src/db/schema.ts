@@ -73,6 +73,8 @@ export const ingredients = sqliteTable(
     isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
     /** The user changed nutrition or piece weight: catalog updates keep the user's values. */
     nutritionEdited: integer('nutrition_edited', { mode: 'boolean' }).notNull().default(false),
+    /** false: not tracked at home (broth: water and a cube) — never «missing», not deducted. */
+    stockTracked: integer('stock_tracked', { mode: 'boolean' }).notNull().default(true),
     /** «Заканчивается» below this amount (ingredient unit); null = default by unit. */
     lowStockThreshold: real('low_stock_threshold'),
     /** What was added «Домой» last time (ingredient unit): the next default amount. */

@@ -46,7 +46,16 @@ export type NutritionIngredient = {
   kcalPer100g: number;
   proteinPer100g: number;
   isStaple: boolean;
+  /**
+   * false: not kept track of at home (broth: made from water and a cube). Counted in
+   * nutrition, never «missing», never deducted. Absent means tracked.
+   */
+  stockTracked?: boolean;
 };
+
+/** Whether stock at home is checked and deducted for this product (staples and broth: no). */
+export const isStockTracked = (i: Pick<NutritionIngredient, 'isStaple' | 'stockTracked'>) =>
+  !i.isStaple && i.stockTracked !== false;
 
 /** One ingredient line of a recipe, amounts are per single serving. */
 export type RecipeLine = {

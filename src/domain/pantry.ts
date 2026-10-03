@@ -1,5 +1,5 @@
 import { resolveLines, type AltChoices } from './nutrition';
-import type { NutritionIngredient, RecipeLine, Unit } from './types';
+import { isStockTracked, type NutritionIngredient, type RecipeLine, type Unit } from './types';
 import { convertAmount } from './units';
 
 /** What is at home, keyed by ingredient id, in the ingredient's own unit. */
@@ -114,7 +114,7 @@ export function canCook<L extends RecipeLine>(
   for (const line of resolveLines(lines, choices)) {
     const { ingredient, required, available } = requirement(line, ingredients, pantry, servings);
     // Staples are not tracked; a line set to 0 on the card is not needed for this cook.
-    if (ingredient.isStaple || required <= EPSILON) continue;
+    if (!isStockTracked(ingredient) || required <= EPSILON) continue;
     const status: LineAvailability =
       available >= required - EPSILON ? 'ok' : available > EPSILON ? 'low' : 'missing';
     const alternatives =

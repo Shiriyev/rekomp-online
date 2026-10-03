@@ -130,6 +130,7 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
         fatPer100g: i.fatPer100g,
         carbsPer100g: i.carbsPer100g,
         isStaple: i.isStaple,
+        stockTracked: i.stockTracked,
         tags: i.tags,
         source: i.source,
         sourceId: i.sourceId,

@@ -180,3 +180,28 @@ describe('autoChoices', () => {
     expect(autoChoices(lines, INGREDIENTS, pantry({}), 1)).toEqual({ z: 'skyr' });
   });
 });
+
+describe('products not tracked at home (broth)', () => {
+  const broth = {
+    id: 'chicken_stock',
+    unit: 'ml' as const,
+    gramsPerPiece: null,
+    kcalPer100g: 36,
+    proteinPer100g: 2,
+    isStaple: false,
+    stockTracked: false,
+  };
+  it('never counts as missing', () => {
+    const line = {
+      ingredientId: 'chicken_stock',
+      amountPerServing: 200,
+      unit: 'ml' as const,
+      optional: false,
+      altGroup: null,
+      sortOrder: 0,
+    };
+    const check = canCook([line], new Map([[broth.id, broth]]), new Map(), 1);
+    expect(check.missing).toEqual([]);
+    expect(check.lines).toEqual([]);
+  });
+});

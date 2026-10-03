@@ -19,6 +19,7 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   kcalPer100g: 63,
   proteinPer100g: 11,
   isStaple: false,
+  stockTracked: true,
   imageKey: null,
   isCustom: false,
   lowStockThreshold: null,

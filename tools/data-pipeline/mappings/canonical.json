@@ -4023,7 +4023,8 @@
     "manualMacros": null,
     "isStaple": false,
     "tags": [],
-    "synonyms": ["chicken broth"]
+    "synonyms": ["chicken broth"],
+    "stockTracked": false
   },
   {
     "id": "vegetable_stock",
@@ -4036,7 +4037,8 @@
     "manualMacros": null,
     "isStaple": false,
     "tags": ["vegetarian", "vegan"],
-    "synonyms": ["vegetable broth"]
+    "synonyms": ["vegetable broth"],
+    "stockTracked": false
   },
   {
     "id": "beef_stock",
@@ -4049,7 +4051,8 @@
     "manualMacros": null,
     "isStaple": false,
     "tags": [],
-    "synonyms": ["hot beef stock", "lamb stock", "beef broth"]
+    "synonyms": ["hot beef stock", "lamb stock", "beef broth"],
+    "stockTracked": false
   },
   {
     "id": "fish_stock",
@@ -4062,7 +4065,8 @@
     "manualMacros": null,
     "isStaple": false,
     "tags": [],
-    "synonyms": ["seafood stock", "shrimp stock", "fish broth"]
+    "synonyms": ["seafood stock", "shrimp stock", "fish broth"],
+    "stockTracked": false
   },
   {
     "id": "stock_cube",

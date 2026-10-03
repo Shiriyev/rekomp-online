@@ -15,6 +15,7 @@ const product = (over: Partial<Canonical> & Pick<Canonical, 'id'>): Canonical =>
   usdaFdcId: null,
   manualMacros: { kcal: 0, protein: 0, fat: null, carbs: null },
   isStaple: false,
+  stockTracked: true,
   tags: ['vegetarian', 'vegan'],
   synonyms: [],
   ...over,

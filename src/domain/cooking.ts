@@ -1,6 +1,6 @@
 import { resolveLines, type AltChoices } from './nutrition';
 import type { PantryStock, Shortage } from './pantry';
-import type { NutritionIngredient, RecipeLine } from './types';
+import { isStockTracked, type NutritionIngredient, type RecipeLine } from './types';
 import { convertAmount, normalizeQuantity } from './units';
 
 export type Consumption = {
@@ -27,7 +27,7 @@ export function planConsumption(
   for (const line of resolveLines(lines, choices)) {
     const ingredient = ingredients.get(line.ingredientId);
     if (!ingredient) throw new Error(`Unknown ingredient "${line.ingredientId}"`);
-    if (ingredient.isStaple) continue;
+    if (!isStockTracked(ingredient)) continue;
 
     const unit = ingredient.unit;
     const required = convertAmount(line.amountPerServing * servings, line.unit, unit, ingredient);
