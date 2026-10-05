@@ -94,22 +94,28 @@ export const useCookStore = create<CookState>((set, get) => {
 
     open: (recipeId, servings, choices, draft = null) => {
       const current = get().session;
+      // `draft` is set only when coming from the card: then its amounts and servings win.
       if (current?.recipeId === recipeId) {
-        // Back on the card, amounts were edited again: the running cook follows the draft.
         if (draft) {
-          const updated = repositories.cook.setAmounts(current.id, draft);
-          if (updated) set({ session: { ...current, amounts: updated.amountOverrides } });
+          const updated = repositories.cook.setAmounts(current.id, draft, servings);
+          if (updated) {
+            set({
+              session: { ...current, servings: updated.servings, amounts: updated.amountOverrides },
+            });
+          }
         }
         return;
       }
       const active = repositories.cook.getActive();
       if (active?.recipeId === recipeId) {
-        const session = draft ? (repositories.cook.setAmounts(active.id, draft) ?? active) : active;
+        const session = draft
+          ? (repositories.cook.setAmounts(active.id, draft, servings) ?? active)
+          : active;
         set({
           session: {
             id: active.id,
             recipeId,
-            servings: active.servings,
+            servings: session.servings,
             choices: active.choices,
             amounts: session.amountOverrides,
           },

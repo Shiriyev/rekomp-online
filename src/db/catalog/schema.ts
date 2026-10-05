@@ -109,6 +109,8 @@ export const catalogRecipeSchema = z
     mealTypes: z.array(z.enum(MEAL_TYPES)).min(1),
     defaultServings: z.number().int().min(1).max(12),
     isBatch: z.boolean(),
+    /** Days the cooked dish keeps in the fridge (reviewed by a person). */
+    storageDays: z.number().int().min(1).max(5),
     prepNightBefore: z.boolean(),
     totalMinutes: z.number().int().positive(),
     imageKey: text.nullable(),

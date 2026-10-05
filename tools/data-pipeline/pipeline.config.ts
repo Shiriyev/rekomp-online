@@ -4,7 +4,7 @@
  */
 import { RECIPE_CRITERIA } from './src/lib/app.ts';
 /** Bump when the catalog content changes; the app updates its catalog when this grows. */
-export const CATALOG_VERSION = 10;
+export const CATALOG_VERSION = 11;
 
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,
@@ -35,6 +35,13 @@ export const config = {
     productSide: 320,
     /** Pexels allows ~200 requests/hour. */
     pexelsPauseMs: 2_000,
+  },
+
+  /** Default fridge life in days (FIXES_v2.1 task 2); reviewed values win. */
+  storage: {
+    long: 3,
+    short: 1,
+    shortWords: /\b(salad|slaw|omelet+e?|frittata|scrambled|eggs?|toast|sandwich|wrap|smoothie)\b/i,
   },
 
   /** Recipe acceptance (PHASE_2 task 3). */

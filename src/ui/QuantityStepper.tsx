@@ -9,6 +9,7 @@ type Props = {
   onDecrement: () => void;
   onIncrement: () => void;
   decrementDisabled?: boolean;
+  incrementDisabled?: boolean;
 };
 
 /** − value + with 48dp targets and spoken labels. */
@@ -18,6 +19,7 @@ export function QuantityStepper({
   onDecrement,
   onIncrement,
   decrementDisabled,
+  incrementDisabled,
 }: Props) {
   const t = useT();
   return (
@@ -38,6 +40,7 @@ export function QuantityStepper({
         mode="outlined"
         size={20}
         onPress={onIncrement}
+        disabled={incrementDisabled}
         accessibilityLabel={t('ui.stepper.increment', { label })}
       />
     </View>

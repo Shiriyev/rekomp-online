@@ -31,7 +31,8 @@ export const pantry: Messages<typeof ru> = {
   },
   portions: {
     emptyTitle: 'No cooked portions',
-    emptyDescription: 'Cook a meal for several days and the portions will appear here.',
+    emptyDescription:
+      'Cook a dish for several servings — the ones you don’t eat right away will appear here.',
     perPortion: '{{kcal}} · {{protein}} g protein per portion',
     cookedToday: 'Cooked today',
     cookedYesterday: 'Cooked yesterday',
@@ -39,7 +40,10 @@ export const pantry: Messages<typeof ru> = {
     cookedDaysAgo_few: 'Cooked {{count}} days ago',
     cookedDaysAgo_many: 'Cooked {{count}} days ago',
     cookedDaysAgo_other: 'Cooked {{count}} days ago',
-    checkFreshness: ' — check it is still fresh',
+    goodUntil: 'Good until {{date}}',
+    goodToday: 'Good until the end of today',
+    goodTomorrow: 'Good until tomorrow',
+    expired: 'Past its keeping time ({{date}}) — better throw it away',
     stepperLabel: '{{name}} portions',
     portionsLeft: '{{n}} port.',
     eat: 'Eat',

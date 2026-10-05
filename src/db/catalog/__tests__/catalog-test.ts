@@ -96,6 +96,7 @@ function tiny(): Catalog {
         mealTypes: ['lunch'],
         defaultServings: 1,
         isBatch: false,
+        storageDays: 3,
         prepNightBefore: false,
         totalMinutes: 20,
         imageKey: null,

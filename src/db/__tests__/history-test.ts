@@ -109,7 +109,7 @@ describe('deleting a cooked entry (phase 7 DoD)', () => {
 
   it('removeEntryOnly ignores portion entries (they must give the portion back)', () => {
     const s = repos.cook.start('O1', 2, {}, NOW);
-    const { portionId } = repos.cook.finish(s.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const { portionId } = repos.cook.finish(s.id, { eaten: 0, mealType: 'lunch' }, NOW);
     const eaten = repos.portions.eat(portionId!, 'lunch', NOW);
     repos.logs.removeEntryOnly(eaten.id);
     expect(repos.logs.get(eaten.id)).toBeDefined();
@@ -117,7 +117,7 @@ describe('deleting a cooked entry (phase 7 DoD)', () => {
 
   it('refuses the product return once portions from the pot were eaten', () => {
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const r = repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
     expect(repos.cook.undoPreview(s.id)).toMatchObject({ canUndo: true, portionsToRemove: 2 });
     repos.portions.eat(r.portionId!, 'lunch', NOW + 1);
     expect(repos.cook.undoPreview(s.id)).toEqual({ canUndo: false, reason: 'portions_eaten' });
@@ -126,7 +126,7 @@ describe('deleting a cooked entry (phase 7 DoD)', () => {
   it('reports sessions that cannot be undone', () => {
     const s = repos.cook.start('P4', 1, {}, NOW);
     expect(repos.cook.undoPreview(s.id)).toEqual({ canUndo: false, reason: 'not_finished' });
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'snack' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'snack' }, NOW);
     repos.cook.undo(s.id);
     expect(repos.cook.undoPreview(s.id)).toEqual({ canUndo: false, reason: 'already_undone' });
     expect(repos.cook.undoPreview('ghost')).toEqual({ canUndo: false, reason: 'not_found' });

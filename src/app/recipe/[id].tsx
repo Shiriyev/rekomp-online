@@ -23,6 +23,7 @@ import {
 } from '@/db/hooks';
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
+import { defaultServingsFor, exceedsStorage, SERVING_CHOICES } from '@/domain/servings';
 import { isStockTracked, MEAL_TYPES, type MealType } from '@/domain/types';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
 import {
@@ -51,7 +52,6 @@ import { EmptyState } from '@/ui/EmptyState';
 import { ImageWithFallback } from '@/ui/ImageWithFallback';
 import { SkeletonDetail } from '@/ui/Skeleton';
 
-const SERVING_OPTIONS = [1, 2, 3, 4] as const;
 const isMealType = (v: unknown): v is MealType =>
   typeof v === 'string' && (MEAL_TYPES as readonly string[]).includes(v);
 const NIGHT_BEFORE_TAG = 'с вечера';
@@ -75,7 +75,9 @@ export default function RecipeScreen() {
   const ready = useTransitionDone();
   const isFavorite = useFavoriteRecipeIds().has(id);
 
-  const servings = servingsOverride ?? recipe?.defaultServings ?? 1;
+  // `defaultServings` in the catalog is the source's yield; the card starts from the meal.
+  const openedFor = isMealType(meal) ? meal : recipe?.mealType;
+  const servings = servingsOverride ?? (openedFor ? defaultServingsFor(openedFor) : 1);
 
   const computed = useMemo(() => {
     if (!recipe || ingredients.size === 0 || lines.length === 0) return null;
@@ -317,31 +319,37 @@ export default function RecipeScreen() {
           </View>
         </View>
 
-        {recipe.isBatch ? (
-          <View style={styles.section}>
-            <Text variant="titleMedium">{t('recipes.card.servings')}</Text>
-            <SegmentedButtons
-              value={String(servings)}
-              onValueChange={(v) => setServings(Number(v))}
-              buttons={SERVING_OPTIONS.map((n) => ({
-                value: String(n),
-                label: String(n),
-                showSelectedCheck: false,
-              }))}
-            />
+        <View style={styles.section}>
+          <Text variant="titleMedium">{t('recipes.card.servings')}</Text>
+          <SegmentedButtons
+            value={String(servings)}
+            onValueChange={(v) => setServings(Number(v))}
+            buttons={SERVING_CHOICES.map((n) => ({
+              value: String(n),
+              label: String(n),
+              showSelectedCheck: false,
+              accessibilityLabel: t('recipes.card.servingsA11y', { count: n }),
+            }))}
+          />
+          {servings > 1 ? (
             <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
               {t('recipes.card.batchTotal', {
                 kcal: formatKcal(macros.total.kcal),
                 protein: formatInt(macros.total.protein),
               })}
             </Text>
-          </View>
-        ) : null}
+          ) : null}
+          {exceedsStorage(servings, recipe.storageDays) ? (
+            <Text variant="bodySmall" style={{ color: theme.colors.warning }}>
+              {t('recipes.card.keepsDays', { count: recipe.storageDays })}
+            </Text>
+          ) : null}
+        </View>
 
         <View style={styles.section}>
           <View style={styles.titleRow}>
             <Text variant="titleMedium" accessibilityRole="header">
-              {recipe.isBatch
+              {servings > 1
                 ? t('recipes.card.productsFor', { count: servings })
                 : t('recipes.card.products')}
             </Text>

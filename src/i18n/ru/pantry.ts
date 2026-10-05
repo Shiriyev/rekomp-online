@@ -29,7 +29,8 @@ export const pantry = {
   },
   portions: {
     emptyTitle: 'Готовых порций нет',
-    emptyDescription: 'Приготовь обед на несколько дней — порции появятся здесь.',
+    emptyDescription:
+      'Приготовь блюдо на несколько порций — те, что не съешь сразу, появятся здесь.',
     perPortion: '{{kcal}} · {{protein}} г белка на порцию',
     cookedToday: 'Приготовлено сегодня',
     cookedYesterday: 'Приготовлено вчера',
@@ -37,7 +38,10 @@ export const pantry = {
     cookedDaysAgo_few: 'Приготовлено {{count}} дня назад',
     cookedDaysAgo_many: 'Приготовлено {{count}} дней назад',
     cookedDaysAgo_other: 'Приготовлено {{count}} дня назад',
-    checkFreshness: ' — проверь свежесть',
+    goodUntil: 'Годно до {{date}}',
+    goodToday: 'Годно до конца сегодняшнего дня',
+    goodTomorrow: 'Годно до завтра',
+    expired: 'Срок хранения вышел ({{date}}) — лучше выбросить',
     stepperLabel: 'порции {{name}}',
     portionsLeft: '{{n}} порц.',
     eat: 'Съесть',

@@ -30,6 +30,7 @@ import {
   type Unit,
 } from './lib/domain.ts';
 import { detectEquipment } from './build/equipment.ts';
+import { defaultStorageDays } from './build/storage.ts';
 import { APP_ROOT, ROOT } from './lib/paths.ts';
 import { loadOwnRecipes } from './own/recipes.ts';
 import { loadOverrides, loadTranslation } from './translate/load.ts';
@@ -228,16 +229,19 @@ function main() {
       | 'tags'
       | 'equipment'
       | 'mainProtein'
-    >,
+      | 'storageDays'
+    > & { storageDays?: number },
     lines: Omit<CatalogLine, 'recipeId' | 'sortOrder'>[],
     steps: Omit<CatalogStep, 'recipeId' | 'order'>[],
   ) => {
     const catalogLines = lines.map((l, sortOrder) => ({ recipeId: r.id, sortOrder, ...l }));
     const { perServing } = recipeMacros(catalogLines, nutrition);
+    const equipment = detectEquipment(steps.map((s) => s.textEn));
     recipes.push({
       ...r,
+      storageDays: r.storageDays ?? defaultStorageDays(r.nameEn, equipment),
       tags: tagsOf(lines.map((l) => l.ingredientId)),
-      equipment: detectEquipment(steps.map((s) => s.textEn)),
+      equipment,
       mainProtein: mainProteinOf(catalogLines),
       ingredientCount: lines.length,
       kcalPerServing: round(perServing.kcal, 1),

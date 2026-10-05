@@ -70,7 +70,7 @@ function populate() {
     repos.pantry.setQuantity(id, 1000, NOW),
   );
   const s = repos.cook.start('O1', 3, {}, NOW);
-  repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+  repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
   const active = repos.cook.start('Z2', 1, { yogurt: 'greek_yogurt' }, NOW + 1);
   repos.cook.saveProgress(active.id, {
     stepIndex: 1,

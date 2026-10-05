@@ -93,7 +93,10 @@ export const recipes = sqliteTable(
     name: text('name').notNull(),
     mealType: text('meal_type', { enum: MEAL_TYPES }).notNull(),
     defaultServings: integer('default_servings').notNull().default(1),
+    /** Cooked for several days (stews, soups): only the «готовится на 3–4 дня» filter. */
     isBatch: integer('is_batch', { mode: 'boolean' }).notNull().default(false),
+    /** How many days the cooked dish keeps in the fridge (catalog, reviewed). */
+    storageDays: integer('storage_days').notNull().default(3),
     prepNightBefore: integer('prep_night_before', { mode: 'boolean' }).notNull().default(false),
     totalMinutes: integer('total_minutes').notNull(),
     imageKey: text('image_key'),
@@ -261,6 +264,8 @@ export const preparedPortions = sqliteTable(
     kcalPerPortion: integer('kcal_per_portion').notNull(),
     proteinPerPortion: real('protein_per_portion').notNull(),
     cookedAt: integer('cooked_at').notNull(),
+    /** The recipe's storage days when it was cooked; null for portions cooked before v2.1. */
+    storageDays: integer('storage_days'),
   },
   (t) => [check('portions_left_non_negative', sql`${t.portionsLeft} >= 0`)],
 );

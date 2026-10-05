@@ -39,12 +39,13 @@ export class CookSessionError extends Error {
 
 export const MAX_SERVINGS = 8;
 
-export type FinishOptions = { eatNow: boolean; mealType: MealType };
+/** `eaten`: portions eaten right away (0…servings); the rest go to «Готовые порции». */
+export type FinishOptions = { eaten: number; mealType: MealType };
 
 export type FinishResult = {
   sessionId: string;
   recipeId: string;
-  /** Rounded per-portion macros as logged. */
+  /** Rounded per-portion macros (the log holds them × the portions eaten). */
   perPortion: Macros;
   servings: number;
   eaten: number;
@@ -115,10 +116,13 @@ export function createCookRepo(db: AppDb) {
       .from(preparedPortions)
       .where(eq(preparedPortions.cookSessionId, session.id))
       .get();
-    const perPortion = log
-      ? { kcal: log.kcal, protein: log.protein }
-      : { kcal: portion?.kcalPerPortion ?? 0, protein: portion?.proteinPerPortion ?? 0 };
-    const eaten = log ? 1 : 0;
+    const eaten = log?.servings ?? 0;
+    const perPortion = portion
+      ? { kcal: portion.kcalPerPortion, protein: portion.proteinPerPortion }
+      : {
+          kcal: log ? roundKcal(log.kcal / eaten) : 0,
+          protein: log ? roundProtein(log.protein / eaten) : 0,
+        };
     return {
       sessionId: session.id,
       recipeId: session.recipeId,
@@ -179,6 +183,9 @@ export function createCookRepo(db: AppDb) {
       throw new CookSessionError('Cook session is closed');
     }
     if (session.finishedAt !== null) return resultOf(tx, session, true, false);
+    if (!Number.isInteger(options.eaten) || options.eaten < 0 || options.eaten > session.servings) {
+      throw new RangeError(`eaten must be an integer 0–${session.servings}, got ${options.eaten}`);
+    }
 
     const recipe = tx.select().from(recipes).where(eq(recipes.id, session.recipeId)).get();
     if (!recipe) throw new CookSessionError(`Recipe not found: ${session.recipeId}`);
@@ -211,7 +218,7 @@ export function createCookRepo(db: AppDb) {
 
     const macros = recipeMacros(lines, ingredientMap, { choices: session.choices }).perServing;
     const perPortion = { kcal: roundKcal(macros.kcal), protein: roundProtein(macros.protein) };
-    const eaten = options.eatNow ? 1 : 0;
+    const eaten = options.eaten;
     const stored = session.servings - eaten;
 
     if (stored > 0) {
@@ -224,6 +231,7 @@ export function createCookRepo(db: AppDb) {
           kcalPerPortion: perPortion.kcal,
           proteinPerPortion: perPortion.protein,
           cookedAt: now,
+          storageDays: recipe.storageDays,
         })
         .run();
     }
@@ -237,9 +245,9 @@ export function createCookRepo(db: AppDb) {
           source: 'recipe',
           recipeId: recipe.id,
           name: recipe.name,
-          kcal: perPortion.kcal,
-          protein: perPortion.protein,
-          servings: 1,
+          kcal: perPortion.kcal * eaten,
+          protein: roundProtein(perPortion.protein * eaten),
+          servings: eaten,
           cookSessionId: session.id,
         })
         .run();
@@ -285,14 +293,25 @@ export function createCookRepo(db: AppDb) {
       return db.transaction((tx) => startIn(tx, recipeId, servings, choices, now, amounts));
     },
 
-    /** The card's draft changed while this recipe was already being cooked. */
-    setAmounts(id: string, amounts: Readonly<Record<string, number>>): CookSession | undefined {
+    /**
+     * The card's draft (and servings, when given) changed while this recipe was already
+     * being cooked: the running cook follows the card.
+     */
+    setAmounts(
+      id: string,
+      amounts: Readonly<Record<string, number>>,
+      servings?: number,
+    ): CookSession | undefined {
+      if (servings !== undefined) validateServings(servings);
       return db.transaction((tx) => {
         const session = getSession(tx, id);
         if (!session || session.finishedAt !== null || session.abandonedAt !== null) return session;
         return tx
           .update(cookSessions)
-          .set({ amountOverrides: snapshotFor(tx, session.recipeId, amounts) })
+          .set({
+            amountOverrides: snapshotFor(tx, session.recipeId, amounts),
+            ...(servings === undefined ? {} : { servings }),
+          })
           .where(eq(cookSessions.id, id))
           .returning()
           .get();
@@ -349,7 +368,7 @@ export function createCookRepo(db: AppDb) {
     ): FinishResult {
       return db.transaction((tx) => {
         const session = startIn(tx, recipeId, servings, choices, now, amounts);
-        return finishIn(tx, session.id, { eatNow: true, mealType }, now);
+        return finishIn(tx, session.id, { eaten: 1, mealType }, now);
       });
     },
 

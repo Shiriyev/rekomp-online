@@ -72,7 +72,7 @@ describe('new entries use the logical day', () => {
     const session = repos.cook.start('O1', 3, {}, local(2026, 9, 30, 18));
     const finished = repos.cook.finish(
       session.id,
-      { eatNow: false, mealType: 'lunch' },
+      { eaten: 0, mealType: 'lunch' },
       local(2026, 9, 30, 19),
     );
     const eaten = repos.portions.eat(finished.portionId!, 'snack', local(2026, 10, 1, 2, 0));

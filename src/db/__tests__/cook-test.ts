@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 
 import { createRepositories, type Repositories } from '../repositories';
 import { CookSessionError } from '../repositories/cookRepo';
-import { cookSessions, mealLogs, preparedPortions } from '../schema';
+import { cookSessions, mealLogs, preparedPortions, recipes } from '../schema';
 import { runSeed } from '../seed/runSeed';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
@@ -38,7 +38,7 @@ describe('cookRepo.finish', () => {
   it('deducts ingredients × servings, stores portions and logs one eaten portion atomically', () => {
     stockO1();
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const r = repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
 
     expect([qty('chicken_breast'), qty('rice'), qty('veg_frozen'), qty('oil')]).toEqual([
       340, 200, 550, 485,
@@ -69,10 +69,63 @@ describe('cookRepo.finish', () => {
     expect(session.shortfall).toEqual([]);
   });
 
+  it('logs N eaten portions as one entry and stores the rest', () => {
+    stockO1();
+    const s = repos.cook.start('O1', 3, {}, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 2, mealType: 'lunch' }, NOW);
+    expect(r).toMatchObject({ eaten: 2, stored: 1, perPortion: { kcal: 709, protein: 61.4 } });
+    expect(logs()).toEqual([expect.objectContaining({ servings: 2, kcal: 1418, protein: 122.8 })]);
+    expect(portions()).toEqual([expect.objectContaining({ portionsLeft: 1, storageDays: 3 })]);
+    // A retry returns the same result.
+    expect(repos.cook.finish(s.id, { eaten: 0, mealType: 'lunch' }, NOW)).toMatchObject({
+      eaten: 2,
+      stored: 1,
+      alreadyFinished: true,
+    });
+  });
+
+  it('eats every portion without storing any', () => {
+    stockO1();
+    const s = repos.cook.start('O1', 2, {}, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 2, mealType: 'lunch' }, NOW);
+    expect(r).toMatchObject({ eaten: 2, stored: 0, portionId: null, perPortion: { kcal: 709 } });
+    expect(portions()).toEqual([]);
+  });
+
+  it('cooks a breakfast for 3: deducts ×3, logs 1, stores 2 with its storage days', () => {
+    repos.pantry.setQuantity('tvorog', 1000);
+    db.update(recipes).set({ storageDays: 1 }).where(eq(recipes.id, 'Z1')).run();
+    const s = repos.cook.start('Z1', 3, {}, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 1, mealType: 'breakfast' }, NOW);
+    expect(qty('tvorog')).toBe(250);
+    expect(r).toMatchObject({ eaten: 1, stored: 2 });
+    expect(portions()).toEqual([
+      expect.objectContaining({ recipeId: 'Z1', portionsLeft: 2, storageDays: 1 }),
+    ]);
+    expect(repos.cook.get(s.id)?.usedAmounts).toContainEqual({
+      ingredientId: 'tvorog',
+      amount: 750,
+      unit: 'g',
+    });
+  });
+
+  it('rejects an eaten count outside 0…servings', () => {
+    stockO1();
+    const s = repos.cook.start('O1', 2, {}, NOW);
+    expect(() => repos.cook.finish(s.id, { eaten: 3, mealType: 'lunch' }, NOW)).toThrow(RangeError);
+    expect(() => repos.cook.finish(s.id, { eaten: -1, mealType: 'lunch' }, NOW)).toThrow(
+      RangeError,
+    );
+    expect(() => repos.cook.finish(s.id, { eaten: 0.5, mealType: 'lunch' }, NOW)).toThrow(
+      RangeError,
+    );
+    expect(repos.cook.get(s.id)?.finishedAt).toBeNull();
+  });
+
   it('stores every portion when not eating now', () => {
     stockO1();
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const r = repos.cook.finish(s.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 0, mealType: 'lunch' }, NOW);
     expect(r).toMatchObject({ eaten: 0, stored: 3, logId: null });
     expect(portions()[0]?.portionsLeft).toBe(3);
     expect(logs()).toEqual([]);
@@ -81,7 +134,7 @@ describe('cookRepo.finish', () => {
   it('clamps pantry at zero and records the shortfall', () => {
     repos.pantry.setQuantity('chicken_breast', 300);
     const s = repos.cook.start('O1', 3, {}, NOW);
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
 
     expect(qty('chicken_breast')).toBe(0);
     const session = repos.cook.get(s.id)!;
@@ -99,8 +152,8 @@ describe('cookRepo.finish', () => {
   it('is idempotent: finishing again does not deduct or log twice', () => {
     stockO1();
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const first = repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
-    const second = repos.cook.finish(s.id, { eatNow: false, mealType: 'dinner' }, NOW + 5000);
+    const first = repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
+    const second = repos.cook.finish(s.id, { eaten: 0, mealType: 'dinner' }, NOW + 5000);
 
     expect(second).toEqual({ ...first, firstTime: false, alreadyFinished: true });
     expect(qty('chicken_breast')).toBe(340);
@@ -112,28 +165,26 @@ describe('cookRepo.finish', () => {
     repos.pantry.setQuantity('greek_yogurt', 200);
     repos.pantry.setQuantity('skyr', 200);
     const s = repos.cook.start('P1', 1, { yogurt: 'greek_yogurt' }, NOW);
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'snack' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'snack' }, NOW);
     expect([qty('greek_yogurt'), qty('skyr')]).toEqual([50, 200]);
   });
 
   it('refuses abandoned, undone or unknown sessions', () => {
     const s = repos.cook.start('P1', 1, {}, NOW);
     repos.cook.abandon(s.id, NOW);
-    expect(() => repos.cook.finish(s.id, { eatNow: true, mealType: 'snack' })).toThrow(
+    expect(() => repos.cook.finish(s.id, { eaten: 1, mealType: 'snack' })).toThrow(
       CookSessionError,
     );
-    expect(() => repos.cook.finish('ghost', { eatNow: true, mealType: 'snack' })).toThrow(
+    expect(() => repos.cook.finish('ghost', { eaten: 1, mealType: 'snack' })).toThrow(
       CookSessionError,
     );
   });
 
   it('marks only the first successful cook of a recipe as first time', () => {
     const a = repos.cook.start('P4', 1, {}, NOW);
-    expect(repos.cook.finish(a.id, { eatNow: true, mealType: 'snack' }, NOW).firstTime).toBe(true);
+    expect(repos.cook.finish(a.id, { eaten: 1, mealType: 'snack' }, NOW).firstTime).toBe(true);
     const b = repos.cook.start('P4', 1, {}, NOW + 1);
-    expect(repos.cook.finish(b.id, { eatNow: true, mealType: 'snack' }, NOW + 1).firstTime).toBe(
-      false,
-    );
+    expect(repos.cook.finish(b.id, { eaten: 1, mealType: 'snack' }, NOW + 1).firstTime).toBe(false);
   });
 });
 
@@ -161,7 +212,7 @@ describe('cookRepo.start / getActive', () => {
     expect(repos.cook.getActive()?.id).toBe(b.id);
     expect(repos.cook.get(a.id)?.abandonedAt).toBe(NOW + 1);
 
-    repos.cook.finish(b.id, { eatNow: true, mealType: 'breakfast' }, NOW + 2);
+    repos.cook.finish(b.id, { eaten: 1, mealType: 'breakfast' }, NOW + 2);
     expect(repos.cook.getActive()).toBeUndefined();
   });
 });
@@ -171,7 +222,7 @@ describe('cookRepo.undo', () => {
     stockO1();
     repos.pantry.setQuantity('chicken_breast', 300); // partially short
     const s = repos.cook.start('O1', 3, {}, NOW);
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
     repos.cook.undo(s.id, NOW + 1000);
 
     expect([qty('chicken_breast'), qty('rice'), qty('veg_frozen'), qty('oil')]).toEqual([
@@ -186,7 +237,7 @@ describe('cookRepo.undo', () => {
     repos.pantry.setQuantity('apple', 1);
     repos.pantry.setQuantity('skyr', 150);
     const s = repos.cook.start('P1', 1, {}, NOW);
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'snack' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'snack' }, NOW);
     repos.pantry.remove('apple');
     repos.cook.undo(s.id, NOW);
     expect(qty('apple')).toBe(1);
@@ -195,7 +246,7 @@ describe('cookRepo.undo', () => {
   it('is idempotent', () => {
     stockO1();
     const s = repos.cook.start('O1', 3, {}, NOW);
-    repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
     repos.cook.undo(s.id, NOW);
     repos.cook.undo(s.id, NOW);
     expect(qty('chicken_breast')).toBe(1000);
@@ -204,7 +255,7 @@ describe('cookRepo.undo', () => {
   it('refuses once a stored portion has been eaten, leaving everything intact', () => {
     stockO1();
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const r = repos.cook.finish(s.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 0, mealType: 'lunch' }, NOW);
     repos.portions.eat(r.portionId!, 'lunch', NOW + 1);
 
     expect(() => repos.cook.undo(s.id)).toThrow('already eaten');

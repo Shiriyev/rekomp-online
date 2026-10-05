@@ -65,26 +65,43 @@ describe('FinishView', () => {
   const props = {
     recipeName: 'Курица с рисом',
     perPortion: { kcal: 709, protein: 61.4 },
-    onEatNow: jest.fn(),
-    onStoreAll: jest.fn(),
+    onFinish: jest.fn(),
     onBack: jest.fn(),
   };
+  beforeEach(() => jest.clearAllMocks());
 
-  it('offers eat-now or store-all for a batch with correct plural and the first-cook badge', async () => {
+  it('eats 1 of 3 by default, the rest go to prepared portions, with the first-cook badge', async () => {
     const user = userEvent.setup();
-    await wrap(<FinishView {...props} servings={3} isBatch firstTime />);
+    await wrap(<FinishView {...props} servings={3} firstTime />);
     expect(screen.getByText('+709 ккал, +61 г белка')).toBeOnTheScreen();
     expect(screen.getByText('Первая готовка этого блюда')).toBeOnTheScreen();
-    await user.press(screen.getByText('Съесть сейчас 1 порцию'));
-    expect(props.onEatNow).toHaveBeenCalled();
-    await user.press(screen.getByText('Убрать все 3 порции в холодильник'));
-    expect(props.onStoreAll).toHaveBeenCalled();
+    expect(screen.getByText('1 порция')).toBeOnTheScreen();
+    expect(screen.getByText('Остальные 2 — в «Готовые порции»')).toBeOnTheScreen();
+    await user.press(screen.getByText('Готово'));
+    expect(props.onFinish).toHaveBeenCalledWith(1);
+  });
+
+  it('lets the count go from 0 to all servings', async () => {
+    const user = userEvent.setup();
+    await wrap(<FinishView {...props} servings={2} firstTime={false} />);
+    await user.press(screen.getByLabelText('Меньше: Съесть сейчас'));
+    expect(screen.getByText('0 порций')).toBeOnTheScreen();
+    expect(screen.getByText('Остальные 2 — в «Готовые порции»')).toBeOnTheScreen();
+    await user.press(screen.getByLabelText('Больше: Съесть сейчас'));
+    await user.press(screen.getByLabelText('Больше: Съесть сейчас'));
+    expect(screen.getByText('2 порции')).toBeOnTheScreen();
+    expect(screen.getByText(/ничего не уйдёт/)).toBeOnTheScreen();
+    await user.press(screen.getByText('Готово'));
+    expect(props.onFinish).toHaveBeenCalledWith(2);
   });
 
   it('uses single-portion wording otherwise', async () => {
-    await wrap(<FinishView {...props} servings={1} isBatch={false} firstTime={false} />);
-    expect(screen.getByText('Съесть сейчас')).toBeOnTheScreen();
-    expect(screen.getByText('Убрать в холодильник')).toBeOnTheScreen();
+    const user = userEvent.setup();
+    await wrap(<FinishView {...props} servings={1} firstTime={false} />);
+    await user.press(screen.getByText('Убрать в холодильник'));
+    expect(props.onFinish).toHaveBeenCalledWith(0);
+    await user.press(screen.getByText('Съесть сейчас'));
+    expect(props.onFinish).toHaveBeenLastCalledWith(1);
     expect(screen.queryByText('Первая готовка этого блюда')).toBeNull();
   });
 });

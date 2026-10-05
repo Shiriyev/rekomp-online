@@ -5,18 +5,16 @@ import { repositories } from '@/db';
 import { useAvailablePortions } from '@/db/hooks';
 import { daysBetween } from '@/domain/dates';
 import { deviceTimeZone, getLogicalDate } from '@/domain/day';
+import { portionFreshness } from '@/domain/servings';
 import { suggestMealType } from '@/domain/today';
 import { showUndo } from '@/features/undo/undoStore';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
-import { formatInt, formatKcal } from '@/lib/format';
+import { formatDayLabel, formatInt, formatKcal } from '@/lib/format';
 import { useClock } from '@/lib/useClock';
 import { spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 import { QuantityStepper } from '@/ui/QuantityStepper';
-
-/** Cooked food keeps ~3 days in the fridge; older containers get a warning. */
-const FRESH_DAYS = 3;
 
 export function PortionsSegment() {
   const theme = useAppTheme();
@@ -38,8 +36,18 @@ export function PortionsSegment() {
   return (
     <ScrollView contentContainerStyle={styles.list}>
       {portions.map((p) => {
-        const age = daysBetween(getLogicalDate(p.cookedAt, dayStartHour, deviceTimeZone()), today);
-        const old = age > FRESH_DAYS;
+        const cookedOn = getLogicalDate(p.cookedAt, dayStartHour, deviceTimeZone());
+        const age = daysBetween(cookedOn, today);
+        const fresh = portionFreshness(cookedOn, p.storageDays, today);
+        // Weekday and date; «Сегодня/Вчера» do not fit a date in the future.
+        const date = formatDayLabel(fresh.bestBefore, '', '');
+        const keeps = fresh.expired
+          ? t('pantry.portions.expired', { date })
+          : fresh.daysLeft === 0
+            ? t('pantry.portions.goodToday')
+            : fresh.daysLeft === 1
+              ? t('pantry.portions.goodTomorrow')
+              : t('pantry.portions.goodUntil', { date });
         const name = content.recipeName({ id: p.recipeId, name: p.recipeName });
         const cooked =
           age <= 0
@@ -48,7 +56,10 @@ export function PortionsSegment() {
               ? t('pantry.portions.cookedYesterday')
               : t('pantry.portions.cookedDaysAgo', { count: age });
         return (
-          <Card key={p.id} mode="outlined">
+          <Card
+            key={p.id}
+            mode="outlined"
+            style={fresh.expired ? { borderColor: theme.colors.error } : undefined}>
             <Card.Content style={styles.content}>
               <Text variant="titleMedium">{name}</Text>
               <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
@@ -57,11 +68,15 @@ export function PortionsSegment() {
                   protein: formatInt(p.proteinPerPortion),
                 })}
               </Text>
-              <Text
-                variant="bodySmall"
-                style={{ color: old ? theme.colors.error : theme.colors.onSurfaceVariant }}>
+              <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
                 {cooked}
-                {old ? t('pantry.portions.checkFreshness') : ''}
+              </Text>
+              <Text
+                variant={fresh.expired ? 'bodyMedium' : 'bodySmall'}
+                style={{
+                  color: fresh.expired ? theme.colors.error : theme.colors.onSurfaceVariant,
+                }}>
+                {keeps}
               </Text>
               <View style={styles.row}>
                 <QuantityStepper
@@ -87,9 +102,12 @@ export function PortionsSegment() {
                 </Button>
               </View>
               <Button
-                compact
-                textColor={theme.colors.error}
-                style={styles.discard}
+                compact={!fresh.expired}
+                mode={fresh.expired ? 'contained' : 'text'}
+                buttonColor={fresh.expired ? theme.colors.error : undefined}
+                textColor={fresh.expired ? theme.colors.onError : theme.colors.error}
+                icon={fresh.expired ? 'delete-outline' : undefined}
+                style={fresh.expired ? undefined : styles.discard}
                 onPress={() => {
                   const left = p.portionsLeft;
                   repositories.portions.setPortionsLeft(p.id, 0);

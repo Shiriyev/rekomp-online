@@ -64,7 +64,7 @@ describe('cook redo (Undo of «удалить и вернуть»)', () => {
   it('takes the products again and restores the log and portions', () => {
     repos.pantry.setQuantity('chicken_breast', 1000, NOW);
     const s = repos.cook.start('O1', 3, {}, NOW);
-    const r = repos.cook.finish(s.id, { eatNow: true, mealType: 'lunch' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
     const before = repos.pantry.get('chicken_breast')?.quantity;
 
     const undone = repos.cook.undo(s.id, NOW)!;

@@ -119,15 +119,20 @@ export function IngredientRow({
       {editor ? (
         <View style={styles.editor}>
           <View style={styles.caption}>
-            {/* Per serving is the default; only the pot total adds information. */}
+            {/* The stepper is per serving; with more servings the pot total is spelled out. */}
             {servings > 1 ? (
-              <Text
-                variant="bodySmall"
-                style={{ color: changed ? theme.colors.primary : theme.colors.onSurfaceVariant }}>
-                {t('recipes.card.totalAmount', {
-                  amount: formatAmount(editor.value * servings, unit),
-                })}
-              </Text>
+              <>
+                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                  {t('recipes.card.perServingAmount')}
+                </Text>
+                <Text
+                  variant="titleSmall"
+                  style={{ color: changed ? theme.colors.primary : theme.colors.onSurface }}>
+                  {t('recipes.card.totalAmount', {
+                    amount: formatAmount(editor.value * servings, unit),
+                  })}
+                </Text>
+              </>
             ) : null}
             {changed ? (
               <Pressable

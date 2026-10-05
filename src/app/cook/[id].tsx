@@ -1,3 +1,4 @@
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import * as Haptics from 'expo-haptics';
 import { useKeepAwake } from 'expo-keep-awake';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
@@ -22,6 +23,7 @@ import { useCookView, useIngredientsMap, useIsFirstCook, useRecipeDetail } from 
 import { formatTimer, isDone, remainingSec, stepIngredients } from '@/domain/cooking';
 import { recipeMacros, roundKcal, roundProtein } from '@/domain/nutrition';
 import { applyAmounts } from '@/domain/recipeDraft';
+import { needsBigPotHint } from '@/domain/servings';
 import { activeTimers, useCookStore } from '@/features/cooking/cookStore';
 import { FinishView } from '@/features/cooking/FinishView';
 import { RecipeOverview } from '@/features/cooking/RecipeOverview';
@@ -32,7 +34,7 @@ import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
 import { formatAmount, formatInt } from '@/lib/format';
 import { useNow } from '@/lib/useNow';
-import { spacing, useAppTheme } from '@/theme';
+import { radius, spacing, useAppTheme } from '@/theme';
 import { EmptyState } from '@/ui/EmptyState';
 
 const parseChoices = (raw: string | undefined): Record<string, string> => {
@@ -163,26 +165,27 @@ export default function CookScreen() {
       .onEnd(() => go(stepIndex - 1)),
   );
 
-  const complete = (eatNow: boolean) => {
+  const complete = (eaten: number) => {
     // A cooked dish counts toward its own meal (breakfast recipe → breakfast).
-    const result = store().finish({ eatNow, mealType: recipe.mealType });
+    const result = store().finish({ eaten, mealType: recipe.mealType });
     if (!result) return;
     clearRecipeDraft(recipe.id);
-    showUndo(
-      eatNow
+    const messages = [
+      result.eaten > 0
         ? t('cooking.undo.eaten', {
-            kcal: formatInt(result.perPortion.kcal),
-            protein: formatInt(result.perPortion.protein),
+            kcal: formatInt(result.perPortion.kcal * result.eaten),
+            protein: formatInt(result.perPortion.protein * result.eaten),
           })
-        : t('cooking.undo.stored', { count: result.stored }),
-      () => {
-        try {
-          repositories.cook.undo(result.sessionId);
-        } catch {
-          showUndo(t('cooking.undo.cannotUndo'));
-        }
-      },
-    );
+        : null,
+      result.stored > 0 ? t('cooking.undo.stored', { count: result.stored }) : null,
+    ];
+    showUndo(messages.filter(Boolean).join(' · '), () => {
+      try {
+        repositories.cook.undo(result.sessionId);
+      } catch {
+        showUndo(t('cooking.undo.cannotUndo'));
+      }
+    });
     router.dismissTo('/');
   };
 
@@ -261,10 +264,8 @@ export default function CookScreen() {
           recipeName={recipeName}
           perPortion={perPortion}
           servings={servings}
-          isBatch={recipe.isBatch}
           firstTime={firstTime}
-          onEatNow={() => complete(true)}
-          onStoreAll={() => complete(false)}
+          onFinish={complete}
           onBack={() => go(steps.length - 1)}
         />
       ) : view === 'overview' ? (
@@ -307,6 +308,21 @@ export default function CookScreen() {
                       />
                     );
                   })}
+                </View>
+              ) : null}
+
+              {needsBigPotHint(servings, step) ? (
+                <View style={[styles.hint, { backgroundColor: theme.colors.secondaryContainer }]}>
+                  <MaterialCommunityIcons
+                    name="pot-steam-outline"
+                    size={20}
+                    color={theme.colors.onSecondaryContainer}
+                  />
+                  <Text
+                    variant="bodyMedium"
+                    style={[styles.flex, { color: theme.colors.onSecondaryContainer }]}>
+                    {t('cooking.screen.bigPot')}
+                  </Text>
                 </View>
               ) : null}
 
@@ -418,6 +434,13 @@ const styles = StyleSheet.create({
   },
   body: { padding: spacing.lg, gap: spacing.lg, flexGrow: 1 },
   stepText: { lineHeight: 34 },
+  hint: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    padding: spacing.md,
+    borderRadius: radius.md,
+  },
   ingredients: { gap: 0 },
   checkbox: { paddingHorizontal: 0, minHeight: 48 },
   checkboxLabel: { textAlign: 'left' },

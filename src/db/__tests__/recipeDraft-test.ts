@@ -40,7 +40,7 @@ describe('cooking with edited amounts (DoD: Z1 творог 250 → 200)', () =>
   it('deducts 200 g and logs the recalculated macros', () => {
     const session = repos.cook.start('Z1', 1, {}, NOW, { tvorog: 200 });
     expect(session.amountOverrides.tvorog).toBe(200);
-    const result = repos.cook.finish(session.id, { eatNow: true, mealType: 'breakfast' }, NOW);
+    const result = repos.cook.finish(session.id, { eaten: 1, mealType: 'breakfast' }, NOW);
 
     expect(repos.pantry.get('tvorog')?.quantity).toBe(300);
     expect(result.perPortion).toEqual(z1Macros({ tvorog: 200 }));
@@ -66,19 +66,29 @@ describe('cooking with edited amounts (DoD: Z1 творог 250 → 200)', () =>
   it('scales the per-serving draft by servings for batches', () => {
     repos.pantry.setQuantity('chicken_breast', 2000, NOW);
     const s = repos.cook.start('O1', 3, {}, NOW, { chicken_breast: 200 });
-    repos.cook.finish(s.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    repos.cook.finish(s.id, { eaten: 0, mealType: 'lunch' }, NOW);
     expect(repos.pantry.get('chicken_breast')?.quantity).toBe(1400);
   });
 
   it('follows a draft changed while the cook is open; undo returns exactly that', () => {
     const s = repos.cook.start('Z1', 1, {}, NOW, { tvorog: 200 });
     repos.cook.setAmounts(s.id, { tvorog: 150 });
-    const r = repos.cook.finish(s.id, { eatNow: true, mealType: 'breakfast' }, NOW);
+    const r = repos.cook.finish(s.id, { eaten: 1, mealType: 'breakfast' }, NOW);
     expect(repos.pantry.get('tvorog')?.quantity).toBe(350);
     repos.cook.undo(r.sessionId, NOW);
     expect(repos.pantry.get('tvorog')?.quantity).toBe(500);
     // A finished session no longer changes.
     expect(repos.cook.setAmounts(s.id, { tvorog: 1 })?.amountOverrides.tvorog).toBe(150);
+  });
+
+  it('takes new servings from the card for an open cook (draft × servings)', () => {
+    repos.pantry.setQuantity('tvorog', 1000, NOW);
+    const s = repos.cook.start('Z1', 1, {}, NOW);
+    const updated = repos.cook.setAmounts(s.id, { tvorog: 200 }, 3);
+    expect(updated).toMatchObject({ servings: 3, amountOverrides: { tvorog: 200 } });
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'breakfast' }, NOW);
+    expect(repos.pantry.get('tvorog')?.quantity).toBe(400); // 200 × 3 taken
+    expect(() => repos.cook.setAmounts(s.id, {}, 9)).toThrow(RangeError);
   });
 
   it('ignores invalid or unknown amounts and keeps the recipe for them', () => {

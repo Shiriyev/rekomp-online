@@ -71,7 +71,7 @@ describe('restore after delete (Undo)', () => {
 
   it('takes the portion out of the fridge again for a portion entry', () => {
     const session = repos.cook.start('O1', 2, {}, NOW);
-    const { portionId } = repos.cook.finish(session.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const { portionId } = repos.cook.finish(session.id, { eaten: 0, mealType: 'lunch' }, NOW);
     const eaten = repos.portions.eat(portionId!, 'lunch', NOW);
     repos.logs.undo(eaten.id);
     expect(repos.portions.listAvailable()[0]?.portionsLeft).toBe(2);
@@ -83,7 +83,7 @@ describe('restore after delete (Undo)', () => {
 
   it('refuses when the portion is gone and changes nothing', () => {
     const session = repos.cook.start('O1', 1, {}, NOW);
-    const { portionId } = repos.cook.finish(session.id, { eatNow: false, mealType: 'lunch' }, NOW);
+    const { portionId } = repos.cook.finish(session.id, { eaten: 0, mealType: 'lunch' }, NOW);
     const eaten = repos.portions.eat(portionId!, 'lunch', NOW);
     repos.logs.undo(eaten.id);
     repos.portions.setPortionsLeft(portionId!, 0);

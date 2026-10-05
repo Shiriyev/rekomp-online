@@ -91,6 +91,39 @@ describe('IngredientRow', () => {
     expect(screen.getByLabelText(label)).toBeOnTheScreen();
   });
 
+  it('scales the total and the status with servings and the drafted amount', async () => {
+    const stock = new Map([['skyr', { quantity: 500, unit: 'g' as const }]]);
+    const rowFor = (servings: number, perServing: number) => {
+      const lines = [line('skyr', perServing)];
+      const check = canCook(lines, INGREDIENTS, stock, servings).lines[0]!;
+      return (
+        <PaperProvider theme={lightTheme}>
+          <IngredientRow
+            check={check}
+            ingredient={SKYR}
+            alternatives={[]}
+            servings={servings}
+            onChooseAlternative={jest.fn()}
+            editor={{ value: perServing, base: 150, step: 10, onChange: jest.fn() }}
+          />
+        </PaperProvider>
+      );
+    };
+    const view = await render(rowFor(1, 150));
+    expect(screen.queryByText('на порцию')).toBeNull();
+    expect(screen.getByLabelText('Скир, 150 г, есть')).toBeOnTheScreen();
+
+    await view.rerender(rowFor(3, 150));
+    expect(screen.getByText('на порцию')).toBeOnTheScreen();
+    expect(screen.getByText('всего 450 г')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Скир, 450 г, есть')).toBeOnTheScreen();
+
+    // A drafted 200 g per serving: 600 g in total, more than the 500 g at home.
+    await view.rerender(rowFor(3, 200));
+    expect(screen.getByText('всего 600 г')).toBeOnTheScreen();
+    expect(screen.getByLabelText(/^Скир, 600 г, мало: 500 г/)).toBeOnTheScreen();
+  });
+
   it('lets the user pick an alternative', async () => {
     const user = userEvent.setup();
     const onChoose = jest.fn();
