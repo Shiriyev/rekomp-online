@@ -10,14 +10,20 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 
-import { isBelowFloor } from '@/domain/calculator';
+import { goalMode, isBelowFloor } from '@/domain/calculator';
 import { parseDecimal, PROFILE_LIMITS, type ProfileInput } from '@/domain/schemas';
-import { SEXES, type GoalRate } from '@/domain/types';
+import { SEXES, type GoalMode, type GoalRate } from '@/domain/types';
 import { spacing, useAppTheme } from '@/theme';
 import { useT, useTranslateMessage } from '@/i18n';
 import { NumberField } from '@/ui/NumberField';
 
-import { activityOptions, goalOptions, sexLabel } from './labels';
+import {
+  activityOptions,
+  goalModeOptions,
+  goalOptions,
+  MODE_DEFAULT_RATE,
+  sexLabel,
+} from './labels';
 import { profileFormSchema, type ProfileFormValues } from './profileFormSchema';
 import { TargetsPreview } from './TargetsPreview';
 
@@ -35,7 +41,6 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
   const t = useT();
   const translate = useTranslateMessage();
   const activities = activityOptions();
-  const goals = goalOptions();
   const { control, handleSubmit, formState } = useForm<ProfileFormValues, unknown, ProfileInput>({
     defaultValues,
     resolver: zodResolver(profileFormSchema),
@@ -150,25 +155,37 @@ export function ProfileForm({ defaultValues, submitLabel, onSubmit, header }: Pr
           <Controller
             control={control}
             name="goalRate"
-            render={({ field }) => (
-              <>
-                <SegmentedButtons
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  buttons={goals.map((o) => ({
-                    value: String(o.value),
-                    label: o.label,
-                    accessibilityLabel: t('profile.form.rateA11y', {
-                      rate: o.label,
-                      description: o.description,
-                    }),
-                  }))}
-                />
-                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                  {goals.find((o) => String(o.value) === field.value)?.description}
-                </Text>
-              </>
-            )}
+            render={({ field }) => {
+              const rate = Number(field.value) as GoalRate;
+              const mode = goalMode(rate);
+              const options = goalOptions(mode);
+              return (
+                <>
+                  <SegmentedButtons
+                    value={mode}
+                    onValueChange={(m) => field.onChange(String(MODE_DEFAULT_RATE[m as GoalMode]))}
+                    buttons={goalModeOptions()}
+                  />
+                  {mode === 'keep' ? null : (
+                    <SegmentedButtons
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      buttons={options.map((o) => ({
+                        value: String(o.value),
+                        label: o.label,
+                        accessibilityLabel: t('profile.form.rateA11y', {
+                          rate: o.label,
+                          description: o.description,
+                        }),
+                      }))}
+                    />
+                  )}
+                  <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                    {options.find((o) => o.value === rate)?.description}
+                  </Text>
+                </>
+              );
+            }}
           />
         </Section>
 

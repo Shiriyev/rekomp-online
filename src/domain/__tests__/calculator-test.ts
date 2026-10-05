@@ -2,7 +2,8 @@ import {
   ACTIVITY_FACTORS,
   bmr,
   calculateTargets,
-  dailyDeficit,
+  dailyKcalDelta,
+  goalMode,
   isBelowFloor,
   kcalFloor,
   planWeightChange,
@@ -34,15 +35,30 @@ describe('tdee', () => {
   });
 });
 
-describe('dailyDeficit', () => {
-  it('is 550 kcal/day for −0.5 kg/week', () => {
-    expect(dailyDeficit(-0.5)).toBe(550);
+describe('dailyKcalDelta', () => {
+  it('is −550 kcal/day for −0.5 kg/week', () => {
+    expect(dailyKcalDelta(-0.5)).toBe(-550);
   });
 
-  it('scales with the rate and is zero for maintenance', () => {
-    expect(dailyDeficit(-0.25)).toBe(275);
-    expect(dailyDeficit(-0.75)).toBe(825);
-    expect(dailyDeficit(0)).toBe(0);
+  it.each([
+    [-1, -1100],
+    [-0.75, -825],
+    [-0.5, -550],
+    [-0.25, -275],
+    [0, 0],
+    [0.25, 275],
+    [0.5, 550],
+    [0.75, 825],
+  ] as const)('%d kg/week → %d kcal/day', (rate, delta) => {
+    expect(dailyKcalDelta(rate)).toBe(delta);
+  });
+});
+
+describe('goalMode', () => {
+  it('reads the sign of the rate', () => {
+    expect(goalMode(-0.25)).toBe('lose');
+    expect(goalMode(0)).toBe('keep');
+    expect(goalMode(0.25)).toBe('gain');
   });
 });
 
@@ -51,7 +67,7 @@ describe('calculateTargets', () => {
     expect(calculateTargets(man, 'moderate', -0.5)).toEqual({
       bmr: 1830,
       tdee: 2837, // 2836.5
-      deficit: 550,
+      kcalDelta: -550,
       kcalTarget: 2287, // 2286.5
       clampedToFloor: false,
       proteinTargetG: 170, // 2.0 g/kg
@@ -60,7 +76,50 @@ describe('calculateTargets', () => {
   });
 
   it('keeps maintenance at TDEE', () => {
-    expect(calculateTargets(woman, 'light', 0).kcalTarget).toBe(Math.round(1320.25 * 1.375));
+    const t = calculateTargets(woman, 'light', 0);
+    expect(t.kcalTarget).toBe(Math.round(1320.25 * 1.375));
+    expect(Object.is(t.kcalDelta, 0)).toBe(true);
+  });
+
+  it.each([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75] as const)(
+    'targets TDEE + rate × 7700 / 7 for %d kg/week',
+    (rate) => {
+      const t = calculateTargets(man, 'active', rate);
+      expect(t.kcalTarget).toBe(Math.round(3156.75 + (rate * 7700) / 7)); // TDEE 1830 × 1.725
+      expect(t.kcalDelta).toBe(Math.round((rate * 7700) / 7));
+      expect(t.clampedToFloor).toBe(false);
+    },
+  );
+
+  it('adds a surplus when gaining (+0.25 ≈ +275 kcal)', () => {
+    const t = calculateTargets(man, 'moderate', 0.25);
+    expect(t.kcalDelta).toBe(275);
+    expect(t.kcalTarget).toBe(3112); // 2836.5 + 275
+  });
+
+  it('uses 1.8 g/kg protein (min 1.6) when gaining, 2.0 otherwise', () => {
+    expect(calculateTargets(man, 'moderate', 0.5)).toMatchObject({
+      proteinTargetG: 153, // 85 × 1.8
+      proteinMinG: 136, // 85 × 1.6
+    });
+    expect(calculateTargets(man, 'moderate', 0)).toMatchObject({
+      proteinTargetG: 170,
+      proteinMinG: 136,
+    });
+    expect(calculateTargets(man, 'moderate', -1).proteinTargetG).toBe(170);
+  });
+
+  it('never applies the floor to a surplus', () => {
+    // TDEE 894 + 275 = 1169 is below the 1200 floor; a gain target stays TDEE + surplus.
+    const tiny = { sex: 'female' as const, age: 70, heightCm: 145, weightKg: 35 };
+    const t = calculateTargets(tiny, 'sedentary', 0.25);
+    expect(t.clampedToFloor).toBe(false);
+    expect(t.kcalTarget).toBe(Math.round(tdee(tiny, 'sedentary') + 275));
+    expect(t.kcalTarget).toBe(1169);
+    expect(calculateTargets(tiny, 'sedentary', 0)).toMatchObject({
+      kcalTarget: 1200,
+      clampedToFloor: true,
+    });
   });
 
   it('clamps women to 1200 kcal when BMR is lower', () => {

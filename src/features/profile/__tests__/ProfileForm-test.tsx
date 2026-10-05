@@ -53,6 +53,38 @@ describe('ProfileForm', () => {
     });
   });
 
+  it('switches to a gain rate: surplus preview, hints, 1.8 g/kg protein', async () => {
+    const { user, onSubmit, fillBody } = await setup();
+    await fillBody();
+    await user.press(screen.getByText('Набор'));
+    expect(screen.getByText('Сухой набор: меньше лишнего жира')).toBeOnTheScreen();
+    expect(screen.getByText('Профицит')).toBeOnTheScreen();
+    expect(screen.getByText('+275')).toBeOnTheScreen();
+
+    await user.press(screen.getByText('+0,5'));
+    expect(screen.getByText(/Для рекомпозиции обычно хватает \+0,25/)).toBeOnTheScreen();
+
+    const body = { sex: 'male' as const, age: 30, heightCm: 180, weightKg: 85.5 };
+    const expected = calculateTargets(body, 'moderate', 0.5);
+    await user.press(screen.getByText('Начать'));
+    expect(onSubmit.mock.calls[0]?.[0]).toMatchObject({
+      goalRateKgPerWeek: 0.5,
+      kcalTarget: expected.kcalTarget,
+      proteinTargetG: Math.round(85.5 * 1.8),
+    });
+  });
+
+  it('offers −1 kg/week and returns to −0,5 when going back to weight loss', async () => {
+    const { user, onSubmit, fillBody } = await setup();
+    await fillBody();
+    await user.press(screen.getByText('−1'));
+    expect(screen.getByText('Дефицит')).toBeOnTheScreen();
+    await user.press(screen.getByText('Поддержание'));
+    await user.press(screen.getByText('Похудение'));
+    await user.press(screen.getByText('Начать'));
+    expect(onSubmit.mock.calls[0]?.[0]).toMatchObject({ goalRateKgPerWeek: -0.5 });
+  });
+
   it('submits manual targets prefilled with the agreed values', async () => {
     const { user, onSubmit, fillBody } = await setup();
     await fillBody();

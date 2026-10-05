@@ -76,7 +76,10 @@ export type Sex = (typeof SEXES)[number];
 export const ACTIVITY_LEVELS = ['sedentary', 'light', 'moderate', 'active', 'very_active'] as const;
 export type ActivityLevel = (typeof ACTIVITY_LEVELS)[number];
 
-/** Weekly weight change in kg; negative = losing. */
-export const GOAL_RATES = [0, -0.25, -0.5, -0.75] as const;
+/** Weekly weight change in kg; negative = losing, positive = gaining. */
+export const GOAL_RATES = [-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75] as const;
 export type GoalRate = (typeof GOAL_RATES)[number];
 export const DEFAULT_GOAL_RATE: GoalRate = -0.5;
+
+export const GOAL_MODES = ['lose', 'keep', 'gain'] as const;
+export type GoalMode = (typeof GOAL_MODES)[number];

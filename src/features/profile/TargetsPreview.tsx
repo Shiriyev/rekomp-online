@@ -36,10 +36,7 @@ export function TargetsPreview({ body, activityLevel, goalRate }: Props) {
         <View style={styles.row}>
           <Stat label={tr('profile.preview.bmr')} value={formatInt(t.bmr)} />
           <Stat label={tr('profile.preview.tdee')} value={formatInt(t.tdee)} />
-          <Stat
-            label={tr('profile.preview.deficit')}
-            value={t.deficit === 0 ? '0' : `−${formatInt(t.deficit)}`}
-          />
+          <Stat label={tr(deltaLabelKey(t.kcalDelta))} value={signedKcal(t.kcalDelta)} />
         </View>
         {t.clampedToFloor ? (
           <Text variant="bodyMedium" style={{ color: theme.colors.warning }}>
@@ -50,6 +47,17 @@ export function TargetsPreview({ body, activityLevel, goalRate }: Props) {
     </Card>
   );
 }
+
+const deltaLabelKey = (delta: number) => {
+  if (delta < 0) return 'profile.preview.deficit';
+  return delta > 0 ? 'profile.preview.surplus' : 'profile.preview.maintenance';
+};
+
+/** «−550» / «+275» / «0» with a true minus sign. */
+const signedKcal = (delta: number): string => {
+  if (delta < 0) return `−${formatInt(-delta)}`;
+  return delta > 0 ? `+${formatInt(delta)}` : '0';
+};
 
 function Stat({ label, value }: { label: string; value: string }) {
   const theme = useAppTheme();

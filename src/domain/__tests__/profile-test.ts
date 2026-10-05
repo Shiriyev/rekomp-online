@@ -38,4 +38,17 @@ describe('buildProfile', () => {
     expect(p.targetOverridden).toBe(true);
     expect(profileSchema.safeParse(p).success).toBe(true);
   });
+
+  it.each([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75] as const)(
+    'keeps manual targets and validates for %d kg/week',
+    (rate) => {
+      const p = buildProfile(body, 'moderate', rate, AGREED_TARGETS);
+      expect(p).toMatchObject({
+        goalRateKgPerWeek: rate,
+        kcalTarget: 2150,
+        targetOverridden: true,
+      });
+      expect(profileSchema.safeParse(p).success).toBe(true);
+    },
+  );
 });

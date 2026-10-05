@@ -1,4 +1,4 @@
-import type { ActivityLevel, GoalRate, Sex } from './types';
+import type { ActivityLevel, GoalMode, GoalRate, Sex } from './types';
 
 /** Multipliers applied to BMR to get TDEE. */
 export const ACTIVITY_FACTORS: Readonly<Record<ActivityLevel, number>> = {
@@ -9,11 +9,15 @@ export const ACTIVITY_FACTORS: Readonly<Record<ActivityLevel, number>> = {
   very_active: 1.9,
 };
 
-/** kcal in 1 kg of body fat, used to turn a weekly rate into a daily deficit. */
+/** kcal in 1 kg of body weight, used to turn a weekly rate into a daily deficit or surplus. */
 export const KCAL_PER_KG = 7700;
 
-export const PROTEIN_TARGET_G_PER_KG = 2.0;
-export const PROTEIN_MIN_G_PER_KG = 1.6;
+/** Protein g/kg by mode: higher on a deficit to keep muscle, 1.8 is enough on a surplus. */
+export const PROTEIN_G_PER_KG: Readonly<Record<GoalMode, { target: number; min: number }>> = {
+  lose: { target: 2.0, min: 1.6 },
+  keep: { target: 2.0, min: 1.6 },
+  gain: { target: 1.8, min: 1.6 },
+};
 
 const KCAL_FLOOR: Readonly<Record<Sex, number>> = { male: 1500, female: 1200 };
 
@@ -29,10 +33,17 @@ export function tdee(body: BodyInput, activity: ActivityLevel): number {
   return bmr(body) * ACTIVITY_FACTORS[activity];
 }
 
-/** Daily kcal deficit for a weekly rate in kg (negative rate = losing). −0.5 kg/week ≈ 550 kcal. */
-export function dailyDeficit(goalRateKgPerWeek: GoalRate): number {
-  const deficit = (-goalRateKgPerWeek * KCAL_PER_KG) / 7;
-  return deficit === 0 ? 0 : deficit; // avoid -0 for maintenance
+export function goalMode(rate: GoalRate): GoalMode {
+  if (rate < 0) return 'lose';
+  return rate > 0 ? 'gain' : 'keep';
+}
+
+/**
+ * Daily kcal change for a weekly rate in kg: negative = deficit, positive = surplus.
+ * −0.5 kg/week ≈ −550 kcal, +0.25 ≈ +275.
+ */
+export function dailyKcalDelta(goalRateKgPerWeek: GoalRate): number {
+  return (goalRateKgPerWeek * KCAL_PER_KG) / 7;
 }
 
 /** Lowest safe daily target: never below BMR nor the per-sex absolute floor. */
@@ -43,9 +54,10 @@ export function kcalFloor(body: BodyInput): number {
 export type Targets = {
   bmr: number;
   tdee: number;
-  deficit: number;
+  /** kcalTarget − TDEE before the floor: negative = deficit, positive = surplus. */
+  kcalDelta: number;
   kcalTarget: number;
-  /** True when the raw target was below the safe floor and got raised to it. */
+  /** True when a deficit target was below the safe floor and got raised to it. */
   clampedToFloor: boolean;
   proteinTargetG: number;
   proteinMinG: number;
@@ -58,19 +70,21 @@ export function calculateTargets(
 ): Targets {
   const b = bmr(body);
   const t = b * ACTIVITY_FACTORS[activity];
-  const deficit = dailyDeficit(goalRateKgPerWeek);
-  const raw = t - deficit;
+  const delta = dailyKcalDelta(goalRateKgPerWeek);
+  const raw = t + delta;
   const floor = kcalFloor(body);
-  const clampedToFloor = raw < floor;
+  // The floor guards against too deep a deficit; a surplus is never lowered or raised by it.
+  const clampedToFloor = goalRateKgPerWeek <= 0 && raw < floor;
+  const protein = PROTEIN_G_PER_KG[goalMode(goalRateKgPerWeek)];
 
   return {
     bmr: Math.round(b),
     tdee: Math.round(t),
-    deficit: Math.round(deficit),
+    kcalDelta: Math.round(delta) || 0, // avoid -0 for maintenance
     kcalTarget: Math.round(clampedToFloor ? floor : raw),
     clampedToFloor,
-    proteinTargetG: Math.round(body.weightKg * PROTEIN_TARGET_G_PER_KG),
-    proteinMinG: Math.round(body.weightKg * PROTEIN_MIN_G_PER_KG),
+    proteinTargetG: Math.round(body.weightKg * protein.target),
+    proteinMinG: Math.round(body.weightKg * protein.min),
   };
 }
 

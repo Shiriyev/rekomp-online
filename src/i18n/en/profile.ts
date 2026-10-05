@@ -44,7 +44,13 @@ export const profile: Messages<typeof ru> = {
     soft: 'Gentle',
     recommended: 'Recommended',
     fast: 'Fast',
-    rateValue: '{{rate}} kg/week',
+    veryFast: 'Very fast: hard to sustain, easy to lose muscle',
+    leanGain: 'Lean gain: less extra fat',
+    fastGain: 'Weight goes up faster, but with more fat. +0.25 is usually enough for recomposition',
+    mode: { lose: 'Lose', keep: 'Maintain', gain: 'Gain' },
+    rateSummary: '{{mode}}: {{rate}} kg/week · {{delta}}',
+    deficit: '~{{kcal}} kcal deficit',
+    surplus: '~{{kcal}} kcal surplus',
   },
   recalculate: 'Recalculate',
   form: {
@@ -74,6 +80,8 @@ export const profile: Messages<typeof ru> = {
     bmr: 'Basal (BMR)',
     tdee: 'Burn (TDEE)',
     deficit: 'Deficit',
+    surplus: 'Surplus',
+    maintenance: 'Difference',
     clamped:
       'The calculation came out too low — the target was raised to the safe minimum. Choose a slower pace.',
   },
