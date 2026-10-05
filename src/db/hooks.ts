@@ -28,6 +28,7 @@ import {
   appMeta,
   cookSessions,
   favoriteRecipes,
+  hiddenRecipes,
   ingredients,
   mealLogs,
   pantryItems,
@@ -131,6 +132,8 @@ export function useRecipeCatalog(): RecipeCatalog {
   const recipeRows = useLiveQuery(
     db.select().from(recipes).where(eq(recipes.isArchived, false)).orderBy(asc(recipes.sortOrder)),
   );
+  // Hidden ones («Скрыть это блюдо») neither; a separate query so hiding re-runs it.
+  const hiddenIds = useHiddenRecipeIds();
   const lineRows = useLiveQuery(db.select().from(recipeIngredients));
   // Only the nutrition columns: stock bookkeeping on products (last added amount, low-stock
   // threshold) then leaves the rows equal and the catalog maths is not redone.
@@ -151,16 +154,17 @@ export function useRecipeCatalog(): RecipeCatalog {
   return useMemo(() => {
     const isLoaded = [recipeRows, lineRows, ingredientRows].every((q) => q.updatedAt !== undefined);
     const ingredientMap = new Map(ingredientRows.data.map((i) => [i.id, i]));
+    const visible = recipeRows.data.filter((r) => !hiddenIds.has(r.id));
     const lines = lineRows.data.map((l) => {
       const amount = custom.get(l.recipeId)?.[l.ingredientId];
       return amount === undefined ? l : { ...l, amountPerServing: amount };
     });
     return {
-      recipes: recipeRows.data,
-      macros: isLoaded ? catalogMacros(recipeRows.data, lines, ingredientMap) : new Map(),
+      recipes: visible,
+      macros: isLoaded ? catalogMacros(visible, lines, ingredientMap) : new Map(),
       isLoaded,
     };
-  }, [recipeRows, lineRows, ingredientRows, custom]);
+  }, [recipeRows, lineRows, ingredientRows, custom, hiddenIds]);
 }
 
 /** Pantry as a stock map for domain checks. */
@@ -357,6 +361,30 @@ export function useFavoriteRecipeIds(): ReadonlySet<string> {
     db.select({ recipeId: favoriteRecipes.recipeId }).from(favoriteRecipes),
   );
   return useMemo(() => new Set(data.map((r) => r.recipeId)), [data]);
+}
+
+/** Hidden dishes for the profile list, last hidden first. */
+export function useHiddenRecipes(): { id: string; name: string; nameEn: string | null }[] {
+  return useLiveQuery(
+    db
+      .select({ id: recipes.id, name: recipes.name, nameEn: recipes.nameEn })
+      .from(hiddenRecipes)
+      .innerJoin(recipes, eq(recipes.id, hiddenRecipes.recipeId))
+      .orderBy(desc(hiddenRecipes.hiddenAt)),
+  ).data;
+}
+
+export function useHiddenRecipeIds(): ReadonlySet<string> {
+  const { data } = useLiveQuery(db.select({ id: hiddenRecipes.recipeId }).from(hiddenRecipes));
+  return useMemo(() => new Set(data.map((r) => r.id)), [data]);
+}
+
+export function useIsRecipeHidden(recipeId: string): boolean {
+  const { data } = useLiveQuery(
+    db.select().from(hiddenRecipes).where(eq(hiddenRecipes.recipeId, recipeId)),
+    [recipeId],
+  );
+  return data.length > 0;
 }
 
 /** Custom products the catalog update could not match (shown once). */

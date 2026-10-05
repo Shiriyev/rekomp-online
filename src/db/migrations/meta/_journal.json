@@ -120,6 +120,13 @@
       "when": 1791212213268,
       "tag": "0016_storage_days",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "6",
+      "when": 1791212981020,
+      "tag": "0017_hidden_recipes",
+      "breakpoints": true
     }
   ]
 }

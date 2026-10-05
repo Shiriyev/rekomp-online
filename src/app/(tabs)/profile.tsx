@@ -12,6 +12,7 @@ import { DayStartDialog, dayStartLabel } from '@/features/profile/DayStartDialog
 import { activityTitle, goalRateLabel, sexLabel } from '@/features/profile/labels';
 import { WeightDialog } from '@/features/profile/WeightDialog';
 import { DataSection } from '@/features/backup/DataSection';
+import { HiddenRecipesSection } from '@/features/profile/HiddenRecipesSection';
 import { showUndo } from '@/features/undo/undoStore';
 import { t as translate, useT } from '@/i18n';
 import { formatDecimal, formatInt, formatKcal } from '@/lib/format';
@@ -132,6 +133,8 @@ export default function ProfileScreen() {
           buttons={LANGUAGE_PREFERENCES.map((p) => ({ value: p, label: languageLabel(p) }))}
         />
       </View>
+
+      <HiddenRecipesSection />
 
       <DataSection />
 

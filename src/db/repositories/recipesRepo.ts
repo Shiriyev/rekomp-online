@@ -5,6 +5,7 @@ import { photoUriSchema } from '../../domain/schemas';
 import type { MealType } from '../../domain/types';
 import {
   favoriteRecipes,
+  hiddenRecipes,
   recipeCustomAmounts,
   recipeIngredients,
   recipes,
@@ -125,6 +126,16 @@ export function createRecipesRepo(db: AppDb) {
         tx.insert(favoriteRecipes).values({ recipeId, createdAt: now }).run();
         return true;
       });
+    },
+
+    /** «Скрыть это блюдо»: out of every list and filter until shown again. Idempotent. */
+    hide(recipeId: string, now: number = Date.now()): void {
+      db.insert(hiddenRecipes).values({ recipeId, hiddenAt: now }).onConflictDoNothing().run();
+    },
+
+    /** Back into the lists (from the profile's hidden list or Undo). */
+    unhide(recipeId: string): void {
+      db.delete(hiddenRecipes).where(eq(hiddenRecipes.recipeId, recipeId)).run();
     },
 
     /** Back to the original recipe amounts. */

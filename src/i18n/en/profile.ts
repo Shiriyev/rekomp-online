@@ -52,6 +52,15 @@ export const profile: Messages<typeof ru> = {
     deficit: '~{{kcal}} kcal deficit',
     surplus: '~{{kcal}} kcal surplus',
   },
+  hidden: {
+    title_one: 'Hidden dishes: {{count}}',
+    title_few: 'Hidden dishes: {{count}}',
+    title_many: 'Hidden dishes: {{count}}',
+    title_other: 'Hidden dishes: {{count}}',
+    hint: 'They are left out of lists and filters. Bring them back here.',
+    restore: 'Show again',
+    restoreA11y: 'Show {{name}} again',
+  },
   recalculate: 'Recalculate',
   form: {
     about: 'About you',

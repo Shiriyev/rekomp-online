@@ -7,7 +7,16 @@ import { eq } from 'drizzle-orm';
 
 import catalogJson from '../../seed/catalog.v2.json';
 import { createRepositories } from '../../repositories';
-import { appMeta, ingredients, mealLogs, pantryItems, recipes, recipeSteps } from '../../schema';
+import {
+  appMeta,
+  hiddenRecipes,
+  ingredients,
+  mealLogs,
+  pantryItems,
+  recipeCustomAmounts,
+  recipes,
+  recipeSteps,
+} from '../../schema';
 import { runSeed } from '../../seed/runSeed';
 import { createTestDb } from '../../testing/createTestDb';
 import type { AppDb } from '../../types';
@@ -132,6 +141,34 @@ describe('upgrade of a v1 install', () => {
     ).toBe(true);
     expect(db.select().from(recipes).where(eq(recipes.id, 'OLD')).get()?.isArchived).toBe(true);
     expect(db.select().from(mealLogs).where(eq(mealLogs.id, 'log1')).get()?.recipeId).toBe('OLD');
+  });
+
+  it('archives a pruned dish the user saved, edited or hid; hidden dishes stay hidden', () => {
+    runSeed(db);
+    const repos = createRepositories(db);
+    const dish = (id: string) => ({ id, name: id, mealType: 'lunch' as const, totalMinutes: 5 });
+    db.insert(recipes).values(['GONE_FAV', 'GONE_MINE', 'GONE_HID', 'GONE_NONE'].map(dish)).run();
+    repos.recipes.toggleFavorite('GONE_FAV');
+    db.insert(recipeCustomAmounts)
+      .values({ recipeId: 'GONE_MINE', ingredientId: 'tvorog', amountPerServing: 100 })
+      .run();
+    repos.recipes.hide('GONE_HID');
+    repos.recipes.hide('P4');
+
+    const result = apply(db);
+    expect(result.applied && result.archived.recipes).toBe(3);
+    const archived = (id: string) =>
+      db.select().from(recipes).where(eq(recipes.id, id)).get()?.isArchived;
+    expect(['GONE_FAV', 'GONE_MINE', 'GONE_HID'].map(archived)).toEqual([true, true, true]);
+    expect(archived('GONE_NONE')).toBeUndefined();
+    expect(
+      db
+        .select()
+        .from(hiddenRecipes)
+        .all()
+        .map((h) => h.recipeId)
+        .sort(),
+    ).toEqual(['GONE_HID', 'P4']);
   });
 
   it('merges custom products into catalog products of the same name, lists the rest', () => {

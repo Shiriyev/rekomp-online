@@ -232,6 +232,14 @@ export const favoriteRecipes = sqliteTable('favorite_recipes', {
   createdAt: integer('created_at').notNull(),
 });
 
+/** Dishes the user hid («Скрыть это блюдо»): left out of lists and filters. User data. */
+export const hiddenRecipes = sqliteTable('hidden_recipes', {
+  recipeId: text('recipe_id')
+    .primaryKey()
+    .references(() => recipes.id, { onDelete: 'cascade' }),
+  hiddenAt: integer('hidden_at').notNull(),
+});
+
 /** «Моя версия рецепта»: own default amounts; the seeded lines stay as the original. */
 export const recipeCustomAmounts = sqliteTable(
   'recipe_custom_amounts',
@@ -373,6 +381,7 @@ export type NewRecipe = typeof recipes.$inferInsert;
 export type RecipeIngredient = typeof recipeIngredients.$inferSelect;
 export type RecipeStep = typeof recipeSteps.$inferSelect;
 export type FavoriteRecipe = typeof favoriteRecipes.$inferSelect;
+export type HiddenRecipe = typeof hiddenRecipes.$inferSelect;
 export type RecipeCustomAmount = typeof recipeCustomAmounts.$inferSelect;
 export type PantryItem = typeof pantryItems.$inferSelect;
 export type CookSession = typeof cookSessions.$inferSelect;

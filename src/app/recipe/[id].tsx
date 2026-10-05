@@ -18,6 +18,7 @@ import { repositories } from '@/db';
 import {
   useFavoriteRecipeIds,
   useIngredientsMap,
+  useIsRecipeHidden,
   usePantryStock,
   useRecipeDetail,
 } from '@/db/hooks';
@@ -40,6 +41,7 @@ import {
   useRecipeDraftStore,
 } from '@/features/recipes/recipeDraftStore';
 import { recipeImage } from '@/features/recipes/recipeImage';
+import { RecipeMenu } from '@/features/recipes/RecipeMenu';
 import { StatusBadge } from '@/features/recipes/StatusBadge';
 import { useKcalLeftToday } from '@/features/recipes/useKcalLeftToday';
 import { showUndo } from '@/features/undo/undoStore';
@@ -74,6 +76,7 @@ export default function RecipeScreen() {
   const [message, setMessage] = useState<string | null>(null);
   const ready = useTransitionDone();
   const isFavorite = useFavoriteRecipeIds().has(id);
+  const isHidden = useIsRecipeHidden(id);
 
   // `defaultServings` in the catalog is the source's yield; the card starts from the meal.
   const openedFor = isMealType(meal) ? meal : recipe?.mealType;
@@ -180,6 +183,14 @@ export default function RecipeScreen() {
     );
   };
 
+  const hide = () => {
+    repositories.recipes.hide(recipe.id);
+    showUndo(translate('recipes.card.hiddenDone', { name: recipeName }), () =>
+      repositories.recipes.unhide(recipe.id),
+    );
+    router.back();
+  };
+
   const addMissing = () => {
     const n = repositories.shopping.addMissing(check.missing);
     setMessage(
@@ -192,7 +203,18 @@ export default function RecipeScreen() {
   return (
     <>
       {/* Titled with the list it was opened from; a recipe can fit several meals. */}
-      <Stack.Screen options={{ title: MEAL_LABELS[isMealType(meal) ? meal : recipe.mealType] }} />
+      <Stack.Screen
+        options={{
+          title: MEAL_LABELS[isMealType(meal) ? meal : recipe.mealType],
+          headerRight: () => (
+            <RecipeMenu
+              hidden={isHidden}
+              onHide={hide}
+              onUnhide={() => repositories.recipes.unhide(recipe.id)}
+            />
+          ),
+        }}
+      />
       <ScrollView contentContainerStyle={styles.content}>
         <View>
           <ImageWithFallback
@@ -247,6 +269,15 @@ export default function RecipeScreen() {
         </View>
 
         <View style={styles.section}>
+          {isHidden ? (
+            <Chip
+              compact
+              icon="eye-off-outline"
+              onPress={() => repositories.recipes.unhide(recipe.id)}
+              accessibilityHint={t('recipes.card.unhide')}>
+              {t('recipes.card.hiddenBanner')}
+            </Chip>
+          ) : null}
           <Text variant="headlineSmall" accessibilityRole="header">
             {recipeName}
           </Text>

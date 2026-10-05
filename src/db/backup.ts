@@ -17,6 +17,7 @@ const TABLES = {
   recipe_steps: schema.recipeSteps,
   recipe_custom_amounts: schema.recipeCustomAmounts,
   favorite_recipes: schema.favoriteRecipes,
+  hidden_recipes: schema.hiddenRecipes,
   pantry_items: schema.pantryItems,
   cook_sessions: schema.cookSessions,
   prepared_portions: schema.preparedPortions,

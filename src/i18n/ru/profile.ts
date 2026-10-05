@@ -50,6 +50,15 @@ export const profile = {
     deficit: 'дефицит ~{{kcal}} ккал',
     surplus: 'профицит ~{{kcal}} ккал',
   },
+  hidden: {
+    title_one: 'Скрытые блюда: {{count}}',
+    title_few: 'Скрытые блюда: {{count}}',
+    title_many: 'Скрытые блюда: {{count}}',
+    title_other: 'Скрытые блюда: {{count}}',
+    hint: 'Их нет в списках и фильтрах. Вернуть можно здесь.',
+    restore: 'Вернуть',
+    restoreA11y: 'Вернуть блюдо {{name}}',
+  },
   recalculate: 'Пересчитать',
   form: {
     about: 'О тебе',

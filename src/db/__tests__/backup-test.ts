@@ -14,6 +14,7 @@ import {
 import { runDataMigrations } from '../logicalDay';
 import { createRepositories, type Repositories } from '../repositories';
 import { applyBundledCatalog } from '../catalog/bundled';
+import catalogJson from '../seed/catalog.v2.json';
 import { createTestDb } from '../testing/createTestDb';
 import type { AppDb } from '../types';
 
@@ -71,6 +72,7 @@ function populate() {
   );
   const s = repos.cook.start('O1', 3, {}, NOW);
   repos.cook.finish(s.id, { eaten: 1, mealType: 'lunch' }, NOW);
+  repos.recipes.hide('P4', NOW);
   const active = repos.cook.start('Z2', 1, { yogurt: 'greek_yogurt' }, NOW + 1);
   repos.cook.saveProgress(active.id, {
     stepIndex: 1,
@@ -167,7 +169,7 @@ describe('importBackup', () => {
   it('applies the bundled catalog over an old backup (no catalog version in it)', () => {
     const empty = parseBackup({ app: 'rekomp', formatVersion: 1, exportedAt: 1, tables: {} });
     importBackup(db, empty);
-    expect(repos.recipes.listDetails()).toHaveLength(146);
+    expect(repos.recipes.listDetails()).toHaveLength(catalogJson.recipes.length);
   });
 });
 

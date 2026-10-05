@@ -8,7 +8,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { CATALOG_VERSION } from '../pipeline.config.ts';
+import { CATALOG_VERSION, config } from '../pipeline.config.ts';
 import { productMacros, type Accepted, type MealType, type RecipeTag } from './build/evaluate.ts';
 import { loadMappings, type Canonical } from './build/mappings.ts';
 import {
@@ -31,6 +31,8 @@ import {
 } from './lib/domain.ts';
 import { detectEquipment } from './build/equipment.ts';
 import { defaultStorageDays } from './build/storage.ts';
+import { prune, type PruneRecipe } from './build/prune.ts';
+import { loadPruneLists, writePruneReport } from './build/pruneReport.ts';
 import { APP_ROOT, ROOT } from './lib/paths.ts';
 import { loadOwnRecipes } from './own/recipes.ts';
 import { loadOverrides, loadTranslation } from './translate/load.ts';
@@ -219,21 +221,52 @@ function main() {
     return best ? proteinShelf(products.get(best.id)!) : 'other';
   };
 
+  type RecipeIn = Omit<
+    CatalogRecipe,
+    | 'kcalPerServing'
+    | 'proteinPerServing'
+    | 'proteinDensity'
+    | 'ingredientCount'
+    | 'tags'
+    | 'equipment'
+    | 'mainProtein'
+    | 'storageDays'
+  > & { storageDays?: number };
+  type LineIn = Omit<CatalogLine, 'recipeId' | 'sortOrder'>;
+  type StepIn = Omit<CatalogStep, 'recipeId' | 'order'>;
+  type Candidate = { r: RecipeIn; lines: LineIn[]; steps: StepIn[]; prune: PruneRecipe };
+  const candidates: Candidate[] = [];
+
+  /** Collects a recipe; the prune step (task 3) decides what goes into the catalog. */
   const push = (
-    r: Omit<
-      CatalogRecipe,
-      | 'kcalPerServing'
-      | 'proteinPerServing'
-      | 'proteinDensity'
-      | 'ingredientCount'
-      | 'tags'
-      | 'equipment'
-      | 'mainProtein'
-      | 'storageDays'
-    > & { storageDays?: number },
-    lines: Omit<CatalogLine, 'recipeId' | 'sortOrder'>[],
-    steps: Omit<CatalogStep, 'recipeId' | 'order'>[],
+    r: RecipeIn,
+    lines: LineIn[],
+    steps: StepIn[],
+    /** Name and source text searched for grill words. */
+    sourceText: string,
+    isProtected = false,
   ) => {
+    candidates.push({
+      r,
+      lines,
+      steps,
+      prune: {
+        id: r.id,
+        nameEn: r.nameEn,
+        mealTypes: r.mealTypes,
+        text: `${r.nameEn}\n${sourceText}`,
+        equipment: detectEquipment(steps.map((s) => s.textEn)),
+        // «To taste» (no amount) and optional lines can go without the dish.
+        lines: lines.map((l) => ({
+          ingredientId: l.ingredientId,
+          mandatory: !l.optional && l.amountPerServing > 0,
+        })),
+        protected: isProtected,
+      },
+    });
+  };
+
+  const emit = (r: RecipeIn, lines: LineIn[], steps: StepIn[]) => {
     const catalogLines = lines.map((l, sortOrder) => ({ recipeId: r.id, sortOrder, ...l }));
     const { perServing } = recipeMacros(catalogLines, nutrition);
     const equipment = detectEquipment(steps.map((s) => s.textEn));
@@ -291,6 +324,8 @@ function main() {
         timerSec: s.timerMin === undefined ? null : Math.round(s.timerMin * 60),
         ingredientRefs: s.refs ?? [],
       })),
+      en.steps.join('\n'),
+      true,
     );
   });
 
@@ -333,6 +368,7 @@ function main() {
         timerSec: s.timerSec,
         ingredientRefs: s.ingredientRefs,
       })),
+      r.steps.map((s) => `${s.en}\n${s.ru}`).join('\n'),
     );
   }
 
@@ -402,8 +438,35 @@ function main() {
         timerSec: s.timerSec,
         ingredientRefs: s.ingredientRefs,
       })),
+      `${t.nameRu}\n${a.instructions}`,
     );
   }
+
+  // ---------- prune (FIXES_v2.1 task 3) ----------
+  const pruned = prune(
+    candidates.map((c) => c.prune),
+    canonical.map((p) => p.id),
+    loadPruneLists(),
+    config.prune,
+  );
+  writePruneReport(
+    candidates.map((c) => ({ ...c.prune, nameRu: c.r.name, source: c.r.source })),
+    pruned,
+    new Map(canonical.map((p) => [p.id, `${translations[p.id]!.ru} (${p.nameEn})`])),
+  );
+  for (const c of candidates) {
+    if (!pruned.keptRecipes.has(c.r.id)) continue;
+    const drop = new Set(pruned.droppedLines.get(c.r.id) ?? []);
+    emit(
+      c.r,
+      c.lines.filter((l) => !drop.has(l.ingredientId)),
+      c.steps.map((s) => ({
+        ...s,
+        ingredientRefs: s.ingredientRefs.filter((id) => !drop.has(id)),
+      })),
+    );
+  }
+  const keptIngredients = ingredients.filter((i) => pruned.keptProducts.has(i.id));
 
   // v1 first (as before), then everything else by meal and protein density.
   const meals = ['breakfast', 'lunch', 'dinner', 'snack'];
@@ -421,7 +484,7 @@ function main() {
 
   const catalog: Catalog = {
     catalogVersion: CATALOG_VERSION,
-    ingredients,
+    ingredients: keptIngredients,
     recipes: ordered,
     recipeIngredients,
     recipeSteps,
@@ -439,7 +502,7 @@ function main() {
 
   // ---------- static requires for the bundled photos ----------
   const keys = [
-    ...new Set([...ingredients, ...ordered].flatMap((x) => (x.imageKey ? [x.imageKey] : []))),
+    ...new Set([...keptIngredients, ...ordered].flatMap((x) => (x.imageKey ? [x.imageKey] : []))),
   ].sort();
   writeFileSync(
     IMAGES_MODULE,
@@ -458,7 +521,7 @@ function main() {
 
   const count = (m: string) => ordered.filter((r) => r.mealTypes.includes(m as never)).length;
   console.log(
-    `catalog v${CATALOG_VERSION}: ${ingredients.length} products, ` +
+    `catalog v${CATALOG_VERSION}: ${keptIngredients.length} products, ` +
       `${ordered.length} recipes (${ordered.filter((r) => r.source === 'own').length} own, ` +
       `${ordered.filter((r) => r.source === 'mealdb').length} TheMealDB; ` +
       `breakfast ${count('breakfast')}, lunch ${count('lunch')}, dinner ${count('dinner')}, snack ${count('snack')}), ` +

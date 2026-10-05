@@ -5,6 +5,8 @@ import {
   appMeta,
   catalogMeta,
   cookSessions,
+  favoriteRecipes,
+  hiddenRecipes,
   ingredients,
   mealLogs,
   pantryItems,
@@ -189,6 +191,22 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
           .select({ id: preparedPortions.id })
           .from(preparedPortions)
           .where(eq(preparedPortions.recipeId, id))
+          .get() ??
+        // User choices about the dish (saved, own amounts, hidden) stay with it too.
+        tx
+          .select({ id: favoriteRecipes.recipeId })
+          .from(favoriteRecipes)
+          .where(eq(favoriteRecipes.recipeId, id))
+          .get() ??
+        tx
+          .select({ id: recipeCustomAmounts.recipeId })
+          .from(recipeCustomAmounts)
+          .where(eq(recipeCustomAmounts.recipeId, id))
+          .get() ??
+        tx
+          .select({ id: hiddenRecipes.recipeId })
+          .from(hiddenRecipes)
+          .where(eq(hiddenRecipes.recipeId, id))
           .get();
       if (used) {
         tx.update(recipes).set({ isArchived: true }).where(eq(recipes.id, id)).run();
