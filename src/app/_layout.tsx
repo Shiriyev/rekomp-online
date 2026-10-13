@@ -103,7 +103,7 @@ function AppShell() {
           <StatusBar style={isDark ? 'light' : 'dark'} />
           {/* A plain slide: Android's default fade/zoom blends two full screens with alpha,
               which drops frames on budget GPUs. */}
-          <Stack screenOptions={{ headerShown: false, animation: 'ios_from_right' }}>
+          <Stack screenOptions={{ headerShown: false, animation: 'default' }}>
             <Stack.Protected guard={hasProfile}>
               <Stack.Screen name="(tabs)" />
               <Stack.Screen

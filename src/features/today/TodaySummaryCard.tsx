@@ -20,7 +20,7 @@ export function TodaySummaryCard({ summary, targets }: Props) {
   const track = theme.colors.surfaceVariant;
 
   return (
-    <Card mode="elevated">
+    <Card mode="contained">
       <Card.Content style={styles.content}>
         <View style={styles.rings}>
           <View style={styles.ringColumn}>

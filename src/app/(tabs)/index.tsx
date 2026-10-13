@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
 import { router } from 'expo-router';
 import { Avatar, Card, Chip, FAB, Text } from 'react-native-paper';
 
@@ -111,9 +110,7 @@ export default function TodayScreen() {
             />
           </Card>
         ) : null}
-        <Animated.View entering={FadeIn.duration(250)}>
-          <TodaySummaryCard summary={summary} targets={profile} />
-        </Animated.View>
+        <TodaySummaryCard summary={summary} targets={profile} />
         {streak >= 2 ? (
           <Chip
             icon="fire"
