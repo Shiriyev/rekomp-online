@@ -47,3 +47,7 @@ example
 coverage/
 # local secrets
 .env
+
+# private planning docs (kept local only)
+docs/PLAN.md
+docs/menu_recomp.xlsx

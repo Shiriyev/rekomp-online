@@ -2,7 +2,7 @@
  * @jest-environment node
  *
  * PLAN phase 1 DoD: kcal/protein computed from ingredients must be within ±15%
- * of the original spreadsheet (docs/menu_recomp.xlsx). The spreadsheet is only a
+ * of the original spreadsheet (kept outside the repo). The spreadsheet is only a
  * reference; ingredient-based calculation is the source of truth.
  */
 import { recipeMacros } from '../../domain/nutrition';
