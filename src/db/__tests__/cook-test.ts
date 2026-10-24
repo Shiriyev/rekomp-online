@@ -3,6 +3,7 @@
  */
 import { eq } from 'drizzle-orm';
 
+import { AUTO_GROUP_PREFIX } from '../../domain/substitutions';
 import { createRepositories, type Repositories } from '../repositories';
 import { CookSessionError } from '../repositories/cookRepo';
 import { cookSessions, mealLogs, preparedPortions, recipes } from '../schema';
@@ -167,6 +168,17 @@ describe('cookRepo.finish', () => {
     const s = repos.cook.start('P1', 1, { yogurt: 'greek_yogurt' }, NOW);
     repos.cook.finish(s.id, { eaten: 1, mealType: 'snack' }, NOW);
     expect([qty('greek_yogurt'), qty('skyr')]).toEqual([50, 200]);
+  });
+
+  it('deducts a global stand-in rather than the product the recipe names', () => {
+    repos.pantry.setQuantity('tvorog', 500);
+    repos.pantry.setQuantity('skyr', 500);
+    // Z1 names tvorog and carries no alternative of its own: skyr stands in only through
+    // the global rules, so the group is on no stored line. Were the lines not expanded for
+    // the cook as well, this would quietly take the tvorog the recipe asked for.
+    const s = repos.cook.start('Z1', 1, { [`${AUTO_GROUP_PREFIX}tvorog`]: 'skyr' }, NOW);
+    repos.cook.finish(s.id, { eaten: 1, mealType: 'breakfast' }, NOW);
+    expect([qty('skyr'), qty('tvorog')]).toEqual([250, 500]);
   });
 
   it('refuses abandoned, undone or unknown sessions', () => {

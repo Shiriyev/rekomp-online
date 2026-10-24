@@ -9,6 +9,8 @@ import {
   sanitizeAmounts,
   usedAmounts,
 } from '../../domain/recipeDraft';
+import { SUBSTITUTION_RULES } from '../../domain/substitutionRules';
+import { expandSubstitutions } from '../../domain/substitutions';
 import type { Macros, MealType } from '../../domain/types';
 import { normalizeQuantity } from '../../domain/units';
 import { newId } from '../../lib/id';
@@ -75,7 +77,13 @@ const validateServings = (servings: number) => {
   }
 };
 
-/** Recipe lines with «моя версия» amounts applied (the card's starting point). */
+/**
+ * Recipe lines with the global stand-ins added and «моя версия» amounts applied (the
+ * card's starting point). The stand-ins have to be added here and not only on the card:
+ * a session's choices name a generated group, and without the matching lines resolveLines
+ * would quietly fall back to the product the recipe named — deducting beef from the pantry
+ * for a cook the user swapped to turkey.
+ */
 export function effectiveLines(tx: AppDb, recipeId: string) {
   const lines = tx
     .select()
@@ -83,13 +91,20 @@ export function effectiveLines(tx: AppDb, recipeId: string) {
     .where(eq(recipeIngredients.recipeId, recipeId))
     .orderBy(asc(recipeIngredients.sortOrder))
     .all();
+  const ingredientMap = new Map(
+    tx
+      .select()
+      .from(ingredients)
+      .all()
+      .map((i) => [i.id, i]),
+  );
   const custom = tx
     .select()
     .from(recipeCustomAmounts)
     .where(eq(recipeCustomAmounts.recipeId, recipeId))
     .all();
   return applyAmounts(
-    lines,
+    expandSubstitutions(lines, SUBSTITUTION_RULES, ingredientMap),
     Object.fromEntries(custom.map((c) => [c.ingredientId, c.amountPerServing])),
   );
 }

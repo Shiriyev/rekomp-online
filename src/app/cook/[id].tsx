@@ -24,6 +24,8 @@ import { formatTimer, isDone, remainingSec, stepIngredients } from '@/domain/coo
 import { recipeMacros, roundKcal, roundProtein } from '@/domain/nutrition';
 import { applyAmounts } from '@/domain/recipeDraft';
 import { needsBigPotHint } from '@/domain/servings';
+import { SUBSTITUTION_RULES } from '@/domain/substitutionRules';
+import { expandSubstitutions } from '@/domain/substitutions';
 import { activeTimers, useCookStore } from '@/features/cooking/cookStore';
 import { FinishView } from '@/features/cooking/FinishView';
 import { RecipeOverview } from '@/features/cooking/RecipeOverview';
@@ -128,10 +130,16 @@ export default function CookScreen() {
 
   const servings = session?.servings ?? recipe?.defaultServings ?? 1;
   const choices = useMemo(() => session?.choices ?? {}, [session?.choices]);
-  // The cooked amounts (edited on the card) drive steps, macros and the deduction.
+  // The cooked amounts (edited on the card) drive steps, macros and the deduction. The
+  // stand-ins are added here too, or a session whose choices name a generated group would
+  // show the product the recipe names while the cook deducts the one that was chosen.
   const lines = useMemo(
-    () => applyAmounts(recipeLines, session?.amounts ?? {}),
-    [recipeLines, session?.amounts],
+    () =>
+      applyAmounts(
+        expandSubstitutions(recipeLines, SUBSTITUTION_RULES, ingredients),
+        session?.amounts ?? {},
+      ),
+    [recipeLines, session?.amounts, ingredients],
   );
   const perPortion = useMemo(() => {
     if (ingredients.size === 0 || lines.length === 0) return { kcal: 0, protein: 0 };

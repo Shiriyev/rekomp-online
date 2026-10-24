@@ -25,6 +25,8 @@ import {
 import { recipeMacros, resolveLines } from '@/domain/nutrition';
 import { autoChoices, canCook } from '@/domain/pantry';
 import { defaultServingsFor, exceedsStorage, SERVING_CHOICES } from '@/domain/servings';
+import { SUBSTITUTION_RULES } from '@/domain/substitutionRules';
+import { expandSubstitutions } from '@/domain/substitutions';
 import { isStockTracked, MEAL_TYPES, type MealType } from '@/domain/types';
 import { applyAmounts, draftStep, isRemoved } from '@/domain/recipeDraft';
 import {
@@ -57,6 +59,8 @@ import { SkeletonDetail } from '@/ui/Skeleton';
 const isMealType = (v: unknown): v is MealType =>
   typeof v === 'string' && (MEAL_TYPES as readonly string[]).includes(v);
 const NIGHT_BEFORE_TAG = 'с вечера';
+/** A swap group can hold eleven cuts of meat; the row has space for a few chips. */
+const MAX_ALTERNATIVES = 3;
 
 export default function RecipeScreen() {
   const theme = useAppTheme();
@@ -84,12 +88,19 @@ export default function RecipeScreen() {
 
   const computed = useMemo(() => {
     if (!recipe || ingredients.size === 0 || lines.length === 0) return null;
+    // The global swaps become extra lines, so a stand-in can be chosen in any dish and not
+    // only where the catalog spelled one out. A note such as «1 ч.л.» describes the product
+    // the recipe named and its amount, so a stand-in does not inherit it.
+    const own = new Set(lines.map((l) => l.ingredientId));
+    const withSwaps = expandSubstitutions(lines, SUBSTITUTION_RULES, ingredients).map((l) =>
+      own.has(l.ingredientId) ? l : { ...l, note: null, noteEn: null },
+    );
     // The card edits a draft of this cook: status, macros and shopping use the drafted amounts.
-    const drafted = applyAmounts(lines, draft);
+    const drafted = applyAmounts(withSwaps, draft);
     const choices = { ...autoChoices(drafted, ingredients, pantry, servings), ...userChoices };
     const check = canCook(drafted, ingredients, pantry, servings, choices);
     const macros = recipeMacros(drafted, ingredients, { servings, choices });
-    const baseMacros = recipeMacros(lines, ingredients, { servings, choices });
+    const baseMacros = recipeMacros(withSwaps, ingredients, { servings, choices });
     const resolved = resolveLines(drafted, choices);
     const used = resolved.filter((l) => {
       const i = ingredients.get(l.ingredientId);
@@ -108,7 +119,7 @@ export default function RecipeScreen() {
       const i = ingredients.get(l.ingredientId);
       return i?.isStaple ? [contentNow.ingredientName(i).toLocaleLowerCase()] : [];
     });
-    return { check, macros, baseMacros, used, staples, basics };
+    return { check, macros, baseMacros, used, staples, basics, withSwaps };
   }, [recipe, lines, draft, ingredients, pantry, servings, userChoices]);
 
   if (isLoaded && !recipe) {
@@ -116,7 +127,7 @@ export default function RecipeScreen() {
   }
   if (!ready || !recipe || !computed) return <SkeletonDetail still={!ready} />;
 
-  const { check, macros, baseMacros, used, staples, basics } = computed;
+  const { check, macros, baseMacros, used, staples, basics, withSwaps } = computed;
   const perServing = macros.perServing;
   const after = kcalLeft - perServing.kcal;
   const drafted = Object.keys(draft).length > 0;
@@ -125,7 +136,9 @@ export default function RecipeScreen() {
   const kcalChanged = formatInt(perServing.kcal) !== formatInt(baseMacros.perServing.kcal);
   const proteinChanged = formatInt(perServing.protein) !== formatInt(baseMacros.perServing.protein);
   const baseAmountOf = (ingredientId: string) =>
-    lines.find((l) => l.ingredientId === ingredientId)?.amountPerServing ?? 0;
+    withSwaps.find((l) => l.ingredientId === ingredientId)?.amountPerServing ?? 0;
+  // Stand-ins already at home are the useful ones, so they are offered first.
+  const atHome = (ingredientId: string) => ((pantry.get(ingredientId)?.quantity ?? 0) > 0 ? 1 : 0);
 
   const startCooking = () => {
     setConfirmOpen(false);
@@ -480,7 +493,10 @@ export default function RecipeScreen() {
                 <IngredientRow
                   check={c}
                   ingredient={ingredient}
-                  alternatives={c.alternatives.flatMap((a) => ingredients.get(a) ?? [])}
+                  alternatives={c.alternatives
+                    .flatMap((a) => ingredients.get(a) ?? [])
+                    .sort((x, y) => atHome(y.id) - atHome(x.id))
+                    .slice(0, MAX_ALTERNATIVES)}
                   servings={servings}
                   onChooseAlternative={(altId) => {
                     const group = c.line.altGroup;
