@@ -1,0 +1,58 @@
+{
+ "nameRu": "Тайский рыбный бульон с зеленью",
+ "descriptionRu": "Пряный бульон на карри-пасте с белой рыбой, креветками, пак-чой и рисовой лапшой.",
+ "descriptionEn": "A spiced curry-paste broth with white fish, prawns, pak choi and rice noodles.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Cook the noodles to packet instructions, refresh in cold water and drain well.",
+   "ru": "Отварите лапшу по инструкции, промойте холодной водой и хорошо откиньте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "en": "Put the stock in a large saucepan and stir in the curry paste, lime leaves, fish sauce and cold water, then bring to a simmer.",
+   "ru": "Влейте бульон в большую кастрюлю, вмешайте карри-пасту, листья лайма, рыбный соус и холодную воду и доведите до слабого кипения.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_stock",
+    "thai_red_curry_paste",
+    "lime_leaf",
+    "fish_sauce"
+   ]
+  },
+  {
+   "en": "Cut the fish into cubes, add to the pan and return to a simmer.",
+   "ru": "Нарежьте рыбу кубиками, положите в кастрюлю и снова доведите до слабого кипения.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "white_fish"
+   ]
+  },
+  {
+   "en": "Stir in the noodles, prawns and pak choi and simmer until the fish and prawns are just cooked.",
+   "ru": "Вмешайте лапшу, креветки и пак-чой и томите, пока рыба и креветки не дойдут.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "rice_noodles",
+    "prawn",
+    "pak_choi"
+   ]
+  },
+  {
+   "en": "Serve in bowls scattered with coriander.",
+   "ru": "Подавайте в тарелках, посыпав кинзой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  }
+ ]
+}

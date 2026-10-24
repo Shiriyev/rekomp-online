@@ -1,0 +1,81 @@
+{
+ "nameRu": "Куриная шаурма с чесночно-йогуртовым соусом",
+ "descriptionRu": "Курица в пряном маринаде, обжаренная на сковороде, с густым йогуртовым соусом.",
+ "descriptionEn": "Chicken in a spiced marinade, seared in a pan, with a thick garlic yogurt sauce.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "Cut the chicken into reasonably small slices and put them in a bag or bowl.",
+   "ru": "Нарежьте курицу некрупными ломтиками и сложите в пакет или миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "Add the garlic, coriander, cumin, cardamom, cayenne, paprika, salt, lemon juice and olive oil and mix thoroughly.",
+   "ru": "Добавьте чеснок, кориандр, зиру, кардамон, кайенский перец, паприку, соль, лимонный сок и оливковое масло и тщательно перемешайте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "ground_coriander",
+    "cumin",
+    "cardamom",
+    "cayenne",
+    "paprika_powder",
+    "salt",
+    "lemon_juice",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Chill in the fridge; longer is better.",
+   "ru": "Уберите в холодильник — чем дольше, тем лучше.",
+   "timerSec": 43200,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "Heat a frying pan to medium-high with a little olive oil.",
+   "ru": "Разогрейте сковороду до сильного огня с небольшим количеством оливкового масла.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Add the chicken in two batches so the pan is not crowded, and cook until well coloured and done through.",
+   "ru": "Выложите курицу в два приёма, чтобы не переполнять сковороду, и обжарьте до румяности и полной готовности.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "While the chicken cooks, stir the yogurt with garlic, lemon and cumin and season with salt.",
+   "ru": "Пока курица жарится, смешайте йогурт с чесноком, лимоном и зирой и посолите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "garlic",
+    "lemon_juice",
+    "cumin"
+   ]
+  },
+  {
+   "en": "Serve the chicken straight away with the sauce spooned over.",
+   "ru": "Подавайте курицу сразу, полив соусом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast",
+    "greek_yogurt"
+   ]
+  }
+ ]
+}

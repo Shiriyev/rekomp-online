@@ -1,0 +1,79 @@
+{
+ "nameRu": "Португальский прегу с зелёным пири-пири",
+ "descriptionRu": "Сэндвич с отбитым стейком, обжаренным на сковороде, и острым зелёным соусом.",
+ "descriptionEn": "A sandwich of thin pan-seared steak with a hot green sauce and rocket.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Rub the garlic over the steaks, put them in a bag with the olive oil, vinegar and parsley stalks and bash them flat with a rolling pin.",
+   "ru": "Натрите стейки чесноком, положите в пакет с оливковым маслом, уксусом и стеблями петрушки и отбейте скалкой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "beef_steak",
+    "olive_oil",
+    "vinegar",
+    "parsley"
+   ]
+  },
+  {
+   "en": "Leave the steaks to marinate.",
+   "ru": "Оставьте стейки мариноваться.",
+   "timerSec": 7200,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Blend the rocket, basil, jalapeño, spring onion, sugar and a spoonful of water as smooth as you can to make the green sauce.",
+   "ru": "Пробейте в блендере руколу, базилик, халапеньо, зелёный лук, сахар и ложку воды до максимальной гладкости — это зелёный соус.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rocket",
+    "basil",
+    "jalapeno",
+    "spring_onion",
+    "sugar"
+   ]
+  },
+  {
+   "en": "Heat a heavy frying pan until very hot. Brush the garlic and parsley off the steaks and season them well.",
+   "ru": "Раскалите тяжёлую сковороду. Счистите со стейков чеснок и петрушку и хорошо приправьте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Sear the steaks on each side, then rest them on a plate.",
+   "ru": "Обжарьте стейки с каждой стороны и дайте им отдохнуть на тарелке.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Put the split baguette cut-side down on the plate to soak up the juices.",
+   "ru": "Положите разрезанный багет срезом вниз на тарелку, чтобы он впитал сок.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette"
+   ]
+  },
+  {
+   "en": "Slice the steaks and stuff them into the bread with the green sauce and rocket.",
+   "ru": "Нарежьте стейки и вложите в хлеб вместе с зелёным соусом и руколой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "baguette",
+    "rocket"
+   ]
+  }
+ ]
+}

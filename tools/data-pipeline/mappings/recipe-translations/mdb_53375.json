@@ -1,0 +1,76 @@
+{
+ "nameRu": "Креветки со стручковым горошком",
+ "descriptionRu": "Креветки в маринаде из хереса и крахмала, быстро обжаренные с горошком и имбирём.",
+ "descriptionEn": "Prawns marinated in sherry and cornflour, flashed in the wok with peas and ginger.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Mix the cornflour, sherry and salt in a large bowl, add the prawns and toss to coat.",
+   "ru": "Смешайте в большой миске крахмал, херес и соль, добавьте креветки и обваляйте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cornstarch",
+    "sherry",
+    "salt",
+    "prawn"
+   ]
+  },
+  {
+   "en": "Let the prawns marinate while you prepare the peas, ginger and garlic.",
+   "ru": "Оставьте креветки мариноваться, пока готовите горошек, имбирь и чеснок.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Heat a wok over high heat, then add the peanut oil and let it get hot.",
+   "ru": "Раскалите вок на сильном огне, влейте арахисовое масло и дайте ему прогреться.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "peanut_oil"
+   ]
+  },
+  {
+   "en": "Add the ginger and garlic and stir-fry briefly.",
+   "ru": "Добавьте имбирь и чеснок и быстро обжарьте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ground_ginger",
+    "garlic"
+   ]
+  },
+  {
+   "en": "Add the prawns with all their marinade, then the peas, soy sauce and stock, and stir-fry until the prawns turn pink.",
+   "ru": "Выложите креветки вместе с маринадом, затем горошек, соевый соус и бульон и обжаривайте, пока креветки не порозовеют.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "prawn",
+    "snap_peas",
+    "soy_sauce",
+    "chicken_stock"
+   ]
+  },
+  {
+   "en": "Add the spring onions and stir-fry a little longer.",
+   "ru": "Добавьте зелёный лук и обжарьте ещё немного.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "spring_onion"
+   ]
+  },
+  {
+   "en": "Turn off the heat, stir through the sesame oil and serve with steamed rice.",
+   "ru": "Выключите огонь, вмешайте кунжутное масло и подавайте с отварным рисом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_oil"
+   ]
+  }
+ ]
+}

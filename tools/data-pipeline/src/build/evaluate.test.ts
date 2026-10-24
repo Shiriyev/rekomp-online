@@ -99,10 +99,12 @@ test('accepts a high-protein main and sizes the portion for its meal', () => {
   );
   assert.equal(r.status, 'accepted');
   if (r.status !== 'accepted') return;
-  // 825 + 730 + 2 × 13.5 g oil (USDA tbsp) ≈ 1794 kcal → 3 lunch servings of ~598 kcal
+  // 825 + 730 + 2 × 13.5 g oil (USDA tbsp) ≈ 1794 kcal → 3 servings of ~598 kcal. The
+  // widened bands overlap, so that portion is a plausible lunch and a plausible dinner;
+  // the primary meal is whichever band's middle it sits closest to.
   assert.equal(r.servings, 3);
-  assert.equal(r.mealType, 'lunch');
-  assert.deepEqual(r.mealTypes, ['lunch']);
+  assert.equal(r.mealType, 'dinner');
+  assert.deepEqual(r.mealTypes, ['lunch', 'dinner']);
   assert.ok(Math.abs(r.perServing.kcal - 598) < 2);
   assert.ok(r.perServing.protein > 50);
   assert.equal(r.lines.find((l) => l.ingredientId === 'olive_oil')?.gramsSource, 'usda');
@@ -115,7 +117,9 @@ test('rejects with one clear reason', () => {
     const r = evaluate(rec, ctx);
     return r.status === 'rejected' ? r.reason : 'accepted';
   };
-  assert.equal(reason(recipe([['1', 'Rice']], { category: 'Dessert' })), 'dessert');
+  // Desserts are no longer excluded by category: allowedMeals sends them to snack, and
+  // they stand or fall on protein like anything else.
+  assert.notEqual(reason(recipe([['1', 'Rice']], { category: 'Dessert' })), 'dessert');
   assert.equal(reason(recipe([['100g', 'Unicorn Meat']])), 'unmapped_ingredient');
   assert.equal(
     reason(
@@ -143,7 +147,7 @@ test('rejects with one clear reason', () => {
           ['500g', 'Chicken Breasts'],
           ['200g', 'Rice'],
         ],
-        { instructions: 'Simmer for 2 hours.' },
+        { instructions: 'Simmer for 4 hours.' },
       ),
     ),
     'too_long',
@@ -181,9 +185,9 @@ test('reviewed meal extras add a meal only with the same servings, or carry a sm
   const big = evaluate(main, withSnack);
   assert.equal(big.status, 'accepted');
   if (big.status !== 'accepted') return;
-  // Lunch keeps its 3 servings; a snack would need 9, so it is not listed.
+  // The main keeps its 3 servings; a snack would need 9 of them, so it is not listed.
   assert.equal(big.servings, 3);
-  assert.deepEqual(big.mealTypes, ['lunch']);
+  assert.deepEqual(big.mealTypes, ['lunch', 'dinner']);
 
   const small = recipe([['120g', 'Chicken Breasts']]);
   const plain = evaluate(small, ctx);

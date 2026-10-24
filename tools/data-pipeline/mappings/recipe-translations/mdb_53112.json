@@ -1,0 +1,95 @@
+{
+ "nameRu": "Кенийское карри с говядиной",
+ "descriptionRu": "Говядина, отваренная с чесноком и имбирём, затем томлённая в томатно-луковом соусе с карри.",
+ "descriptionEn": "Beef boiled with garlic and ginger, then simmered in a spiced tomato and onion sauce.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Bring the water to a boil in a large pot, add the beef, garlic and ginger and stir well.",
+   "ru": "Доведите воду до кипения в большой кастрюле, добавьте говядину, чеснок и имбирь и хорошо перемешайте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water",
+    "beef_steak",
+    "garlic",
+    "ground_ginger"
+   ]
+  },
+  {
+   "en": "Bring to a gentle simmer, cover and cook, skimming off any foam.",
+   "ru": "Убавьте до слабого кипения, накройте и варите, снимая пену.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Drain the beef, keeping the cooking water.",
+   "ru": "Откиньте говядину, сохранив отвар.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Heat the oil in the pot over medium heat and cook the onions until softened.",
+   "ru": "Разогрейте масло в кастрюле на среднем огне и готовьте лук до мягкости.",
+   "timerSec": 420,
+   "ingredientRefs": [
+    "oil",
+    "red_onion"
+   ]
+  },
+  {
+   "en": "Add the tomatoes and cook until they fall apart.",
+   "ru": "Добавьте помидоры и готовьте, пока они не разойдутся.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "tomato"
+   ]
+  },
+  {
+   "en": "Return the drained beef to the pot and cook, stirring occasionally.",
+   "ru": "Верните говядину в кастрюлю и готовьте, иногда помешивая.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Stir in the paprika, pepper, curry powder, tomato purée and salt.",
+   "ru": "Вмешайте паприку, перец, карри, томатную пасту и соль.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "paprika_powder",
+    "pepper",
+    "curry_powder",
+    "tomato_puree",
+    "salt"
+   ]
+  },
+  {
+   "en": "Pour back the reserved cooking water with enough extra to cover, bring to a boil, then simmer uncovered until the meat is tender and the sauce has thickened.",
+   "ru": "Влейте сохранённый отвар и воду, чтобы покрыть мясо, доведите до кипения и томите без крышки, пока мясо не станет мягким, а соус густым.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "water",
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Taste and adjust the seasoning, then garnish with fresh chilli and coriander.",
+   "ru": "Попробуйте, поправьте на соль и посыпьте свежим чили и кинзой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "coriander_leaf"
+   ]
+  }
+ ]
+}

@@ -94,7 +94,8 @@ const PASSIVE =
 /** Meals a TheMealDB category may serve; the kcal fit then decides. */
 export function allowedMeals(category: string): readonly MealType[] {
   if (category === 'Breakfast') return ['breakfast'];
-  if (category === 'Side' || category === 'Starter') return ['snack'];
+  // A dessert is a snack, never a dinner: it is let in by excludedCategories being empty.
+  if (category === 'Side' || category === 'Starter' || category === 'Dessert') return ['snack'];
   return ['lunch', 'dinner'];
 }
 

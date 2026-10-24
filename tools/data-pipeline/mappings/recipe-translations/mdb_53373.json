@@ -1,0 +1,74 @@
+{
+ "nameRu": "Жареные спринг-роллы",
+ "descriptionRu": "Рулетики из теста вонтон со свиным фаршем и капустой, обжаренные до золотистой корочки.",
+ "descriptionEn": "Wonton wrappers rolled around a pork and cabbage filling, fried until golden.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the olive oil in a large skillet over medium heat and cook the pork mince, breaking it apart, until cooked through.",
+   "ru": "Разогрейте оливковое масло в большой сковороде на среднем огне и обжарьте свиной фарш, разбивая комки, до готовности.",
+   "timerSec": 480,
+   "ingredientRefs": [
+    "olive_oil",
+    "pork_mince"
+   ]
+  },
+  {
+   "en": "Add the garlic, ginger, carrot, spring onions and cabbage and cook, stirring, until the cabbage wilts and softens.",
+   "ru": "Добавьте чеснок, имбирь, морковь, зелёный лук и капусту и обжаривайте, помешивая, пока капуста не опадёт и не станет мягкой.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "garlic",
+    "ginger",
+    "carrot",
+    "spring_onion",
+    "cabbage"
+   ]
+  },
+  {
+   "en": "Season the filling with soy sauce and rice vinegar and take it off the heat to cool.",
+   "ru": "Приправьте начинку соевым соусом и рисовым уксусом и снимите с огня, чтобы остудить.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "rice_vinegar"
+   ]
+  },
+  {
+   "en": "Lay a wrapper as a diamond, put a spoonful of filling in the middle, wet the edges and roll it away from you into a tight cylinder. Repeat with the rest.",
+   "ru": "Положите лист теста ромбом, выложите в центр ложку начинки, смочите края и сверните плотным рулетиком от себя. Повторите с остальными.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "wonton_wrapper"
+   ]
+  },
+  {
+   "en": "Pour oil into a deep skillet to about a centimetre and heat it to 175°C.",
+   "ru": "Налейте в глубокую сковороду масло слоем около сантиметра и разогрейте до 175 °C.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "en": "Fry the rolls until golden, then flip and fry the other side.",
+   "ru": "Обжарьте рулетики до золотистого цвета, переверните и обжарьте с другой стороны.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "wonton_wrapper"
+   ]
+  },
+  {
+   "en": "Drain them on paper towels and serve hot with plum sauce.",
+   "ru": "Обсушите на бумажных полотенцах и подавайте горячими со сливовым соусом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "plum_sauce"
+   ]
+  }
+ ]
+}

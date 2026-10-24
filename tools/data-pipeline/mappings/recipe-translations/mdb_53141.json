@@ -1,0 +1,65 @@
+{
+ "nameRu": "Карбонада криолья",
+ "descriptionRu": "Аргентинское рагу из говядины с тыквой, картофелем и курагой.",
+ "descriptionEn": "An Argentinian beef stew with pumpkin, potato and dried apricots.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Brown the beef cubes in a large pot, in batches so they sear rather than steam, then lift them out.",
+   "ru": "Обжарьте кубики говядины в большой кастрюле партиями, чтобы они подрумянились, а не тушились, затем выньте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "In the same pot, cook the onion until translucent.",
+   "ru": "В той же кастрюле обжарьте лук до прозрачности.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "en": "Add the carrot, potato and pumpkin and cook for a few minutes.",
+   "ru": "Добавьте морковь, картофель и тыкву и готовьте несколько минут.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "potato",
+    "pumpkin"
+   ]
+  },
+  {
+   "en": "Return the beef, pour in the stock, add the dried apricots and season with salt and pepper.",
+   "ru": "Верните говядину, влейте бульон, добавьте курагу и приправьте солью и перцем.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "beef_stock",
+    "dried_apricot",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Simmer until the beef is tender.",
+   "ru": "Томите, пока говядина не станет мягкой.",
+   "timerSec": 7200,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Serve hot with crusty bread.",
+   "ru": "Подавайте горячим с хрустящим хлебом.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

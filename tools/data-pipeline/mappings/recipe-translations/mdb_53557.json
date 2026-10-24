@@ -1,0 +1,65 @@
+{
+ "nameRu": "Очень хрустящие куриные крылышки",
+ "descriptionRu": "Крылышки в маринаде со специями, в кассавовой муке, обжаренные дважды до хрусткости.",
+ "descriptionEn": "Wings marinated in spices, coated in cassava flour and fried twice until crisp.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Wash the chicken wings and pat them dry, then put them in a large bowl.",
+   "ru": "Вымойте куриные крылышки, обсушите и сложите в большую миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "en": "Season with garlic powder, salt, pepper and turmeric and leave to marinate.",
+   "ru": "Приправьте чесночным порошком, солью, перцем и куркумой и оставьте мариноваться.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic_powder",
+    "salt",
+    "pepper",
+    "turmeric"
+   ]
+  },
+  {
+   "en": "Coat the wings in the cassava flour and set them on a rack to dry.",
+   "ru": "Обваляйте крылышки в кассавовой муке и выложите на решётку подсохнуть.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "cassava"
+   ]
+  },
+  {
+   "en": "Heat the oil in a saucepan until hot and fry the wings over medium heat until light brown.",
+   "ru": "Разогрейте масло в кастрюле и обжарьте крылышки на среднем огне до светло-золотистого цвета.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil",
+    "chicken_wing"
+   ]
+  },
+  {
+   "en": "Drain them on paper towel and let them rest.",
+   "ru": "Обсушите на бумажном полотенце и дайте отдохнуть.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  },
+  {
+   "en": "Return the wings to the hot oil over high heat and fry until deep golden and crisp.",
+   "ru": "Верните крылышки в горячее масло на сильном огне и обжарьте до насыщенного золотистого цвета и хрусткости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_wing"
+   ]
+  }
+ ]
+}

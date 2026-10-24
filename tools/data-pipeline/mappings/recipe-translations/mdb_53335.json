@@ -1,0 +1,82 @@
+{
+ "nameRu": "Обед Джиггса",
+ "descriptionRu": "Солонина, отваренная с гороховым пудингом в мешочке и корнеплодами.",
+ "descriptionEn": "Salt beef boiled with a bag of pease pudding and root vegetables.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "The night before, break the salt beef into chunks and soak it in water, and soak the split peas separately.",
+   "ru": "Накануне разломайте солонину на куски и замочите в воде, а колотый горох замочите отдельно.",
+   "timerSec": 36000,
+   "ingredientRefs": [
+    "beef",
+    "split_peas"
+   ]
+  },
+  {
+   "en": "Drain the beef, put it in a large stockpot and cover with plenty of fresh water.",
+   "ru": "Слейте воду с солонины, положите её в большую кастрюлю и залейте свежей водой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Tie the split peas loosely in a cloth bag, leaving room to expand, and lower it into the pot.",
+   "ru": "Завяжите горох неплотно в тканевый мешочек, оставив место для набухания, и опустите в кастрюлю.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "split_peas"
+   ]
+  },
+  {
+   "en": "Bring to a boil, then lower the heat and simmer.",
+   "ru": "Доведите до кипения, убавьте огонь и варите.",
+   "timerSec": 7200,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Lift out the pea bag, tip the contents into a bowl and mash with butter and pepper.",
+   "ru": "Выньте мешочек с горохом, переложите содержимое в миску и разомните со сливочным маслом и перцем.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "split_peas",
+    "butter",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Add the cabbage to the pot and boil.",
+   "ru": "Добавьте в кастрюлю капусту и проварите.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "en": "Add the turnip, carrots and potatoes and boil until the vegetables are tender.",
+   "ru": "Добавьте репу, морковь и картофель и варите до мягкости овощей.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "turnip",
+    "carrot",
+    "potato"
+   ]
+  },
+  {
+   "en": "Lift the beef and vegetables onto a platter and serve with the pease pudding, using the cooking liquid as a gravy.",
+   "ru": "Выложите мясо и овощи на блюдо и подавайте с гороховым пудингом, используя отвар как соус.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "nameRu": "Креветки на гриле с зелёным соусом",
+ "descriptionRu": "Креветки на шпажках под сырым соусом из зелёного лука, чеснока и зиры.",
+ "descriptionEn": "Skewered prawns under a raw sauce of spring onion, garlic and cumin.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Grind the garlic, spring onion, cumin, salt, vinegar and water into a paste to make the sauce.",
+   "ru": "Разотрите чеснок, зелёный лук, зиру, соль, уксус и воду в пасту — это соус.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "spring_onion",
+    "cumin",
+    "salt",
+    "vinegar",
+    "water"
+   ]
+  },
+  {
+   "en": "Thread the prawns onto skewers and brush them with the sauce.",
+   "ru": "Нанижите креветки на шпажки и смажьте соусом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Grill on each side until they lose their translucency.",
+   "ru": "Обжарьте на гриле с каждой стороны, пока креветки не перестанут быть прозрачными.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Serve with the remaining sauce alongside.",
+   "ru": "Подавайте с оставшимся соусом.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

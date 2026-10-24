@@ -131,13 +131,13 @@
   },
   {
    "ru": "Обжарьте сэндвичи с одной стороны.",
-   "en": "Grill the sandwiches on the first side.",
+   "en": "Toast the sandwiches in a dry pan on the first side, pressing down with a spatula.",
    "timerSec": 240,
    "ingredientRefs": []
   },
   {
    "ru": "Переверните и обжарьте с другой стороны, пока хлеб не станет хрустящим, а сыр не расплавится.",
-   "en": "Turn and grill the other side until toasted and the cheese is melted.",
+   "en": "Turn and toast the other side until the bread is crisp and the cheese is melted.",
    "timerSec": 240,
    "ingredientRefs": [
     "swiss_cheese"

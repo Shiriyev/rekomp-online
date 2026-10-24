@@ -1,0 +1,76 @@
+{
+ "nameRu": "Афганские манту",
+ "descriptionRu": "Паровые пельмени с бараниной и луком под томатным соусом и йогуртом.",
+ "descriptionEn": "Steamed lamb and onion dumplings under tomato sauce and yogurt.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Sift the flour with salt, mix in enough water to form a stiff dough, then knead until elastic and shiny.",
+   "ru": "Просейте муку с солью, подмешайте воды до крутого теста и вымешивайте до эластичности и блеска.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "flour",
+    "water"
+   ]
+  },
+  {
+   "en": "Cover the dough with a damp cloth and let it rest.",
+   "ru": "Накройте тесто влажной тканью и дайте отдохнуть.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Mix the chopped lamb, onion, chilli, salt and pepper thoroughly.",
+   "ru": "Тщательно смешайте рубленую баранину, лук, чили, соль и перец.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb",
+    "onion",
+    "green_chilli",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Roll the dough very thin and cut it into squares, placing a heaped teaspoon of filling on each.",
+   "ru": "Раскатайте тесто очень тонко, нарежьте квадратами и положите на каждый по горке начинки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "en": "Pinch opposite corners together in the centre, then the other two, leaving small gaps so steam can get in.",
+   "ru": "Соедините противоположные углы в центре, затем два других, оставив щели, чтобы проходил пар.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Grease the steamer shelves, space the dumplings apart and steam them over medium heat.",
+   "ru": "Смажьте решётки пароварки, разложите манту с промежутками и готовьте на пару на среднем огне.",
+   "timerSec": 2700,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Meanwhile heat the oil, add the tomato purée, bring to the boil and simmer gently until the dumplings are ready.",
+   "ru": "Тем временем разогрейте масло, добавьте томатную пасту, доведите до кипения и томите на слабом огне, пока манту не дойдут.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil",
+    "tomato_puree"
+   ]
+  },
+  {
+   "en": "Arrange the dumplings on a warm dish, spoon over the tomato sauce and yogurt and scatter with coriander.",
+   "ru": "Выложите манту на тёплое блюдо, полейте томатным соусом и йогуртом и посыпьте кинзой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "greek_yogurt",
+    "coriander_leaf"
+   ]
+  }
+ ]
+}

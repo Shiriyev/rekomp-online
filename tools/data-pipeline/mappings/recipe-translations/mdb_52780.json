@@ -1,7 +1,7 @@
 {
  "nameRu": "Картофельный гратен с курицей",
- "descriptionRu": "Тонко нарезанный картофель с луком под крем-фреш и пармезаном, подрумяненный под грилем и поданный с курицей и беконом.",
- "descriptionEn": "Thinly sliced potatoes with onion under crème fraîche and Parmesan, browned under the grill and served with chicken and bacon.",
+ "descriptionRu": "Тонко нарезанный картофель с луком под крем-фреш и пармезаном, подрумяненный в духовке и поданный с курицей и беконом.",
+ "descriptionEn": "Thinly sliced potatoes with onion under crème fraîche and Parmesan, browned in the oven and served with chicken and bacon.",
  "steps": [
   {
    "ru": "Тонко нарежьте картофель.",
@@ -70,8 +70,8 @@
    ]
   },
   {
-   "ru": "Подрумяньте гратен под грилем до золотистой корочки.",
-   "en": "Finish under the grill until nicely golden.",
+   "ru": "Подрумяньте гратен в духовке под верхним нагревом до золотистой корочки.",
+   "en": "Finish in the oven with top heat until nicely golden.",
    "timerSec": null,
    "ingredientRefs": []
   },

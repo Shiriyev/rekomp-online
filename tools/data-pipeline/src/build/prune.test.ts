@@ -11,7 +11,7 @@ const options = {
 };
 const lists = (over: Partial<PruneLists> = {}): PruneLists => ({
   ingredientAllow: new Set(['onion', 'salt']),
-  ingredientLidl: new Set(),
+  ingredientShops: new Set(),
   ingredientBlock: new Set(),
   recipeAllow: new Set(),
   recipeBlock: new Set(),
@@ -153,7 +153,7 @@ test('a product sold at Lidl is not rare', () => {
   const r = prune(
     [...common(), recipe('t', ['chicken', 'tamarind'])],
     ALL,
-    lists({ ingredientLidl: new Set(['tamarind']) }),
+    lists({ ingredientShops: new Set(['tamarind']) }),
     options,
   );
   assert.ok(r.keptRecipes.has('t'));

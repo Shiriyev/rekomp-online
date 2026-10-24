@@ -1,0 +1,92 @@
+{
+ "nameRu": "Барбадосский пепперпот",
+ "descriptionRu": "Говядина с рулькой и хвостом, долго томлённые с корицей, гвоздикой и острым перцем.",
+ "descriptionEn": "Beef with pork hock and oxtail, long-simmered with cinnamon, cloves and hot pepper.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Wash the stewing beef and put it in a bowl with the lime juice while you prepare everything else.",
+   "ru": "Промойте говядину для тушения и залейте соком лайма, пока готовите остальное.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "lime_juice"
+   ]
+  },
+  {
+   "en": "Slice the garlic and onion finely and chop the basil and thyme.",
+   "ru": "Тонко нарежьте чеснок и лук, порубите базилик и тимьян.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "garlic",
+    "onion",
+    "basil",
+    "thyme"
+   ]
+  },
+  {
+   "en": "Chop the scotch bonnet finely, wearing gloves, and wash your hands straight after — the oil burns skin and eyes.",
+   "ru": "Мелко нарежьте острый перец в перчатках и сразу вымойте руки — его масло жжёт кожу и глаза.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "en": "Rinse the lime juice off the beef and cut it into cubes, and cube the pork hock and oxtail too.",
+   "ru": "Смойте с говядины сок лайма и нарежьте её кубиками, так же нарежьте рульку и хвост.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "pork_hock",
+    "oxtail"
+   ]
+  },
+  {
+   "en": "Bring a large pan of water to the boil, add the pork hock and boil, then drain off the water.",
+   "ru": "Доведите большую кастрюлю воды до кипения, положите рульку, проварите и слейте воду.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_hock"
+   ]
+  },
+  {
+   "en": "Add the beef and oxtail, cover with fresh hot water, then add the garlic, onion and peppers.",
+   "ru": "Добавьте говядину и хвост, залейте свежим кипятком и положите чеснок, лук и перцы.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "oxtail",
+    "garlic",
+    "onion",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "en": "Add the cinnamon, cloves, basil, thyme and a pinch each of salt and sugar.",
+   "ru": "Добавьте корицу, гвоздику, базилик, тимьян и по щепотке соли и сахара.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cinnamon",
+    "cloves",
+    "basil",
+    "thyme",
+    "salt",
+    "sugar"
+   ]
+  },
+  {
+   "en": "Simmer until the meat is tender. The flavour deepens over days, so always reheat the whole pot to boiling.",
+   "ru": "Томите до мягкости мяса. Вкус раскрывается за несколько дней, поэтому всегда прогревайте всю кастрюлю до кипения.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  }
+ ]
+}

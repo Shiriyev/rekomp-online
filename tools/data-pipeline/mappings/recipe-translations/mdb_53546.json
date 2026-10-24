@@ -1,0 +1,84 @@
+{
+ "nameRu": "Суп из чёрной фасоли",
+ "descriptionRu": "Чёрная фасоль с халапеньо и специями, пробитая до густоты, со сметаной и авокадо.",
+ "descriptionEn": "Black beans with jalapeño and spices, blended thick and served with sour cream and avocado.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the oil in a large pot over medium heat and cook the onion until soft and translucent.",
+   "ru": "Разогрейте масло в большой кастрюле на среднем огне и обжарьте лук до мягкости и прозрачности.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "olive_oil",
+    "red_onion"
+   ]
+  },
+  {
+   "en": "Add the jalapeños and garlic and cook until fragrant.",
+   "ru": "Добавьте халапеньо и чеснок и обжарьте до аромата.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "jalapeno",
+    "garlic"
+   ]
+  },
+  {
+   "en": "Add the tomato purée, stir to coat the vegetables and cook it out briefly.",
+   "ru": "Добавьте томатную пасту, обваляйте в ней овощи и недолго прогрейте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato_puree"
+   ]
+  },
+  {
+   "en": "Season with salt, pepper, cumin and chilli powder and stir to coat.",
+   "ru": "Приправьте солью, перцем, зирой и молотым чили и перемешайте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper",
+    "cumin",
+    "chilli_powder"
+   ]
+  },
+  {
+   "en": "Add the black beans and stock, stir in the bay leaf and bring to a boil.",
+   "ru": "Добавьте чёрную фасоль и бульон, положите лавровый лист и доведите до кипения.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "black_beans",
+    "chicken_stock",
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Reduce to a simmer and cook until slightly reduced and thickened.",
+   "ru": "Убавьте до слабого кипения и варите, пока суп слегка не уварится и не загустеет.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Remove the bay leaf, cool slightly and blend to the consistency you like.",
+   "ru": "Выньте лавровый лист, слегка остудите и пробейте блендером до нужной густоты.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Serve with a spoonful of sour cream, sliced avocado, coriander and a squeeze of lime.",
+   "ru": "Подавайте с ложкой сметаны, ломтиками авокадо, кинзой и соком лайма.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sour_cream",
+    "avocado",
+    "coriander_leaf",
+    "lime"
+   ]
+  }
+ ]
+}

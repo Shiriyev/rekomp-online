@@ -1,0 +1,65 @@
+{
+ "nameRu": "Роти джон",
+ "descriptionRu": "Малайзийский сэндвич: багет, прижатый к омлету с фаршем и луком на сковороде.",
+ "descriptionEn": "A Malaysian sandwich: baguette pressed into a beef and onion omelette in the pan.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Mix the beef mince, onion, egg, chilli, salt and pepper in a bowl.",
+   "ru": "Смешайте в миске говяжий фарш, лук, яйцо, перец чили, соль и перец.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_mince",
+    "onion",
+    "egg",
+    "red_chilli",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Heat a pan with a little oil.",
+   "ru": "Разогрейте сковороду с небольшим количеством масла.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Pour the mixture into the pan and lay the open-faced baguette on top.",
+   "ru": "Вылейте смесь на сковороду и положите сверху разрезанный багет.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette"
+   ]
+  },
+  {
+   "en": "Press down on the bread with a spatula and cook until the egg is set.",
+   "ru": "Прижмите хлеб лопаткой и готовьте, пока яйцо не схватится.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "egg",
+    "baguette"
+   ]
+  },
+  {
+   "en": "Turn the sandwich over and cook the bread until a little crisp.",
+   "ru": "Переверните сэндвич и подрумяньте хлеб до лёгкой хрусткости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "baguette"
+   ]
+  },
+  {
+   "en": "Lift it out, spread with mayonnaise and cut into portions.",
+   "ru": "Снимите со сковороды, смажьте майонезом и нарежьте на порции.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mayonnaise"
+   ]
+  }
+ ]
+}

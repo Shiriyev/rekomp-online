@@ -1,0 +1,97 @@
+{
+ "nameRu": "Ирландское рагу с ягнёнком",
+ "descriptionRu": "Ягнёнок и корнеплоды, обжаренные и томлённые в духовке с белым вином, пшеницей и бульоном.",
+ "descriptionEn": "Lamb and root vegetables, seared then braised in the oven with white wine, wheat and stock.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the oven to 180°C.",
+   "ru": "Разогрейте духовку до 180 °C.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Drain and rinse the soaked wheat, put it in a pan with plenty of water, bring to a boil and simmer until cooked, then drain.",
+   "ru": "Слейте воду с замоченной пшеницы и промойте её, положите в кастрюлю с большим количеством воды, доведите до кипения и варите до готовности, затем откиньте.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "wheat_grain"
+   ]
+  },
+  {
+   "en": "Season the lamb with salt and black pepper.",
+   "ru": "Посолите и поперчите ягнятину.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_chop"
+   ]
+  },
+  {
+   "en": "Heat a tablespoon of oil in a large deep pan over medium-high heat and sear the lamb on all sides, in batches so the pan is not crowded. Transfer to a bowl.",
+   "ru": "Разогрейте ложку масла в большой глубокой сковороде на сильном огне и обжарьте ягнятину со всех сторон, партиями, чтобы не переполнять сковороду. Переложите в миску.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "lamb_chop",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Lower the heat, add more oil and fry the shallots until caramelised, then add them to the lamb.",
+   "ru": "Убавьте огонь, добавьте масла и обжарьте шалот до карамельного цвета, затем отправьте его к ягнятине.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "shallot",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Brown the carrot, turnip, celeriac and potato the same way, adding oil as needed, and add them to the bowl.",
+   "ru": "Так же подрумяньте морковь, репу, сельдерей и картофель, добавляя масло по мере надобности, и отправьте их в миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "carrot",
+    "turnip",
+    "celeriac",
+    "potato"
+   ]
+  },
+  {
+   "en": "Pour the wine into the empty pan with the sugar, thyme, oregano, salt and pepper, and boil hard.",
+   "ru": "Влейте в пустую сковороду вино, добавьте сахар, тимьян, орегано, соль и перец и прокипятите на сильном огне.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "white_wine",
+    "sugar",
+    "thyme",
+    "oregano"
+   ]
+  },
+  {
+   "en": "Return the lamb, vegetables and wheat to the pot, add the stock, cover and boil.",
+   "ru": "Верните в кастрюлю ягнятину, овощи и пшеницу, влейте бульон, накройте крышкой и доведите до кипения.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "chicken_stock",
+    "lamb_chop",
+    "wheat_grain"
+   ]
+  },
+  {
+   "en": "Transfer the covered pot to the oven and braise until the lamb is tender.",
+   "ru": "Переставьте кастрюлю под крышкой в духовку и томите, пока ягнятина не станет мягкой.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Check the liquid: if there is a lot, uncover and boil for a few minutes to reduce.",
+   "ru": "Проверьте количество жидкости: если её много, снимите крышку и уварите несколько минут.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

@@ -511,7 +511,13 @@ function main() {
       '/** Bundled catalog photos by imageKey (path under assets/images without extension). */',
       'export const CATALOG_IMAGES: Readonly<Record<string, number>> = {',
       ...keys.map((k) => {
-        const rel = path.relative(path.dirname(IMAGES_MODULE), imageFile(k)!);
+        // Forward slashes always: on Windows path.relative gives «..\..\assets\…», and
+        // inside a string literal that reads as escapes — «\u1» alone makes the generated
+        // module a syntax error. require() takes forward slashes on every platform.
+        const rel = path
+          .relative(path.dirname(IMAGES_MODULE), imageFile(k)!)
+          .split(path.sep)
+          .join('/');
         return `  '${k}': require('${rel}'),`;
       }),
       '};',

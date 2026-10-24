@@ -34,7 +34,7 @@ export type PruneRecipe = {
 export type PruneLists = {
   ingredientAllow: ReadonlySet<string>;
   /** Products Lidl Hungary sells (hand-made stand-in for the Open Food Facts variants). */
-  ingredientLidl: ReadonlySet<string>;
+  ingredientShops: ReadonlySet<string>;
   ingredientBlock: ReadonlySet<string>;
   recipeAllow: ReadonlySet<string>;
   recipeBlock: ReadonlySet<string>;
@@ -137,7 +137,7 @@ export function prune(
   const isRare = (id: string, uses: ReadonlyMap<string, number>) =>
     !lists.ingredientAllow.has(id) &&
     (lists.ingredientBlock.has(id) ||
-      (!lists.ingredientLidl.has(id) && (uses.get(id) ?? 0) < options.minRecipeUses));
+      (!lists.ingredientShops.has(id) && (uses.get(id) ?? 0) < options.minRecipeUses));
 
   // Removing a dish lowers the counts of its products; with `cascade`, repeat until stable.
   const firstUses = countUses();

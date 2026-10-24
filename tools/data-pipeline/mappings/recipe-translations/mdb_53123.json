@@ -1,0 +1,65 @@
+{
+ "nameRu": "Баранина с капустой по-норвежски",
+ "descriptionRu": "Баранина и капуста, выложенные слоями и долго томлённые до мягкости.",
+ "descriptionEn": "Lamb and cabbage layered in a pot and simmered slowly until falling apart.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Cut the lamb into large pieces.",
+   "ru": "Нарежьте баранину крупными кусками.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb"
+   ]
+  },
+  {
+   "en": "Slice the cabbage into large wedges, keeping the core attached so they hold together.",
+   "ru": "Нарежьте капусту крупными дольками, не срезая кочерыжку, чтобы они не распались.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cabbage"
+   ]
+  },
+  {
+   "en": "Lay the lamb fat-side down in a large pot, season with salt and peppercorns, then add a layer of cabbage.",
+   "ru": "Выложите баранину жиром вниз в большую кастрюлю, приправьте солью и перцем горошком и добавьте слой капусты.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb",
+    "cabbage",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Repeat the layers, finishing with cabbage on top, and dust with flour for a thicker stew.",
+   "ru": "Повторите слои, закончив капустой, и присыпьте мукой, если хотите более густое рагу.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb",
+    "cabbage",
+    "flour"
+   ]
+  },
+  {
+   "en": "Add the water, bring to a boil, then cover and cook on low heat until the lamb falls from the bone.",
+   "ru": "Влейте воду, доведите до кипения, накройте и томите на слабом огне, пока баранина не станет отходить от кости.",
+   "timerSec": 10800,
+   "ingredientRefs": [
+    "water",
+    "lamb"
+   ]
+  },
+  {
+   "en": "Serve with boiled potatoes, spooning plenty of the broth over.",
+   "ru": "Подавайте с отварным картофелем, щедро полив бульоном.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

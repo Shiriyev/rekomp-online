@@ -1,0 +1,71 @@
+{
+ "nameRu": "Долма в виноградных листьях",
+ "descriptionRu": "Виноградные листья с начинкой из бараньего фарша и риса, томлённые под крышкой.",
+ "descriptionEn": "Vine leaves rolled around lamb mince and rice, simmered slowly under a lid.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Fry the onions in olive oil in a sauté pan until they start to brown.",
+   "ru": "Обжарьте лук на оливковом масле в сковороде, пока он не начнёт румяниться.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Take the pan off the heat and mix in the lamb mince, rice, pepper, paprika, stock powder, parsley and basil.",
+   "ru": "Снимите с огня и вмешайте бараний фарш, рис, перец, паприку, сухой бульон, петрушку и базилик.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lamb_mince",
+    "rice",
+    "pepper",
+    "paprika_powder",
+    "vegetable_stock",
+    "parsley",
+    "basil"
+   ]
+  },
+  {
+   "en": "Unwrap the vine leaves and lay two overlapping, points opposed, for each parcel.",
+   "ru": "Разверните виноградные листья и для каждого свёртка положите два внахлёст, остриями в разные стороны.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "grape_leaves"
+   ]
+  },
+  {
+   "en": "Place a spoonful of filling in the middle, fold the base over it, fold in the sides and roll upwards into a parcel.",
+   "ru": "Положите в середину ложку начинки, заверните основание, подогните бока и сверните рулетиком.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Line the bottom of a deep saucepan with vine leaves and pack the parcels side by side in layers.",
+   "ru": "Выстелите дно глубокой кастрюли виноградными листьями и уложите свёртки плотно слоями.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "grape_leaves"
+   ]
+  },
+  {
+   "en": "Pour in enough boiling water to just cover, bring to a boil, then simmer with a lid on, topping up if it dries.",
+   "ru": "Влейте кипяток так, чтобы едва покрыть, доведите до кипения и томите под крышкой, подливая воду, если выкипит.",
+   "timerSec": 5400,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "en": "Let them cool before serving.",
+   "ru": "Дайте долме остыть перед подачей.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  }
+ ]
+}

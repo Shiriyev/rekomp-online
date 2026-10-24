@@ -1,0 +1,87 @@
+{
+ "nameRu": "Креветки на воке с овощами",
+ "descriptionRu": "Креветки в маринаде из чили, чеснока и лайма с хрустящими овощами и лапшой.",
+ "descriptionEn": "Prawns in a chilli, garlic and lime marinade with crunchy vegetables and noodles.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Put the prawns in a bowl.",
+   "ru": "Сложите креветки в миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Grind the chilli, garlic, coriander stalks and sugar together, then stir in half the lime juice and the fish sauce and pour it over the prawns.",
+   "ru": "Разотрите вместе чили, чеснок, стебли кинзы и сахар, вмешайте половину сока лайма и рыбный соус и залейте этим креветки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "green_chilli",
+    "garlic",
+    "coriander_leaf",
+    "sugar",
+    "lime",
+    "fish_sauce"
+   ]
+  },
+  {
+   "en": "Heat a tablespoon of oil in a wok and fry the ginger and spring onions.",
+   "ru": "Разогрейте ложку масла в воке и обжарьте имбирь и зелёный лук.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "peanut_oil",
+    "ginger",
+    "spring_onion"
+   ]
+  },
+  {
+   "en": "Add the pepper and fry until it starts to soften.",
+   "ru": "Добавьте сладкий перец и обжарьте, пока он не начнёт размягчаться.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "bell_pepper"
+   ]
+  },
+  {
+   "en": "Add the water chestnuts and bean sprouts and toss until the sprouts start to wilt, then add the soy sauce and black pepper and tip into a serving dish.",
+   "ru": "Добавьте водяные орехи и ростки сои, обжарьте до лёгкого опадания ростков, влейте соевый соус, поперчите и переложите в блюдо.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water_chestnut",
+    "bean_sprouts",
+    "soy_sauce"
+   ]
+  },
+  {
+   "en": "Heat the remaining oil, lift the prawns from their marinade and toss them until they turn pink.",
+   "ru": "Разогрейте оставшееся масло, выньте креветки из маринада и обжарьте до розового цвета.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "peanut_oil",
+    "prawn"
+   ]
+  },
+  {
+   "en": "Add the marinade, swirl the wok quickly and tip everything over the vegetables.",
+   "ru": "Влейте маринад, быстро прокрутите вок и выложите всё на овощи.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Snip over the coriander leaves, squeeze on the remaining lime and serve over the noodles.",
+   "ru": "Нарежьте сверху кинзу, сбрызните оставшимся лаймом и подавайте на лапше.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf",
+    "lime",
+    "rice_noodles"
+   ]
+  }
+ ]
+}

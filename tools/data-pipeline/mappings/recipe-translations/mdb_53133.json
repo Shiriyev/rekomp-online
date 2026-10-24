@@ -1,0 +1,61 @@
+{
+ "nameRu": "Асадо",
+ "descriptionRu": "Аргентинское мясо на углях: говядина, чоризо и кровяная колбаса, только соль.",
+ "descriptionEn": "Argentinian meat over coals: beef, chorizo and black pudding, seasoned with salt alone.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Start a wood fire and let it burn down to steady coals.",
+   "ru": "Разожгите дрова и дайте им прогореть до ровных углей.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Season the beef generously with salt.",
+   "ru": "Щедро посолите говядину.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "salt"
+   ]
+  },
+  {
+   "en": "Lay the beef over the coals, thickest cuts furthest from the heat.",
+   "ru": "Выложите говядину над углями, самые толстые куски — дальше от жара.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Add the chorizo and black pudding once the beef has had a head start.",
+   "ru": "Добавьте чоризо и кровяную колбасу, когда говядина уже разошлась.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chorizo",
+    "black_pudding"
+   ]
+  },
+  {
+   "en": "Cook, turning occasionally, until the meat reaches the doneness you want; ribs can take a couple of hours.",
+   "ru": "Готовьте, иногда переворачивая, до нужной прожарки; рёбра могут занять пару часов.",
+   "timerSec": 7200,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Rest the meat before slicing.",
+   "ru": "Дайте мясу отдохнуть перед нарезкой.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "beef"
+   ]
+  }
+ ]
+}

@@ -194,7 +194,7 @@ describe('validateCatalog', () => {
     expect(errorsOf(c)).toEqual(
       expect.arrayContaining([
         'recipe r1: kcalPerServing 605, lines give 220',
-        'recipe r1 (lunch): 220 kcal outside 560–740',
+        'recipe r1 (lunch): 220 kcal outside 400–950',
       ]),
     );
   });
@@ -206,7 +206,7 @@ describe('validateCatalog', () => {
     c.recipes[0]!.proteinPerServing = 46;
     const result = validateCatalog(c, { ...options, criteriaWarningsOnly: ['r1'] });
     expect(result.errors).toEqual([]);
-    expect(result.warnings).toEqual(['recipe r1 (lunch): 220 kcal outside 560–740']);
+    expect(result.warnings).toEqual(['recipe r1 (lunch): 220 kcal outside 400–950']);
   });
 
   it('only allows a zero amount for staples or optional lines', () => {

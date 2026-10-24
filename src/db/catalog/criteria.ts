@@ -5,12 +5,17 @@ import type { MealType } from '../../domain/types';
  * (filter) and the catalog validator, so the two can never disagree.
  */
 export const RECIPE_CRITERIA = {
-  /** kcal per serving by meal (the ranges of the v1 recipes). */
+  /**
+   * kcal per serving by meal. These started as the narrow ranges of the v1 recipes, which
+   * rejected 151 dishes for fitting no serving size at all. Widened to a band a portion can
+   * plausibly land in: the dish still has to clear the protein bar, and the card shows the
+   * kcal so the choice stays the cook's.
+   */
   kcalRange: {
-    breakfast: [500, 620],
-    lunch: [560, 740],
-    dinner: [465, 530],
-    snack: [160, 215],
+    breakfast: [350, 800],
+    lunch: [400, 950],
+    dinner: [350, 800],
+    snack: [100, 350],
   } satisfies Record<MealType, readonly [number, number]>,
   /** Protein: share of kcal (protein g × 4 / kcal) and grams per serving. */
   protein: {

@@ -1,0 +1,69 @@
+{
+ "nameRu": "Курица в сливочно-горчичном соусе",
+ "descriptionRu": "Куриные ножки, обжаренные и томлённые в соусе из горчицы, сливок и мёда.",
+ "descriptionEn": "Chicken legs seared then braised in a mustard, cream and honey sauce.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Pat the chicken dry and season it with salt, pepper and paprika.",
+   "ru": "Обсушите курицу и приправьте солью, перцем и паприкой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg",
+    "salt",
+    "pepper",
+    "paprika_powder"
+   ]
+  },
+  {
+   "en": "Heat the oil in a saucepan over medium-high heat and sear the chicken on all sides until golden, turning a couple of times.",
+   "ru": "Разогрейте масло в сотейнике на сильном огне и обжарьте курицу со всех сторон до золотистого цвета, пару раз перевернув.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "olive_oil",
+    "chicken_leg"
+   ]
+  },
+  {
+   "en": "Transfer the chicken to a plate and cook the onion and garlic in the pan until soft.",
+   "ru": "Переложите курицу на тарелку и обжарьте в сотейнике лук с чесноком до мягкости.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "onion",
+    "garlic"
+   ]
+  },
+  {
+   "en": "Add the stock, mustard, honey and cream and season with salt and black pepper.",
+   "ru": "Влейте бульон, добавьте горчицу, мёд и сливки и приправьте солью и чёрным перцем.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock",
+    "mustard",
+    "honey",
+    "cream"
+   ]
+  },
+  {
+   "en": "Stir well, return the chicken to the pan, cover and cook over medium-low heat until done through.",
+   "ru": "Хорошо размешайте, верните курицу в сотейник, накройте и готовьте на небольшом огне до полной готовности.",
+   "timerSec": 2700,
+   "ingredientRefs": [
+    "chicken_leg"
+   ]
+  },
+  {
+   "en": "Serve warm over white rice, scattered with chopped parsley.",
+   "ru": "Подавайте тёплым с отварным рисом, посыпав рубленой петрушкой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "nameRu": "Джаджик",
+ "descriptionRu": "Холодный йогуртовый суп с огурцом, чесноком и мятой.",
+ "descriptionEn": "A chilled yogurt soup with cucumber, garlic and mint.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Blend the yogurt, water, garlic and salt for a few seconds.",
+   "ru": "Пробейте блендером йогурт, воду, чеснок и соль несколько секунд.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "yogurt",
+    "water",
+    "garlic",
+    "salt"
+   ]
+  },
+  {
+   "en": "Transfer to a bowl and stir through the mint and cucumber.",
+   "ru": "Перелейте в миску и вмешайте мяту и огурец.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "mint",
+    "cucumber"
+   ]
+  },
+  {
+   "en": "Chill well before serving, with a few ice cubes if you like.",
+   "ru": "Хорошо охладите перед подачей, по желанию добавьте пару кубиков льда.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

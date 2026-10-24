@@ -1,0 +1,60 @@
+{
+ "nameRu": "Сате из говядины",
+ "descriptionRu": "Кубики говядины в маринаде из лука, чеснока, лимона и соевого соуса, обжаренные на шпажках.",
+ "descriptionEn": "Cubed beef in an onion, garlic, lemon and soy marinade, cooked on skewers.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Blend the onion, garlic, lemon juice, sugar, soy sauce, salt, ground coriander and oil thoroughly.",
+   "ru": "Тщательно пробейте блендером лук, чеснок, лимонный сок, сахар, соевый соус, соль, молотый кориандр и масло.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "lemon",
+    "sugar",
+    "soy_sauce",
+    "salt",
+    "ground_coriander",
+    "oil"
+   ]
+  },
+  {
+   "en": "Pour the marinade over the cubed beef and leave it for a few hours only, not overnight.",
+   "ru": "Залейте маринадом нарезанную кубиками говядину и оставьте всего на несколько часов, не на ночь.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Thread the meat onto skewers.",
+   "ru": "Нанижите мясо на шпажки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Roll each skewer in seasoned oil so the meat does not dry out.",
+   "ru": "Обваляйте каждую шпажку в приправленном масле, чтобы мясо не пересохло.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "en": "Fry the skewers, turning, until browned all over and cooked through.",
+   "ru": "Обжарьте шпажки, поворачивая, до румяности со всех сторон и полной готовности.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  }
+ ]
+}

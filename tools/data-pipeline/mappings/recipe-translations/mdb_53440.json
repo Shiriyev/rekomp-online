@@ -1,0 +1,73 @@
+{
+ "nameRu": "Балчи ди писка, шарики из солёной трески",
+ "descriptionRu": "Вымоченная треска, размятая с картофелем и пряным овощным пюре, обжаренная шариками.",
+ "descriptionEn": "Soaked cod mashed with potato and a spiced vegetable purée, fried into balls.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "Soak the salt cod in water for a full day, then discard the water.",
+   "ru": "Вымачивайте солёную треску в воде сутки, затем слейте воду.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Simmer the cod in fresh water until it flakes easily, then strain, keeping a little of the broth, and bone the fish.",
+   "ru": "Варите треску в свежей воде, пока она не начнёт легко расслаиваться, процедите, сохранив немного отвара, и выберите кости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Boil the diced potatoes until tender, drain well, then mash them thoroughly with the cod.",
+   "ru": "Отварите нарезанный картофель до мягкости, хорошо откиньте и тщательно разомните вместе с треской.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Blend the tomato, bell pepper, onion, garlic, hot sauce, nutmeg, salt and pepper for a few seconds.",
+   "ru": "Пробейте блендером несколько секунд помидор, сладкий перец, лук, чеснок, острый соус, мускатный орех, соль и перец.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato",
+    "bell_pepper",
+    "onion",
+    "garlic",
+    "hot_sauce",
+    "nutmeg",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Pour the sauce over the fish mixture, combine well and beat in the egg.",
+   "ru": "Влейте соус в рыбную массу, хорошо перемешайте и вмешайте яйцо.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "en": "The mixture should be stiff enough to roll into small balls; loosen with the reserved broth a spoonful at a time if too dry.",
+   "ru": "Масса должна держать форму; если суховата, подлейте отвар по ложке.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Fry the balls in hot deep fat until golden brown, then drain.",
+   "ru": "Обжарьте шарики в раскалённом фритюре до золотистого цвета и обсушите.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

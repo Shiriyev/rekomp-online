@@ -1,7 +1,7 @@
 {
  "nameRu": "Курица тандури",
- "descriptionRu": "Куриные бёдра в пряном йогуртовом маринаде, обжаренные на гриле до лёгкой корочки.",
- "descriptionEn": "Chicken thighs in a spiced yogurt marinade, grilled until lightly charred.",
+ "descriptionRu": "Куриные бёдра в пряном йогуртовом маринаде, обжаренные в духовке до лёгкой корочки.",
+ "descriptionEn": "Chicken thighs in a spiced yogurt marinade, roasted until lightly browned.",
  "steps": [
   {
    "ru": "Смешайте лимонный сок с паприкой и красным луком в большой неглубокой посуде.",
@@ -62,8 +62,8 @@
    ]
   },
   {
-   "ru": "Разогрейте гриль.",
-   "en": "Heat the grill.",
+   "ru": "Разогрейте духовку.",
+   "en": "Heat the oven.",
    "timerSec": null,
    "ingredientRefs": []
   },
@@ -85,8 +85,8 @@
    ]
   },
   {
-   "ru": "Жарьте на гриле с каждой стороны до лёгкой корочки и полной готовности.",
-   "en": "Grill on each side until lightly charred and completely cooked through.",
+   "ru": "Запекайте, переворачивая, до лёгкой корочки и полной готовности.",
+   "en": "Roast, turning once, until lightly browned and cooked through.",
    "timerSec": 480,
    "ingredientRefs": [
     "chicken_thigh"

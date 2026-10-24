@@ -1,0 +1,83 @@
+{
+ "nameRu": "Камбоджийское кислое рагу",
+ "descriptionRu": "Куриные бёдрышки в кисло-пряном бульоне с тамариндом, ананасом и зелёной фасолью.",
+ "descriptionEn": "Chicken thighs in a sour, fragrant broth with tamarind, pineapple and green beans.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the oil in a large pot over medium-high heat until it shimmers.",
+   "ru": "Разогрейте масло в большой кастрюле на сильном огне до лёгкой дымки.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "en": "Add the chicken thighs and cook until browned on all sides, stirring now and then.",
+   "ru": "Выложите куриные бёдрышки и обжарьте со всех сторон, иногда помешивая.",
+   "timerSec": 420,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "en": "Pour in the water, bring to a boil, then reduce to a simmer.",
+   "ru": "Влейте воду, доведите до кипения и убавьте до слабого.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "en": "Stir in the tamarind paste, fish sauce and sugar until fully dissolved.",
+   "ru": "Вмешайте тамариндовую пасту, рыбный соус и сахар до полного растворения.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "tamarind_paste",
+    "fish_sauce",
+    "sugar"
+   ]
+  },
+  {
+   "en": "Bruise the lemongrass to release its oils, add it with the lime leaves, cover and simmer to infuse the broth.",
+   "ru": "Разбейте лемонграсс, чтобы он отдал масла, добавьте его с листьями лайма, накройте и томите, настаивая бульон.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "lemongrass",
+    "lime_leaf"
+   ]
+  },
+  {
+   "en": "Add the pineapple, cherry tomatoes and green beans and stir gently.",
+   "ru": "Добавьте ананас, черри и зелёную фасоль и аккуратно перемешайте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pineapple",
+    "cherry_tomato",
+    "green_beans"
+   ]
+  },
+  {
+   "en": "Simmer uncovered until the beans are tender but still crisp and the tomatoes begin to soften.",
+   "ru": "Томите без крышки, пока фасоль не станет мягкой, но упругой, а помидоры не начнут оседать.",
+   "timerSec": 720,
+   "ingredientRefs": [
+    "green_beans",
+    "cherry_tomato"
+   ]
+  },
+  {
+   "en": "Stir in the chilli and simmer a little longer, then taste and adjust with tamarind or fish sauce.",
+   "ru": "Вмешайте чили, проварите ещё немного, затем попробуйте и поправьте тамариндом или рыбным соусом.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "red_chilli"
+   ]
+  }
+ ]
+}

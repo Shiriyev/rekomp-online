@@ -1,0 +1,74 @@
+{
+ "nameRu": "Курица пири-пири со слоу",
+ "descriptionRu": "Целая курица в остром маринаде пири-пири, запечённая в духовке, с капустным салатом.",
+ "descriptionEn": "A whole chicken in a hot piri-piri marinade, roasted, with a crunchy slaw.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Blend the chilli, garlic, ginger, oregano, coriander, paprika, vinegar and oil to a marinade.",
+   "ru": "Пробейте в блендере чили, чеснок, имбирь, орегано, кинзу, паприку, уксус и масло до состояния маринада.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "garlic",
+    "ginger",
+    "oregano",
+    "coriander_leaf",
+    "paprika_powder",
+    "wine_vinegar",
+    "oil"
+   ]
+  },
+  {
+   "en": "Rub the marinade all over the chicken and leave it at room temperature.",
+   "ru": "Натрите курицу маринадом со всех сторон и оставьте при комнатной температуре.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "en": "Heat the oven to 190°C, put the chicken in a roasting tray and roast until cooked through.",
+   "ru": "Разогрейте духовку до 190 °C, выложите курицу в форму и запекайте до полной готовности.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "en": "Rest the chicken under loose foil.",
+   "ru": "Дайте курице отдохнуть под неплотно укрытой фольгой.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  },
+  {
+   "en": "While it rests, mix the red onion, carrot, beetroot and cabbage with the mayonnaise, yogurt and cumin, and season.",
+   "ru": "Пока курица отдыхает, смешайте красный лук, морковь, свёклу и капусту с майонезом, йогуртом и зирой и приправьте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_onion",
+    "carrot",
+    "beetroot",
+    "cabbage",
+    "mayonnaise",
+    "greek_yogurt",
+    "cumin"
+   ]
+  },
+  {
+   "en": "Carve the chicken and serve with the slaw.",
+   "ru": "Разделайте курицу и подавайте со слоу.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken"
+   ]
+  }
+ ]
+}

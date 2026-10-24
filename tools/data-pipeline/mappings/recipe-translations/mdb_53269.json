@@ -1,0 +1,47 @@
+{
+ "nameRu": "Хумус",
+ "descriptionRu": "Нутовое пюре с тахини, чесноком и йогуртом, доведённое до гладкости.",
+ "descriptionEn": "Chickpeas blended smooth with tahini, garlic and yogurt.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Drain the chickpeas over a bowl, keeping the liquid.",
+   "ru": "Откиньте нут, сохранив жидкость из банки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chickpeas"
+   ]
+  },
+  {
+   "en": "Blend the chickpeas, tahini, garlic and yogurt until smooth.",
+   "ru": "Пробейте блендером нут, тахини, чеснок и йогурт до гладкости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chickpeas",
+    "tahini",
+    "garlic",
+    "greek_yogurt"
+   ]
+  },
+  {
+   "en": "Blend in the reserved chickpea liquid a spoonful at a time until the texture is right, then scrape into a bowl.",
+   "ru": "Подливайте сохранённую жидкость по ложке, пробивая до нужной консистенции, затем переложите в миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chickpeas"
+   ]
+  },
+  {
+   "en": "Stir in a squeeze of lemon and season to taste.",
+   "ru": "Вмешайте немного лимонного сока и приправьте по вкусу.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lemon"
+   ]
+  }
+ ]
+}

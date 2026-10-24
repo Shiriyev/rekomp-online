@@ -1,0 +1,103 @@
+{
+ "nameRu": "Клэм-чаудер",
+ "descriptionRu": "Густой суп из моллюсков с беконом, картофелем, молоком и сливками.",
+ "descriptionEn": "A thick clam soup with bacon, potato, milk and cream.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Rinse the clams in several changes of cold water and drain well.",
+   "ru": "Промойте моллюсков в нескольких водах и хорошо обсушите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "clam"
+   ]
+  },
+  {
+   "en": "Put the clams in a large pan with water, cover and simmer until they have just opened.",
+   "ru": "Положите моллюсков в большую кастрюлю с водой, накройте и варите, пока раковины не раскроются.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "clam"
+   ]
+  },
+  {
+   "en": "Drain through a colander over a bowl to catch the stock, then pick the clams from their shells.",
+   "ru": "Откиньте на дуршлаг над миской, чтобы собрать бульон, затем выньте мясо моллюсков из раковин.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "clam"
+   ]
+  },
+  {
+   "en": "Strain the clam stock into a jug, leaving any grit behind.",
+   "ru": "Процедите бульон в кувшин, оставив песок на дне.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Heat the butter in the same pan and sizzle the bacon until it starts to brown.",
+   "ru": "Растопите сливочное масло в той же кастрюле и обжарьте бекон до румяности.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "butter",
+    "bacon"
+   ]
+  },
+  {
+   "en": "Stir in the onion, thyme and bay leaf and cook gently until the onion is soft and golden.",
+   "ru": "Добавьте лук, тимьян и лавровый лист и томите, пока лук не станет мягким и золотистым.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "onion",
+    "thyme",
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Scatter over the flour and stir to a sandy paste, then cook it out.",
+   "ru": "Всыпьте муку и размешайте до однородной пасты, затем прогрейте её.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "en": "Gradually stir in the clam stock, then the milk and the cream.",
+   "ru": "Постепенно влейте бульон от моллюсков, затем молоко и сливки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "milk",
+    "cream"
+   ]
+  },
+  {
+   "en": "Add the potatoes, bring to a simmer and bubble gently until they are cooked.",
+   "ru": "Добавьте картофель, доведите до слабого кипения и варите до готовности.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "en": "Crush a few potato chunks against the side of the pan to thicken the soup, keeping most of them whole.",
+   "ru": "Разомните несколько кусочков картофеля о стенку кастрюли, чтобы загустить суп, оставив остальные целыми.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "en": "Stir through the clam meat to reheat, season with black pepper and salt, and finish with the parsley.",
+   "ru": "Верните мясо моллюсков, прогрейте, приправьте чёрным перцем и солью и посыпьте петрушкой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "clam",
+    "parsley"
+   ]
+  }
+ ]
+}

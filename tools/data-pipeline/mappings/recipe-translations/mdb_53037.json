@@ -1,0 +1,58 @@
+{
+ "nameRu": "Свинина, томлённая в сидре",
+ "descriptionRu": "Свиные отбивные с беконом и корнеплодами, тушённые под крышкой в сидре с бульоном.",
+ "descriptionEn": "Pork chops with bacon and root vegetables, braised in cider and stock.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the butter in a casserole dish until sizzling and fry the pork on each side until browned, then remove it from the pan.",
+   "ru": "Растопите сливочное масло в сотейнике до шипения и обжарьте свинину с каждой стороны до румяности, затем выньте её.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "butter",
+    "pork_chop"
+   ]
+  },
+  {
+   "en": "Tip the bacon, carrot, potatoes and swede into the pan and fry gently until slightly coloured.",
+   "ru": "Положите в сотейник бекон, морковь, картофель и брюкву и слегка обжарьте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bacon",
+    "carrot",
+    "potato",
+    "swede"
+   ]
+  },
+  {
+   "en": "Stir in the cabbage, sit the chops back on top and add the bay leaf.",
+   "ru": "Вмешайте капусту, верните сверху отбивные и добавьте лавровый лист.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cabbage",
+    "pork_chop",
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Pour over the cider and stock, cover, and simmer gently until the pork is cooked through and the vegetables are tender.",
+   "ru": "Влейте сидр и бульон, накройте крышкой и тушите, пока свинина не дойдёт, а овощи не станут мягкими.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "cider",
+    "chicken_stock"
+   ]
+  },
+  {
+   "en": "Serve straight from the dish.",
+   "ru": "Подавайте прямо из сотейника.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

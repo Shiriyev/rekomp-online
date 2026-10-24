@@ -1,0 +1,88 @@
+{
+ "nameRu": "Биск из креветок с фенхелем",
+ "descriptionRu": "Протёртый суп на панцирях креветок с фенхелем, вином, бренди и сливками.",
+ "descriptionEn": "A smooth soup built on prawn shells with fennel, wine, brandy and cream.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Shell the prawns and keep the shells.",
+   "ru": "Очистите креветки и сохраните панцири.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Fry the shells in the oil in a large pan.",
+   "ru": "Обжарьте панцири в масле в большой кастрюле.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "prawn",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Add the onion, fennel and carrots and cook until the vegetables start to soften.",
+   "ru": "Добавьте лук, фенхель и морковь и готовьте, пока овощи не начнут размягчаться.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "onion",
+    "fennel",
+    "carrot"
+   ]
+  },
+  {
+   "en": "Pour in the wine and brandy and bubble hard to drive off the alcohol.",
+   "ru": "Влейте вино и бренди и дайте сильно покипеть, чтобы выпарить алкоголь.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "white_wine",
+    "brandy"
+   ]
+  },
+  {
+   "en": "Add the tomatoes, stock and paprika, cover and simmer.",
+   "ru": "Добавьте помидоры, бульон и паприку, накройте и томите.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "tomato",
+    "fish_stock",
+    "paprika_powder"
+   ]
+  },
+  {
+   "en": "Meanwhile, chop the prawns.",
+   "ru": "Тем временем нарежьте креветки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Blend the soup as finely as you can, then press it through a sieve for a velvety texture.",
+   "ru": "Пробейте суп блендером как можно мельче, затем протрите через сито до бархатистой текстуры.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Return it to a clean pan, add the prawns and cook, then blend again until smooth.",
+   "ru": "Верните в чистую кастрюлю, добавьте креветки и проварите, затем снова пробейте до гладкости.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Reheat gently with the cream to serve.",
+   "ru": "Перед подачей аккуратно прогрейте со сливками.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cream"
+   ]
+  }
+ ]
+}

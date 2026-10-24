@@ -1,0 +1,63 @@
+{
+ "nameRu": "Паштет из куриной печени",
+ "descriptionRu": "Куриная печень, запечённая с беконом и луком в молоке и пробитая до гладкости с хересом.",
+ "descriptionEn": "Chicken livers baked with bacon and onion in milk, then blended smooth with sherry.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Clean the livers of sinew and gall.",
+   "ru": "Очистите печень от жилок и желчных протоков.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_liver"
+   ]
+  },
+  {
+   "en": "Put the livers in a casserole with the roughly chopped bacon, garlic and onion and the mustard powder.",
+   "ru": "Положите печень в жаропрочную форму с крупно нарезанным беконом, чесноком, луком и горчичным порошком.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_liver",
+    "bacon",
+    "garlic",
+    "onion",
+    "mustard_powder"
+   ]
+  },
+  {
+   "en": "Season with salt and pepper and cover everything with milk.",
+   "ru": "Приправьте солью и перцем и залейте молоком.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt",
+    "pepper",
+    "milk"
+   ]
+  },
+  {
+   "en": "Put the lid on and cook in a slow oven at 150°C.",
+   "ru": "Накройте крышкой и готовьте в духовке при 150 °C.",
+   "timerSec": 7200,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Liquidize in a blender and adjust the seasoning.",
+   "ru": "Пробейте блендером до гладкости и поправьте на соль.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Stir in the sherry, scrape into a dish and chill.",
+   "ru": "Вмешайте херес, переложите в форму и охладите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sherry"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "nameRu": "Каллалу с солёной треской",
+ "descriptionRu": "Вымоченная солёная треска с беконом, зеленью и острым перцем, обжаренные вместе.",
+ "descriptionEn": "Soaked salt cod with bacon, greens and hot pepper, fried together.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "Soak the salt cod in water overnight.",
+   "ru": "Замочите солёную треску в воде на ночь.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Heat the fish in fresh water until it boils and a foam rises, then drain, cool and shred it.",
+   "ru": "Прогрейте рыбу в свежей воде до кипения и появления пены, затем слейте, остудите и разберите на волокна.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Cook the bacon in a skillet over medium heat until crisp, then drain off most of the fat.",
+   "ru": "Обжарьте бекон в сковороде на среднем огне до хрусткости и слейте почти весь жир.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bacon"
+   ]
+  },
+  {
+   "en": "Add the onion, spring onion, scotch bonnet and garlic and cook until the onions soften.",
+   "ru": "Добавьте репчатый и зелёный лук, острый перец и чеснок и готовьте, пока лук не станет мягким.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "onion",
+    "spring_onion",
+    "scotch_bonnet",
+    "garlic"
+   ]
+  },
+  {
+   "en": "Stir in the shredded fish and cook briefly.",
+   "ru": "Вмешайте рыбу и прогрейте недолго.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "salt_cod"
+   ]
+  },
+  {
+   "en": "Add the greens, tomatoes, thyme and black pepper and cook until heated through.",
+   "ru": "Добавьте зелень, помидоры, тимьян и чёрный перец и прогрейте до готовности.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "leafy_greens",
+    "tomato",
+    "thyme",
+    "pepper"
+   ]
+  }
+ ]
+}

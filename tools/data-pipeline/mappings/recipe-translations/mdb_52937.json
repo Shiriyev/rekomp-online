@@ -1,0 +1,89 @@
+{
+ "nameRu": "Курица джерк с рисом и фасолью",
+ "descriptionRu": "Бёдрышки в пряном ямайском маринаде, запечённые в духовке, с рисом на кокосовом молоке.",
+ "descriptionEn": "Chicken thighs in a spiced Jamaican marinade, roasted in the oven, with coconut rice and beans.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "Blend the spring onion, ginger, garlic, onion, chilli, thyme, soy sauce, oil, brown sugar, allspice and salt to a thick paste.",
+   "ru": "Пробейте в блендере зелёный лук, имбирь, чеснок, репчатый лук, перец чили, тимьян, соевый соус, масло, коричневый сахар, душистый перец и соль до густой пасты.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "spring_onion",
+    "ginger",
+    "garlic",
+    "onion",
+    "red_chilli",
+    "thyme",
+    "soy_sauce",
+    "oil",
+    "brown_sugar",
+    "allspice"
+   ]
+  },
+  {
+   "en": "Taste the marinade: it should be salty and balanced. Add more chilli for heat or more brown sugar if it is too sharp.",
+   "ru": "Попробуйте маринад: он должен быть солёным и сбалансированным. Добавьте чили для остроты или сахара, если слишком резко.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "brown_sugar"
+   ]
+  },
+  {
+   "en": "Slash the chicken thighs, rub the marinade into every crevice, cover and leave in the fridge overnight.",
+   "ru": "Сделайте надрезы на бёдрышках, вотрите маринад во все складки, накройте и оставьте в холодильнике на ночь.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "en": "Heat the oven to 180°C, put the chicken in a roasting tin with the lime halves and roast until tender and cooked through.",
+   "ru": "Разогрейте духовку до 180 °C, выложите курицу в форму с половинками лайма и запекайте до мягкости и полной готовности.",
+   "timerSec": 2700,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "lime"
+   ]
+  },
+  {
+   "en": "Rinse the rice, then put it in a saucepan with the coconut milk, salt and cold water.",
+   "ru": "Промойте рис и положите его в кастрюлю с кокосовым молоком, солью и холодной водой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice",
+    "coconut_milk"
+   ]
+  },
+  {
+   "en": "Bring to the boil, then turn down, cover and cook.",
+   "ru": "Доведите до кипения, убавьте огонь, накройте крышкой и варите.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "rice"
+   ]
+  },
+  {
+   "en": "Stir in the kidney beans, cover and leave off the heat until the liquid is absorbed.",
+   "ru": "Вмешайте красную фасоль, накройте и оставьте без огня, пока жидкость не впитается.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "kidney_beans"
+   ]
+  },
+  {
+   "en": "Squeeze the roasted lime over the chicken and serve with the rice and beans.",
+   "ru": "Выжмите запечённый лайм на курицу и подавайте с рисом и фасолью.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime"
+   ]
+  }
+ ]
+}

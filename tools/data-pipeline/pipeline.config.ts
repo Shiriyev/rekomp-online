@@ -4,7 +4,7 @@
  */
 import { RECIPE_CRITERIA } from './src/lib/app.ts';
 /** Bump when the catalog content changes; the app updates its catalog when this grows. */
-export const CATALOG_VERSION = 12;
+export const CATALOG_VERSION = 14;
 
 export const config = {
   userAgent: `Rekomp-data-pipeline/0.1 (${process.env.PIPELINE_CONTACT ?? '<PIPELINE_CONTACT>'})`,
@@ -73,14 +73,14 @@ export const config = {
 
   /** Recipe acceptance (PHASE_2 task 3). */
   filter: {
-    excludedCategories: ['Dessert'] as readonly string[],
-    maxIngredients: 15,
+    excludedCategories: [] as readonly string[],
+    maxIngredients: 22,
     /** Only applied when the instructions state durations we can add up. */
-    maxMinutes: 90,
+    maxMinutes: 180,
     /** An alcohol ingredient above this share of the dish weight makes it alcohol-based. */
     maxAlcoholShare: 0.1,
     /** Servings tried when sizing a portion. */
-    servings: { min: 1, max: 6 },
+    servings: { min: 1, max: 10 },
     /** kcal ranges and protein minimums, shared with the app's catalog validator. */
     kcalRange: RECIPE_CRITERIA.kcalRange,
     protein: RECIPE_CRITERIA.protein,

@@ -1,0 +1,72 @@
+{
+ "nameRu": "Рагу с моллюсками, чоризо и белой фасолью",
+ "descriptionRu": "Чоризо и фасоль в томатном бульоне, домленные с моллюсками до раскрытия раковин.",
+ "descriptionEn": "Chorizo and beans in a tomato broth, finished by steaming clams open on top.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Fry the chorizo in a large frying pan over medium heat until it crisps and releases its oil.",
+   "ru": "Обжарьте чоризо в большой сковороде на среднем огне, пока оно не подрумянится и не отдаст масло.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chorizo"
+   ]
+  },
+  {
+   "en": "Add the onion and cook until starting to soften.",
+   "ru": "Добавьте лук и готовьте, пока он не начнёт размягчаться.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "en": "Add the garlic and finely chopped parsley and fry briefly.",
+   "ru": "Добавьте чеснок и мелко нарезанную петрушку и обжарьте недолго.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "garlic",
+    "parsley"
+   ]
+  },
+  {
+   "en": "Pour in the stock and tomatoes, bring to the boil, then add the beans and vinegar.",
+   "ru": "Влейте бульон и помидоры, доведите до кипения, затем добавьте фасоль и уксус.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "vegetable_stock",
+    "tomatoes_canned",
+    "butter_beans",
+    "wine_vinegar"
+   ]
+  },
+  {
+   "en": "Simmer until the liquid has reduced slightly.",
+   "ru": "Томите, пока жидкость слегка не уварится.",
+   "timerSec": 600,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Scatter over the clams, cover and steam, shaking the pan now and then, until the shells open. Discard any that stay shut.",
+   "ru": "Разложите сверху моллюсков, накройте крышкой и припустите, встряхивая сковороду, пока раковины не раскроются. Нераскрывшиеся выбросьте.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "clam"
+   ]
+  },
+  {
+   "en": "Taste before seasoning, as the clams are salty, then scatter with parsley and serve with bread.",
+   "ru": "Попробуйте перед тем как солить — моллюски сами солёные, затем посыпьте петрушкой и подавайте с хлебом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "bread_white"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "nameRu": "Стейк с вьетнамским салатом из лапши",
+ "descriptionRu": "Обжаренный стейк на холодной рисовой лапше с овощами и кисло-сладкой заправкой.",
+ "descriptionEn": "Seared steak over cold rice noodles with vegetables and a sweet-sour dressing.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Mix the brown sugar, rice vinegar, garlic, fish sauce, lime juice and a spoonful of water until the sugar dissolves.",
+   "ru": "Смешайте коричневый сахар, рисовый уксус, чеснок, рыбный соус, сок лайма и ложку воды до растворения сахара.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "brown_sugar",
+    "rice_vinegar",
+    "garlic",
+    "fish_sauce",
+    "lime"
+   ]
+  },
+  {
+   "en": "Cook the noodles to packet instructions, cool them completely in cold water and drain.",
+   "ru": "Отварите лапшу по инструкции, полностью остудите в холодной воде и откиньте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "en": "Toss the noodles with the carrot, cabbage, spring onion and the dressing.",
+   "ru": "Перемешайте лапшу с морковью, капустой, зелёным луком и заправкой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "carrot",
+    "chinese_cabbage",
+    "spring_onion"
+   ]
+  },
+  {
+   "en": "Heat the oil in a frying pan over high heat, season the steak and cook it to your liking.",
+   "ru": "Разогрейте масло в сковороде на сильном огне, приправьте стейк и обжарьте до нужной прожарки.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "oil",
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Rest the steak, then slice it.",
+   "ru": "Дайте стейку отдохнуть и нарежьте его.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_steak"
+   ]
+  },
+  {
+   "en": "Divide the salad between bowls, top with the steak and scatter over the coriander and chilli.",
+   "ru": "Разложите салат по тарелкам, сверху выложите стейк и посыпьте кинзой и чили.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef_steak",
+    "coriander_leaf",
+    "red_chilli"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,80 @@
+{
+ "nameRu": "Говядина с лемонграссом и лапшой",
+ "descriptionRu": "Говядина, долго томлённая в ароматной пасте из лемонграсса, имбиря и чеснока, с рисовой лапшой.",
+ "descriptionEn": "Beef slow-simmered in a lemongrass, ginger and garlic paste, served over rice noodles.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Pulse the ginger, garlic, lemongrass, coriander and one chilli to a purée.",
+   "ru": "Пробейте имбирь, чеснок, лемонграсс, кинзу и один перец чили до состояния пюре.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ginger",
+    "garlic",
+    "lemongrass",
+    "coriander_leaf",
+    "red_chilli"
+   ]
+  },
+  {
+   "en": "Heat the oil in a pan over low heat and cook the purée.",
+   "ru": "Разогрейте масло в кастрюле на слабом огне и прогрейте пюре.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "en": "Stir in the beef, soy sauce, five-spice, sugar and stock.",
+   "ru": "Вмешайте говядину, соевый соус, пятиспеций, сахар и бульон.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "soy_sauce",
+    "five_spice",
+    "brown_sugar",
+    "beef_stock"
+   ]
+  },
+  {
+   "en": "Cover, bring to the boil, then lower the heat and simmer.",
+   "ru": "Накройте крышкой, доведите до кипения, убавьте огонь и томите.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Remove the lid and cook on until the beef is tender and the sauce has reduced.",
+   "ru": "Снимите крышку и доведите до мягкости говядины и загустения соуса.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Prepare the noodles to packet instructions and drain well.",
+   "ru": "Приготовьте лапшу по инструкции на упаковке и хорошо откиньте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles"
+   ]
+  },
+  {
+   "en": "Divide the noodles between bowls, spoon over the stew and serve with the remaining chilli, coriander and lime wedges.",
+   "ru": "Разложите лапшу по тарелкам, выложите сверху рагу и подавайте с оставшимся чили, кинзой и дольками лайма.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "rice_noodles",
+    "red_chilli",
+    "coriander_leaf",
+    "lime"
+   ]
+  }
+ ]
+}

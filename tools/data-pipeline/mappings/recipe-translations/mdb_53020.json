@@ -1,0 +1,79 @@
+{
+ "nameRu": "Росол, польский куриный суп",
+ "descriptionRu": "Прозрачный куриный бульон, долго томлённый с кореньями и специями.",
+ "descriptionEn": "A clear chicken broth, long-simmered with root vegetables and spices.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Put the chicken legs in a large stock pot and cover with water.",
+   "ru": "Положите куриные ножки в большую кастрюлю и залейте водой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg"
+   ]
+  },
+  {
+   "en": "Bring to a boil and simmer, skimming the surface to keep the broth clear.",
+   "ru": "Доведите до кипения и варите на слабом огне, снимая пену, чтобы бульон остался прозрачным.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg"
+   ]
+  },
+  {
+   "en": "Add the onion, carrot, leek, celery, cabbage, cloves, allspice and bay leaf for the last part of the cooking.",
+   "ru": "Добавьте лук, морковь, лук-порей, сельдерей, капусту, гвоздику, душистый перец и лавровый лист под конец варки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "carrot",
+    "leek",
+    "celery",
+    "cabbage",
+    "cloves",
+    "allspice",
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Strain everything out of the broth.",
+   "ru": "Процедите бульон, убрав из него всё.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Bone the chicken and pull the meat into large chunks, and slice the carrots.",
+   "ru": "Разберите курицу, снимите мясо крупными кусками и нарежьте морковь.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg",
+    "carrot"
+   ]
+  },
+  {
+   "en": "Return the chicken and carrots to the broth and season with salt and pepper.",
+   "ru": "Верните курицу и морковь в бульон и приправьте солью и перцем.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_leg",
+    "carrot",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Serve hot, scattered with parsley and dill.",
+   "ru": "Подавайте горячим, посыпав петрушкой и укропом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "parsley",
+    "dill"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+{
+ "nameRu": "Тажин с курицей и бататом",
+ "descriptionRu": "Куриные бёдрышки, томлённые со специями, затем запечённые с бататом, морковью и сухофруктами.",
+ "descriptionEn": "Chicken thighs simmered with spices, then baked with sweet potato, carrot and dried fruit.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Combine the onion, celery, coriander and parsley in a large pot and stir in the turmeric, cumin, paprika, ginger, cayenne, salt and pepper.",
+   "ru": "Соедините в большой кастрюле лук, сельдерей, кинзу и петрушку и вмешайте куркуму, зиру, паприку, имбирь, кайенский перец, соль и перец.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "celery",
+    "coriander_leaf",
+    "parsley",
+    "turmeric",
+    "cumin",
+    "paprika_powder",
+    "ground_ginger",
+    "cayenne",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Lay the chicken thighs on top, drizzle with olive oil, cover and simmer over low heat until tender.",
+   "ru": "Выложите сверху куриные бёдрышки, сбрызните оливковым маслом, накройте и томите на слабом огне до мягкости.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "chicken_thigh",
+    "olive_oil"
+   ]
+  },
+  {
+   "en": "Cover the raisins with hot water and leave them to soak, then drain.",
+   "ru": "Залейте изюм горячей водой, дайте набухнуть и слейте воду.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "raisins"
+   ]
+  },
+  {
+   "en": "Heat the oven to 200°C.",
+   "ru": "Разогрейте духовку до 200 °C.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Transfer the chicken mixture to an oven dish, add the stock, sweet potato and carrots and cover.",
+   "ru": "Переложите курицу со специями в форму, влейте бульон, добавьте батат и морковь и накройте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock",
+    "sweet_potato",
+    "carrot"
+   ]
+  },
+  {
+   "en": "Bake until the sweet potato is soft.",
+   "ru": "Запекайте, пока батат не станет мягким.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "sweet_potato"
+   ]
+  },
+  {
+   "en": "Add the drained raisins and the prunes and bake on, covered, until heated through.",
+   "ru": "Добавьте изюм и чернослив и допеките под крышкой до прогрева.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "raisins",
+    "prune"
+   ]
+  }
+ ]
+}

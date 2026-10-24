@@ -1,0 +1,80 @@
+{
+ "nameRu": "Вьетнамский салат со свининой",
+ "descriptionRu": "Свиная вырезка, обжаренная и доведённая в духовке, с хрустящими овощами и острой заправкой.",
+ "descriptionEn": "Pork tenderloin seared then finished in the oven, with crunchy vegetables and a hot dressing.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": true,
+ "steps": [
+  {
+   "en": "Put the sugar and lime juice in a pan with a spoonful of water and bring to the boil to dissolve the sugar.",
+   "ru": "Положите сахар в кастрюлю с соком лайма и ложкой воды и доведите до кипения, чтобы сахар растворился.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar",
+    "lime"
+   ]
+  },
+  {
+   "en": "Add the chilli and coriander, stir well, then blend until smooth.",
+   "ru": "Добавьте чили и кинзу, хорошо размешайте и пробейте блендером до гладкости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "red_chilli",
+    "coriander_leaf"
+   ]
+  },
+  {
+   "en": "Stir in the sesame oil, fish sauce and soy sauce to finish the dressing, then cover and chill.",
+   "ru": "Вмешайте кунжутное масло, рыбный и соевый соусы — заправка готова; накройте и уберите в холод.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sesame_oil",
+    "fish_sauce",
+    "soy_sauce"
+   ]
+  },
+  {
+   "en": "Heat the oven to 200°C. Brush the pork with oil and sear it on all sides in a hot pan.",
+   "ru": "Разогрейте духовку до 200 °C. Смажьте свинину маслом и обжарьте со всех сторон на раскалённой сковороде.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_tenderloin",
+    "oil"
+   ]
+  },
+  {
+   "en": "Transfer to a baking tray and roast until cooked through.",
+   "ru": "Переложите на противень и доведите в духовке до готовности.",
+   "timerSec": 720,
+   "ingredientRefs": [
+    "pork_tenderloin"
+   ]
+  },
+  {
+   "en": "Cool the pork, then slice it thinly against the grain and pour over half the dressing.",
+   "ru": "Остудите свинину, нарежьте тонко поперёк волокон и полейте половиной заправки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork_tenderloin"
+   ]
+  },
+  {
+   "en": "Toss the cabbage, cucumber, celery, spring onion, lemongrass and mint with the remaining dressing, pile onto a platter and top with the pork.",
+   "ru": "Перемешайте капусту, огурец, сельдерей, зелёный лук, лемонграсс и мяту с оставшейся заправкой, выложите горкой на блюдо и сверху — свинину.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "cabbage",
+    "cucumber",
+    "celery",
+    "spring_onion",
+    "lemongrass",
+    "mint",
+    "pork_tenderloin"
+   ]
+  }
+ ]
+}

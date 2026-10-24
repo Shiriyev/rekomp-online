@@ -1,19 +1,17 @@
 # Recipe filter
 
-Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
+Recipes in TheMealDB: **790** · accepted: **161** · rejected: **629**
 
 ## Rejected by reason
 
 | Reason | Recipes |
 |---|---|
-| low_protein | 220 |
-| dessert | 167 |
-| no_serving_fits | 151 |
-| too_many_ingredients | 64 |
-| too_long | 48 |
-| no_grams | 13 |
-| alcohol_based | 11 |
-| unmapped_ingredient | 4 |
+| low_protein | 357 |
+| unmapped_ingredient | 165 |
+| no_serving_fits | 60 |
+| no_grams | 18 |
+| too_long | 15 |
+| alcohol_based | 13 |
 | excluded | 1 |
 
 ## Accepted by meal
@@ -21,34 +19,34 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 | Meal | Primary | Fits (any) |
 |---|---|---|
 | breakfast | 1 | 3 |
-| lunch | 61 | 61 |
-| dinner | 38 | 38 |
-| snack | 11 | 11 |
+| lunch | 55 | 142 |
+| dinner | 88 | 141 |
+| snack | 17 | 17 |
 
 ## Top 20 by protein density
 
 | Recipe | Meal | Servings | kcal | Protein g | Protein % kcal |
 |---|---|---|---|---|---|
-| Jamaican Pepper Shrimp | snack | 2 | 205 | 38 | 74% |
-| Tandoori chicken | dinner | 5 | 508 | 76 | 60% |
-| Jamaican Curry Goat | dinner | 4 | 520 | 73 | 56% |
-| Red curry chicken kebabs | lunch | 1 | 623 | 85 | 55% |
+| Camaro Grelhado Com Molho Cru (Grilled Prawns with Green Onion Sauce) | dinner | 1 | 379 | 72 | 76% |
+| Jamaican Pepper Shrimp | dinner | 1 | 410 | 76 | 74% |
+| Chicken Shawarma with homemade garlic herb yoghurt sauce | dinner | 3 | 550 | 84 | 61% |
+| Tandoori chicken | lunch | 4 | 635 | 95 | 60% |
+| Jamaican Curry Goat | lunch | 3 | 693 | 97 | 56% |
+| Red curry chicken kebabs | dinner | 1 | 623 | 85 | 55% |
 | Spiced smoky barbecued chicken | lunch | 3 | 655 | 87 | 53% |
+| Callaloo and SaltFish | snack | 6 | 221 | 29 | 53% |
 | Cayman-Style Lobster | dinner | 2 | 469 | 61 | 52% |
 | Spanish Chicken | lunch | 2 | 691 | 91 | 52% |
 | Chilli ginger lamb chops | lunch | 2 | 648 | 84 | 52% |
 | Nutty Chicken Curry | dinner | 3 | 507 | 66 | 52% |
-| Beef Caldereta | lunch | 6 | 625 | 79 | 51% |
-| Sea bass with sizzled ginger, chilli & spring onions | lunch | 2 | 579 | 73 | 51% |
+| Asado | dinner | 7 | 549 | 70 | 51% |
+| Split Pea Soup | snack | 9 | 221 | 28 | 51% |
+| Beef Caldereta | dinner | 7 | 536 | 68 | 51% |
+| Sea bass with sizzled ginger, chilli & spring onions | dinner | 2 | 579 | 73 | 51% |
+| Pollo en Salsa | lunch | 1 | 822 | 103 | 50% |
 | Smoky chicken skewers | dinner | 2 | 521 | 65 | 50% |
 | Lakra me Mish Cabbage and Meat Stew | dinner | 2 | 504 | 63 | 50% |
-| Thai chicken cakes with sweet chilli sauce | lunch | 1 | 675 | 80 | 47% |
-| Fresh sardines | snack | 6 | 173 | 21 | 47% |
-| Chuletas de Cerdo a la Criolla (Pork Chops in Creole Sauce) | dinner | 3 | 480 | 57 | 47% |
-| Barramundi with Moroccan spices | lunch | 2 | 643 | 72 | 45% |
-| Imam bayildi with BBQ lamb & tzatziki | lunch | 4 | 638 | 71 | 45% |
-| Salt cod tortilla | lunch | 4 | 569 | 63 | 44% |
-| Moussaka | lunch | 2 | 678 | 75 | 44% |
+| Vietnamese pork salad | dinner | 2 | 496 | 60 | 48% |
 
 ## Conversions that used generic defaults (check these)
 
@@ -57,11 +55,16 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 - curry_paste «2 tbsp»
 - flour «1tbsp»
 - mustard «1 tbsp»
+- flour «1 tbls»
 - tomato_puree «3 tsp»
 - peanut_butter «5 tblsp»
 - butter «2 knobs»
 - parmesan «1 tsp»
 - gruyere «4 tbs»
+- brandy «1 tbs»
+- spring_onion «1  bunch»
+- ginger «1 tbs chopped»
+- brown_sugar «3 tbs»
 - tomato_puree «1 tsp»
 - cornstarch «1 tsp»
 - brown_sugar «1 tbs»
@@ -69,21 +72,33 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 - cornstarch «1 tbs»
 - lemon_juice «2 tbs»
 - sugar «2 tblsp»
+- greek_yogurt «2 tbs»
 - spring_onion «1  bunch»
 - flour «2 tbs»
 - tamarind_paste «2 tbs»
 - coconut_milk «1 can»
+- red_chilli «1 tbs»
 - breadcrumbs «2 tbs»
 - peanut_butter «3  tablespoons»
 - tomato_sauce «2 tbs»
+- tomato_puree «1 teaspoon»
+- mustard «1 tbsp»
+- flour «5 tablespoons»
 - cornstarch «1/2 tbs»
 - sherry «2 tbsp»
+- sherry «2 tblsp»
 - pine_nut «2 tbsp»
 - sweet_chilli_sauce «1 tblsp»
+- lime_juice «4 tablespoons»
+- sugar «1 tblsp»
 - garlic «3 tblsp chopped»
 - thai_red_curry_paste «2 tblsp»
+- thai_red_curry_paste «2 tsp»
+- ginger «1 tablespoon chopped»
 - sweet_chilli_sauce «2 tablespoons»
 - thai_red_curry_paste «1 tblsp»
+- thai_red_curry_paste «1 tblsp»
+- lemon_juice «2 tblsp»
 - sugar «1 tablespoon»
 - fish_sauce «2 tsp»
 - thai_red_curry_paste «2 tsp»
@@ -91,23 +106,35 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 - brown_sugar «1 tablespoon»
 - ginger «1 tblsp»
 - lemon_juice «1 tblsp»
+- greek_yogurt «3  tablespoons»
 - mustard «1 tablespoon»
 - worcestershire_sauce «2 tsp»
 - sherry «1 tsp»
 - cornstarch «1/2 tsp»
 - sesame_seed «2 tsp»
+- ginger «1 tablespoon»
+- cornstarch «2 tsp»
+- sherry «1 tablespoon»
 - cornstarch «2 tsp»
 - brown_sugar «3  tablespoons»
 - flour «2 tablespoons»
+- vegetable_stock «1 tsp»
 - tomato_puree «3 tsp»
 - leafy_greens «1  bunch»
 - soybeans «2 tablespoons»
+- sugar «2 tablespoons»
 - ginger «1 tablespoon»
+- sherry «1 tablespoon»
 - garlic «1/2 tbs»
 - lemon_juice «1 tablespoon»
 - coconut_milk «1 Can»
 - thai_red_curry_paste «2 tablespoons»
+- tamarind_paste «2 tablespoons»
 - cornstarch «2 tsp»
+- raisins «2 tablespoons»
+- green_olives «2 tablespoons»
+- mustard «2 tablespoons»
+- black_beans «3 cans»
 - mustard «2 tablespoons»
 - creme_fraiche «4 tablespoons»
 - garlic «1 tablespoon»
@@ -115,13 +142,15 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 
 ## Rejected recipes
 
-### alcohol_based (11)
+### alcohol_based (13)
 
 - Garides Saganaki — 21%
+- Coq au vin — 23%
 - Beef and Oyster pie — 12%
 - Beef Bourguignon — 28%
 - Duck Confit — 11%
 - Portuguese barbecued pork (Febras assadas) — 12%
+- Portuguese fish stew (Caldeirada de peixe) — 11%
 - Traditional Croatian Goulash — 18%
 - Sushi — 14%
 - Torrijas with sherry — 14%
@@ -129,400 +158,535 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 - Belgian Stoemp — 20%
 - Danish Rye Bread — 17%
 
-### dessert (167)
+### unmapped_ingredient (165)
 
-- Bakewell tart — Dessert
-- Apple Frangipan Tart — Dessert
-- Chocolate Gateau — Dessert
-- Rocky Road Fudge — Dessert
-- Hot Chocolate Fudge — Dessert
-- Christmas Pudding Flapjack — Dessert
-- Eton Mess — Dessert
-- Bread and Butter Pudding — Dessert
-- Sticky Toffee Pudding Ultimate — Dessert
-- Salted Caramel Cheescake — Dessert
-- Chocolate Avocado Mousse — Dessert
-- Pancakes — Dessert
-- Banana Pancakes — Dessert
-- Choc Chip Pecan Pie — Dessert
-- Pumpkin Pie — Dessert
-- New York cheesecake — Dessert
-- Key Lime Pie — Dessert
-- Chocolate Raspberry Brownies — Dessert
-- Peanut Butter Cheesecake — Dessert
-- Peach & Blueberry Grunt — Dessert
-- Sticky Toffee Pudding — Dessert
-- Spotted Dick — Dessert
-- Eccles Cakes — Dessert
-- Summer Pudding — Dessert
-- Jam Roly-Poly — Dessert
-- Blackberry Fool — Dessert
-- Treacle Tart — Dessert
-- Apple & Blackberry Crumble — Dessert
-- Battenberg Cake — Dessert
-- Carrot Cake — Dessert
-- Chelsea Buns — Dessert
-- Dundee cake — Dessert
-- Madeira Cake — Dessert
-- Rock Cakes — Dessert
-- Parkin Cake — Dessert
-- Chocolate Souffle — Dessert
-- Tarte Tatin — Dessert
-- Chinon Apple Tarts — Dessert
-- Pear Tarte Tatin — Dessert
-- White chocolate creme brulee — Dessert
-- Canadian Butter Tarts — Dessert
-- Nanaimo Bars — Dessert
-- BeaverTails — Dessert
-- Timbits — Dessert
-- Sugar Pie — Dessert
-- Pouding chomeur — Dessert
-- Peanut Butter Cookies — Dessert
-- Budino Di Ricotta — Dessert
-- Chocolate Caramel Crispy — Dessert
-- Tunisian Orange Cake — Dessert
-- Cashew Ghoriba Biscuits — Dessert
-- Classic Christmas pudding — Dessert
-- Christmas Pudding Trifle — Dessert
-- Christmas cake — Dessert
-- Mince Pies — Dessert
-- Strawberry Rhubarb Pie — Dessert
-- Honey Yogurt Cheesecake — Dessert
-- Krispy Kreme Donut — Dessert
-- Polskie Nalesniki (Polish Pancakes) — Dessert
-- Rogaliki (Polish Croissant Cookies) — Dessert
-- Portuguese custard tarts — Dessert
-- Apam balik — Dessert
-- Seri muka kuih — Dessert
-- Walnut Roll Gužvara — Dessert
-- Strawberries Romanoff — Dessert
-- Blueberry & lemon friands — Dessert
-- Chocolate Coconut Squares — Dessert
-- Lamingtons — Dessert
-- Anzac biscuits — Dessert
-- Cinnamon buns — Dessert
-- Tall Skoleboller — Dessert
-- Authentic Norwegian Kransekake — Dessert
-- Kvæfjord Cake “Verdens Beste” (World’s Best Cake) — Dessert
-- Norwegian Krumkake — Dessert
-- Suksessterte (Norwegian almond “success cake”) — Dessert
-- Fyrstekake – Norwegian Prince Cake — Dessert
-- Mazariner – Scandinavian Almond Tartlets — Dessert
-- Dulce de Leche — Dessert
-- Alfajores — Dessert
-- Crema Catalana — Dessert
-- Ensaimada — Dessert
-- Churros — Dessert
-- Spanish fig & almond balls — Dessert
-- Chocolate churros with chocolate & salted caramel sauce — Dessert
-- Šúĺlance s Makom — Dessert
-- Knafeh — Dessert
-- Mamoul (Eid biscuits) — Dessert
-- Pistachio Kunafa Chocolate Cake and Cupcakes — Dessert
-- Walnut, date & honey cake — Dessert
-- Apricot & Turkish delight mess — Dessert
-- Baklava with spiced nuts, ricotta & chocolate — Dessert
-- Dziriat (Algerian Almond Tarts) — Dessert
-- Cornes de Gazelle (Gazelle Horns) — Dessert
-- Piernik (Polish gingerbread) — Dessert
-- Pistachio cake — Dessert
-- Polish chocolate & walnut cake — Dessert
-- Polish doughnuts (Pączki) — Dessert
-- Raspberry mousse — Dessert
-- Mini bundt cakes — Dessert
-- Beetroot pancakes — Dessert
-- Chocolate alfajores — Dessert
-- Vanilla alfajores — Dessert
-- Flan — Dessert
-- Postre Chajá — Dessert
-- Chocolate empanadas — Dessert
-- Passion fruit mousse — Dessert
-- Saskatoon Pie — Dessert
-- Date squares — Dessert
-- Jam jam cookies — Dessert
-- Flapper Pie — Dessert
-- Figgy Duff — Dessert
-- Jamaican Sweet Potato Pudding — Dessert
-- Grape Nut Ice Cream — Dessert
-- No-Churn Rum Raisin Ice Cream — Dessert
-- Jamaican Spice Bun Recipe — Dessert
-- Jamaican Banana Fritters — Dessert
-- Caribbean Tamarind balls — Dessert
-- Apple cake — Dessert
-- Gevulde speculaas — Dessert
-- Dutch stroopwafel — Dessert
-- Boterkoek (Dutch Butter Cake) — Dessert
-- Dutch Apple Pie — Dessert
-- Dutch Spiced Breakfast Cake (Ontbijtkoek) — Dessert
-- Traditional Dutch rice tart (rijstevlaai) — Dessert
-- Arnhemse meisjes — Dessert
-- Dutch doughnuts — Dessert
-- Zeeuwse bolussen — Dessert
-- Slagroomtaart — Dessert
-- Baghlaw-e-Khanagi — Dessert
-- Firni — Dessert
-- Arra të Mbushura me Fik Walnut Stuffed Figs (with Fig Syrup) — Dessert
-- Shendetlie Honey and Nut Cake — Dessert
-- Kurabie Butter Cookies — Dessert
-- Cambodian Waffles (Num Poum) — Dessert
-- Laos Plantain Coconut Bake (Flourless Muffin) — Dessert
-- Authentic Laos Tapioca Pudding with Bananas — Dessert
-- Banana den Forno — Dessert
-- Handesh – Bangladeshi rice flour and date molasses cakes — Dessert
-- Breadfruit in Butter Sauce Recipe — Dessert
-- Cinnamon Roll Cookies — Dessert
-- Magwinya: Doughnut Bites from Botswana — Dessert
-- Brazilian chocolate truffles - brigadeiro — Dessert
-- Coconut quindim — Dessert
-- Brazilian carrot cake — Dessert
-- Bulgarian Honey Cookies — Dessert
-- Cassava Cake — Dessert
-- Manjar (Dulce de Leche) — Dessert
-- Leche Asada — Dessert
-- Arroz con Leche Recipe — Dessert
-- Coconut Natilla Recipe — Dessert
-- Tamal De Maicena — Dessert
-- Pan De Yucca — Dessert
-- Chorreadas — Dessert
-- Dulce de Leche Cheesecake with a Maria Cookie Crust. — Dessert
-- CAFE LA LLAVE ESPRESSO ICE CREAM — Dessert
-- Strawberry tart — Dessert
-- Old-fashioned Danish Apple Trifle — Dessert
-- Apple pie pops — Dessert
-- Creamy mango smoothie — Dessert
-- Layered mango custard — Dessert
-- Dominica’s coconut rough cake — Dessert
-- Fried cocoy banana — Dessert
-- Quark and Rhubarb Pie — Dessert
-- Apple Pie — Dessert
-- Gingerbread Waffles — Dessert
-- Honey Cookies — Dessert
-- Biss Jaggery Modak — Dessert
+- Bakewell tart — chilled butter, raspberry jam, ground almond, almond extract, flaked almond
+- Apple Frangipan Tart — digestive biscuit, salted butter, ground almond, almond extract, flaked almond
+- Chocolate Gateau — plain chocolate
+- Lamb tomato and sweet spices — vine leaf, clove
+- Rigatoni with fennel sausage sauce — smoky paprika, pitted black olives, rigatoni, anchovy fillet
+- Smoky Lentil Chili with Squash — cocoa, cashew
+- Dal fry — toor dal, ghee, mustard seeds
+- Rocky Road Fudge — miniature marshmallow, chocolate chip
+- Hot Chocolate Fudge — chocolate chip, condensed milk, white chocolate chip, miniature marshmallow
+- Christmas Pudding Flapjack — salted butter, dark soft brown sugar, golden syrup, rolled oats, christmas pudding
+- Eton Mess — meringue nest, ginger cordial
+- Bread and Butter Pudding — sultana
+- Sticky Toffee Pudding Ultimate — medjool date, demerara sugar, ice cream
+- Chicken Handi — coriander seeds, fenugreek
+- Chicken Alfredo Primavera — bowtie pasta
+- Lamb Biryani — khus khus, ghee, full fat yogurt, biryani masala
+- Osso Buco alla Milanese — veal
+- Braised Beef Chilli — ancho chilly, dark brown sugar, borlotti beans
+- Grilled Mac and Cheese Sandwich — colby jack cheese
+- Salted Caramel Cheescake — digestive biscuit, caramel, caramel sauce, toffee popcorn
+- Pork Cassoulet — haricot beans
+- Pancakes — blueberry
+- Banana Pancakes — pecan nut
+- Choc Chip Pecan Pie — light brown soft sugar, dark brown soft sugar, pecan nut, dark chocolate chip
+- Key Lime Pie — digestive biscuit, condensed milk
+- Chocolate Raspberry Brownies — dark chocolate, milk chocolate, salted butter, light brown soft sugar, cocoa
+- Peanut Butter Cheesecake — peanut cooky, gelatine leaf, golden syrup, light brown soft sugar, peanut brittle
+- Peach & Blueberry Grunt — peach, blueberry
+- Vegetarian Chilli — mixed grain
+- Beef Dumpling Stew — suet
+- Chicken Parmentier — gruyere cheese
+- Spotted Dick — suet, currant, custard
+- Eccles Cakes — currant, mixed peel
+- Summer Pudding — redcurrant
+- Jam Roly-Poly — suet, raspberry jam, custard
+- Blackberry Fool — hazlenut
+- Treacle Tart — golden syrup
+- Apple & Blackberry Crumble — braeburn apple, demerara sugar, ice cream
+- Battenberg Cake — almond extract, almond extract, pink food colouring, marzipan
+- Chelsea Buns — white flour, dried fruit
+- Dundee cake — ground almond, dried fruit, glace cherry
+- Madeira Cake — mixed peel
+- Rock Cakes — dried fruit
+- Parkin Cake — golden syrup, oatmeal
+- Chocolate Souffle — dark chocolate, dark chocolate
+- Tarte Tatin — braeburn apple
+- Chinon Apple Tarts — dark brown soft sugar, braeburn apple, red wine jelly
+- Pear Tarte Tatin — pear
+- White chocolate creme brulee — white chocolate chip
+- Nanaimo Bars — custard, cocoa, digestive biscuit, custard powder, dark chocolate
+- Chicken Basquaise — sun-dried tomato
+- Steak Diane — tabasco sauce
+- Saltfish and Ackee — ackee, suet
+- Escovitch Fish — red snapper, malt vinegar
+- Ma Po Tofu — doubanjiang, fermented black beans
+- Szechuan Beef — cooking wine
+- General Tsos Chicken — gochujang
+- Shrimp Chow Fun — cooking wine
+- Chicken Congee — ginger cordial
+- Budino Di Ricotta — dark rum
+- Chocolate Caramel Crispy — mars bar, rice krispy, milk chocolate
+- Cashew Ghoriba Biscuits — orange blossom water
+- Classic Christmas pudding — candied peel
+- Christmas Pudding Trifle — demerara sugar, grand marnier, christmas pudding, custard, flaked almond, dark chocolate
+- Christmas cake — ground almond, candied peel, glace cherry, currant, pecan nut, mixed spice
+- Vegetable Shepherds Pie — salted butter
+- Strawberry Rhubarb Pie — rhubarb
+- Honey Yogurt Cheesecake — digestive biscuit, fruit mix
+- Bigos (Hunters Stew) — kielbasa
+- Rogaliki (Polish Croissant Cookies) — jam
+- Nasi lemak — anchovy fillet, anchovy fillet
+- Strawberries Romanoff — grand marnier
+- Blueberry & lemon friands — unwaxed lemon
+- Chocolate Coconut Squares — cocoa powder, plain chocolate
+- Lamingtons — salted butter, raspberry jam, cocoa powder
+- Anzac biscuits — porridge oats, golden syrup
+- Cinnamon buns — strong white flour
+- Nordic smørrebrød with asparagus and horseradish cream — white asparagus, vasterbottensost cheese
+- Tall Skoleboller — powdered sugar
+- Authentic Norwegian Kransekake — powdered sugar, powdered sugar
+- Fyrstekake – Norwegian Prince Cake — almond extract
+- Mazariner – Scandinavian Almond Tartlets — powdered sugar, powdered sugar, almond flour, almond extract, powdered sugar, almond extract
+- Choripán — chimichurri sauce
+- Alfajores — dulce de leche
+- Churros — dark chocolate, golden syrup
+- Pollo en pepitoria — stale bread
+- Spanish fig & almond balls — fig, dried cranberry
+- Chocolate churros with chocolate & salted caramel sauce — ice cream, dark chocolate, cocoa powder
+- Šúĺlance s Makom — ground poppy seeds, powdered sugar
+- Panang chicken curry (kaeng panang gai) — panang curry paste, dried red chilly, shrimp paste
+- Knafeh — knafeh, yellow food colouring
+- Pistachio Kunafa Chocolate Cake and Cupcakes — white chocolate, unsalted pistachio, condensed milk, oreo cream biscuit, sevaiiya, ghee, dark chocolate, malai
+- Vietnamese lamb shanks with sweet potatoes — lamb shank
+- Beef pho — coriander seeds
+- Walnut, date & honey cake — stoned date
+- Apricot & Turkish delight mess — orange blossom water, meringue nest, turkish delight
+- Baklava with spiced nuts, ricotta & chocolate — pecan nut, vanilla bean paste, ground pistachio
+- Dziriat (Algerian Almond Tarts) — orange blossom water, orange blossom water, orange blossom water
+- Chorba Hamra bel Frik (Algerian Lamb, Tomato, and Freekeh Soup) — freekeh
+- Cornes de Gazelle (Gazelle Horns) — orange blossom water, orange blossom water
+- Piernik (Polish gingerbread) — plum jam, dark chocolate
+- Pistachio cake — pistachio paste, unwaxed lime
+- Polish chocolate & walnut cake — chocolate chip
+- Polish doughnuts (Pączki) — jam, ground almond
+- Bigos (Polish hunter's stew) — german sausage, juniper berry, allspice berry
+- Raspberry mousse — gelatine leaf
+- Mini bundt cakes — cocoa powder
+- Beetroot pancakes — frozen mixed berry, blackcurrant jam
+- Beef Empanadas — egg wash, chimichurri sauce
+- Chivito sandwich — egg wash, chimichurri sauce
+- Chocolate alfajores — unsweetened cocoa, dulce de leche, milk chocolate
+- Vanilla alfajores — dulce de leche, coconut flakes, dulce de leche, coconut flakes
+- Flan — dulce de leche
+- Postre Chajá — dulce de leche, peach, peach juice
+- Chocolate empanadas — condensed milk, unsweetened cocoa
+- Venezuelan Sancocho — hind shank, sweet red pepper, cassaba, yautia, white yam
+- Passion fruit mousse — unflavoured gelatin, passion fruit pulp, condensed milk
+- Arepa Pabellón — corn arepa filled with mozarella cheese, meat
+- Saskatoon Pie — vegetable shortening, saskatoon berry
+- Date squares — pitted date
+- Jam jam cookies — jam
+- Flapper Pie — graham cracker crumb, cream of tartar
+- Grape Nut Ice Cream — condensed milk, grape nut cereal
+- No-Churn Rum Raisin Ice Cream — dark rum, condensed milk
+- Jamaican Spice Bun Recipe — caramelized sugar sauce, dried cranberry, dried cherry
+- Caribbean Tamarind balls — tamarind pulp
+- Singapore Noodles with Shrimp — seasoned rice vinegar
+- Egg Foo Young — unsalted beef stock, shaoxing wine, mung bean sprouts
+- Apple cake — ground sugar
+- Gevulde speculaas — speculaas spice mix, almond paste
+- Dutch stroopwafel — dutch stroop
+- Boterkoek (Dutch Butter Cake) — dulce de leche, dark chocolate
+- Dutch Spiced Breakfast Cake (Ontbijtkoek) — dark brown soft sugar
+- Traditional Dutch rice tart (rijstevlaai) — vegetable millk, dessert rice, vegetable millk
+- Slagroomtaart — jam, nougatine, fruit mix
+- Baghlaw-e-Khanagi — ground walnut
+- Arra të Mbushura me Fik Walnut Stuffed Figs (with Fig Syrup) — fig
+- Cambodian Waffles (Num Poum) — wheat flour
+- BEEF LOK LAK (Lok Lak Sach Ko) — beef tenderloin, kampot pepper
+- Lao Naem Khao — sour pork sausage, pickled garlic, hot mint
+- Handesh – Bangladeshi rice flour and date molasses cakes — date molasses
+- Belgian Meatballs in Liège Syrup Sauce — sirop de liege
+- Magwinya: Doughnut Bites from Botswana — ground sugar
+- Brazilian chocolate truffles - brigadeiro — condensed milk, cocoa powder
+- Acaraje black-eyed pea fritters with shrimp filling — black eyed peas
+- Brazilian carrot cake — cocoa powder
+- Bulgarian Honey Cookies — powdered sugar, chocolate chip
+- Cassava Cake — dark brown soft sugar
+- Arroz con Leche Recipe — condensed milk
+- Coconut Natilla Recipe — condensed milk
+- Colombian Style Stuffed Potatoes — sazon goya with azafran, sazon goya with azafran
+- Pan De Yucca — yucca
+- Dulce de Leche Cheesecake with a Maria Cookie Crust. — maria cooky, dulce de leche
+- CAFE LA LLAVE ESPRESSO ICE CREAM — cafe la llave
+- Ropa Veija — pimento stuffed olives
+- Strawberry tart — marzipan, dark chocolate
+- Old-fashioned Danish Apple Trifle — cooking apple, vanilla powder
+- Creamy mango smoothie — condensed milk, ice cube
+- Layered mango custard — custard
+- Dominica’s coconut rough cake — wheat flour
+- Fried cocoy banana — cocoy banana
+- Quark and Rhubarb Pie — sweet quark, rhubarb
+- Apple Pie — sour milk
+- Gingerbread Waffles — gingerbread spice
+- Biss Jaggery Modak — coconut flakes, dried fruit
 
-### low_protein (220)
+### low_protein (357)
 
 - Kapsalon — 24% kcal, 43 g/serving
-- Spaghetti Bolognese — 23% kcal, 38 g/serving
+- Spaghetti Bolognese — 23% kcal, 51 g/serving
 - Spicy Arrabiata Penne — 11% kcal, 20 g/serving
-- Pad See Ew — 11% kcal, 17 g/serving
-- Mediterranean Pasta Salad — 22% kcal, 36 g/serving
+- Pad See Ew — 11% kcal, 21 g/serving
+- Mediterranean Pasta Salad — 22% kcal, 47 g/serving
 - Vegan Chocolate Cake — 9% kcal, 12 g/serving
 - Spicy North African Potato Salad — 13% kcal, 17 g/serving
-- Beef Wellington — 23% kcal, 41 g/serving
+- Beef Wellington — 23% kcal, 49 g/serving
+- Poutine — 18% kcal, 38 g/serving
 - Ribollita — 15% kcal, 25 g/serving
 - Thai Green Curry — 18% kcal, 33 g/serving
 - French Lentils With Garlic and Thyme — 22% kcal, 35 g/serving
 - Roasted Eggplant With Tahini, Pine Nuts, and Lentils — 20% kcal, 32 g/serving
-- Laksa King Prawn Noodles — 11% kcal, 13 g/serving
-- Toad In The Hole — 16% kcal, 26 g/serving
-- Salmon Prawn Risotto — 22% kcal, 33 g/serving
+- Stovetop Eggplant With Harissa, Chickpeas, and Cumin Yogurt — 18% kcal, 38 g/serving
+- Katsu Chicken curry — 20% kcal, 41 g/serving
+- Laksa King Prawn Noodles — 11% kcal, 20 g/serving
+- Toad In The Hole — 16% kcal, 35 g/serving
+- Salmon Prawn Risotto — 22% kcal, 49 g/serving
+- Massaman Beef curry — 23% kcal, 46 g/serving
 - Vietnamese Grilled Pork (bun-thit-nuong) — 22% kcal, 40 g/serving
-- Chicken Karaage — 19% kcal, 29 g/serving
+- Chicken Karaage — 19% kcal, 44 g/serving
 - Fettucine alfredo — 9% kcal, 16 g/serving
-- Chilli prawn linguine — 23% kcal, 36 g/serving
-- Broccoli & Stilton soup — 16% kcal, 8 g/serving
-- Chicken & mushroom Hotpot — 16% kcal, 25 g/serving
-- Bean & Sausage Hotpot — 20% kcal, 32 g/serving
-- Chicken Couscous — 23% kcal, 30 g/serving
-- Mushroom & Chestnut Rotolo — 14% kcal, 20 g/serving
+- Venetian Duck Ragu — 12% kcal, 26 g/serving
+- Chilli prawn linguine — 23% kcal, 53 g/serving
+- Creamy Tomato Soup — 12% kcal, 9 g/serving
+- Broccoli & Stilton soup — 16% kcal, 12 g/serving
+- Lamb Tagine — 21% kcal, 35 g/serving
+- Lasagne — 17% kcal, 38 g/serving
+- Chicken & mushroom Hotpot — 16% kcal, 37 g/serving
+- Bean & Sausage Hotpot — 20% kcal, 43 g/serving
+- Spinach & Ricotta Cannelloni — 16% kcal, 36 g/serving
+- Chicken Couscous — 23% kcal, 46 g/serving
+- Chocolate Avocado Mousse — 6% kcal, 4 g/serving
+- Pumpkin Pie — 7% kcal, 5 g/serving
+- Mushroom & Chestnut Rotolo — 14% kcal, 26 g/serving
 - Matar Paneer — 22% kcal, 28 g/serving
-- Squash linguine — 11% kcal, 17 g/serving
+- Squash linguine — 11% kcal, 25 g/serving
 - Kidney Bean Curry — 18% kcal, 26 g/serving
-- Tahini Lentils — 19% kcal, 27 g/serving
+- Tahini Lentils — 19% kcal, 41 g/serving
 - Chickpea Fajitas — 11% kcal, 17 g/serving
-- Yaki Udon — 11% kcal, 13 g/serving
-- Spanish Tortilla — 16% kcal, 24 g/serving
-- Minced Beef Pie — 15% kcal, 26 g/serving
-- Lamb and Potato pie — 12% kcal, 21 g/serving
-- Steak and Kidney Pie — 13% kcal, 19 g/serving
-- Lancashire hotpot — 22% kcal, 38 g/serving
+- Yaki Udon — 11% kcal, 20 g/serving
+- Spanish Tortilla — 16% kcal, 32 g/serving
+- Beef and Mustard Pie — 24% kcal, 54 g/serving
+- Chicken Ham and Leek Pie — 18% kcal, 39 g/serving
+- Minced Beef Pie — 15% kcal, 32 g/serving
+- Lamb and Potato pie — 12% kcal, 25 g/serving
+- McSinghs Scotch pie — 16% kcal, 36 g/serving
+- Steak and Kidney Pie — 13% kcal, 25 g/serving
+- Lancashire hotpot — 22% kcal, 46 g/serving
 - Kedgeree — 25% kcal, 45 g/serving
 - English Breakfast — 20% kcal, 27 g/serving
-- Full English Breakfast — 19% kcal, 24 g/serving
+- Full English Breakfast — 19% kcal, 32 g/serving
+- French Onion Soup — 16% kcal, 13 g/serving
+- Flamiche — 7% kcal, 15 g/serving
 - Ratatouille — 9% kcal, 13 g/serving
-- Three-cheese souffles — 22% kcal, 40 g/serving
-- Fennel Dauphinoise — 8% kcal, 4 g/serving
-- Provençal Omelette Cake — 18% kcal, 25 g/serving
-- Tourtiere — 14% kcal, 24 g/serving
-- Brown Stew Chicken — 24% kcal, 41 g/serving
+- Summer Pistou — 21% kcal, 29 g/serving
+- Three-cheese souffles — 22% kcal, 48 g/serving
+- Boulangère Potatoes — 9% kcal, 7 g/serving
+- Fish Stew with Rouille — 22% kcal, 36 g/serving
+- Fennel Dauphinoise — 8% kcal, 6 g/serving
+- Provençal Omelette Cake — 18% kcal, 34 g/serving
+- Tourtiere — 14% kcal, 29 g/serving
+- BeaverTails — 8% kcal, 6 g/serving
+- Timbits — 9% kcal, 8 g/serving
+- Pate Chinois — 19% kcal, 36 g/serving
+- Sugar Pie — 5% kcal, 4 g/serving
+- Jamaican Beef Patties — 16% kcal, 32 g/serving
+- Callaloo Jamaican Style — 10% kcal, 19 g/serving
+- Brown Stew Chicken — 24% kcal, 51 g/serving
 - Roast fennel and aubergine paella — 11% kcal, 20 g/serving
 - Oxtail with broad beans — 25% kcal, 37 g/serving
-- Kung Pao Chicken — 22% kcal, 31 g/serving
+- Kung Pao Chicken — 22% kcal, 42 g/serving
+- Beef Lo Mein — 18% kcal, 38 g/serving
+- Fruit and Cream Cheese Breakfast Pastries — 4% kcal, 8 g/serving
 - Salmon Avocado Salad — 20% kcal, 35 g/serving
-- Home-made Mandazi — 12% kcal, 16 g/serving
-- Kafteji — 22% kcal, 36 g/serving
-- Tunisian Lamb Soup — 25% kcal, 41 g/serving
+- Salmon Eggs Eggs Benedict — 19% kcal, 32 g/serving
+- Shakshuka — 18% kcal, 38 g/serving
+- Breakfast Potatoes — 9% kcal, 10 g/serving
+- Home-made Mandazi — 12% kcal, 19 g/serving
+- Mbuzi Choma (Roasted Goat) — 17% kcal, 35 g/serving
+- Chakchouka — 19% kcal, 37 g/serving
+- Tunisian Orange Cake — 7% kcal, 6 g/serving
+- Kafteji — 22% kcal, 43 g/serving
+- Tunisian Lamb Soup — 25% kcal, 55 g/serving
 - Leblebi Soup — 12% kcal, 18 g/serving
-- Keleya Zaara — 23% kcal, 34 g/serving
+- Keleya Zaara — 23% kcal, 46 g/serving
 - Tuna and Egg Briks — 21% kcal, 30 g/serving
-- Bitterballen (Dutch meatballs) — 24% kcal, 36 g/serving
-- Stamppot — 14% kcal, 22 g/serving
-- Spaghetti alla Carbonara — 16% kcal, 24 g/serving
-- Lasagna Sandwiches — 20% kcal, 35 g/serving
-- Skillet Apple Pork Chops with Roasted Sweet Potatoes & Zucchini — 22% kcal, 28 g/serving
+- Kumpir — 16% kcal, 11 g/serving
+- Bitterballen (Dutch meatballs) — 24% kcal, 48 g/serving
+- Stamppot — 14% kcal, 29 g/serving
+- Spaghetti alla Carbonara — 16% kcal, 31 g/serving
+- Lasagna Sandwiches — 20% kcal, 44 g/serving
+- Skillet Apple Pork Chops with Roasted Sweet Potatoes & Zucchini — 22% kcal, 42 g/serving
+- Corned Beef and Cabbage — 23% kcal, 50 g/serving
 - Crispy Sausages and Greens — 20% kcal, 32 g/serving
 - Stuffed Lamb Tomatoes — 15% kcal, 26 g/serving
-- Chick-Fil-A Sandwich — 9% kcal, 15 g/serving
-- Paszteciki (Polish Pasties) — 14% kcal, 21 g/serving
-- Golabki (cabbage roll) — 22% kcal, 35 g/serving
-- Koshari — 12% kcal, 23 g/serving
-- Mulukhiyah — 22% kcal, 29 g/serving
-- Japanese gohan rice — 8% kcal, 4 g/serving
+- Lamb and Lemon Souvlaki — 24% kcal, 45 g/serving
+- Gigantes Plaki — 11% kcal, 26 g/serving
+- Pizza Express Margherita — 15% kcal, 20 g/serving
+- Krispy Kreme Donut — 2% kcal, 2 g/serving
+- Chick-Fil-A Sandwich — 9% kcal, 20 g/serving
+- Paszteciki (Polish Pasties) — 14% kcal, 28 g/serving
+- Pierogi (Polish Dumplings) — 11% kcal, 9 g/serving
+- Golabki (cabbage roll) — 22% kcal, 44 g/serving
+- Polskie Nalesniki (Polish Pancakes) — 13% kcal, 9 g/serving
+- Koshari — 12% kcal, 28 g/serving
+- Mulukhiyah — 22% kcal, 43 g/serving
+- Egyptian Fatteh — 8% kcal, 20 g/serving
+- Japanese gohan rice — 8% kcal, 5 g/serving
 - Japanese Katsudon — 18% kcal, 30 g/serving
 - Ham hock colcannon — 19% kcal, 34 g/serving
-- Boxty Breakfast — 14% kcal, 23 g/serving
-- Mustard champ — 9% kcal, 5 g/serving
-- Mee goreng mamak — 15% kcal, 25 g/serving
+- Boxty Breakfast — 14% kcal, 28 g/serving
+- Mustard champ — 9% kcal, 7 g/serving
+- Mee goreng mamak — 15% kcal, 33 g/serving
+- Beef Rendang — 20% kcal, 38 g/serving
+- Croatian lamb peka — 16% kcal, 31 g/serving
 - Croatian Bean Stew — 18% kcal, 34 g/serving
-- Mushroom soup with buckwheat — 6% kcal, 3 g/serving
-- Burek — 16% kcal, 8 g/serving
+- Mushroom soup with buckwheat — 6% kcal, 4 g/serving
+- Burek — 16% kcal, 10 g/serving
 - Fettuccine Alfredo — 10% kcal, 19 g/serving
 - Stuffed Bell Peppers with Quinoa and Black Beans — 20% kcal, 33 g/serving
-- Crispy Eggplant — 17% kcal, 20 g/serving
+- Crispy Eggplant — 17% kcal, 40 g/serving
+- Eggplant Adobo — 12% kcal, 27 g/serving
 - Grilled eggplant with coconut milk — 9% kcal, 15 g/serving
 - Tortang Talong — 17% kcal, 26 g/serving
 - Cabbage Soup (Shchi) — 11% kcal, 18 g/serving
 - Beetroot Soup (Borscht) — 12% kcal, 22 g/serving
 - Fish Soup (Ukha) — 21% kcal, 34 g/serving
-- Blini Pancakes — 13% kcal, 7 g/serving
-- Potato Salad (Olivier Salad) — 11% kcal, 20 g/serving
-- Lamb Pilaf (Plov) — 16% kcal, 24 g/serving
+- Blini Pancakes — 13% kcal, 11 g/serving
+- Potato Salad (Olivier Salad) — 11% kcal, 24 g/serving
+- Lamb Pilaf (Plov) — 16% kcal, 30 g/serving
+- Syrian Bread — 10% kcal, 19 g/serving
 - Falafel Pita Sandwich with Tahini Sauce — 14% kcal, 26 g/serving
 - Fasoliyyeh Bi Z-Zayt (Syrian Green Beans with Olive Oil) — 5% kcal, 8 g/serving
-- Syrian Spaghetti — 12% kcal, 17 g/serving
-- Baba Ghanoush — 10% kcal, 5 g/serving
-- Yorkshire Puddings — 20% kcal, 24 g/serving
+- Syrian Spaghetti — 12% kcal, 23 g/serving
+- Baba Ghanoush — 10% kcal, 8 g/serving
+- Syrian Rice with Meat — 21% kcal, 46 g/serving
+- Yorkshire Puddings — 20% kcal, 48 g/serving
 - Squid, chickpea & chorizo salad — 23% kcal, 42 g/serving
-- Warm roast asparagus salad — 11% kcal, 19 g/serving
-- Avocado dip with new potatoes — 9% kcal, 14 g/serving
-- Mini chilli beef pies — 12% kcal, 19 g/serving
-- Sukuma Wiki — 8% kcal, 10 g/serving
-- Rømmegrøt – Norwegian Sour Cream Porridge — 9% kcal, 12 g/serving
-- Fiskesuppe (Creamy Norwegian Fish Soup) — 24% kcal, 40 g/serving
+- Warm roast asparagus salad — 11% kcal, 23 g/serving
+- Avocado dip with new potatoes — 9% kcal, 19 g/serving
+- Mini chilli beef pies — 12% kcal, 24 g/serving
+- Sukuma Wiki — 8% kcal, 19 g/serving
+- Ugali – Kenyan cornmeal — 8% kcal, 8 g/serving
+- Red onion pickle — 4% kcal, 4 g/serving
+- Rømmegrøt – Norwegian Sour Cream Porridge — 9% kcal, 18 g/serving
+- Fiskesuppe (Creamy Norwegian Fish Soup) — 24% kcal, 53 g/serving
+- Norwegian Krumkake — 6% kcal, 5 g/serving
+- Empanadas — 15% kcal, 35 g/serving
+- Dulce de Leche — 7% kcal, 5 g/serving
 - Gambas al ajillo — 11% kcal, 14 g/serving
-- Arroz con gambas y calamar — 25% kcal, 43 g/serving
-- Paella — 23% kcal, 38 g/serving
-- Spanish chicken pie — 20% kcal, 30 g/serving
+- Locro — 22% kcal, 51 g/serving
+- Arroz con gambas y calamar — 25% kcal, 58 g/serving
+- Crema Catalana — 7% kcal, 6 g/serving
+- Paella — 23% kcal, 51 g/serving
+- Spanish chicken pie — 20% kcal, 45 g/serving
+- Arroz al horno (baked rice) — 16% kcal, 34 g/serving
 - Chorizo & soft-boiled egg salad — 20% kcal, 36 g/serving
 - Air fryer patatas bravas — 8% kcal, 11 g/serving
 - Chorizo, potato & cheese omelette — 22% kcal, 37 g/serving
 - Pisto con huevos — 18% kcal, 25 g/serving
+- Chicken & chorizo rice pot — 22% kcal, 45 g/serving
 - Chickpea, chorizo & spinach stew — 16% kcal, 27 g/serving
 - Seafood rice — 23% kcal, 42 g/serving
 - Chorizo & chickpea soup — 22% kcal, 27 g/serving
+- Ajo blanco — 11% kcal, 10 g/serving
 - Patatas bravas — 6% kcal, 11 g/serving
-- Spaghetti with Spanish flavours — 14% kcal, 22 g/serving
-- Fried calamari — 19% kcal, 23 g/serving
-- Ham croquetas — 15% kcal, 22 g/serving
-- Spanish seafood rice — 21% kcal, 27 g/serving
-- Spanish rice & prawn one-pot — 17% kcal, 22 g/serving
+- Quick gazpacho — 15% kcal, 6 g/serving
+- Spaghetti with Spanish flavours — 14% kcal, 34 g/serving
+- Fried calamari — 19% kcal, 34 g/serving
+- Ham croquetas — 15% kcal, 33 g/serving
+- Spanish seafood rice — 21% kcal, 40 g/serving
+- Spanish rice & prawn one-pot — 17% kcal, 32 g/serving
 - Chorizo & tomato salad — 11% kcal, 18 g/serving
-- Bryndzové Halušky — 15% kcal, 25 g/serving
+- Zemiakové Placky — 16% kcal, 13 g/serving
+- Bryndzové Halušky — 15% kcal, 33 g/serving
 - Pad Thai — 18% kcal, 27 g/serving
-- Drunken noodles (pad kee mao) — 19% kcal, 24 g/serving
-- Thai curry noodle soup — 17% kcal, 21 g/serving
+- Drunken noodles (pad kee mao) — 19% kcal, 36 g/serving
+- Thai curry noodle soup — 17% kcal, 31 g/serving
 - Thai pork & peanut curry — 23% kcal, 39 g/serving
 - Thai fried rice with prawns & peas — 24% kcal, 41 g/serving
-- Tom kha gai — 22% kcal, 38 g/serving
-- Thai coconut & veg broth — 11% kcal, 16 g/serving
-- Thai pumpkin soup — 7% kcal, 9 g/serving
-- Thai green chicken soup — 24% kcal, 36 g/serving
+- Tom kha gai — 22% kcal, 51 g/serving
+- Thai coconut & veg broth — 11% kcal, 25 g/serving
+- Thai pumpkin soup — 7% kcal, 14 g/serving
+- Thai green chicken soup — 24% kcal, 45 g/serving
 - Shakshouka — 17% kcal, 31 g/serving
 - Shakshuka Feta Cheese — 23% kcal, 39 g/serving
-- kabse — 22% kcal, 32 g/serving
-- Shawarma bread — 9% kcal, 4 g/serving
-- Rice paper dumplings — 14% kcal, 22 g/serving
-- Vietnamese-style caramel pork — 21% kcal, 30 g/serving
+- kabse — 22% kcal, 47 g/serving
+- Vegetarian Shakshuka — 22% kcal, 25 g/serving
+- Mutabbaq — 3% kcal, 7 g/serving
+- Yemeni Lahsa (Elite Shakshuka) — 21% kcal, 40 g/serving
+- Shawarma bread — 9% kcal, 6 g/serving
+- Rice paper dumplings — 14% kcal, 30 g/serving
+- Purple sprouting broccoli tempura with nuoc cham — 10% kcal, 21 g/serving
+- Vietnamese-style caramel pork — 21% kcal, 45 g/serving
+- Vietnamese-style veggie hotpot — 11% kcal, 11 g/serving
 - Bang bang prawn salad — 20% kcal, 32 g/serving
-- Barbecue pork buns — 12% kcal, 20 g/serving
+- Barbecue pork buns — 12% kcal, 24 g/serving
 - Prawn & noodle salad with crispy shallots — 17% kcal, 30 g/serving
 - Noodle bowl salad — 18% kcal, 23 g/serving
 - Tangy carrot, cabbage & onion salad — 9% kcal, 13 g/serving
-- Turkey Bánh mì — 21% kcal, 32 g/serving
+- Turkey Bánh mì — 21% kcal, 48 g/serving
 - Vegan banh mi — 22% kcal, 37 g/serving
-- Turkish lahmacun — 17% kcal, 28 g/serving
+- Turkish lahmacun — 17% kcal, 37 g/serving
 - Turkish rice (vermicelli rice) — 9% kcal, 15 g/serving
+- Ezme — 5% kcal, 10 g/serving
 - Grilled aubergines with spicy chickpeas & walnut sauce — 15% kcal, 26 g/serving
-- Cacik — 17% kcal, 7 g/serving
-- kofta burgers — 24% kcal, 40 g/serving
-- Hot cumin lamb wrap with crunchy slaw & spicy mayo — 19% kcal, 31 g/serving
-- Adana kebab — 24% kcal, 36 g/serving
-- Turkish lamb pilau — 19% kcal, 30 g/serving
+- Cacik — 17% kcal, 10 g/serving
+- kofta burgers — 24% kcal, 48 g/serving
+- Hot cumin lamb wrap with crunchy slaw & spicy mayo — 19% kcal, 41 g/serving
+- Smoked aubergine purée — 18% kcal, 13 g/serving
+- Adana kebab — 24% kcal, 48 g/serving
+- Turkish lamb pilau — 19% kcal, 41 g/serving
 - Falafel — 16% kcal, 28 g/serving
 - Aubergine couscous salad — 13% kcal, 21 g/serving
 - Turkish-style lamb — 24% kcal, 41 g/serving
+- Griddled flatbreads — 13% kcal, 10 g/serving
 - Roast aubergine with goat's cheese & toasted flatbread — 10% kcal, 12 g/serving
+- Griddled aubergines with sesame dressing — 17% kcal, 37 g/serving
+- Sweet potato salad — 5% kcal, 11 g/serving
 - Lamb & apricot meatballs — 20% kcal, 35 g/serving
 - Aubergine & hummus grills — 10% kcal, 18 g/serving
-- Algerian Carrots — 4% kcal, 2 g/serving
+- Algerian Carrots — 4% kcal, 3 g/serving
 - Chtitha Batata (Algerian Potato Stew) — 8% kcal, 10 g/serving
-- Zapiekanki — 19% kcal, 28 g/serving
+- Khobz el Dar (Algerian Semolina Bread) — 11% kcal, 9 g/serving
+- Zapiekanki — 19% kcal, 38 g/serving
 - Sauerkraut pierogi — 10% kcal, 17 g/serving
-- Pork & sauerkraut goulash — 21% kcal, 37 g/serving
-- Braised stuffed cabbage — 15% kcal, 22 g/serving
+- Pomegranate salad — 6% kcal, 8 g/serving
+- Polish patties (kotlety) — 19% kcal, 15 g/serving
+- Pork & sauerkraut goulash — 21% kcal, 46 g/serving
+- Braised stuffed cabbage — 15% kcal, 28 g/serving
+- Pork rib bortsch — 18% kcal, 38 g/serving
+- Rye bread — 12% kcal, 9 g/serving
+- Cucumber & fennel salad — 8% kcal, 9 g/serving
+- Challah — 10% kcal, 8 g/serving
 - Tangy cabbage slaw — 3% kcal, 4 g/serving
 - Beetroot latkes — 19% kcal, 26 g/serving
 - Sauerkraut pierogii — 10% kcal, 17 g/serving
-- Rosemary braised red cabbage with kabanos — 9% kcal, 13 g/serving
-- Torta de fiambre — 18% kcal, 30 g/serving
-- Venezuelan Arepas — 7% kcal, 4 g/serving
+- Rosemary braised red cabbage with kabanos — 9% kcal, 19 g/serving
+- Torta de fiambre — 18% kcal, 40 g/serving
+- Venezuelan Arepas — 7% kcal, 6 g/serving
 - Venezuelan Coconut Chicken — 18% kcal, 31 g/serving
 - Oatmeal pancakes — 6% kcal, 10 g/serving
 - Hodge Podge — 9% kcal, 15 g/serving
+- Figgy Duff — 4% kcal, 4 g/serving
+- Jamaican Banana Fritters — 7% kcal, 6 g/serving
 - Jamaican Instant Pot Rice and Beans — 10% kcal, 18 g/serving
-- Jamaican Boiled Dumplings — 11% kcal, 5 g/serving
-- Jamaican Rice and Peas — 9% kcal, 15 g/serving
-- Chicken Mandi — 22% kcal, 36 g/serving
-- Jamaican Curry Shrimp Recipe — 22% kcal, 28 g/serving
+- Jamaican Boiled Dumplings — 11% kcal, 9 g/serving
+- Jamaican Festival (Sweet Dumpling) — 9% kcal, 6 g/serving
+- Jamaican Rice and Peas — 9% kcal, 19 g/serving
+- Chicken Mandi — 22% kcal, 43 g/serving
+- Beef Mandi — 9% kcal, 20 g/serving
+- Jamaican Curry Shrimp Recipe — 22% kcal, 42 g/serving
 - Jamaican Cornmeal Porridge — 7% kcal, 10 g/serving
-- Jamaican Steamed Cabbage — 5% kcal, 2 g/serving
+- Jamaican Steamed Cabbage — 5% kcal, 4 g/serving
+- Chinese Orange Chicken — 10% kcal, 22 g/serving
+- Chicken Fried Rice — 17% kcal, 34 g/serving
 - Chinese Tomato Egg Stir Fry — 13% kcal, 21 g/serving
 - Sichuan Eggplant — 9% kcal, 12 g/serving
-- Mastawa Lamb and Rice — 23% kcal, 36 g/serving
-- Muraba-E-Kadu (Pumpkin Jam) — 2% kcal, 4 g/serving
+- Napa Cabbage with Dried Shrimp — 23% kcal, 31 g/serving
+- Sesame Cucumber Salad — 10% kcal, 6 g/serving
+- Dutch poffertjes (mini pancakes) — 15% kcal, 24 g/serving
+- Runner Bean Mash (Snijbonen Stamppot) — 15% kcal, 12 g/serving
+- Apple Potato Mash (Hete bliksem) — 19% kcal, 14 g/serving
+- Dutch doughnuts — 12% kcal, 10 g/serving
+- Haft Mewa Recipe — 9% kcal, 8 g/serving
+- Kadu Borani — 7% kcal, 10 g/serving
+- Firni — 8% kcal, 7 g/serving
+- Mastawa Lamb and Rice — 23% kcal, 45 g/serving
+- Bolani with Potato Filling — 11% kcal, 9 g/serving
+- Muraba-E-Kadu (Pumpkin Jam) — 2% kcal, 5 g/serving
 - Tavë me Presh ska Mish Meatless Leek Bake — 9% kcal, 14 g/serving
 - Lakror me Kungull Summer Squash Pie — 13% kcal, 23 g/serving
+- Kulaç Soda Bread — 18% kcal, 15 g/serving
 - Presh me Oriz Leek and Rice Bake — 21% kcal, 37 g/serving
+- Torrijas — 8% kcal, 14 g/serving
+- Trinxat (Potato, Cabbage and Bacon Hash) — 13% kcal, 30 g/serving
+- Crispy fried fish with ginger and fermented soybeans (trey chien chuon) — 19% kcal, 42 g/serving
 - Meang Nem — 18% kcal, 27 g/serving
+- Laos Plantain Coconut Bake (Flourless Muffin) — 4% kcal, 3 g/serving
 - Lao Som Pak Pickled Cabbage — 21% kcal, 9 g/serving
-- Slow-cooked, Wadadli-spiced Cubano pork belly — 2% kcal, 3 g/serving
-- Jajek — 22% kcal, 10 g/serving
-- Bolita di Keshi — 21% kcal, 35 g/serving
+- Antiguan Breakfast (Chop Up and ‘Saltfish’) — 10% kcal, 12 g/serving
+- Corn on the cob with lime, green chilli and coconut butter — 7% kcal, 6 g/serving
+- Slow-cooked, Wadadli-spiced Cubano pork belly — 2% kcal, 4 g/serving
+- Stuffed Grape Leaves — 8% kcal, 6 g/serving
+- Leg of Lamb Armenian-Style — 7% kcal, 12 g/serving
+- Bolita di Keshi — 21% kcal, 44 g/serving
 - Arepa — 0% kcal, 0 g/serving
+- Banana den Forno — 2% kcal, 1 g/serving
 - Tirolean Dumplings — 24% kcal, 36 g/serving
-- Kaspressknödel - Cheese Dumplings — 20% kcal, 32 g/serving
-- Kelem dolmasi — 17% kcal, 28 g/serving
-- Macaroni Pie — 19% kcal, 29 g/serving
+- Kaspressknödel - Cheese Dumplings — 20% kcal, 43 g/serving
+- Clear Soup with Semolina Dumplings — 16% kcal, 21 g/serving
+- Tendir Choreyi (Tandoori Bread) — 11% kcal, 10 g/serving
+- Kelem dolmasi — 17% kcal, 38 g/serving
+- Breadfruit in Butter Sauce Recipe — 4% kcal, 3 g/serving
+- Bajan Salt Bread Recipe — 10% kcal, 9 g/serving
+- Breadfruit in Butter Sauce — 4% kcal, 3 g/serving
+- Macaroni Pie — 19% kcal, 37 g/serving
+- Cinnamon Roll Cookies — 5% kcal, 4 g/serving
 - Flemish Hutsepot — 15% kcal, 25 g/serving
-- Belgian Waterzooi Chicken — 22% kcal, 31 g/serving
+- Belgian Waterzooi Chicken — 22% kcal, 47 g/serving
 - Liegeoise Salad — 12% kcal, 21 g/serving
+- Phaphatha Flatbreads — 12% kcal, 10 g/serving
 - Madombi: Dumplings from Botswana — 11% kcal, 19 g/serving
-- Curried Spinach from Botswana — 5% kcal, 2 g/serving
+- Curried Spinach from Botswana — 5% kcal, 4 g/serving
+- Brazilian cheese bread (pão de queijo) — 8% kcal, 6 g/serving
+- Coconut quindim — 7% kcal, 6 g/serving
 - Grilled corn with garlic mayo & grated cheese — 9% kcal, 12 g/serving
-- Smoky tomato pepper salsa — 3% kcal, 1 g/serving
-- Simple heart of palm & tomato salad — 9% kcal, 4 g/serving
-- Oyster Mushroom Soup — 13% kcal, 7 g/serving
-- Bulgarian Green Salad — 6% kcal, 3 g/serving
-- Bai Sach Chrouk – Grilled Pork with Rice — 18% kcal, 29 g/serving
-- Samlar Kari – Khmer Red Curry — 25% kcal, 38 g/serving
+- Smoky tomato pepper salsa — 3% kcal, 2 g/serving
+- Creamy Aji green sauce — 2% kcal, 2 g/serving
+- Bahia-style Moqueca prawn stew — 21% kcal, 43 g/serving
+- Simple heart of palm & tomato salad — 9% kcal, 6 g/serving
+- Easy White Bean Soup — 17% kcal, 22 g/serving
+- Oyster Mushroom Soup — 13% kcal, 9 g/serving
+- Potato Moussaka Recipe — 18% kcal, 36 g/serving
+- Shopska Salad — 8% kcal, 15 g/serving
+- Bulgarian Green Salad — 6% kcal, 5 g/serving
+- Keto Banitsa — 17% kcal, 13 g/serving
+- Bai Sach Chrouk – Grilled Pork with Rice — 18% kcal, 37 g/serving
+- Samlar Kari – Khmer Red Curry — 25% kcal, 56 g/serving
 - Prahok Ktis – Pork and Coconut Dip — 19% kcal, 31 g/serving
-- Num Pang – Cambodian Baguette Sandwich — 20% kcal, 34 g/serving
-- Khmer Banh Xeo – Cambodian Savory Pancake — 9% kcal, 14 g/serving
+- Num Ansom – Sticky Rice Cake — 7% kcal, 6 g/serving
+- Num Pang – Cambodian Baguette Sandwich — 20% kcal, 41 g/serving
+- Khmer Banh Xeo – Cambodian Savory Pancake — 9% kcal, 18 g/serving
+- Macaroni Pudding — 10% kcal, 21 g/serving
+- Conch Fritters — 14% kcal, 31 g/serving
 - Rice and Beans — 8% kcal, 10 g/serving
-- Pastel de Papas (Chilean Potato Pie) — 17% kcal, 25 g/serving
-- Empanadas Fritas de Queso — 15% kcal, 22 g/serving
+- Salt Beef and Beans — 22% kcal, 53 g/serving
+- Manjar (Dulce de Leche) — 9% kcal, 7 g/serving
+- Pastel de Papas (Chilean Potato Pie) — 17% kcal, 31 g/serving
+- Empanadas Fritas de Queso — 15% kcal, 30 g/serving
+- Leche Asada — 18% kcal, 15 g/serving
 - Porotos Granados (Chilean Bean Stew) — 20% kcal, 36 g/serving
+- Colombian Buñuelos Recipe — 15% kcal, 12 g/serving
 - Ají de Aguacate Recipe (Colombian Spicy Avocado Sauce) — 10% kcal, 16 g/serving
 - Achiote Oil (Aceite Achiotado) Recipe — 0% kcal, 0 g/serving
-- Chicken in Orange Sauce Recipe (Pollo a la Naranja) — 23% kcal, 35 g/serving
+- Almojábanas (Colombian Cheese Bread) — 19% kcal, 15 g/serving
+- Chicken in Orange Sauce Recipe (Pollo a la Naranja) — 23% kcal, 43 g/serving
+- Creamy Corn Soup Recipe — 9% kcal, 18 g/serving
 - Papas Chorreadas Recipe (Potatoes with Cream and Cheese Sauce) — 11% kcal, 19 g/serving
-- Mango Tropical Salsa — 8% kcal, 3 g/serving
+- Black Beans Hotpot — 22% kcal, 30 g/serving
+- Mango Tropical Salsa — 8% kcal, 5 g/serving
 - Gallo pinto — 11% kcal, 13 g/serving
-- Frikadeller - Danish Meatballs — 25% kcal, 35 g/serving
+- Chorreadas — 12% kcal, 9 g/serving
+- Baked Yuca Fries — 3% kcal, 3 g/serving
+- Hveder - Danish Wheat Buns — 10% kcal, 8 g/serving
+- Frikadeller - Danish Meatballs — 25% kcal, 53 g/serving
+- Open-faced Sandwich With Potato — 5% kcal, 11 g/serving
+- Classic Potato Salad — 5% kcal, 4 g/serving
+- Codfish deviled eggs — 21% kcal, 42 g/serving
 - Breadfruit Tacos — 4% kcal, 2 g/serving
+- Cassava bread — 1% kcal, 1 g/serving
+- plantain rolls — 18% kcal, 15 g/serving
+- Apple pie pops — 5% kcal, 4 g/serving
+- Carrot and Bean Fritters — 15% kcal, 31 g/serving
 - Sauerkraut and Fish Salad — 7% kcal, 13 g/serving
+- Honey Cookies — 8% kcal, 6 g/serving
 
-### no_grams (13)
+### no_grams (18)
 
 - Teriyaki Chicken Casserole — veg_frozen (piece)
 - Vegan Lasagna — pasta (piece)
@@ -530,292 +694,99 @@ Recipes in TheMealDB: **790** · accepted: **111** · rejected: **679**
 - Beef Sunday Roast — beef (piece)
 - Crock Pot Chicken Baked Tacos — vinaigrette (piece)
 - Vegetarian Casserole — oil (piece)
+- Montreal Smoked Meat — beef_brisket (piece)
+- Peanut Butter Cookies — peanut_butter (cup)
 - Soy-Glazed Meatloaves with Wasabi Mashed Potatoes & Roasted Carrots — soy_sauce (piece), beef_mince (piece)
 - Big Mac — cheese (piece)
 - Chivito uruguayo — beef_brisket (piece)
+- Suksessterte (Norwegian almond “success cake”) — almond (cup)
 - Prawns with Romesco sauce — almond (piece)
 - Fašírky — milk (piece)
 - Cassava pizza — casabe (piece)
 - Venezuelan turnovers — masa_harina (piece)
+- Authentic Laos Tapioca Pudding with Bananas — banana (cup)
+- Chilean Empanada — black_olives (cup)
 
-### no_serving_fits (151)
+### no_serving_fits (60)
 
 - Cream Cheese Tart — 3787 kcal total
-- Irish stew — 6479 kcal total
-- Poutine — 1666 kcal total
 - Baingan Bharta — 347 kcal total
-- Stovetop Eggplant With Harissa, Chickpeas, and Cumin Yogurt — 1661 kcal total
-- Clam chowder — 3262 kcal total
-- Creamy Tomato Soup — 1850 kcal total
-- Lasagne — 5206 kcal total
-- Spinach & Ricotta Cannelloni — 6139 kcal total
-- Beef and Mustard Pie — 4545 kcal total
-- French Onion Soup — 2258 kcal total
-- Summer Pistou — 1092 kcal total
+- Kentucky Fried Chicken — 19632 kcal total
+- New York cheesecake — 6175 kcal total
+- Sticky Toffee Pudding — 4933 kcal total
+- Carrot Cake — 11150 kcal total
 - Brie wrapped in prosciutto & brioche — 4244 kcal total
-- Boulangère Potatoes — 1495 kcal total
-- Prawn & Fennel Bisque — 1980 kcal total
-- Split Pea Soup — 1990 kcal total
-- Pate Chinois — 2222 kcal total
-- Callaloo Jamaican Style — 789 kcal total
-- Fruit and Cream Cheese Breakfast Pastries — 4613 kcal total
-- Salmon Eggs Eggs Benedict — 1958 kcal total
-- Shakshuka — 850 kcal total
-- Breakfast Potatoes — 883 kcal total
-- Mbuzi Choma (Roasted Goat) — 4989 kcal total
-- Chakchouka — 783 kcal total
-- Kumpir — 1402 kcal total
-- Snert (Dutch Split Pea Soup) — 2237 kcal total
-- Corned Beef and Cabbage — 5100 kcal total
-- Lamb and Lemon Souvlaki — 2236 kcal total
-- Pizza Express Margherita — 1073 kcal total
-- Pierogi (Polish Dumplings) — 2732 kcal total
+- Canadian Butter Tarts — 3603 kcal total
+- Pouding chomeur — 5663 kcal total
+- Mince Pies — 4113 kcal total
+- Ful Medames — 249 kcal total
 - Tamiya — 282 kcal total
 - Feteer Meshaltet — 3925 kcal total
-- Coddled pork with cider — 1595 kcal total
+- Portuguese custard tarts — 4077 kcal total
 - Moroccan Carrot Soup — 326 kcal total
-- Roti john — 838 kcal total
+- Apam balik — 7252 kcal total
+- Seri muka kuih — 3603 kcal total
+- Walnut Roll Gužvara — 4210 kcal total
 - Bread omelette — 319 kcal total
 - Migas — 13638 kcal total
-- Syrian Bread — 1614 kcal total
-- Syrian Rice with Meat — 4515 kcal total
-- Sticky Chicken — 1630 kcal total
-- Ugali – Kenyan cornmeal — 871 kcal total
-- Red onion pickle — 434 kcal total
 - Norwegian Potato Lefse — 4540 kcal total
-- Empanadas — 4744 kcal total
+- Kvæfjord Cake “Verdens Beste” (World’s Best Cake) — 5175 kcal total
 - Jamon & wild garlic croquetas — 10410 kcal total
+- Ensaimada — 3968 kcal total
 - Padron peppers — 269 kcal total
-- Clam, chorizo & white bean stew — 1103 kcal total
-- Arroz al horno (baked rice) — 7014 kcal total
-- Chicken & chorizo rice pot — 4899 kcal total
-- Ajo blanco — 2023 kcal total
-- Quick gazpacho — 154 kcal total
 - Spanish tomato bread with jamón Serrano — 14236 kcal total
-- Zemiakové Placky — 1327 kcal total
-- Tom yum (hot & sour) soup with prawns — 450 kcal total
-- Thai beef stir-fry — 777 kcal total
 - Thai-style steamed fish — 300 kcal total
-- Thai prawn curry — 745 kcal total
-- Thai-style fish broth with greens — 844 kcal total
-- Chicken Shawarma with homemade garlic herb yoghurt sauce — 1650 kcal total
-- Vegetarian Shakshuka — 447 kcal total
-- Mutabbaq — 4721 kcal total
-- Yemeni Lahsa (Elite Shakshuka) — 772 kcal total
-- Steak & Vietnamese noodle salad — 912 kcal total
-- Purple sprouting broccoli tempura with nuoc cham — 849 kcal total
-- Vietnamese-style veggie hotpot — 434 kcal total
-- Ezme — 836 kcal total
-- Smoked aubergine purée — 280 kcal total
-- Hummus — 477 kcal total
-- Griddled flatbreads — 2007 kcal total
-- Griddled aubergines with sesame dressing — 861 kcal total
-- Sweet potato salad — 1594 kcal total
+- Mamoul (Eid biscuits) — 4089 kcal total
 - Algerian Bouzgene Berber Bread with Roasted Pepper Sauce — 4777 kcal total
-- Khobz el Dar (Algerian Semolina Bread) — 2883 kcal total
 - Algerian Flafla (Bell Pepper Salad) — 287 kcal total
 - Cheese Borek — 4476 kcal total
-- Pomegranate salad — 1072 kcal total
-- Polish patties (kotlety) — 2467 kcal total
 - Beetroot & red cabbage sauerkraut — 305 kcal total
-- Rye bread — 1462 kcal total
-- Cucumber & fennel salad — 448 kcal total
-- Jamaican Festival (Sweet Dumpling) — 1433 kcal total
+- Jamaican Sweet Potato Pudding — 3567 kcal total
 - Jamaican Fried Dumplings — 3912 kcal total
-- Callaloo and SaltFish — 1324 kcal total
 - Sichuan Style Stir-Fried Chinese Long Beans — 318 kcal total
-- Air Fryer Egg Rolls — 1591 kcal total
-- Shrimp With Snow Peas — 878 kcal total
-- Sesame Cucumber Salad — 232 kcal total
-- Dutch poffertjes (mini pancakes) — 1301 kcal total
 - Ramen Noodles with Boiled Egg — 315 kcal total
-- Runner Bean Mash (Snijbonen Stamppot) — 1617 kcal total
-- Apple Potato Mash (Hete bliksem) — 1841 kcal total
-- Haft Mewa Recipe — 1686 kcal total
-- Kadu Borani — 1065 kcal total
-- Bolani with Potato Filling — 2347 kcal total
-- Mantu Afghan Dumpling — 3290 kcal total
-- Kulaç Soda Bread — 1988 kcal total
-- Dolma Japrak Stuffed Vine Leaves — 1847 kcal total
-- Torrijas — 4070 kcal total
-- Trinxat (Potato, Cabbage and Bacon Hash) — 890 kcal total
+- Dutch Apple Pie — 4091 kcal total
+- Arnhemse meisjes — 9223 kcal total
+- Zeeuwse bolussen — 3510 kcal total
+- Shendetlie Honey and Nut Cake — 7021 kcal total
+- Flija Layered Pancake / Crepe — 13572 kcal total
+- Kurabie Butter Cookies — 4579 kcal total
 - Pa Amb Tomaquet (Bread with Tomato) — 236 kcal total
-- Crispy fried fish with ginger and fermented soybeans (trey chien chuon) — 8118 kcal total
 - Num E (Sticky Rice Balls in Sugar Syrup and Coconut Cream) — 5857 kcal total
-- Camaro Grelhado Com Molho Cru (Grilled Prawns with Green Onion Sauce) — 379 kcal total
 - Paracuca (Roasted Peanuts) — 4913 kcal total
-- Antiguan Breakfast (Chop Up and ‘Saltfish’) — 930 kcal total
-- Corn on the cob with lime, green chilli and coconut butter — 2260 kcal total
 - Mango chow — 89 kcal total
 - Koulenje — 5788 kcal total
-- Stuffed Grape Leaves — 2111 kcal total
-- Balchi di Pisca — 896 kcal total
 - Cheese Sticks — 3654 kcal total
-- Satee — 6543 kcal total
-- Clear Soup with Semolina Dumplings — 1071 kcal total
-- Tendir Choreyi (Tandoori Bread) — 1380 kcal total
 - Grits — 145 kcal total
-- Barbados Pepperpot — 4723 kcal total
-- Breadfruit in Butter Sauce — 1679 kcal total
 - Bajan Sweet Bread — 5030 kcal total
-- Phaphatha Flatbreads — 2001 kcal total
-- Brazilian cheese bread (pão de queijo) — 2700 kcal total
-- Creamy Aji green sauce — 420 kcal total
-- Bahia-style Moqueca prawn stew — 1620 kcal total
-- Shopska Salad — 797 kcal total
-- Keto Banitsa — 1507 kcal total
-- Samlar Machu Kreung – Cambodian Sour Stew — 924 kcal total
-- Macaroni Pudding — 6238 kcal total
-- Conch Fritters — 887 kcal total
 - Cayman Style Potato Salad — 3670 kcal total
 - Chilean-Style Sopaipillas — 7254 kcal total
 - Chilean Dobladitas — 3827 kcal total
-- Colombian Buñuelos Recipe — 1798 kcal total
-- Almojábanas (Colombian Cheese Bread) — 2529 kcal total
-- Creamy Mustard Chicken — 5465 kcal total
-- Creamy Corn Soup Recipe — 800 kcal total
-- Black Beans Hotpot — 537 kcal total
-- Pollo en Salsa — 822 kcal total
-- Baked Yuca Fries — 1893 kcal total
-- Hveder - Danish Wheat Buns — 2998 kcal total
-- Open-faced Sandwich With Potato — 4632 kcal total
-- Classic Potato Salad — 1699 kcal total
-- Extra crispy chicken wings — 2227 kcal total
+- Tamal De Maicena — 3735 kcal total
 - Stuffed plantain cups — 6444 kcal total
 - Baked brie with sorrel jam — 5012 kcal total
 - Mini butter buns — 8793 kcal total
-- Codfish deviled eggs — 1604 kcal total
 - Dominica mastiff bread — 5945 kcal total
-- Cassava bread — 1864 kcal total
-- plantain rolls — 3248 kcal total
 - Dominican Bakes — 6154 kcal total
 - Papaya salad — 345 kcal total
-- Carrot and Bean Fritters — 831 kcal total
 
-### too_many_ingredients (64)
-
-- Lamb tomato and sweet spices — 19
-- Rigatoni with fennel sausage sauce — 17
-- Smoky Lentil Chili with Squash — 19
-- Dal fry — 16
-- Chicken Handi — 16
-- Chicken Alfredo Primavera — 19
-- Lamb Biryani — 20
-- Osso Buco alla Milanese — 18
-- Kentucky Fried Chicken — 17
-- Katsu Chicken curry — 16
-- Braised Beef Chilli — 17
-- Grilled Mac and Cheese Sandwich — 17
-- Coq au vin — 18
-- Pork Cassoulet — 16
-- Beef Dumpling Stew — 19
-- Chicken Ham and Leek Pie — 17
-- Chicken Parmentier — 17
-- McSinghs Scotch pie — 16
-- Fish Stew with Rouille — 18
-- Montreal Smoked Meat — 16
-- Chicken Basquaise — 19
-- Steak Diane — 16
-- Saltfish and Ackee — 16
-- Jerk chicken with rice & peas — 20
-- Jamaican Beef Patties — 20
-- Escovitch Fish — 17
-- Ma Po Tofu — 17
-- Szechuan Beef — 20
-- General Tsos Chicken — 20
-- Beef Lo Mein — 17
-- Shrimp Chow Fun — 17
-- Vegetable Shepherds Pie — 19
-- Bigos (Hunters Stew) — 20
-- Piri-piri chicken and slaw — 17
-- Portuguese fish stew (Caldeirada de peixe) — 16
-- Nasi lemak — 18
-- Nordic smørrebrød with asparagus and horseradish cream — 16
-- Pollo en pepitoria — 17
-- Spanish meatballs with clams, chorizo & squid — 17
-- Panang chicken curry (kaeng panang gai) — 20
-- Prawn stir-fry — 16
-- Vietnamese lamb shanks with sweet potatoes — 18
-- Vietnamese pork salad — 18
-- Beef pho — 17
-- Tajine de Poulet aux Carottes et Patates Douces (Chicken and Sweet Potato Tagine) — 18
-- Chorba Hamra bel Frik (Algerian Lamb, Tomato, and Freekeh Soup) — 18
-- Bigos (Polish hunter's stew) — 16
-- Borsch — 16
-- Beef Empanadas — 18
-- Chivito sandwich — 20
-- Venezuelan Sancocho — 17
-- Chinese Orange Chicken — 20
-- Singapore Noodles with Shrimp — 18
-- Egg Foo Young — 17
-- BEEF LOK LAK (Lok Lak Sach Ko) — 16
-- Lao Naem Khao — 17
-- Belgian Meatballs in Liège Syrup Sauce — 20
-- Acaraje black-eyed pea fritters with shrimp filling — 18
-- Potato Moussaka Recipe — 20
-- Chilean Empanada — 16
-- Pastel de Choclo — 16
-- Colombian Style Stuffed Potatoes — 18
-- Ropa Veija — 18
-- Black Bean soup — 16
-
-### too_long (48)
+### too_long (15)
 
 - Beef Brisket Pot Roast — 466 min
-- Massaman Beef curry — 126 min
-- Venetian Duck Ragu — 152 min
-- Lamb Tagine — 124 min
-- Flamiche — 92 min
-- Rappie Pie — 125 min
 - Red Peas Soup — 230 min
-- Gigantes Plaki — 123 min
-- Rosol (Polish Chicken Soup) — 120 min
-- Ful Medames — 120 min
-- Egyptian Fatteh — 155 min
-- Portuguese prego with green piri-piri — 120 min
-- Beef Rendang — 121 min
-- Croatian lamb peka — 120 min
-- Eggplant Adobo — 178 min
 - Cumberland Pie — 290 min
-- Kenyan Beef Curry — 97 min
-- Fårikål (Norwegian National Dish) — 180 min
 - Raspeballer (Norwegian Potato Dumplings) — 240 min
-- Asado — 120 min
 - Fainá — 270 min
-- Carbonada Criolla — 120 min
-- Locro — 180 min
 - Spanish-style slow-cooked lamb shoulder & beans — 215 min
-- Lemongrass beef stew with noodles — 95 min
 - Shawarma chuck roast wrap — 600 min
 - Slow-roast lamb with cinnamon, fennel & citrus — 260 min
-- Pork rib bortsch — 130 min
-- Challah — 125 min
-- Arepa pelua — 123 min
-- Jiggs Dinner — 120 min
+- Borsch — 302 min
 - Molasses Baked Beans — 330 min
-- Beef Mandi — 135 min
-- Chicken Fried Rice — 140 min
-- Napa Cabbage with Dried Shrimp — 97 min
-- Flija Layered Pancake / Crepe — 130 min
-- Leg of Lamb Armenian-Style — 180 min
 - Tafelspitz — 300 min
-- Chicken Liver Pate Recipe — 120 min
-- Bajan Salt Bread Recipe — 130 min
-- Chicken and Potato Roti — 111 min
 - Beef pumpkin Stew — 210 min
 - Seswaa — 480 min
 - Black bean & meat stew - feijoada — 638 min
-- Easy White Bean Soup — 122 min
-- Num Ansom – Sticky Rice Cake — 105 min
-- Salt Beef and Beans — 140 min
 - Conch Stew — 240 min
-
-### unmapped_ingredient (4)
-
-- Vegetarian Chilli — mixed grain
-- Chicken Congee — ginger cordial
-- Choripán — chimichurri sauce
-- Arepa Pabellón — corn arepa filled with mozarella cheese, meat
 
 ### excluded (1)
 

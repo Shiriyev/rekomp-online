@@ -18,10 +18,28 @@ function readList(name: string): Set<string> {
   return new Set(listSchema.parse(JSON.parse(readFileSync(file, 'utf8'))).ids);
 }
 
+const shopsSchema = z.object({
+  all: z.array(z.string()),
+  super: z.array(z.string()),
+  tesco: z.array(z.string()),
+});
+
+/**
+ * Products a shopper can actually buy, from ingredient-shops.json: every tier but «none».
+ * Replaces the single hand-made Lidl list the prune used to ask, which named about 180
+ * products and so made ordinary things — lamb, crème fraîche, capers — count as rare.
+ */
+function readShops(): Set<string> {
+  const file = path.join(MAPPINGS, 'ingredient-shops.json');
+  if (!existsSync(file)) return readList('ingredient-lidl.json');
+  const tiers = shopsSchema.parse(JSON.parse(readFileSync(file, 'utf8')));
+  return new Set([...tiers.all, ...tiers.super, ...tiers.tesco]);
+}
+
 export function loadPruneLists(): PruneLists {
   return {
     ingredientAllow: readList('ingredient-allowlist.json'),
-    ingredientLidl: readList('ingredient-lidl.json'),
+    ingredientShops: readShops(),
     ingredientBlock: readList('ingredient-blocklist.json'),
     recipeAllow: readList('recipe-allowlist.json'),
     recipeBlock: readList('recipe-blocklist.json'),
@@ -70,7 +88,7 @@ export function writePruneReport(
     '`mappings/ingredient-blocklist.json` (id продукта). 16 рецептов v1 не трогаются.',
     '',
     'Критерий «есть в Lidl»: данные Open Food Facts удалены из каталога в v7, поэтому вместо них —',
-    'список `mappings/ingredient-lidl.json`, составленный вручную (что обычно продаётся в Lidl Венгрии).',
+    'список `mappings/ingredient-shops.json`: где продукт можно купить (Lidl / Spar / Tesco / Aldi).',
     'Его стоит проверить: всё, что в нём, не считается редким.',
     '',
     '## Итог',
@@ -88,7 +106,7 @@ export function writePruneReport(
     'посчитать → убрать блюда → убрать неиспользуемые продукты). После чистки у оставшихся',
     `блюд продуктов вне белого списка и Lidl с < 3 использованиями: ${
       [...result.uses].filter(
-        ([id, n]) => n < 3 && !lists.ingredientAllow.has(id) && !lists.ingredientLidl.has(id),
+        ([id, n]) => n < 3 && !lists.ingredientAllow.has(id) && !lists.ingredientShops.has(id),
       ).length
     } (каскадный пересчёт — \`prune.cascade\` в конфиге — оставил бы только свои блюда).`,
     '',

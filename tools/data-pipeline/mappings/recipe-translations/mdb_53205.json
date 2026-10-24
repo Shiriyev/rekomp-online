@@ -1,0 +1,62 @@
+{
+ "nameRu": "Тайское карри с креветками",
+ "descriptionRu": "Креветки в красной карри-пасте с томатами и кокосовыми сливками.",
+ "descriptionEn": "Prawns in red curry paste with tomatoes and coconut cream.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the oil in a medium saucepan and cook the onion and ginger until softened.",
+   "ru": "Разогрейте масло в средней кастрюле и обжарьте лук с имбирём до мягкости.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil",
+    "onion",
+    "ginger"
+   ]
+  },
+  {
+   "en": "Stir in the curry paste and cook it out.",
+   "ru": "Вмешайте карри-пасту и прогрейте её.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "thai_red_curry_paste"
+   ]
+  },
+  {
+   "en": "Pour over the chopped tomatoes and coconut cream and bring to the boil.",
+   "ru": "Влейте рубленые помидоры и кокосовые сливки и доведите до кипения.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomatoes_canned",
+    "coconut_cream"
+   ]
+  },
+  {
+   "en": "Simmer, loosening with a little boiling water if it gets too thick.",
+   "ru": "Томите, разбавляя кипятком, если соус станет слишком густым.",
+   "timerSec": 300,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Tip in the prawns and cook until they are done, depending on their size.",
+   "ru": "Выложите креветки и готовьте до готовности, ориентируясь на их размер.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "prawn"
+   ]
+  },
+  {
+   "en": "Serve with plain rice, sprinkled with chopped coriander.",
+   "ru": "Подавайте с отварным рисом, посыпав рубленой кинзой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "coriander_leaf"
+   ]
+  }
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "nameRu": "Матамбре а-ля пицца",
- "descriptionRu": "Аргентинский говяжий стейк на гриле с томатным соусом, моцареллой, орегано и оливками.",
- "descriptionEn": "Argentinian grilled beef flank topped with tomato sauce, mozzarella, oregano and olives.",
+ "descriptionRu": "Аргентинский говяжий стейк, обжаренный на сковороде, с томатным соусом, моцареллой, орегано и оливками.",
+ "descriptionEn": "Argentinian seared beef flank topped with tomato sauce, mozzarella, oregano and olives.",
  "steps": [
   {
    "ru": "Слегка надрежьте мясо с обеих сторон — так оно станет мягче и прожарится равномернее.",
@@ -22,8 +22,8 @@
    ]
   },
   {
-   "ru": "Обжарьте мясо на гриле с одной стороны до полуготовности.",
-   "en": "Grill one side until half-cooked.",
+   "ru": "Обжарьте мясо на сковороде с одной стороны до полуготовности.",
+   "en": "Sear one side in a hot pan until half-cooked.",
    "timerSec": null,
    "ingredientRefs": [
     "beef_flank"
@@ -49,8 +49,8 @@
    ]
   },
   {
-   "ru": "Жарьте на гриле, пока сыр не расплавится и не начнёт пузыриться.",
-   "en": "Grill until the cheese is melted and bubbling.",
+   "ru": "Запекайте, пока сыр не расплавится и не начнёт пузыриться.",
+   "en": "Bake until the cheese is melted and bubbling.",
    "timerSec": null,
    "ingredientRefs": [
     "mozzarella"

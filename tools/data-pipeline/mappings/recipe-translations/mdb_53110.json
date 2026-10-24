@@ -1,0 +1,56 @@
+{
+ "nameRu": "Липкие куриные голени",
+ "descriptionRu": "Голени в глазури из соевого соуса, мёда и горчицы, запечённые до блеска.",
+ "descriptionEn": "Drumsticks in a soy, honey and mustard glaze, roasted until glossy.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Make three slashes in each drumstick.",
+   "ru": "Сделайте по три надреза на каждой голени.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "en": "Mix the soy sauce, honey, oil, tomato purée and mustard, pour it over the chicken and coat it thoroughly.",
+   "ru": "Смешайте соевый соус, мёд, масло, томатную пасту и горчицу, залейте курицу и тщательно обваляйте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "soy_sauce",
+    "honey",
+    "olive_oil",
+    "tomato_puree",
+    "mustard",
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "en": "Leave to marinate at room temperature, or overnight in the fridge.",
+   "ru": "Оставьте мариноваться при комнатной температуре или на ночь в холодильнике.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  },
+  {
+   "en": "Heat the oven to 200°C.",
+   "ru": "Разогрейте духовку до 200 °C.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Tip the chicken into a shallow roasting tray and roast, turning occasionally, until tender and glistening.",
+   "ru": "Выложите курицу в неглубокую форму и запекайте, иногда переворачивая, до мягкости и блеска.",
+   "timerSec": 2100,
+   "ingredientRefs": [
+    "chicken_drumstick"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "nameRu": "Гороховый суп с ветчиной",
+ "descriptionRu": "Ветчина, томлённая до мягкости, с зелёным горошком и кореньями, пробитая до гладкости.",
+ "descriptionEn": "Ham simmered until tender with peas and root vegetables, blended smooth.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Put the ham in a very large pan with water and bring to the boil, then drain off the water to lose some of the salt.",
+   "ru": "Положите ветчину в очень большую кастрюлю с водой и доведите до кипения, затем слейте воду, чтобы убрать часть соли.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ham"
+   ]
+  },
+  {
+   "en": "Cover again with cold water and bring back to the boil.",
+   "ru": "Снова залейте холодной водой и доведите до кипения.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ham"
+   ]
+  },
+  {
+   "en": "Add the onion, carrot, celery and bay leaf, reduce to a simmer and cook until the ham pulls into shreds, topping up the water as needed.",
+   "ru": "Добавьте лук, морковь, сельдерей и лавровый лист, убавьте огонь и варите, пока ветчина не станет разбираться на волокна, подливая воду по мере выкипания.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "carrot",
+    "celery",
+    "bay_leaf"
+   ]
+  },
+  {
+   "en": "Lift out the ham, peel off and discard the skin, and shred the meat while it is still hot.",
+   "ru": "Выньте ветчину, снимите и выбросьте шкурку и разберите мясо на волокна, пока оно горячее.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ham"
+   ]
+  },
+  {
+   "en": "Remove the bay leaf from the soup and stir in the peas.",
+   "ru": "Выньте из супа лавровый лист и всыпьте горошек.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bay_leaf",
+    "peas"
+   ]
+  },
+  {
+   "en": "Simmer briefly, then blend until smooth, loosening with a splash of water if it is too thick.",
+   "ru": "Проварите недолго, затем пробейте до гладкости, разбавив водой, если суп слишком густой.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "peas"
+   ]
+  },
+  {
+   "en": "Stir most of the ham back into the hot soup and serve with the rest scattered on top, with bread alongside.",
+   "ru": "Верните большую часть ветчины в горячий суп и подавайте, посыпав остальной сверху, с хлебом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "ham",
+    "bread_white"
+   ]
+  }
+ ]
+}

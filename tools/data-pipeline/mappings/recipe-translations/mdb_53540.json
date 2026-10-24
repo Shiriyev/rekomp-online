@@ -1,0 +1,61 @@
+{
+ "nameRu": "Курица в соусе",
+ "descriptionRu": "Куриные бёдрышки, тушённые в соусе из томата, лука и сладкого перца с зирой и орегано.",
+ "descriptionEn": "Chicken thighs stewed in a tomato, onion and pepper sauce with cumin and oregano.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Chop the pepper, onion and tomato and set them aside.",
+   "ru": "Нарежьте перец, лук и помидор и отложите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "bell_pepper",
+    "onion",
+    "tomato"
+   ]
+  },
+  {
+   "en": "Heat a little oil in a heavy pot and sauté the onion, garlic, tomato, bell pepper, cumin, oregano, annatto, salt and pepper.",
+   "ru": "Разогрейте немного масла в тяжёлой кастрюле и обжарьте лук, чеснок, помидор, сладкий перец, зиру, орегано, аннато, соль и перец.",
+   "timerSec": 240,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "tomato",
+    "bell_pepper",
+    "cumin",
+    "oregano",
+    "annatto",
+    "salt",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Add the chicken and brown it on each side, stirring often.",
+   "ru": "Добавьте курицу и подрумяньте с каждой стороны, часто помешивая.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "chicken_thigh"
+   ]
+  },
+  {
+   "en": "Pour in the chicken stock, cover and cook until the chicken is tender.",
+   "ru": "Влейте куриный бульон, накройте крышкой и тушите до мягкости курицы.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "en": "Taste for salt and serve with the juices spooned over rice and beans.",
+   "ru": "Попробуйте на соль и подавайте, полив соусом рис с фасолью.",
+   "timerSec": null,
+   "ingredientRefs": []
+  }
+ ]
+}

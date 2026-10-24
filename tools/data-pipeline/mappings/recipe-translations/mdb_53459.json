@@ -1,0 +1,85 @@
+{
+ "nameRu": "Роти с курицей и картофелем",
+ "descriptionRu": "Тонкие лепёшки к курице, карамелизованной с пряностями и острым перцем.",
+ "descriptionEn": "Thin flatbreads served with chicken caramelised with spices and hot pepper.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Caramelise the sugar in a large saucepan over high heat, then add the cubed chicken and stir until browned.",
+   "ru": "Карамелизуйте сахар в большой кастрюле на сильном огне, добавьте нарезанную кубиками курицу и обжарьте до румяности.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar",
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "Add the onion, garlic, parsley, thyme, jerk seasoning, salt and the whole scotch bonnet — leave the pepper uncut.",
+   "ru": "Добавьте лук, чеснок, петрушку, тимьян, приправу джерк, соль и целый острый перец — не разрезайте его.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "parsley",
+    "thyme",
+    "jerk_seasoning",
+    "salt",
+    "scotch_bonnet"
+   ]
+  },
+  {
+   "en": "Add the potato, reduce the heat to low and simmer.",
+   "ru": "Добавьте картофель, убавьте огонь и томите.",
+   "timerSec": 1500,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "en": "Sift the flour with a pinch of salt into a large bowl.",
+   "ru": "Просейте муку со щепоткой соли в большую миску.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour",
+    "salt"
+   ]
+  },
+  {
+   "en": "Rub the shortening into the flour a spoonful at a time, until the whole bowl looks like breadcrumbs.",
+   "ru": "Вотрите жир в муку по ложке, пока вся масса не станет похожа на крошку.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "shortening"
+   ]
+  },
+  {
+   "en": "Add water a little at a time, mixing with a knife, until it comes together as a soft dough.",
+   "ru": "Подливайте воду понемногу, замешивая ножом, пока не получится мягкое тесто.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water"
+   ]
+  },
+  {
+   "en": "Dust the surface with flour and roll the dough into wafer-thin rounds, keeping them under a tea towel.",
+   "ru": "Присыпьте стол мукой и раскатайте тесто в тончайшие лепёшки, держа их под полотенцем.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "flour"
+   ]
+  },
+  {
+   "en": "Cook the roti briefly in a dry pan and serve with the chicken.",
+   "ru": "Быстро обжарьте роти на сухой сковороде и подавайте с курицей.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  }
+ ]
+}

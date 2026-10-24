@@ -1,0 +1,93 @@
+{
+ "nameRu": "Испанские фрикадельки с моллюсками, чоризо и кальмаром",
+ "descriptionRu": "Свиные фрикадельки на хересе, томлённые в томатном соусе с чоризо, кальмаром и моллюсками.",
+ "descriptionEn": "Pork meatballs made with sherry, simmered in tomato with chorizo, squid and clams.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Melt the butter in a heavy casserole and soften the shallots.",
+   "ru": "Растопите сливочное масло в тяжёлом сотейнике и припустите шалот до мягкости.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "butter",
+    "shallot"
+   ]
+  },
+  {
+   "en": "Add the paprika and crushed garlic and cook until the paprika smells fragrant.",
+   "ru": "Добавьте паприку и давленый чеснок и прогрейте, пока паприка не станет ароматной.",
+   "timerSec": 60,
+   "ingredientRefs": [
+    "paprika_powder",
+    "garlic"
+   ]
+  },
+  {
+   "en": "Splash in the sherry, then tip the lot into a bowl with the breadcrumbs, season and leave to cool.",
+   "ru": "Плесните херес, затем переложите всё в миску с панировочными сухарями, приправьте и остудите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sherry",
+    "breadcrumbs"
+   ]
+  },
+  {
+   "en": "Add the pork mince and egg yolk and beat well, then shape into small meatballs.",
+   "ru": "Добавьте свиной фарш и желток, хорошо вымешайте и скатайте небольшие фрикадельки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork",
+    "egg_yolk"
+   ]
+  },
+  {
+   "en": "Wipe the pan, heat the oil over medium-high heat and fry the meatballs just to colour them, then lift them out.",
+   "ru": "Протрите сотейник, разогрейте масло на сильном огне и обжарьте фрикадельки только до цвета, затем выньте.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "olive_oil",
+    "pork"
+   ]
+  },
+  {
+   "en": "Sizzle the chorizo in the same oil, then add the squid and fry to give it a little colour.",
+   "ru": "Обжарьте в том же масле чоризо, затем добавьте кальмара и подрумяньте.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chorizo",
+    "squid"
+   ]
+  },
+  {
+   "en": "Pour in the white wine, bring to the boil and scrape the bottom of the pan.",
+   "ru": "Влейте белое вино, доведите до кипения и соскребите всё со дна сотейника.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "white_wine"
+   ]
+  },
+  {
+   "en": "Stir in the pulped tomatoes, bring back to the boil, then add the meatballs and the clams.",
+   "ru": "Вмешайте протёртые помидоры, снова доведите до кипения и добавьте фрикадельки и моллюсков.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "tomato",
+    "clam"
+   ]
+  },
+  {
+   "en": "Cover and cook until the clam shells open, discarding any that stay shut, then scatter with parsley.",
+   "ru": "Накройте и готовьте, пока раковины не раскроются; нераскрывшиеся выбросьте, затем посыпьте петрушкой.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "clam",
+    "parsley"
+   ]
+  }
+ ]
+}

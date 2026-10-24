@@ -1,0 +1,53 @@
+{
+ "nameRu": "Том ям с креветками",
+ "descriptionRu": "Острый кисло-пряный тайский суп на бульоне с лемонграссом, имбирём и лаймом.",
+ "descriptionEn": "A hot and sour Thai broth with lemongrass, ginger, prawns and lime.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Bring the stock to a boil in a medium saucepan.",
+   "ru": "Доведите бульон до кипения в средней кастрюле.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_stock"
+   ]
+  },
+  {
+   "en": "Add the lemongrass, ginger, coriander roots and lime leaves and simmer to infuse.",
+   "ru": "Добавьте лемонграсс, имбирь, корни кинзы и листья лайма и проварите, чтобы бульон настоялся.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "lemongrass",
+    "ginger",
+    "coriander_leaf",
+    "lime_leaf"
+   ]
+  },
+  {
+   "en": "Add the prawns, fish sauce, chillies and lime juice and return to the boil.",
+   "ru": "Добавьте креветки, рыбный соус, чили и сок лайма и снова доведите до кипения.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "prawn",
+    "fish_sauce",
+    "green_chilli",
+    "lime_juice"
+   ]
+  },
+  {
+   "en": "Taste and adjust with more lime juice or fish sauce, then garnish with coriander leaves.",
+   "ru": "Попробуйте и поправьте соком лайма или рыбным соусом, затем украсьте листьями кинзы.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "lime_juice",
+    "fish_sauce",
+    "coriander_leaf"
+   ]
+  }
+ ]
+}

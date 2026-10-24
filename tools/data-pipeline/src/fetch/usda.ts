@@ -40,8 +40,10 @@ async function main() {
     }
     if (!existsSync(out)) {
       ensureDir(out);
-      // Junk paths: the CSVs land directly in raw/usda/<dataset>/.
-      execFileSync('unzip', ['-q', '-j', '-o', zip, '*.csv', '-d', out]);
+      // Junk paths: the CSVs land directly in raw/usda/<dataset>/. No member pattern —
+      // the CSVs sit in a folder inside the zip, which «*.csv» fails to match on some
+      // unzip builds (Windows), leaving the directory empty and the run silently CSV-less.
+      execFileSync('unzip', ['-q', '-j', '-o', zip, '-d', out]);
     }
     const csvs = readdirSync(out).filter((f) => f.endsWith('.csv'));
     console.log(`usda: ${name} = ${file} (${csvs.length} CSV files)`);

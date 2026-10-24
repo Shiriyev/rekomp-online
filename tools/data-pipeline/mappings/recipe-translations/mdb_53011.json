@@ -39,8 +39,8 @@
    ]
   },
   {
-   "ru": "Обжарьте курицу на раскалённой сковороде-гриль с каждой стороны до готовности.",
-   "en": "Cook the chicken in a hot griddle pan on each side until cooked through.",
+   "ru": "Обжарьте курицу на раскалённой сковороде с каждой стороны до готовности.",
+   "en": "Cook the chicken in a hot frying pan on each side until cooked through.",
    "timerSec": 240,
    "ingredientRefs": [
     "chicken_breast"

@@ -1,0 +1,76 @@
+{
+ "nameRu": "Снерт, голландский гороховый суп",
+ "descriptionRu": "Густой суп из колотого гороха со свининой, кореньями и копчёной колбаской.",
+ "descriptionEn": "A thick split pea soup with pork, root vegetables and smoked sausage.",
+ "mealTypes": [
+  "snack"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Bring the water, split peas, pork and stock cube to a boil in a large soup pot.",
+   "ru": "Доведите до кипения воду, колотый горох, свинину и бульонный кубик в большой кастрюле.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "water",
+    "peas",
+    "pork",
+    "stock_cube"
+   ]
+  },
+  {
+   "en": "Reduce to a simmer, cover and cook, stirring now and then and skimming off any foam.",
+   "ru": "Убавьте до слабого кипения, накройте и варите, иногда помешивая и снимая пену.",
+   "timerSec": 2700,
+   "ingredientRefs": [
+    "peas",
+    "pork"
+   ]
+  },
+  {
+   "en": "Remove the pork, take the meat off the bone and slice it thinly. Set aside.",
+   "ru": "Выньте свинину, снимите мясо с кости и тонко нарежьте. Отложите.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork"
+   ]
+  },
+  {
+   "en": "Add the celery, carrot, potato, onion, leek and celeriac, return to the boil, then simmer uncovered until tender, adding water if it starts to stick.",
+   "ru": "Добавьте сельдерей, морковь, картофель, лук, лук-порей и корень сельдерея, доведите до кипения и варите без крышки до мягкости, подливая воду, если начнёт пригорать.",
+   "timerSec": 1800,
+   "ingredientRefs": [
+    "celery",
+    "carrot",
+    "potato",
+    "onion",
+    "leek",
+    "celeriac"
+   ]
+  },
+  {
+   "en": "Add the smoked sausage for the last part of the cooking time, then lift it out and slice it thinly.",
+   "ru": "Положите копчёную колбаску под конец варки, затем выньте её и тонко нарежьте.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "sausage"
+   ]
+  },
+  {
+   "en": "For a smooth soup, blend it with a stick blender, then season with salt and pepper.",
+   "ru": "Для гладкой текстуры пробейте суп погружным блендером и приправьте солью и перцем.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Return the meat to the soup and serve in warm bowls topped with the sausage slices.",
+   "ru": "Верните мясо в суп и подавайте в тёплых тарелках, украсив ломтиками колбаски.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "pork",
+    "sausage"
+   ]
+  }
+ ]
+}

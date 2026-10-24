@@ -1,0 +1,46 @@
+{
+ "nameRu": "Тайская говядина на воке",
+ "descriptionRu": "Полоски говядины с чили и устричным соусом, быстро обжаренные на сильном огне с базиликом.",
+ "descriptionEn": "Strips of beef with chilli and oyster sauce, flashed over a high heat with basil.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": false,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat a wok or large frying pan until smoking hot, then pour in the oil and swirl it around.",
+   "ru": "Раскалите вок или большую сковороду до дымка, влейте масло и распределите по стенкам.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oil"
+   ]
+  },
+  {
+   "en": "Tip in the beef strips and chilli and cook, stirring constantly, until the meat is lightly browned.",
+   "ru": "Выложите полоски говядины и чили и готовьте, непрерывно помешивая, до лёгкой румяности.",
+   "timerSec": 180,
+   "ingredientRefs": [
+    "beef",
+    "red_chilli"
+   ]
+  },
+  {
+   "en": "Pour over the oyster sauce and cook until it coats the meat.",
+   "ru": "Влейте устричный соус и прогрейте, пока он не обволочёт мясо.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "oyster_sauce"
+   ]
+  },
+  {
+   "en": "Stir in the basil leaves and serve with plain rice.",
+   "ru": "Вмешайте листья базилика и подавайте с отварным рисом.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "basil"
+   ]
+  }
+ ]
+}

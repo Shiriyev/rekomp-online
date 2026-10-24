@@ -1,0 +1,81 @@
+{
+ "nameRu": "Арепа пелуа",
+ "descriptionRu": "Кукурузные лепёшки с рваной говядиной в специях и тёртым сыром.",
+ "descriptionEn": "Corn flatbreads filled with spiced shredded beef and grated cheese.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Put the beef in a pot with the stock, water and salt and cook over low heat until tender enough to shred.",
+   "ru": "Положите говядину в кастрюлю с бульоном, водой и солью и варите на слабом огне, пока её не станет легко разобрать на волокна.",
+   "timerSec": 7200,
+   "ingredientRefs": [
+    "beef",
+    "beef_stock",
+    "water",
+    "salt"
+   ]
+  },
+  {
+   "en": "Drain the beef and shred it with two forks.",
+   "ru": "Откиньте говядину и разберите её двумя вилками на волокна.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Sauté the onion, bell pepper and garlic in a little oil, then stir in the cumin, oregano, paprika and salt.",
+   "ru": "Обжарьте в небольшом количестве масла лук, сладкий перец и чеснок, затем вмешайте зиру, орегано, паприку и соль.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "onion",
+    "bell_pepper",
+    "garlic",
+    "olive_oil",
+    "cumin",
+    "oregano",
+    "paprika_powder"
+   ]
+  },
+  {
+   "en": "Stir the shredded beef into the vegetables and cook until the flavours come together.",
+   "ru": "Вмешайте рваную говядину в овощи и прогрейте, чтобы вкусы соединились.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef"
+   ]
+  },
+  {
+   "en": "Mix the cornmeal with warm water and salt to a soft dough and let it rest.",
+   "ru": "Смешайте кукурузную муку с тёплой водой и солью до мягкого теста и дайте ему отдохнуть.",
+   "timerSec": 300,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Divide the dough into portions, roll into balls and flatten into thick discs.",
+   "ru": "Разделите тесто на порции, скатайте шарики и расплющите в толстые лепёшки.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Cook the arepas in a dry skillet over medium heat on each side until golden.",
+   "ru": "Обжарьте арепы на сухой сковороде на среднем огне с каждой стороны до золотистого цвета.",
+   "timerSec": 180,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Slice each arepa open and fill with the hot beef, topping with grated cheese.",
+   "ru": "Разрежьте каждую арепу сбоку и наполните горячей говядиной, посыпав тёртым сыром.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "beef",
+    "cheese"
+   ]
+  }
+ ]
+}

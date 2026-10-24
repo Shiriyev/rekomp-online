@@ -4,8 +4,8 @@
  "descriptionEn": "A quick beef moussaka with potatoes and aubergine under a baked yogurt and parmesan topping.",
  "steps": [
   {
-   "ru": "Разогрейте гриль духовки на максимум.",
-   "en": "Heat the grill to high.",
+   "ru": "Разогрейте духовку до максимума (верхний нагрев).",
+   "en": "Heat the oven to its highest setting, top heat.",
    "timerSec": null,
    "ingredientRefs": []
   },
@@ -77,8 +77,8 @@
    ]
   },
   {
-   "ru": "Поставьте под гриль, пока заливка не схватится и не зарумянится.",
-   "en": "Grill until the topping has set and turned golden.",
+   "ru": "Запекайте, пока заливка не схватится и не зарумянится.",
+   "en": "Bake until the topping has set and turned golden.",
    "timerSec": null,
    "ingredientRefs": []
   }

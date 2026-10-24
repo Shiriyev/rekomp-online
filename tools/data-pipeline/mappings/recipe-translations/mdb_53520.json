@@ -1,0 +1,92 @@
+{
+ "nameRu": "Пастель де чокло",
+ "descriptionRu": "Мясная начинка с изюмом и оливками под запечённой кукурузной пастой.",
+ "descriptionEn": "A meat filling with raisins and olives under a baked sweetcorn crust.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Cover the eggs with water, bring to a boil, take off the heat and let them stand in the hot water.",
+   "ru": "Залейте яйца водой, доведите до кипения, снимите с огня и оставьте в горячей воде.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "en": "Meanwhile heat oil in a skillet and cook the onion, garlic, a pinch of salt, paprika and pepper until fragrant.",
+   "ru": "Тем временем разогрейте масло в сковороде и обжарьте лук, чеснок, щепотку соли, паприку и перец до аромата.",
+   "timerSec": 120,
+   "ingredientRefs": [
+    "onion",
+    "garlic",
+    "salt",
+    "paprika_powder",
+    "pepper"
+   ]
+  },
+  {
+   "en": "Add the beef mince with the remaining salt, paprika and pepper and cook until mostly browned.",
+   "ru": "Добавьте говяжий фарш с оставшейся солью, паприкой и перцем и обжарьте почти до готовности.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "beef_mince"
+   ]
+  },
+  {
+   "en": "Stir in the chicken, raisins and olives.",
+   "ru": "Вмешайте курицу, изюм и оливки.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken",
+    "raisins",
+    "green_olives"
+   ]
+  },
+  {
+   "en": "Cool and peel the eggs, chop them roughly and add them to the meat. Keep the filling warm.",
+   "ru": "Остудите и очистите яйца, крупно порубите и добавьте к мясу. Держите начинку тёплой.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "egg"
+   ]
+  },
+  {
+   "en": "Blend the sweetcorn and basil smooth, pour into a saucepan over medium heat, add the butter and stir until thickened.",
+   "ru": "Пробейте кукурузу с базиликом до гладкости, перелейте в кастрюлю на средний огонь, добавьте сливочное масло и мешайте до загустения.",
+   "timerSec": 600,
+   "ingredientRefs": [
+    "sweetcorn",
+    "basil",
+    "butter"
+   ]
+  },
+  {
+   "en": "Stir in the milk, sugar and salt and cook until it thickens to a paste.",
+   "ru": "Вмешайте молоко, сахар и соль и уварите до состояния пасты.",
+   "timerSec": 900,
+   "ingredientRefs": [
+    "milk",
+    "sugar"
+   ]
+  },
+  {
+   "en": "Heat the oven to 175°C, spread the filling in a baking dish, cover with the corn paste and dust with a little sugar.",
+   "ru": "Разогрейте духовку до 175 °C, выложите начинку в форму, покройте кукурузной пастой и присыпьте сахаром.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "sugar"
+   ]
+  },
+  {
+   "en": "Bake until golden brown on top.",
+   "ru": "Запекайте до золотистой корочки.",
+   "timerSec": 1200,
+   "ingredientRefs": []
+  }
+ ]
+}

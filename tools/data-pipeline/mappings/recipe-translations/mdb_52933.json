@@ -1,0 +1,90 @@
+{
+ "nameRu": "Раппи-пай с курицей",
+ "descriptionRu": "Запеканка из отжатого картофеля с варёной курицей и карамелизованным луком.",
+ "descriptionEn": "A baked pie of pressed potato layered with poached chicken and caramelised onion.",
+ "mealTypes": [
+  "lunch",
+  "dinner"
+ ],
+ "isBatch": true,
+ "prepNightBefore": false,
+ "steps": [
+  {
+   "en": "Heat the oven to 200°C and grease a large baking pan.",
+   "ru": "Разогрейте духовку до 200 °C и смажьте большую форму.",
+   "timerSec": null,
+   "ingredientRefs": []
+  },
+  {
+   "en": "Melt the butter in a skillet over medium heat and cook the onion until softened and translucent.",
+   "ru": "Растопите сливочное масло в сковороде на среднем огне и готовьте лук до мягкости и прозрачности.",
+   "timerSec": 300,
+   "ingredientRefs": [
+    "butter",
+    "onion"
+   ]
+  },
+  {
+   "en": "Reduce the heat to low and keep cooking and stirring until the onion is very tender and dark brown.",
+   "ru": "Убавьте огонь до слабого и продолжайте готовить, помешивая, пока лук не станет очень мягким и тёмно-золотистым.",
+   "timerSec": 2400,
+   "ingredientRefs": [
+    "onion"
+   ]
+  },
+  {
+   "en": "Bring the chicken stock to a boil in a large pot, add the chicken breasts, reduce the heat and simmer until cooked through.",
+   "ru": "Доведите куриный бульон до кипения в большой кастрюле, положите куриные грудки, убавьте огонь и варите до готовности.",
+   "timerSec": 1200,
+   "ingredientRefs": [
+    "chicken_stock",
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "Lift the chicken out and keep the broth.",
+   "ru": "Выньте курицу и сохраните бульон.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "chicken_breast"
+   ]
+  },
+  {
+   "en": "Grate the potatoes and squeeze out the juice, keeping only the dry flesh.",
+   "ru": "Натрите картофель и отожмите сок, оставив только сухую мякоть.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato"
+   ]
+  },
+  {
+   "en": "Season the potato with salt and pepper and stir in enough reserved broth to reach the consistency of porridge.",
+   "ru": "Посолите и поперчите картофель и подмешайте столько бульона, чтобы масса стала как каша.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "salt",
+    "pepper",
+    "chicken_stock"
+   ]
+  },
+  {
+   "en": "Spread half the potato in the pan, lay the chicken over it and scatter the caramelised onion on top.",
+   "ru": "Выложите половину картофеля в форму, распределите сверху курицу и посыпьте карамелизованным луком.",
+   "timerSec": null,
+   "ingredientRefs": [
+    "potato",
+    "chicken_breast",
+    "onion"
+   ]
+  },
+  {
+   "en": "Cover with the remaining potato and bake until golden brown.",
+   "ru": "Закройте оставшимся картофелем и запекайте до золотистой корочки.",
+   "timerSec": 3600,
+   "ingredientRefs": [
+    "potato"
+   ]
+  }
+ ]
+}

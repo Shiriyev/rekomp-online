@@ -55,14 +55,14 @@
    ]
   },
   {
-   "ru": "Разогрейте гриль духовки.",
-   "en": "Heat the grill.",
+   "ru": "Разогрейте духовку.",
+   "en": "Heat the oven.",
    "timerSec": null,
    "ingredientRefs": []
   },
   {
-   "ru": "Поставьте тортилью под гриль, пока верх не схватится.",
-   "en": "Flash the tortilla under the grill until the top is set.",
+   "ru": "Поставьте тортилью в духовку, пока верх не схватится.",
+   "en": "Finish the tortilla in the oven until the top is set.",
    "timerSec": 120,
    "ingredientRefs": []
   },
