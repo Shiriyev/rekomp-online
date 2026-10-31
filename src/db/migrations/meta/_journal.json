@@ -127,6 +127,13 @@
       "when": 1791212981020,
       "tag": "0017_hidden_recipes",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1793414897801,
+      "tag": "0018_ingredient_shops",
+      "breakpoints": true
     }
   ]
 }

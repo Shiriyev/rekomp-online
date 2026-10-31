@@ -136,6 +136,7 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
         source: i.source,
         sourceId: i.sourceId,
         imageKey: i.imageKey,
+        shops: i.shops,
         isCustom: false,
         isArchived: false,
       };

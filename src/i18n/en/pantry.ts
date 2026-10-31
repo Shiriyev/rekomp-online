@@ -75,5 +75,9 @@ export const pantry: Messages<typeof ru> = {
     atHome: 'at home: {{amount}}',
     alreadyListed: 'already on the list',
     added: 'On the list: {{name}} {{amount}}',
+    shopAll: 'All shops',
+    shopHint: 'Pick where you are shopping',
+    notStocked: 'Not at {{shop}}',
+    shopEmpty: 'Nothing on your list is sold at {{shop}}',
   },
 };

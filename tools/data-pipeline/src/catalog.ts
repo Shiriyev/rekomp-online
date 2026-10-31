@@ -27,6 +27,7 @@ import {
   ingredientMacros,
   recipeMacros,
   type NutritionIngredient,
+  type Shop,
   type Unit,
 } from './lib/domain.ts';
 import { detectEquipment } from './build/equipment.ts';
@@ -43,6 +44,27 @@ const IMAGES_MODULE = path.join(APP_ROOT, 'src', 'features', 'catalogImages.ts')
 /** The app reads this at start-up and loads the (large) catalog only when it is newer. */
 const VERSION_MODULE = path.join(APP_ROOT, 'src', 'db', 'seed', 'catalogVersion.ts');
 const IMAGES = path.join(APP_ROOT, 'assets', 'images');
+
+/**
+ * Which chains stock each product, read from mappings/ingredient-shops.json. The file
+ * groups products by the narrowest tier that covers them, so the tiers are expanded into
+ * the per-product lists the app stores; a product in no tier is on no shelf we know of.
+ */
+const shopsOf = (() => {
+  const file = path.join(ROOT, 'mappings', 'ingredient-shops.json');
+  const tiers = JSON.parse(readFileSync(file, 'utf8')) as Record<string, string[]>;
+  const byTier: Record<string, readonly Shop[]> = {
+    all: ['lidl', 'spar', 'tesco', 'aldi'],
+    super: ['spar', 'tesco'],
+    tesco: ['tesco'],
+    none: [],
+  };
+  const map = new Map<string, readonly Shop[]>();
+  for (const [tier, shops] of Object.entries(byTier)) {
+    for (const id of tiers[tier] ?? []) map.set(id, shops);
+  }
+  return (id: string): Shop[] => [...(map.get(id) ?? [])];
+})();
 
 /** imageKey → file under assets/images (v1 photos are .jpg, catalog photos .webp). */
 export function imageFile(key: string): string | undefined {
@@ -178,6 +200,7 @@ function main() {
       source: p.manualMacros ? 'manual' : 'usda',
       sourceId: p.manualMacros || p.usdaFdcId === null ? null : String(p.usdaFdcId),
       imageKey: v1Photo ?? catalogPhoto,
+      shops: shopsOf(p.id),
     };
   });
   const byId = new Map(ingredients.map((i) => [i.id, i]));

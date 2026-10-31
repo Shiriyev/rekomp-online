@@ -9,4 +9,4 @@ export {
   roundProtein,
 } from '../../../../src/domain/nutrition';
 export { toGrams } from '../../../../src/domain/units';
-export type { Macros, NutritionIngredient, RecipeLine, Unit } from '../../../../src/domain/types';
+export type { Macros, NutritionIngredient, RecipeLine, Shop, Unit } from '../../../../src/domain/types';

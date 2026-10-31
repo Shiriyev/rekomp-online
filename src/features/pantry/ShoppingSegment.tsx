@@ -2,13 +2,14 @@ import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Checkbox, Surface, Text } from 'react-native-paper';
+import { Button, Checkbox, Chip, Surface, Text } from 'react-native-paper';
 
 import { repositories } from '@/db';
-import { useIngredientsMap, usePantryItems, useShoppingItems } from '@/db/hooks';
+import { useIngredientsMap, usePantryItems, useShop, useShoppingItems } from '@/db/hooks';
 import type { ShoppingItem } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
 import { shoppingStep, stepQuantity } from '@/domain/stock';
+import { SHOPS, type Shop } from '@/domain/types';
 import { convertAmount } from '@/domain/units';
 import { showUndo } from '@/features/undo/undoStore';
 import { useT } from '@/i18n';
@@ -22,6 +23,14 @@ import { SwipeToDelete } from '@/ui/SwipeToDelete';
 import { useBulkAddStore } from './bulkAddStore';
 import { ProductPickerSheet } from './ProductPickerSheet';
 
+/** The chains write themselves this way on the shopfront. */
+const SHOP_LABELS: Record<Shop, string> = {
+  lidl: 'Lidl',
+  spar: 'SPAR',
+  tesco: 'Tesco',
+  aldi: 'ALDI',
+};
+
 export function ShoppingSegment() {
   const theme = useAppTheme();
   const t = useT();
@@ -29,6 +38,7 @@ export function ShoppingSegment() {
   const items = useShoppingItems();
   const ingredients = useIngredientsMap();
   const pantry = usePantryItems();
+  const shop = useShop();
   const pickerRef = useRef<BottomSheetModal>(null);
   // «Купил несколько»: pick bought items, then set the amounts on one screen.
   const [selecting, setSelecting] = useState(false);
@@ -37,6 +47,17 @@ export function ShoppingSegment() {
   const open = items.filter((i) => !i.checked);
   const bought = items.filter((i) => i.checked);
   const linkedOpen = open.filter((i) => i.ingredientId && ingredients.has(i.ingredientId));
+
+  // With a shop chosen the open list splits in two. A free-text item has no product behind
+  // it and so no shelf to be absent from — it stays in the main list rather than being
+  // hidden away under «not stocked».
+  const stocked = (item: ShoppingItem) => {
+    if (shop === null) return true;
+    const ingredient = item.ingredientId ? ingredients.get(item.ingredientId) : undefined;
+    return ingredient ? ingredient.shops.includes(shop) : true;
+  };
+  const here = open.filter(stocked);
+  const elsewhere = shop === null ? [] : open.filter((i) => !stocked(i));
 
   // Catalog-linked items follow the language; free-text items stay as typed.
   const titleOf = (item: ShoppingItem) => {
@@ -192,7 +213,52 @@ export function ShoppingSegment() {
           />
         ) : null}
 
-        {selecting ? open.map(pickRow) : open.map(row)}
+        {open.length > 0 && !selecting ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.shops}
+            accessibilityLabel={t('pantry.shopping.shopHint')}>
+            <Chip
+              compact
+              selected={shop === null}
+              showSelectedCheck={false}
+              onPress={() => repositories.settings.setShop(null)}>
+              {t('pantry.shopping.shopAll')}
+            </Chip>
+            {SHOPS.map((s) => (
+              <Chip
+                key={s}
+                compact
+                selected={shop === s}
+                showSelectedCheck={false}
+                onPress={() => repositories.settings.setShop(shop === s ? null : s)}>
+                {SHOP_LABELS[s]}
+              </Chip>
+            ))}
+          </ScrollView>
+        ) : null}
+
+        {selecting ? open.map(pickRow) : here.map(row)}
+
+        {here.length === 0 && elsewhere.length > 0 && !selecting && shop ? (
+          <Text
+            variant="bodyMedium"
+            style={[styles.note, { color: theme.colors.onSurfaceVariant }]}>
+            {t('pantry.shopping.shopEmpty', { shop: SHOP_LABELS[shop] })}
+          </Text>
+        ) : null}
+
+        {elsewhere.length > 0 && !selecting && shop ? (
+          <>
+            <View style={styles.boughtHeader}>
+              <Text variant="titleSmall" style={{ color: theme.colors.onSurfaceVariant }}>
+                {t('pantry.shopping.notStocked', { shop: SHOP_LABELS[shop] })}
+              </Text>
+            </View>
+            {elsewhere.map(row)}
+          </>
+        ) : null}
 
         {bought.length > 0 && !selecting ? (
           <>
@@ -283,6 +349,13 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
   },
   next: { flexDirection: 'row-reverse', minHeight: 48 },
+  shops: {
+    flexDirection: 'row',
+    gap: spacing.xs,
+    paddingBottom: spacing.sm,
+    paddingRight: spacing.lg,
+  },
+  note: { paddingVertical: spacing.md },
   row: { flexDirection: 'row', alignItems: 'center' },
   item: { paddingHorizontal: 0, minHeight: 48 },
   label: { textAlign: 'left' },

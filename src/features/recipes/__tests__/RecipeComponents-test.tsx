@@ -34,6 +34,7 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   sourceId: null,
   isArchived: false,
   nutritionEdited: false,
+  shops: [],
   ...over,
 });
 

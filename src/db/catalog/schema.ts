@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { MEAL_TYPES, UNITS } from '../../domain/types';
+import { MEAL_TYPES, SHOPS, UNITS } from '../../domain/types';
 
 /**
  * The bundled catalog (src/db/seed/catalog.v2.json), built by tools/data-pipeline.
@@ -94,6 +94,8 @@ export const catalogIngredientSchema = z
     /** USDA FoodData Central fdcId when source = usda. */
     sourceId: text.nullable(),
     imageKey: text.nullable(),
+    /** Chains that stock it; empty means it is on no Hungarian shelf the list knows of. */
+    shops: z.array(z.enum(SHOPS)),
   })
   .strict();
 

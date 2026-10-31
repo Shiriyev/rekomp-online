@@ -215,3 +215,26 @@ it('changes nothing when the catalog cannot be used', () => {
 it('normalizes names for matching', () => {
   expect(normalizeName('  Ёжик-Túró! ')).toBe('ежик turo');
 });
+
+it('stores which chains stock each product, for sorting the shopping list by shop', () => {
+  runSeed(db);
+  apply(db);
+  const rows = db.select().from(ingredients).all();
+  const byId = new Map(rows.map((r) => [r.id, r]));
+
+  // Every catalog product carries a list; a staple on every shelf carries all four.
+  expect(rows.every((r) => Array.isArray(r.shops))).toBe(true);
+  expect(byId.get('milk')?.shops).toEqual(['lidl', 'spar', 'tesco', 'aldi']);
+  // A world-foods item is not at the discounters.
+  expect(byId.get('pak_choi')?.shops).not.toContain('lidl');
+  expect(byId.get('pak_choi')?.shops).toContain('tesco');
+});
+
+it('remembers the shop the list is sorted for, and forgets it again', () => {
+  const repos = createRepositories(db);
+  expect(repos.settings.setShop('lidl')).toBeUndefined();
+  expect(db.select().from(appMeta).where(eq(appMeta.key, 'shop')).get()?.value).toBe('lidl');
+  repos.settings.setShop(null);
+  expect(db.select().from(appMeta).where(eq(appMeta.key, 'shop')).get()).toBeUndefined();
+  expect(() => repos.settings.setShop('spar_market' as never)).toThrow('Unknown shop');
+});

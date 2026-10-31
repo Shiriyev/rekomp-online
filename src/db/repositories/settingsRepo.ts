@@ -7,11 +7,13 @@ import {
   themePreferenceSchema,
   type ThemePreference,
 } from '../../domain/schemas';
+import { SHOPS, type Shop } from '../../domain/types';
 import { appMeta } from '../schema';
 import type { AppDb } from '../types';
 
 export const THEME_KEY = 'theme';
 export const COOK_VIEW_KEY = 'cook_view';
+export const SHOP_KEY = 'shop';
 export const PHOTO_CLEANUP_KEY = 'photo_cleanup_at';
 export const LANGUAGE_KEY = 'language';
 export const COOK_VIEWS = ['steps', 'overview'] as const;
@@ -35,6 +37,16 @@ export function createSettingsRepo(db: AppDb) {
     setCookView(view: CookView): void {
       if (!COOK_VIEWS.includes(view)) throw new RangeError(`Unknown cook view ${view}`);
       setMeta(COOK_VIEW_KEY, view);
+    },
+
+    /** The shop the list is sorted for; null shows everything in one list. */
+    setShop(shop: Shop | null): void {
+      if (shop === null) {
+        db.delete(appMeta).where(eq(appMeta.key, SHOP_KEY)).run();
+        return;
+      }
+      if (!SHOPS.includes(shop)) throw new RangeError(`Unknown shop ${shop}`);
+      setMeta(SHOP_KEY, shop);
     },
 
     /** When the orphan-photo sweep last ran (epoch ms), or null. */

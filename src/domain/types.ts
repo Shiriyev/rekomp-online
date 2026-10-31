@@ -6,6 +6,10 @@ export type Unit = (typeof UNITS)[number];
 export const MEAL_TYPES = ['breakfast', 'lunch', 'snack', 'dinner'] as const;
 export type MealType = (typeof MEAL_TYPES)[number];
 
+/** Chains the shopping list can be sorted for. Hungary: the two discounters and two supermarkets. */
+export const SHOPS = ['lidl', 'spar', 'tesco', 'aldi'] as const;
+export type Shop = (typeof SHOPS)[number];
+
 /** Product categories of the catalog (PHASE_2), in display order. */
 export const INGREDIENT_CATEGORIES = [
   'dairy_eggs',

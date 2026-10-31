@@ -73,5 +73,9 @@ export const pantry = {
     atHome: 'дома: {{amount}}',
     alreadyListed: 'уже в списке',
     added: 'В списке: {{name}} {{amount}}',
+    shopAll: 'Все магазины',
+    shopHint: 'Выбери, куда идёшь',
+    notStocked: 'Нет в {{shop}}',
+    shopEmpty: 'Из списка в {{shop}} ничего не продаётся',
   },
 } as const;

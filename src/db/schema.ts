@@ -19,6 +19,7 @@ import {
   SEXES,
   UNITS,
   type GoalRate,
+  type Shop,
 } from '../domain/types';
 
 type MealTypeValue = (typeof MEAL_TYPES)[number];
@@ -79,6 +80,11 @@ export const ingredients = sqliteTable(
     lowStockThreshold: real('low_stock_threshold'),
     /** What was added «Домой» last time (ingredient unit): the next default amount. */
     lastAddedAmount: real('last_added_amount'),
+    /** Chains that stock it, for sorting the shopping list by the shop you are standing in. */
+    shops: text('shops', { mode: 'json' })
+      .$type<Shop[]>()
+      .notNull()
+      .default(sql`'[]'`),
   },
   (t) => [
     index('ingredients_category_idx').on(t.category),

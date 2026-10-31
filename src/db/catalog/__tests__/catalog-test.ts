@@ -61,6 +61,7 @@ function tiny(): Catalog {
         source: 'usda',
         sourceId: '1',
         imageKey: 'ok',
+        shops: [],
       },
       {
         id: 'salt',
@@ -82,6 +83,7 @@ function tiny(): Catalog {
         source: 'manual',
         sourceId: null,
         imageKey: null,
+        shops: [],
       },
     ],
     recipes: [

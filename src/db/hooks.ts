@@ -11,7 +11,7 @@ import {
 } from '@/domain/schemas';
 import { catalogMacros, recentPresets, type Preset } from '@/domain/today';
 import { applyAmounts } from '@/domain/recipeDraft';
-import type { Macros } from '@/domain/types';
+import { SHOPS, type Macros, type Shop } from '@/domain/types';
 
 import { UNSUPPORTED_PRODUCTS_KEY } from './catalog/apply';
 import { db } from './client';
@@ -21,6 +21,7 @@ import {
   COOK_VIEW_KEY,
   COOK_VIEWS,
   LANGUAGE_KEY,
+  SHOP_KEY,
   THEME_KEY,
   type CookView,
 } from './repositories/settingsRepo';
@@ -406,6 +407,13 @@ export function useCookView(): CookView {
   const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, COOK_VIEW_KEY)));
   const value = data[0]?.value;
   return COOK_VIEWS.find((v) => v === value) ?? 'steps';
+}
+
+/** The shop the shopping list is sorted for, or null for one undivided list. */
+export function useShop(): Shop | null {
+  const { data } = useLiveQuery(db.select().from(appMeta).where(eq(appMeta.key, SHOP_KEY)));
+  const value = data[0]?.value;
+  return SHOPS.find((s) => s === value) ?? null;
 }
 
 export type MealLogDetail = {
