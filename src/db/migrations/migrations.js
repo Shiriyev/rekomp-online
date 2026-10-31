@@ -20,6 +20,7 @@ import m0015 from './0015_drop_lidl_products.sql';
 import m0016 from './0016_storage_days.sql';
 import m0017 from './0017_hidden_recipes.sql';
 import m0018 from './0018_ingredient_shops.sql';
+import m0019 from './0019_ingredient_photo.sql';
 
   export default {
     journal,
@@ -42,7 +43,8 @@ m0014,
 m0015,
 m0016,
 m0017,
-m0018
+m0018,
+m0019
     }
   }
   

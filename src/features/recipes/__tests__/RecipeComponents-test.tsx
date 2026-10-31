@@ -35,6 +35,7 @@ const ingredient = (id: string, name: string, over: Partial<Ingredient> = {}): I
   isArchived: false,
   nutritionEdited: false,
   shops: [],
+  photoUri: null,
   ...over,
 });
 

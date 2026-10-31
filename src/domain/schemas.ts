@@ -6,6 +6,7 @@ import {
   INGREDIENT_CATEGORIES,
   MEAL_TYPES,
   SEXES,
+  SHOPS,
   UNITS,
 } from './types';
 import { LANGUAGE_PREFERENCES } from './language';
@@ -97,12 +98,16 @@ export const customIngredientSchema = z
     gramsPerPiece: z.number().positive().max(5000).nullable(),
     kcalPer100g: z.number().min(0).max(900),
     proteinPer100g: z.number().min(0).max(100),
+    /** Where the user buys it, so it sorts with the rest of the list at that shop. */
+    shops: z.array(z.enum(SHOPS)).default([]),
+    photoUri: z.string().min(1).nullable().default(null),
   })
   .refine((v) => v.unit !== 'pcs' || v.gramsPerPiece !== null, {
     path: ['gramsPerPiece'],
     message: 'validation.pieceWeight',
   });
-export type CustomIngredientInput = z.infer<typeof customIngredientSchema>;
+/** The input side: `shops` and `photoUri` have defaults, so a caller may leave them out. */
+export type CustomIngredientInput = z.input<typeof customIngredientSchema>;
 
 export const ingredientSettingsSchema = ingredientNutritionSchema.extend({
   lowStockThreshold: z.number().min(0).max(100_000).nullable(),

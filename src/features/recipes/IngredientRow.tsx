@@ -4,7 +4,7 @@ import { Chip, Text } from 'react-native-paper';
 
 import type { Ingredient, RecipeIngredient } from '@/db/schema';
 import type { LineCheck } from '@/domain/pantry';
-import { bundledImage } from '@/features/bundledImage';
+import { productImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
@@ -73,7 +73,7 @@ export function IngredientRow({
         accessible
         accessibilityLabel={`${name}, ${amount}, ${detail}${changed ? `, ${t('recipes.row.changed')}` : ''}`}>
         <ImageWithFallback
-          source={bundledImage(ingredient.imageKey)}
+          source={productImage(ingredient)}
           fallbackIcon={CATEGORY_ICONS[ingredient.category]}
           style={styles.image}
           iconSize={24}

@@ -10,7 +10,7 @@ import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
 import { INGREDIENT_CATEGORIES, type IngredientCategory } from '@/domain/types';
-import { bundledImage } from '@/features/bundledImage';
+import { productImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useBulkAddStore } from '@/features/pantry/bulkAddStore';
 import { CategoryCard } from '@/features/products/CategoryCard';
@@ -82,7 +82,7 @@ export default function BulkSelectScreen() {
     const byUse = [...available].sort((a, b) => factsOf(b).uses - factsOf(a).uses);
     for (const i of byUse) {
       if (map.has(i.category)) continue;
-      const image = bundledImage(i.imageKey);
+      const image = productImage(i);
       if (image !== undefined) map.set(i.category, image);
     }
     return map;
@@ -230,7 +230,7 @@ const SelectTile = memo(function SelectTile({ ingredient, checked, have, onToggl
       accessibilityLabel={name}>
       <View>
         <ImageWithFallback
-          source={bundledImage(ingredient.imageKey)}
+          source={productImage(ingredient)}
           fallbackIcon={CATEGORY_ICONS[ingredient.category]}
           style={styles.image}
           iconSize={28}

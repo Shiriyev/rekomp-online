@@ -14,7 +14,7 @@ import {
 import { defaultAddAmount } from '@/domain/bulkAdd';
 import { isLowStock } from '@/domain/stock';
 import { quantityStep } from '@/domain/units';
-import { bundledImage } from '@/features/bundledImage';
+import { productImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS, useCategoryLabel } from '@/features/ingredients';
 import { MEAL_ICONS } from '@/features/meals';
 import { recipeImage } from '@/features/recipes/recipeImage';
@@ -110,7 +110,7 @@ export default function ProductScreen() {
       {title}
       <ScrollView contentContainerStyle={{ paddingBottom: spacing.xl + insets.bottom }}>
         <ImageWithFallback
-          source={bundledImage(ingredient.imageKey)}
+          source={productImage(ingredient)}
           fallbackIcon={CATEGORY_ICONS[ingredient.category]}
           style={styles.photo}
           iconSize={56}

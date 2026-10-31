@@ -8,7 +8,7 @@ import { repositories } from '@/db';
 import { useIngredientsMap, usePantryItems } from '@/db/hooks';
 import type { Ingredient } from '@/db/schema';
 import { quantityStep } from '@/domain/units';
-import { bundledImage } from '@/features/bundledImage';
+import { productImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS, CATEGORY_LABELS } from '@/features/ingredients';
 import { openProductCard, ProductRow } from '@/features/products/ProductRow';
 import { ProductsEmpty } from '@/features/products/ProductsEmpty';
@@ -175,7 +175,7 @@ const PantryTile = memo(function PantryTile({ ingredient, quantity, low, onOpen 
       accessibilityLabel={`${name}, ${formatAmount(quantity, ingredient.unit)}`}
       accessibilityHint={t('pantry.home.editHint')}>
       <ImageWithFallback
-        source={bundledImage(ingredient.imageKey)}
+        source={productImage(ingredient)}
         fallbackIcon={CATEGORY_ICONS[ingredient.category]}
         style={styles.image}
         iconSize={32}

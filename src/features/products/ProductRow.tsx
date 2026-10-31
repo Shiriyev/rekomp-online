@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text, TouchableRipple } from 'react-native-paper';
 
 import type { Ingredient } from '@/db/schema';
-import { bundledImage } from '@/features/bundledImage';
+import { productImage } from '@/features/bundledImage';
 import { CATEGORY_ICONS } from '@/features/ingredients';
 import { useT } from '@/i18n';
 import { useContent } from '@/i18n/content';
@@ -66,7 +66,7 @@ export const ProductRow = memo(function ProductRow({
       ]}>
       <View style={styles.inner}>
         <ImageWithFallback
-          source={bundledImage(ingredient.imageKey)}
+          source={productImage(ingredient)}
           fallbackIcon={CATEGORY_ICONS[ingredient.category]}
           style={styles.image}
           iconSize={22}

@@ -185,3 +185,51 @@ describe('portionsRepo.setPortionsLeft', () => {
     expect(() => repos.portions.setPortionsLeft('p', 1.5)).toThrow(RangeError);
   });
 });
+
+describe('own products carry a photo and the shops that sell them', () => {
+  const PHOTO = 'file:///data/user/0/com.tmstart.rekomp/files/meal-photos/own.jpg';
+
+  it('saves the photo and the shops, so the product sorts with the rest of that shop', () => {
+    const skyr = repos.ingredients.createCustom({
+      name: 'Lidl Skyr vanília',
+      category: 'dairy_eggs',
+      unit: 'g',
+      gramsPerPiece: null,
+      kcalPer100g: 65,
+      proteinPer100g: 11,
+      shops: ['lidl', 'aldi'],
+      photoUri: PHOTO,
+    });
+    expect(skyr).toMatchObject({ isCustom: true, photoUri: PHOTO, shops: ['lidl', 'aldi'] });
+    // Saved to the catalog, so it is picked from the list next time instead of retyped.
+    expect(repos.ingredients.getById(skyr.id)?.name).toBe('Lidl Skyr vanília');
+  });
+
+  it('defaults to no photo and no shop when they are left out', () => {
+    const plain = repos.ingredients.createCustom({
+      name: 'Безымянный',
+      category: 'other',
+      unit: 'g',
+      gramsPerPiece: null,
+      kcalPer100g: 10,
+      proteinPer100g: 0,
+    });
+    expect(plain).toMatchObject({ photoUri: null, shops: [] });
+  });
+
+  it('keeps an own product photo out of the orphan sweep', () => {
+    const p = repos.ingredients.createCustom({
+      name: 'Туршу',
+      category: 'vegetables',
+      unit: 'g',
+      gramsPerPiece: null,
+      kcalPer100g: 20,
+      proteinPer100g: 1,
+      photoUri: PHOTO,
+    });
+    expect(p.photoUri).toBe(PHOTO);
+    // Without this the daily sweep would delete the file as unreferenced.
+    expect(repos.logs.photoUris()).toContain(PHOTO);
+    expect(repos.logs.isPhotoReferenced(PHOTO)).toBe(true);
+  });
+});

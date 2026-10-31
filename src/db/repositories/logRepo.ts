@@ -91,10 +91,21 @@ export function createLogRepo(db: AppDb) {
         .from(recipes)
         .where(isNotNull(recipes.photoUri))
         .all();
-      return [...new Set([...fromLogs, ...fromRecipes].flatMap((r) => (r.uri ? [r.uri] : [])))];
+      // Own products keep their photo in the same folder, so the sweep has to count them
+      // too — otherwise a product photo is deleted as an orphan the next day.
+      const fromIngredients = db
+        .selectDistinct({ uri: ingredients.photoUri })
+        .from(ingredients)
+        .where(isNotNull(ingredients.photoUri))
+        .all();
+      return [
+        ...new Set(
+          [...fromLogs, ...fromRecipes, ...fromIngredients].flatMap((r) => (r.uri ? [r.uri] : [])),
+        ),
+      ];
     },
 
-    /** Whether an entry or a dish still uses this photo file. */
+    /** Whether an entry, a dish or an own product still uses this photo file. */
     isPhotoReferenced(photoUri: string): boolean {
       const inLogs = db
         .select({ id: mealLogs.id })
@@ -103,11 +114,18 @@ export function createLogRepo(db: AppDb) {
         .limit(1)
         .get();
       if (inLogs) return true;
+      const inRecipes = db
+        .select({ id: recipes.id })
+        .from(recipes)
+        .where(eq(recipes.photoUri, photoUri))
+        .limit(1)
+        .get();
+      if (inRecipes) return true;
       return (
         db
-          .select({ id: recipes.id })
-          .from(recipes)
-          .where(eq(recipes.photoUri, photoUri))
+          .select({ id: ingredients.id })
+          .from(ingredients)
+          .where(eq(ingredients.photoUri, photoUri))
           .limit(1)
           .get() !== undefined
       );

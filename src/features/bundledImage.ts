@@ -10,3 +10,11 @@ export function bundledImage(key: string | null | undefined): number | undefined
   if (!key) return undefined;
   return CATALOG_IMAGES[key] ?? RECIPE_IMAGES[key] ?? INGREDIENT_IMAGES[key];
 }
+
+/** A product's photo: the user's own if they took one, else the bundled catalog photo. */
+export function productImage(product: {
+  photoUri?: string | null;
+  imageKey: string | null;
+}): number | { uri: string } | undefined {
+  return product.photoUri ? { uri: product.photoUri } : bundledImage(product.imageKey);
+}

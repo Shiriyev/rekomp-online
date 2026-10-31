@@ -9,7 +9,8 @@ import { useIngredientsMap, usePantryItems, useShop, useShoppingItems } from '@/
 import type { ShoppingItem } from '@/db/schema';
 import { defaultAddAmount } from '@/domain/bulkAdd';
 import { shoppingStep, stepQuantity } from '@/domain/stock';
-import { SHOPS, type Shop } from '@/domain/types';
+import { SHOPS } from '@/domain/types';
+import { SHOP_LABELS } from '@/features/shops';
 import { convertAmount } from '@/domain/units';
 import { showUndo } from '@/features/undo/undoStore';
 import { useT } from '@/i18n';
@@ -22,14 +23,6 @@ import { SwipeToDelete } from '@/ui/SwipeToDelete';
 
 import { useBulkAddStore } from './bulkAddStore';
 import { ProductPickerSheet } from './ProductPickerSheet';
-
-/** The chains write themselves this way on the shopfront. */
-const SHOP_LABELS: Record<Shop, string> = {
-  lidl: 'Lidl',
-  spar: 'SPAR',
-  tesco: 'Tesco',
-  aldi: 'ALDI',
-};
 
 export function ShoppingSegment() {
   const theme = useAppTheme();
@@ -189,9 +182,17 @@ export function ShoppingSegment() {
               {t('pantry.shopping.selectHint')}
             </Text>
           ) : (
-            <Button mode="contained-tonal" icon="plus" onPress={() => pickerRef.current?.present()}>
-              {t('pantry.shopping.addProduct')}
-            </Button>
+            <View style={styles.adders}>
+              <Button
+                mode="contained-tonal"
+                icon="plus"
+                onPress={() => pickerRef.current?.present()}>
+                {t('pantry.shopping.addProduct')}
+              </Button>
+              <Button icon="tag-plus-outline" onPress={() => router.push('/add-product')}>
+                {t('pantry.shopping.addOwn')}
+              </Button>
+            </View>
           )}
           {linkedOpen.length > 1 || selecting ? (
             <Button
@@ -349,6 +350,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
   },
   next: { flexDirection: 'row-reverse', minHeight: 48 },
+  adders: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, flexShrink: 1 },
   shops: {
     flexDirection: 'row',
     gap: spacing.xs,

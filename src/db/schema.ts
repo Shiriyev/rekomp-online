@@ -85,6 +85,8 @@ export const ingredients = sqliteTable(
       .$type<Shop[]>()
       .notNull()
       .default(sql`'[]'`),
+    /** The user's own photo of the product (documents/meal-photos); beats the bundled one. */
+    photoUri: text('photo_uri'),
   },
   (t) => [
     index('ingredients_category_idx').on(t.category),
