@@ -109,6 +109,27 @@ export const customIngredientSchema = z
 /** The input side: `shops` and `photoUri` have defaults, so a caller may leave them out. */
 export type CustomIngredientInput = z.input<typeof customIngredientSchema>;
 
+export const customRecipeSchema = z.object({
+  name: z.string().trim().min(1, 'validation.required').max(80, 'validation.maxLength|80'),
+  mealType: z.enum(MEAL_TYPES),
+  defaultServings: z.number().int().min(1).max(10),
+  totalMinutes: z.number().int().min(0).max(600),
+  photoUri: z.string().min(1).nullable().default(null),
+  lines: z
+    .array(
+      z.object({
+        ingredientId: z.string().min(1),
+        amountPerServing: z.number().min(0).max(100_000),
+        unit: z.enum(UNITS),
+      }),
+    )
+    .min(1, 'validation.required'),
+  /** Free text, one action each; an empty list is fine for a dish that needs no cooking. */
+  steps: z.array(z.string().trim().min(1).max(500)),
+});
+/** The input side: `photoUri` has a default, so a caller may leave it out. */
+export type CustomRecipeInput = z.input<typeof customRecipeSchema>;
+
 export const ingredientSettingsSchema = ingredientNutritionSchema.extend({
   lowStockThreshold: z.number().min(0).max(100_000).nullable(),
 });

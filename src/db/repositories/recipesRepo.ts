@@ -1,7 +1,7 @@
-import { asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, eq, inArray } from 'drizzle-orm';
 
 import { sanitizeAmounts } from '../../domain/recipeDraft';
-import { photoUriSchema } from '../../domain/schemas';
+import { customRecipeSchema, photoUriSchema, type CustomRecipeInput } from '../../domain/schemas';
 import type { MealType } from '../../domain/types';
 import {
   favoriteRecipes,
@@ -14,6 +14,7 @@ import {
   type RecipeIngredient,
   type RecipeStep,
 } from '../schema';
+import { newId } from '../../lib/id';
 import type { AppDb } from '../types';
 
 export type RecipeDetail = { recipe: Recipe; lines: RecipeIngredient[]; steps: RecipeStep[] };
@@ -141,6 +142,60 @@ export function createRecipesRepo(db: AppDb) {
     /** Back to the original recipe amounts. */
     resetCustomAmounts(recipeId: string): void {
       db.delete(recipeCustomAmounts).where(eq(recipeCustomAmounts.recipeId, recipeId)).run();
+    },
+
+    /**
+     * A dish the user wrote, saved alongside the catalog ones so it shows on its meal
+     * page and can be cooked like any other. `isCustom` keeps the catalog update from
+     * treating it as a row that went missing.
+     */
+    createCustom(input: CustomRecipeInput): Recipe {
+      const v = customRecipeSchema.parse(input);
+      return db.transaction((tx) => {
+        const id = `own_${newId()}`;
+        const recipe = tx
+          .insert(recipes)
+          .values({
+            id,
+            name: v.name,
+            mealType: v.mealType,
+            mealTypes: [v.mealType],
+            defaultServings: v.defaultServings,
+            totalMinutes: v.totalMinutes,
+            photoUri: v.photoUri,
+            ingredientCount: v.lines.length,
+            source: 'own',
+            isCustom: true,
+            // The user's own dish sorts before the catalog, which starts at 0.
+            sortOrder: -1,
+          })
+          .returning()
+          .get();
+        tx.insert(recipeIngredients)
+          .values(
+            v.lines.map((l, sortOrder) => ({
+              recipeId: id,
+              ingredientId: l.ingredientId,
+              amountPerServing: l.amountPerServing,
+              unit: l.unit,
+              sortOrder,
+            })),
+          )
+          .run();
+        if (v.steps.length > 0) {
+          tx.insert(recipeSteps)
+            .values(v.steps.map((text, i) => ({ recipeId: id, order: i + 1, text })))
+            .run();
+        }
+        return recipe;
+      });
+    },
+
+    /** Removes a dish the user wrote, with its lines and steps. */
+    removeCustom(recipeId: string): void {
+      db.delete(recipes)
+        .where(and(eq(recipes.id, recipeId), eq(recipes.isCustom, true)))
+        .run();
     },
 
     /** Every recipe with its lines and steps, in 3 queries. */

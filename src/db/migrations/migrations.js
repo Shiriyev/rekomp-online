@@ -21,6 +21,7 @@ import m0016 from './0016_storage_days.sql';
 import m0017 from './0017_hidden_recipes.sql';
 import m0018 from './0018_ingredient_shops.sql';
 import m0019 from './0019_ingredient_photo.sql';
+import m0020 from './0020_recipe_custom.sql';
 
   export default {
     journal,
@@ -44,7 +45,8 @@ m0015,
 m0016,
 m0017,
 m0018,
-m0019
+m0019,
+m0020
     }
   }
   

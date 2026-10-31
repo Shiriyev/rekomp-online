@@ -238,3 +238,27 @@ it('remembers the shop the list is sorted for, and forgets it again', () => {
   expect(db.select().from(appMeta).where(eq(appMeta.key, 'shop')).get()).toBeUndefined();
   expect(() => repos.settings.setShop('spar_market' as never)).toThrow('Unknown shop');
 });
+
+it('leaves a dish the user wrote alone when the catalog updates', () => {
+  runSeed(db);
+  apply(db);
+  const repos = createRepositories(db);
+  const mine = repos.recipes.createCustom({
+    name: 'Плов как у бабушки',
+    mealType: 'lunch',
+    defaultServings: 4,
+    totalMinutes: 60,
+    lines: [{ ingredientId: 'rice', amountPerServing: 100, unit: 'g' }],
+    steps: ['Промыть рис.', 'Тушить под крышкой.'],
+  });
+  expect(mine.isCustom).toBe(true);
+
+  // A later catalog does not contain it, and must not take it for a row that went missing.
+  const next = { ...catalog, catalogVersion: catalog.catalogVersion + 1 };
+  applyCatalog(db, next.catalogVersion, () => next);
+
+  const after = db.select().from(recipes).where(eq(recipes.id, mine.id)).get();
+  expect(after).toMatchObject({ id: mine.id, isArchived: false, isCustom: true });
+  expect(repos.recipes.getDetail(mine.id)?.steps).toHaveLength(2);
+  expect(repos.recipes.getDetail(mine.id)?.lines).toHaveLength(1);
+});

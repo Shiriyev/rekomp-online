@@ -174,10 +174,18 @@ export function applyCatalog(db: AppDb, version: number, load: () => Catalog): C
     const archived = { ingredients: 0, recipes: 0 };
     const deleted = { ingredients: 0, recipes: 0 };
 
+    // A dish the user wrote is theirs, not a catalog row that went missing: leave it be,
+    // exactly as a custom product is left alone below.
     const goneRecipes = tx
       .select({ id: recipes.id })
       .from(recipes)
-      .where(and(notInArray(recipes.id, recipeIds), eq(recipes.isArchived, false)))
+      .where(
+        and(
+          notInArray(recipes.id, recipeIds),
+          eq(recipes.isCustom, false),
+          eq(recipes.isArchived, false),
+        ),
+      )
       .all()
       .map((r) => r.id);
     for (const id of goneRecipes) {

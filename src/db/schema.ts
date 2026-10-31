@@ -141,6 +141,8 @@ export const recipes = sqliteTable(
     /** Where most of the protein comes from (poultry, fish, …), for the shelves. */
     mainProtein: text('main_protein').notNull().default('other'),
     isArchived: integer('is_archived', { mode: 'boolean' }).notNull().default(false),
+    /** The user wrote this dish: the catalog update leaves it alone, like a custom product. */
+    isCustom: integer('is_custom', { mode: 'boolean' }).notNull().default(false),
   },
   (t) => [
     index('recipes_meal_type_idx').on(t.mealType),

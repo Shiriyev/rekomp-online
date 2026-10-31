@@ -2,7 +2,7 @@ import { FlashList } from '@shopify/flash-list';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { memo, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, TextInput, TouchableRipple } from 'react-native-paper';
+import { IconButton, Text, TextInput, TouchableRipple } from 'react-native-paper';
 
 import { buildShelves, cuisinesOf, type Shelf } from '@/domain/browse';
 import { MEAL_TYPES, type MealType } from '@/domain/types';
@@ -48,7 +48,20 @@ export default function RecipesScreen() {
   const cuisines = useMemo(() => cuisinesOf(all), [all]);
 
   if (!meal) return <EmptyState icon="alert-circle-outline" title={t('recipes.noCategory')} />;
-  const title = <Stack.Screen options={{ title: MEAL_LABELS[meal] }} />;
+  const title = (
+    <Stack.Screen
+      options={{
+        title: MEAL_LABELS[meal],
+        headerRight: () => (
+          <IconButton
+            icon="plus"
+            accessibilityLabel={t('recipes.ownDish.add')}
+            onPress={() => router.push({ pathname: '/add-dish', params: { meal } })}
+          />
+        ),
+      }}
+    />
+  );
   if (!ready || !isLoaded) {
     return (
       <>
